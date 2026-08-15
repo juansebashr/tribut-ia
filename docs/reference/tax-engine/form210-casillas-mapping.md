@@ -1,4 +1,4 @@
-# 📋 Mapeo Oficial de Casillas — Formulario 210 DIAN
+# Mapeo Oficial de Casillas — Formulario 210 DIAN
 
 Correspondencia entre el modelo de datos de TributIA y las casillas oficiales del Formulario 210 de la DIAN.
 
@@ -21,3 +21,4 @@ Correspondencia entre el modelo de datos de TributIA y las casillas oficiales de
 | **134** | `saldo_a_pagar_impuesto` | Saldo a pagar por impuesto ($\text{C113} - \text{C118}$) |
 | **137** | `saldo_a_favor` | Saldo a favor del contribuyente |
 | **980** | `pago_total` | Pago total de la declaración |
+

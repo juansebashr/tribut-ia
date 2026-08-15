@@ -1,4 +1,4 @@
-# 📋 Mapeo Oficial de Casillas — Formulario 110 DIAN & TTD
+# Mapeo Oficial de Casillas — Formulario 110 DIAN & TTD
 
 Correspondencia para declaraciones de Personas Jurídicas (Formulario 110 y Tasa Mínima TTD Art. 240 Par. 6 E.T.).
 
@@ -23,3 +23,4 @@ Correspondencia para declaraciones de Personas Jurídicas (Formulario 110 y Tasa
 | **97** | `retenciones_fuente` | Retenciones en la fuente practicadas |
 | **98** | `autorretenciones_practicadas` | Autorretenciones practicadas |
 | **105** | `saldo_a_pagar_impuesto` | Total saldo a pagar |
+

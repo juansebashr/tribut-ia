@@ -13,3 +13,4 @@ Separar completamente la lógica del motor de cálculo de los parámetros tribut
 ## Consecuencias
 - **Positivas**: Soporte inmediato para múltiples años gravables, capacidad de simular escenarios de reformas fiscales futuras sin modificar código, fácil auditoría por parte de contadores públicos.
 - **Negativas**: Requiere validar que las claves de los archivos JSON se adhieran rigurosamente al esquema Pydantic.
+

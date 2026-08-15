@@ -14,3 +14,4 @@ En la contabilidad y declaraciones tributarias en Colombia, las cifras se escrib
 
 ## Consecuencias
 - **Positivas**: La interfaz ofrece la experiencia contable colombiana nativa sin romper ningún cálculo en el motor matemático.
+

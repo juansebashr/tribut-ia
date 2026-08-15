@@ -1,4 +1,4 @@
-# 📜 Algoritmo Matemático de la Tabla Marginal (Art. 241 E.T.)
+# Algoritmo Matemático de la Tabla Marginal (Art. 241 E.T.)
 
 El Artículo 241 del Estatuto Tributario establece la tarifa progresiva para la Cédula General y Pensiones de personas naturales residentes en Colombia.
 
@@ -23,3 +23,4 @@ El Artículo 241 del Estatuto Tributario establece la tarifa progresiva para la 
 Todos los valores monetarios en los formularios oficiales de la DIAN se redondean al **múltiplo de mil más cercano**:
 
 $$\text{Valor Redondeado} = \text{round}(\text{Valor COP}, -3)$$
+
