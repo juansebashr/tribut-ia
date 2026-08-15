@@ -1,0 +1,57 @@
+from pathlib import Path
+from fastapi import FastAPI
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
+from fastapi.middleware.cors import CORSMiddleware
+from app.api.v1.router import api_router
+from app.core.rules_engine.loader import load_all_rules
+
+app = FastAPI(
+    title="TributIA API - Motor Tributario Colombiano",
+    description=(
+        "API y plataforma para cálculo, planeación y liquidación automatizada del impuesto sobre la renta "
+        "en Colombia para Personas Naturales (Cédula General) y Personas Jurídicas (Formulario 110 & Tasa Mínima TTD), "
+        "con motor de reglas tributarias declarativo y trazabilidad paso a paso para contadores y agentes de IA."
+    ),
+    version="1.0.0",
+    docs_url="/docs",
+    redoc_url="/redoc"
+)
+
+# CORS middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# Static files directory
+STATIC_DIR = Path(__file__).parent / "static"
+if STATIC_DIR.exists():
+    app.mount("/static", StaticFiles(directory=str(STATIC_DIR)), name="static")
+
+@app.on_event("startup")
+def startup_event():
+    load_all_rules()
+
+# API Router
+app.include_router(api_router, prefix="/api/v1")
+
+# Web UI entrypoint
+@app.get("/", tags=["UI"])
+def serve_ui():
+    index_file = STATIC_DIR / "index.html"
+    if index_file.exists():
+        return FileResponse(str(index_file))
+    return {
+        "app": "TributIA API",
+        "status": "online",
+        "docs": "/docs",
+        "version": "1.0.0"
+    }
+
+@app.get("/health", tags=["Health"])
+def health_check():
+    return {"status": "ok", "app": "TributIA"}

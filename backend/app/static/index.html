@@ -1,0 +1,2222 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TributIA Colombia - Suite Profesional de Impuestos & Calendario DIAN</title>
+  <meta name="description" content="Suite tributaria profesional para Colombia: Liquidación de Renta Personas Naturales (F210), Personas Jurídicas (F110), IVA (F300), Retención en la Fuente (F350), Régimen SIMPLE y Calendario Tributario Oficial con consulta por NIT.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    
+    <!-- =====================================================================
+         SIDEBAR LATERAL COLAPSABLE
+         ===================================================================== -->
+    <aside class="sidebar" id="app-sidebar">
+      <div class="sidebar-header">
+        <a href="#" class="sidebar-logo" onclick="navigateTo('pn', 'calc')">
+          <div class="sidebar-logo-badge">
+            <span class="logo-full">TributIA</span>
+            <span class="logo-short">T</span>
+          </div>
+          <div class="sidebar-logo-text">
+            <span class="sidebar-logo-title">TributIA</span>
+            <span class="sidebar-logo-subtitle">Suite Tributaria DIAN</span>
+          </div>
+        </a>
+        <button class="sidebar-toggle-btn" id="btn-toggle-sidebar" onclick="toggleSidebar()" title="Colapsar / Expandir barra lateral">
+          ◀
+        </button>
+      </div>
+
+      <nav class="sidebar-nav">
+        <!-- GRUPO: CALENDARIO & VENCIMIENTOS -->
+        <div>
+          <div class="sidebar-group-title">Calendario & Vencimientos</div>
+          <ul class="sidebar-menu">
+            <li>
+              <button class="sidebar-item-btn" id="nav-item-calendario" onclick="navigateTo('calendario', 'main')">
+                <span class="sidebar-item-icon">📅</span>
+                <span class="sidebar-item-label">Calendario & Consulta NIT</span>
+                <span class="sidebar-item-tag" style="background:#2563eb; color:white;">DIAN</span>
+              </button>
+            </li>
+          </ul>
+        </div>
+
+        <!-- GRUPO: RENTA PERSONAS NATURALES -->
+        <div>
+          <div class="sidebar-group-title">Renta Personas Naturales</div>
+          <ul class="sidebar-menu">
+            <li>
+              <button class="sidebar-item-btn active" id="nav-item-pn-calc" onclick="navigateTo('pn', 'calc')">
+                <span class="sidebar-item-icon">👤</span>
+                <span class="sidebar-item-label">Depuración Cédula General</span>
+                <span class="sidebar-item-tag">F-210</span>
+              </button>
+            </li>
+            <li>
+              <button class="sidebar-item-btn" id="nav-item-pn-f210" onclick="navigateTo('pn', 'f210')">
+                <span class="sidebar-item-icon">📋</span>
+                <span class="sidebar-item-label">Formulario 210 (Copia Real)</span>
+                <span class="sidebar-item-tag">Facsímil</span>
+              </button>
+            </li>
+            <li>
+              <button class="sidebar-item-btn" id="nav-item-pn-marginal" onclick="navigateTo('pn', 'marginal')">
+                <span class="sidebar-item-icon">🌡️</span>
+                <span class="sidebar-item-label">Tarifa Progresiva & Termómetro</span>
+                <span class="sidebar-item-tag">Art. 241</span>
+              </button>
+            </li>
+          </ul>
+        </div>
+
+        <!-- GRUPO: RENTA EMPRESARIAL & JURÍDICAS -->
+        <div>
+          <div class="sidebar-group-title">Renta Empresarial & PJ</div>
+          <ul class="sidebar-menu">
+            <li>
+              <button class="sidebar-item-btn" id="nav-item-pj" onclick="navigateTo('pj', 'f110')">
+                <span class="sidebar-item-icon">🏢</span>
+                <span class="sidebar-item-label">Renta Jurídicas & TTD (15%)</span>
+                <span class="sidebar-item-tag">F-110</span>
+              </button>
+            </li>
+            <li>
+              <button class="sidebar-item-btn" id="nav-item-simple" onclick="navigateTo('simple', 'main')">
+                <span class="sidebar-item-icon">📑</span>
+                <span class="sidebar-item-label">Régimen SIMPLE de Tributación</span>
+                <span class="sidebar-item-tag">F-260</span>
+              </button>
+            </li>
+          </ul>
+        </div>
+
+        <!-- GRUPO: IMPUESTOS PERIÓDICOS -->
+        <div>
+          <div class="sidebar-group-title">Impuestos Periódicos</div>
+          <ul class="sidebar-menu">
+            <li>
+              <button class="sidebar-item-btn" id="nav-item-iva" onclick="navigateTo('iva', 'main')">
+                <span class="sidebar-item-icon">🛍️</span>
+                <span class="sidebar-item-label">Impuesto a las Ventas (IVA)</span>
+                <span class="sidebar-item-tag">F-300</span>
+              </button>
+            </li>
+            <li>
+              <button class="sidebar-item-btn" id="nav-item-retefuente" onclick="navigateTo('retefuente', 'main')">
+                <span class="sidebar-item-icon">💰</span>
+                <span class="sidebar-item-label">Retención en la Fuente</span>
+                <span class="sidebar-item-tag">F-350</span>
+              </button>
+            </li>
+          </ul>
+        </div>
+
+        <!-- GRUPO: BENEFICIOS & AUDITORÍA -->
+        <div>
+          <div class="sidebar-group-title">Optimización & Auditoría</div>
+          <ul class="sidebar-menu">
+            <li>
+              <button class="sidebar-item-btn" id="nav-item-beneficios" onclick="navigateTo('beneficios', 'all')">
+                <span class="sidebar-item-icon">🎁</span>
+                <span class="sidebar-item-label">Beneficios, Auditoría & Sanciones</span>
+              </button>
+            </li>
+          </ul>
+        </div>
+
+        <!-- GRUPO: SISTEMA & DESARROLLADORES -->
+        <div>
+          <div class="sidebar-group-title">Configuración & API</div>
+          <ul class="sidebar-menu">
+            <li>
+              <button class="sidebar-item-btn" id="nav-item-rules" onclick="navigateTo('rules', 'main')">
+                <span class="sidebar-item-icon">⚙️</span>
+                <span class="sidebar-item-label">Reglas Tributarias & UVT</span>
+              </button>
+            </li>
+            <li>
+              <button class="sidebar-item-btn" id="nav-item-docs" onclick="navigateTo('docs', 'main')">
+                <span class="sidebar-item-icon">🤖</span>
+                <span class="sidebar-item-label">API REST & Agentes IA</span>
+              </button>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="sidebar-footer-inner">
+          <div style="font-size: 11px; color: #64748b; font-weight: 700; text-transform: uppercase;">Estado del Motor:</div>
+          <div style="display: flex; align-items: center; gap: 6px; font-size: 12px; color: #10b981; font-weight: 700;">
+            <span style="width: 8px; height: 8px; background: #10b981; border-radius: 50%; display: inline-block;"></span>
+            <span>Estatuto Reformado 2026</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- =====================================================================
+         WORKSPACE PRINCIPAL
+         ===================================================================== -->
+    <main class="workspace" id="app-workspace">
+      
+      <!-- TOP HEADER BAR -->
+      <header class="workspace-header">
+        <div class="workspace-title-area">
+          <span class="workspace-breadcrumbs" id="header-breadcrumbs">IMPUESTO DE RENTA / PERSONA NATURAL</span>
+          <h1 class="workspace-title" id="header-title">Depuración de Renta Persona Natural</h1>
+        </div>
+
+        <!-- SUB TABS CONTEXTUALES -->
+        <div class="sub-tabs-container" id="sub-tabs-bar" style="display: flex;">
+          <button class="sub-tab-btn active" id="sub-tab-btn-pn-calc" onclick="navigateTo('pn', 'calc')">
+            <span>✏️</span> Captura & Depuración
+          </button>
+          <button class="sub-tab-btn" id="sub-tab-btn-pn-f210" onclick="navigateTo('pn', 'f210')">
+            <span>📋</span> Formulario 210 DIAN Real
+          </button>
+          <button class="sub-tab-btn" id="sub-tab-btn-pn-marginal" onclick="navigateTo('pn', 'marginal')">
+            <span>🌡️</span> Tarifa Progresiva & Termómetro
+          </button>
+        </div>
+
+        <!-- CONTROLES GLOBALES -->
+        <div class="workspace-controls">
+          <div class="selector-group">
+            <label>Año:</label>
+            <select id="select-year" class="select-input" onchange="onYearChange()">
+              <option value="2026" selected>2026</option>
+              <option value="2025">2025</option>
+              <option value="2024">2024</option>
+              <option value="2022">2022</option>
+            </select>
+          </div>
+
+          <div class="selector-group">
+            <label>UVT:</label>
+            <input
+              type="number"
+              id="input-custom-uvt"
+              class="text-input"
+              style="width: 95px; font-family: var(--font-mono); font-weight: 700;"
+              value="52350"
+              onchange="onUvtChange()"
+            />
+          </div>
+
+          <!-- API SYNC STATUS BADGE -->
+          <div id="api-sync-badge" class="api-sync-status-badge connected" title="Sincronización en vivo SSE activa con la API REST">
+            <span class="sync-dot"></span>
+            <span id="api-sync-text">API Sync: Conectado</span>
+          </div>
+
+          <button class="btn btn-outline btn-sm" onclick="openImportJsonModal()" title="Cargar valores a la interfaz desde un payload JSON de la API">
+            <span>📥</span> Importar JSON
+          </button>
+          
+          <button class="btn btn-outline btn-sm" onclick="openExportJsonModal()" title="Exportar estado de la interfaz como JSON compatible con la API">
+            <span>📤</span> Exportar JSON
+          </button>
+
+          <a href="/docs" target="_blank" class="btn btn-outline btn-sm" style="text-decoration: none;">
+            <span>📖</span> API Docs
+          </a>
+        </div>
+      </header>
+
+      <!-- WORKSPACE BODY -->
+      <div class="workspace-body">
+
+        <!-- =================================================================
+             MÓDULO 0: CALENDARIO TRIBUTARIO & CONSULTA POR NIT
+             ================================================================= -->
+        <div id="pane-calendario" class="module-pane">
+          <!-- SEARCH BY NIT WIDGET -->
+          <div class="calendar-search-box">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 14px; flex-wrap: wrap; gap: 10px;">
+              <div>
+                <h2 style="font-size: 18px; font-weight: 800; color: #ffffff;">🔍 Consulta de Vencimientos Tributarios por NIT</h2>
+                <p style="font-size: 12.5px; color: #cbd5e1; margin-top: 2px;">
+                  Digita tu número de identificación para calcular el día exacto límite de presentación y pago según el calendario oficial de la DIAN.
+                </p>
+              </div>
+              <span class="badge-uvt" style="background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); color: #ffffff;">
+                Decreto de Plazos DIAN
+              </span>
+            </div>
+
+            <div class="calendar-search-grid">
+              <div class="input-field">
+                <label style="color: #e2e8f0; font-size: 11.5px; font-weight: 700;">Número de NIT / Cédula (sin DV):</label>
+                <input
+                  type="text"
+                  id="cal-search-nit"
+                  class="text-input"
+                  style="width: 100%; font-size: 14px; font-weight: 800; font-family: var(--font-mono); background: #ffffff; color: #0b3b60;"
+                  value="1234567890"
+                  oninput="consultarVencimientoNit()"
+                />
+              </div>
+
+              <div class="input-field">
+                <label style="color: #e2e8f0; font-size: 11.5px; font-weight: 700;">Tipo de Impuesto u Obligación:</label>
+                <select id="cal-search-tax" class="select-input" style="width: 100%; font-size: 13.5px; font-weight: 700; background: #ffffff; color: #0b3b60;" onchange="consultarVencimientoNit()">
+                  <option value="renta_pn" selected>👤 Renta Personas Naturales (Formulario 210)</option>
+                  <option value="renta_pj">🏢 Renta Personas Jurídicas (Formulario 110)</option>
+                  <option value="iva_bimestral">🛍️ IVA Bimestral (Formulario 300)</option>
+                  <option value="retefuente_mensual">💰 Retención en la Fuente (Formulario 350)</option>
+                  <option value="simple_anual">📑 Régimen SIMPLE Anual (Formulario 260)</option>
+                </select>
+              </div>
+
+              <button class="btn btn-primary" style="background: #10b981; color: #ffffff; height: 36px; padding: 0 18px;" onclick="consultarVencimientoNit()">
+                ⚡ Consultar Fechas
+              </button>
+            </div>
+
+            <!-- RESULT DISPLAY -->
+            <div id="cal-search-result-container" style="margin-top: 14px;">
+              <!-- Populated via JS -->
+            </div>
+          </div>
+
+          <!-- BARRA DE FILTROS POR IMPUESTO -->
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 10px;">
+            <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+              <button class="btn btn-primary btn-sm" id="cal-filter-btn-all" onclick="filterCalendarTax('all', this)">
+                🌐 Todos (Vista Calendario)
+              </button>
+              <button class="btn btn-outline btn-sm" id="cal-filter-btn-renta_pn" onclick="filterCalendarTax('renta_pn', this)">
+                👤 Renta Natural (Día por Día)
+              </button>
+              <button class="btn btn-outline btn-sm" id="cal-filter-btn-renta_pj" onclick="filterCalendarTax('renta_pj', this)">
+                🏢 Renta Jurídica (Día por Día)
+              </button>
+              <button class="btn btn-outline btn-sm" id="cal-filter-btn-iva" onclick="filterCalendarTax('iva', this)">
+                🛍️ IVA (Día por Día)
+              </button>
+              <button class="btn btn-outline btn-sm" id="cal-filter-btn-retefuente" onclick="filterCalendarTax('retefuente', this)">
+                💰 Retención en la Fuente (Día por Día)
+              </button>
+              <button class="btn btn-outline btn-sm" id="cal-filter-btn-simple" onclick="filterCalendarTax('simple', this)">
+                📑 SIMPLE (Día por Día)
+              </button>
+            </div>
+          </div>
+
+          <!-- 1. VISTA GENERAL: CALENDARIO MENSUAL (SE MUESTRA EN 'TODOS') -->
+          <div id="cal-overview-calendar-container" class="card">
+            <div class="card-header">
+              <div class="calendar-nav-bar" style="width: 100%; margin: 0;">
+                <div class="calendar-month-selector">
+                  <button class="btn btn-outline btn-sm" onclick="changeCalendarMonth(-1)">◀ Mes Anterior</button>
+                  <span id="cal-current-month-label" style="font-size: 15px; font-weight: 800; color: #0b3b60; min-width: 160px; text-align: center;">Agosto 2026</span>
+                  <button class="btn btn-outline btn-sm" onclick="changeCalendarMonth(1)">Mes Siguiente ▶</button>
+                </div>
+
+                <span style="font-size: 11.5px; color: var(--text-muted);">
+                  💡 Selecciona un impuesto arriba para ver el <strong>desglose exacto día por día</strong> según cada par o último dígito de NIT.
+                </span>
+              </div>
+            </div>
+
+            <div class="card-body" style="padding: 0;">
+              <div class="calendar-grid-wrapper">
+                <div class="calendar-weekdays-row">
+                  <div>Lun</div>
+                  <div>Mar</div>
+                  <div>Mié</div>
+                  <div>Jue</div>
+                  <div>Vie</div>
+                  <div>Sáb</div>
+                  <div>Dom</div>
+                </div>
+                <div class="calendar-days-grid" id="cal-days-grid-container">
+                  <!-- Populated dynamically via JS -->
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2. VISTA ESPECÍFICA: CRONOGRAMA DETALLADO DÍA POR DÍA (SE MUESTRA AL ELEGIR UN IMPUESTO) -->
+          <div id="cal-detailed-timeline-container" class="card" style="display: none;">
+            <div class="day-by-day-header-bar">
+              <div>
+                <h3 id="cal-timeline-title" style="font-size: 15px; font-weight: 800; color: #0b3b60;">Cronograma de Vencimientos Día por Día</h3>
+                <p id="cal-timeline-desc" style="font-size: 11.5px; color: var(--text-muted);">Días hábiles y dígitos asignados por el Decreto de Plazos de la DIAN.</p>
+              </div>
+
+              <div style="display: flex; gap: 8px; align-items: center;">
+                <input
+                  type="text"
+                  id="cal-timeline-search-digit"
+                  class="text-input"
+                  placeholder="Filtrar por dígito (ej: 32)..."
+                  style="width: 190px; font-size: 12px;"
+                  oninput="filterTimelineByDigit()"
+                />
+                <button class="btn btn-outline btn-sm" onclick="filterCalendarTax('all', document.getElementById('cal-filter-btn-all'))">
+                  ⬅ Volver a Calendario General
+                </button>
+              </div>
+            </div>
+
+            <div class="card-body" style="padding: 0;">
+              <div class="day-by-day-grid" id="cal-timeline-grid">
+                <!-- Populated dynamically via JS -->
+              </div>
+            </div>
+          </div>
+
+        </div>
+        
+        <!-- =================================================================
+             MÓDULO 1: PERSONA NATURAL - CAPTURA & DEPURACIÓN
+             ================================================================= -->
+        <div id="pane-pn-calc" class="module-pane active">
+          <div style="display: flex; gap: 10px; margin-bottom: 16px; flex-wrap: wrap;">
+            <button class="btn btn-outline btn-sm" onclick="loadPnDefaultDummy()">
+              ✨ Cargar Ejemplo Estándar (Tramo 28%)
+            </button>
+            <button class="btn btn-outline btn-sm" onclick="loadPn35PercentPreset()">
+              🔥 Cargar Altos Ingresos (Tramo 35%)
+            </button>
+            <button class="btn btn-outline btn-sm" onclick="loadPnWithGoDummy()">
+              ✨ Cargar Ejemplo con Ganancia Ocasional
+            </button>
+            <button class="btn btn-primary btn-sm" onclick="navigateTo('pn', 'marginal')">
+              🌡️ Ver Termómetro y Tarifa Progresiva
+            </button>
+            <button class="btn btn-secondary btn-sm" onclick="navigateTo('pn', 'f210')">
+              📋 Ver Formulario 210 DIAN
+            </button>
+          </div>
+
+          <div class="calc-grid">
+            <!-- INPUTS -->
+            <div class="card">
+              <div class="card-header">
+                <h2 class="card-title">Datos del Declarante y Cédula General</h2>
+                <span style="font-size: 11px; color: var(--text-muted);">Cálculo reactivo en tiempo real</span>
+              </div>
+
+              <div class="card-body">
+                <!-- DATOS DECLARANTE -->
+                <div class="form-section">
+                  <h3 class="section-title">Datos de Identificación del Contribuyente</h3>
+                  <div class="inputs-row">
+                    <div class="input-field">
+                      <label class="input-label">Nombres y Apellidos</label>
+                      <input type="text" id="pn_nombre_declarante" class="text-input" value="CARLOS ALBERTO PEREZ GOMEZ" oninput="triggerPnCalc()">
+                    </div>
+                    <div class="input-field">
+                      <label class="input-label">Número de NIT / Cédula</label>
+                      <input type="text" id="pn_nit_declarante" class="text-input" value="1234567890" oninput="triggerPnCalc(); syncNitToCalendar();">
+                    </div>
+                  </div>
+                </div>
+
+                <!-- PATRIMONIO -->
+                <div class="form-section">
+                  <h3 class="section-title">Patrimonio a 31 de Diciembre (Casillas 29, 30, 31)</h3>
+                  <div class="inputs-row">
+                    <div class="input-field">
+                      <label class="input-label">Total Patrimonio Bruto (Casilla 29)</label>
+                      <div class="input-wrapper">
+                        <span class="input-prefix">$</span>
+                        <input type="text" inputmode="numeric" id="pn_patrimonio_bruto" class="currency-input" value="300'000.000" oninput="triggerPnCalc()">
+                      </div>
+                    </div>
+
+                    <div class="input-field">
+                      <label class="input-label">Total Deudas (Casilla 30)</label>
+                      <div class="input-wrapper">
+                        <span class="input-prefix">$</span>
+                        <input type="text" inputmode="numeric" id="pn_deudas" class="currency-input" value="80'000.000" oninput="triggerPnCalc()">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- INGRESOS LABORALES -->
+                <div class="form-section">
+                  <h3 class="section-title">Rentas de Trabajo (Cédula General - Casilla 32)</h3>
+                  <div class="inputs-row">
+                    <div class="input-field">
+                      <label class="input-label">Ingresos Brutos de Trabajo (Salarios / Comisiones)</label>
+                      <div class="input-wrapper">
+                        <span class="input-prefix">$</span>
+                        <input type="text" inputmode="numeric" id="pn_rentas_trabajo" class="currency-input" value="120'000.000" oninput="triggerPnCalc()">
+                      </div>
+                    </div>
+
+                    <div class="input-field">
+                      <label class="input-label">Viáticos Gravados</label>
+                      <div class="input-wrapper">
+                        <span class="input-prefix">$</span>
+                        <input type="text" inputmode="numeric" id="pn_viaticos" class="currency-input" value="0" oninput="triggerPnCalc()">
+                      </div>
+                    </div>
+
+                    <div class="input-field">
+                      <label class="input-label">Otros Ingresos Cédula General</label>
+                      <div class="input-wrapper">
+                        <span class="input-prefix">$</span>
+                        <input type="text" inputmode="numeric" id="pn_otros_ingresos" class="currency-input" value="0" oninput="triggerPnCalc()">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- OTRAS RENTAS CEDULA GENERAL (CAPITAL Y NO LABORALES) -->
+                <div class="form-section">
+                  <h3 class="section-title">Otras Rentas: Capital y No Laborales (Casillas 58 y 74)</h3>
+                  <div class="inputs-row">
+                    <div class="input-field">
+                      <label class="input-label">Rentas de Capital (Intereses / Arrendamientos - Casilla 58)</label>
+                      <div class="input-wrapper">
+                        <span class="input-prefix">$</span>
+                        <input type="text" inputmode="numeric" id="pn_rentas_capital" class="currency-input" value="0" oninput="triggerPnCalc()">
+                      </div>
+                    </div>
+
+                    <div class="input-field">
+                      <label class="input-label">INCRNGO Rentas de Capital (Casilla 59)</label>
+                      <div class="input-wrapper">
+                        <span class="input-prefix">$</span>
+                        <input type="text" inputmode="numeric" id="pn_incrngo_capital" class="currency-input" value="0" oninput="triggerPnCalc()">
+                      </div>
+                    </div>
+
+                    <div class="input-field">
+                      <label class="input-label">Rentas No Laborales (Honorarios sin relación laboral - Casilla 74)</label>
+                      <div class="input-wrapper">
+                        <span class="input-prefix">$</span>
+                        <input type="text" inputmode="numeric" id="pn_rentas_nolaborales" class="currency-input" value="0" oninput="triggerPnCalc()">
+                      </div>
+                    </div>
+
+                    <div class="input-field">
+                      <label class="input-label">INCRNGO Rentas No Laborales (Casilla 76)</label>
+                      <div class="input-wrapper">
+                        <span class="input-prefix">$</span>
+                        <input type="text" inputmode="numeric" id="pn_incrngo_nolaborales" class="currency-input" value="0" oninput="triggerPnCalc()">
+                      </div>
+                    </div>
+
+                    <div class="input-field">
+                      <label class="input-label">Costos Procedentes No Laborales (Casilla 77)</label>
+                      <div class="input-wrapper">
+                        <span class="input-prefix">$</span>
+                        <input type="text" inputmode="numeric" id="pn_costos_nolaborales" class="currency-input" value="0" oninput="triggerPnCalc()">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- INCRNGO TRABAJO -->
+                <div class="form-section">
+                  <h3 class="section-title">INCRNGO Rentas de Trabajo (Casilla 33)</h3>
+                  <div class="inputs-row">
+                    <div class="input-field">
+                      <label class="input-label">Aporte Salud Obligatorio (EPS)</label>
+                      <div class="input-wrapper">
+                        <span class="input-prefix">$</span>
+                        <input type="text" inputmode="numeric" id="pn_salud" class="currency-input" value="4'800.000" oninput="triggerPnCalc()">
+                      </div>
+                    </div>
+
+                    <div class="input-field">
+                      <label class="input-label">Aporte Pensión Obligatoria & FSP</label>
+                      <div class="input-wrapper">
+                        <span class="input-prefix">$</span>
+                        <input type="text" inputmode="numeric" id="pn_pension" class="currency-input" value="4'800.000" oninput="triggerPnCalc()">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- DEDUCCIONES -->
+                <div class="form-section">
+                  <h3 class="section-title">Deducciones Imputables (Casillas 38, 39, 40)</h3>
+                  <div style="margin-bottom: 12px;">
+                    <label class="checkbox-group">
+                      <input type="checkbox" id="pn_dependiente_general" checked onchange="triggerPnCalc()">
+                      <div>
+                        <strong style="font-size: 13px;">Deducción Dependiente Económico General (Art. 387 E.T.)</strong>
+                        <p style="font-size: 11px; color: var(--text-muted);">10% de ingresos de trabajo hasta máx 384 UVT</p>
+                      </div>
+                    </label>
+                  </div>
+
+                  <div class="inputs-row">
+                    <div class="input-field">
+                      <label class="input-label">
+                        <span>Intereses Vivienda / Leasing (Casilla 38)</span>
+                        <span class="input-helper">Máx 1.200 UVT</span>
+                      </label>
+                      <div class="input-wrapper">
+                        <span class="input-prefix">$</span>
+                        <input type="text" inputmode="numeric" id="pn_vivienda" class="currency-input" value="12'000.000" oninput="triggerPnCalc()">
+                      </div>
+                    </div>
+
+                    <div class="input-field">
+                      <label class="input-label">
+                        <span>Medicina Prepagada Anual</span>
+                        <span class="input-helper">Máx 192 UVT</span>
+                      </label>
+                      <div class="input-wrapper">
+                        <span class="input-prefix">$</span>
+                        <input type="text" inputmode="numeric" id="pn_prepagada" class="currency-input" value="0" oninput="triggerPnCalc()">
+                      </div>
+                    </div>
+
+                    <div class="input-field">
+                      <label class="input-label">
+                        <span>GMF (4x1000) Pagado</span>
+                        <span class="input-helper">50% deducible</span>
+                      </label>
+                      <div class="input-wrapper">
+                        <span class="input-prefix">$</span>
+                        <input type="text" inputmode="numeric" id="pn_gmf" class="currency-input" value="0" oninput="triggerPnCalc()">
+                      </div>
+                    </div>
+
+                    <div class="input-field">
+                      <label class="input-label">
+                        <span>Compras Factura Electrónica (Casilla 28)</span>
+                        <span class="input-helper">1% deducible (Máx 240 UVT)</span>
+                      </label>
+                      <div class="input-wrapper">
+                        <span class="input-prefix">$</span>
+                        <input type="text" inputmode="numeric" id="pn_factura_elec" class="currency-input" value="15'000.000" oninput="triggerPnCalc()">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- RENTAS EXENTAS -->
+                <div class="form-section">
+                  <h3 class="section-title">Rentas Exentas (Casillas 35, 36, 37)</h3>
+                  <div class="inputs-row">
+                    <div class="input-field">
+                      <label class="input-label">
+                        <span>Aportes Voluntarios AFC / Pensión (Casilla 35)</span>
+                        <span class="input-helper">Máx 30% / 3.800 UVT</span>
+                      </label>
+                      <div class="input-wrapper">
+                        <span class="input-prefix">$</span>
+                        <input type="text" inputmode="numeric" id="pn_afc" class="currency-input" value="10'000.000" oninput="triggerPnCalc()">
+                      </div>
+                    </div>
+
+                    <div class="input-field">
+                      <label class="input-label">Otras Rentas Exentas (Cesantías, etc. - Casilla 36)</label>
+                      <div class="input-wrapper">
+                        <span class="input-prefix">$</span>
+                        <input type="text" inputmode="numeric" id="pn_otras_exentas" class="currency-input" value="0" oninput="triggerPnCalc()">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- GANANCIAS OCASIONALES -->
+                <div class="form-section">
+                  <h3 class="section-title">Ganancias Ocasionales (Casillas 112 a 115)</h3>
+                  <div class="inputs-row">
+                    <div class="input-field">
+                      <label class="input-label">
+                        <span>Venta Activos Fijos (&gt;= 2 años)</span>
+                        <span class="input-helper">Inmuebles / Vehículos</span>
+                      </label>
+                      <div class="input-wrapper">
+                        <span class="input-prefix">$</span>
+                        <input type="text" inputmode="numeric" id="pn_go_activos" class="currency-input" value="0" oninput="triggerPnCalc()">
+                      </div>
+                    </div>
+
+                    <div class="input-field">
+                      <label class="input-label">(-) Costo Fiscal del Activo Vendido</label>
+                      <div class="input-wrapper">
+                        <span class="input-prefix">$</span>
+                        <input type="text" inputmode="numeric" id="pn_go_costos" class="currency-input" value="0" oninput="triggerPnCalc()">
+                      </div>
+                    </div>
+
+                    <div class="input-field">
+                      <label class="input-label">Herencias, Legados o Donaciones</label>
+                      <div class="input-wrapper">
+                        <span class="input-prefix">$</span>
+                        <input type="text" inputmode="numeric" id="pn_go_herencias" class="currency-input" value="0" oninput="triggerPnCalc()">
+                      </div>
+                    </div>
+
+                    <div class="input-field">
+                      <label class="input-label">
+                        <span>Loterías, Rifas y Juegos</span>
+                        <span class="input-helper">Tarifa 20%</span>
+                      </label>
+                      <div class="input-wrapper">
+                        <span class="input-prefix">$</span>
+                        <input type="text" inputmode="numeric" id="pn_go_loterias" class="currency-input" value="0" oninput="triggerPnCalc()">
+                      </div>
+                    </div>
+
+                    <div class="input-field">
+                      <label class="input-label">
+                        <span>(-) Exenciones GO Solicitadas</span>
+                        <span class="input-helper">Art. 307 E.T.</span>
+                      </label>
+                      <div class="input-wrapper">
+                        <span class="input-prefix">$</span>
+                        <input type="text" inputmode="numeric" id="pn_go_exentas" class="currency-input" value="0" oninput="triggerPnCalc()">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- RETENCIONES Y PAGOS -->
+                <div class="form-section">
+                  <h3 class="section-title">Retenciones y Pagos Previos (Casillas 130 a 132)</h3>
+                  <div class="inputs-row">
+                    <div class="input-field">
+                      <label class="input-label">Retenciones en la Fuente (Casilla 132)</label>
+                      <div class="input-wrapper">
+                        <span class="input-prefix">$</span>
+                        <input type="text" inputmode="numeric" id="pn_retenciones" class="currency-input" value="5'000.000" oninput="triggerPnCalc()">
+                      </div>
+                    </div>
+
+                    <div class="input-field">
+                      <label class="input-label">Saldo a Favor Año Anterior (Casilla 131)</label>
+                      <div class="input-wrapper">
+                        <span class="input-prefix">$</span>
+                        <input type="text" inputmode="numeric" id="pn_saldo_favor_anterior" class="currency-input" value="0" oninput="triggerPnCalc()">
+                      </div>
+                    </div>
+
+                    <div class="input-field">
+                      <label class="input-label">Anticipo Renta Año Anterior (Casilla 130)</label>
+                      <div class="input-wrapper">
+                        <span class="input-prefix">$</span>
+                        <input type="text" inputmode="numeric" id="pn_anticipo" class="currency-input" value="0" oninput="triggerPnCalc()">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- RESULTS -->
+            <div>
+              <div class="card results-card">
+                <div class="card-header">
+                  <h2 class="card-title">Resumen de Liquidación</h2>
+                  <button class="btn btn-outline btn-sm" onclick="openAuditModal('pn')">
+                    👁️ Ver Auditoría Legal
+                  </button>
+                </div>
+
+                <div class="card-body">
+                  <div id="pn-kpi-box" class="kpi-banner to-pay">
+                    <div>
+                      <div id="pn-kpi-label" class="kpi-label">Saldo a Pagar (Casilla 136)</div>
+                      <div id="pn-kpi-value" class="kpi-value">$0 COP</div>
+                    </div>
+                    <span id="pn-kpi-badge" class="badge-uvt">Tarifa: 0%</span>
+                  </div>
+
+                  <table class="breakdown-table">
+                    <tbody>
+                      <tr>
+                        <td>Total Ingresos Brutos (Trabajo + Otras)</td>
+                        <td id="res-pn-ingresos-brutos" class="amount">$0</td>
+                      </tr>
+                      <tr>
+                        <td>(-) Total INCRNGO</td>
+                        <td id="res-pn-incrngo" class="amount negative">-$0</td>
+                      </tr>
+                      <tr class="highlight">
+                        <td>(=) Total Ingreso Neto</td>
+                        <td id="res-pn-ingreso-neto" class="amount">$0</td>
+                      </tr>
+                      <tr>
+                        <td>(-) Deducciones Aceptadas</td>
+                        <td id="res-pn-deducciones" class="amount negative">-$0</td>
+                      </tr>
+                      <tr>
+                        <td>(-) Rentas Exentas (AFC + Otras)</td>
+                        <td id="res-pn-exentas-afc" class="amount negative">-$0</td>
+                      </tr>
+                      <tr>
+                        <td>(-) Renta Exenta Laboral (25%)</td>
+                        <td id="res-pn-exenta-25" class="amount negative">-$0</td>
+                      </tr>
+                      <tr>
+                        <td>Tope Límite Conjunto (40% / 1.340 UVT)</td>
+                        <td id="res-pn-limite-conjunto" class="amount" style="color: var(--amber);">$0</td>
+                      </tr>
+                      <tr class="highlight" style="border-top: 2px solid var(--primary-border);">
+                        <td>(=) Renta Líquida Gravable (Casilla 111)</td>
+                        <td id="res-pn-renta-gravable" class="amount" style="color: var(--primary);">$0</td>
+                      </tr>
+                      <tr class="highlight">
+                        <td>(=) Impuesto Neto de Renta (Casilla 126)</td>
+                        <td id="res-pn-impuesto-bruto" class="amount">$0</td>
+                      </tr>
+                      <tr id="res-pn-row-go" style="display: none;">
+                        <td style="color: #0b3b60;">(+) Impuesto Ganancias Ocasionales (Casilla 127)</td>
+                        <td id="res-pn-impuesto-go" class="amount" style="color: #0b3b60;">+$0</td>
+                      </tr>
+                      <tr class="highlight" style="background: #eff6ff; font-weight: 800;">
+                        <td>(=) Total Impuesto a Cargo (Casilla 129)</td>
+                        <td id="res-pn-total-impuesto-cargo" class="amount">$0</td>
+                      </tr>
+                      <tr>
+                        <td>(-) Retenciones y Anticipos</td>
+                        <td id="res-pn-retenciones" class="amount negative">-$0</td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+                  <div style="display: flex; gap: 8px;">
+                    <button class="btn btn-primary" style="flex: 1;" onclick="openAuditModal('pn')">
+                      🔍 Auditoría Legal
+                    </button>
+                    <button class="btn btn-outline" style="flex: 1;" onclick="navigateTo('pn', 'f210')">
+                      📋 Ver F210 DIAN Real
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- =================================================================
+             MÓDULO 1.2: FORMULARIO 210 DIAN (COPIA REAL CON POPUPS)
+             ================================================================= -->
+        <div id="pane-pn-f210" class="module-pane">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; flex-wrap: wrap; gap: 10px;">
+            <div>
+              <h2 style="font-size: 16px; font-weight: 800; color: #002e5b;">Simulación Oficial Formulario 210 DIAN (Copia Exacta)</h2>
+              <p style="font-size: 12px; color: var(--text-muted);">
+                💡 <em>Pasa el cursor o haz clic en el ícono <strong>[ i ]</strong> de cualquier casilla para consultar la cartilla legal y cómo se llena.</em>
+              </p>
+            </div>
+            <div style="display: flex; gap: 8px;">
+              <button class="btn btn-outline btn-sm" onclick="window.print()">
+                🖨️ Imprimir Formulario Oficial
+              </button>
+              <button class="btn btn-primary btn-sm" onclick="navigateTo('pn', 'calc')">
+                ✏️ Modificar Valores
+              </button>
+            </div>
+          </div>
+
+          <!-- FORMULARIO 210 EXACT SHEET -->
+          <div class="f210-sheet-wrapper">
+            <div class="f210-watermark">DIAN 210</div>
+            
+            <table class="f210-table">
+              <!-- HEADER ROW -->
+              <tr>
+                <td class="f210-header-cell-logo">
+                  <div class="f210-dian-logo-svg">
+                    <span style="letter-spacing: -2px; font-weight: 900; font-size: 26px;">DIAN</span>
+                  </div>
+                </td>
+                <td class="f210-header-title">
+                  Declaración de renta y complementario<br>
+                  personas naturales y asimiladas residentes<br>
+                  y sucesiones ilíquidas de causantes residentes
+                </td>
+                <td class="f210-header-privada">
+                  PRIVADA
+                </td>
+                <td class="f210-header-form-num">
+                  210
+                </td>
+              </tr>
+
+              <!-- METADATA ROW -->
+              <tr>
+                <td colspan="2" style="background: #f8fafc;">
+                  <div style="display: flex; align-items: center; gap: 8px;">
+                    <span style="font-weight: 700;">1. Año</span>
+                    <div class="f210-digit-grid" id="f210-year-digits">
+                      <div class="f210-digit-box">2</div>
+                      <div class="f210-digit-box">0</div>
+                      <div class="f210-digit-box">2</div>
+                      <div class="f210-digit-box">6</div>
+                    </div>
+                    <span style="font-size: 8.5px; color: #64748b; margin-left: 10px;">Espacio reservado para la DIAN</span>
+                  </div>
+                </td>
+                <td colspan="2" style="background: #ffffff; text-align: right; padding-right: 8px;">
+                  <div style="font-size: 8px; font-weight: 700;">4. Número de formulario:</div>
+                  <div style="font-family: var(--font-mono); font-size: 13px; font-weight: 800;">2109999999999</div>
+                </td>
+              </tr>
+
+              <!-- BARCODE ROW -->
+              <tr>
+                <td colspan="4" style="padding: 2px 0;">
+                  <div class="f210-barcode-container">
+                    <div class="f210-barcode-stripes"></div>
+                    <div class="f210-barcode-text">(415)7707212489984(8020) 000210999999999 9</div>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- DATOS DEL DECLARANTE -->
+              <tr>
+                <td colspan="4" class="f210-section-title-cell">
+                  Datos del declarante
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4" style="padding: 3px;">
+                  <table style="width: 100%; border-collapse: collapse; font-size: 9px;">
+                    <tr>
+                      <td style="width: 25%;">
+                        <div style="font-size: 7.5px; font-weight: 700;">5. Número de Identificación Tributaria (NIT)</div>
+                        <div class="f210-digit-grid" style="margin-top: 2px;" id="f210-nit-digits">
+                          <div class="f210-digit-box">1</div>
+                          <div class="f210-digit-box">2</div>
+                          <div class="f210-digit-box">3</div>
+                          <div class="f210-digit-box">4</div>
+                          <div class="f210-digit-box">5</div>
+                          <div class="f210-digit-box">6</div>
+                          <div class="f210-digit-box">7</div>
+                          <div class="f210-digit-box">8</div>
+                          <div class="f210-digit-box">9</div>
+                          <div class="f210-digit-box">0</div>
+                        </div>
+                      </td>
+                      <td style="width: 5%;">
+                        <div style="font-size: 7.5px; font-weight: 700;">6.DV</div>
+                        <div class="f210-digit-box" id="f210-val-dv" style="margin-top: 2px;">1</div>
+                      </td>
+                      <td style="width: 17%;">
+                        <div style="font-size: 7.5px; font-weight: 700;">7. Primer apellido</div>
+                        <div style="font-weight: 800; font-size: 10px;" id="f210-val-papellido">PEREZ</div>
+                      </td>
+                      <td style="width: 17%;">
+                        <div style="font-size: 7.5px; font-weight: 700;">8. Segundo apellido</div>
+                        <div style="font-weight: 800; font-size: 10px;" id="f210-val-sapellido">GOMEZ</div>
+                      </td>
+                      <td style="width: 18%;">
+                        <div style="font-size: 7.5px; font-weight: 700;">9. Primer nombre</div>
+                        <div style="font-weight: 800; font-size: 10px;" id="f210-val-pnombre">CARLOS</div>
+                      </td>
+                      <td style="width: 18%;">
+                        <div style="font-size: 7.5px; font-weight: 700;">10. Otros nombres</div>
+                        <div style="font-weight: 800; font-size: 10px;" id="f210-val-onombre">ALBERTO</div>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+
+              <!-- ACTIVIDAD ECONOMICA Y COMPRAS FE -->
+              <tr>
+                <td colspan="4" style="padding: 2px;">
+                  <table style="width: 100%; border-collapse: collapse; font-size: 8.5px;">
+                    <tr>
+                      <td style="width: 25%;">
+                        <span>24. Actividad económica principal: </span>
+                        <strong style="font-family: var(--font-mono);">0010</strong>
+                      </td>
+                      <td style="width: 20%;">
+                        <span>12. Cód. Dirección seccional: </span>
+                        <strong style="font-family: var(--font-mono);">32</strong>
+                      </td>
+                      <td style="width: 55%; text-align: right;">
+                        <span style="vertical-align: middle;">28. Uno por ciento (1%) de compras con factura electrónica: </span>
+                        <span class="f210-casilla-num" data-casilla="28" style="display:inline-block; vertical-align:middle; width:25px; height:16px; line-height:16px; margin: 0 3px;"><span class="f210-info-badge">i</span>28</span>
+                        <span class="f210-casilla-val" id="f210_val_c28" style="display:inline-block; vertical-align:middle; border: 1px solid #000000; height:16px; line-height:16px;">150.000</span>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+
+              <!-- PATRIMONIO HEADER & ROW -->
+              <tr>
+                <td style="background: #e2e8f0; font-weight: 800;">Patrimonio</td>
+                <td colspan="3" style="padding: 0;">
+                  <table style="width: 100%; border-collapse: collapse; font-size: 9px;">
+                    <tr>
+                      <td style="padding: 2px 4px;">Total patrimonio bruto</td>
+                      <td class="f210-casilla-num" data-casilla="29"><span class="f210-info-badge">i</span>29</td>
+                      <td class="f210-casilla-val" id="f210_val_c29">300'000.000</td>
+                      <td style="padding: 2px 4px;">Deudas</td>
+                      <td class="f210-casilla-num" data-casilla="30"><span class="f210-info-badge">i</span>30</td>
+                      <td class="f210-casilla-val" id="f210_val_c30">80'000.000</td>
+                      <td style="padding: 2px 4px;"><strong>Total patrimonio líquido</strong></td>
+                      <td class="f210-casilla-num" data-casilla="31"><span class="f210-info-badge">i</span>31</td>
+                      <td class="f210-casilla-val calc-highlight" id="f210_val_c31">220'000.000</td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+
+              <!-- CÉDULA GENERAL - TABLA MATRIX 4 COLUMNAS -->
+              <tr>
+                <td colspan="4" class="f210-section-title-cell" style="text-align: center;">
+                  Cédula General (Art. 330 a 336 E.T.)
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4" style="padding: 0;">
+                  <table style="width: 100%; border-collapse: collapse; font-size: 8.5px;">
+                    <tr style="background: #f1f5f9; text-align: center; font-weight: 700;">
+                      <td style="width: 18%;">Conceptos / Rentas</td>
+                      <td style="width: 20%;" colspan="2">Rentas de trabajo</td>
+                      <td style="width: 20%;" colspan="2">Rentas trabajo no rel. laboral</td>
+                      <td style="width: 21%;" colspan="2">Rentas de capital</td>
+                      <td style="width: 21%;" colspan="2">Rentas no laborales</td>
+                    </tr>
+
+                    <!-- INGRESOS BRUTOS -->
+                    <tr>
+                      <td>Ingresos brutos</td>
+                      <td class="f210-casilla-num" data-casilla="32"><span class="f210-info-badge">i</span>32</td>
+                      <td class="f210-casilla-val" id="f210_val_c32">120'000.000</td>
+                      <td class="f210-casilla-num" data-casilla="43"><span class="f210-info-badge">i</span>43</td>
+                      <td class="f210-casilla-val">0</td>
+                      <td class="f210-casilla-num" data-casilla="58"><span class="f210-info-badge">i</span>58</td>
+                      <td class="f210-casilla-val" id="f210_val_c58">0</td>
+                      <td class="f210-casilla-num" data-casilla="74"><span class="f210-info-badge">i</span>74</td>
+                      <td class="f210-casilla-val" id="f210_val_c74">0</td>
+                    </tr>
+
+                    <!-- DEVOLUCIONES -->
+                    <tr>
+                      <td>Devoluciones, rebajas y desc.</td>
+                      <td colspan="2" style="background: #f8fafc;"></td>
+                      <td colspan="2" style="background: #f8fafc;"></td>
+                      <td colspan="2" style="background: #f8fafc;"></td>
+                      <td class="f210-casilla-num" data-casilla="75"><span class="f210-info-badge">i</span>75</td>
+                      <td class="f210-casilla-val">0</td>
+                    </tr>
+
+                    <!-- INCRNGO -->
+                    <tr>
+                      <td>Ingresos no constitutivos de renta</td>
+                      <td class="f210-casilla-num" data-casilla="33"><span class="f210-info-badge">i</span>33</td>
+                      <td class="f210-casilla-val" id="f210_val_c33">9'600.000</td>
+                      <td class="f210-casilla-num" data-casilla="44"><span class="f210-info-badge">i</span>44</td>
+                      <td class="f210-casilla-val">0</td>
+                      <td class="f210-casilla-num" data-casilla="59"><span class="f210-info-badge">i</span>59</td>
+                      <td class="f210-casilla-val">0</td>
+                      <td class="f210-casilla-num" data-casilla="76"><span class="f210-info-badge">i</span>76</td>
+                      <td class="f210-casilla-val" id="f210_val_c76">0</td>
+                    </tr>
+
+                    <!-- COSTOS -->
+                    <tr>
+                      <td>Costos y deducciones procedentes</td>
+                      <td colspan="2" style="background: #f8fafc;"></td>
+                      <td class="f210-casilla-num" data-casilla="45"><span class="f210-info-badge">i</span>45</td>
+                      <td class="f210-casilla-val">0</td>
+                      <td class="f210-casilla-num" data-casilla="60"><span class="f210-info-badge">i</span>60</td>
+                      <td class="f210-casilla-val">0</td>
+                      <td class="f210-casilla-num" data-casilla="77"><span class="f210-info-badge">i</span>77</td>
+                      <td class="f210-casilla-val" id="f210_val_c77">0</td>
+                    </tr>
+
+                    <!-- RENTA LIQUIDA PREVIA -->
+                    <tr style="font-weight: 700; background: #f8fafc;">
+                      <td>Renta líquida</td>
+                      <td class="f210-casilla-num" data-casilla="34"><span class="f210-info-badge">i</span>34</td>
+                      <td class="f210-casilla-val calc-highlight" id="f210_val_c34">110'400.000</td>
+                      <td class="f210-casilla-num" data-casilla="46"><span class="f210-info-badge">i</span>46</td>
+                      <td class="f210-casilla-val">0</td>
+                      <td class="f210-casilla-num" data-casilla="61"><span class="f210-info-badge">i</span>61</td>
+                      <td class="f210-casilla-val calc-highlight" id="f210_val_c61">0</td>
+                      <td class="f210-casilla-num" data-casilla="78"><span class="f210-info-badge">i</span>78</td>
+                      <td class="f210-casilla-val calc-highlight" id="f210_val_c78">0</td>
+                    </tr>
+
+                    <!-- RENTAS EXENTAS SUB-BLOCK -->
+                    <tr>
+                      <td>Aportes voluntarios AFC, FVP y AVC</td>
+                      <td class="f210-casilla-num" data-casilla="35"><span class="f210-info-badge">i</span>35</td>
+                      <td class="f210-casilla-val" id="f210_val_c35">10'000.000</td>
+                      <td class="f210-casilla-num" data-casilla="47"><span class="f210-info-badge">i</span>47</td>
+                      <td class="f210-casilla-val">0</td>
+                      <td class="f210-casilla-num" data-casilla="63"><span class="f210-info-badge">i</span>63</td>
+                      <td class="f210-casilla-val">0</td>
+                      <td class="f210-casilla-num" data-casilla="80"><span class="f210-info-badge">i</span>80</td>
+                      <td class="f210-casilla-val">0</td>
+                    </tr>
+                    <tr>
+                      <td>Otras rentas exentas (25% laboral)</td>
+                      <td class="f210-casilla-num" data-casilla="36"><span class="f210-info-badge">i</span>36</td>
+                      <td class="f210-casilla-val" id="f210_val_c36">19'100.000</td>
+                      <td class="f210-casilla-num" data-casilla="48"><span class="f210-info-badge">i</span>48</td>
+                      <td class="f210-casilla-val">0</td>
+                      <td class="f210-casilla-num" data-casilla="64"><span class="f210-info-badge">i</span>64</td>
+                      <td class="f210-casilla-val">0</td>
+                      <td class="f210-casilla-num" data-casilla="81"><span class="f210-info-badge">i</span>81</td>
+                      <td class="f210-casilla-val">0</td>
+                    </tr>
+                    <tr style="font-weight: 700;">
+                      <td>Total rentas exentas</td>
+                      <td class="f210-casilla-num" data-casilla="37"><span class="f210-info-badge">i</span>37</td>
+                      <td class="f210-casilla-val" id="f210_val_c37">29'100.000</td>
+                      <td class="f210-casilla-num" data-casilla="49"><span class="f210-info-badge">i</span>49</td>
+                      <td class="f210-casilla-val">0</td>
+                      <td class="f210-casilla-num" data-casilla="65"><span class="f210-info-badge">i</span>65</td>
+                      <td class="f210-casilla-val">0</td>
+                      <td class="f210-casilla-num" data-casilla="82"><span class="f210-info-badge">i</span>82</td>
+                      <td class="f210-casilla-val">0</td>
+                    </tr>
+
+                    <!-- DEDUCCIONES SUB-BLOCK -->
+                    <tr>
+                      <td>Intereses de vivienda</td>
+                      <td class="f210-casilla-num" data-casilla="38"><span class="f210-info-badge">i</span>38</td>
+                      <td class="f210-casilla-val" id="f210_val_c38">12'000.000</td>
+                      <td class="f210-casilla-num" data-casilla="50"><span class="f210-info-badge">i</span>50</td>
+                      <td class="f210-casilla-val">0</td>
+                      <td class="f210-casilla-num" data-casilla="66"><span class="f210-info-badge">i</span>66</td>
+                      <td class="f210-casilla-val">0</td>
+                      <td class="f210-casilla-num" data-casilla="83"><span class="f210-info-badge">i</span>83</td>
+                      <td class="f210-casilla-val">0</td>
+                    </tr>
+                    <tr>
+                      <td>Otras deducciones imputables</td>
+                      <td class="f210-casilla-num" data-casilla="39"><span class="f210-info-badge">i</span>39</td>
+                      <td class="f210-casilla-val">0</td>
+                      <td class="f210-casilla-num" data-casilla="51"><span class="f210-info-badge">i</span>51</td>
+                      <td class="f210-casilla-val">0</td>
+                      <td class="f210-casilla-num" data-casilla="67"><span class="f210-info-badge">i</span>67</td>
+                      <td class="f210-casilla-val">0</td>
+                      <td class="f210-casilla-num" data-casilla="84"><span class="f210-info-badge">i</span>84</td>
+                      <td class="f210-casilla-val">0</td>
+                    </tr>
+                    <tr style="font-weight: 700;">
+                      <td>Total deducciones imputables</td>
+                      <td class="f210-casilla-num" data-casilla="40"><span class="f210-info-badge">i</span>40</td>
+                      <td class="f210-casilla-val" id="f210_val_c40">24'150.000</td>
+                      <td class="f210-casilla-num" data-casilla="52"><span class="f210-info-badge">i</span>52</td>
+                      <td class="f210-casilla-val">0</td>
+                      <td class="f210-casilla-num" data-casilla="68"><span class="f210-info-badge">i</span>68</td>
+                      <td class="f210-casilla-val">0</td>
+                      <td class="f210-casilla-num" data-casilla="85"><span class="f210-info-badge">i</span>85</td>
+                      <td class="f210-casilla-val">0</td>
+                    </tr>
+
+                    <!-- ALIVIOS LIMITADOS Y RENTA LIQUIDA ORDINARIA -->
+                    <tr style="background: #fffbeb; font-weight: 700;">
+                      <td>Rentas exentas y/o deduc. limitadas</td>
+                      <td class="f210-casilla-num" data-casilla="41"><span class="f210-info-badge">i</span>41</td>
+                      <td class="f210-casilla-val" id="f210_val_c41">44'160.000</td>
+                      <td class="f210-casilla-num" data-casilla="53"><span class="f210-info-badge">i</span>53</td>
+                      <td class="f210-casilla-val">0</td>
+                      <td class="f210-casilla-num" data-casilla="69"><span class="f210-info-badge">i</span>69</td>
+                      <td class="f210-casilla-val">0</td>
+                      <td class="f210-casilla-num" data-casilla="86"><span class="f210-info-badge">i</span>86</td>
+                      <td class="f210-casilla-val">0</td>
+                    </tr>
+                    <tr style="background: #e0f2fe; font-weight: 800;">
+                      <td>Renta líquida ordinaria</td>
+                      <td class="f210-casilla-num" data-casilla="42"><span class="f210-info-badge">i</span>42</td>
+                      <td class="f210-casilla-val calc-highlight" id="f210_val_c42">66'240.000</td>
+                      <td class="f210-casilla-num" data-casilla="57"><span class="f210-info-badge">i</span>57</td>
+                      <td class="f210-casilla-val">0</td>
+                      <td class="f210-casilla-num" data-casilla="73"><span class="f210-info-badge">i</span>73</td>
+                      <td class="f210-casilla-val calc-highlight" id="f210_val_c73">0</td>
+                      <td class="f210-casilla-num" data-casilla="90"><span class="f210-info-badge">i</span>90</td>
+                      <td class="f210-casilla-val calc-highlight" id="f210_val_c90">0</td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+
+              <!-- TOTALES CÉDULA GENERAL (Casillas 91 a 98) -->
+              <tr>
+                <td colspan="4" style="padding: 0;">
+                  <table style="width: 100%; border-collapse: collapse; font-size: 8.5px; background: #f8fafc;">
+                    <tr>
+                      <td style="padding: 2px 4px;"><strong>Ren. líquida céd. gen.</strong></td>
+                      <td class="f210-casilla-num" data-casilla="91"><span class="f210-info-badge">i</span>91</td>
+                      <td class="f210-casilla-val" style="font-weight: 800;" id="f210_val_c91">110'400.000</td>
+
+                      <td style="padding: 2px 4px;"><strong>Ren. ex. y ded. imp. li.</strong></td>
+                      <td class="f210-casilla-num" data-casilla="92"><span class="f210-info-badge">i</span>92</td>
+                      <td class="f210-casilla-val" id="f210_val_c92">44'160.000</td>
+
+                      <td style="padding: 2px 4px;"><strong>R. líq. ord. cédula gen.</strong></td>
+                      <td class="f210-casilla-num" data-casilla="93"><span class="f210-info-badge">i</span>93</td>
+                      <td class="f210-casilla-val calc-highlight" id="f210_val_c93">66'240.000</td>
+
+                      <td style="padding: 2px 4px;">Comp. pérdidas año 2018</td>
+                      <td class="f210-casilla-num" data-casilla="94"><span class="f210-info-badge">i</span>94</td>
+                      <td class="f210-casilla-val">0</td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 2px 4px;">Comp. exc. ren. presuntiva</td>
+                      <td class="f210-casilla-num" data-casilla="95"><span class="f210-info-badge">i</span>95</td>
+                      <td class="f210-casilla-val">0</td>
+
+                      <td style="padding: 2px 4px;">Rentas gravables</td>
+                      <td class="f210-casilla-num" data-casilla="96"><span class="f210-info-badge">i</span>96</td>
+                      <td class="f210-casilla-val">0</td>
+
+                      <td style="padding: 2px 4px;"><strong>R. líq. grav. cédula gen.</strong></td>
+                      <td class="f210-casilla-num" data-casilla="97"><span class="f210-info-badge">i</span>97</td>
+                      <td class="f210-casilla-val calc-highlight" style="font-weight: 800;" id="f210_val_c97">66'240.000</td>
+
+                      <td style="padding: 2px 4px;">Renta presuntiva</td>
+                      <td class="f210-casilla-num" data-casilla="98"><span class="f210-info-badge">i</span>98</td>
+                      <td class="f210-casilla-val">0</td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+
+              <!-- 2-COLUMN SPLIT: LEFT (PENSIONES, DIVIDENDOS, GO) vs RIGHT (LIQUIDACIÓN PRIVADA) -->
+              <tr>
+                <!-- COLUMNA IZQUIERDA -->
+                <td colspan="2" style="vertical-align: top; padding: 0; width: 50%;">
+                  <table style="width: 100%; border-collapse: collapse; font-size: 8.5px;">
+                    <!-- PENSIONES -->
+                    <tr>
+                      <td colspan="3" class="f210-section-title-cell">Cédula de Pensiones</td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 2px 4px;">Ingresos brutos por rentas de pensiones</td>
+                      <td class="f210-casilla-num" data-casilla="99"><span class="f210-info-badge">i</span>99</td>
+                      <td class="f210-casilla-val">0</td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 2px 4px;">Ingresos no constitutivos de renta</td>
+                      <td class="f210-casilla-num" data-casilla="100"><span class="f210-info-badge">i</span>100</td>
+                      <td class="f210-casilla-val">0</td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 2px 4px;">Renta líquida gravable cédula de pensiones</td>
+                      <td class="f210-casilla-num" data-casilla="103"><span class="f210-info-badge">i</span>103</td>
+                      <td class="f210-casilla-val">0</td>
+                    </tr>
+
+                    <!-- DIVIDENDOS -->
+                    <tr>
+                      <td colspan="3" class="f210-section-title-cell">Cédula de Dividendos y Participaciones</td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 2px 4px;">Dividendos y participaciones 2016 y anteriores</td>
+                      <td class="f210-casilla-num" data-casilla="104"><span class="f210-info-badge">i</span>104</td>
+                      <td class="f210-casilla-val">0</td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 2px 4px;">Ingresos no constitutivos de renta</td>
+                      <td class="f210-casilla-num" data-casilla="105"><span class="f210-info-badge">i</span>105</td>
+                      <td class="f210-casilla-val">0</td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 2px 4px;">Subcédula año 2017 y siguientes numeral 3 art. 49</td>
+                      <td class="f210-casilla-num" data-casilla="107"><span class="f210-info-badge">i</span>107</td>
+                      <td class="f210-casilla-val">0</td>
+                    </tr>
+
+                    <!-- RENTA LIQUIDA GRAVABLE ART 241 -->
+                    <tr style="background: #e0f2fe; font-weight: 800;">
+                      <td style="padding: 2px 4px;">Renta líquida gravable (Cédula general + Pensiones, art. 241 E.T.)</td>
+                      <td class="f210-casilla-num" data-casilla="111"><span class="f210-info-badge">i</span>111</td>
+                      <td class="f210-casilla-val calc-highlight" id="f210_val_c111">66'240.000</td>
+                    </tr>
+
+                    <!-- GANANCIAS OCASIONALES -->
+                    <tr>
+                      <td colspan="3" class="f210-section-title-cell">Ganancias Ocasionales (Art. 300 a 317 E.T.)</td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 2px 4px;">Ingresos por ganancias ocasionales país y exterior</td>
+                      <td class="f210-casilla-num" data-casilla="112"><span class="f210-info-badge">i</span>112</td>
+                      <td class="f210-casilla-val" id="f210_val_c112">0</td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 2px 4px;">Costos por ganancias ocasionales</td>
+                      <td class="f210-casilla-num" data-casilla="113"><span class="f210-info-badge">i</span>113</td>
+                      <td class="f210-casilla-val" id="f210_val_c113">0</td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 2px 4px;">Ganancias ocasionales no gravadas y exentas (Art. 307)</td>
+                      <td class="f210-casilla-num" data-casilla="114"><span class="f210-info-badge">i</span>114</td>
+                      <td class="f210-casilla-val" id="f210_val_c114">0</td>
+                    </tr>
+                    <tr style="background: #fffbeb; font-weight: 800;">
+                      <td style="padding: 2px 4px;">Ganancias ocasionales gravables (112 - 113 - 114)</td>
+                      <td class="f210-casilla-num" data-casilla="115"><span class="f210-info-badge">i</span>115</td>
+                      <td class="f210-casilla-val calc-highlight" id="f210_val_c115">0</td>
+                    </tr>
+                  </table>
+                </td>
+
+                <!-- COLUMNA DERECHA -->
+                <td colspan="2" style="vertical-align: top; padding: 0; width: 50%;">
+                  <table style="width: 100%; border-collapse: collapse; font-size: 8.5px;">
+                    <tr>
+                      <td colspan="3" class="f210-section-title-cell">Liquidación Privada</td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 2px 4px;">Cédula general, de pensiones y de dividendos</td>
+                      <td class="f210-casilla-num" data-casilla="116"><span class="f210-info-badge">i</span>116</td>
+                      <td class="f210-casilla-val" id="f210_val_c116">1'745.000</td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 2px 4px;">Por dividendos y participaciones año 2017 y siguientes</td>
+                      <td class="f210-casilla-num" data-casilla="118"><span class="f210-info-badge">i</span>118</td>
+                      <td class="f210-casilla-val">0</td>
+                    </tr>
+                    <tr style="font-weight: 700;">
+                      <td style="padding: 2px 4px;">Total impuesto sobre las rentas líquidas gravables</td>
+                      <td class="f210-casilla-num" data-casilla="121"><span class="f210-info-badge">i</span>121</td>
+                      <td class="f210-casilla-val" id="f210_val_c121">1'745.000</td>
+                    </tr>
+
+                    <!-- DESCUENTOS -->
+                    <tr>
+                      <td style="padding: 2px 4px;">Donaciones y otros descuentos tributarios</td>
+                      <td class="f210-casilla-num" data-casilla="125"><span class="f210-info-badge">i</span>125</td>
+                      <td class="f210-casilla-val">0</td>
+                    </tr>
+                    <tr style="font-weight: 700;">
+                      <td style="padding: 2px 4px;">Impuesto neto de renta (121 - 125)</td>
+                      <td class="f210-casilla-num" data-casilla="126"><span class="f210-info-badge">i</span>126</td>
+                      <td class="f210-casilla-val" id="f210_val_c126">1'745.000</td>
+                    </tr>
+
+                    <!-- IMPUESTO GANANCIA OCASIONAL -->
+                    <tr>
+                      <td style="padding: 2px 4px;">Impuesto de ganancias ocasionales (115 * 15%/20%)</td>
+                      <td class="f210-casilla-num" data-casilla="127"><span class="f210-info-badge">i</span>127</td>
+                      <td class="f210-casilla-val" id="f210_val_c127">0</td>
+                    </tr>
+                    <tr style="background: #e0f2fe; font-weight: 800;">
+                      <td style="padding: 2px 4px;"><strong>Total impuesto a cargo (126 + 127)</strong></td>
+                      <td class="f210-casilla-num" data-casilla="129"><span class="f210-info-badge">i</span>129</td>
+                      <td class="f210-casilla-val calc-highlight" id="f210_val_c129">1'745.000</td>
+                    </tr>
+
+                    <!-- RETENCIONES Y ANTICIPOS -->
+                    <tr>
+                      <td style="padding: 2px 4px;">Anticipo renta liquidado año gravable anterior</td>
+                      <td class="f210-casilla-num" data-casilla="130"><span class="f210-info-badge">i</span>130</td>
+                      <td class="f210-casilla-val" id="f210_val_c130">0</td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 2px 4px;">Saldo a favor año anterior sin solicitud devolución</td>
+                      <td class="f210-casilla-num" data-casilla="131"><span class="f210-info-badge">i</span>131</td>
+                      <td class="f210-casilla-val" id="f210_val_c131">0</td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 2px 4px;">Retenciones año gravable a declarar</td>
+                      <td class="f210-casilla-num" data-casilla="132"><span class="f210-info-badge">i</span>132</td>
+                      <td class="f210-casilla-val" id="f210_val_c132">5'000.000</td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 2px 4px;">Anticipo renta para el año gravable siguiente</td>
+                      <td class="f210-casilla-num" data-casilla="133"><span class="f210-info-badge">i</span>133</td>
+                      <td class="f210-casilla-val">0</td>
+                    </tr>
+
+                    <!-- SALDO A PAGAR / SALDO A FAVOR FINAL -->
+                    <tr style="background: #fef08a; font-weight: 900;">
+                      <td style="padding: 2px 4px;"><strong>Saldo a pagar por impuesto</strong></td>
+                      <td class="f210-casilla-num" data-casilla="134"><span class="f210-info-badge">i</span>134</td>
+                      <td class="f210-casilla-val total-to-pay" id="f210_val_c134">0</td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 2px 4px;">Sanciones</td>
+                      <td class="f210-casilla-num" data-casilla="135"><span class="f210-info-badge">i</span>135</td>
+                      <td class="f210-casilla-val">0</td>
+                    </tr>
+                    <tr style="background: #fef9c3; font-weight: 900;">
+                      <td style="padding: 2px 4px;"><strong>Total saldo a pagar (134 + 135)</strong></td>
+                      <td class="f210-casilla-num" data-casilla="136"><span class="f210-info-badge">i</span>136</td>
+                      <td class="f210-casilla-val total-to-pay" id="f210_val_c136">0</td>
+                    </tr>
+                    <tr style="background: #ecfdf5; font-weight: 800;">
+                      <td style="padding: 2px 4px;">Total saldo a favor</td>
+                      <td class="f210-casilla-num" data-casilla="137"><span class="f210-info-badge">i</span>137</td>
+                      <td class="f210-casilla-val" style="color: #059669; font-weight: 800;" id="f210_val_c137">3'255.000</td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+
+              <!-- DEPENDIENTES BAR (Casillas 138 a 141) -->
+              <tr>
+                <td colspan="4" style="padding: 0;">
+                  <table style="width: 100%; border-collapse: collapse; font-size: 8px;">
+                    <tr>
+                      <td style="padding: 2px 4px;">Número de dependientes económicos</td>
+                      <td class="f210-casilla-num" data-casilla="138"><span class="f210-info-badge">i</span>138</td>
+                      <td class="f210-casilla-val" style="text-align: center;" id="f210_val_c138">1</td>
+                      <td style="padding: 2px 4px;">Adición por dependientes a la casilla 92</td>
+                      <td class="f210-casilla-num" data-casilla="139"><span class="f210-info-badge">i</span>139</td>
+                      <td class="f210-casilla-val" style="text-align: center;">0</td>
+                      <td style="padding: 2px 4px;">Ud. superó tope indicativo art. 336-1 E.T., marque X</td>
+                      <td class="f210-casilla-num" data-casilla="140"><span class="f210-info-badge">i</span>140</td>
+                      <td class="f210-casilla-val" style="text-align: center;">0</td>
+                      <td style="padding: 2px 4px;">Aporte voluntario</td>
+                      <td class="f210-casilla-num" data-casilla="141"><span class="f210-info-badge">i</span>141</td>
+                      <td class="f210-casilla-val" style="text-align: center;">0</td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+
+              <!-- SIGNATURE & DIGITAL SEAL FOOTER -->
+              <tr>
+                <td colspan="4" style="padding: 4px;">
+                  <table style="width: 100%; border-collapse: collapse; font-size: 8.5px;">
+                    <tr>
+                      <td style="width: 30%; border-right: 1px solid #000; padding: 4px;">
+                        <div style="font-size: 7.5px; color: #475569;">981. Cód. Representación: [   ]</div>
+                        <div style="margin-top: 14px; border-top: 1px solid #000; text-align: center; font-weight: 700; font-size: 8px;">
+                          Firma del declarante o de quien lo representa
+                        </div>
+                      </td>
+                      <td style="width: 35%; border-right: 1px solid #000; padding: 4px; text-align: center;">
+                        <div class="f210-digital-stamp">
+                          <span>DIAN</span>
+                          <span style="font-size: 6px;">Fecha Acuse</span>
+                          <span style="font-size: 7px; font-weight: 900;">• Firmado •</span>
+                        </div>
+                        <div style="font-size: 7.5px; margin-top: 2px; font-family: var(--font-mono);">
+                          2026-08-14 / 08:30:00 AM
+                        </div>
+                      </td>
+                      <td style="width: 35%; padding: 4px;">
+                        <div style="background: #f8fafc; border: 2px solid #002e5b; border-radius: 4px; padding: 6px; text-align: center;">
+                          <div style="font-size: 8.5px; font-weight: 800; color: #002e5b;">
+                            <span class="f210-casilla-num" data-casilla="980" style="display:inline-block; width:28px; height:16px; margin-right:4px;"><span class="f210-info-badge">i</span>980</span>
+                            PAGO TOTAL $
+                          </div>
+                          <div style="font-size: 16px; font-weight: 900; font-family: var(--font-mono); color: #002e5b;" id="f210_val_c980">
+                            $0
+                          </div>
+                        </div>
+                        <div style="font-size: 7px; text-align: right; margin-top: 4px; color: #64748b;">
+                          996. Espacio adhesivo DIAN: 9900000000001
+                        </div>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+            
+            <div style="display: flex; justify-content: space-between; font-size: 8px; color: #64748b; margin-top: 4px; font-family: var(--font-mono);">
+              <span>Formulario 210 DIAN - Versión Oficial Certificada</span>
+              <span>Serie: 20269999999999</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- =================================================================
+             MÓDULO 1.3: TARIFA MARGINAL & TERMÓMETRO PROGRESIVO (ART. 241 E.T.)
+             ================================================================= -->
+        <div id="pane-pn-marginal" class="module-pane">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 10px;">
+            <div>
+              <h2 style="font-size: 17px; font-weight: 800; color: var(--text-primary); margin-bottom: 2px;">
+                🌡️ Termómetro Tributario: Tarifa Marginal y Progresividad (Art. 241 E.T.)
+              </h2>
+              <p style="font-size: 12px; color: var(--text-muted); margin: 0;">
+                Aprende cómo tributa tu renta en Colombia tramo por tramo. Tu impuesto se cobra por porciones, no como un porcentaje plano.
+              </p>
+            </div>
+            <button class="btn btn-outline btn-sm" onclick="navigateTo('pn', 'calc')">
+              ✏️ Modificar Ingresos en Calculadora
+            </button>
+          </div>
+
+          <!-- TOP KPI CARDS -->
+          <div class="marginal-kpi-grid">
+            <div class="marginal-kpi-card accent-blue">
+              <span class="marginal-kpi-label">Renta Líquida Gravable</span>
+              <span class="marginal-kpi-val" id="therm-kpi-renta-cop">$0</span>
+              <span class="marginal-kpi-sub" id="therm-kpi-renta-uvt">0 UVT</span>
+            </div>
+
+            <div class="marginal-kpi-card accent-amber">
+              <span class="marginal-kpi-label">Tu Tramo Marginal Máximo</span>
+              <span class="marginal-kpi-val" id="therm-kpi-marginal-rate" style="color: #d97706;">0%</span>
+              <span class="marginal-kpi-sub" id="therm-kpi-marginal-bracket">Tramo 1 (0 a 1.090 UVT)</span>
+            </div>
+
+            <div class="marginal-kpi-card accent-emerald">
+              <span class="marginal-kpi-label">Tarifa Efectiva Real</span>
+              <span class="marginal-kpi-val" id="therm-kpi-effective-rate" style="color: #059669;">0.0%</span>
+              <span class="marginal-kpi-sub">(Impuesto Total / Renta Gravable)</span>
+            </div>
+
+            <div class="marginal-kpi-card accent-rose">
+              <span class="marginal-kpi-label">Impuesto Básico de Renta</span>
+              <span class="marginal-kpi-val" id="therm-kpi-tax-cop" style="color: #e11d48;">$0</span>
+              <span class="marginal-kpi-sub" id="therm-kpi-tax-uvt">0 UVT</span>
+            </div>
+          </div>
+
+          <!-- TERMÓMETRO VISUAL (GAUGE) -->
+          <div class="thermometer-container">
+            <div class="thermometer-header">
+              <div>
+                <h3 style="font-size: 14px; font-weight: 800; color: #0b3b60; margin: 0 0 2px 0;">
+                  📍 Escala de los 7 Tramos del Estatuto Tributario
+                </h3>
+                <span style="font-size: 11.5px; color: var(--text-muted);">
+                  El pin marca exactamente en qué escalón de la tarifa marginal se encuentra tu último peso ganado.
+                </span>
+              </div>
+              <div id="therm-current-status-badge" style="background: #eff6ff; border: 1px solid #bfdbfe; color: #1e40af; font-size: 11.5px; font-weight: 700; padding: 4px 10px; border-radius: 20px;">
+                Estás en el Tramo 1 (0% Exento)
+              </div>
+            </div>
+
+            <div class="thermometer-track-wrap">
+              <!-- POINTER DINÁMICO -->
+              <div id="therm-pointer" class="thermometer-pointer" style="left: 7.1%;">
+                <div class="thermometer-pointer-tag" id="therm-pointer-label">
+                  📍 0 UVT ($0)
+                </div>
+                <div class="thermometer-pointer-arrow"></div>
+              </div>
+
+              <!-- BARRA DE GRADIENTE DE 7 TRAMOS -->
+              <div class="thermometer-track">
+                <div class="thermometer-bar-tier t0" id="therm-tier-bar-0" title="Tramo 1: 0 a 1.090 UVT (0%)">0%</div>
+                <div class="thermometer-bar-tier t1" id="therm-tier-bar-1" title="Tramo 2: 1.090 a 1.700 UVT (19%)">19%</div>
+                <div class="thermometer-bar-tier t2" id="therm-tier-bar-2" title="Tramo 3: 1.700 a 4.100 UVT (28%)">28%</div>
+                <div class="thermometer-bar-tier t3" id="therm-tier-bar-3" title="Tramo 4: 4.100 a 8.670 UVT (33%)">33%</div>
+                <div class="thermometer-bar-tier t4" id="therm-tier-bar-4" title="Tramo 5: 8.670 a 18.970 UVT (35%)">35%</div>
+                <div class="thermometer-bar-tier t5" id="therm-tier-bar-5" title="Tramo 6: 18.970 a 31.000 UVT (37%)">37%</div>
+                <div class="thermometer-bar-tier t6" id="therm-tier-bar-6" title="Tramo 7: > 31.000 UVT (39%)">39%</div>
+              </div>
+
+              <div class="thermometer-labels-row">
+                <span>0 UVT</span>
+                <span>1.090</span>
+                <span>1.700</span>
+                <span>4.100</span>
+                <span>8.670</span>
+                <span>18.970</span>
+                <span>31.000+</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- DESGLOSE DIDÁCTICO TRAMO POR TRAMO -->
+          <div class="card" style="margin-bottom: 20px;">
+            <div class="card-header">
+              <h3 class="card-title">🍰 Desglose Didáctico de tu Renta "Rebanada por Rebanada"</h3>
+              <span style="font-size: 11px; color: var(--text-muted);">Comprueba cómo cada porción de tu ingreso tributa de forma independiente</span>
+            </div>
+            <div class="card-body">
+              <div style="overflow-x: auto;">
+                <table class="step-slice-table">
+                  <thead>
+                    <tr>
+                      <th>Tramo Legal</th>
+                      <th>Rango UVT</th>
+                      <th>Rango en Pesos (COP)</th>
+                      <th>Tarifa</th>
+                      <th>Tu Renta en Este Tramo</th>
+                      <th>Impuesto de la Porción</th>
+                      <th>Estado</th>
+                    </tr>
+                  </thead>
+                  <tbody id="therm-step-slices-tbody">
+                    <!-- Populated dynamically via JS -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- SIMULADOR DIDÁCTICO: EL MITO DE SUBIR DE TRAMO -->
+          <div class="myth-buster-box">
+            <div style="display: flex; gap: 12px; align-items: flex-start; margin-bottom: 12px;">
+              <span style="font-size: 26px;">💡</span>
+              <div>
+                <h3 style="font-size: 14px; font-weight: 800; color: #0b3b60; margin: 0 0 4px 0;">
+                  El Gran Mito Tributario: "¿Si me suben el sueldo o paso de tramo, perderé dinero?"
+                </h3>
+                <p style="font-size: 12px; color: #334155; line-height: 1.5; margin: 0;">
+                  <strong>¡Rotundamente NO!</strong> El impuesto en Colombia es <em>marginal</em>. Esto significa que cuando entras a un tramo superior, <strong>la tarifa más alta SOLO se aplica a los pesos que sobrepasen el límite</strong>. Todo tu dinero anterior sigue pagando las tarifas bajas o el 0% exento.
+                </p>
+              </div>
+            </div>
+
+            <!-- SIMULADOR INTERACTIVO DE INCREMENTO -->
+            <div style="background: #ffffff; border: 1px solid #bfdbfe; border-radius: 8px; padding: 14px; margin-top: 10px;">
+              <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 10px;">
+                <label style="font-size: 12px; font-weight: 700; color: #1e3a8a;">
+                  ⚡ Simula un Aumento de Ingresos Gravables:
+                </label>
+                <div style="display: flex; gap: 6px;">
+                  <button class="btn btn-outline btn-sm" onclick="simulateMarginalIncrease(1000000)">+$1'000.000</button>
+                  <button class="btn btn-outline btn-sm" onclick="simulateMarginalIncrease(5000000)">+$5'000.000</button>
+                  <button class="btn btn-outline btn-sm" onclick="simulateMarginalIncrease(10000000)">+$10'000.000</button>
+                </div>
+              </div>
+
+              <div id="myth-sim-result" style="font-size: 12px; line-height: 1.5; color: #1e293b;">
+                <!-- Populated via JS -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- =================================================================
+             MÓDULO 2: PERSONA JURÍDICA (FORMULARIO 110 & TTD)
+             ================================================================= -->
+        <div id="pane-pj" class="module-pane">
+          <div style="display: flex; gap: 10px; margin-bottom: 16px; flex-wrap: wrap;">
+            <button class="btn btn-outline btn-sm" onclick="loadPjStandardPreset()">
+              ✨ Cargar Empresa Comercial (Tarifa General 35%)
+            </button>
+            <button class="btn btn-outline btn-sm" onclick="loadPjTtdPreset()">
+              ⚠️ Cargar Caso Tasa Mínima TTD Activada (&lt; 15%)
+            </button>
+          </div>
+
+          <div class="calc-grid">
+            <!-- INPUTS -->
+            <div class="card">
+              <div class="card-header">
+                <h2 class="card-title">Datos Fiscales - Formulario 110</h2>
+                <span style="font-size: 11px; color: var(--text-muted);">Conciliación contable y fiscal</span>
+              </div>
+
+              <div class="card-body">
+                <div class="form-section">
+                  <h3 class="section-title">1. Ingresos Fiscales</h3>
+                  <div class="inputs-row">
+                    <div class="input-field">
+                      <label class="input-label">Ingresos Brutos Operacionales</label>
+                      <div class="input-wrapper">
+                        <span class="input-prefix">$</span>
+                        <input type="text" inputmode="numeric" id="pj_ingresos_op" class="currency-input" value="1'200'000.000" oninput="triggerPjCalc()">
+                      </div>
+                    </div>
+
+                    <div class="input-field">
+                      <label class="input-label">Ingresos No Operacionales</label>
+                      <div class="input-wrapper">
+                        <span class="input-prefix">$</span>
+                        <input type="text" inputmode="numeric" id="pj_ingresos_noop" class="currency-input" value="50'000.000" oninput="triggerPjCalc()">
+                      </div>
+                    </div>
+
+                    <div class="input-field">
+                      <label class="input-label">(-) Devoluciones y Descuentos</label>
+                      <div class="input-wrapper">
+                        <span class="input-prefix">$</span>
+                        <input type="text" inputmode="numeric" id="pj_devoluciones" class="currency-input" value="20'000.000" oninput="triggerPjCalc()">
+                      </div>
+                    </div>
+
+                    <div class="input-field">
+                      <label class="input-label">(-) INCRNGO (Dividendos Art. 48/49)</label>
+                      <div class="input-wrapper">
+                        <span class="input-prefix">$</span>
+                        <input type="text" inputmode="numeric" id="pj_incrngo" class="currency-input" value="10'000.000" oninput="triggerPjCalc()">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-section">
+                  <h3 class="section-title">2. Costos y Gastos Operacionales</h3>
+                  <div class="inputs-row">
+                    <div class="input-field">
+                      <label class="input-label">Costos Fiscales Procedentes</label>
+                      <div class="input-wrapper">
+                        <span class="input-prefix">$</span>
+                        <input type="text" inputmode="numeric" id="pj_costos" class="currency-input" value="650'000.000" oninput="triggerPjCalc()">
+                      </div>
+                    </div>
+
+                    <div class="input-field">
+                      <label class="input-label">Gastos de Administración</label>
+                      <div class="input-wrapper">
+                        <span class="input-prefix">$</span>
+                        <input type="text" inputmode="numeric" id="pj_gastos_admin" class="currency-input" value="180'000.000" oninput="triggerPjCalc()">
+                      </div>
+                    </div>
+
+                    <div class="input-field">
+                      <label class="input-label">Gastos de Ventas</label>
+                      <div class="input-wrapper">
+                        <span class="input-prefix">$</span>
+                        <input type="text" inputmode="numeric" id="pj_gastos_ventas" class="currency-input" value="100'000.000" oninput="triggerPjCalc()">
+                      </div>
+                    </div>
+
+                    <div class="input-field">
+                      <label class="input-label">Gastos Financieros</label>
+                      <div class="input-wrapper">
+                        <span class="input-prefix">$</span>
+                        <input type="text" inputmode="numeric" id="pj_gastos_fin" class="currency-input" value="30'000.000" oninput="triggerPjCalc()">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-section">
+                  <h3 class="section-title">3. Conciliación & Tasa Mínima TTD (Art. 240 Par. 6)</h3>
+                  <div class="inputs-row">
+                    <div class="input-field">
+                      <label class="input-label">
+                        <span>Utilidad Contable Antes Impuestos</span>
+                        <span class="input-helper">Auditoría TTD 15%</span>
+                      </label>
+                      <div class="input-wrapper">
+                        <span class="input-prefix">$</span>
+                        <input type="text" inputmode="numeric" id="pj_utilidad_contable" class="currency-input" value="260'000.000" oninput="triggerPjCalc()">
+                      </div>
+                    </div>
+
+                    <div class="input-field">
+                      <label class="input-label">Gastos No Deducibles (Sanciones, sin FE)</label>
+                      <div class="input-wrapper">
+                        <span class="input-prefix">$</span>
+                        <input type="text" inputmode="numeric" id="pj_gastos_no_deducibles" class="currency-input" value="15'000.000" oninput="triggerPjCalc()">
+                      </div>
+                    </div>
+
+                    <div class="input-field">
+                      <label class="input-label">Rentas Exentas PJ</label>
+                      <div class="input-wrapper">
+                        <span class="input-prefix">$</span>
+                        <input type="text" inputmode="numeric" id="pj_rentas_exentas" class="currency-input" value="0" oninput="triggerPjCalc()">
+                      </div>
+                    </div>
+
+                    <div class="input-field">
+                      <label class="input-label">Compensación Pérdidas Fiscales</label>
+                      <div class="input-wrapper">
+                        <span class="input-prefix">$</span>
+                        <input type="text" inputmode="numeric" id="pj_compensacion" class="currency-input" value="0" oninput="triggerPjCalc()">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-section">
+                  <h3 class="section-title">4. Descuentos y Retenciones</h3>
+                  <div class="inputs-row">
+                    <div class="input-field">
+                      <label class="input-label">Descuento Tributario ICA (50%)</label>
+                      <div class="input-wrapper">
+                        <span class="input-prefix">$</span>
+                        <input type="text" inputmode="numeric" id="pj_desc_ica" class="currency-input" value="12'000.000" oninput="triggerPjCalc()">
+                      </div>
+                    </div>
+
+                    <div class="input-field">
+                      <label class="input-label">Retenciones en la Fuente Practicadas</label>
+                      <div class="input-wrapper">
+                        <span class="input-prefix">$</span>
+                        <input type="text" inputmode="numeric" id="pj_retenciones" class="currency-input" value="35'000.000" oninput="triggerPjCalc()">
+                      </div>
+                    </div>
+
+                    <div class="input-field">
+                      <label class="input-label">Autorretenciones Practicadas</label>
+                      <div class="input-wrapper">
+                        <span class="input-prefix">$</span>
+                        <input type="text" inputmode="numeric" id="pj_autorretenciones" class="currency-input" value="20'000.000" oninput="triggerPjCalc()">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- RESULTS -->
+            <div>
+              <div class="card results-card">
+                <div class="card-header">
+                  <h2 class="card-title">Liquidación Privada PJ (F110)</h2>
+                  <button class="btn btn-outline btn-sm" onclick="openAuditModal('pj')">
+                    👁️ Ver Auditoría Legal
+                  </button>
+                </div>
+
+                <div class="card-body">
+                  <div id="pj-kpi-box" class="kpi-banner to-pay">
+                    <div>
+                      <div id="pj-kpi-label" class="kpi-label">Saldo a Pagar (Formulario 110)</div>
+                      <div id="pj-kpi-value" class="kpi-value">$0 COP</div>
+                    </div>
+                    <span id="pj-kpi-badge" class="badge-uvt">Tarifa: 35%</span>
+                  </div>
+
+                  <div id="pj-ttd-alert" style="display: none; background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px; padding: 12px; margin-bottom: 14px; font-size: 12px;">
+                    <strong style="color: #b45309;">⚠️ Alerta TTD: Tasa Mínima 15% Activada</strong>
+                    <p id="pj-ttd-alert-text" style="color: #78350f; font-size: 11px; margin-top: 4px;"></p>
+                  </div>
+
+                  <table class="breakdown-table">
+                    <tbody>
+                      <tr>
+                        <td>Ingresos Fiscales Netos</td>
+                        <td id="res-pj-ingresos-netos" class="amount">$0</td>
+                      </tr>
+                      <tr>
+                        <td>(-) Costos Fiscales Procedentes</td>
+                        <td id="res-pj-costos" class="amount negative">-$0</td>
+                      </tr>
+                      <tr class="highlight">
+                        <td>(=) Renta Bruta Fiscal</td>
+                        <td id="res-pj-renta-bruta" class="amount">$0</td>
+                      </tr>
+                      <tr>
+                        <td>(-) Gastos Deducibles</td>
+                        <td id="res-pj-gastos" class="amount negative">-$0</td>
+                      </tr>
+                      <tr class="highlight" style="border-top: 2px solid var(--primary-border);">
+                        <td>(=) Renta Líquida Gravable</td>
+                        <td id="res-pj-renta-gravable" class="amount" style="color: var(--primary);">$0</td>
+                      </tr>
+                      <tr>
+                        <td>Impuesto Básico de Renta (35%)</td>
+                        <td id="res-pj-impuesto-basico" class="amount">$0</td>
+                      </tr>
+                      <tr>
+                        <td>(-) Descuentos Tributarios (ICA)</td>
+                        <td id="res-pj-descuentos" class="amount negative">-$0</td>
+                      </tr>
+                      <tr id="res-pj-row-ia-ttd" style="display: none;">
+                        <td style="color: #b45309;">(+) Impuesto Adicional TTD (Tasa 15%)</td>
+                        <td id="res-pj-ia-ttd" class="amount" style="color: #b45309;">+$0</td>
+                      </tr>
+                      <tr class="highlight">
+                        <td>(=) Impuesto Neto Total</td>
+                        <td id="res-pj-impuesto-neto" class="amount">$0</td>
+                      </tr>
+                      <tr>
+                        <td>(-) Retenciones y Autorretenciones</td>
+                        <td id="res-pj-retenciones" class="amount negative">-$0</td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+                  <button class="btn btn-primary" style="width: 100%;" onclick="openAuditModal('pj')">
+                    🔍 Ver Conciliación Contable-Fiscal
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- =================================================================
+             MÓDULO 3: RÉGIMEN SIMPLE (F260 - SCAFFOLD / MÓDULO)
+             ================================================================= -->
+        <div id="pane-simple" class="module-pane">
+          <div class="card" style="margin-bottom: 20px;">
+            <div class="card-header">
+              <h2 class="card-title">📑 Régimen Simple de Tributación - SIMPLE (Formulario 260 DIAN)</h2>
+              <span class="badge-uvt">Art. 903 a 916 E.T.</span>
+            </div>
+            <div class="card-body" style="font-size: 13px; line-height: 1.6;">
+              <p style="margin-bottom: 12px; color: var(--text-secondary);">
+                El Régimen Simple sustituye el impuesto sobre la renta e integra el Impuesto Nacional al Consumo y el ICA consolidado territorial.
+              </p>
+              
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; margin: 16px 0;">
+                <div style="background: #f8fafc; border: 1px solid var(--border-subtle); padding: 14px; border-radius: 8px;">
+                  <h4 style="color: #0b3b60; font-weight: 700; margin-bottom: 6px;">Grupo 1: Tiendas y Minimercados</h4>
+                  <p style="font-size: 11.5px; color: var(--text-muted);">Tarifas desde 1.2% hasta 5.6% sobre ingresos brutos.</p>
+                </div>
+                <div style="background: #f8fafc; border: 1px solid var(--border-subtle); padding: 14px; border-radius: 8px;">
+                  <h4 style="color: #0b3b60; font-weight: 700; margin-bottom: 6px;">Grupo 2: Comercio & Servicios Técnicos</h4>
+                  <p style="font-size: 11.5px; color: var(--text-muted);">Tarifas desde 1.6% hasta 4.5% sobre ingresos brutos.</p>
+                </div>
+                <div style="background: #f8fafc; border: 1px solid var(--border-subtle); padding: 14px; border-radius: 8px;">
+                  <h4 style="color: #0b3b60; font-weight: 700; margin-bottom: 6px;">Grupo 3: Profesiones Liberales</h4>
+                  <p style="font-size: 11.5px; color: var(--text-muted);">Consultorías y servicios profesionales (Tope 12.000 UVT).</p>
+                </div>
+              </div>
+
+              <div style="background: #eff6ff; border-left: 4px solid #2563eb; padding: 12px 16px; border-radius: 0 8px 8px 0; margin-top: 16px;">
+                <strong>💡 Módulo Listo para Extensión:</strong> Este calculador cuenta con el motor de reglas preparado en el backend para liquidar los anticipos bimestrales (F2593) y la declaración anual consolidada (F260).
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- =================================================================
+             MÓDULO 4: IVA (FORMULARIO 300 - SCAFFOLD / MÓDULO)
+             ================================================================= -->
+        <div id="pane-iva" class="module-pane">
+          <div class="card">
+            <div class="card-header">
+              <h2 class="card-title">🛍️ Impuesto sobre las Ventas - IVA (Formulario 300 DIAN)</h2>
+              <span class="badge-uvt">Bimestral / Cuatrimestral</span>
+            </div>
+            <div class="card-body" style="font-size: 13px; line-height: 1.6;">
+              <p style="margin-bottom: 12px; color: var(--text-secondary);">
+                Declaración y pago del IVA generado en ventas de bienes y servicios gravados (19%, 5%, exentos 0% y excluidos) versus IVA descontable en compras, importaciones y servicios.
+              </p>
+
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 16px 0;">
+                <div style="background: #f8fafc; border: 1px solid var(--border-subtle); padding: 14px; border-radius: 8px;">
+                  <h4 style="color: #0b3b60; font-weight: 700; margin-bottom: 6px;">IVA Generado (Ventas)</h4>
+                  <ul style="padding-left: 18px; font-size: 12px; color: var(--text-muted);">
+                    <li>Operaciones gravadas a la tarifa general (19%)</li>
+                    <li>Operaciones gravadas a la tarifa especial (5%)</li>
+                    <li>Exportaciones y bienes exentos (0%)</li>
+                  </ul>
+                </div>
+
+                <div style="background: #f8fafc; border: 1px solid var(--border-subtle); padding: 14px; border-radius: 8px;">
+                  <h4 style="color: #059669; font-weight: 700; margin-bottom: 6px;">IVA Descontable (Compras)</h4>
+                  <ul style="padding-left: 18px; font-size: 12px; color: var(--text-muted);">
+                    <li>IVA pagado en adquisición de inventarios</li>
+                    <li>IVA en gastos y servicios operativos con FE</li>
+                    <li>Retención de IVA practicada (ReteIVA 15%)</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div style="background: #ecfdf5; border-left: 4px solid #059669; padding: 12px 16px; border-radius: 0 8px 8px 0; margin-top: 14px;">
+                <strong>⚡ Arquitectura Lista:</strong> Puedes integrar el calculador detallado de IVA casilla por casilla sin alterar los demás módulos de renta.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- =================================================================
+             MÓDULO 5: RETENCIÓN EN LA FUENTE (F350 - SCAFFOLD / MÓDULO)
+             ================================================================= -->
+        <div id="pane-retefuente" class="module-pane">
+          <div class="card">
+            <div class="card-header">
+              <h2 class="card-title">💰 Retenciones en la Fuente (Formulario 350 DIAN)</h2>
+              <span class="badge-uvt">Declaración Mensual</span>
+            </div>
+            <div class="card-body" style="font-size: 13px; line-height: 1.6;">
+              <p style="margin-bottom: 12px; color: var(--text-secondary);">
+                Módulo para la liquidación mensual de retenciones a título de Renta (Laborales Art. 383, Compras 2.5%, Servicios 4%/6%, Honorarios 10%/11%), IVA (15%) y Timbre.
+              </p>
+
+              <div style="background: #fffbeb; border-left: 4px solid #d97706; padding: 12px 16px; border-radius: 0 8px 8px 0; margin-top: 14px;">
+                <strong>📅 Declaración Mensual:</strong> Permite consolidar las retenciones practicadas y autorretenciones especiales del periodo.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- =================================================================
+             MÓDULO 6: BENEFICIOS TRIBUTARIOS & SIMULADORES
+             ================================================================= -->
+        <div id="pane-beneficios" class="module-pane">
+          <div style="margin-bottom: 16px;">
+            <h2 style="font-size: 17px; font-weight: 800; color: var(--text-primary);">Catálogo de Beneficios y Alivios Tributarios (E.T. Colombia)</h2>
+            <p style="font-size: 12px; color: var(--text-muted);">
+              Guía legal interactiva con topes en UVT, requisitos y simuladores de Beneficio de Auditoría y Reducción de Sanciones.
+            </p>
+          </div>
+
+          <!-- SIMULADORES -->
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px;">
+            <!-- AUDITORIA WIDGET -->
+            <div class="card" style="border: 2px solid var(--primary-border);">
+              <div class="card-header" style="background: var(--primary-light);">
+                <div class="card-title" style="color: var(--primary);">
+                  ⚡ Simulador de Beneficio de Auditoría (Art. 689-3 E.T.)
+                </div>
+              </div>
+              <div class="card-body">
+                <p style="font-size: 11.5px; color: var(--text-secondary); margin-bottom: 10px;">
+                  Obtén <strong>firmeza definitiva en 6 meses</strong> (+35%) o en <strong>12 meses</strong> (+25%) frente a la DIAN.
+                </p>
+
+                <div class="input-field" style="margin-bottom: 10px;">
+                  <label class="input-label">Impuesto Neto de Renta del Año Anterior</label>
+                  <div class="input-wrapper">
+                    <span class="input-prefix">$</span>
+                    <input
+                      type="text"
+                      inputmode="numeric"
+                      id="sim-aud-impuesto-ant"
+                      class="currency-input"
+                      value="10'000.000"
+                      oninput="runSimulacionAuditoria()"
+                    />
+                  </div>
+                </div>
+
+                <div id="sim-aud-result" style="background: var(--bg-subtle); padding: 10px; border-radius: 6px; font-size: 12px;">
+                  <!-- Populated via JS -->
+                </div>
+              </div>
+            </div>
+
+            <!-- SANCIONES WIDGET -->
+            <div class="card" style="border: 2px solid var(--emerald-border);">
+              <div class="card-header" style="background: var(--emerald-light);">
+                <div class="card-title" style="color: var(--emerald);">
+                  ⚖️ Reducción de Sanciones por Corrección (Art. 640 y 644 E.T.)
+                </div>
+              </div>
+              <div class="card-body">
+                <p style="font-size: 11.5px; color: var(--text-secondary); margin-bottom: 10px;">
+                  Calcula el descuento de favorabilidad (50% o 75% de rebaja) al corregir voluntariamente.
+                </p>
+
+                <div class="input-field" style="margin-bottom: 8px;">
+                  <label class="input-label">Monto de la Sanción Plena (Ej. 10% del mayor valor)</label>
+                  <div class="input-wrapper">
+                    <span class="input-prefix">$</span>
+                    <input
+                      type="text"
+                      inputmode="numeric"
+                      id="sim-sancion-base"
+                      class="currency-input"
+                      value="2'000.000"
+                      oninput="runSimulacionSanciones()"
+                    />
+                  </div>
+                </div>
+
+                <div style="margin-bottom: 8px;">
+                  <label class="checkbox-group" style="padding: 4px 8px;">
+                    <input type="checkbox" id="sim-sancion-check-2anos" checked onchange="runSimulacionSanciones()">
+                    <span style="font-size: 11.5px;">Sin sanciones en los últimos 2 años (Rebaja al 50%)</span>
+                  </label>
+                </div>
+
+                <div id="sim-sancion-result" style="background: var(--bg-subtle); padding: 10px; border-radius: 6px; font-size: 12px;">
+                  <!-- Populated via JS -->
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- FILTER BAR -->
+          <div class="beneficio-filter-bar">
+            <button class="btn btn-primary btn-sm" onclick="filterBeneficios('all', this)">Todos</button>
+            <button class="btn btn-outline btn-sm" onclick="filterBeneficios('incrngo', this)">INCRNGO</button>
+            <button class="btn btn-outline btn-sm" onclick="filterBeneficios('deducciones', this)">Deducciones</button>
+            <button class="btn btn-outline btn-sm" onclick="filterBeneficios('rentas_exentas', this)">Rentas Exentas</button>
+            <button class="btn btn-outline btn-sm" onclick="filterBeneficios('auditoria_sanciones', this)">Auditoría & Sanciones</button>
+          </div>
+
+          <!-- LIST OF BENEFITS -->
+          <div id="beneficios-list-container">
+            <!-- Populated dynamically via JS -->
+          </div>
+        </div>
+
+        <!-- =================================================================
+             MÓDULO 7: REGLAS & UVT
+             ================================================================= -->
+        <div id="pane-rules" class="module-pane">
+          <div class="card" style="margin-bottom: 20px;">
+            <div class="card-header">
+              <h2 class="card-title">Tabla Marginal Progresiva Personas Naturales (Art. 241 E.T.)</h2>
+            </div>
+            <div class="card-body">
+              <table class="breakdown-table">
+                <thead>
+                  <tr style="background: var(--bg-subtle); text-align: left;">
+                    <th style="padding: 8px;">Rango Desde (UVT)</th>
+                    <th style="padding: 8px;">Rango Hasta (UVT)</th>
+                    <th style="padding: 8px;">Tarifa Marginal</th>
+                    <th style="padding: 8px;">Impuesto Fijo UVT</th>
+                    <th style="padding: 8px;">Fórmula Legal Aplicable</th>
+                  </tr>
+                </thead>
+                <tbody id="rules-marginal-tbody">
+                  <!-- Populated dynamically via JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <h2 class="card-title">Configuración Declarativa JSON</h2>
+            </div>
+            <div class="card-body">
+              <pre id="rules-json-view" style="background: #0f172a; color: #38bdf8; padding: 16px; border-radius: 8px; font-family: var(--font-mono); font-size: 12px; overflow-x: auto; max-height: 400px;"></pre>
+            </div>
+          </div>
+        </div>
+
+        <!-- =================================================================
+             MÓDULO 8: AGENTES IA & API
+             ================================================================= -->
+        <div id="pane-docs" class="module-pane">
+          <div class="card" style="margin-bottom: 20px;">
+            <div class="card-header">
+              <h2 class="card-title">🤖 Integración con Agentes de Inteligencia Artificial (Function Calling / Skill)</h2>
+            </div>
+            <div class="card-body" style="font-size: 13.5px; line-height: 1.6;">
+              <p style="margin-bottom: 14px; color: var(--text-secondary);">
+                TributIA expone una API estandarizada para que <strong>Agentes de IA</strong> extraigan datos de certificados tributarios (Formulario 220, PILA, extractos bancarios, escrituras notariales) y generen automáticamente la liquidación y el Formulario 210 de la DIAN.
+              </p>
+
+              <h4 style="font-weight: 700; margin: 16px 0 6px;">Prompt del Agente Tributario:</h4>
+              <pre style="background: #0f172a; color: #f8fafc; padding: 12px; border-radius: 8px; font-size: 12px; line-height: 1.5; font-family: var(--font-mono); overflow-x: auto;">
+Eres un Contador Tributario Colombiano experto.
+1. Recibe los certificados (Formulario 220, PILA, extractos bancarios, retenciones en la fuente).
+2. Invoca POST /api/v1/calculate/persona-natural/calculate con tax_year=2026.
+3. Evalúa deducciones por dependientes, compras con factura electrónica y Ganancias Ocasionales.
+4. Genera la declaración oficial lista para el Formulario 210 de la DIAN.
+              </pre>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- FLOATING CASILLA POPOVER -->
+  <div id="casilla-popover" style="display: none;">
+    <div class="popover-header">
+      <div>
+        <span class="popover-badge-num" id="popover-num">Casilla 32</span>
+        <div class="popover-title-text" id="popover-title" style="margin-top: 4px;">Ingresos brutos por rentas de trabajo</div>
+      </div>
+      <button class="popover-close-btn" onclick="hideCasillaPopover()">✕</button>
+    </div>
+    
+    <div class="popover-art-tag" id="popover-art">Art. 103 E.T.</div>
+
+    <div class="popover-section">
+      <div class="popover-section-label">📌 ¿A qué hace referencia?</div>
+      <div class="popover-section-body" id="popover-concepto"></div>
+    </div>
+
+    <div class="popover-section">
+      <div class="popover-section-label">✍️ ¿Cómo debería llenarse?</div>
+      <div class="popover-section-body instruccion" id="popover-como-llenar"></div>
+    </div>
+
+    <div class="popover-section" id="popover-section-tope">
+      <div class="popover-section-label">⚠️ Tope / Validación Legal</div>
+      <div class="popover-section-body tope-legal" id="popover-tope"></div>
+    </div>
+  </div>
+
+  <!-- AUDIT MODAL -->
+  <div id="audit-modal" class="modal-backdrop" style="display: none;" onclick="closeAuditModal()">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <h3 id="audit-modal-title" style="font-size: 15px; font-weight: 700;">Auditoría y Trazabilidad Paso a Paso</h3>
+        <button class="btn btn-outline btn-sm" onclick="closeAuditModal()">✕ Cerrar</button>
+      </div>
+      <div id="audit-modal-body" class="modal-body">
+        <!-- Populated via JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- =====================================================================
+       MODAL: IMPORTAR / EXPORTAR JSON & SINCRONIZACIÓN API
+       ===================================================================== -->
+  <div id="modal-json-sync" class="modal-backdrop" style="display: none;" onclick="closeJsonModalOnBackdrop(event)">
+    <div class="modal-content" style="max-width: 680px;" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <span id="modal-json-icon" style="font-size: 18px;">🔄</span>
+          <h3 id="modal-json-title" style="font-size: 15px; font-weight: 800; color: #0b3b60; margin: 0;">Sincronización de Estado con la API</h3>
+        </div>
+        <button class="btn btn-outline btn-sm" onclick="closeJsonModal()">✕ Cerrar</button>
+      </div>
+
+      <div style="display: flex; gap: 8px; border-bottom: 1px solid var(--border-subtle); padding: 10px 16px 0 16px; background: #f8fafc;">
+        <button id="modal-tab-btn-export" class="sub-tab-btn active" onclick="switchJsonModalTab('export')">
+          📤 Exportar Estado UI
+        </button>
+        <button id="modal-tab-btn-import" class="sub-tab-btn" onclick="switchJsonModalTab('import')">
+          📥 Importar JSON
+        </button>
+        <button id="modal-tab-btn-api" class="sub-tab-btn" onclick="switchJsonModalTab('api')">
+          ⚡ Comandos cURL & API
+        </button>
+      </div>
+
+      <div class="modal-body" style="padding: 16px;">
+        <!-- TAB: EXPORT -->
+        <div id="modal-pane-export" class="modal-pane-content" style="display: block;">
+          <p style="font-size: 12px; color: var(--text-muted); margin: 0 0 8px 0;">
+            Estado completo actual de la interfaz web. Úsalo para guardar tu sesión o enviarlo directamente a la API:
+          </p>
+          <textarea id="export-json-textarea" readonly style="width: 100%; height: 220px; font-family: var(--font-mono); font-size: 11px; background: #0f172a; color: #f8fafc; padding: 10px; border-radius: 6px; border: 1px solid #334155; resize: vertical; box-sizing: border-box;"></textarea>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 12px; flex-wrap: wrap; gap: 8px;">
+            <span id="export-copy-feedback" style="font-size: 12px; color: #059669; font-weight: 700;"></span>
+            <div style="display: flex; gap: 8px;">
+              <button class="btn btn-outline btn-sm" onclick="downloadCurrentStateJson()">
+                💾 Descargar .json
+              </button>
+              <button class="btn btn-primary btn-sm" onclick="copyExportJsonToClipboard()">
+                📋 Copiar JSON
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB: IMPORT -->
+        <div id="modal-pane-import" class="modal-pane-content" style="display: none;">
+          <p style="font-size: 12px; color: var(--text-muted); margin: 0 0 8px 0;">
+            Pega cualquier payload JSON para rellenar la pantalla y recalcular en tiempo real:
+          </p>
+          <textarea id="import-json-textarea" placeholder='{\n  "persona_natural": {\n    "rentas_trabajo": 700000000,\n    "aporte_salud_obligatorio": 28000000\n  }\n}' style="width: 100%; height: 220px; font-family: var(--font-mono); font-size: 11px; background: #ffffff; color: #0f172a; padding: 10px; border-radius: 6px; border: 1px solid var(--border-strong); resize: vertical; box-sizing: border-box;"></textarea>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 12px; flex-wrap: wrap; gap: 8px;">
+            <span id="import-error-feedback" style="font-size: 12px; color: #e11d48; font-weight: 700;"></span>
+            <div style="display: flex; gap: 8px;">
+              <button class="btn btn-outline btn-sm" onclick="triggerJsonFileInput()">
+                📁 Subir .json
+              </button>
+              <input type="file" id="json-file-input" accept=".json" style="display: none;" onchange="handleJsonFileSelected(event)">
+              <button class="btn btn-primary btn-sm" onclick="applyImportedJson()">
+                ✨ Rellenar Interfaz Ahora
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB: API COMMANDS -->
+        <div id="modal-pane-api" class="modal-pane-content" style="display: none;">
+          <p style="font-size: 12px; color: var(--text-muted); margin: 0 0 8px 0;">
+            Comandos listos para interactuar con la interfaz en vivo desde la terminal o tus agentes:
+          </p>
+          <div style="font-size: 11.5px; font-weight: 700; color: #1e3a8a; margin-bottom: 4px;">1. Inyectar datos en la UI en vivo (cURL):</div>
+          <pre id="snippet-curl-post" style="background: #0f172a; color: #38bdf8; padding: 10px; border-radius: 6px; font-size: 11px; font-family: var(--font-mono); overflow-x: auto; white-space: pre-wrap; margin: 0 0 10px 0;"></pre>
+          
+          <div style="font-size: 11.5px; font-weight: 700; color: #1e3a8a; margin-bottom: 4px;">2. Leer el estado actual de la pantalla (cURL):</div>
+          <pre style="background: #0f172a; color: #38bdf8; padding: 10px; border-radius: 6px; font-size: 11px; font-family: var(--font-mono); overflow-x: auto; white-space: pre-wrap; margin: 0;">curl -s http://localhost:8000/api/v1/session/state</pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/static/casillas_info.js"></script>
+  <script src="/static/calendario_data.js"></script>
+  <script src="/static/app.js"></script>
+</body>
+</html>

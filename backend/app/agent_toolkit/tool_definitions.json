@@ -1,0 +1,168 @@
+{
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "calcular_renta_persona_natural",
+        "description": "Calcula la liquidación y depuración del impuesto de renta de Persona Natural en Colombia (Cédula General / Rentas de Trabajo) para cualquier año fiscal (2022, 2024, 2025, 2026). Aplica límites de UVT, topes de deducciones (dependientes, medicina prepagada, intereses de vivienda, GMF, compras electrónicas), rentas exentas (AFC, laboral 25%), límite conjunto del 40% y tabla marginal progresiva (Art. 241 E.T.).",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "tax_year": {
+              "type": "integer",
+              "description": "Año gravable a liquidar (ej. 2026, 2025, 2024, 2022)",
+              "default": 2026
+            },
+            "rentas_trabajo": {
+              "type": "number",
+              "description": "Total ingresos brutos por salarios, honorarios, comisiones, primas o cesantías"
+            },
+            "viaticos": {
+              "type": "number",
+              "description": "Viáticos gravados recibidos en el año",
+              "default": 0
+            },
+            "otros_ingresos_brutos": {
+              "type": "number",
+              "description": "Otros ingresos brutos de la cédula general (capital o no laborales)",
+              "default": 0
+            },
+            "aporte_salud_obligatorio": {
+              "type": "number",
+              "description": "Aportes obligatorios a salud (EPS) realizados durante el año"
+            },
+            "aporte_pension_obligatorio": {
+              "type": "number",
+              "description": "Aportes obligatorios a pensión y Fondo de Solidaridad Pensional (FSP)"
+            },
+            "aplica_dependiente_general": {
+              "type": "boolean",
+              "description": "Indica si tiene al menos 1 dependiente económico a cargo (deducción del 10% del ingreso laboral hasta 384 UVT)",
+              "default": false
+            },
+            "numero_dependientes_adicionales_72uvt": {
+              "type": "integer",
+              "description": "Número de dependientes adicionales (0 a 4) para deducir 72 UVT c/u según Art. 336 numeral 2",
+              "default": 0
+            },
+            "medicina_prepagada_anual": {
+              "type": "number",
+              "description": "Total pagos anuales por medicina prepagada o seguros médicos (hasta 192 UVT)",
+              "default": 0
+            },
+            "intereses_vivienda_anual": {
+              "type": "number",
+              "description": "Total intereses pagados por crédito de vivienda o leasing habitacional (hasta 1.200 UVT)",
+              "default": 0
+            },
+            "gmf_4x1000_total": {
+              "type": "number",
+              "description": "Total Gravamen a Movimientos Financieros (4x1000) certificado en extractos bancarios (50% deducible)",
+              "default": 0
+            },
+            "compras_factura_electronica": {
+              "type": "number",
+              "description": "Total compras personales soportadas con Factura Electrónica (1% deducible hasta 240 UVT)",
+              "default": 0
+            },
+            "aportes_voluntarios_pension_afc": {
+              "type": "number",
+              "description": "Total aportes voluntarios a fondos de pensiones voluntarias o cuentas AFC (hasta 30% ingreso bruto / 3.800 UVT)",
+              "default": 0
+            },
+            "retenciones_fuente_practicadas": {
+              "type": "number",
+              "description": "Total retenciones en la fuente certificadas que le fueron practicadas",
+              "default": 0
+            },
+            "anticipo_ano_anterior": {
+              "type": "number",
+              "description": "Anticipo de renta liquidado en la declaración del año anterior",
+              "default": 0
+            },
+            "saldo_a_favor_ano_anterior": {
+              "type": "number",
+              "description": "Saldo a favor de la declaración anterior",
+              "default": 0
+            }
+          },
+          "required": ["tax_year", "rentas_trabajo", "aporte_salud_obligatorio", "aporte_pension_obligatorio"]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "calcular_renta_persona_juridica",
+        "description": "Calcula la liquidación del impuesto de renta para Persona Jurídica en Colombia (Formulario 110), aplicando tarifa general de renta (35%), costos procedentes, gastos deducibles, compensación de pérdidas, Ganancia Ocasional y cálculo obligatorio de la Tasa de Tributación Depurada (TTD - Tasa Mínima del 15% según Art. 240 Parágrafo 6).",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "tax_year": {
+              "type": "integer",
+              "description": "Año gravable (ej. 2026)",
+              "default": 2026
+            },
+            "ingresos_brutos_operacionales": {
+              "type": "number",
+              "description": "Ingresos operacionales por ventas o servicios"
+            },
+            "ingresos_brutos_no_operacionales": {
+              "type": "number",
+              "description": "Rendimientos financieros u otros ingresos",
+              "default": 0
+            },
+            "costos_procedentes": {
+              "type": "number",
+              "description": "Costo fiscal de ventas y producción"
+            },
+            "gastos_administracion": {
+              "type": "number",
+              "description": "Gastos de nómina, arriendos, servicios administrativos"
+            },
+            "gastos_ventas": {
+              "type": "number",
+              "description": "Gastos comerciales y de ventas",
+              "default": 0
+            },
+            "gastos_financieros": {
+              "type": "number",
+              "description": "Gastos bancarios e intereses",
+              "default": 0
+            },
+            "gastos_no_deducibles": {
+              "type": "number",
+              "description": "Gastos sin soporte electrónico, multas o sanciones",
+              "default": 0
+            },
+            "utilidad_contable_antes_impuestos": {
+              "type": "number",
+              "description": "Utilidad contable/comercial del ejercicio (para auditar TTD 15%)"
+            },
+            "ganancia_ocasional_gravable": {
+              "type": "number",
+              "description": "Utilidad en venta de activos fijos poseídos más de 2 años",
+              "default": 0
+            },
+            "descuento_tributario_ica": {
+              "type": "number",
+              "description": "Descuento del 50% de ICA efectivamente pagado",
+              "default": 0
+            },
+            "retenciones_en_la_fuente": {
+              "type": "number",
+              "description": "Retenciones practicadas a la sociedad",
+              "default": 0
+            },
+            "autorretenciones_practicadas": {
+              "type": "number",
+              "description": "Autorretenciones liquidadas",
+              "default": 0
+            }
+          },
+          "required": ["tax_year", "ingresos_brutos_operacionales", "costos_procedentes", "gastos_administracion", "utilidad_contable_antes_impuestos"]
+        }
+      }
+    }
+  ]
+}

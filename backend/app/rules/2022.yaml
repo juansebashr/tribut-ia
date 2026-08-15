@@ -1,0 +1,47 @@
+tax_year: 2022
+uvt_value: 38004
+description: "Reglas tributarias año gravable 2022 (Previo a Ley 2277 de 2022)"
+
+persona_natural:
+  cedula_general:
+    limite_conjunto_rentas_exentas_deducciones:
+      porcentaje_max_ingreso_neto: 0.40
+      tope_uvt: 5040
+    deducciones:
+      dependiente_general:
+        porcentaje_ingreso_laboral: 0.10
+        tope_uvt: 384
+      dependientes_adicionales_72uvt:
+        tope_uvt_por_dependiente: 0
+        max_dependientes: 0
+      medicina_prepagada:
+        tope_uvt_anual: 192
+      intereses_vivienda:
+        tope_uvt_anual: 1200
+      gmf:
+        porcentaje_deducible: 0.50
+    rentas_exentas:
+      voluntarias_pension_afc:
+        porcentaje_max_ingreso: 0.30
+        tope_uvt: 3800
+      laboral_25:
+        porcentaje: 0.25
+        tope_uvt: 2880
+    tabla_marginal_art241:
+      - { desde_uvt: 0, hasta_uvt: 1090, tarifa: 0.00, uvt_adicional: 0 }
+      - { desde_uvt: 1090, hasta_uvt: 1700, tarifa: 0.19, uvt_adicional: 0 }
+      - { desde_uvt: 1700, hasta_uvt: 4100, tarifa: 0.28, uvt_adicional: 116 }
+      - { desde_uvt: 4100, hasta_uvt: 8670, tarifa: 0.33, uvt_adicional: 788 }
+      - { desde_uvt: 8670, hasta_uvt: 18970, tarifa: 0.35, uvt_adicional: 2296 }
+      - { desde_uvt: 18970, hasta_uvt: 31000, tarifa: 0.37, uvt_adicional: 5901 }
+      - { desde_uvt: 31000, hasta_uvt: 9999999, tarifa: 0.39, uvt_adicional: 10352 }
+
+persona_juridica:
+  tarifa_general: 0.35
+  ganancia_ocasional: 0.10
+  tasa_minima_ttd:
+    aplica: false
+    tarifa_minima: 0.00
+  descuentos:
+    ica_descuento_porcentaje: 0.50
+    donaciones_porcentaje: 0.25

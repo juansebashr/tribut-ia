@@ -1,0 +1,2003 @@
+// Estado global
+let currentYear = 2026;
+let currentUvt = 52350;
+let lastPnResult = null;
+let lastPjResult = null;
+let currentRules = null;
+let debounceTimer = null;
+let allBeneficios = [];
+let isPopoverPinned = false;
+let isSidebarCollapsed = false;
+let currentActiveModule = 'pn';
+let currentActiveSubTab = 'calc';
+let liveSyncEventSource = null;
+let syncDebounceTimer = null;
+let currentSessionId = 'default';
+let isApplyingRemoteState = false;
+
+// Formateador de moneda tradicional colombiano (Separador de millones: ', Separador de miles: .)
+function formatCOP(amount, includeSymbol = true) {
+  if (amount === undefined || amount === null || isNaN(amount)) return includeSymbol ? '$0' : '0';
+  const num = Math.round(Number(amount));
+  const isNegative = num < 0;
+  const absStr = String(Math.abs(num));
+
+  if (absStr.length <= 3) {
+    return (isNegative ? '-' : '') + (includeSymbol ? '$' : '') + absStr;
+  }
+
+  const rev = absStr.split('').reverse();
+  const parts = [];
+  for (let i = 0; i < rev.length; i += 3) {
+    parts.push(rev.slice(i, i + 3).reverse().join(''));
+  }
+
+  let formatted = parts[parts.length - 1];
+  for (let i = parts.length - 2; i >= 0; i--) {
+    const sep = (i % 2 === 1) ? "'" : ".";
+    formatted += sep + parts[i];
+  }
+
+  return (isNegative ? '-' : '') + (includeSymbol ? '$' : '') + formatted;
+}
+
+// Estado del Calendario
+let currentCalYear = 2026;
+let currentCalMonth = 8; // Agosto (1 a 12)
+let calTaxFilter = 'all';
+let currentTimelineItems = [];
+
+// Configuración de módulos y títulos
+const MODULE_METADATA = {
+  'calendario': {
+    breadcrumb: 'VENCIMIENTOS / CALENDARIO DIAN',
+    title: 'Calendario Tributario Nacional & Consulta de Vencimientos por NIT',
+    hasSubTabs: false
+  },
+  'pn-calc': {
+    breadcrumb: 'IMPUESTO DE RENTA / PERSONA NATURAL',
+    title: 'Depuración Cédula General (Rentas de Trabajo, Capital y No Laborales)',
+    hasSubTabs: true
+  },
+  'pn-f210': {
+    breadcrumb: 'IMPUESTO DE RENTA / PERSONA NATURAL',
+    title: 'Formulario 210 DIAN - Facsímil Oficial en Vivo',
+    hasSubTabs: true
+  },
+  'pn-marginal': {
+    breadcrumb: 'IMPUESTO DE RENTA / PERSONA NATURAL',
+    title: 'Tarifa Marginal Progresiva & Termómetro de Brackets (Art. 241 E.T.)',
+    hasSubTabs: true
+  },
+  'pj': {
+    breadcrumb: 'IMPUESTO DE RENTA / PERSONA JURÍDICA',
+    title: 'Liquidación Renta Empresarial (F110) & Tasa Mínima TTD (15%)',
+    hasSubTabs: false
+  },
+  'simple': {
+    breadcrumb: 'RÉGIMEN ESPECIAL / SIMPLE',
+    title: 'Régimen Simple de Tributación - SIMPLE (Formulario 260)',
+    hasSubTabs: false
+  },
+  'iva': {
+    breadcrumb: 'IMPUESTOS INDIRECTOS / IVA',
+    title: 'Impuesto sobre las Ventas - IVA (Formulario 300 DIAN)',
+    hasSubTabs: false
+  },
+  'retefuente': {
+    breadcrumb: 'IMPUESTOS PERIÓDICOS / RETENCIONES',
+    title: 'Retención en la Fuente Mensual (Formulario 350 DIAN)',
+    hasSubTabs: false
+  },
+  'beneficios': {
+    breadcrumb: 'OPTIMIZACIÓN / BENEFICIOS FISCALES',
+    title: 'Catálogo de Beneficios, Firmeza de Auditoría & Sanciones',
+    hasSubTabs: false
+  },
+  'rules': {
+    breadcrumb: 'SISTEMA / CONFIGURACIÓN',
+    title: 'Reglas Tributarias, UVT & Parámetros Legales Declarativos',
+    hasSubTabs: false
+  },
+  'docs': {
+    breadcrumb: 'DESARROLLADORES / AGENTES IA',
+    title: 'Integración API REST & Prompts para Agentes Autónomos',
+    hasSubTabs: false
+  }
+};
+
+const NOMBRES_MESES = [
+  "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+  "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+];
+
+// Helpers para leer y escribir valores numéricos en campos formateados ($1'280.000)
+function getNum(id) {
+  const el = typeof id === 'string' ? document.getElementById(id) : id;
+  if (!el) return 0;
+  // En declaraciones tributarias colombianas, los valores son enteros en pesos (COP).
+  // Los separadores visuales son ' (millones) y . (miles). Eliminamos todo lo que no sea dígito o signo menos.
+  const str = String(el.value || '').trim();
+  const isNeg = str.startsWith('-');
+  const digitsOnly = str.replace(/\D/g, '');
+  if (!digitsOnly) return 0;
+  const val = parseInt(digitsOnly, 10);
+  return isNeg ? -val : val;
+}
+
+function setNum(id, val) {
+  const el = typeof id === 'string' ? document.getElementById(id) : id;
+  if (!el) return;
+  el.value = formatCOP(val, false);
+}
+
+// Máscara interactiva para que el usuario escriba directamente con formato ($1'280.000)
+function attachCurrencyInputMasks() {
+  document.querySelectorAll('.currency-input').forEach(input => {
+    // Formatear valor inicial
+    const digits = String(input.value || '').replace(/\D/g, '');
+    if (digits) {
+      input.value = formatCOP(digits, false);
+    }
+
+    input.addEventListener('input', () => {
+      const curPos = input.selectionStart;
+      const prevLen = input.value.length;
+      const rawDigits = input.value.replace(/\D/g, '');
+      
+      if (!rawDigits) {
+        input.value = '0';
+      } else {
+        input.value = formatCOP(rawDigits, false);
+      }
+
+      // Reubicar cursor adecuadamente tras insertar separadores
+      const newLen = input.value.length;
+      const diff = newLen - prevLen;
+      const newPos = Math.max(0, (curPos || 0) + diff);
+      try {
+        input.setSelectionRange(newPos, newPos);
+      } catch (err) {}
+    });
+
+    input.addEventListener('focus', () => {
+      if (input.value === '0') {
+        input.value = '';
+      }
+    });
+
+    input.addEventListener('blur', () => {
+      if (!input.value.trim()) {
+        input.value = '0';
+      } else {
+        const rawDigits = input.value.replace(/\D/g, '');
+        input.value = formatCOP(rawDigits, false);
+      }
+    });
+  });
+}
+
+// Inicialización
+document.addEventListener('DOMContentLoaded', () => {
+  loadRules(currentYear);
+  loadBeneficiosCatalog();
+  attachCurrencyInputMasks();
+  triggerPnCalc();
+  triggerPjCalc();
+  runSimulacionAuditoria();
+  runSimulacionSanciones();
+  initCasillaPopovers();
+  consultarVencimientoNit();
+  renderVisualCalendar();
+  initLiveSync();
+});
+
+// SIDEBAR TOGGLE
+function toggleSidebar() {
+  const sidebar = document.getElementById('app-sidebar');
+  const workspace = document.getElementById('app-workspace');
+  const btn = document.getElementById('btn-toggle-sidebar');
+  
+  isSidebarCollapsed = !isSidebarCollapsed;
+  if (isSidebarCollapsed) {
+    sidebar.classList.add('collapsed');
+    workspace.classList.add('expanded');
+    btn.innerText = '▶';
+  } else {
+    sidebar.classList.remove('collapsed');
+    workspace.classList.remove('expanded');
+    btn.innerText = '◀';
+  }
+}
+
+// NAVEGACIÓN MODULAR
+function navigateTo(moduleKey, subTab = 'main') {
+  hideCasillaPopover();
+  currentActiveModule = moduleKey;
+  currentActiveSubTab = subTab;
+
+  // Determinar pane target
+  let targetPaneId = `pane-${moduleKey}`;
+  if (moduleKey === 'pn') {
+    if (subTab === 'f210') targetPaneId = 'pane-pn-f210';
+    else if (subTab === 'marginal') targetPaneId = 'pane-pn-marginal';
+    else targetPaneId = 'pane-pn-calc';
+  }
+
+  // Ocultar todos los panes
+  document.querySelectorAll('.module-pane').forEach(p => p.classList.remove('active'));
+
+  // Desactivar items del sidebar
+  document.querySelectorAll('.sidebar-item-btn').forEach(b => b.classList.remove('active'));
+
+  // Mostrar pane target
+  const targetPane = document.getElementById(targetPaneId);
+  if (targetPane) {
+    targetPane.classList.add('active');
+  }
+
+  // Actualizar item activo del sidebar
+  if (moduleKey === 'pn') {
+    const sideBtn = document.getElementById(`nav-item-pn-${subTab}`);
+    if (sideBtn) sideBtn.classList.add('active');
+  } else {
+    const sideBtn = document.getElementById(`nav-item-${moduleKey}`);
+    if (sideBtn) sideBtn.classList.add('active');
+  }
+
+  // Actualizar Header Breadcrumbs & Title
+  const metaKey = moduleKey === 'pn' ? `pn-${subTab}` : moduleKey;
+  const meta = MODULE_METADATA[metaKey] || { breadcrumb: 'TRIBUTIA SUITE', title: 'Módulo Tributario', hasSubTabs: false };
+  
+  document.getElementById('header-breadcrumbs').innerText = meta.breadcrumb;
+  document.getElementById('header-title').innerText = meta.title;
+
+  // Sub tabs bar en el header
+  const subTabsBar = document.getElementById('sub-tabs-bar');
+  if (moduleKey === 'pn') {
+    subTabsBar.style.display = 'flex';
+    document.getElementById('sub-tab-btn-pn-calc').className = subTab === 'calc' ? 'sub-tab-btn active' : 'sub-tab-btn';
+    document.getElementById('sub-tab-btn-pn-f210').className = subTab === 'f210' ? 'sub-tab-btn active' : 'sub-tab-btn';
+    document.getElementById('sub-tab-btn-pn-marginal').className = subTab === 'marginal' ? 'sub-tab-btn active' : 'sub-tab-btn';
+  } else {
+    subTabsBar.style.display = 'none';
+  }
+
+  // Renderizados específicos al navegar
+  if (moduleKey === 'calendario') {
+    consultarVencimientoNit();
+    if (calTaxFilter === 'all') {
+      renderVisualCalendar();
+    } else {
+      filterCalendarTax(calTaxFilter, document.getElementById(`cal-filter-btn-${calTaxFilter}`));
+    }
+  } else if (moduleKey === 'rules') {
+    renderRulesTab();
+  } else if (moduleKey === 'pn' && subTab === 'f210' && lastPnResult) {
+    renderForm210OfficialSheet(lastPnResult);
+  } else if (moduleKey === 'pn' && subTab === 'marginal' && lastPnResult) {
+    renderPnMarginalThermometer(lastPnResult);
+  } else if (moduleKey === 'beneficios') {
+    renderBeneficiosList('all');
+  }
+
+  // Scroll suave al top
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// CALENDARIO - CONSULTA POR NIT
+function syncNitToCalendar() {
+  const nitPn = document.getElementById('pn_nit_declarante');
+  const calNit = document.getElementById('cal-search-nit');
+  if (nitPn && calNit) {
+    calNit.value = nitPn.value;
+  }
+}
+
+function consultarVencimientoNit() {
+  const nitInput = document.getElementById('cal-search-nit');
+  const taxSelect = document.getElementById('cal-search-tax');
+  const resultContainer = document.getElementById('cal-search-result-container');
+  if (!nitInput || !taxSelect || !resultContainer) return;
+
+  const rawNit = nitInput.value.trim() || '1234567890';
+  const taxKey = taxSelect.value;
+  const config = CALENDARIO_TRIBUTARIO[taxKey];
+  if (!config) return;
+
+  const cleanNit = rawNit.replace(/\D/g, '');
+  const last2 = cleanNit.length >= 2 ? cleanNit.slice(-2) : cleanNit;
+  const last1 = cleanNit.length >= 1 ? cleanNit.slice(-1) : cleanNit;
+
+  const vencimientos = config.calcularVencimiento(rawNit, currentYear);
+  const hoy = new Date("2026-08-14T00:00:00");
+
+  let html = `
+    <div class="calendar-result-card">
+      <div style="grid-column: 1 / -1; border-bottom: 1px solid #e2e8f0; padding-bottom: 8px; margin-bottom: 4px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+        <div>
+          <strong style="color: #0b3b60; font-size: 14px;">${config.nombre} (${config.formulario})</strong>
+          <div style="font-size: 11.5px; color: #64748b;">
+            NIT Consultado: <strong style="font-family: var(--font-mono); color: #0b3b60;">${rawNit}</strong> 
+            (Último dígito: <strong style="font-family: var(--font-mono);">${last1}</strong> | 2 Últimos: <strong style="font-family: var(--font-mono);">${last2}</strong>)
+          </div>
+        </div>
+        <span class="badge-uvt" style="background:#eff6ff; color:#1d4ed8;">${config.frecuencia}</span>
+      </div>
+  `;
+
+  vencimientos.forEach(v => {
+    const targetDate = new Date(`${v.fecha}T00:00:00`);
+    const diffTime = targetDate.getTime() - hoy.getTime();
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    
+    let countdownBadge = '';
+    if (diffDays > 0) {
+      countdownBadge = `<span class="calendar-due-badge" style="background:#ecfdf5; color:#059669;">⏳ Faltan ${diffDays} días</span>`;
+    } else if (diffDays === 0) {
+      countdownBadge = `<span class="calendar-due-badge" style="background:#fef08a; color:#854d0e;">⚠️ ¡VENCE HOY!</span>`;
+    } else {
+      countdownBadge = `<span class="calendar-due-badge" style="background:#fee2e2; color:#b91c1c;">✓ Vencido hace ${Math.abs(diffDays)} días</span>`;
+    }
+
+    html += `
+      <div class="calendar-due-item">
+        <div style="font-size: 11px; font-weight: 700; color: #475569; text-transform: uppercase;">
+          ${v.cuota || v.concepto}
+        </div>
+        <div class="calendar-due-date">${v.fechaTexto}</div>
+        <div style="font-size: 11px; color: #64748b;">${v.concepto}</div>
+        <div style="margin-top: 4px;">${countdownBadge}</div>
+      </div>
+    `;
+  });
+
+  html += `
+      <div style="grid-column: 1 / -1; background: #f8fafc; padding: 8px 12px; border-radius: 6px; font-size: 11px; color: #64748b; margin-top: 4px;">
+        📌 <strong>Fundamento Legal:</strong> ${config.base_legal}. ${config.descripcion}
+      </div>
+    </div>
+  `;
+
+  resultContainer.innerHTML = html;
+}
+
+// CALENDARIO - SWITCH ENTRE VISTA RESUMEN (TODOS) Y VISTA DÍA POR DÍA (IMPUESTO ESPECÍFICO)
+function filterCalendarTax(taxType, btn) {
+  calTaxFilter = taxType;
+
+  // Actualizar botones de filtro
+  document.querySelectorAll('#pane-calendario button').forEach(b => {
+    if (b.id && b.id.startsWith('cal-filter-btn-')) {
+      b.className = 'btn btn-outline btn-sm';
+    }
+  });
+  if (btn) btn.className = 'btn btn-primary btn-sm';
+
+  const overviewContainer = document.getElementById('cal-overview-calendar-container');
+  const timelineContainer = document.getElementById('cal-detailed-timeline-container');
+  const searchInput = document.getElementById('cal-timeline-search-digit');
+  if (searchInput) searchInput.value = '';
+
+  if (taxType === 'all') {
+    // Modo "Todos": Muestra la vista limpia de cuadrícula de calendario
+    overviewContainer.style.display = 'block';
+    timelineContainer.style.display = 'none';
+    renderVisualCalendar();
+  } else {
+    // Modo "Impuesto Específico": Muestra el cronograma exhaustivo día a día
+    overviewContainer.style.display = 'none';
+    timelineContainer.style.display = 'block';
+    loadAndRenderDayByDaySchedule(taxType);
+  }
+}
+
+function loadAndRenderDayByDaySchedule(taxType) {
+  const titleEl = document.getElementById('cal-timeline-title');
+  const descEl = document.getElementById('cal-timeline-desc');
+  let items = [];
+
+  if (taxType === 'renta_pn') {
+    titleEl.innerText = '👤 Cronograma Día por Día: Renta Personas Naturales (Formulario 210)';
+    descEl.innerText = '50 días hábiles en Agosto, Septiembre y Octubre según los 2 últimos dígitos del NIT (Art. 579-2 E.T.).';
+    items = getCronogramaRentaPN(currentCalYear);
+  } else if (taxType === 'renta_pj') {
+    titleEl.innerText = '🏢 Cronograma Día por Día: Renta Personas Jurídicas (Formulario 110)';
+    descEl.innerText = 'Cuota 1 (Mayo) por pares de 2 dígitos y Cuota 2 (Julio) por último dígito.';
+    items = getCronogramaRentaPJ(currentCalYear);
+  } else if (taxType === 'iva') {
+    titleEl.innerText = '🛍️ Cronograma Día por Día: Impuesto sobre las Ventas - IVA (Formulario 300)';
+    descEl.innerText = 'Vencimientos bimestrales según el último dígito del NIT en Mar, May, Jul, Sep, Nov y Ene.';
+    items = getCronogramaIVA(currentCalYear);
+  } else if (taxType === 'retefuente') {
+    titleEl.innerText = '💰 Cronograma Día por Día: Retención en la Fuente Mensual (Formulario 350)';
+    descEl.innerText = '12 periodos mensuales con vencimientos según el último dígito del NIT.';
+    items = getCronogramaRetefuente(currentCalYear);
+  } else if (taxType === 'simple') {
+    titleEl.innerText = '📑 Cronograma Día por Día: Régimen SIMPLE Consolidado (Formulario 260)';
+    descEl.innerText = 'Declaración anual consolidada en Abril según el último dígito del NIT.';
+    items = getCronogramaSimple(currentCalYear);
+  }
+
+  currentTimelineItems = items;
+  renderTimelineGrid(items);
+}
+
+function renderTimelineGrid(items) {
+  const container = document.getElementById('cal-timeline-grid');
+  if (!container) return;
+
+  if (!items || items.length === 0) {
+    container.innerHTML = `
+      <div style="grid-column: 1 / -1; text-align: center; padding: 40px; color: var(--text-muted);">
+        No se encontraron vencimientos para el filtro ingresado.
+      </div>
+    `;
+    return;
+  }
+
+  const hoy = new Date("2026-08-14T00:00:00");
+  let html = '';
+
+  items.forEach((item, idx) => {
+    const targetDate = new Date(`${item.fecha}T00:00:00`);
+    const diffTime = targetDate.getTime() - hoy.getTime();
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    
+    let statusPill = '';
+    let isToday = false;
+
+    if (diffDays > 0) {
+      statusPill = `<span style="font-size: 10px; font-weight: 700; color: #059669; background: #ecfdf5; padding: 2px 6px; border-radius: 4px;">⏳ Faltan ${diffDays} d</span>`;
+    } else if (diffDays === 0) {
+      statusPill = `<span style="font-size: 10px; font-weight: 900; color: #854d0e; background: #fef08a; padding: 2px 6px; border-radius: 4px;">⚠️ ¡VENCE HOY!</span>`;
+      isToday = true;
+    } else {
+      statusPill = `<span style="font-size: 10px; font-weight: 700; color: #94a3b8; background: #f1f5f9; padding: 2px 6px; border-radius: 4px;">✓ Finalizado</span>`;
+    }
+
+    html += `
+      <div class="day-by-day-card ${isToday ? 'active-today' : ''}">
+        <div class="day-by-day-card-header">
+          <span style="font-size: 11px; font-weight: 800; text-transform: uppercase; color: #2563eb;">
+            ${item.mes} ${item.dia} • ${item.diaSemana}
+          </span>
+          ${statusPill}
+        </div>
+
+        <div class="day-by-day-date">${item.fechaTexto}</div>
+
+        <div class="day-by-day-digits-box">
+          <span style="font-size: 10.5px; text-transform: uppercase; font-weight: 700; color: #94a3b8;">Vence NITs:</span>
+          <span>${item.digitos}</span>
+        </div>
+
+        <div class="day-by-day-footer">
+          <span>${item.cuota || item.periodo || 'Declaración y Pago'}</span>
+          <span style="font-family: var(--font-mono); font-weight: 800; color: #0b3b60;">${item.formulario}</span>
+        </div>
+      </div>
+    `;
+  });
+
+  container.innerHTML = html;
+}
+
+function filterTimelineByDigit() {
+  const query = (document.getElementById('cal-timeline-search-digit').value || '').trim().toLowerCase();
+  if (!query) {
+    renderTimelineGrid(currentTimelineItems);
+    return;
+  }
+
+  const filtered = currentTimelineItems.filter(item => {
+    return item.digitos.toLowerCase().includes(query) ||
+           item.fechaTexto.toLowerCase().includes(query) ||
+           item.mes.toLowerCase().includes(query) ||
+           (item.dia && String(item.dia).includes(query));
+  });
+
+  renderTimelineGrid(filtered);
+}
+
+// CALENDARIO - VISUALIZADOR DE MES RESUMEN
+function changeCalendarMonth(delta) {
+  currentCalMonth += delta;
+  if (currentCalMonth > 12) {
+    currentCalMonth = 1;
+    currentCalYear++;
+  } else if (currentCalMonth < 1) {
+    currentCalMonth = 12;
+    currentCalYear--;
+  }
+  renderVisualCalendar();
+}
+
+function renderVisualCalendar() {
+  const label = document.getElementById('cal-current-month-label');
+  const container = document.getElementById('cal-days-grid-container');
+  if (!label || !container) return;
+
+  label.innerText = `${NOMBRES_MESES[currentCalMonth - 1]} ${currentCalYear}`;
+  container.innerHTML = '';
+
+  const firstDayIndex = new Date(currentCalYear, currentCalMonth - 1, 1).getDay();
+  const startDay = (firstDayIndex === 0) ? 6 : firstDayIndex - 1;
+  const daysInMonth = new Date(currentCalYear, currentCalMonth, 0).getDate();
+  const daysInPrevMonth = new Date(currentCalYear, currentCalMonth - 1, 0).getDate();
+
+  const allEvents = getEventosCalendarioMes(currentCalYear, currentCalMonth);
+
+  // Días del mes previo
+  for (let i = startDay - 1; i >= 0; i--) {
+    const d = daysInPrevMonth - i;
+    const cell = document.createElement('div');
+    cell.className = 'calendar-day-cell other-month';
+    cell.innerHTML = `<span class="calendar-day-num">${d}</span>`;
+    container.appendChild(cell);
+  }
+
+  // Días del mes actual
+  for (let d = 1; d <= daysInMonth; d++) {
+    const cell = document.createElement('div');
+    const isToday = (currentCalYear === 2026 && currentCalMonth === 8 && d === 14);
+    cell.className = isToday ? 'calendar-day-cell today' : 'calendar-day-cell';
+    
+    let cellContent = `<span class="calendar-day-num">${d}</span>`;
+    
+    const dayEvents = allEvents.filter(e => e.dia === d);
+    dayEvents.forEach(ev => {
+      cellContent += `
+        <div class="calendar-event-pill" style="background: ${ev.color};" title="${ev.titulo}" onclick="selectCalendarEvent('${ev.titulo}', '${d} de ${NOMBRES_MESES[currentCalMonth - 1]}')">
+          <span style="font-weight:900;">[${ev.badge}]</span> ${ev.titulo}
+        </div>
+      `;
+    });
+
+    cell.innerHTML = cellContent;
+    container.appendChild(cell);
+  }
+
+  // Días del mes siguiente
+  const totalCells = startDay + daysInMonth;
+  const remainingCells = (totalCells <= 35) ? (35 - totalCells) : (42 - totalCells);
+  for (let d = 1; d <= remainingCells; d++) {
+    const cell = document.createElement('div');
+    cell.className = 'calendar-day-cell other-month';
+    cell.innerHTML = `<span class="calendar-day-num">${d}</span>`;
+    container.appendChild(cell);
+  }
+}
+
+function selectCalendarEvent(titulo, fecha) {
+  alert(`📅 Vencimiento DIAN:\n\n${titulo}\nFecha límite: ${fecha} de ${currentCalYear}\n\nSelecciona el impuesto correspondiente en los botones superiores para ver la lista completa día por día.`);
+}
+
+// CARGA DE REGLAS & UVT
+async function loadRules(year, customUvt = null) {
+  try {
+    const url = customUvt ? `/api/v1/rules/${year}?custom_uvt=${customUvt}` : `/api/v1/rules/${year}`;
+    const res = await fetch(url);
+    if (!res.ok) throw new Error('Error al cargar reglas');
+    currentRules = await res.json();
+    currentYear = currentRules.tax_year;
+    currentUvt = currentRules.uvt_value;
+    
+    document.getElementById('input-custom-uvt').value = currentUvt;
+    renderYearDigits(currentYear);
+    
+    if (document.getElementById('pane-rules').classList.contains('active')) {
+      renderRulesTab();
+    }
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+function renderYearDigits(year) {
+  const container = document.getElementById('f210-year-digits');
+  if (!container) return;
+  const str = String(year).padStart(4, '0');
+  container.innerHTML = `
+    <div class="f210-digit-box">${str[0]}</div>
+    <div class="f210-digit-box">${str[1]}</div>
+    <div class="f210-digit-box">${str[2]}</div>
+    <div class="f210-digit-box">${str[3]}</div>
+  `;
+}
+
+function onYearChange() {
+  const sel = document.getElementById('select-year');
+  currentYear = parseInt(sel.value) || 2026;
+  currentCalYear = currentYear;
+  loadRules(currentYear).then(() => {
+    triggerPnCalc();
+    triggerPjCalc();
+    runSimulacionAuditoria();
+    consultarVencimientoNit();
+    if (calTaxFilter === 'all') {
+      renderVisualCalendar();
+    } else {
+      loadAndRenderDayByDaySchedule(calTaxFilter);
+    }
+  });
+}
+
+function onUvtChange() {
+  const input = document.getElementById('input-custom-uvt');
+  const val = parseFloat(input.value);
+  if (val && val > 0) {
+    currentUvt = val;
+    triggerPnCalc();
+    triggerPjCalc();
+    runSimulacionAuditoria();
+  }
+}
+
+// PERSONA NATURAL - CÁLCULO
+function triggerPnCalc() {
+  clearTimeout(debounceTimer);
+  debounceTimer = setTimeout(runPnCalc, 150);
+}
+
+async function runPnCalc() {
+  const rentasCapital = getNum('pn_rentas_capital');
+  const rentasNoLaborales = getNum('pn_rentas_nolaborales');
+  const otrosIngresos = getNum('pn_otros_ingresos') + rentasCapital + rentasNoLaborales;
+
+  const payload = {
+    tax_year: currentYear,
+    custom_uvt: currentUvt,
+    patrimonio_bruto: getNum('pn_patrimonio_bruto'),
+    deudas: getNum('pn_deudas'),
+    rentas_trabajo: getNum('pn_rentas_trabajo'),
+    viaticos: getNum('pn_viaticos'),
+    otros_ingresos_brutos: otrosIngresos,
+    aporte_salud_obligatorio: getNum('pn_salud'),
+    aporte_pension_obligatorio: getNum('pn_pension'),
+    otros_incrngo: getNum('pn_incrngo_capital') + getNum('pn_incrngo_nolaborales'),
+    aplica_dependiente_general: document.getElementById('pn_dependiente_general').checked,
+    numero_dependientes_adicionales_72uvt: 0,
+    medicina_prepagada_anual: getNum('pn_prepagada'),
+    intereses_vivienda_anual: getNum('pn_vivienda'),
+    gmf_4x1000_total: getNum('pn_gmf'),
+    compras_factura_electronica: getNum('pn_factura_elec'),
+    aportes_voluntarios_pension_afc: getNum('pn_afc'),
+    otras_rentas_exentas: getNum('pn_otras_exentas'),
+    ganancias_ocasionales_brutas_activos_fijos: getNum('pn_go_activos'),
+    costos_ganancia_ocasional: getNum('pn_go_costos'),
+    ganancias_ocasionales_brutas_herencias: getNum('pn_go_herencias'),
+    ganancias_ocasionales_brutas_loterias: getNum('pn_go_loterias'),
+    ganancias_ocasionales_exentas_solicitadas: getNum('pn_go_exentas'),
+    descuentos_tributarios: 0,
+    retenciones_fuente_practicadas: getNum('pn_retenciones'),
+    anticipo_ano_anterior: getNum('pn_anticipo'),
+    saldo_a_favor_ano_anterior: getNum('pn_saldo_favor_anterior')
+  };
+
+  try {
+    const res = await fetch('/api/v1/calculate/persona-natural/calculate', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    if (!res.ok) throw new Error('Error en el cálculo');
+    const data = await res.json();
+    lastPnResult = data;
+    renderPnResult(data);
+    renderForm210OfficialSheet(data);
+    renderPnMarginalThermometer(data);
+    syncUiStateToBackend();
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+function renderPnResult(data) {
+  const kpiBox = document.getElementById('pn-kpi-box');
+  const kpiLabel = document.getElementById('pn-kpi-label');
+  const kpiValue = document.getElementById('pn-kpi-value');
+  const kpiBadge = document.getElementById('pn-kpi-badge');
+
+  if (data.saldo_a_pagar > 0) {
+    kpiBox.className = 'kpi-banner to-pay';
+    kpiLabel.innerText = 'Saldo Total a Pagar (Casilla 136)';
+    kpiValue.innerText = `${formatCOP(data.saldo_a_pagar)} COP`;
+    kpiBadge.innerText = `Tarifa Marginal: ${(data.tarifa_marginal_maxima * 100).toFixed(0)}%`;
+  } else {
+    kpiBox.className = 'kpi-banner favorable';
+    kpiLabel.innerText = 'Saldo a Favor del Contribuyente (Casilla 137)';
+    kpiValue.innerText = `${formatCOP(data.saldo_a_favor)} COP`;
+    kpiBadge.innerText = '✓ Saldo a Favor';
+  }
+
+  document.getElementById('res-pn-ingresos-brutos').innerText = formatCOP(data.total_ingresos_brutos);
+  document.getElementById('res-pn-incrngo').innerText = `-${formatCOP(data.total_incrngo)}`;
+  document.getElementById('res-pn-ingreso-neto').innerText = formatCOP(data.ingreso_neto);
+  document.getElementById('res-pn-deducciones').innerText = `-${formatCOP(data.total_deducciones_aceptadas)}`;
+  document.getElementById('res-pn-exentas-afc').innerText = `-${formatCOP(data.total_rentas_exentas_previas)}`;
+  document.getElementById('res-pn-exenta-25').innerText = `-${formatCOP(data.renta_exenta_laboral_25)}`;
+  document.getElementById('res-pn-limite-conjunto').innerText = formatCOP(data.limite_conjunto_aplicable_cop);
+  document.getElementById('res-pn-renta-gravable').innerHTML = `${formatCOP(data.renta_liquida_gravable)} <div style="font-size:11px;color:var(--text-muted);">${data.renta_liquida_gravable_uvt.toFixed(2)} UVT</div>`;
+  document.getElementById('res-pn-impuesto-bruto').innerText = formatCOP(data.impuesto_bruto_renta);
+  
+  const rowGo = document.getElementById('res-pn-row-go');
+  if (data.impuesto_ganancias_ocasionales > 0) {
+    rowGo.style.display = 'table-row';
+    document.getElementById('res-pn-impuesto-go').innerText = `+${formatCOP(data.impuesto_ganancias_ocasionales)}`;
+  } else {
+    rowGo.style.display = 'none';
+  }
+
+  document.getElementById('res-pn-total-impuesto-cargo').innerText = formatCOP(data.total_impuesto_a_cargo);
+  document.getElementById('res-pn-retenciones').innerText = `-${formatCOP(data.total_anticipos_y_retenciones)}`;
+}
+
+// Algoritmo DIAN para cálculo del Dígito de Verificación (DV) según Art. 370 E.T.
+function calculateDianDv(nit) {
+  if (!nit) return '1';
+  const clean = String(nit).replace(/\D/g, '');
+  if (!clean) return '1';
+  const weights = [71, 67, 59, 53, 47, 43, 41, 37, 29, 23, 19, 17, 13, 7, 3];
+  const str = clean.padStart(15, '0');
+  let sum = 0;
+  for (let i = 0; i < 15; i++) {
+    sum += parseInt(str[i], 10) * weights[i];
+  }
+  const remainder = sum % 11;
+  if (remainder === 0 || remainder === 1) return String(remainder);
+  return String(11 - remainder);
+}
+
+// Parser inteligente de nombres y apellidos colombianos (1, 2, 3, 4 o más palabras con partículas)
+function parseColombianFullName(fullName) {
+  if (!fullName || typeof fullName !== 'string') {
+    return { primerNombre: '', otrosNombres: '', primerApellido: '', segundoApellido: '' };
+  }
+
+  const raw = fullName.trim().toUpperCase();
+  if (!raw) {
+    return { primerNombre: '', otrosNombres: '', primerApellido: '', segundoApellido: '' };
+  }
+
+  // Tokenizar por espacios
+  const words = raw.split(/\s+/).filter(Boolean);
+
+  if (words.length === 1) {
+    return {
+      primerNombre: words[0],
+      otrosNombres: '',
+      primerApellido: '',
+      segundoApellido: ''
+    };
+  }
+
+  if (words.length === 2) {
+    // Ej: "JUAN PEREZ" -> 1er Nombre: JUAN, 1er Apellido: PEREZ
+    return {
+      primerNombre: words[0],
+      otrosNombres: '',
+      primerApellido: words[1],
+      segundoApellido: ''
+    };
+  }
+
+  if (words.length === 3) {
+    // Ej: "JUAN PEREZ GOMEZ" -> 1er Nombre: JUAN, 1er Apellido: PEREZ, 2do Apellido: GOMEZ
+    return {
+      primerNombre: words[0],
+      otrosNombres: '',
+      primerApellido: words[1],
+      segundoApellido: words[2]
+    };
+  }
+
+  if (words.length === 4) {
+    // Ej: "CARLOS ALBERTO PEREZ GOMEZ" -> 1er Nombre: CARLOS, Otros: ALBERTO, 1er Apellido: PEREZ, 2do Apellido: GOMEZ
+    return {
+      primerNombre: words[0],
+      otrosNombres: words[1],
+      primerApellido: words[2],
+      segundoApellido: words[3]
+    };
+  }
+
+  // 5 o más palabras: Agrupar partículas compuestas (DE, DEL, LA, LAS, LOS, SAN, SANTA)
+  const particles = ['DE', 'DEL', 'LA', 'LAS', 'LOS', 'SAN', 'SANTA', 'Y', 'VON', 'VAN'];
+  const merged = [];
+  for (let i = 0; i < words.length; i++) {
+    const w = words[i];
+    if (particles.includes(w) && i + 1 < words.length) {
+      let combined = w;
+      while (i + 1 < words.length && particles.includes(words[i + 1])) {
+        combined += ' ' + words[++i];
+      }
+      if (i + 1 < words.length) {
+        combined += ' ' + words[++i];
+      }
+      merged.push(combined);
+    } else {
+      merged.push(w);
+    }
+  }
+
+  if (merged.length === 2) {
+    return { primerNombre: merged[0], otrosNombres: '', primerApellido: merged[1], segundoApellido: '' };
+  } else if (merged.length === 3) {
+    return { primerNombre: merged[0], otrosNombres: '', primerApellido: merged[1], segundoApellido: merged[2] };
+  } else if (merged.length === 4) {
+    return { primerNombre: merged[0], otrosNombres: merged[1], primerApellido: merged[2], segundoApellido: merged[3] };
+  } else {
+    const primerApellido = merged[merged.length - 2] || '';
+    const segundoApellido = merged[merged.length - 1] || '';
+    const primerNombre = merged[0] || '';
+    const otrosNombres = merged.slice(1, merged.length - 2).join(' ') || '';
+    return { primerNombre, otrosNombres, primerApellido, segundoApellido };
+  }
+}
+
+// FORMULARIO 210 FACSÍMIL RENDER
+function renderForm210OfficialSheet(data) {
+  if (!data) return;
+
+  const nombre = document.getElementById('pn_nombre_declarante') ? document.getElementById('pn_nombre_declarante').value : "CARLOS ALBERTO PEREZ GOMEZ";
+  const nit = document.getElementById('pn_nit_declarante') ? document.getElementById('pn_nit_declarante').value : "1234567890";
+  
+  // Traslado inteligente de nombres y apellidos según casillas 5, 6, 7, 8 del RUT/F210
+  const parsed = parseColombianFullName(nombre);
+  document.getElementById('f210-val-papellido').innerText = parsed.primerApellido || '';
+  document.getElementById('f210-val-sapellido').innerText = parsed.segundoApellido || '';
+  document.getElementById('f210-val-pnombre').innerText = parsed.primerNombre || '';
+  document.getElementById('f210-val-onombre').innerText = parsed.otrosNombres || '';
+
+  const nitDigitsContainer = document.getElementById('f210-nit-digits');
+  if (nitDigitsContainer) {
+    const nitClean = nit.replace(/\D/g, '').padStart(10, '0');
+    nitDigitsContainer.innerHTML = nitClean.split('').map(d => `<div class="f210-digit-box">${d}</div>`).join('');
+  }
+
+  const dvEl = document.getElementById('f210-val-dv');
+  if (dvEl) {
+    dvEl.innerText = calculateDianDv(nit);
+  }
+
+  const rentasCap = getNum('pn_rentas_capital');
+  const incrngoCap = getNum('pn_incrngo_capital');
+  const rentasNoLab = getNum('pn_rentas_nolaborales');
+  const incrngoNoLab = getNum('pn_incrngo_nolaborales');
+  const costosNoLab = getNum('pn_costos_nolaborales');
+  const comprasFe = getNum('pn_factura_elec');
+
+  const fe1pct = Math.round(comprasFe * 0.01);
+  if (document.getElementById('f210_val_c28')) document.getElementById('f210_val_c28').innerText = formatCOP(fe1pct, false);
+
+  document.getElementById('f210_val_c29').innerText = formatCOP(data.patrimonio_bruto, false);
+  document.getElementById('f210_val_c30').innerText = formatCOP(data.deudas, false);
+  document.getElementById('f210_val_c31').innerText = formatCOP(data.patrimonio_liquido, false);
+
+  const rentasTrabajo = getNum('pn_rentas_trabajo');
+  const viaticos = getNum('pn_viaticos');
+  const totalTrabajo = rentasTrabajo + viaticos;
+  const salud = getNum('pn_salud');
+  const pension = getNum('pn_pension');
+  const totalIncrngoTrabajo = salud + pension;
+  const rentaLiqTrabajo = Math.max(0, totalTrabajo - totalIncrngoTrabajo);
+
+  document.getElementById('f210_val_c32').innerText = formatCOP(totalTrabajo, false);
+  document.getElementById('f210_val_c33').innerText = formatCOP(totalIncrngoTrabajo, false);
+  document.getElementById('f210_val_c34').innerText = formatCOP(rentaLiqTrabajo, false);
+
+  const afc = getNum('pn_afc');
+  const exenta25 = data.renta_exenta_laboral_25;
+  const totalExentasTrabajo = afc + exenta25;
+  const viv = getNum('pn_vivienda');
+  const totalDeduccionesTrabajo = viv + (data.total_deducciones_aceptadas - viv);
+
+  document.getElementById('f210_val_c35').innerText = formatCOP(afc, false);
+  document.getElementById('f210_val_c36').innerText = formatCOP(exenta25, false);
+  document.getElementById('f210_val_c37').innerText = formatCOP(totalExentasTrabajo, false);
+  document.getElementById('f210_val_c38').innerText = formatCOP(viv, false);
+  document.getElementById('f210_val_c40').innerText = formatCOP(totalDeduccionesTrabajo, false);
+  document.getElementById('f210_val_c41').innerText = formatCOP(data.alivios_procedentes_finales, false);
+  document.getElementById('f210_val_c42').innerText = formatCOP(data.renta_liquida_gravable, false);
+
+  const rentaLiqCap = Math.max(0, rentasCap - incrngoCap);
+  document.getElementById('f210_val_c58').innerText = formatCOP(rentasCap, false);
+  document.getElementById('f210_val_c59').innerText = formatCOP(incrngoCap, false);
+  document.getElementById('f210_val_c61').innerText = formatCOP(rentaLiqCap, false);
+  document.getElementById('f210_val_c73').innerText = formatCOP(rentaLiqCap, false);
+
+  const rentaLiqNoLab = Math.max(0, rentasNoLab - incrngoNoLab - costosNoLab);
+  document.getElementById('f210_val_c74').innerText = formatCOP(rentasNoLab, false);
+  document.getElementById('f210_val_c76').innerText = formatCOP(incrngoNoLab, false);
+  document.getElementById('f210_val_c77').innerText = formatCOP(costosNoLab, false);
+  document.getElementById('f210_val_c78').innerText = formatCOP(rentaLiqNoLab, false);
+  document.getElementById('f210_val_c90').innerText = formatCOP(rentaLiqNoLab, false);
+
+  const totRenLiqGen = rentaLiqTrabajo + rentaLiqCap + rentaLiqNoLab;
+  document.getElementById('f210_val_c91').innerText = formatCOP(totRenLiqGen, false);
+  document.getElementById('f210_val_c92').innerText = formatCOP(data.alivios_procedentes_finales, false);
+  document.getElementById('f210_val_c93').innerText = formatCOP(data.renta_liquida_gravable, false);
+  document.getElementById('f210_val_c97').innerText = formatCOP(data.renta_liquida_gravable, false);
+  document.getElementById('f210_val_c111').innerText = formatCOP(data.renta_liquida_gravable, false);
+
+  document.getElementById('f210_val_c112').innerText = formatCOP(data.total_ganancias_ocasionales_brutas, false);
+  document.getElementById('f210_val_c113').innerText = formatCOP(data.costos_ganancia_ocasional, false);
+  document.getElementById('f210_val_c114').innerText = formatCOP(data.ganancias_ocasionales_exentas_aceptadas, false);
+  document.getElementById('f210_val_c115').innerText = formatCOP(data.ganancia_ocasional_gravable, false);
+
+  document.getElementById('f210_val_c116').innerText = formatCOP(data.impuesto_bruto_renta, false);
+  document.getElementById('f210_val_c121').innerText = formatCOP(data.impuesto_bruto_renta, false);
+  document.getElementById('f210_val_c126').innerText = formatCOP(data.impuesto_neto_renta, false);
+  document.getElementById('f210_val_c127').innerText = formatCOP(data.impuesto_ganancias_ocasionales, false);
+  document.getElementById('f210_val_c129').innerText = formatCOP(data.total_impuesto_a_cargo, false);
+
+  const antAnt = getNum('pn_anticipo');
+  const salFavAnt = getNum('pn_saldo_favor_anterior');
+  const ret = getNum('pn_retenciones');
+
+  document.getElementById('f210_val_c130').innerText = formatCOP(antAnt, false);
+  document.getElementById('f210_val_c131').innerText = formatCOP(salFavAnt, false);
+  document.getElementById('f210_val_c132').innerText = formatCOP(ret, false);
+
+  document.getElementById('f210_val_c134').innerText = formatCOP(data.saldo_a_pagar, false);
+  document.getElementById('f210_val_c136').innerText = formatCOP(data.saldo_a_pagar, false);
+  document.getElementById('f210_val_c137').innerText = formatCOP(data.saldo_a_favor, false);
+
+  document.getElementById('f210_val_c980').innerText = formatCOP(data.saldo_a_pagar);
+}
+
+// =========================================================================
+// RENDERIZADO DEL TERMÓMETRO MARGINAL PROGRESIVO (ART. 241 E.T.)
+// =========================================================================
+function renderPnMarginalThermometer(data) {
+  if (!data || !currentRules) return;
+
+  const uvtVal = data.uvt_value || currentUvt || 52350;
+  const rentaCop = data.renta_liquida_gravable || 0;
+  const rentaUvt = data.renta_liquida_gravable_uvt !== undefined ? data.renta_liquida_gravable_uvt : (rentaCop / uvtVal);
+  const impuestoCop = data.impuesto_bruto_renta || 0;
+  const impuestoUvt = impuestoCop / uvtVal;
+  const tarifaMarginal = data.tarifa_marginal_maxima || 0;
+  const tarifaEfectiva = rentaCop > 0 ? (impuestoCop / rentaCop) * 100 : 0;
+
+  const brackets = currentRules.persona_natural.cedula_general.tabla_marginal_art241;
+
+  // Determinar en qué tramo se encuentra el usuario
+  let activeBracketIdx = 0;
+  for (let i = 0; i < brackets.length; i++) {
+    if (rentaUvt >= brackets[i].desde_uvt) {
+      activeBracketIdx = i;
+    }
+  }
+
+  const activeBracket = brackets[activeBracketIdx];
+
+  // 1. Actualizar KPIs
+  const kpiRentaCop = document.getElementById('therm-kpi-renta-cop');
+  const kpiRentaUvt = document.getElementById('therm-kpi-renta-uvt');
+  const kpiMarginalRate = document.getElementById('therm-kpi-marginal-rate');
+  const kpiMarginalBracket = document.getElementById('therm-kpi-marginal-bracket');
+  const kpiEffectiveRate = document.getElementById('therm-kpi-effective-rate');
+  const kpiTaxCop = document.getElementById('therm-kpi-tax-cop');
+  const kpiTaxUvt = document.getElementById('therm-kpi-tax-uvt');
+
+  if (kpiRentaCop) kpiRentaCop.innerText = formatCOP(rentaCop);
+  if (kpiRentaUvt) kpiRentaUvt.innerText = `${rentaUvt.toLocaleString('es-CO', { maximumFractionDigits: 2 })} UVT`;
+  if (kpiMarginalRate) kpiMarginalRate.innerText = `${(tarifaMarginal * 100).toFixed(0)}%`;
+  if (kpiMarginalBracket) {
+    const hastaTxt = activeBracket.hasta_uvt > 9000000 ? 'En adelante' : `${formatCOP(activeBracket.hasta_uvt, false)} UVT`;
+    kpiMarginalBracket.innerText = `Tramo ${activeBracketIdx + 1} (${formatCOP(activeBracket.desde_uvt, false)} a ${hastaTxt})`;
+  }
+  if (kpiEffectiveRate) kpiEffectiveRate.innerText = `${tarifaEfectiva.toFixed(2)}%`;
+  if (kpiTaxCop) kpiTaxCop.innerText = formatCOP(impuestoCop);
+  if (kpiTaxUvt) kpiTaxUvt.innerText = `${impuestoUvt.toLocaleString('es-CO', { maximumFractionDigits: 2 })} UVT`;
+
+  // 2. Actualizar Termómetro Gauge Pointer & Bars
+  const statusBadge = document.getElementById('therm-current-status-badge');
+  if (statusBadge) {
+    statusBadge.innerText = `Estás en el Tramo ${activeBracketIdx + 1} (Tarifa Marginal: ${(activeBracket.tarifa * 100).toFixed(0)}%)`;
+  }
+
+  // Activar barra correspondiente
+  for (let i = 0; i < 7; i++) {
+    const bar = document.getElementById(`therm-tier-bar-${i}`);
+    if (bar) {
+      bar.className = (i === activeBracketIdx) ? `thermometer-bar-tier t${i} active-tier` : `thermometer-bar-tier t${i}`;
+    }
+  }
+
+  // Calcular posición del pin en la escala
+  const pointer = document.getElementById('therm-pointer');
+  const pointerLabel = document.getElementById('therm-pointer-label');
+  if (pointer && pointerLabel) {
+    const range = (activeBracket.hasta_uvt > 9000000 ? 10000 : (activeBracket.hasta_uvt - activeBracket.desde_uvt)) || 1;
+    const progressInTier = Math.min(1, Math.max(0, (rentaUvt - activeBracket.desde_uvt) / range));
+    const tierWidthPct = 100 / 7;
+    const pointerPct = (activeBracketIdx * tierWidthPct) + (progressInTier * tierWidthPct);
+    const clampedPct = Math.min(96, Math.max(4, pointerPct));
+
+    pointer.style.left = `${clampedPct.toFixed(1)}%`;
+    pointerLabel.innerText = `📍 ${rentaUvt.toLocaleString('es-CO', { maximumFractionDigits: 0 })} UVT (${formatCOP(rentaCop)})`;
+  }
+
+  // 3. Generar tabla de rebanadas didácticas
+  const slicesTbody = document.getElementById('therm-step-slices-tbody');
+  if (slicesTbody) {
+    slicesTbody.innerHTML = '';
+    brackets.forEach((b, idx) => {
+      const tr = document.createElement('tr');
+      const desdeCop = b.desde_uvt * uvtVal;
+      const hastaCop = b.hasta_uvt <= 9000000 ? b.hasta_uvt * uvtVal : null;
+      const hastaTxtUvt = b.hasta_uvt > 9000000 ? 'En adelante' : `${formatCOP(b.hasta_uvt, false)} UVT`;
+      const hastaTxtCop = hastaCop ? formatCOP(hastaCop) : 'En adelante';
+
+      // Calcular porción de la renta que cae en este tramo
+      let portionUvt = 0;
+      if (rentaUvt > b.desde_uvt) {
+        portionUvt = Math.min(rentaUvt, b.hasta_uvt) - b.desde_uvt;
+      }
+      const portionCop = Math.round(portionUvt * uvtVal);
+      const taxInSliceCop = Math.round(portionCop * b.tarifa);
+
+      let estadoHtml = '';
+      if (idx < activeBracketIdx) {
+        tr.className = 'completed-slice-row';
+        estadoHtml = `<span style="color:#059669; font-weight:700; font-size:11px;">✓ 100% Lleno</span>`;
+      } else if (idx === activeBracketIdx) {
+        tr.className = 'active-slice-row';
+        estadoHtml = `<span style="color:#2563eb; font-weight:800; font-size:11px; background:#dbeafe; padding:2px 6px; border-radius:4px;">📍 Tramo Activo</span>`;
+      } else {
+        tr.className = 'unreached-slice-row';
+        estadoHtml = `<span style="color:#94a3b8; font-size:11px;">⚪ No alcanzado</span>`;
+      }
+
+      tr.innerHTML = `
+        <td style="font-weight:700;">Tramo ${idx + 1}</td>
+        <td style="font-family:var(--font-mono);">${formatCOP(b.desde_uvt, false)} - ${hastaTxtUvt}</td>
+        <td style="font-family:var(--font-mono); color:var(--text-muted); font-size:11px;">${formatCOP(desdeCop)} - ${hastaTxtCop}</td>
+        <td style="font-weight:800; color:${b.tarifa === 0 ? '#059669' : '#0b3b60'};">${(b.tarifa * 100).toFixed(0)}%</td>
+        <td style="font-weight:700; font-family:var(--font-mono);">${formatCOP(portionCop)} <div style="font-size:10px; color:var(--text-muted);">${portionUvt.toLocaleString('es-CO', { maximumFractionDigits: 1 })} UVT</div></td>
+        <td style="font-weight:800; font-family:var(--font-mono); color:${taxInSliceCop > 0 ? '#e11d48' : '#059669'};">${formatCOP(taxInSliceCop)}</td>
+        <td>${estadoHtml}</td>
+      `;
+      slicesTbody.appendChild(tr);
+    });
+  }
+
+  // 4. Inicializar simulador del mito con $1'000.000
+  simulateMarginalIncrease(1000000);
+}
+
+function simulateMarginalIncrease(incrementCop) {
+  if (!lastPnResult || !currentRules) return;
+  const resultDiv = document.getElementById('myth-sim-result');
+  if (!resultDiv) return;
+
+  const uvtVal = lastPnResult.uvt_value || currentUvt || 52350;
+  const currentRentaCop = lastPnResult.renta_liquida_gravable || 0;
+  const newRentaCop = currentRentaCop + incrementCop;
+  const newRentaUvt = newRentaCop / uvtVal;
+
+  // Calcular nuevo impuesto
+  const brackets = currentRules.persona_natural.cedula_general.tabla_marginal_art241;
+  let newTaxCop = 0;
+
+  brackets.forEach(b => {
+    if (newRentaUvt > b.desde_uvt) {
+      const sliceUvt = Math.min(newRentaUvt, b.hasta_uvt) - b.desde_uvt;
+      newTaxCop += sliceUvt * uvtVal * b.tarifa;
+    }
+  });
+
+  newTaxCop = Math.round(newTaxCop);
+  const currentTaxCop = lastPnResult.impuesto_bruto_renta || 0;
+  const extraTaxCop = Math.max(0, newTaxCop - currentTaxCop);
+  const netPocketCop = incrementCop - extraTaxCop;
+  const netPct = ((netPocketCop / incrementCop) * 100).toFixed(1);
+  const marginalEffectiveRate = ((extraTaxCop / incrementCop) * 100).toFixed(0);
+
+  resultDiv.innerHTML = `
+    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap:10px; margin-bottom:8px;">
+      <div style="background:#f8fafc; border:1px solid #e2e8f0; padding:8px 10px; border-radius:6px;">
+        <span style="font-size:10.5px; color:#64748b; font-weight:700;">Incremento Gravable:</span>
+        <div style="font-size:14px; font-weight:800; color:#0b3b60; font-family:var(--font-mono);">+${formatCOP(incrementCop)}</div>
+      </div>
+      <div style="background:#fff1f2; border:1px solid #fecdd3; padding:8px 10px; border-radius:6px;">
+        <span style="font-size:10.5px; color:#e11d48; font-weight:700;">Impuesto Adicional (${marginalEffectiveRate}%):</span>
+        <div style="font-size:14px; font-weight:800; color:#e11d48; font-family:var(--font-mono);">+${formatCOP(extraTaxCop)}</div>
+      </div>
+      <div style="background:#f0fdf4; border:1px solid #bbf7d0; padding:8px 10px; border-radius:6px;">
+        <span style="font-size:10.5px; color:#15803d; font-weight:700;">💵 En Tu Bolsillo (${netPct}%):</span>
+        <div style="font-size:14px; font-weight:800; color:#15803d; font-family:var(--font-mono);">+${formatCOP(netPocketCop)}</div>
+      </div>
+    </div>
+    <div style="font-size:11.5px; color:#334155; line-height:1.5;">
+      🎯 <strong>Conclusión didáctica:</strong> De los <strong>${formatCOP(incrementCop)}</strong> que aumentaste, te quedan netos <strong>${formatCOP(netPocketCop)} (${netPct}%)</strong>. Solo pagas impuestos por el dinero nuevo que superó el umbral. ¡Tu dinero anterior no paga más!
+    </div>
+  `;
+}
+
+// CASILLAS POPOVER CONTROLLER
+function initCasillaPopovers() {
+  const popover = document.getElementById('casilla-popover');
+  if (!popover) return;
+
+  document.addEventListener('mouseover', (e) => {
+    const target = e.target.closest('.f210-casilla-num');
+    if (target && !isPopoverPinned) {
+      const casillaNum = target.getAttribute('data-casilla');
+      if (casillaNum) {
+        showCasillaPopover(casillaNum, target);
+      }
+    }
+  });
+
+  document.addEventListener('mouseout', (e) => {
+    const target = e.target.closest('.f210-casilla-num');
+    if (target && !isPopoverPinned) {
+      hideCasillaPopover();
+    }
+  });
+
+  document.addEventListener('click', (e) => {
+    const target = e.target.closest('.f210-casilla-num');
+    if (target) {
+      const casillaNum = target.getAttribute('data-casilla');
+      if (casillaNum) {
+        isPopoverPinned = true;
+        showCasillaPopover(casillaNum, target);
+        e.stopPropagation();
+      }
+    } else if (!e.target.closest('#casilla-popover')) {
+      if (isPopoverPinned) {
+        hideCasillaPopover();
+      }
+    }
+  });
+}
+
+function showCasillaPopover(casillaNum, targetElement) {
+  const popover = document.getElementById('casilla-popover');
+  if (!popover) return;
+
+  const info = (typeof CASILLAS_INFO !== 'undefined' && CASILLAS_INFO[casillaNum]) ? CASILLAS_INFO[casillaNum] : {
+    titulo: `Casilla ${casillaNum}`,
+    art: "Estatuto Tributario DIAN",
+    concepto: "Rubro del Formulario 210 para la declaración de renta de personas naturales.",
+    como_llenar: "Diligencie según soportes contables y certificados tributarios del año.",
+    tope: "Sujeto a normas generales de fiscalización DIAN."
+  };
+
+  document.getElementById('popover-num').innerText = `Casilla ${casillaNum}`;
+  document.getElementById('popover-title').innerText = info.titulo;
+  document.getElementById('popover-art').innerText = info.art || 'E.T. Nacional';
+  document.getElementById('popover-concepto').innerText = info.concepto;
+  document.getElementById('popover-como-llenar').innerText = info.como_llenar;
+
+  const secTope = document.getElementById('popover-section-tope');
+  if (info.tope) {
+    secTope.style.display = 'block';
+    document.getElementById('popover-tope').innerText = info.tope;
+  } else {
+    secTope.style.display = 'none';
+  }
+
+  popover.style.display = 'block';
+  const rect = targetElement.getBoundingClientRect();
+  const popoverWidth = 330;
+  const popoverHeight = popover.offsetHeight || 260;
+  
+  let left = rect.left;
+  let top = rect.bottom + 6;
+
+  if (left + popoverWidth > window.innerWidth - 20) {
+    left = window.innerWidth - popoverWidth - 20;
+  }
+  if (top + popoverHeight > window.innerHeight - 20) {
+    top = rect.top - popoverHeight - 6;
+  }
+  if (left < 10) left = 10;
+  if (top < 10) top = 10;
+
+  popover.style.left = `${left}px`;
+  popover.style.top = `${top}px`;
+}
+
+function hideCasillaPopover() {
+  const popover = document.getElementById('casilla-popover');
+  if (popover) {
+    popover.style.display = 'none';
+  }
+  isPopoverPinned = false;
+}
+
+// PRESETS DUMMY PN
+function loadPnDefaultDummy() {
+  document.getElementById('select-year').value = '2026';
+  currentYear = 2026;
+  currentUvt = 52350;
+  document.getElementById('input-custom-uvt').value = '52350';
+  document.getElementById('pn_nombre_declarante').value = 'CARLOS ALBERTO PEREZ GOMEZ';
+  document.getElementById('pn_nit_declarante').value = '1234567890';
+  document.getElementById('cal-search-nit').value = '1234567890';
+  setNum('pn_patrimonio_bruto', 300000000);
+  setNum('pn_deudas', 80000000);
+  setNum('pn_rentas_trabajo', 120000000);
+  setNum('pn_viaticos', 0);
+  setNum('pn_otros_ingresos', 0);
+  setNum('pn_rentas_capital', 0);
+  setNum('pn_incrngo_capital', 0);
+  setNum('pn_rentas_nolaborales', 0);
+  setNum('pn_incrngo_nolaborales', 0);
+  setNum('pn_costos_nolaborales', 0);
+  setNum('pn_salud', 4800000);
+  setNum('pn_pension', 4800000);
+  document.getElementById('pn_dependiente_general').checked = true;
+  setNum('pn_prepagada', 0);
+  setNum('pn_vivienda', 12000000);
+  setNum('pn_gmf', 0);
+  setNum('pn_factura_elec', 15000000);
+  setNum('pn_afc', 10000000);
+  setNum('pn_otras_exentas', 0);
+  setNum('pn_go_activos', 0);
+  setNum('pn_go_costos', 0);
+  setNum('pn_go_herencias', 0);
+  setNum('pn_go_loterias', 0);
+  setNum('pn_go_exentas', 0);
+  setNum('pn_retenciones', 5000000);
+  setNum('pn_anticipo', 0);
+  if (document.getElementById('pn_saldo_favor_anterior')) setNum('pn_saldo_favor_anterior', 0);
+  loadRules(2026, 52350).then(() => {
+    runPnCalc();
+    consultarVencimientoNit();
+  });
+}
+
+function loadPn35PercentPreset() {
+  document.getElementById('select-year').value = '2026';
+  currentYear = 2026;
+  currentUvt = 52350;
+  document.getElementById('input-custom-uvt').value = '52350';
+  document.getElementById('pn_nombre_declarante').value = 'MARIANA RESTREPO BOTERO';
+  document.getElementById('pn_nit_declarante').value = '9008765432';
+  document.getElementById('cal-search-nit').value = '9008765432';
+  setNum('pn_patrimonio_bruto', 1200000000);
+  setNum('pn_deudas', 200000000);
+  setNum('pn_rentas_trabajo', 700000000);
+  setNum('pn_viaticos', 0);
+  setNum('pn_otros_ingresos', 0);
+  setNum('pn_rentas_capital', 0);
+  setNum('pn_incrngo_capital', 0);
+  setNum('pn_rentas_nolaborales', 0);
+  setNum('pn_incrngo_nolaborales', 0);
+  setNum('pn_costos_nolaborales', 0);
+  setNum('pn_salud', 28000000);
+  setNum('pn_pension', 28000000);
+  document.getElementById('pn_dependiente_general').checked = true;
+  setNum('pn_prepagada', 10051200);
+  setNum('pn_vivienda', 62820000);
+  setNum('pn_gmf', 4000000);
+  setNum('pn_factura_elec', 20000000);
+  setNum('pn_afc', 50000000);
+  setNum('pn_otras_exentas', 0);
+  setNum('pn_go_activos', 0);
+  setNum('pn_go_costos', 0);
+  setNum('pn_go_herencias', 0);
+  setNum('pn_go_loterias', 0);
+  setNum('pn_go_exentas', 0);
+  setNum('pn_retenciones', 140000000);
+  setNum('pn_anticipo', 0);
+  if (document.getElementById('pn_saldo_favor_anterior')) setNum('pn_saldo_favor_anterior', 0);
+  loadRules(2026, 52350).then(() => {
+    runPnCalc();
+    consultarVencimientoNit();
+  });
+}
+
+function loadPnWithGoDummy() {
+  document.getElementById('select-year').value = '2026';
+  currentYear = 2026;
+  currentUvt = 52350;
+  document.getElementById('input-custom-uvt').value = '52350';
+  document.getElementById('pn_nombre_declarante').value = 'MARIA FERNANDA LOPEZ RIVERA';
+  document.getElementById('pn_nit_declarante').value = '9876543210';
+  document.getElementById('cal-search-nit').value = '9876543210';
+  setNum('pn_patrimonio_bruto', 500000000);
+  setNum('pn_deudas', 100000000);
+  setNum('pn_rentas_trabajo', 150000000);
+  setNum('pn_viaticos', 0);
+  setNum('pn_otros_ingresos', 0);
+  setNum('pn_rentas_capital', 12000000);
+  setNum('pn_incrngo_capital', 500000);
+  setNum('pn_rentas_nolaborales', 0);
+  setNum('pn_incrngo_nolaborales', 0);
+  setNum('pn_costos_nolaborales', 0);
+  setNum('pn_salud', 6000000);
+  setNum('pn_pension', 6000000);
+  document.getElementById('pn_dependiente_general').checked = true;
+  setNum('pn_prepagada', 6000000);
+  setNum('pn_vivienda', 18000000);
+  setNum('pn_gmf', 1000000);
+  setNum('pn_factura_elec', 20000000);
+  setNum('pn_afc', 20000000);
+  setNum('pn_otras_exentas', 0);
+  setNum('pn_go_activos', 200000000);
+  setNum('pn_go_costos', 140000000);
+  setNum('pn_go_herencias', 0);
+  setNum('pn_go_loterias', 0);
+  setNum('pn_go_exentas', 0);
+  setNum('pn_retenciones', 12000000);
+  setNum('pn_anticipo', 0);
+  if (document.getElementById('pn_saldo_favor_anterior')) setNum('pn_saldo_favor_anterior', 0);
+  loadRules(2026, 52350).then(() => {
+    runPnCalc();
+    consultarVencimientoNit();
+  });
+}
+
+// PERSONA JURIDICA - CÁLCULO
+function triggerPjCalc() {
+  clearTimeout(debounceTimer);
+  debounceTimer = setTimeout(runPjCalc, 150);
+}
+
+async function runPjCalc() {
+  const payload = {
+    tax_year: currentYear,
+    custom_uvt: currentUvt,
+    ingresos_brutos_operacionales: getNum('pj_ingresos_op'),
+    ingresos_brutos_no_operacionales: getNum('pj_ingresos_noop'),
+    devoluciones_rebajas_descuentos: getNum('pj_devoluciones'),
+    ingresos_no_constitutivos_renta: getNum('pj_incrngo'),
+    costos_procedentes: getNum('pj_costos'),
+    gastos_administracion: getNum('pj_gastos_admin'),
+    gastos_ventas: getNum('pj_gastos_ventas'),
+    gastos_financieros: getNum('pj_gastos_fin'),
+    gastos_no_deducibles: getNum('pj_gastos_no_deducibles'),
+    deducciones_especiales: 0,
+    rentas_exentas: getNum('pj_rentas_exentas'),
+    compensacion_perdidas_fiscales: getNum('pj_compensacion'),
+    compensacion_exceso_renta_presuntiva: 0,
+    utilidad_contable_antes_impuestos: getNum('pj_utilidad_contable'),
+    diferencias_permanentes_ttd: 0,
+    ganancia_ocasional_gravable: 0,
+    descuento_tributario_ica: getNum('pj_desc_ica'),
+    otros_descuentos_tributarios: 0,
+    retenciones_en_la_fuente: getNum('pj_retenciones'),
+    autorretenciones_practicadas: getNum('pj_autorretenciones'),
+    anticipo_ano_anterior: 0,
+    saldo_a_favor_ano_anterior: 0
+  };
+
+  try {
+    const res = await fetch('/api/v1/calculate/persona-juridica/calculate', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    if (!res.ok) throw new Error('Error en cálculo PJ');
+    const data = await res.json();
+    lastPjResult = data;
+    renderPjResult(data);
+    syncUiStateToBackend();
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+function renderPjResult(data) {
+  const kpiBox = document.getElementById('pj-kpi-box');
+  const kpiLabel = document.getElementById('pj-kpi-label');
+  const kpiValue = document.getElementById('pj-kpi-value');
+  const kpiBadge = document.getElementById('pj-kpi-badge');
+
+  if (data.saldo_a_pagar > 0) {
+    kpiBox.className = 'kpi-banner to-pay';
+    kpiLabel.innerText = 'Saldo a Pagar (Formulario 110)';
+    kpiValue.innerText = `${formatCOP(data.saldo_a_pagar)} COP`;
+    kpiBadge.innerText = `Tarifa: ${(data.tarifa_renta_aplicada * 100).toFixed(0)}%`;
+  } else {
+    kpiBox.className = 'kpi-banner favorable';
+    kpiLabel.innerText = 'Saldo a Favor';
+    kpiValue.innerText = `${formatCOP(data.saldo_a_favor)} COP`;
+    kpiBadge.innerText = '✓ Saldo a Favor';
+  }
+
+  const ttdAlert = document.getElementById('pj-ttd-alert');
+  const ttdAlertText = document.getElementById('pj-ttd-alert-text');
+  const rowIaTtd = document.getElementById('res-pj-row-ia-ttd');
+
+  if (data.aplica_impuesto_adicional_ttd) {
+    ttdAlert.style.display = 'block';
+    ttdAlertText.innerText = `La Tasa Depurada (${(data.ttd_calculada_pct * 100).toFixed(2)}%) es inferior al 15%. Se generó un Impuesto Adicional (IA) de ${formatCOP(data.impuesto_adicional_ttd)} COP según Art. 240 Par. 6.`;
+    rowIaTtd.style.display = 'table-row';
+    document.getElementById('res-pj-ia-ttd').innerText = `+${formatCOP(data.impuesto_adicional_ttd)}`;
+  } else {
+    ttdAlert.style.display = 'none';
+    rowIaTtd.style.display = 'none';
+  }
+
+  document.getElementById('res-pj-ingresos-netos').innerText = formatCOP(data.ingresos_netos);
+  document.getElementById('res-pj-costos').innerText = `-${formatCOP(getNum('pj_costos'))}`;
+  document.getElementById('res-pj-renta-bruta').innerText = formatCOP(data.renta_bruta);
+  document.getElementById('res-pj-gastos').innerText = `-${formatCOP(data.total_gastos_deducibles)}`;
+  document.getElementById('res-pj-renta-gravable').innerText = formatCOP(data.renta_liquida_gravable);
+  document.getElementById('res-pj-impuesto-basico').innerText = formatCOP(data.impuesto_basico_renta);
+  document.getElementById('res-pj-descuentos').innerText = `-${formatCOP(data.total_descuentos_tributarios_aplicados)}`;
+  document.getElementById('res-pj-impuesto-neto').innerText = formatCOP(data.impuesto_neto_total);
+  document.getElementById('res-pj-retenciones').innerText = `-${formatCOP(data.total_retenciones_y_anticipos)}`;
+}
+
+function loadPjStandardPreset() {
+  setNum('pj_ingresos_op', 1200000000);
+  setNum('pj_ingresos_noop', 50000000);
+  setNum('pj_devoluciones', 20000000);
+  setNum('pj_incrngo', 10000000);
+  setNum('pj_costos', 650000000);
+  setNum('pj_gastos_admin', 180000000);
+  setNum('pj_gastos_ventas', 100000000);
+  setNum('pj_gastos_fin', 30000000);
+  setNum('pj_gastos_no_deducibles', 15000000);
+  setNum('pj_rentas_exentas', 0);
+  setNum('pj_compensacion', 0);
+  setNum('pj_utilidad_contable', 260000000);
+  setNum('pj_desc_ica', 12000000);
+  setNum('pj_retenciones', 35000000);
+  setNum('pj_autorretenciones', 20000000);
+  runPjCalc();
+}
+
+function loadPjTtdPreset() {
+  setNum('pj_ingresos_op', 800000000);
+  setNum('pj_ingresos_noop', 0);
+  setNum('pj_devoluciones', 0);
+  setNum('pj_incrngo', 0);
+  setNum('pj_costos', 500000000);
+  setNum('pj_gastos_admin', 220000000);
+  setNum('pj_gastos_ventas', 30000000);
+  setNum('pj_gastos_fin', 0);
+  setNum('pj_gastos_no_deducibles', 0);
+  setNum('pj_rentas_exentas', 40000000);
+  setNum('pj_compensacion', 0);
+  setNum('pj_utilidad_contable', 450000000);
+  setNum('pj_desc_ica', 0);
+  setNum('pj_retenciones', 5000000);
+  setNum('pj_autorretenciones', 3000000);
+  runPjCalc();
+}
+
+// BENEFICIOS CATALOG & SIMULATORS
+async function loadBeneficiosCatalog() {
+  try {
+    const res = await fetch('/api/v1/beneficios/catalog');
+    if (!res.ok) throw new Error('Error al cargar catálogo');
+    allBeneficios = await res.json();
+    renderBeneficiosList('all');
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+function filterBeneficios(cat, btn) {
+  document.querySelectorAll('.beneficio-filter-bar button').forEach(b => {
+    b.className = 'btn btn-outline btn-sm';
+  });
+  if (btn) btn.className = 'btn btn-primary btn-sm';
+  renderBeneficiosList(cat);
+}
+
+function renderBeneficiosList(cat) {
+  const container = document.getElementById('beneficios-list-container');
+  if (!container) return;
+  
+  const filtered = cat === 'all' ? allBeneficios : allBeneficios.filter(b => b.categoria === cat);
+  container.innerHTML = '';
+
+  filtered.forEach(b => {
+    const div = document.createElement('div');
+    div.className = 'beneficio-card';
+    div.innerHTML = `
+      <div class="beneficio-header">
+        <span class="beneficio-title">${b.nombre}</span>
+        <span class="beneficio-art">${b.articulo_et}</span>
+      </div>
+      <p class="beneficio-desc">${b.descripcion}</p>
+      <div class="beneficio-meta">
+        <span>Tope Legal: <strong>${b.tope_legal_texto}</strong></span>
+        <span>Ejemplo: <em>${b.ejemplo_calculo}</em></span>
+      </div>
+    `;
+    container.appendChild(div);
+  });
+}
+
+async function runSimulacionAuditoria() {
+  const inputVal = getNum('sim-aud-impuesto-ant');
+  const resDiv = document.getElementById('sim-aud-result');
+  if (!resDiv) return;
+
+  try {
+    const res = await fetch('/api/v1/beneficios/simular-auditoria', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        tax_year: currentYear,
+        impuesto_neto_ano_anterior: inputVal,
+        custom_uvt: currentUvt
+      })
+    });
+    const data = await res.json();
+
+    if (data.cumple_impuesto_minimo) {
+      resDiv.innerHTML = `
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:8px; margin-bottom:6px;">
+          <div style="background:#eff6ff; border:1px solid #bfdbfe; padding:6px; border-radius:4px;">
+            <div style="font-weight:700; color:#002e5b; font-size:10.5px;">⚡ FIRMEZA EN 6 MESES (+35%)</div>
+            <div style="font-size:14px; font-weight:800; font-family:var(--font-mono); color:#002e5b;">${formatCOP(data.impuesto_objetivo_6_meses_cop)}</div>
+            <div style="font-size:10px; color:#64748b;">Incremento: +${formatCOP(data.incremento_requerido_6_meses_cop)}</div>
+          </div>
+          <div style="background:#f0fdf4; border:1px solid #bbf7d0; padding:6px; border-radius:4px;">
+            <div style="font-weight:700; color:#15803d; font-size:10.5px;">⚡ FIRMEZA EN 12 MESES (+25%)</div>
+            <div style="font-size:14px; font-weight:800; font-family:var(--font-mono); color:#15803d;">${formatCOP(data.impuesto_objetivo_12_meses_cop)}</div>
+            <div style="font-size:10px; color:#64748b;">Incremento: +${formatCOP(data.incremento_requerido_12_meses_cop)}</div>
+          </div>
+        </div>
+        <p style="font-size:11px; color:#475569; margin:0;">${data.recomendacion}</p>
+      `;
+    } else {
+      resDiv.innerHTML = `
+        <div style="color:#b45309; font-size:11px;">⚠️ ${data.recomendacion}</div>
+      `;
+    }
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+async function runSimulacionSanciones() {
+  const baseVal = getNum('sim-sancion-base');
+  const chk2 = document.getElementById('sim-sancion-check-2anos').checked;
+  const resDiv = document.getElementById('sim-sancion-result');
+  if (!resDiv) return;
+
+  try {
+    const res = await fetch('/api/v1/beneficios/simular-reduccion-sancion', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        monto_sancion_base_cop: baseVal,
+        sin_sanciones_ultimos_2_anos: chk2,
+        sin_sanciones_ultimo_1_ano: true
+      })
+    });
+    const data = await res.json();
+
+    resDiv.innerHTML = `
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+        <span style="font-weight:700; color:#059669;">Sanción Reducida:</span>
+        <span style="font-size:15px; font-weight:800; font-family:var(--font-mono); color:#059669;">${formatCOP(data.sancion_final_reducida_cop)} COP</span>
+      </div>
+      <div style="font-size:11px; color:#64748b; margin-bottom:2px;">
+        Ahorro Legal: <strong>${formatCOP(data.ahorro_sancion_cop)} COP (${data.porcentaje_reduccion_aplicado.toFixed(0)}% de rebaja)</strong>
+      </div>
+      <p style="font-size:10.5px; color:#475569; margin:0;">${data.explicacion}</p>
+    `;
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+// RULES TAB
+function renderRulesTab() {
+  if (!currentRules) return;
+  const tbody = document.getElementById('rules-marginal-tbody');
+  if (!tbody) return;
+  tbody.innerHTML = '';
+  
+  const brackets = currentRules.persona_natural.cedula_general.tabla_marginal_art241;
+  brackets.forEach(b => {
+    const tr = document.createElement('tr');
+    const desdeCop = b.desde_uvt * currentUvt;
+    const hastaCop = b.hasta_uvt <= 9000000 ? b.hasta_uvt * currentUvt : null;
+
+    tr.innerHTML = `
+      <td style="padding:6px;font-family:var(--font-mono);">${formatCOP(b.desde_uvt, false)} UVT <div style="font-size:10px;color:var(--text-muted);">${formatCOP(desdeCop)}</div></td>
+      <td style="padding:6px;font-family:var(--font-mono);">${b.hasta_uvt > 9000000 ? 'En adelante' : `${formatCOP(b.hasta_uvt, false)} UVT <div style="font-size:10px;color:var(--text-muted);">${formatCOP(hastaCop)}</div>`}</td>
+      <td style="padding:6px;font-weight:700;color:var(--primary);">${(b.tarifa * 100).toFixed(0)}%</td>
+      <td style="padding:6px;font-family:var(--font-mono);">${formatCOP(b.uvt_adicional, false)} UVT</td>
+      <td style="padding:6px;font-size:11px;color:var(--text-secondary);">${b.tarifa === 0 ? 'Exento (0%)' : `(Renta Gravable UVT - ${formatCOP(b.desde_uvt, false)}) x ${(b.tarifa * 100).toFixed(0)}% + ${formatCOP(b.uvt_adicional, false)} UVT`}</td>
+    `;
+    tbody.appendChild(tr);
+  });
+
+  document.getElementById('rules-json-view').innerText = JSON.stringify(currentRules, null, 2);
+}
+
+// AUDIT MODAL
+function openAuditModal(type) {
+  const result = type === 'pn' ? lastPnResult : lastPjResult;
+  if (!result || !result.audit_trace) return;
+
+  const modal = document.getElementById('audit-modal');
+  const title = document.getElementById('audit-modal-title');
+  const body = document.getElementById('audit-modal-body');
+
+  title.innerText = type === 'pn' 
+    ? `Auditoría Persona Natural (${result.tax_year}) - Cédula General & Ganancias Ocasionales`
+    : `Auditoría Persona Jurídica (${result.tax_year}) - Formulario 110 & TTD`;
+
+  body.innerHTML = '';
+  result.audit_trace.forEach((step, idx) => {
+    const div = document.createElement('div');
+    div.className = 'audit-item';
+    div.innerHTML = `
+      <div class="audit-item-header">
+        <span class="audit-item-title">${idx + 1}. ${step.title}</span>
+        ${step.statutory_reference ? `<span class="audit-item-ref">${step.statutory_reference}</span>` : ''}
+      </div>
+      ${step.notes ? `<p class="audit-item-notes">${step.notes}</p>` : ''}
+      <div class="audit-item-values">
+        <span>Calculado: <strong>${formatCOP(step.calculated_cop)} COP</strong></span>
+        ${step.limit_cop ? `<span>Tope Legal: <strong>${formatCOP(step.limit_cop)} COP ${step.limit_uvt ? `(${step.limit_uvt} UVT)` : ''}</strong></span>` : ''}
+        ${step.excess_rejected_cop > 0 ? `<span style="color:#e11d48;">Exceso Rechazado: <strong>${formatCOP(step.excess_rejected_cop)} COP</strong></span>` : ''}
+        <span>Valor Aceptado: <strong style="color:#059669;">${formatCOP(step.final_allowed_cop)} COP</strong></span>
+      </div>
+    `;
+    body.appendChild(div);
+  });
+
+  modal.style.display = 'flex';
+}
+
+function closeAuditModal() {
+  document.getElementById('audit-modal').style.display = 'none';
+}
+
+// =========================================================================
+// SINCRONIZACIÓN BIDIRECCIONAL API ↔ UI EN TIEMPO REAL (SSE & REST)
+// =========================================================================
+function initLiveSync() {
+  const badge = document.getElementById('api-sync-badge');
+  const badgeText = document.getElementById('api-sync-text');
+
+  if (liveSyncEventSource) {
+    liveSyncEventSource.close();
+  }
+
+  try {
+    liveSyncEventSource = new EventSource(`/api/v1/session/events?session_id=${currentSessionId}`);
+
+    liveSyncEventSource.onopen = () => {
+      if (badge) badge.className = 'api-sync-status-badge connected';
+      if (badgeText) badgeText.innerText = `API Sync: En Vivo`;
+    };
+
+    liveSyncEventSource.addEventListener('connected', (e) => {
+      if (badge) badge.className = 'api-sync-status-badge connected';
+      if (badgeText) badgeText.innerText = `API Sync: En Vivo`;
+    });
+
+    liveSyncEventSource.addEventListener('state_update', (e) => {
+      try {
+        const payload = JSON.parse(e.data);
+        if (payload && payload.state && payload.source !== 'ui') {
+          applyStateToUi(payload.state, 'api');
+        }
+      } catch (err) {
+        console.error('Error procesando state_update SSE:', err);
+      }
+    });
+
+    liveSyncEventSource.addEventListener('reset', (e) => {
+      try {
+        const payload = JSON.parse(e.data);
+        if (payload && payload.state) {
+          applyStateToUi(payload.state, 'api');
+        }
+      } catch (err) {
+        console.error('Error procesando reset SSE:', err);
+      }
+    });
+
+    liveSyncEventSource.onerror = () => {
+      if (badge) badge.className = 'api-sync-status-badge disconnected';
+      if (badgeText) badgeText.innerText = `API Sync: Reconectando...`;
+    };
+  } catch (err) {
+    console.error('No se pudo inicializar LiveSync SSE:', err);
+    if (badge) badge.className = 'api-sync-status-badge disconnected';
+  }
+}
+
+// Extrae el estado actual del DOM en un objeto estructurado
+function getCurrentUiState() {
+  const nombre = document.getElementById('pn_nombre_declarante') ? document.getElementById('pn_nombre_declarante').value : '';
+  const nit = document.getElementById('pn_nit_declarante') ? document.getElementById('pn_nit_declarante').value : '';
+  const year = parseInt(document.getElementById('select-year') ? document.getElementById('select-year').value : '2026', 10);
+  const uvt = parseFloat(document.getElementById('input-custom-uvt') ? document.getElementById('input-custom-uvt').value : '52350');
+
+  const activeModule = currentActiveModule || 'pn';
+  const activeSubtab = currentActiveSubTab || 'calc';
+
+  return {
+    session_id: currentSessionId,
+    metadata: {
+      nombre,
+      nit,
+      tax_year: year,
+      custom_uvt: uvt,
+      active_module: activeModule,
+      active_subtab: activeSubtab
+    },
+    persona_natural: {
+      patrimonio_bruto: getNum('pn_patrimonio_bruto'),
+      deudas: getNum('pn_deudas'),
+      rentas_trabajo: getNum('pn_rentas_trabajo'),
+      viaticos: getNum('pn_viaticos'),
+      otros_ingresos_brutos: getNum('pn_otros_ingresos'),
+      rentas_capital: getNum('pn_rentas_capital'),
+      incrngo_capital: getNum('pn_incrngo_capital'),
+      rentas_nolaborales: getNum('pn_rentas_nolaborales'),
+      incrngo_nolaborales: getNum('pn_incrngo_nolaborales'),
+      costos_nolaborales: getNum('pn_costos_nolaborales'),
+      aporte_salud_obligatorio: getNum('pn_salud'),
+      aporte_pension_obligatorio: getNum('pn_pension'),
+      aplica_dependiente_general: document.getElementById('pn_dependiente_general') ? document.getElementById('pn_dependiente_general').checked : false,
+      numero_dependientes_adicionales_72uvt: 0,
+      medicina_prepagada_anual: getNum('pn_prepagada'),
+      intereses_vivienda_anual: getNum('pn_vivienda'),
+      gmf_4x1000_total: getNum('pn_gmf'),
+      compras_factura_electronica: getNum('pn_factura_elec'),
+      aportes_voluntarios_pension_afc: getNum('pn_afc'),
+      otras_rentas_exentas: getNum('pn_otras_exentas'),
+      ganancias_ocasionales_brutas_activos_fijos: getNum('pn_go_activos'),
+      costos_ganancia_ocasional: getNum('pn_go_costos'),
+      ganancias_ocasionales_brutas_herencias: getNum('pn_go_herencias'),
+      ganancias_ocasionales_brutas_loterias: getNum('pn_go_loterias'),
+      ganancias_ocasionales_exentas_solicitadas: getNum('pn_go_exentas'),
+      retenciones_fuente_practicadas: getNum('pn_retenciones'),
+      anticipo_ano_anterior: getNum('pn_anticipo'),
+      saldo_a_favor_ano_anterior: getNum('pn_saldo_favor_anterior')
+    },
+    persona_juridica: {
+      ingresos_brutos_operacionales: getNum('pj_ing_operacionales'),
+      ingresos_no_operacionales: getNum('pj_ing_no_operacionales'),
+      ingresos_no_constitutivos_renta: getNum('pj_incrngo'),
+      costos_ventas_operacionales: getNum('pj_costos_ventas'),
+      gastos_administracion_ventas: getNum('pj_gastos_admin'),
+      rentas_exentas: getNum('pj_rentas_exentas'),
+      utilidad_contable_antes_impuestos: getNum('pj_utilidad_contable'),
+      ingresos_no_constitutivos_utilidad: getNum('pj_incrngo_ttd'),
+      costos_gastos_no_deducibles: getNum('pj_gastos_no_deducibles'),
+      retenciones_fuente_practicadas: getNum('pj_retenciones'),
+      anticipo_ano_anterior: getNum('pj_anticipo')
+    },
+    calculation_results: {
+      persona_natural: lastPnResult,
+      persona_juridica: lastPjResult
+    }
+  };
+}
+
+// Envía el estado actual de la UI al backend (debounced)
+function syncUiStateToBackend() {
+  if (isApplyingRemoteState) return;
+  clearTimeout(syncDebounceTimer);
+  syncDebounceTimer = setTimeout(async () => {
+    try {
+      const state = getCurrentUiState();
+      await fetch(`/api/v1/session/state?session_id=${currentSessionId}&source=ui`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(state)
+      });
+    } catch (err) {
+      console.warn('Sync a backend falló:', err);
+    }
+  }, 400);
+}
+
+// Aplica un estado recibido (por API o por Importar JSON) directamente a la UI
+function applyStateToUi(state, source = 'api') {
+  if (!state) return;
+  isApplyingRemoteState = true;
+
+  try {
+    // 1. Metadatos
+    if (state.metadata) {
+      if (state.metadata.nombre && document.getElementById('pn_nombre_declarante')) {
+        document.getElementById('pn_nombre_declarante').value = state.metadata.nombre;
+      }
+      if (state.metadata.nit && document.getElementById('pn_nit_declarante')) {
+        document.getElementById('pn_nit_declarante').value = state.metadata.nit;
+        if (document.getElementById('cal-search-nit')) {
+          document.getElementById('cal-search-nit').value = state.metadata.nit;
+        }
+      }
+      if (state.metadata.tax_year && document.getElementById('select-year')) {
+        document.getElementById('select-year').value = String(state.metadata.tax_year);
+        currentYear = parseInt(state.metadata.tax_year, 10);
+      }
+      if (state.metadata.custom_uvt && document.getElementById('input-custom-uvt')) {
+        document.getElementById('input-custom-uvt').value = String(state.metadata.custom_uvt);
+        currentUvt = parseFloat(state.metadata.custom_uvt);
+      }
+    }
+
+    // 2. Persona Natural
+    if (state.persona_natural) {
+      const pn = state.persona_natural;
+      if (pn.patrimonio_bruto !== undefined) setNum('pn_patrimonio_bruto', pn.patrimonio_bruto);
+      if (pn.deudas !== undefined) setNum('pn_deudas', pn.deudas);
+      if (pn.rentas_trabajo !== undefined) setNum('pn_rentas_trabajo', pn.rentas_trabajo);
+      if (pn.viaticos !== undefined) setNum('pn_viaticos', pn.viaticos);
+      if (pn.otros_ingresos_brutos !== undefined) setNum('pn_otros_ingresos', pn.otros_ingresos_brutos);
+      if (pn.rentas_capital !== undefined) setNum('pn_rentas_capital', pn.rentas_capital);
+      if (pn.incrngo_capital !== undefined) setNum('pn_incrngo_capital', pn.incrngo_capital);
+      if (pn.rentas_nolaborales !== undefined) setNum('pn_rentas_nolaborales', pn.rentas_nolaborales);
+      if (pn.incrngo_nolaborales !== undefined) setNum('pn_incrngo_nolaborales', pn.incrngo_nolaborales);
+      if (pn.costos_nolaborales !== undefined) setNum('pn_costos_nolaborales', pn.costos_nolaborales);
+      if (pn.aporte_salud_obligatorio !== undefined) setNum('pn_salud', pn.aporte_salud_obligatorio);
+      if (pn.aporte_pension_obligatorio !== undefined) setNum('pn_pension', pn.aporte_pension_obligatorio);
+      if (pn.aplica_dependiente_general !== undefined && document.getElementById('pn_dependiente_general')) {
+        document.getElementById('pn_dependiente_general').checked = !!pn.aplica_dependiente_general;
+      }
+      if (pn.medicina_prepagada_anual !== undefined) setNum('pn_prepagada', pn.medicina_prepagada_anual);
+      if (pn.intereses_vivienda_anual !== undefined) setNum('pn_vivienda', pn.intereses_vivienda_anual);
+      if (pn.gmf_4x1000_total !== undefined) setNum('pn_gmf', pn.gmf_4x1000_total);
+      if (pn.compras_factura_electronica !== undefined) setNum('pn_factura_elec', pn.compras_factura_electronica);
+      if (pn.aportes_voluntarios_pension_afc !== undefined) setNum('pn_afc', pn.aportes_voluntarios_pension_afc);
+      if (pn.otras_rentas_exentas !== undefined) setNum('pn_otras_exentas', pn.otras_rentas_exentas);
+      if (pn.ganancias_ocasionales_brutas_activos_fijos !== undefined) setNum('pn_go_activos', pn.ganancias_ocasionales_brutas_activos_fijos);
+      if (pn.costos_ganancia_ocasional !== undefined) setNum('pn_go_costos', pn.costos_ganancia_ocasional);
+      if (pn.ganancias_ocasionales_brutas_herencias !== undefined) setNum('pn_go_herencias', pn.ganancias_ocasionales_brutas_herencias);
+      if (pn.ganancias_ocasionales_brutas_loterias !== undefined) setNum('pn_go_loterias', pn.ganancias_ocasionales_brutas_loterias);
+      if (pn.ganancias_ocasionales_exentas_solicitadas !== undefined) setNum('pn_go_exentas', pn.ganancias_ocasionales_exentas_solicitadas);
+      if (pn.retenciones_fuente_practicadas !== undefined) setNum('pn_retenciones', pn.retenciones_fuente_practicadas);
+      if (pn.anticipo_ano_anterior !== undefined) setNum('pn_anticipo', pn.anticipo_ano_anterior);
+      if (pn.saldo_a_favor_ano_anterior !== undefined && document.getElementById('pn_saldo_favor_anterior')) {
+        setNum('pn_saldo_favor_anterior', pn.saldo_a_favor_ano_anterior);
+      }
+    }
+
+    // 3. Persona Jurídica
+    if (state.persona_juridica) {
+      const pj = state.persona_juridica;
+      if (pj.ingresos_brutos_operacionales !== undefined) setNum('pj_ing_operacionales', pj.ingresos_brutos_operacionales);
+      if (pj.ingresos_no_operacionales !== undefined) setNum('pj_ing_no_operacionales', pj.ingresos_no_operacionales);
+      if (pj.ingresos_no_constitutivos_renta !== undefined) setNum('pj_incrngo', pj.ingresos_no_constitutivos_renta);
+      if (pj.costos_ventas_operacionales !== undefined) setNum('pj_costos_ventas', pj.costos_ventas_operacionales);
+      if (pj.gastos_administracion_ventas !== undefined) setNum('pj_gastos_admin', pj.gastos_administracion_ventas);
+      if (pj.rentas_exentas !== undefined) setNum('pj_rentas_exentas', pj.rentas_exentas);
+      if (pj.utilidad_contable_antes_impuestos !== undefined) setNum('pj_utilidad_contable', pj.utilidad_contable_antes_impuestos);
+      if (pj.ingresos_no_constitutivos_utilidad !== undefined) setNum('pj_incrngo_ttd', pj.ingresos_no_constitutivos_utilidad);
+      if (pj.costos_gastos_no_deducibles !== undefined) setNum('pj_gastos_no_deducibles', pj.costos_gastos_no_deducibles);
+      if (pj.retenciones_fuente_practicadas !== undefined) setNum('pj_retenciones', pj.retenciones_fuente_practicadas);
+      if (pj.anticipo_ano_anterior !== undefined) setNum('pj_anticipo', pj.anticipo_ano_anterior);
+    }
+
+    // Micro-animación flash si vino de la API externa
+    if (source === 'api') {
+      document.querySelectorAll('.currency-input').forEach(inp => {
+        inp.classList.add('api-flash-update');
+        setTimeout(() => inp.classList.remove('api-flash-update'), 1200);
+      });
+    }
+
+    // Recalcular y actualizar vistas
+    loadRules(currentYear, currentUvt).then(() => {
+      runPnCalc();
+      runPjCalc();
+      consultarVencimientoNit();
+    });
+
+  } finally {
+    isApplyingRemoteState = false;
+  }
+}
+
+// MODAL IMPORT / EXPORT JSON
+function openExportJsonModal() {
+  const modal = document.getElementById('modal-json-sync');
+  if (!modal) return;
+  switchJsonModalTab('export');
+  const currentState = getCurrentUiState();
+  const jsonStr = JSON.stringify(currentState, null, 2);
+  document.getElementById('export-json-textarea').value = jsonStr;
+  document.getElementById('export-copy-feedback').innerText = '';
+  modal.style.display = 'flex';
+}
+
+function openImportJsonModal() {
+  const modal = document.getElementById('modal-json-sync');
+  if (!modal) return;
+  switchJsonModalTab('import');
+  document.getElementById('import-error-feedback').innerText = '';
+  modal.style.display = 'flex';
+}
+
+function closeJsonModal() {
+  const modal = document.getElementById('modal-json-sync');
+  if (modal) modal.style.display = 'none';
+}
+
+function closeJsonModalOnBackdrop(e) {
+  if (e.target && e.target.id === 'modal-json-sync') {
+    closeJsonModal();
+  }
+}
+
+function switchJsonModalTab(tab) {
+  document.getElementById('modal-tab-btn-export').className = tab === 'export' ? 'sub-tab-btn active' : 'sub-tab-btn';
+  document.getElementById('modal-tab-btn-import').className = tab === 'import' ? 'sub-tab-btn active' : 'sub-tab-btn';
+  document.getElementById('modal-tab-btn-api').className = tab === 'api' ? 'sub-tab-btn active' : 'sub-tab-btn';
+
+  document.getElementById('modal-pane-export').style.display = tab === 'export' ? 'block' : 'none';
+  document.getElementById('modal-pane-import').style.display = tab === 'import' ? 'block' : 'none';
+  document.getElementById('modal-pane-api').style.display = tab === 'api' ? 'block' : 'none';
+
+  if (tab === 'export') {
+    const currentState = getCurrentUiState();
+    document.getElementById('export-json-textarea').value = JSON.stringify(currentState, null, 2);
+  } else if (tab === 'api') {
+    const samplePayload = {
+      persona_natural: {
+        rentas_trabajo: getNum('pn_rentas_trabajo') || 700000000,
+        aporte_salud_obligatorio: getNum('pn_salud') || 28000000,
+        aporte_pension_obligatorio: getNum('pn_pension') || 28000000
+      }
+    };
+    document.getElementById('snippet-curl-post').innerText = `curl -X POST http://localhost:8000/api/v1/session/state \\\n  -H "Content-Type: application/json" \\\n  -d '${JSON.stringify(samplePayload, null, 2)}'`;
+  }
+}
+
+function copyExportJsonToClipboard() {
+  const textarea = document.getElementById('export-json-textarea');
+  textarea.select();
+  navigator.clipboard.writeText(textarea.value).then(() => {
+    const feedback = document.getElementById('export-copy-feedback');
+    feedback.innerText = '✓ ¡Copiado al portapapeles!';
+    setTimeout(() => { feedback.innerText = ''; }, 3000);
+  });
+}
+
+function downloadCurrentStateJson() {
+  const currentState = getCurrentUiState();
+  const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(currentState, null, 2));
+  const downloadAnchor = document.createElement('a');
+  downloadAnchor.setAttribute("href", dataStr);
+  downloadAnchor.setAttribute("download", `tributia_estado_${currentYear}.json`);
+  document.body.appendChild(downloadAnchor);
+  downloadAnchor.click();
+  downloadAnchor.remove();
+}
+
+function applyImportedJson() {
+  const textarea = document.getElementById('import-json-textarea');
+  const errorFeedback = document.getElementById('import-error-feedback');
+  errorFeedback.innerText = '';
+
+  try {
+    const parsed = JSON.parse(textarea.value.trim());
+    applyStateToUi(parsed, 'api');
+    closeJsonModal();
+  } catch (err) {
+    errorFeedback.innerText = `Error de sintaxis JSON: ${err.message}`;
+  }
+}
+
+function triggerJsonFileInput() {
+  document.getElementById('json-file-input').click();
+}
+
+function handleJsonFileSelected(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = (event) => {
+    document.getElementById('import-json-textarea').value = event.target.result;
+    applyImportedJson();
+  };
+  reader.readAsText(file);
+}

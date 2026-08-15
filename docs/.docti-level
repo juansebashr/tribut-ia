@@ -1,0 +1,4 @@
+level: N3
+name: Arquitectura & Sistema Completo
+standard: Diátaxis + ADRs (Nygard) + C4 (Simon Brown) + Mermaid
+framework_version: 1.0.0
