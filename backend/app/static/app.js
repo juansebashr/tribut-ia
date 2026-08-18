@@ -642,8 +642,11 @@ function triggerPnCalc() {
 
 async function runPnCalc() {
   const rentasCapital = getNum('pn_rentas_capital');
+  const incrngoCapital = getNum('pn_incrngo_capital');
   const rentasNoLaborales = getNum('pn_rentas_nolaborales');
-  const otrosIngresos = getNum('pn_otros_ingresos') + rentasCapital + rentasNoLaborales;
+  const incrngoNoLaborales = getNum('pn_incrngo_nolaborales');
+  const costosNoLaborales = getNum('pn_costos_nolaborales');
+  const otrosIngresos = getNum('pn_otros_ingresos');
 
   const payload = {
     tax_year: currentYear,
@@ -653,10 +656,15 @@ async function runPnCalc() {
     rentas_trabajo: getNum('pn_rentas_trabajo'),
     viaticos: getNum('pn_viaticos'),
     otros_ingresos_brutos: otrosIngresos,
+    rentas_capital: rentasCapital,
+    incrngo_capital: incrngoCapital,
+    rentas_nolaborales: rentasNoLaborales,
+    incrngo_nolaborales: incrngoNoLaborales,
+    costos_nolaborales: costosNoLaborales,
     aporte_salud_obligatorio: getNum('pn_salud'),
     aporte_pension_obligatorio: getNum('pn_pension'),
-    otros_incrngo: getNum('pn_incrngo_capital') + getNum('pn_incrngo_nolaborales'),
-    aplica_dependiente_general: document.getElementById('pn_dependiente_general').checked,
+    otros_incrngo: 0,
+    aplica_dependiente_general: document.getElementById('pn_dependiente_general') ? document.getElementById('pn_dependiente_general').checked : false,
     numero_dependientes_adicionales_72uvt: 0,
     medicina_prepagada_anual: getNum('pn_prepagada'),
     intereses_vivienda_anual: getNum('pn_vivienda'),
@@ -845,10 +853,10 @@ function renderForm210OfficialSheet(data) {
   
   // Traslado inteligente de nombres y apellidos según casillas 5, 6, 7, 8 del RUT/F210
   const parsed = parseColombianFullName(nombre);
-  document.getElementById('f210-val-papellido').innerText = parsed.primerApellido || '';
-  document.getElementById('f210-val-sapellido').innerText = parsed.segundoApellido || '';
-  document.getElementById('f210-val-pnombre').innerText = parsed.primerNombre || '';
-  document.getElementById('f210-val-onombre').innerText = parsed.otrosNombres || '';
+  if (document.getElementById('f210-val-papellido')) document.getElementById('f210-val-papellido').innerText = parsed.primerApellido || '';
+  if (document.getElementById('f210-val-sapellido')) document.getElementById('f210-val-sapellido').innerText = parsed.segundoApellido || '';
+  if (document.getElementById('f210-val-pnombre')) document.getElementById('f210-val-pnombre').innerText = parsed.primerNombre || '';
+  if (document.getElementById('f210-val-onombre')) document.getElementById('f210-val-onombre').innerText = parsed.otrosNombres || '';
 
   const nitDigitsContainer = document.getElementById('f210-nit-digits');
   if (nitDigitsContainer) {
@@ -861,20 +869,16 @@ function renderForm210OfficialSheet(data) {
     dvEl.innerText = calculateDianDv(nit);
   }
 
-  const rentasCap = getNum('pn_rentas_capital');
-  const incrngoCap = getNum('pn_incrngo_capital');
-  const rentasNoLab = getNum('pn_rentas_nolaborales');
-  const incrngoNoLab = getNum('pn_incrngo_nolaborales');
-  const costosNoLab = getNum('pn_costos_nolaborales');
-  const comprasFe = getNum('pn_factura_elec');
+  // 1. Patrimonio
+  const patBruto = data.patrimonio_bruto !== undefined ? data.patrimonio_bruto : getNum('pn_patrimonio_bruto');
+  const deudas = data.deudas !== undefined ? data.deudas : getNum('pn_deudas');
+  const patLiq = data.patrimonio_liquido !== undefined ? data.patrimonio_liquido : (patBruto - deudas);
 
-  const fe1pct = Math.round(comprasFe * 0.01);
-  if (document.getElementById('f210_val_c28')) document.getElementById('f210_val_c28').innerText = formatCOP(fe1pct, false);
+  if (document.getElementById('f210_val_c29')) document.getElementById('f210_val_c29').innerText = formatCOP(patBruto, false);
+  if (document.getElementById('f210_val_c30')) document.getElementById('f210_val_c30').innerText = formatCOP(deudas, false);
+  if (document.getElementById('f210_val_c31')) document.getElementById('f210_val_c31').innerText = formatCOP(patLiq, false);
 
-  document.getElementById('f210_val_c29').innerText = formatCOP(data.patrimonio_bruto, false);
-  document.getElementById('f210_val_c30').innerText = formatCOP(data.deudas, false);
-  document.getElementById('f210_val_c31').innerText = formatCOP(data.patrimonio_liquido, false);
-
+  // 2. Rentas de Trabajo
   const rentasTrabajo = getNum('pn_rentas_trabajo');
   const viaticos = getNum('pn_viaticos');
   const totalTrabajo = rentasTrabajo + viaticos;
@@ -883,68 +887,102 @@ function renderForm210OfficialSheet(data) {
   const totalIncrngoTrabajo = salud + pension;
   const rentaLiqTrabajo = Math.max(0, totalTrabajo - totalIncrngoTrabajo);
 
-  document.getElementById('f210_val_c32').innerText = formatCOP(totalTrabajo, false);
-  document.getElementById('f210_val_c33').innerText = formatCOP(totalIncrngoTrabajo, false);
-  document.getElementById('f210_val_c34').innerText = formatCOP(rentaLiqTrabajo, false);
+  if (document.getElementById('f210_val_c32')) document.getElementById('f210_val_c32').innerText = formatCOP(totalTrabajo, false);
+  if (document.getElementById('f210_val_c33')) document.getElementById('f210_val_c33').innerText = formatCOP(totalIncrngoTrabajo, false);
+  if (document.getElementById('f210_val_c34')) document.getElementById('f210_val_c34').innerText = formatCOP(rentaLiqTrabajo, false);
 
   const afc = getNum('pn_afc');
-  const exenta25 = data.renta_exenta_laboral_25;
-  const totalExentasTrabajo = afc + exenta25;
+  const exenta25 = data.renta_exenta_laboral_25 !== undefined ? data.renta_exenta_laboral_25 : (data.renta_exenta_laboral_25pct || 0);
+  const totalExentasTrabajo = afc + exenta25 + getNum('pn_otras_exentas');
   const viv = getNum('pn_vivienda');
-  const totalDeduccionesTrabajo = viv + (data.total_deducciones_aceptadas - viv);
+  const totalDeduccionesTrabajo = data.total_deducciones_aceptadas !== undefined ? data.total_deducciones_aceptadas : (viv + getNum('pn_prepagada'));
+  const aliviosImputables = data.alivios_procedentes_finales !== undefined ? data.alivios_procedentes_finales : Math.min(totalExentasTrabajo + totalDeduccionesTrabajo, data.limite_conjunto_aplicable_cop || (rentaLiqTrabajo * 0.4));
+  const rentaLiqGravTrabajo = Math.max(0, rentaLiqTrabajo - aliviosImputables);
 
-  document.getElementById('f210_val_c35').innerText = formatCOP(afc, false);
-  document.getElementById('f210_val_c36').innerText = formatCOP(exenta25, false);
-  document.getElementById('f210_val_c37').innerText = formatCOP(totalExentasTrabajo, false);
-  document.getElementById('f210_val_c38').innerText = formatCOP(viv, false);
-  document.getElementById('f210_val_c40').innerText = formatCOP(totalDeduccionesTrabajo, false);
-  document.getElementById('f210_val_c41').innerText = formatCOP(data.alivios_procedentes_finales, false);
-  document.getElementById('f210_val_c42').innerText = formatCOP(data.renta_liquida_gravable, false);
+  if (document.getElementById('f210_val_c35')) document.getElementById('f210_val_c35').innerText = formatCOP(afc, false);
+  if (document.getElementById('f210_val_c36')) document.getElementById('f210_val_c36').innerText = formatCOP(exenta25, false);
+  if (document.getElementById('f210_val_c37')) document.getElementById('f210_val_c37').innerText = formatCOP(totalExentasTrabajo, false);
+  if (document.getElementById('f210_val_c38')) document.getElementById('f210_val_c38').innerText = formatCOP(viv, false);
+  if (document.getElementById('f210_val_c40')) document.getElementById('f210_val_c40').innerText = formatCOP(totalDeduccionesTrabajo, false);
+  if (document.getElementById('f210_val_c41')) document.getElementById('f210_val_c41').innerText = formatCOP(aliviosImputables, false);
+  if (document.getElementById('f210_val_c42')) document.getElementById('f210_val_c42').innerText = formatCOP(rentaLiqGravTrabajo, false);
 
+  // 3. Rentas de Capital
+  const rentasCap = getNum('pn_rentas_capital');
+  const incrngoCap = getNum('pn_incrngo_capital');
   const rentaLiqCap = Math.max(0, rentasCap - incrngoCap);
-  document.getElementById('f210_val_c58').innerText = formatCOP(rentasCap, false);
-  document.getElementById('f210_val_c59').innerText = formatCOP(incrngoCap, false);
-  document.getElementById('f210_val_c61').innerText = formatCOP(rentaLiqCap, false);
-  document.getElementById('f210_val_c73').innerText = formatCOP(rentaLiqCap, false);
 
+  if (document.getElementById('f210_val_c58')) document.getElementById('f210_val_c58').innerText = formatCOP(rentasCap, false);
+  if (document.getElementById('f210_val_c59')) document.getElementById('f210_val_c59').innerText = formatCOP(incrngoCap, false);
+  if (document.getElementById('f210_val_c61')) document.getElementById('f210_val_c61').innerText = formatCOP(rentaLiqCap, false);
+  if (document.getElementById('f210_val_c73')) document.getElementById('f210_val_c73').innerText = formatCOP(rentaLiqCap, false);
+
+  // 4. Rentas No Laborales
+  const rentasNoLab = getNum('pn_rentas_nolaborales');
+  const incrngoNoLab = getNum('pn_incrngo_nolaborales');
+  const costosNoLab = getNum('pn_costos_nolaborales');
   const rentaLiqNoLab = Math.max(0, rentasNoLab - incrngoNoLab - costosNoLab);
-  document.getElementById('f210_val_c74').innerText = formatCOP(rentasNoLab, false);
-  document.getElementById('f210_val_c76').innerText = formatCOP(incrngoNoLab, false);
-  document.getElementById('f210_val_c77').innerText = formatCOP(costosNoLab, false);
-  document.getElementById('f210_val_c78').innerText = formatCOP(rentaLiqNoLab, false);
-  document.getElementById('f210_val_c90').innerText = formatCOP(rentaLiqNoLab, false);
+
+  if (document.getElementById('f210_val_c74')) document.getElementById('f210_val_c74').innerText = formatCOP(rentasNoLab, false);
+  if (document.getElementById('f210_val_c76')) document.getElementById('f210_val_c76').innerText = formatCOP(incrngoNoLab, false);
+  if (document.getElementById('f210_val_c77')) document.getElementById('f210_val_c77').innerText = formatCOP(costosNoLab, false);
+  if (document.getElementById('f210_val_c78')) document.getElementById('f210_val_c78').innerText = formatCOP(rentaLiqNoLab, false);
+  if (document.getElementById('f210_val_c90')) document.getElementById('f210_val_c90').innerText = formatCOP(rentaLiqNoLab, false);
+
+  // 5. Deducción 1% Factura Electrónica y Cédula General Consolidada
+  const comprasFe = getNum('pn_factura_elec');
+  const fe1pct = (data.deduccion_factura_electronica !== undefined && data.deduccion_factura_electronica > 0)
+    ? data.deduccion_factura_electronica
+    : Math.round(comprasFe * 0.01);
+  if (document.getElementById('f210_val_c28')) document.getElementById('f210_val_c28').innerText = formatCOP(fe1pct, false);
 
   const totRenLiqGen = rentaLiqTrabajo + rentaLiqCap + rentaLiqNoLab;
-  document.getElementById('f210_val_c91').innerText = formatCOP(totRenLiqGen, false);
-  document.getElementById('f210_val_c92').innerText = formatCOP(data.alivios_procedentes_finales, false);
-  document.getElementById('f210_val_c93').innerText = formatCOP(data.renta_liquida_gravable, false);
-  document.getElementById('f210_val_c97').innerText = formatCOP(data.renta_liquida_gravable, false);
-  document.getElementById('f210_val_c111').innerText = formatCOP(data.renta_liquida_gravable, false);
+  const rentaLiqGravGen = data.renta_liquida_gravable !== undefined ? data.renta_liquida_gravable : Math.max(0, totRenLiqGen - aliviosImputables - fe1pct);
 
-  document.getElementById('f210_val_c112').innerText = formatCOP(data.total_ganancias_ocasionales_brutas, false);
-  document.getElementById('f210_val_c113').innerText = formatCOP(data.costos_ganancia_ocasional, false);
-  document.getElementById('f210_val_c114').innerText = formatCOP(data.ganancias_ocasionales_exentas_aceptadas, false);
-  document.getElementById('f210_val_c115').innerText = formatCOP(data.ganancia_ocasional_gravable, false);
+  if (document.getElementById('f210_val_c91')) document.getElementById('f210_val_c91').innerText = formatCOP(totRenLiqGen, false);
+  if (document.getElementById('f210_val_c92')) document.getElementById('f210_val_c92').innerText = formatCOP(aliviosImputables, false);
+  if (document.getElementById('f210_val_c93')) document.getElementById('f210_val_c93').innerText = formatCOP(Math.max(0, totRenLiqGen - aliviosImputables), false);
+  if (document.getElementById('f210_val_c97')) document.getElementById('f210_val_c97').innerText = formatCOP(rentaLiqGravGen, false);
+  if (document.getElementById('f210_val_c111')) document.getElementById('f210_val_c111').innerText = formatCOP(rentaLiqGravGen, false);
 
-  document.getElementById('f210_val_c116').innerText = formatCOP(data.impuesto_bruto_renta, false);
-  document.getElementById('f210_val_c121').innerText = formatCOP(data.impuesto_bruto_renta, false);
-  document.getElementById('f210_val_c126').innerText = formatCOP(data.impuesto_neto_renta, false);
-  document.getElementById('f210_val_c127').innerText = formatCOP(data.impuesto_ganancias_ocasionales, false);
-  document.getElementById('f210_val_c129').innerText = formatCOP(data.total_impuesto_a_cargo, false);
+  // 6. Ganancias Ocasionales
+  const goBrutas = data.total_ganancias_ocasionales_brutas !== undefined ? data.total_ganancias_ocasionales_brutas : getNum('pn_go_activos');
+  const goCostos = data.costos_ganancia_ocasional !== undefined ? data.costos_ganancia_ocasional : getNum('pn_go_costos');
+  const goExentas = data.ganancias_ocasionales_exentas_aceptadas !== undefined ? data.ganancias_ocasionales_exentas_aceptadas : getNum('pn_go_exentas');
+  const goGravable = data.ganancia_ocasional_gravable !== undefined ? data.ganancia_ocasional_gravable : Math.max(0, goBrutas - goCostos - goExentas);
+
+  if (document.getElementById('f210_val_c112')) document.getElementById('f210_val_c112').innerText = formatCOP(goBrutas, false);
+  if (document.getElementById('f210_val_c113')) document.getElementById('f210_val_c113').innerText = formatCOP(goCostos, false);
+  if (document.getElementById('f210_val_c114')) document.getElementById('f210_val_c114').innerText = formatCOP(goExentas, false);
+  if (document.getElementById('f210_val_c115')) document.getElementById('f210_val_c115').innerText = formatCOP(goGravable, false);
+
+  // 7. Impuesto y Liquidación Privada
+  const impRenta = data.impuesto_bruto_renta !== undefined ? data.impuesto_bruto_renta : (data.impuesto_cedula_general || 0);
+  const impGo = data.impuesto_ganancias_ocasionales !== undefined ? data.impuesto_ganancias_ocasionales : 0;
+  const totImpCargo = data.total_impuesto_a_cargo !== undefined ? data.total_impuesto_a_cargo : (impRenta + impGo);
+
+  if (document.getElementById('f210_val_c116')) document.getElementById('f210_val_c116').innerText = formatCOP(impRenta, false);
+  if (document.getElementById('f210_val_c121')) document.getElementById('f210_val_c121').innerText = formatCOP(impRenta, false);
+  if (document.getElementById('f210_val_c126')) document.getElementById('f210_val_c126').innerText = formatCOP(impRenta, false);
+  if (document.getElementById('f210_val_c127')) document.getElementById('f210_val_c127').innerText = formatCOP(impGo, false);
+  if (document.getElementById('f210_val_c129')) document.getElementById('f210_val_c129').innerText = formatCOP(totImpCargo, false);
 
   const antAnt = getNum('pn_anticipo');
   const salFavAnt = getNum('pn_saldo_favor_anterior');
   const ret = getNum('pn_retenciones');
+  const totAntRet = data.total_anticipos_y_retenciones !== undefined ? data.total_anticipos_y_retenciones : (antAnt + salFavAnt + ret);
 
-  document.getElementById('f210_val_c130').innerText = formatCOP(antAnt, false);
-  document.getElementById('f210_val_c131').innerText = formatCOP(salFavAnt, false);
-  document.getElementById('f210_val_c132').innerText = formatCOP(ret, false);
+  if (document.getElementById('f210_val_c130')) document.getElementById('f210_val_c130').innerText = formatCOP(antAnt, false);
+  if (document.getElementById('f210_val_c131')) document.getElementById('f210_val_c131').innerText = formatCOP(salFavAnt, false);
+  if (document.getElementById('f210_val_c132')) document.getElementById('f210_val_c132').innerText = formatCOP(ret, false);
+  if (document.getElementById('f210_val_c134')) document.getElementById('f210_val_c134').innerText = formatCOP(totAntRet, false);
 
-  document.getElementById('f210_val_c134').innerText = formatCOP(data.saldo_a_pagar, false);
-  document.getElementById('f210_val_c136').innerText = formatCOP(data.saldo_a_pagar, false);
-  document.getElementById('f210_val_c137').innerText = formatCOP(data.saldo_a_favor, false);
+  const saldoPagar = data.saldo_a_pagar !== undefined ? data.saldo_a_pagar : Math.max(0, totImpCargo - totAntRet);
+  const saldoFavor = data.saldo_a_favor !== undefined ? data.saldo_a_favor : Math.max(0, totAntRet - totImpCargo);
 
-  document.getElementById('f210_val_c980').innerText = formatCOP(data.saldo_a_pagar);
+  if (document.getElementById('f210_val_c136')) document.getElementById('f210_val_c136').innerText = formatCOP(saldoPagar, false);
+  if (document.getElementById('f210_val_c137')) document.getElementById('f210_val_c137').innerText = formatCOP(saldoFavor, false);
+  if (document.getElementById('f210_val_c980')) document.getElementById('f210_val_c980').innerText = formatCOP(saldoPagar);
 }
 
 // =========================================================================
