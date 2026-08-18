@@ -29,40 +29,45 @@ def liquidar_persona_natural(payload: PersonaNaturalInput) -> PersonaNaturalOutp
             notes=f"Patrimonio Bruto (${patrimonio_bruto:,.0f}) menos Deudas (${deudas:,.0f}) = ${patrimonio_liquido:,.0f}."
         ))
 
-    # 1. INGRESOS BRUTOS DE TRABAJO / CÉDULA GENERAL (Casilla 33)
-    total_ingresos = payload.rentas_trabajo + payload.viaticos + payload.otros_ingresos_brutos
+    # 1. INGRESOS BRUTOS DE TRABAJO / CÉDULA GENERAL (Casilla 33 / Casilla 32)
+    ingresos_trabajo = payload.rentas_trabajo + payload.viaticos
+    total_ingresos = ingresos_trabajo + payload.otros_ingresos_brutos + payload.rentas_capital + payload.rentas_nolaborales
     trace.append(AuditTraceItem(
         step_id="ingresos_brutos",
-        title="Ingresos Brutos Cédula General (Casilla 33)",
+        title="Ingresos Brutos Cédula General (Casilla 32, 58, 74)",
         statutory_reference="Art. 103, 335 E.T.",
         raw_input_cop=total_ingresos,
         calculated_cop=total_ingresos,
         final_allowed_cop=total_ingresos,
-        notes=f"Suma de rentas de trabajo (${payload.rentas_trabajo:,.0f}), viáticos (${payload.viaticos:,.0f}) y otros (${payload.otros_ingresos_brutos:,.0f})."
+        notes=f"Trabajo (${ingresos_trabajo:,.0f}) + Capital (${payload.rentas_capital:,.0f}) + No Laboral (${payload.rentas_nolaborales:,.0f}) + Otros (${payload.otros_ingresos_brutos:,.0f})."
     ))
 
-    # 2. INCRNGO (Casilla 34)
-    total_incrngo = payload.aporte_salud_obligatorio + payload.aporte_pension_obligatorio + payload.otros_incrngo
+    # 2. INCRNGO (Casilla 33, 59, 76)
+    incrngo_trabajo = payload.aporte_salud_obligatorio + payload.aporte_pension_obligatorio
+    total_incrngo = incrngo_trabajo + payload.otros_incrngo + payload.incrngo_capital + payload.incrngo_nolaborales
     trace.append(AuditTraceItem(
         step_id="incrngo",
-        title="Ingresos No Constitutivos de Renta (INCRNGO - Casilla 34)",
-        statutory_reference="Art. 55, 56 E.T.",
+        title="Ingresos No Constitutivos de Renta (INCRNGO)",
+        statutory_reference="Art. 38 a 41, 55, 56 E.T.",
         raw_input_cop=total_incrngo,
         calculated_cop=total_incrngo,
         final_allowed_cop=total_incrngo,
-        notes=f"Aportes obligatorios a salud (${payload.aporte_salud_obligatorio:,.0f}), pensión/FSP (${payload.aporte_pension_obligatorio:,.0f}) y otros INCRNGO (${payload.otros_incrngo:,.0f})."
+        notes=f"Salud/Pensión (${incrngo_trabajo:,.0f}) + Capital inflacionario (${payload.incrngo_capital:,.0f}) + No laboral (${payload.incrngo_nolaborales:,.0f}) + Otros (${payload.otros_incrngo:,.0f})."
     ))
 
-    # 3. INGRESO NETO / RENTA LÍQUIDA ORDINARIA PREVIA (Casilla 36)
-    ingreso_neto = max(0.0, total_ingresos - total_incrngo)
+    # 3. COSTOS PROCEDENTES (Casilla 77)
+    total_costos = payload.costos_nolaborales
+
+    # 4. INGRESO NETO / RENTA LÍQUIDA ORDINARIA PREVIA (Casilla 36, 61, 78)
+    ingreso_neto = max(0.0, total_ingresos - total_incrngo - total_costos)
     trace.append(AuditTraceItem(
         step_id="ingreso_neto",
-        title="Renta Líquida Ordinaria Previa a Deducciones (Casilla 36)",
+        title="Renta Líquida Ordinaria Previa Cédula General",
         statutory_reference="Art. 336 E.T.",
         raw_input_cop=total_ingresos,
         calculated_cop=ingreso_neto,
         final_allowed_cop=ingreso_neto,
-        notes="Ingreso Bruto menos INCRNGO."
+        notes=f"Ingreso Bruto (${total_ingresos:,.0f}) menos INCRNGO (${total_incrngo:,.0f}) menos Costos Procedentes (${total_costos:,.0f})."
     ))
 
     # 4. DEDUCCIONES IMPUTABLES
@@ -181,6 +186,7 @@ def liquidar_persona_natural(payload: PersonaNaturalInput) -> PersonaNaturalOutp
         ))
 
     # 4.6 Compras Factura Electrónica 1%
+    allowed_fe = 0.0
     if payload.compras_factura_electronica > 0 and deducciones_dict.compras_factura_electronica_1pct:
         fe_rules = deducciones_dict.compras_factura_electronica_1pct
         fe_pct = fe_rules.get("porcentaje_compras", 0.01)
@@ -384,32 +390,79 @@ def liquidar_persona_natural(payload: PersonaNaturalInput) -> PersonaNaturalOutp
         notes=f"Total Impuesto a Cargo (${total_impuesto_a_cargo:,.0f}) - Retenciones/Anticipos (${total_retenciones_anticipos:,.0f}) = Saldo {'a Pagar: $' + f'{saldo_a_pagar:,.0f}' if saldo_a_pagar > 0 else 'a Favor: $' + f'{saldo_a_favor:,.0f}'}."
     ))
 
+    # Subcédulas Cédula General
+    renta_liq_trabajo = max(0.0, ingresos_trabajo - incrngo_trabajo)
+    renta_liq_capital = max(0.0, payload.rentas_capital - payload.incrngo_capital)
+    renta_liq_nolaboral = max(0.0, payload.rentas_nolaborales - payload.incrngo_nolaborales - payload.costos_nolaborales)
+
     # Mapeo Oficial Casillas Formulario 210 DIAN
     form_210_dict: Dict[str, float] = {
+        "c28_deduccion_facturas_1pct": allowed_fe,
+        "c29_patrimonio_bruto": patrimonio_bruto,
         "c30_patrimonio_bruto": patrimonio_bruto,
+        "c30_deudas": deudas,
         "c31_deudas": deudas,
+        "c31_patrimonio_liquido": patrimonio_liquido,
         "c32_patrimonio_liquido": patrimonio_liquido,
-        "c33_ingresos_brutos_trabajo": total_ingresos,
-        "c34_incrngo_trabajo": total_incrngo,
-        "c35_costos_deducciones_trabajo": 0.0,
-        "c36_renta_liquida_ordinaria_trabajo": ingreso_neto,
+        "c32_ingresos_brutos_trabajo": ingresos_trabajo,
+        "c33_ingresos_brutos_trabajo": ingresos_trabajo,
+        "c33_incrngo_trabajo": incrngo_trabajo,
+        "c34_incrngo_trabajo": incrngo_trabajo,
+        "c34_renta_liquida_trabajo": renta_liq_trabajo,
+        "c35_afc_fvp_trabajo": allowed_afc,
+        "c36_renta_exenta_laboral_25": allowed_exenta_laboral,
+        "c37_total_rentas_exentas_trabajo": total_rentas_exentas_aceptadas,
         "c37_rentas_exentas_deducciones_limitadas": alivios_procedentes_finales,
-        "c38_renta_liquida_ordinaria_ejercicio": renta_liquida_gravable,
+        "c38_intereses_vivienda_trabajo": payload.intereses_vivienda_anual,
         "c39_renta_liquida_gravable_trabajo": renta_liquida_gravable,
+        "c40_total_deducciones_trabajo": total_deducciones_aceptadas,
+        "c41_rentas_exentas_deducciones_limitadas_trabajo": alivios_procedentes_finales,
+        "c42_renta_liquida_ordinaria_trabajo": max(0.0, renta_liq_trabajo - alivios_procedentes_finales),
+        "c58_ingresos_brutos_capital": payload.rentas_capital,
+        "c59_incrngo_capital": payload.incrngo_capital,
+        "c61_renta_liquida_capital": renta_liq_capital,
+        "c70_exentas_no_imputables_capital": 0.0,
+        "c71_compensacion_perdidas_capital": 0.0,
+        "c72_renta_liquida_gravable_capital": renta_liq_capital,
+        "c73_renta_liquida_ordinaria_capital": renta_liq_capital,
+        "c74_ingresos_brutos_nolaborales": payload.rentas_nolaborales,
+        "c75_devoluciones_nolaborales": 0.0,
+        "c76_incrngo_nolaborales": payload.incrngo_nolaborales,
+        "c77_costos_deducciones_nolaborales": payload.costos_nolaborales,
+        "c78_renta_liquida_nolaboral": renta_liq_nolaboral,
+        "c87_exentas_no_imputables_nolaboral": 0.0,
+        "c88_compensacion_perdidas_nolaboral": 0.0,
+        "c89_renta_liquida_gravable_nolaboral": renta_liq_nolaboral,
+        "c90_renta_liquida_ordinaria_nolaboral": renta_liq_nolaboral,
+        "c91_total_renta_liquida_ordinaria_cedula_general": renta_liq_trabajo + renta_liq_capital + renta_liq_nolaboral,
+        "c92_total_rentas_exentas_deducciones_limitadas": alivios_procedentes_finales,
+        "c93_renta_liquida_ordinaria_cedula_general": max(0.0, (renta_liq_trabajo + renta_liq_capital + renta_liq_nolaboral) - alivios_procedentes_finales),
+        "c97_renta_liquida_gravable_cedula_general": renta_liquida_gravable,
         "c104_ingresos_ganancias_ocasionales": total_go_brutas,
         "c105_costos_ganancias_ocasionales": costos_go,
         "c106_ganancias_ocasionales_exentas": go_exenta_aceptada,
         "c107_ganancias_ocasionales_gravables": total_go_gravable,
         "c108_impuesto_rentas_liquidas_gravables": impuesto_bruto_cop,
-        "c111_descuentos_tributarios": descuentos,
+        "c111_total_rentas_liquidas_gravables": renta_liquida_gravable,
+        "c112_ingresos_ganancias_ocasionales": total_go_brutas,
+        "c113_costos_ganancias_ocasionales": costos_go,
+        "c114_ganancias_ocasionales_exentas": go_exenta_aceptada,
+        "c115_ganancias_ocasionales_gravables": total_go_gravable,
         "c112_impuesto_neto_renta": impuesto_neto,
         "c113_impuesto_ganancias_ocasionales": impuesto_go_cop,
         "c115_total_impuesto_a_cargo": total_impuesto_a_cargo,
-        "c116_anticipo_ano_anterior": payload.anticipo_ano_anterior,
-        "c117_saldo_a_favor_ano_anterior": payload.saldo_a_favor_ano_anterior,
-        "c118_retenciones_fuente": payload.retenciones_fuente_practicadas,
-        "c120_saldo_a_pagar_por_impuesto": saldo_a_pagar,
-        "c121_saldo_a_favor_total": saldo_a_favor,
+        "c116_impuesto_rentas_liquidas_gravables": impuesto_bruto_cop,
+        "c121_total_impuesto_a_cargo": total_impuesto_a_cargo,
+        "c126_impuesto_neto_renta": impuesto_neto,
+        "c127_impuesto_ganancias_ocasionales": impuesto_go_cop,
+        "c129_total_impuesto_a_cargo": total_impuesto_a_cargo,
+        "c130_anticipo_ano_anterior": payload.anticipo_ano_anterior,
+        "c131_saldo_a_favor_ano_anterior": payload.saldo_a_favor_ano_anterior,
+        "c132_retenciones_fuente": payload.retenciones_fuente_practicadas,
+        "c134_total_anticipos_retenciones": total_retenciones_anticipos,
+        "c136_saldo_a_pagar_por_impuesto": saldo_a_pagar,
+        "c137_saldo_a_favor": saldo_a_favor,
+        "c980_total_a_pagar": saldo_a_pagar,
     }
 
     resumen = (

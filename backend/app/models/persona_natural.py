@@ -14,7 +14,12 @@ class PersonaNaturalInput(BaseModel):
     # 1. Ingresos Brutos de Trabajo / Cédula General (Casilla 33)
     rentas_trabajo: float = Field(0.0, description="Salarios, honorarios, comisiones, primas, cesantías pagadas directamente")
     viaticos: float = Field(0.0, description="Viáticos gravados")
-    otros_ingresos_brutos: float = Field(0.0, description="Otros ingresos brutos de la cédula general (capital, no laborales)")
+    otros_ingresos_brutos: float = Field(0.0, description="Otros ingresos brutos de la cédula general")
+    rentas_capital: float = Field(0.0, description="Rentas de capital (intereses, rendimientos, arriendos - Casilla 58)")
+    incrngo_capital: float = Field(0.0, description="INCRNGO rentas de capital (componente inflacionario - Casilla 59)")
+    rentas_nolaborales: float = Field(0.0, description="Rentas no laborales (comercio, servicios independientes sin relación laboral - Casilla 74)")
+    incrngo_nolaborales: float = Field(0.0, description="INCRNGO rentas no laborales (daño emergente, PILA - Casilla 76)")
+    costos_nolaborales: float = Field(0.0, description="Costos y deducciones procedentes no laborales (Casilla 77)")
     
     # 2. INCRNGO (Casilla 34)
     aporte_salud_obligatorio: float = Field(0.0, description="Aporte obligatorio a salud (EPS / FOSYGA / ADRES)")
