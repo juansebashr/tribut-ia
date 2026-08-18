@@ -18,6 +18,7 @@ class SessionState(BaseModel):
     persona_natural: Dict[str, Any] = Field(default_factory=dict)
     persona_juridica: Dict[str, Any] = Field(default_factory=dict)
     calculation_results: Dict[str, Any] = Field(default_factory=dict)
+    reconciliation: Dict[str, Any] = Field(default_factory=dict)
     last_updated_at: str = Field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
 
 
@@ -114,6 +115,8 @@ class SessionStore:
                 current.persona_juridica.update(new_state_data["persona_juridica"])
             if "calculation_results" in new_state_data and isinstance(new_state_data["calculation_results"], dict):
                 current.calculation_results.update(new_state_data["calculation_results"])
+            if "reconciliation" in new_state_data and isinstance(new_state_data["reconciliation"], dict):
+                current.reconciliation = new_state_data["reconciliation"]
         
         current.last_updated_at = datetime.now(timezone.utc).isoformat()
         self._sessions[session_id] = current

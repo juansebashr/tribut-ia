@@ -25,14 +25,39 @@ Use este skill cuando:
 
 ---
 
-## Workflow en 3 Fases
+## Workflow en 4 Fases con Conciliacion Exogena
+
+### Paso 0: Deteccion de Documentos Especiales
+
+Al iniciar el analisis del directorio, verificar la presencia de dos documentos clave:
+1. `DIAN - Facturas electronicas [Ano].xlsx` (o `.csv`): Usado para extraer el total de compras con pago electronico y liquidar la deduccion del 1% (Art. 336 Num. 5 E.T.).
+2. `DIAN - Informacion exogena [Ano].xlsx` (o `.csv`): Usado para cruzar los valores reportados por terceros ante la DIAN frente a los certificados del contribuyente.
+
+> **Regla de Continuidad**: Si el usuario NO tiene estos archivos, el flujo NO se detiene; continua normalmente liquidando con los certificados disponibles, omitiendo la conciliacion exogena y la deduccion del 1% si faltan.
+
+---
 
 ### Fase 1: Ingesta y Desglose Documental en CSV (`transacciones_depuradas.csv`)
 
 1. Escanear todos los archivos del directorio de documentos del contribuyente (`/documentos_renta` o carpeta especificada).
 2. Extraer cada transaccion identificando: fecha, archivo de origen, nombre del tercero, NIT, descripcion, tipo de movimiento (`INGRESO`, `EGRESO`, `PATRIMONIO_ACTIVO`, `PATRIMONIO_PASIVO`, `RETENCION`), valor en COP, preclasificacion de cedula y concepto tributario.
 3. Guardar las filas en `transacciones_depuradas.csv` usando el esquema definido en `templates/transacciones_template.csv`.
-4. Reportar al usuario el numero de movimientos extraidos y solicitar revision si existen transacciones con confianza `REQUIERE_REVISION`.
+
+---
+
+### Paso 1.5: Motor de Conciliacion Automatica contra Informacion Exogena
+
+Si existe el archivo de Informacion Exogena, ejecutar el motor de conciliacion:
+```bash
+python skills/renta-persona-natural/scripts/conciliar_exogena.py transacciones_depuradas.csv "DIAN - Informacion exogena 2025.xlsx" --facturas "DIAN - Facturas electronicas 2025.xlsx" --out-csv conciliacion_exogena.csv --out-json estado_conciliacion.json
+```
+El script clasifica cada partida en:
+- `MATCH_EXACTO`: Coincide el NIT y el valor reportado por el tercero.
+- `DIFERENCIA_VALOR`: Coincide el NIT pero existe discrepancia numerica entre el certificado y la exogena.
+- `SOLO_EN_CERTIFICADOS`: Registros del contribuyente no reportados en la exogena (se conservan en el calculo).
+- `SOLO_EN_EXOGENA`: Partidas reportadas en la DIAN sin soporte en extractos/certificados (ej. cuentas bancarias antiguas, vehiculos, otros ingresos).
+
+---
 
 ### Fase 2: Clasificacion Cedular y Aplicacion de Beneficios
 
@@ -44,32 +69,31 @@ Use este skill cuando:
      - Si el activo/accion fue poseido por **menos de 2 anos**: La utilidad neta (precio de venta - costo fiscal de adquisicion) se clasifica en la **Cedula General (Rentas No Laborales)** y tributa a la tarifa marginal del Art. 241 (hasta el 39%).
      - Si el activo/accion fue poseido por **2 anos o mas**: La utilidad neta se clasifica como **Ganancia Ocasional (Art. 300 E.T.)** y tributa a la tarifa fija del **15%** (Art. 313 y 314 E.T.).
      - En ambos casos, se debe restar el **Costo Fiscal de Adquisicion (Art. 71, 73 y 90 E.T.)** para no tributar sobre el capital recuperado.
-3. Agrupar transacciones en sus respectivas cedulas:
-   - **Cedula General - Rentas de Trabajo**: Salarios, honorarios y compensaciones laborales.
-   - **Cedula General - Rentas de Capital**: Rendimientos financieros netos de componente inflacionario, arrendamientos y regalias.
-   - **Cedula General - Rentas No Laborales**: Ingresos comerciales y venta de activos poseidos por menos de 2 anos.
-   - **Cedula de Pensiones**: Mesadas pensionales (exentas hasta 1.000 UVT mes).
-   - **Cedula de Dividendos**: Dividendos ordinarios o con componentes no gravados.
-   - **Ganancias Ocasionales**: Venta de activos/acciones poseidos por 2 anos o mas (Art. 300), herencias y donaciones.
-4. Aplicar las deducciones y rentas exentas con estricto orden matematico:
-   - **Paso A**: Restar INCRNGO (Salud 4%, Pension 4%, FSP y Componente Inflacionario).
-   - **Paso B**: Imputar Deducciones Ordinarias (Vivienda hasta 1.200 UVT, Prepagada hasta 192 UVT, Dependientes 10% hasta 384 UVT, GMF 50%).
-   - **Paso C**: Calcular Renta Exenta Laboral del 25% (Art. 206 Num. 10 E.T., max 790 UVT).
-   - **Paso D**: Aplicar Limite Conjunto del 40% o 1.340 UVT ($70.149.000 en 2026 / $66.731.000 en 2025).
-   - **Paso E**: Imputar Deducciones Especiales Extra-Cupo (Dependientes adicionales de 72 UVT c/u max 288 UVT y 1% de compras en factura electronica max 240 UVT).
-5. Generar la consolidacion ejecutando:
+3. Agrupar transacciones en sus respectivas cedulas (Trabajo, Capital, No Laborales, Pensiones, Dividendos, Ganancias Ocasionales).
+4. Aplicar las deducciones y rentas exentas (INCRNGO, Deducciones ordinarias, 25% exenta laboral, tope 1.340 UVT, y deducciones extra-cupo).
+
+---
+
+### Paso 2.5: Aclaracion Interactiva con el Usuario sobre Discrepancias
+
+Si el reporte de conciliacion contiene partidas `SOLO_EN_EXOGENA` o `DIFERENCIA_VALOR`:
+1. El skill le presenta al usuario cada discrepancia con los datos de la DIAN (Tercero, NIT, Concepto y Valor).
+2. Pregunta al usuario si desea incorporarlas a su declaracion o descartarlas (ej. cuentas inactivas de saldo menor, avaluo oficial de vehiculo, otros ingresos).
+3. Con base en la respuesta del usuario, se actualizan las partidas en `transacciones_depuradas.csv` con resolucion `INCLUIDO_POR_EXOGENA` o `DESCARTADO_USUARIO`.
+
+---
+
+### Fase 3: Consolidacion e Inyeccion a la API de TributIA
+
+1. Consolidar el CSV validado con el estado de conciliacion:
    ```bash
-   python skills/renta-persona-natural/scripts/consolidar_transacciones.py transacciones_depuradas.csv --year 2026 --uvt 52350 --nombre "NOMBRE COMPLETO" --nit "NIT_SIN_DV" --out payload_declaracion.json
+   python skills/renta-persona-natural/scripts/consolidar_transacciones.py transacciones_depuradas.csv --year 2025 --uvt 49799 --nombre "NOMBRE" --nit "NIT" --reconciliation estado_conciliacion.json --out payload_declaracion.json
    ```
-
-### Fase 3: Inyeccion a la API de TributIA y Verificacion Visual
-
-1. Enviar los valores a la aplicacion web de TributIA:
+2. Enviar los valores a la aplicacion web de TributIA:
    ```bash
    python skills/renta-persona-natural/scripts/inyectar_tributia.py payload_declaracion.json --api-url http://localhost:8000
    ```
-2. La plataforma web recibe el payload, dispara el recalculo reactivo, aplica la mascara contable colombiana (`$120'000.000`), llena el Formulario 210 oficial y situa el Termometro Progresivo en el bracket correspondiente.
-3. Presentar al contribuyente el resumen con: Renta Liquida Gravable, Tarifa Marginal, Impuesto a Cargo, Retenciones aplicadas y Saldo Neto a Pagar o a Favor.
+3. Presentar al contribuyente el resumen con: Renta Liquida Gravable, Tarifa Marginal, Impuesto a Cargo, Retenciones aplicadas, Saldo Neto a Pagar o a Favor, y estado de conciliacion DIAN.
 
 ---
 

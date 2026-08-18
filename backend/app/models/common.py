@@ -27,3 +27,31 @@ class UvtConversionResponse(BaseModel):
     uvt_value: float
     amount_cop: float
     amount_uvt: float
+
+
+class ReconciliationItem(BaseModel):
+    id: str
+    tercero_nit: str
+    tercero_nombre: str
+    concepto: str
+    valor_certificado: float = 0.0
+    valor_exogena: float = 0.0
+    diferencia: float = 0.0
+    estado: str = "MATCH_EXACTO"  # "MATCH_EXACTO", "DIFERENCIA_VALOR", "SOLO_EN_CERTIFICADOS", "SOLO_EN_EXOGENA"
+    resolucion_usuario: Optional[str] = None
+    observaciones: Optional[str] = None
+
+
+class ReconciliationState(BaseModel):
+    has_exogena: bool = False
+    has_facturas_electronicas: bool = False
+    archivo_exogena: Optional[str] = None
+    archivo_facturas: Optional[str] = None
+    total_susceptible_factura_elec: float = 0.0
+    deduccion_1pct_factura_elec: float = 0.0
+    total_partidas_exogena: int = 0
+    total_conciliadas: int = 0
+    total_discrepancias: int = 0
+    porcentaje_match: float = 0.0
+    items: List[ReconciliationItem] = Field(default_factory=list)
+

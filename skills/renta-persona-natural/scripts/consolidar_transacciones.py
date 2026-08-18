@@ -129,6 +129,18 @@ def consolidar_csv_a_payload(csv_path: str, tax_year: int = 2026, custom_uvt: fl
             elif tipo_mov == "INGRESO":
                 otros_ingresos_brutos += val
 
+    # Buscar archivo de conciliación si existe
+    reconciliation_state = {}
+    recon_file = path.parent / "estado_conciliacion.json"
+    if not recon_file.exists():
+        recon_file = Path("estado_conciliacion.json")
+    if recon_file.exists():
+        try:
+            with open(recon_file, "r", encoding="utf-8") as rf:
+                reconciliation_state = json.load(rf)
+        except Exception:
+            pass
+
     payload = {
         "session_id": "default",
         "metadata": {
@@ -170,7 +182,8 @@ def consolidar_csv_a_payload(csv_path: str, tax_year: int = 2026, custom_uvt: fl
             "retenciones_fuente_practicadas": retenciones_fuente,
             "anticipo_ano_anterior": anticipo_ano_anterior,
             "saldo_a_favor_ano_anterior": saldo_favor_anterior
-        }
+        },
+        "reconciliation": reconciliation_state
     }
     return payload
 
@@ -182,6 +195,7 @@ if __name__ == "__main__":
     parser.add_argument("--uvt", type=float, default=52350.0, help="Valor UVT (default: 52350)")
     parser.add_argument("--nombre", type=str, default="", help="Nombre del declarante")
     parser.add_argument("--nit", type=str, default="", help="NIT del declarante")
+    parser.add_argument("--reconciliation", type=str, default=None, help="Ruta a estado_conciliacion.json")
     parser.add_argument("--out", type=str, default="", help="Ruta para guardar el JSON resultante")
 
     args = parser.parse_args()
@@ -194,6 +208,10 @@ if __name__ == "__main__":
         nit=args.nit
     )
 
+    if args.reconciliation and Path(args.reconciliation).exists():
+        with open(args.reconciliation, "r", encoding="utf-8") as rf:
+            payload["reconciliation"] = json.load(rf)
+
     json_str = json.dumps(payload, indent=2, ensure_ascii=False)
     if args.out:
         with open(args.out, "w", encoding="utf-8") as out_f:
@@ -201,3 +219,4 @@ if __name__ == "__main__":
         print(f"[OK] Payload guardado exitosamente en: {args.out}")
     else:
         print(json_str)
+
