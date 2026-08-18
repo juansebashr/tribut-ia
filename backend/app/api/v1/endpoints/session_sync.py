@@ -13,12 +13,12 @@ router = APIRouter()
 
 
 @router.get("/state", response_model=SessionState, summary="Obtener estado actual de la sesión (UI/API)")
-def get_session_state(session_id: str = Query("default", description="ID único de la sesión")):
+async def get_session_state(session_id: str = Query("default", description="ID único de la sesión")):
     """
     Retorna el estado completo actual de la interfaz web/sesión:
     metadatos, datos de Persona Natural, Persona Jurídica y cálculos.
     """
-    return session_store.get_state(session_id)
+    return await session_store.get_state(session_id)
 
 
 @router.post("/state", response_model=SessionState, summary="Inyectar / Actualizar estado en la UI")
@@ -33,7 +33,7 @@ async def update_session_state(
     recibirá los datos inmediatamente por SSE (Server-Sent Events) y actualizará la pantalla.
     Además, ejecuta automáticamente los cálculos del motor tributario si se envían datos de PN o PJ.
     """
-    current_state = session_store.get_state(session_id)
+    current_state = await session_store.get_state(session_id)
     
     # Extraer y combinar datos de persona natural
     merged_pn = dict(current_state.persona_natural)
@@ -94,7 +94,7 @@ async def session_events_stream(
 
     async def event_generator():
         # Enviar evento inicial de conexión con el estado actual
-        initial_state = session_store.get_state(session_id)
+        initial_state = await session_store.get_state(session_id)
         yield f"event: connected\ndata: {json.dumps({'status': 'connected', 'session_id': session_id, 'state': initial_state.model_dump()})}\n\n"
         
         try:
@@ -105,11 +105,14 @@ async def session_events_stream(
                 try:
                     # Esperar hasta 20s por un nuevo mensaje o enviar ping keep-alive
                     msg = await asyncio.wait_for(queue.get(), timeout=20.0)
-                    yield f"event: {msg.get('type', 'state_update')}\ndata: {json.dumps(msg)}\n\n"
+                    if isinstance(msg, str):
+                        yield msg
+                    else:
+                        yield f"event: {msg.get('type', 'state_update')}\ndata: {json.dumps(msg)}\n\n"
                 except asyncio.TimeoutError:
                     yield f"event: ping\ndata: {json.dumps({'time': asyncio.get_event_loop().time()})}\n\n"
         finally:
-            session_store.unsubscribe(queue, session_id)
+            await session_store.unsubscribe(session_id, queue)
 
     return StreamingResponse(
         event_generator(),

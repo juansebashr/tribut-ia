@@ -2,170 +2,344 @@ import asyncio
 import json
 from datetime import datetime, timezone
 from typing import Dict, List, Optional, Any
-from pydantic import BaseModel, Field
+import redis.asyncio as aioredis
+
+from app.core.config import settings
+from app.services.session_store_base import SessionState, SessionStoreBase
 
 
-class SessionState(BaseModel):
-    session_id: str = "default"
-    metadata: Dict[str, Any] = Field(default_factory=lambda: {
-        "nombre": "CARLOS ALBERTO PEREZ GOMEZ",
-        "nit": "1234567890",
-        "tax_year": 2026,
-        "custom_uvt": 52350,
-        "active_module": "pn",
-        "active_subtab": "calc"
-    })
-    persona_natural: Dict[str, Any] = Field(default_factory=dict)
-    persona_juridica: Dict[str, Any] = Field(default_factory=dict)
-    calculation_results: Dict[str, Any] = Field(default_factory=dict)
-    reconciliation: Dict[str, Any] = Field(default_factory=dict)
-    last_updated_at: str = Field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
-
-
-class SessionStore:
+class InMemorySessionStore(SessionStoreBase):
     """
-    Almacén de sesiones reactivo en memoria con difusión de eventos SSE (Server-Sent Events)
-    para sincronización en tiempo real entre la API y clientes web.
+    Almacén de sesiones en memoria RAM para desarrollo local y tests unitarios.
     """
     def __init__(self):
         self._sessions: Dict[str, SessionState] = {}
         self._subscribers: Dict[str, List[asyncio.Queue]] = {}
         self._lock = asyncio.Lock()
-        
-        # Inicializar sesión por defecto
         self._sessions["default"] = self._create_default_session("default")
 
-    def _create_default_session(self, session_id: str) -> SessionState:
-        return SessionState(
-            session_id=session_id,
-            metadata={
-                "nombre": "CARLOS ALBERTO PEREZ GOMEZ",
-                "nit": "1234567890",
-                "tax_year": 2026,
-                "custom_uvt": 52350,
-                "active_module": "pn",
-                "active_subtab": "calc"
-            },
-            persona_natural={
-                "patrimonio_bruto": 300000000.0,
-                "deudas": 80000000.0,
-                "rentas_trabajo": 120000000.0,
-                "viaticos": 0.0,
-                "otros_ingresos_brutos": 0.0,
-                "rentas_capital": 0.0,
-                "incrngo_capital": 0.0,
-                "rentas_nolaborales": 0.0,
-                "incrngo_nolaborales": 0.0,
-                "costos_nolaborales": 0.0,
-                "aporte_salud_obligatorio": 4800000.0,
-                "aporte_pension_obligatorio": 4800000.0,
-                "aplica_dependiente_general": True,
-                "numero_dependientes_adicionales_72uvt": 0,
-                "medicina_prepagada_anual": 0.0,
-                "intereses_vivienda_anual": 12000000.0,
-                "gmf_4x1000_total": 0.0,
-                "compras_factura_electronica": 15000000.0,
-                "aportes_voluntarios_pension_afc": 10000000.0,
-                "otras_rentas_exentas": 0.0,
-                "ganancias_ocasionales_brutas_activos_fijos": 0.0,
-                "costos_ganancia_ocasional": 0.0,
-                "ganancias_ocasionales_brutas_herencias": 0.0,
-                "ganancias_ocasionales_brutas_loterias": 0.0,
-                "ganancias_ocasionales_exentas_solicitadas": 0.0,
-                "retenciones_fuente_practicadas": 5000000.0,
-                "anticipo_ano_anterior": 0.0,
-                "saldo_a_favor_ano_anterior": 0.0
-            },
-            persona_juridica={
-                "ingresos_brutos_operacionales": 1200000000.0,
-                "ingresos_no_operacionales": 50000000.0,
-                "ingresos_no_constitutivos_renta": 30000000.0,
-                "costos_ventas_operacionales": 650000000.0,
-                "gastos_administracion_ventas": 200000000.0,
-                "rentas_exentas": 20000000.0,
-                "utilidad_contable_antes_impuestos": 370000000.0,
-                "ingresos_no_constitutivos_utilidad": 30000000.0,
-                "costos_gastos_no_deducibles": 25000000.0,
-                "retenciones_fuente_practicadas": 35000000.0,
-                "anticipo_ano_anterior": 15000000.0
-            }
-        )
-
-    def get_state(self, session_id: str = "default") -> SessionState:
-        if session_id not in self._sessions:
-            self._sessions[session_id] = self._create_default_session(session_id)
-        return self._sessions[session_id]
+    async def get_state(self, session_id: str = "default") -> SessionState:
+        async with self._lock:
+            if session_id not in self._sessions:
+                self._sessions[session_id] = self._create_default_session(session_id)
+            return self._sessions[session_id]
 
     async def update_state(
         self,
-        session_id: str = "default",
-        new_state_data: Optional[Dict[str, Any]] = None,
+        session_id: str,
+        payload: Dict[str, Any],
         source: str = "api"
     ) -> SessionState:
-        if session_id not in self._sessions:
-            self._sessions[session_id] = self._create_default_session(session_id)
-        
-        current = self._sessions[session_id]
-        if new_state_data:
-            if "metadata" in new_state_data and isinstance(new_state_data["metadata"], dict):
-                current.metadata.update(new_state_data["metadata"])
-            if "persona_natural" in new_state_data and isinstance(new_state_data["persona_natural"], dict):
-                current.persona_natural.update(new_state_data["persona_natural"])
-            if "persona_juridica" in new_state_data and isinstance(new_state_data["persona_juridica"], dict):
-                current.persona_juridica.update(new_state_data["persona_juridica"])
-            if "calculation_results" in new_state_data and isinstance(new_state_data["calculation_results"], dict):
-                current.calculation_results.update(new_state_data["calculation_results"])
-            if "reconciliation" in new_state_data and isinstance(new_state_data["reconciliation"], dict):
-                current.reconciliation = new_state_data["reconciliation"]
-        
-        current.last_updated_at = datetime.now(timezone.utc).isoformat()
-        self._sessions[session_id] = current
+        async with self._lock:
+            current = self._sessions.get(session_id)
+            if not current:
+                current = self._create_default_session(session_id)
+                self._sessions[session_id] = current
 
-        # Broadcast SSE event a los suscriptores conectados
-        await self._broadcast(session_id, {
-            "type": "state_update",
-            "source": source,
-            "session_id": session_id,
-            "state": current.model_dump()
-        })
+            # Incrementar revisión para concurrencia optimista
+            new_revision = current.revision + 1
 
-        return current
+            # Combinar metadatos
+            new_metadata = dict(current.metadata)
+            if "metadata" in payload and isinstance(payload["metadata"], dict):
+                new_metadata.update(payload["metadata"])
+
+            # Combinar persona natural
+            new_pn = dict(current.persona_natural)
+            if "persona_natural" in payload and isinstance(payload["persona_natural"], dict):
+                new_pn.update(payload["persona_natural"])
+
+            # Combinar persona jurídica
+            new_pj = dict(current.persona_juridica)
+            if "persona_juridica" in payload and isinstance(payload["persona_juridica"], dict):
+                new_pj.update(payload["persona_juridica"])
+
+            # Resultados de cálculo
+            new_calc = dict(current.calculation_results)
+            if "calculation_results" in payload and isinstance(payload["calculation_results"], dict):
+                new_calc.update(payload["calculation_results"])
+
+            # Reconciliación exógena
+            new_rec = dict(current.reconciliation)
+            if "reconciliation" in payload and isinstance(payload["reconciliation"], dict):
+                new_rec.update(payload["reconciliation"])
+
+            updated_state = SessionState(
+                session_id=session_id,
+                revision=new_revision,
+                metadata=new_metadata,
+                persona_natural=new_pn,
+                persona_juridica=new_pj,
+                calculation_results=new_calc,
+                reconciliation=new_rec,
+                last_updated_at=datetime.now(timezone.utc).isoformat()
+            )
+            self._sessions[session_id] = updated_state
+
+        # Difundir evento a suscriptores SSE
+        await self.publish_event(
+            session_id=session_id,
+            event_type="state_update",
+            data={
+                "session_id": session_id,
+                "revision": new_revision,
+                "source": source,
+                "timestamp": updated_state.last_updated_at,
+                "state": updated_state.model_dump()
+            },
+            source=source
+        )
+        return updated_state
 
     async def reset_state(self, session_id: str = "default") -> SessionState:
-        new_state = self._create_default_session(session_id)
-        self._sessions[session_id] = new_state
-        
-        await self._broadcast(session_id, {
-            "type": "reset",
-            "source": "api",
-            "session_id": session_id,
-            "state": new_state.model_dump()
-        })
-        
-        return new_state
+        async with self._lock:
+            default_state = self._create_default_session(session_id)
+            self._sessions[session_id] = default_state
+
+        await self.publish_event(
+            session_id=session_id,
+            event_type="reset",
+            data={
+                "session_id": session_id,
+                "revision": 1,
+                "timestamp": default_state.last_updated_at,
+                "state": default_state.model_dump()
+            }
+        )
+        return default_state
 
     async def subscribe(self, session_id: str = "default") -> asyncio.Queue:
-        queue = asyncio.Queue()
-        if session_id not in self._subscribers:
-            self._subscribers[session_id] = []
-        self._subscribers[session_id].append(queue)
-        return queue
+        async with self._lock:
+            if session_id not in self._subscribers:
+                self._subscribers[session_id] = []
+            queue = asyncio.Queue(maxsize=100)
+            self._subscribers[session_id].append(queue)
+            return queue
 
-    def unsubscribe(self, queue: asyncio.Queue, session_id: str = "default"):
-        if session_id in self._subscribers and queue in self._subscribers[session_id]:
-            self._subscribers[session_id].remove(queue)
+    async def unsubscribe(self, session_id: str, queue: asyncio.Queue) -> None:
+        async with self._lock:
+            if session_id in self._subscribers and queue in self._subscribers[session_id]:
+                self._subscribers[session_id].remove(queue)
 
-    async def _broadcast(self, session_id: str, message: Dict[str, Any]):
-        if session_id in self._subscribers:
-            dead_queues = []
-            for queue in self._subscribers[session_id]:
-                try:
-                    queue.put_nowait(message)
-                except asyncio.QueueFull:
-                    dead_queues.append(queue)
-            for q in dead_queues:
-                self.unsubscribe(q, session_id)
+    async def publish_event(
+        self,
+        session_id: str,
+        event_type: str,
+        data: Dict[str, Any],
+        source: str = "api"
+    ) -> None:
+        async with self._lock:
+            subscribers = list(self._subscribers.get(session_id, []))
+
+        msg = f"event: {event_type}\ndata: {json.dumps(data)}\n\n"
+        for queue in subscribers:
+            try:
+                queue.put_nowait(msg)
+            except asyncio.QueueFull:
+                pass
 
 
-# Instancia singleton del SessionStore
-session_store = SessionStore()
+class RedisSessionStore(SessionStoreBase):
+    """
+    Almacén de sesiones distribuido en Redis con TTL de 1 día y Pub/Sub
+    para sincronización en tiempo real entre múltiples instancias de GCP Cloud Run.
+    """
+    def __init__(self, redis_url: str = settings.REDIS_URL, ttl_seconds: int = settings.REDIS_SESSION_TTL_SECONDS):
+        self.redis_url = redis_url
+        self.ttl_seconds = ttl_seconds
+        self._redis: Optional[aioredis.Redis] = None
+        self._local_subscribers: Dict[str, List[asyncio.Queue]] = {}
+        self._pubsub_tasks: Dict[str, asyncio.Task] = {}
+        self._lock = asyncio.Lock()
+
+    async def _get_client(self) -> aioredis.Redis:
+        if self._redis is None:
+            self._redis = aioredis.from_url(
+                self.redis_url,
+                encoding="utf-8",
+                decode_responses=True
+            )
+        return self._redis
+
+    def _get_key(self, session_id: str) -> str:
+        return f"session:{session_id}"
+
+    def _get_channel(self, session_id: str) -> str:
+        return f"session:{session_id}:events"
+
+    async def get_state(self, session_id: str = "default") -> SessionState:
+        client = await self._get_client()
+        key = self._get_key(session_id)
+        raw = await client.get(key)
+
+        if not raw:
+            default_session = self._create_default_session(session_id)
+            await client.set(key, default_session.model_dump_json(), ex=self.ttl_seconds)
+            return default_session
+
+        # Rolling Expiration: Renovar TTL de 1 día al consultar
+        await client.expire(key, self.ttl_seconds)
+        data = json.loads(raw)
+        return SessionState(**data)
+
+    async def update_state(
+        self,
+        session_id: str,
+        payload: Dict[str, Any],
+        source: str = "api"
+    ) -> SessionState:
+        client = await self._get_client()
+        key = self._get_key(session_id)
+
+        # Leer estado actual
+        current = await self.get_state(session_id)
+        new_revision = current.revision + 1
+
+        # Combinar metadatos
+        new_metadata = dict(current.metadata)
+        if "metadata" in payload and isinstance(payload["metadata"], dict):
+            new_metadata.update(payload["metadata"])
+
+        # Combinar persona natural
+        new_pn = dict(current.persona_natural)
+        if "persona_natural" in payload and isinstance(payload["persona_natural"], dict):
+            new_pn.update(payload["persona_natural"])
+
+        # Combinar persona jurídica
+        new_pj = dict(current.persona_juridica)
+        if "persona_juridica" in payload and isinstance(payload["persona_juridica"], dict):
+            new_pj.update(payload["persona_juridica"])
+
+        # Resultados de cálculo
+        new_calc = dict(current.calculation_results)
+        if "calculation_results" in payload and isinstance(payload["calculation_results"], dict):
+            new_calc.update(payload["calculation_results"])
+
+        # Reconciliación exógena
+        new_rec = dict(current.reconciliation)
+        if "reconciliation" in payload and isinstance(payload["reconciliation"], dict):
+            new_rec.update(payload["reconciliation"])
+
+        updated_state = SessionState(
+            session_id=session_id,
+            revision=new_revision,
+            metadata=new_metadata,
+            persona_natural=new_pn,
+            persona_juridica=new_pj,
+            calculation_results=new_calc,
+            reconciliation=new_rec,
+            last_updated_at=datetime.now(timezone.utc).isoformat()
+        )
+
+        # Guardar en Redis con TTL de 1 día (86.400s)
+        await client.set(key, updated_state.model_dump_json(), ex=self.ttl_seconds)
+
+        # Publicar evento a canal Pub/Sub para que todas las instancias de Cloud Run lo reciban
+        await self.publish_event(
+            session_id=session_id,
+            event_type="state_update",
+            data={
+                "session_id": session_id,
+                "revision": new_revision,
+                "source": source,
+                "timestamp": updated_state.last_updated_at,
+                "state": updated_state.model_dump()
+            },
+            source=source
+        )
+
+        return updated_state
+
+    async def reset_state(self, session_id: str = "default") -> SessionState:
+        client = await self._get_client()
+        key = self._get_key(session_id)
+        default_state = self._create_default_session(session_id)
+
+        await client.set(key, default_state.model_dump_json(), ex=self.ttl_seconds)
+
+        await self.publish_event(
+            session_id=session_id,
+            event_type="reset",
+            data={
+                "session_id": session_id,
+                "revision": 1,
+                "timestamp": default_state.last_updated_at,
+                "state": default_state.model_dump()
+            }
+        )
+        return default_state
+
+    async def _redis_pubsub_listener(self, session_id: str, channel_name: str):
+        """Escucha eventos en Redis Pub/Sub y los despacha a los clientes SSE conectados a esta instancia."""
+        try:
+            client = await self._get_client()
+            pubsub = client.pubsub()
+            await pubsub.subscribe(channel_name)
+            
+            async for message in pubsub.listen():
+                if message["type"] == "message":
+                    payload_str = message["data"]
+                    async with self._lock:
+                        subscribers = list(self._local_subscribers.get(session_id, []))
+                    for queue in subscribers:
+                        try:
+                            queue.put_nowait(payload_str)
+                        except asyncio.QueueFull:
+                            pass
+        except asyncio.CancelledError:
+            pass
+        except Exception as e:
+            print(f"[REDIS PUBSUB LISTENER ERROR]: {e}")
+
+    async def subscribe(self, session_id: str = "default") -> asyncio.Queue:
+        async with self._lock:
+            if session_id not in self._local_subscribers:
+                self._local_subscribers[session_id] = []
+            queue = asyncio.Queue(maxsize=100)
+            self._local_subscribers[session_id].append(queue)
+
+            # Iniciar listener de Pub/Sub si no existe para esta sesión
+            channel_name = self._get_channel(session_id)
+            if session_id not in self._pubsub_tasks or self._pubsub_tasks[session_id].done():
+                task = asyncio.create_task(self._redis_pubsub_listener(session_id, channel_name))
+                self._pubsub_tasks[session_id] = task
+
+            return queue
+
+    async def unsubscribe(self, session_id: str, queue: asyncio.Queue) -> None:
+        async with self._lock:
+            if session_id in self._local_subscribers and queue in self._local_subscribers[session_id]:
+                self._local_subscribers[session_id].remove(queue)
+                # Si no quedan clientes en esta instancia, cancelar la tarea de Pub/Sub
+                if len(self._local_subscribers[session_id]) == 0:
+                    task = self._pubsub_tasks.pop(session_id, None)
+                    if task and not task.done():
+                        task.cancel()
+
+    async def publish_event(
+        self,
+        session_id: str,
+        event_type: str,
+        data: Dict[str, Any],
+        source: str = "api"
+    ) -> None:
+        client = await self._get_client()
+        channel = self._get_channel(session_id)
+        msg = f"event: {event_type}\ndata: {json.dumps(data)}\n\n"
+        await client.publish(channel, msg)
+
+
+# Factoría de sesión
+def create_session_store() -> SessionStoreBase:
+    backend_type = settings.SESSION_STORE_BACKEND.lower()
+    if backend_type == "redis":
+        return RedisSessionStore(
+            redis_url=settings.REDIS_URL,
+            ttl_seconds=settings.REDIS_SESSION_TTL_SECONDS
+        )
+    return InMemorySessionStore()
+
+
+# Instancia singleton para FastAPI
+session_store = create_session_store()
+SessionStore = InMemorySessionStore  # Alias para compatibilidad con código existente

@@ -2245,8 +2245,28 @@ Eres un Contador Tributario Colombiano experto.
     </div>
   </div>
 
-  <script src="/static/casillas_info.js?v=20260818_2"></script>
-  <script src="/static/calendario_data.js?v=20260818_2"></script>
-  <script src="/static/app.js?v=20260818_2"></script>
+  <!-- =====================================================================
+       MODAL DE CONFIRMACIÓN PARA ACCIONES DESTRUCTIVAS
+       ===================================================================== -->
+  <div id="modal-confirm-action" class="modal-backdrop" style="display: none;" onclick="closeConfirmModal()">
+    <div class="modal-content" style="max-width: 480px; text-align: center; padding: 24px;" onclick="event.stopPropagation()">
+      <div id="confirm-modal-icon" style="font-size: 38px; margin-bottom: 12px;">⚠️</div>
+      <h3 id="confirm-modal-title" style="font-size: 16px; font-weight: 800; color: #0b3b60; margin: 0 0 8px 0;">¿Sobreescribir datos de la sesión actual?</h3>
+      <p id="confirm-modal-msg" style="font-size: 13px; color: var(--text-muted); line-height: 1.5; margin: 0 0 20px 0;">
+        Tienes datos cargados en esta declaración. Si continúas, los valores actuales se reemplazarán.
+      </p>
+      <div style="display: flex; gap: 10px; justify-content: center;">
+        <button class="btn btn-outline" style="min-width: 110px;" onclick="closeConfirmModal()">Cancelar</button>
+        <button id="confirm-modal-btn-accept" class="btn btn-primary" style="background: #e11d48; border-color: #be123c; min-width: 130px;">Sobreescribir</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST CONTAINER -->
+  <div id="tributia-toast-container" style="position: fixed; bottom: 24px; right: 24px; z-index: 99999; display: flex; flex-direction: column; gap: 8px; pointer-events: none;"></div>
+
+  <script src="/static/casillas_info.js?v=20260818_3"></script>
+  <script src="/static/calendario_data.js?v=20260818_3"></script>
+  <script src="/static/app.js?v=20260818_3"></script>
 </body>
 </html>

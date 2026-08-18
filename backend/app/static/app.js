@@ -1,4 +1,6 @@
 // Estado global
+const urlParams = new URLSearchParams(window.location.search);
+let currentSessionId = urlParams.get('session_id') || 'default';
 let currentYear = 2026;
 let currentUvt = 52350;
 let lastPnResult = null;
@@ -12,8 +14,101 @@ let currentActiveModule = 'pn';
 let currentActiveSubTab = 'calc';
 let liveSyncEventSource = null;
 let syncDebounceTimer = null;
-let currentSessionId = 'default';
 let isApplyingRemoteState = false;
+let pendingConfirmCallback = null;
+
+// =========================================================================
+// SISTEMA DE NOTIFICACIONES TOAST & MODAL DE CONFIRMACIÓN (UX RESILIENTE)
+// =========================================================================
+function showToast(message, type = 'info', duration = 3500) {
+  const container = document.getElementById('tributia-toast-container');
+  if (!container) return;
+
+  const toast = document.createElement('div');
+  const bgColor = type === 'success' ? '#065f46' : type === 'warning' ? '#9a3412' : type === 'error' ? '#991b1b' : '#1e3a8a';
+  const icon = type === 'success' ? '✓' : type === 'warning' ? '⚠️' : type === 'error' ? '✕' : 'ℹ️';
+
+  toast.style.cssText = `
+    background: ${bgColor};
+    color: #ffffff;
+    padding: 12px 18px;
+    border-radius: 8px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+    font-size: 13px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    pointer-events: auto;
+    animation: toastSlideIn 0.3s ease forwards;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    border-left: 4px solid #38bdf8;
+    max-width: 420px;
+  `;
+  toast.innerHTML = `<span style="font-size: 16px;">${icon}</span><span>${message}</span>`;
+  container.appendChild(toast);
+
+  setTimeout(() => {
+    toast.style.opacity = '0';
+    toast.style.transform = 'translateY(10px)';
+    setTimeout(() => toast.remove(), 300);
+  }, duration);
+}
+
+function showConfirmModal({ title, msg, icon = '⚠️', confirmText = 'Aceptar', onConfirm }) {
+  const modal = document.getElementById('modal-confirm-action');
+  if (!modal) {
+    if (onConfirm) onConfirm();
+    return;
+  }
+  document.getElementById('confirm-modal-icon').innerText = icon;
+  document.getElementById('confirm-modal-title').innerText = title;
+  document.getElementById('confirm-modal-msg').innerText = msg;
+  const btnAccept = document.getElementById('confirm-modal-btn-accept');
+  btnAccept.innerText = confirmText;
+
+  pendingConfirmCallback = onConfirm;
+  btnAccept.onclick = () => {
+    closeConfirmModal();
+    if (pendingConfirmCallback) {
+      pendingConfirmCallback();
+      pendingConfirmCallback = null;
+    }
+  };
+  modal.style.display = 'flex';
+}
+
+function closeConfirmModal() {
+  const modal = document.getElementById('modal-confirm-action');
+  if (modal) modal.style.display = 'none';
+  pendingConfirmCallback = null;
+}
+
+function saveLocalDraft() {
+  try {
+    const state = getCurrentUiState();
+    localStorage.setItem(`tributia_draft_${currentSessionId}`, JSON.stringify(state));
+  } catch (err) {
+    console.warn('No se pudo guardar borrador local:', err);
+  }
+}
+
+function loadLocalDraft() {
+  try {
+    const raw = localStorage.getItem(`tributia_draft_${currentSessionId}`);
+    return raw ? JSON.parse(raw) : null;
+  } catch (err) {
+    return null;
+  }
+}
+
+function hasEnteredUserData() {
+  const rt = getNum('pn_rentas_trabajo');
+  const rc = getNum('pn_rentas_capital');
+  const rnl = getNum('pn_rentas_nolaborales');
+  const pat = getNum('pn_patrimonio_bruto');
+  return (rt > 0 && rt !== 120000000) || rc > 0 || rnl > 0 || (pat > 0 && pat !== 300000000);
+}
 
 // Formateador de moneda tradicional colombiano (Separador de millones: ', Separador de miles: .)
 function formatCOP(amount, includeSymbol = true) {
@@ -192,13 +287,21 @@ document.addEventListener('DOMContentLoaded', async () => {
     const res = await fetch(`/api/v1/session/state?session_id=${currentSessionId}`);
     if (res.ok) {
       const state = await res.json();
-      if (state && state.persona_natural && Object.keys(state.persona_natural).length > 0 && state.persona_natural.rentas_trabajo > 0) {
+      if (state && state.persona_natural && Object.keys(state.persona_natural).length > 0 && (state.persona_natural.rentas_trabajo > 0 || state.persona_natural.patrimonio_bruto > 0)) {
         applyStateToUi(state, 'api');
         return;
       }
     }
   } catch (err) {
     console.warn('No se pudo precargar sesión remota:', err);
+  }
+
+  // Fallback: Recuperar borrador de localStorage si existe
+  const localDraft = loadLocalDraft();
+  if (localDraft && localDraft.persona_natural && (localDraft.persona_natural.rentas_trabajo > 0 || localDraft.persona_natural.patrimonio_bruto > 0)) {
+    applyStateToUi(localDraft, 'api');
+    showToast('📂 Borrador local recuperado de la sesión anterior', 'info', 3000);
+    return;
   }
 
   await loadRules(currentYear);
@@ -1762,6 +1865,8 @@ function initLiveSync() {
         const payload = JSON.parse(e.data);
         if (payload && payload.state && payload.source !== 'ui') {
           applyStateToUi(payload.state, 'api');
+          const rev = payload.revision ? ` (v${payload.revision})` : '';
+          showToast(`⚡ Declaración actualizada desde la API externa${rev}`, 'success', 4000);
         }
       } catch (err) {
         console.error('Error procesando state_update SSE:', err);
@@ -1773,6 +1878,7 @@ function initLiveSync() {
         const payload = JSON.parse(e.data);
         if (payload && payload.state) {
           applyStateToUi(payload.state, 'api');
+          showToast('🔄 Sesión restablecida a valores por defecto', 'info', 3000);
         }
       } catch (err) {
         console.error('Error procesando reset SSE:', err);
@@ -1859,9 +1965,10 @@ function getCurrentUiState() {
   };
 }
 
-// Envía el estado actual de la UI al backend (debounced)
+// Envía el estado actual de la UI al backend (debounced) y guarda borrador local
 function syncUiStateToBackend() {
   if (isApplyingRemoteState) return;
+  saveLocalDraft();
   clearTimeout(syncDebounceTimer);
   syncDebounceTimer = setTimeout(async () => {
     try {
@@ -2057,12 +2164,29 @@ function applyImportedJson() {
   const errorFeedback = document.getElementById('import-error-feedback');
   errorFeedback.innerText = '';
 
+  let parsed = null;
   try {
-    const parsed = JSON.parse(textarea.value.trim());
-    applyStateToUi(parsed, 'api');
-    closeJsonModal();
+    parsed = JSON.parse(textarea.value.trim());
   } catch (err) {
     errorFeedback.innerText = `Error de sintaxis JSON: ${err.message}`;
+    return;
+  }
+
+  const doApply = () => {
+    applyStateToUi(parsed, 'api');
+    closeJsonModal();
+    showToast('✓ Estado importado y recalculado exitosamente', 'success');
+  };
+
+  if (hasEnteredUserData()) {
+    showConfirmModal({
+      title: '¿Sobreescribir datos actuales?',
+      msg: 'Tienes una declaración activa en pantalla. Al importar este JSON, los valores actuales se reemplazarán.',
+      confirmText: 'Sí, importar',
+      onConfirm: doApply
+    });
+  } else {
+    doApply();
   }
 }
 
