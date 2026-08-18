@@ -37,20 +37,27 @@ Use este skill cuando:
 ### Fase 2: Clasificacion Cedular y Aplicacion de Beneficios
 
 1. Consultar el catalogo exhaustivo en `beneficios_tributarios_pn.md` para verificar los articulos del Estatuto Tributario, topes en UVT y reglas de exclusion.
-2. Agrupar transacciones en sus respectivas cedulas:
+2. **Ajuste Obligatorio por Inversiones y Cedula de Rentas de Capital (Revision Paso a Paso)**:
+   - **Paso 2.1 (Exclusion del Capital Invertido)**: El dinero invertido (principal) NO es ingreso; constituye un activo en el **Patrimonio Bruto (Casilla 29)** a 31 de diciembre. El ingreso bruto tributario es unicamente el rendimiento o utilidad generada.
+   - **Paso 2.2 (Componente Inflacionario - Art. 38, 40-1 y 41 E.T.)**: Para personas naturales no obligadas a llevar contabilidad, restar como INCRNGO (Casilla 59) el porcentaje certificado de inflacion sobre los rendimientos percibidos de entidades financieras y FICs (ej. 55,43% para 2025).
+   - **Paso 2.3 (Regla de los 2 Anos en Venta de Acciones y Activos - Art. 300 E.T.)**:
+     - Si el activo/accion fue poseido por **menos de 2 anos**: La utilidad neta (precio de venta - costo fiscal de adquisicion) se clasifica en la **Cedula General (Rentas No Laborales)** y tributa a la tarifa marginal del Art. 241 (hasta el 39%).
+     - Si el activo/accion fue poseido por **2 anos o mas**: La utilidad neta se clasifica como **Ganancia Ocasional (Art. 300 E.T.)** y tributa a la tarifa fija del **15%** (Art. 313 y 314 E.T.).
+     - En ambos casos, se debe restar el **Costo Fiscal de Adquisicion (Art. 71, 73 y 90 E.T.)** para no tributar sobre el capital recuperado.
+3. Agrupar transacciones en sus respectivas cedulas:
    - **Cedula General - Rentas de Trabajo**: Salarios, honorarios y compensaciones laborales.
-   - **Cedula General - Rentas de Capital**: Rendimientos financieros, arrendamientos y regalias.
-   - **Cedula General - Rentas No Laborales**: Ingresos comerciales y de servicios independientes con costos procedentes.
+   - **Cedula General - Rentas de Capital**: Rendimientos financieros netos de componente inflacionario, arrendamientos y regalias.
+   - **Cedula General - Rentas No Laborales**: Ingresos comerciales y venta de activos poseidos por menos de 2 anos.
    - **Cedula de Pensiones**: Mesadas pensionales (exentas hasta 1.000 UVT mes).
    - **Cedula de Dividendos**: Dividendos ordinarios o con componentes no gravados.
-   - **Ganancias Ocasionales**: Venta de inmuebles poseidos por mas de 2 anos, herencias y donaciones.
-3. Aplicar las deducciones y rentas exentas con estricto orden matematico:
-   - **Paso A**: Restar INCRNGO (Salud 4%, Pension 4% y FSP).
+   - **Ganancias Ocasionales**: Venta de activos/acciones poseidos por 2 anos o mas (Art. 300), herencias y donaciones.
+4. Aplicar las deducciones y rentas exentas con estricto orden matematico:
+   - **Paso A**: Restar INCRNGO (Salud 4%, Pension 4%, FSP y Componente Inflacionario).
    - **Paso B**: Imputar Deducciones Ordinarias (Vivienda hasta 1.200 UVT, Prepagada hasta 192 UVT, Dependientes 10% hasta 384 UVT, GMF 50%).
    - **Paso C**: Calcular Renta Exenta Laboral del 25% (Art. 206 Num. 10 E.T., max 790 UVT).
-   - **Paso D**: Aplicar Limite Conjunto del 40% o 1.340 UVT ($70.149.000 en 2026).
+   - **Paso D**: Aplicar Limite Conjunto del 40% o 1.340 UVT ($70.149.000 en 2026 / $66.731.000 en 2025).
    - **Paso E**: Imputar Deducciones Especiales Extra-Cupo (Dependientes adicionales de 72 UVT c/u max 288 UVT y 1% de compras en factura electronica max 240 UVT).
-4. Generar la consolidacion ejecutando:
+5. Generar la consolidacion ejecutando:
    ```bash
    python skills/renta-persona-natural/scripts/consolidar_transacciones.py transacciones_depuradas.csv --year 2026 --uvt 52350 --nombre "NOMBRE COMPLETO" --nit "NIT_SIN_DV" --out payload_declaracion.json
    ```

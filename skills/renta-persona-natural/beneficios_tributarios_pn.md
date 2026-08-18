@@ -15,7 +15,9 @@ Los INCRNGO se restan directamente de los ingresos brutos en la primera etapa de
 | **Aportes Voluntarios a Pensiones Obligatorias (RAIS)** | Art. 55 Par. 1 E.T. | Hasta el 25% del ingreso laboral anual, con tope maximo de **2.500 UVT** ($130.875.000 en 2026) | Realizados por el afiliado al regimen de ahorro individual con solidaridad. Gozan de retiro con destino a pension o retiro anticipado con retencion contingente del 35%. |
 | **Apoyos Economicos del Estado** | Art. 57-1 E.T. | 100% del apoyo recibido | Recursos entregados por el Estado o entidades para programas educativos de pregrado o posgrado. |
 | **Utilidad en Venta de Acciones en BVC** | Art. 36-1 E.T. | 100% si no supera el 3% de las acciones en circulacion | Utilidad obtenida en la enajenacion de acciones inscritas en la Bolsa de Valores de Colombia. |
+| **Componente Inflacionario de Rendimientos Financieros** | Art. 38, 40-1 y 41 E.T. | Porcentaje fijado por decreto anual (ej. **55,43% en 2025**) | Para personas naturales no obligadas a llevar contabilidad, la porcion de los rendimientos financieros que remunera la inflacion es 100% INCRNGO. Se descuenta antes de calcular la renta liquida de capital, tributando solo sobre la tasa real. |
 | **Dividendos No Gravados (Componente Historico)** | Art. 48 y 49 E.T. | Segun certificacion de utilidades decretadas | Dividendos que fueron gravados en cabeza de la sociedad y se trasladan como no gravados a los socios. |
+| **Capital Principal Invertido (No Constitutivo)** | Art. 71, 90 y 261 E.T. | 100% del capital aportado o costo fiscal de adquisicion | El dinero colocado en CDTs, cuentas, fondos o acciones NO constituye ingreso. Al enajenar, se resta el costo fiscal de modo que solo tributa la ganancia o rendimiento neto. |
 
 ---
 
@@ -85,6 +87,7 @@ Las ganancias ocasionales no se mezclan con la cedula general; tributan a tarifa
 
 | Concepto de Ganancia Ocasional | Articulo E.T. | Limite Exento | Requisitos |
 | :--- | :--- | :--- | :--- |
+| **Venta de Acciones e Inversiones (Posesion >= 2 Anos)** | Art. 300, 313 y 314 E.T. | Tarifa fija del **15%** (vs. hasta 39% en renta ordinaria) | La utilidad neta obtenida en la enajenacion de acciones o activos fijos poseidos por dos (2) anos o mas no se suma a la cedula general; tributa como ganancia ocasional a tarifa reducida fija del 15%. |
 | **Utilidad en Venta de Casa o Apartamento de Habitacion** | Art. 311-1 E.T. | Primeras **5.000 UVT** de utilidad ($261.750.000 en 2026) | 1. Que el inmueble haya sido la vivienda de habitacion del contribuyente.<br/>2. Que el 100% de los dineros netos obtenidos se depositen en una cuenta AFC o se usen para pagar un credito hipotecario de vivienda propia. |
 | **Herencia de Vivienda Urbana del Causante** | Art. 307 Numeral 1 E.T. | Primeras **13.000 UVT** ($680.550.000 en 2026) | Casa o apartamento urbano que pertenecio al causante y es adjudicado a herederos. |
 | **Herencia de Inmueble Rural del Causante** | Art. 307 Numeral 2 E.T. | Primeras **6.500 UVT** ($340.275.000 en 2026) | Inmueble rural propiedad del causante que no este destinado a recreo o descanso. |

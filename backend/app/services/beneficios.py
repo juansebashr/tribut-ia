@@ -87,6 +87,43 @@ def get_catalogo_beneficios() -> List[BeneficioItem]:
             requisitos=["Certificado de dividendos expedido por la sociedad pagadora."],
             ejemplo_calculo="Si una sociedad distribuye $50.000.000 de utilidades no gravadas, el socio las reporta como INCRNGO."
         ),
+        BeneficioItem(
+            id="incrngo_componente_inflacionario",
+            categoria="incrngo",
+            nombre="Componente Inflacionario de Rendimientos Financieros",
+            articulo_et="Art. 38, 40-1 y 41 E.T.",
+            descripcion="Para personas naturales no obligadas a llevar contabilidad, la porción de los rendimientos financieros que corresponde a la inflación del año no constituye renta ni ganancia ocasional (INCRNGO), tributando únicamente sobre la rentabilidad real.",
+            tope_legal_texto="Porcentaje fijado anualmente por decreto nacional (ej. 55,43% en 2025)",
+            requisitos=[
+                "Ser persona natural no obligada a llevar contabilidad.",
+                "Rendimientos pagados por entidades vigiladas por la Superintendencia Financiera o FICs.",
+                "Certificado tributario bancario donde conste el componente inflacionario."
+            ],
+            ejemplo_calculo="Si un FIC generó $1.000.000 de rendimientos, el 55,43% ($554.300) se resta como INCRNGO y solo tributa sobre $445.700."
+        ),
+        BeneficioItem(
+            id="costo_fiscal_inversiones_capital",
+            categoria="deducciones",
+            nombre="Costo Fiscal de Inversión y Enajenación de Activos",
+            articulo_et="Art. 71, 90 y 261 E.T.",
+            descripcion="El capital aportado en inversiones o compra de activos NO es renta; es patrimonio. Al vender o rescatar una inversión, se resta el costo fiscal de adquisición de modo que el impuesto se calcula estrictamente sobre la ganancia neta realizada.",
+            tope_legal_texto="100% del costo de adquisición o valor de compra certificado",
+            requisitos=["Comprobante de compra de títulos, acciones o extracto bursátil."],
+            ejemplo_calculo="Si compras acciones por $9.000.000 y las vendes en $10.000.000, solo los $1.000.000 de utilidad son base gravable."
+        ),
+        BeneficioItem(
+            id="ganancia_ocasional_acciones_2anos",
+            categoria="rentas_exentas",
+            nombre="Tratamiento de Ganancia Ocasional en Venta de Acciones (Posesión ≥ 2 Años)",
+            articulo_et="Art. 300, 313 y 314 E.T.",
+            descripcion="Si las acciones, títulos o inmuebles han sido poseídos por el contribuyente durante dos (2) años o más, la utilidad obtenida en su venta no se suma a la Cédula General (que tiene tarifas marginales de hasta el 39%), sino que tributa a la tarifa fija del 15% como Ganancia Ocasional.",
+            tope_legal_texto="Tarifa fija del 15% sobre la utilidad neta (vs. hasta 39% en renta ordinaria)",
+            requisitos=[
+                "Posesión fiscal del activo por un periodo continuo de 2 años o más.",
+                "Soporte de fecha de adquisición y fecha de enajenación."
+            ],
+            ejemplo_calculo="Utilidad de $50.000.000 en acciones poseídas por 3 años tributa 15% ($7.500.000) en lugar del 35%-39% de la cédula general."
+        ),
 
         # 2. DEDUCCIONES
         BeneficioItem(
