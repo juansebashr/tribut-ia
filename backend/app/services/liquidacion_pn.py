@@ -245,7 +245,8 @@ def liquidar_persona_natural(payload: PersonaNaturalInput) -> PersonaNaturalOutp
     total_rentas_exentas_previas = allowed_afc + payload.otras_rentas_exentas
 
     # 5.2 Renta Exenta Laboral 25% (Art. 206 Numeral 10)
-    base_exenta_laboral = max(0.0, ingreso_neto - total_deducciones_aceptadas - total_rentas_exentas_previas)
+    ingreso_neto_trabajo = max(0.0, ingresos_trabajo - incrngo_trabajo)
+    base_exenta_laboral = max(0.0, ingreso_neto_trabajo - total_deducciones_aceptadas - total_rentas_exentas_previas)
     lab_rule = re_rules.laboral_25
     lab_pct = lab_rule.get("porcentaje", 0.25)
     lab_tope_uvt = lab_rule.get("tope_uvt", 790)
@@ -265,7 +266,7 @@ def liquidar_persona_natural(payload: PersonaNaturalInput) -> PersonaNaturalOutp
         limit_cop=lab_tope_cop,
         excess_rejected_cop=excess_exenta_laboral,
         final_allowed_cop=allowed_exenta_laboral,
-        notes=f"25% sobre base depurada (${base_exenta_laboral:,.0f}) limitado a {lab_tope_uvt} UVT (${lab_tope_cop:,.0f})."
+        notes=f"25% sobre base depurada de trabajo (${base_exenta_laboral:,.0f}) limitado a {lab_tope_uvt} UVT (${lab_tope_cop:,.0f})."
     ))
 
     total_rentas_exentas_aceptadas = total_rentas_exentas_previas + allowed_exenta_laboral
@@ -293,8 +294,8 @@ def liquidar_persona_natural(payload: PersonaNaturalInput) -> PersonaNaturalOutp
         notes=f"Menor entre el 40% del Ingreso Neto (${limite_pct_cop:,.0f}) y {limite_conjunto_rule.tope_uvt} UVT (${limite_uvt_cop:,.0f}). Alivios solicitados: ${subtotal_alivios:,.0f} -> Procedentes: ${alivios_procedentes_finales:,.0f}."
     ))
 
-    # 7. RENTA LÍQUIDA GRAVABLE (Casilla 39)
-    renta_liquida_gravable = max(0.0, ingreso_neto - alivios_procedentes_finales)
+    # 7. RENTA LÍQUIDA GRAVABLE (Casilla 39 / Casilla 97)
+    renta_liquida_gravable = max(0.0, ingreso_neto - alivios_procedentes_finales - allowed_fe)
     renta_liquida_gravable_uvt = renta_liquida_gravable / uvt if uvt > 0 else 0.0
     
     trace.append(AuditTraceItem(
