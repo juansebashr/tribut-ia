@@ -885,49 +885,56 @@ function renderForm210OfficialSheet(data) {
   const salud = getNum('pn_salud');
   const pension = getNum('pn_pension');
   const totalIncrngoTrabajo = salud + pension;
-  const rentaLiqTrabajo = Math.max(0, totalTrabajo - totalIncrngoTrabajo);
+  const c34_rentaLiqTrabajo = Math.max(0, totalTrabajo - totalIncrngoTrabajo);
 
   if (document.getElementById('f210_val_c32')) document.getElementById('f210_val_c32').innerText = formatCOP(totalTrabajo, false);
   if (document.getElementById('f210_val_c33')) document.getElementById('f210_val_c33').innerText = formatCOP(totalIncrngoTrabajo, false);
-  if (document.getElementById('f210_val_c34')) document.getElementById('f210_val_c34').innerText = formatCOP(rentaLiqTrabajo, false);
+  if (document.getElementById('f210_val_c34')) document.getElementById('f210_val_c34').innerText = formatCOP(c34_rentaLiqTrabajo, false);
 
   const afc = getNum('pn_afc');
   const exenta25 = data.renta_exenta_laboral_25 !== undefined ? data.renta_exenta_laboral_25 : (data.renta_exenta_laboral_25pct || 0);
   const totalExentasTrabajo = afc + exenta25 + getNum('pn_otras_exentas');
   const viv = getNum('pn_vivienda');
   const totalDeduccionesTrabajo = data.total_deducciones_aceptadas !== undefined ? data.total_deducciones_aceptadas : (viv + getNum('pn_prepagada'));
-  const aliviosImputables = data.alivios_procedentes_finales !== undefined ? data.alivios_procedentes_finales : Math.min(totalExentasTrabajo + totalDeduccionesTrabajo, data.limite_conjunto_aplicable_cop || (rentaLiqTrabajo * 0.4));
-  const rentaLiqGravTrabajo = Math.max(0, rentaLiqTrabajo - aliviosImputables);
+  
+  // Casilla 41: Menor entre alivios solicitados de trabajo y el tope legal de 1.340 UVT / 40%
+  const limiteMaxTrabajo = data.limite_conjunto_aplicable_cop !== undefined ? data.limite_conjunto_aplicable_cop : (c34_rentaLiqTrabajo * 0.4);
+  const c41_aliviosLimitados = data.alivios_procedentes_finales !== undefined 
+    ? data.alivios_procedentes_finales 
+    : Math.min(totalExentasTrabajo + totalDeduccionesTrabajo, limiteMaxTrabajo);
+    
+  // Casilla 42 = Casilla 34 - Casilla 41 (Renta Líquida Ordinaria de Trabajo)
+  const c42_rentaLiqOrdTrabajo = Math.max(0, c34_rentaLiqTrabajo - c41_aliviosLimitados);
 
   if (document.getElementById('f210_val_c35')) document.getElementById('f210_val_c35').innerText = formatCOP(afc, false);
   if (document.getElementById('f210_val_c36')) document.getElementById('f210_val_c36').innerText = formatCOP(exenta25, false);
   if (document.getElementById('f210_val_c37')) document.getElementById('f210_val_c37').innerText = formatCOP(totalExentasTrabajo, false);
   if (document.getElementById('f210_val_c38')) document.getElementById('f210_val_c38').innerText = formatCOP(viv, false);
   if (document.getElementById('f210_val_c40')) document.getElementById('f210_val_c40').innerText = formatCOP(totalDeduccionesTrabajo, false);
-  if (document.getElementById('f210_val_c41')) document.getElementById('f210_val_c41').innerText = formatCOP(aliviosImputables, false);
-  if (document.getElementById('f210_val_c42')) document.getElementById('f210_val_c42').innerText = formatCOP(rentaLiqGravTrabajo, false);
+  if (document.getElementById('f210_val_c41')) document.getElementById('f210_val_c41').innerText = formatCOP(c41_aliviosLimitados, false);
+  if (document.getElementById('f210_val_c42')) document.getElementById('f210_val_c42').innerText = formatCOP(c42_rentaLiqOrdTrabajo, false);
 
   // 3. Rentas de Capital
   const rentasCap = getNum('pn_rentas_capital');
   const incrngoCap = getNum('pn_incrngo_capital');
-  const rentaLiqCap = Math.max(0, rentasCap - incrngoCap);
+  const c61_rentaLiqCap = Math.max(0, rentasCap - incrngoCap);
 
   if (document.getElementById('f210_val_c58')) document.getElementById('f210_val_c58').innerText = formatCOP(rentasCap, false);
   if (document.getElementById('f210_val_c59')) document.getElementById('f210_val_c59').innerText = formatCOP(incrngoCap, false);
-  if (document.getElementById('f210_val_c61')) document.getElementById('f210_val_c61').innerText = formatCOP(rentaLiqCap, false);
-  if (document.getElementById('f210_val_c73')) document.getElementById('f210_val_c73').innerText = formatCOP(rentaLiqCap, false);
+  if (document.getElementById('f210_val_c61')) document.getElementById('f210_val_c61').innerText = formatCOP(c61_rentaLiqCap, false);
+  if (document.getElementById('f210_val_c73')) document.getElementById('f210_val_c73').innerText = formatCOP(c61_rentaLiqCap, false);
 
   // 4. Rentas No Laborales
   const rentasNoLab = getNum('pn_rentas_nolaborales');
   const incrngoNoLab = getNum('pn_incrngo_nolaborales');
   const costosNoLab = getNum('pn_costos_nolaborales');
-  const rentaLiqNoLab = Math.max(0, rentasNoLab - incrngoNoLab - costosNoLab);
+  const c78_rentaLiqNoLab = Math.max(0, rentasNoLab - incrngoNoLab - costosNoLab);
 
   if (document.getElementById('f210_val_c74')) document.getElementById('f210_val_c74').innerText = formatCOP(rentasNoLab, false);
   if (document.getElementById('f210_val_c76')) document.getElementById('f210_val_c76').innerText = formatCOP(incrngoNoLab, false);
   if (document.getElementById('f210_val_c77')) document.getElementById('f210_val_c77').innerText = formatCOP(costosNoLab, false);
-  if (document.getElementById('f210_val_c78')) document.getElementById('f210_val_c78').innerText = formatCOP(rentaLiqNoLab, false);
-  if (document.getElementById('f210_val_c90')) document.getElementById('f210_val_c90').innerText = formatCOP(rentaLiqNoLab, false);
+  if (document.getElementById('f210_val_c78')) document.getElementById('f210_val_c78').innerText = formatCOP(c78_rentaLiqNoLab, false);
+  if (document.getElementById('f210_val_c90')) document.getElementById('f210_val_c90').innerText = formatCOP(c78_rentaLiqNoLab, false);
 
   // 5. Deducción 1% Factura Electrónica y Cédula General Consolidada
   const comprasFe = getNum('pn_factura_elec');
@@ -936,14 +943,22 @@ function renderForm210OfficialSheet(data) {
     : Math.round(comprasFe * 0.01);
   if (document.getElementById('f210_val_c28')) document.getElementById('f210_val_c28').innerText = formatCOP(fe1pct, false);
 
-  const totRenLiqGen = rentaLiqTrabajo + rentaLiqCap + rentaLiqNoLab;
-  const rentaLiqGravGen = data.renta_liquida_gravable !== undefined ? data.renta_liquida_gravable : Math.max(0, totRenLiqGen - aliviosImputables - fe1pct);
+  // Casilla 91: Total Renta Líquida Cédula General = C34 (Trabajo) + C61 (Capital) + C78 (No Laboral)
+  const c91_totRenLiqGen = c34_rentaLiqTrabajo + c61_rentaLiqCap + c78_rentaLiqNoLab;
+  // Casilla 92: Total Rentas Exentas y Deducciones Limitadas Cédula General
+  const c92_totAliviosLimitados = c41_aliviosLimitados;
+  // Casilla 93: Renta Líquida Ordinaria Cédula General = C91 - C92
+  const c93_rentaLiqOrdGen = Math.max(0, c91_totRenLiqGen - c92_totAliviosLimitados);
+  // Casilla 97: Renta Líquida Gravable Cédula General = C93 - Casilla 28 (Deducción 1% Facturas)
+  const c97_rentaLiqGravGen = data.renta_liquida_gravable !== undefined 
+    ? data.renta_liquida_gravable 
+    : Math.max(0, c93_rentaLiqOrdGen - fe1pct);
 
-  if (document.getElementById('f210_val_c91')) document.getElementById('f210_val_c91').innerText = formatCOP(totRenLiqGen, false);
-  if (document.getElementById('f210_val_c92')) document.getElementById('f210_val_c92').innerText = formatCOP(aliviosImputables, false);
-  if (document.getElementById('f210_val_c93')) document.getElementById('f210_val_c93').innerText = formatCOP(Math.max(0, totRenLiqGen - aliviosImputables), false);
-  if (document.getElementById('f210_val_c97')) document.getElementById('f210_val_c97').innerText = formatCOP(rentaLiqGravGen, false);
-  if (document.getElementById('f210_val_c111')) document.getElementById('f210_val_c111').innerText = formatCOP(rentaLiqGravGen, false);
+  if (document.getElementById('f210_val_c91')) document.getElementById('f210_val_c91').innerText = formatCOP(c91_totRenLiqGen, false);
+  if (document.getElementById('f210_val_c92')) document.getElementById('f210_val_c92').innerText = formatCOP(c92_totAliviosLimitados, false);
+  if (document.getElementById('f210_val_c93')) document.getElementById('f210_val_c93').innerText = formatCOP(c93_rentaLiqOrdGen, false);
+  if (document.getElementById('f210_val_c97')) document.getElementById('f210_val_c97').innerText = formatCOP(c97_rentaLiqGravGen, false);
+  if (document.getElementById('f210_val_c111')) document.getElementById('f210_val_c111').innerText = formatCOP(c97_rentaLiqGravGen, false);
 
   // 6. Ganancias Ocasionales
   const goBrutas = data.total_ganancias_ocasionales_brutas !== undefined ? data.total_ganancias_ocasionales_brutas : getNum('pn_go_activos');
