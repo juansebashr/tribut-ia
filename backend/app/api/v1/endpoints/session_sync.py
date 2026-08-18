@@ -43,17 +43,18 @@ async def update_session_state(
             tax_year = payload.get("metadata", {}).get("tax_year", current_state.metadata.get("tax_year", 2026))
             custom_uvt = payload.get("metadata", {}).get("custom_uvt", current_state.metadata.get("custom_uvt", 52350.0))
             
+            pn_fields = {k: v for k, v in merged_pn.items() if k in PersonaNaturalInput.model_fields and k not in ("tax_year", "custom_uvt")}
             calc_input = PersonaNaturalInput(
                 tax_year=tax_year,
                 custom_uvt=custom_uvt,
-                **{k: v for k, v in merged_pn.items() if k in PersonaNaturalInput.model_fields}
+                **pn_fields
             )
             res = liquidar_persona_natural(calc_input)
             if "calculation_results" not in payload:
                 payload["calculation_results"] = {}
             payload["calculation_results"]["persona_natural"] = res.model_dump()
         except Exception as e:
-            pass
+            print(f"[ERROR CALCULATING PN]: {e}")
 
     # Extraer y combinar datos de persona jurídica
     merged_pj = dict(current_state.persona_juridica)
@@ -63,17 +64,18 @@ async def update_session_state(
             tax_year = payload.get("metadata", {}).get("tax_year", current_state.metadata.get("tax_year", 2026))
             custom_uvt = payload.get("metadata", {}).get("custom_uvt", current_state.metadata.get("custom_uvt", 52350.0))
             
+            pj_fields = {k: v for k, v in merged_pj.items() if k in PersonaJuridicaInput.model_fields and k not in ("tax_year", "custom_uvt")}
             calc_input = PersonaJuridicaInput(
                 tax_year=tax_year,
                 custom_uvt=custom_uvt,
-                **{k: v for k, v in merged_pj.items() if k in PersonaJuridicaInput.model_fields}
+                **pj_fields
             )
             res = liquidar_persona_juridica(calc_input)
             if "calculation_results" not in payload:
                 payload["calculation_results"] = {}
             payload["calculation_results"]["persona_juridica"] = res.model_dump()
         except Exception as e:
-            pass
+            print(f"[ERROR CALCULATING PJ]: {e}")
 
     updated_state = await session_store.update_state(session_id, payload, source=source)
     return updated_state
