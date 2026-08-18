@@ -178,18 +178,33 @@ function attachCurrencyInputMasks() {
 }
 
 // Inicialización
-document.addEventListener('DOMContentLoaded', () => {
-  loadRules(currentYear);
-  loadBeneficiosCatalog();
+document.addEventListener('DOMContentLoaded', async () => {
   attachCurrencyInputMasks();
-  triggerPnCalc();
-  triggerPjCalc();
+  initCasillaPopovers();
+  renderVisualCalendar();
+  loadBeneficiosCatalog();
   runSimulacionAuditoria();
   runSimulacionSanciones();
-  initCasillaPopovers();
-  consultarVencimientoNit();
-  renderVisualCalendar();
   initLiveSync();
+
+  // Cargar estado de sesión si existe en backend
+  try {
+    const res = await fetch(`/api/v1/session/state?session_id=${currentSessionId}`);
+    if (res.ok) {
+      const state = await res.json();
+      if (state && state.persona_natural && Object.keys(state.persona_natural).length > 0 && state.persona_natural.rentas_trabajo > 0) {
+        applyStateToUi(state, 'api');
+        return;
+      }
+    }
+  } catch (err) {
+    console.warn('No se pudo precargar sesión remota:', err);
+  }
+
+  await loadRules(currentYear);
+  triggerPnCalc();
+  triggerPjCalc();
+  consultarVencimientoNit();
 });
 
 // SIDEBAR TOGGLE
