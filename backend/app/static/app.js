@@ -922,6 +922,9 @@ function renderForm210OfficialSheet(data) {
   if (document.getElementById('f210_val_c58')) document.getElementById('f210_val_c58').innerText = formatCOP(rentasCap, false);
   if (document.getElementById('f210_val_c59')) document.getElementById('f210_val_c59').innerText = formatCOP(incrngoCap, false);
   if (document.getElementById('f210_val_c61')) document.getElementById('f210_val_c61').innerText = formatCOP(c61_rentaLiqCap, false);
+  if (document.getElementById('f210_val_c70')) document.getElementById('f210_val_c70').innerText = formatCOP(0, false);
+  if (document.getElementById('f210_val_c71')) document.getElementById('f210_val_c71').innerText = formatCOP(0, false);
+  if (document.getElementById('f210_val_c72')) document.getElementById('f210_val_c72').innerText = formatCOP(c61_rentaLiqCap, false);
   if (document.getElementById('f210_val_c73')) document.getElementById('f210_val_c73').innerText = formatCOP(c61_rentaLiqCap, false);
 
   // 4. Rentas No Laborales
@@ -934,7 +937,15 @@ function renderForm210OfficialSheet(data) {
   if (document.getElementById('f210_val_c76')) document.getElementById('f210_val_c76').innerText = formatCOP(incrngoNoLab, false);
   if (document.getElementById('f210_val_c77')) document.getElementById('f210_val_c77').innerText = formatCOP(costosNoLab, false);
   if (document.getElementById('f210_val_c78')) document.getElementById('f210_val_c78').innerText = formatCOP(c78_rentaLiqNoLab, false);
+  if (document.getElementById('f210_val_c87')) document.getElementById('f210_val_c87').innerText = formatCOP(0, false);
+  if (document.getElementById('f210_val_c88')) document.getElementById('f210_val_c88').innerText = formatCOP(0, false);
+  if (document.getElementById('f210_val_c89')) document.getElementById('f210_val_c89').innerText = formatCOP(c78_rentaLiqNoLab, false);
   if (document.getElementById('f210_val_c90')) document.getElementById('f210_val_c90').innerText = formatCOP(c78_rentaLiqNoLab, false);
+
+  // Honorarios / Rentas de trabajo sin relación laboral (Casillas 54, 55, 56)
+  if (document.getElementById('f210_val_c54')) document.getElementById('f210_val_c54').innerText = formatCOP(0, false);
+  if (document.getElementById('f210_val_c55')) document.getElementById('f210_val_c55').innerText = formatCOP(0, false);
+  if (document.getElementById('f210_val_c56')) document.getElementById('f210_val_c56').innerText = formatCOP(0, false);
 
   // 5. Deducción 1% Factura Electrónica y Cédula General Consolidada
   const comprasFe = getNum('pn_factura_elec');

@@ -263,6 +263,27 @@ const CASILLAS_INFO = {
     como_llenar: "Cálculo automático: Menor entre (Casilla 49 + 52) y el 40% de la Casilla 46.",
     tope: "40% de la casilla 46 o remanente del límite de 1.340 UVT."
   },
+  "54": {
+    titulo: "Rentas exentas y deducciones no imputables (Honorarios)",
+    art: "Art. 336 E.T. y Art. 1.2.1.20.4 DUT 1625/2016",
+    concepto: "Rentas exentas y deducciones que no fueron imputadas por superar el límite del 40% o 1.340 UVT.",
+    como_llenar: "Exceso de deducciones y exenciones no admitidas en la casilla 53.",
+    tope: "(Casilla 49 + 52) menos Casilla 53."
+  },
+  "55": {
+    titulo: "Compensación por pérdidas (Honorarios)",
+    art: "Art. 147 y 330 E.T.",
+    concepto: "Pérdidas fiscales acumuladas de años gravables anteriores imputables a la subcédula de honorarios.",
+    como_llenar: "Valor de las pérdidas declaradas en años previos sujetas a compensación sin exceder la renta líquida.",
+    tope: "Hasta el valor de la renta líquida ordinaria de la subcédula."
+  },
+  "56": {
+    titulo: "Renta líquida gravable (Honorarios)",
+    art: "Art. 336 E.T.",
+    concepto: "Base gravable neta final correspondiente a honorarios y compensaciones.",
+    como_llenar: "Cálculo automático: Casilla 57 menos Casilla 55.",
+    tope: "Renta gravable definitiva de la subcédula."
+  },
   "57": {
     titulo: "Renta líquida ordinaria (Honorarios sin relación laboral)",
     art: "Art. 336 E.T.",
@@ -348,6 +369,27 @@ const CASILLAS_INFO = {
     concepto: "Alivios procedentes de capital tras aplicar el límite conjunto del 40% y 1.340 UVT.",
     como_llenar: "Cálculo automático: Menor entre (Casilla 65 + 68) y el 40% de la Casilla 61.",
     tope: "40% de la casilla 61 o cupo disponible de 1.340 UVT."
+  },
+  "70": {
+    titulo: "Rentas exentas y deducciones no imputables (Capital)",
+    art: "Art. 336 E.T. y Art. 1.2.1.20.4 DUT 1625/2016",
+    concepto: "Rentas exentas y deducciones de capital rechazadas por superar el límite del 40% o 1.340 UVT.",
+    como_llenar: "(Casilla 65 + 68) menos Casilla 69.",
+    tope: "Exceso de alivios no deducibles."
+  },
+  "71": {
+    titulo: "Compensación por pérdidas (Capital)",
+    art: "Art. 147 y 330 E.T.",
+    concepto: "Compensación de pérdidas fiscales de años anteriores en la cédula de capital.",
+    como_llenar: "Pérdidas acumuladas imputables a la actividad de capital.",
+    tope: "Hasta la renta líquida ordinaria de capital."
+  },
+  "72": {
+    titulo: "Renta líquida gravable (Capital)",
+    art: "Art. 336 E.T.",
+    concepto: "Base gravable neta de rentas de capital tras compensaciones.",
+    como_llenar: "Cálculo automático: Casilla 73 menos Casilla 71.",
+    tope: "Renta gravable final de capital."
   },
   "73": {
     titulo: "Renta líquida ordinaria (Capital)",
@@ -441,6 +483,27 @@ const CASILLAS_INFO = {
     concepto: "Alivios procedentes de rentas no laborales tras aplicar el límite conjunto del 40% y 1.340 UVT.",
     como_llenar: "Cálculo automático: Menor entre (Casilla 82 + 85) y el 40% de la Casilla 78.",
     tope: "40% de la casilla 78 o cupo disponible de 1.340 UVT."
+  },
+  "87": {
+    titulo: "Rentas exentas y deducciones no imputables (No laborales)",
+    art: "Art. 336 E.T. y Art. 1.2.1.20.4 DUT 1625/2016",
+    concepto: "Alivios tributarios no laborales que superan el límite del 40% o 1.340 UVT.",
+    como_llenar: "(Casilla 82 + 85) menos Casilla 86.",
+    tope: "Exceso de deducciones y exenciones."
+  },
+  "88": {
+    titulo: "Compensación por pérdidas (No laborales)",
+    art: "Art. 147 y 330 E.T.",
+    concepto: "Compensación de pérdidas fiscales acumuladas en la cédula no laboral.",
+    como_llenar: "Pérdidas acumuladas a compensar.",
+    tope: "Hasta la renta líquida ordinaria no laboral."
+  },
+  "89": {
+    titulo: "Renta líquida gravable (No laborales)",
+    art: "Art. 336 E.T.",
+    concepto: "Base gravable final de rentas no laborales.",
+    como_llenar: "Cálculo automático: Casilla 90 menos Casilla 88.",
+    tope: "Renta gravable definitiva de la subcédula."
   },
   "90": {
     titulo: "Renta líquida ordinaria (No laborales)",
