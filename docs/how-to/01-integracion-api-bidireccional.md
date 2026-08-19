@@ -77,11 +77,11 @@ print(f"Impuesto calculado en vivo: {state['calculation_results']['persona_natur
 
 ## 3. Inyección Automatizada con el Script del Skill
 
-Puedes usar el script oficial del Skill `colombian-tax-assistant`:
+Puedes usar el script oficial del Skill `declaracion-renta-persona-natural` (incluido en el plugin `colombian-tax-assistant`):
 
 ```bash
 # Inyectar payload consolidado directamente a la sesión activa:
-python skills/colombian-tax-assistant/scripts/inyectar_tributia.py payload_declaracion.json \
+python skills/declaracion-renta-persona-natural/scripts/inyectar_tributia.py payload_declaracion.json \
   --api-url http://localhost:8000 \
   --session-id $SESSION_ID
 ```

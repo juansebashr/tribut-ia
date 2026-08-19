@@ -1,0 +1,13 @@
+{
+  "name": "colombian-tax-assistant",
+  "version": "1.0.0",
+  "description": "Suite de automatización y análisis tributario profesional para Colombia (TributIA)",
+  "author": "TributIA Team",
+  "skills": [
+    {
+      "name": "declaracion-renta-persona-natural",
+      "path": "../skills/declaracion-renta-persona-natural",
+      "description": "Analiza soportes contables, extrae transacciones, concilia exógena DIAN y liquida la Renta Persona Natural (Formulario 210)."
+    }
+  ]
+}

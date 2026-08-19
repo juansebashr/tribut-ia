@@ -3,8 +3,8 @@ import sys
 from pathlib import Path
 
 # Añadir scripts del skill al sys.path para pruebas
-SKILL_SCRIPTS_DIR = Path(__file__).resolve().parent.parent.parent / "skills" / "colombian-tax-assistant" / "scripts"
-SKILL_TEMPLATES_DIR = Path(__file__).resolve().parent.parent.parent / "skills" / "colombian-tax-assistant" / "templates"
+SKILL_SCRIPTS_DIR = Path(__file__).resolve().parent.parent.parent / "skills" / "declaracion-renta-persona-natural" / "scripts"
+SKILL_TEMPLATES_DIR = Path(__file__).resolve().parent.parent.parent / "skills" / "declaracion-renta-persona-natural" / "templates"
 sys.path.insert(0, str(SKILL_SCRIPTS_DIR))
 
 from consolidar_transacciones import consolidar_csv_a_payload
