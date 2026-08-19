@@ -114,3 +114,32 @@ def test_ui_alias_routes():
     res = client.get("/api/v1/ui/state?session_id=default")
     assert res.status_code == 200
     assert "session_id" in res.json()
+
+
+def test_session_sync_header_resolution():
+    """Verifica la resolución de sesión mediante el Header HTTP 'X-Session-ID'."""
+    payload = {
+        "metadata": {"nombre": "TEST VIA HEADER"},
+        "persona_natural": {"rentas_trabajo": 333000000.0}
+    }
+    # Enviar POST con Header X-Session-ID
+    post_res = client.post("/api/v1/session/state", headers={"X-Session-ID": "ses_header_123"}, json=payload)
+    assert post_res.status_code == 200
+    assert post_res.json()["session_id"] == "ses_header_123"
+    assert post_res.json()["metadata"]["nombre"] == "TEST VIA HEADER"
+
+    # Consultar con Header X-Session-ID
+    get_res = client.get("/api/v1/session/state", headers={"X-Session-ID": "ses_header_123"})
+    assert get_res.status_code == 200
+    assert get_res.json()["session_id"] == "ses_header_123"
+    assert get_res.json()["persona_natural"]["rentas_trabajo"] == 333000000.0
+
+
+def test_session_sync_cookie_auto_provisioning():
+    """Verifica que clientes sin header o query reciban automáticamente un UUID seguro en la cookie tributia_sid."""
+    res = client.get("/api/v1/session/current")
+    assert res.status_code == 200
+    data = res.json()
+    assert data["session_id"].startswith("ses_")
+    assert data["auth_mode"] == "header_or_cookie"
+    assert "tributia_sid" in res.cookies

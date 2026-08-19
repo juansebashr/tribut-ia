@@ -1,7 +1,8 @@
 import asyncio
 import json
+import uuid
 from typing import Optional, Dict, Any
-from fastapi import APIRouter, Query, Request, Body, HTTPException
+from fastapi import APIRouter, Query, Header, Request, Response, Body, Depends, HTTPException
 from fastapi.responses import StreamingResponse
 from app.services.session_store import session_store, SessionState
 from app.models.persona_natural import PersonaNaturalInput
@@ -12,26 +13,91 @@ from app.services.liquidacion_pj import liquidar_persona_juridica
 router = APIRouter()
 
 
-@router.get("/state", response_model=SessionState, summary="Obtener estado actual de la sesión (UI/API)")
-async def get_session_state(session_id: str = Query("default", description="ID único de la sesión")):
+async def resolve_session_id(
+    request: Request,
+    response: Response,
+    x_session_id: Optional[str] = Header(None, alias="X-Session-ID"),
+    session_id: Optional[str] = Query(None, description="ID de sesión opcional en URL")
+) -> str:
     """
-    Retorna el estado completo actual de la interfaz web/sesión:
+    Resolución unificada de ID de Sesión (Dual-Mode):
+    1. Header HTTP 'X-Session-ID' (Scripts CLI, Python, cURL, Agentes IA)
+    2. Query Param '?session_id=...' (Enlaces directos o tests)
+    3. Cookie 'tributia_sid' del navegador (Navegación transparente y SSE)
+    4. Auto-generación de UUID criptográfico si es un usuario nuevo
+    """
+    # 1. Header HTTP
+    if x_session_id and x_session_id.strip():
+        sid = x_session_id.strip()
+        response.set_cookie(key="tributia_sid", value=sid, max_age=86400, samesite="lax", httponly=False)
+        return sid
+
+    # 2. Query param
+    if session_id and session_id.strip():
+        sid = session_id.strip()
+        response.set_cookie(key="tributia_sid", value=sid, max_age=86400, samesite="lax", httponly=False)
+        return sid
+
+    # 3. Cookie de navegador
+    cookie_sid = request.cookies.get("tributia_sid")
+    if cookie_sid and cookie_sid.strip():
+        return cookie_sid.strip()
+
+    # 4. Auto-generación de UUIDv4 seguro
+    new_sid = f"ses_{uuid.uuid4().hex[:16]}"
+    response.set_cookie(
+        key="tributia_sid",
+        value=new_sid,
+        max_age=86400,  # 1 día de TTL
+        samesite="lax",
+        httponly=False
+    )
+    return new_sid
+
+
+@router.get("/current", summary="Consultar o inicializar ID de sesión activa")
+async def get_current_session_info(
+    response: Response,
+    session_id: str = Depends(resolve_session_id)
+):
+    """
+    Retorna el ID de sesión asignado al cliente actual vía Cookie o Header.
+    """
+    response.set_cookie(
+        key="tributia_sid",
+        value=session_id,
+        max_age=86400,
+        samesite="lax",
+        httponly=False
+    )
+    return {
+        "session_id": session_id,
+        "ttl_seconds": 86400,
+        "auth_mode": "header_or_cookie"
+    }
+
+
+@router.get("/state", response_model=SessionState, summary="Obtener estado actual de la sesión")
+async def get_session_state(
+    session_id: str = Depends(resolve_session_id)
+):
+    """
+    Retorna el estado completo actual de la sesión resuelta:
     metadatos, datos de Persona Natural, Persona Jurídica y cálculos.
     """
     return await session_store.get_state(session_id)
 
 
-@router.post("/state", response_model=SessionState, summary="Inyectar / Actualizar estado en la UI")
+@router.post("/state", response_model=SessionState, summary="Inyectar / Actualizar estado en la sesión")
 async def update_session_state(
     request: Request,
-    session_id: str = Query("default", description="ID único de la sesión"),
-    payload: Dict[str, Any] = Body(..., description="Estado parcial o total a inyectar en la UI"),
-    source: str = Query("api", description="Origen de la actualización ('api' o 'ui')")
+    payload: Dict[str, Any] = Body(..., description="Estado parcial o total a inyectar en la sesión"),
+    source: str = Query("api", description="Origen de la actualización ('api' o 'ui')"),
+    session_id: str = Depends(resolve_session_id)
 ):
     """
     Inyecta datos en la sesión activa. Si la interfaz web está abierta con esta sesión,
     recibirá los datos inmediatamente por SSE (Server-Sent Events) y actualizará la pantalla.
-    Además, ejecuta automáticamente los cálculos del motor tributario si se envían datos de PN o PJ.
     """
     current_state = await session_store.get_state(session_id)
     
@@ -81,14 +147,14 @@ async def update_session_state(
     return updated_state
 
 
-@router.get("/events", summary="Stream de eventos en tiempo real (SSE para la UI)")
+@router.get("/events", summary="Stream de eventos en tiempo real (SSE)")
 async def session_events_stream(
     request: Request,
-    session_id: str = Query("default", description="ID único de la sesión a escuchar")
+    session_id: str = Depends(resolve_session_id)
 ):
     """
     Canal Server-Sent Events (SSE) al que se conecta el navegador web para recibir
-    notificaciones en vivo cuando un cliente externo o Agente IA actualiza los datos.
+    notificaciones en vivo de su sesión específica vía Redis Pub/Sub.
     """
     queue = await session_store.subscribe(session_id)
 
@@ -99,11 +165,9 @@ async def session_events_stream(
         
         try:
             while True:
-                # Comprobar desconexión del cliente
                 if await request.is_disconnected():
                     break
                 try:
-                    # Esperar hasta 20s por un nuevo mensaje o enviar ping keep-alive
                     msg = await asyncio.wait_for(queue.get(), timeout=20.0)
                     if isinstance(msg, str):
                         yield msg
@@ -126,8 +190,10 @@ async def session_events_stream(
 
 
 @router.post("/reset", response_model=SessionState, summary="Restablecer estado de la sesión")
-async def reset_session(session_id: str = Query("default", description="ID único de la sesión")):
+async def reset_session(
+    session_id: str = Depends(resolve_session_id)
+):
     """
-    Restablece todos los datos de la sesión a sus valores iniciales por defecto.
+    Restablece todos los datos de la sesión actual a sus valores iniciales por defecto.
     """
     return await session_store.reset_state(session_id)

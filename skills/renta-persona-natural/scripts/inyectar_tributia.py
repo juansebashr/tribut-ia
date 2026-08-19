@@ -15,14 +15,17 @@ from pathlib import Path
 from consolidar_transacciones import consolidar_csv_a_payload
 
 
-def inyectar_a_tributia(payload: dict, api_url: str = "http://localhost:8000"):
-    url = f"{api_url.rstrip('/')}/api/v1/session/state?session_id=default&source=api"
+def inyectar_a_tributia(payload: dict, api_url: str = "http://localhost:8000", session_id: str = "default"):
+    url = f"{api_url.rstrip('/')}/api/v1/session/state?source=api"
     data_bytes = json.dumps(payload).encode("utf-8")
 
     req = urllib.request.Request(
         url,
         data=data_bytes,
-        headers={"Content-Type": "application/json"}
+        headers={
+            "Content-Type": "application/json",
+            "X-Session-ID": session_id
+        }
     )
 
     try:
@@ -54,6 +57,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Inyecta liquidación a TributIA API")
     parser.add_argument("input_file", help="Ruta a transacciones_depuradas.csv o payload.json")
     parser.add_argument("--api-url", default="http://localhost:8000", help="URL base de TributIA")
+    parser.add_argument("--session-id", default="default", help="ID de la sesión (header X-Session-ID)")
     parser.add_argument("--nombre", default="", help="Nombre del declarante")
     parser.add_argument("--nit", default="", help="NIT del declarante")
 
@@ -75,7 +79,7 @@ if __name__ == "__main__":
             payload = json.load(f)
 
     try:
-        resp = inyectar_a_tributia(payload, api_url=args.api_url)
+        resp = inyectar_a_tributia(payload, api_url=args.api_url, session_id=args.session_id)
         print("\n=======================================================")
         print("  [OK] LIQUIDACIÓN INYECTADA EN TRIBUTIA EN VIVO")
         print("=======================================================")

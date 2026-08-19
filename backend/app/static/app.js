@@ -110,6 +110,38 @@ function hasEnteredUserData() {
   return (rt > 0 && rt !== 120000000) || rc > 0 || rnl > 0 || (pat > 0 && pat !== 300000000);
 }
 
+function updateSessionBadgeUi() {
+  const el = document.getElementById('session-active-id-display');
+  if (el) {
+    el.innerText = currentSessionId;
+    el.title = `Sesión: ${currentSessionId}`;
+  }
+}
+
+function copySessionIdToClipboard() {
+  navigator.clipboard.writeText(currentSessionId).then(() => {
+    showToast(`✓ ID de sesión copiado: ${currentSessionId}`, 'success', 2500);
+  });
+}
+
+function iniciarNuevaSesion() {
+  const doNew = () => {
+    const newId = `ses_${Math.random().toString(36).substring(2, 10)}${Math.random().toString(36).substring(2, 10)}`;
+    window.location.search = `?session_id=${newId}`;
+  };
+
+  if (hasEnteredUserData()) {
+    showConfirmModal({
+      title: '¿Iniciar nueva declaración limpia?',
+      msg: 'Se creará un nuevo ID de sesión en blanco. La sesión actual permanecerá guardada en Redis.',
+      confirmText: 'Crear nueva sesión',
+      onConfirm: doNew
+    });
+  } else {
+    doNew();
+  }
+}
+
 // Formateador de moneda tradicional colombiano (Separador de millones: ', Separador de miles: .)
 function formatCOP(amount, includeSymbol = true) {
   if (amount === undefined || amount === null || isNaN(amount)) return includeSymbol ? '$0' : '0';
@@ -280,11 +312,28 @@ document.addEventListener('DOMContentLoaded', async () => {
   loadBeneficiosCatalog();
   runSimulacionAuditoria();
   runSimulacionSanciones();
+
+  // Resolver ID de sesión activa (Cookie, Header o URL)
+  try {
+    const infoRes = await fetch('/api/v1/session/current', {
+      headers: currentSessionId && currentSessionId !== 'default' ? { 'X-Session-ID': currentSessionId } : {}
+    });
+    if (infoRes.ok) {
+      const info = await infoRes.json();
+      if (info && info.session_id && (!urlParams.get('session_id') || urlParams.get('session_id') === 'default')) {
+        currentSessionId = info.session_id;
+      }
+    }
+  } catch (err) {}
+
+  updateSessionBadgeUi();
   initLiveSync();
 
   // Cargar estado de sesión si existe en backend
   try {
-    const res = await fetch(`/api/v1/session/state?session_id=${currentSessionId}`);
+    const res = await fetch(`/api/v1/session/state`, {
+      headers: { 'X-Session-ID': currentSessionId }
+    });
     if (res.ok) {
       const state = await res.json();
       if (state && state.persona_natural && Object.keys(state.persona_natural).length > 0 && (state.persona_natural.rentas_trabajo > 0 || state.persona_natural.patrimonio_bruto > 0)) {
