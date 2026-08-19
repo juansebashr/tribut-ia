@@ -2183,7 +2183,7 @@ function switchJsonModalTab(tab) {
         aporte_pension_obligatorio: getNum('pn_pension') || 28000000
       }
     };
-    document.getElementById('snippet-curl-post').innerText = `curl -X POST http://localhost:8000/api/v1/session/state \\\n  -H "Content-Type: application/json" \\\n  -d '${JSON.stringify(samplePayload, null, 2)}'`;
+    document.getElementById('snippet-curl-post').innerText = `curl -X POST http://localhost:8000/api/v1/session/state?source=api \\\n  -H "Content-Type: application/json" \\\n  -H "X-Session-ID: ${currentSessionId}" \\\n  -d '${JSON.stringify(samplePayload, null, 2)}'`;
   }
 }
 

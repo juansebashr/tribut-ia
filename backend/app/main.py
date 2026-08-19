@@ -7,13 +7,19 @@ from app.api.v1.router import api_router
 from app.core.rules_engine.loader import load_all_rules
 
 app = FastAPI(
-    title="TributIA API - Motor Tributario Colombiano",
+    title="TributIA API - Suite Tributaria Colombiana & Agentes IA",
     description=(
+        "## TributIA - Suite Tributaria DIAN & Motor de Liquidación en Tiempo Real\n\n"
         "API y plataforma para cálculo, planeación y liquidación automatizada del impuesto sobre la renta "
-        "en Colombia para Personas Naturales (Cédula General) y Personas Jurídicas (Formulario 110 & Tasa Mínima TTD), "
-        "con motor de reglas tributarias declarativo y trazabilidad paso a paso para contadores y agentes de IA."
+        "en Colombia para Personas Naturales (Cédula General, Ganancias Ocasionales, Formulario 210) "
+        "y Personas Jurídicas (Formulario 110 & Tasa Mínima TTD).\n\n"
+        "### 🔒 Control de Acceso & Aislamiento de Sesiones en Redis:\n"
+        "- Para sincronizar datos con una sesión específica o la pantalla en vivo de un usuario, "
+        "incluye la cabecera HTTP **`X-Session-ID: <session_id>`** (o el parámetro de consulta `?session_id=...`).\n"
+        "- Si el cliente es un navegador web, se auto-emite de forma transparente una cookie `tributia_sid` con un UUID seguro.\n"
+        "- Todas las mutaciones emitidas por la API se transmiten en vivo a la interfaz gráfica vía Redis Pub/Sub y Server-Sent Events (`/api/v1/session/events`)."
     ),
-    version="1.0.0",
+    version="1.2.0",
     docs_url="/docs",
     redoc_url="/redoc"
 )

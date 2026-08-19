@@ -89,10 +89,13 @@ Si el reporte de conciliacion contiene partidas `SOLO_EN_EXOGENA` o `DIFERENCIA_
    ```bash
    python skills/renta-persona-natural/scripts/consolidar_transacciones.py transacciones_depuradas.csv --year 2025 --uvt 49799 --nombre "NOMBRE" --nit "NIT" --reconciliation estado_conciliacion.json --out payload_declaracion.json
    ```
-2. Enviar los valores a la aplicacion web de TributIA:
+2. Enviar los valores a la aplicacion web de TributIA con el ID de sesion correspondiente (usando el header `X-Session-ID` o argumento `--session-id`):
    ```bash
-   python skills/renta-persona-natural/scripts/inyectar_tributia.py payload_declaracion.json --api-url http://localhost:8000
+   # Inyectar en la sesion activa del usuario (ej. ses_9b8f2c3d o default):
+   python skills/renta-persona-natural/scripts/inyectar_tributia.py payload_declaracion.json --api-url http://localhost:8000 --session-id ses_9b8f2c3d
    ```
+   > **Nota de Control de Acceso**: La API utiliza la cabecera HTTP `X-Session-ID: <session_id>` para dirigir los datos a la sesion exacta en Redis. Si no se especifica, se utiliza `default`.
+
 3. Presentar al contribuyente el resumen con: Renta Liquida Gravable, Tarifa Marginal, Impuesto a Cargo, Retenciones aplicadas, Saldo Neto a Pagar o a Favor, y estado de conciliacion DIAN.
 
 ---

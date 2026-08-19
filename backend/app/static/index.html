@@ -2108,21 +2108,91 @@
              ================================================================= -->
         <div id="pane-docs" class="module-pane">
           <div class="card" style="margin-bottom: 20px;">
-            <div class="card-header">
-              <h2 class="card-title">🤖 Integración con Agentes de Inteligencia Artificial (Function Calling / Skill)</h2>
+            <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
+              <h2 class="card-title">🤖 Integración con Agentes de Inteligencia Artificial & API REST</h2>
+              <a href="/docs" target="_blank" class="btn btn-outline btn-sm" style="text-decoration: none;">
+                <span>📖</span> Abrir Swagger UI Oficial
+              </a>
             </div>
             <div class="card-body" style="font-size: 13.5px; line-height: 1.6;">
               <p style="margin-bottom: 14px; color: var(--text-secondary);">
-                TributIA expone una API estandarizada para que <strong>Agentes de IA</strong> extraigan datos de certificados tributarios (Formulario 220, PILA, extractos bancarios, escrituras notariales) y generen automáticamente la liquidación y el Formulario 210 de la DIAN.
+                TributIA expone una <strong>API RESTful bidireccional en tiempo real</strong> respaldada por Redis y Server-Sent Events (SSE). Permite que <strong>Agentes de IA</strong>, scripts CLI o integraciones empresariales extraigan datos de documentos tributarios (Formulario 220, extractos bancarios, facturas electrónicas) e interactúen en vivo con la interfaz visual.
               </p>
 
-              <h4 style="font-weight: 700; margin: 16px 0 6px;">Prompt del Agente Tributario:</h4>
-              <pre style="background: #0f172a; color: #f8fafc; padding: 12px; border-radius: 8px; font-size: 12px; line-height: 1.5; font-family: var(--font-mono); overflow-x: auto;">
-Eres un Contador Tributario Colombiano experto.
-1. Recibe los certificados (Formulario 220, PILA, extractos bancarios, retenciones en la fuente).
-2. Invoca POST /api/v1/calculate/persona-natural/calculate con tax_year=2026.
-3. Evalúa deducciones por dependientes, compras con factura electrónica y Ganancias Ocasionales.
-4. Genera la declaración oficial lista para el Formulario 210 de la DIAN.
+              <!-- CONTROL DE ACCESO & HEADERS -->
+              <div style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px; padding: 14px; margin-bottom: 20px;">
+                <div style="font-weight: 800; color: #166534; font-size: 14px; margin-bottom: 6px; display: flex; align-items: center; gap: 6px;">
+                  <span>🔒</span> Control de Acceso & Aislamiento de Sesión por Cabecera HTTP:
+                </div>
+                <p style="font-size: 12.5px; color: #14532d; margin: 0 0 8px 0;">
+                  Para enviar o consultar datos en una sesión específica (y ver reflejados los cambios en vivo en la pantalla del usuario), incluye la cabecera estándar <code>X-Session-ID</code>:
+                </p>
+                <pre style="background: #0f172a; color: #38bdf8; padding: 10px; border-radius: 6px; font-size: 12px; font-family: var(--font-mono); margin: 0;">X-Session-ID: ses_9b8f2c3d...</pre>
+              </div>
+
+              <!-- ENDPOINTS PRINCIPALES -->
+              <h4 style="font-weight: 800; color: #0b3b60; margin: 20px 0 10px;">📡 Endpoints Principales de la API:</h4>
+              
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 12px; margin-bottom: 20px;">
+                <div style="border: 1px solid var(--border-subtle); border-radius: 6px; padding: 12px; background: #fafafa;">
+                  <div style="font-weight: 700; font-family: var(--font-mono); font-size: 12px; color: #059669; margin-bottom: 4px;">POST /api/v1/session/state</div>
+                  <div style="font-size: 12px; color: var(--text-secondary);">Inyecta datos tributarios en la sesión y los emite en vivo a la pantalla web vía Redis Pub/Sub.</div>
+                </div>
+
+                <div style="border: 1px solid var(--border-subtle); border-radius: 6px; padding: 12px; background: #fafafa;">
+                  <div style="font-weight: 700; font-family: var(--font-mono); font-size: 12px; color: #2563eb; margin-bottom: 4px;">GET /api/v1/session/state</div>
+                  <div style="font-size: 12px; color: var(--text-secondary);">Obtiene el estado completo actual (Persona Natural, Jurídica y cálculos del F210).</div>
+                </div>
+
+                <div style="border: 1px solid var(--border-subtle); border-radius: 6px; padding: 12px; background: #fafafa;">
+                  <div style="font-weight: 700; font-family: var(--font-mono); font-size: 12px; color: #7c3aed; margin-bottom: 4px;">GET /api/v1/session/events</div>
+                  <div style="font-size: 12px; color: var(--text-secondary);">Stream SSE (Server-Sent Events) para suscripción en vivo a cambios de estado.</div>
+                </div>
+
+                <div style="border: 1px solid var(--border-subtle); border-radius: 6px; padding: 12px; background: #fafafa;">
+                  <div style="font-weight: 700; font-family: var(--font-mono); font-size: 12px; color: #d97706; margin-bottom: 4px;">POST /api/v1/calculate/persona-natural/calculate</div>
+                  <div style="font-size: 12px; color: var(--text-secondary);">Motor de cálculo puro sin estado para Formulario 210, deducciones y auditoría.</div>
+                </div>
+              </div>
+
+              <!-- EJEMPLO PYTHON & CURL -->
+              <h4 style="font-weight: 800; color: #0b3b60; margin: 20px 0 10px;">💻 Ejemplo de Inyección desde Python (Agente IA):</h4>
+              <pre style="background: #0f172a; color: #f8fafc; padding: 14px; border-radius: 8px; font-size: 12px; line-height: 1.5; font-family: var(--font-mono); overflow-x: auto;">
+import requests
+
+api_url = "http://localhost:8000/api/v1/session/state?source=api"
+headers = {
+    "Content-Type": "application/json",
+    "X-Session-ID": "ses_9b8f2c3d"  # ID de sesión activo en la UI
+}
+
+payload = {
+    "metadata": {
+        "nombre": "CARLOS ALBERTO PEREZ",
+        "nit": "1022440206",
+        "tax_year": 2025
+    },
+    "persona_natural": {
+        "rentas_trabajo": 206083000,
+        "aporte_salud_obligatorio": 8243320,
+        "aporte_pension_obligatorio": 8243320,
+        "medicina_prepagada_anual": 7200000,
+        "compras_factura_electronica": 15000000
+    }
+}
+
+response = requests.post(api_url, json=payload, headers=headers)
+print("Estado actualizado en vivo:", response.json())
+              </pre>
+
+              <!-- INSTRUCCIÓN SYSTEM PROMPT PARA AGENTES -->
+              <h4 style="font-weight: 800; color: #0b3b60; margin: 20px 0 10px;">🧠 System Prompt para Agentes Autónomos:</h4>
+              <pre style="background: #0f172a; color: #a5f3fc; padding: 14px; border-radius: 8px; font-size: 12px; line-height: 1.5; font-family: var(--font-mono); overflow-x: auto;">
+Eres un Asistente Contador Tributario en Colombia.
+1. Procesa los certificados fiscales del declarante (Formulario 220, PILA, extractos bancarios).
+2. Genera el payload estructurado con los valores depurados por cédula.
+3. Envía un POST a /api/v1/session/state incluyendo la cabecera 'X-Session-ID: &lt;session_id&gt;'.
+4. La interfaz web de TributIA reflejará inmediatamente las casillas oficiales del Formulario 210.
               </pre>
             </div>
           </div>
@@ -2247,7 +2317,7 @@ Eres un Contador Tributario Colombiano experto.
           <pre id="snippet-curl-post" style="background: #0f172a; color: #38bdf8; padding: 10px; border-radius: 6px; font-size: 11px; font-family: var(--font-mono); overflow-x: auto; white-space: pre-wrap; margin: 0 0 10px 0;"></pre>
           
           <div style="font-size: 11.5px; font-weight: 700; color: #1e3a8a; margin-bottom: 4px;">2. Leer el estado actual de la pantalla (cURL):</div>
-          <pre style="background: #0f172a; color: #38bdf8; padding: 10px; border-radius: 6px; font-size: 11px; font-family: var(--font-mono); overflow-x: auto; white-space: pre-wrap; margin: 0;">curl -s http://localhost:8000/api/v1/session/state</pre>
+          <pre style="background: #0f172a; color: #38bdf8; padding: 10px; border-radius: 6px; font-size: 11px; font-family: var(--font-mono); overflow-x: auto; white-space: pre-wrap; margin: 0;">curl -s http://localhost:8000/api/v1/session/state -H "X-Session-ID: ses_9b8f2c3d"</pre>
         </div>
       </div>
     </div>
