@@ -1,5 +1,5 @@
 ---
-name: renta-persona-natural
+name: colombian-tax-assistant
 description: Use when analyzing bank statements, tax certificates, or financial documents to calculate, audit, and file individual income tax (Renta Personas Naturales - Formulario 210) for Colombian tax residents.
 ---
 
@@ -49,7 +49,7 @@ Al iniciar el analisis del directorio, verificar la presencia de dos documentos 
 
 Si existe el archivo de Informacion Exogena, ejecutar el motor de conciliacion:
 ```bash
-python skills/renta-persona-natural/scripts/conciliar_exogena.py transacciones_depuradas.csv "DIAN - Informacion exogena 2025.xlsx" --facturas "DIAN - Facturas electronicas 2025.xlsx" --out-csv conciliacion_exogena.csv --out-json estado_conciliacion.json
+python skills/colombian-tax-assistant/scripts/conciliar_exogena.py transacciones_depuradas.csv "DIAN - Informacion exogena 2025.xlsx" --facturas "DIAN - Facturas electronicas 2025.xlsx" --out-csv conciliacion_exogena.csv --out-json estado_conciliacion.json
 ```
 El script clasifica cada partida en:
 - `MATCH_EXACTO`: Coincide el NIT y el valor reportado por el tercero.
@@ -87,12 +87,12 @@ Si el reporte de conciliacion contiene partidas `SOLO_EN_EXOGENA` o `DIFERENCIA_
 
 1. Consolidar el CSV validado con el estado de conciliacion:
    ```bash
-   python skills/renta-persona-natural/scripts/consolidar_transacciones.py transacciones_depuradas.csv --year 2025 --uvt 49799 --nombre "NOMBRE" --nit "NIT" --reconciliation estado_conciliacion.json --out payload_declaracion.json
+   python skills/colombian-tax-assistant/scripts/consolidar_transacciones.py transacciones_depuradas.csv --year 2025 --uvt 49799 --nombre "NOMBRE" --nit "NIT" --reconciliation estado_conciliacion.json --out payload_declaracion.json
    ```
 2. Enviar los valores a la aplicacion web de TributIA con el ID de sesion correspondiente (usando el header `X-Session-ID` o argumento `--session-id`):
    ```bash
    # Inyectar en la sesion activa del usuario (ej. ses_9b8f2c3d o default):
-   python skills/renta-persona-natural/scripts/inyectar_tributia.py payload_declaracion.json --api-url http://localhost:8000 --session-id ses_9b8f2c3d
+   python skills/colombian-tax-assistant/scripts/inyectar_tributia.py payload_declaracion.json --api-url http://localhost:8000 --session-id ses_9b8f2c3d
    ```
    > **Nota de Control de Acceso**: La API utiliza la cabecera HTTP `X-Session-ID: <session_id>` para dirigir los datos a la sesion exacta en Redis. Si no se especifica, se utiliza `default`.
 
