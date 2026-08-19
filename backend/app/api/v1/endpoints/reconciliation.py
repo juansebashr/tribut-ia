@@ -1,7 +1,7 @@
 import csv
 import io
 import re
-from typing import List, Dict, Any, Optional
+from typing import List, Dict, Any, Optional, Tuple
 from fastapi import APIRouter, UploadFile, File, HTTPException, Body
 from fastapi.responses import PlainTextResponse
 from pydantic import BaseModel, Field
