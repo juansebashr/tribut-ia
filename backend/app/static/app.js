@@ -477,7 +477,8 @@ function consultarVencimientoNit() {
   const last1 = cleanNit.length >= 1 ? cleanNit.slice(-1) : cleanNit;
 
   const vencimientos = config.calcularVencimiento(rawNit, currentYear);
-  const hoy = new Date("2026-08-14T00:00:00");
+  const hoy = new Date();
+  hoy.setHours(0, 0, 0, 0);
 
   let html = `
     <div class="calendar-result-card">
@@ -603,7 +604,8 @@ function renderTimelineGrid(items) {
     return;
   }
 
-  const hoy = new Date("2026-08-14T00:00:00");
+  const hoy = new Date();
+  hoy.setHours(0, 0, 0, 0);
   let html = '';
 
   items.forEach((item, idx) => {
@@ -704,10 +706,14 @@ function renderVisualCalendar() {
     container.appendChild(cell);
   }
 
-  // Días del mes actual
+  const realToday = new Date();
   for (let d = 1; d <= daysInMonth; d++) {
     const cell = document.createElement('div');
-    const isToday = (currentCalYear === 2026 && currentCalMonth === 8 && d === 14);
+    const isToday = (
+      currentCalYear === realToday.getFullYear() &&
+      currentCalMonth === (realToday.getMonth() + 1) &&
+      d === realToday.getDate()
+    );
     cell.className = isToday ? 'calendar-day-cell today' : 'calendar-day-cell';
     
     let cellContent = `<span class="calendar-day-num">${d}</span>`;
