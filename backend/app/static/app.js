@@ -1864,9 +1864,21 @@ function renderRulesTab() {
 }
 
 // AUDIT MODAL
-function openAuditModal(type) {
-  const result = type === 'pn' ? lastPnResult : lastPjResult;
-  if (!result || !result.audit_trace) return;
+async function openAuditModal(type) {
+  let result = type === 'pn' ? lastPnResult : lastPjResult;
+  if (!result || !result.audit_trace || result.audit_trace.length === 0) {
+    if (type === 'pn') {
+      await runPnCalc();
+      result = lastPnResult;
+    } else {
+      await runPjCalc();
+      result = lastPjResult;
+    }
+  }
+  if (!result || !result.audit_trace || result.audit_trace.length === 0) {
+    showToast('Realiza un cálculo primero para ver la trazabilidad legal', 'info');
+    return;
+  }
 
   const modal = document.getElementById('audit-modal');
   const title = document.getElementById('audit-modal-title');
