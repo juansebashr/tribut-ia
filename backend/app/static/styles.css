@@ -1881,3 +1881,194 @@ body {
     outline: none;
   }
 }
+
+/* =========================================================================
+   ESTILOS: SPREADSHEET FISCAL & CONCILIACIÓN EXÓGENA (F210)
+   ========================================================================= */
+.ephemeral-privacy-notice {
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: var(--radius-md);
+  padding: 12px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.reconciliation-toolbar-card {
+  background: #ffffff;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  box-shadow: var(--shadow-sm);
+}
+
+.reconciliation-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 12px;
+}
+
+.reconcile-kpi-card {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+}
+
+.reconcile-kpi-card.accent-blue { border-left: 4px solid #2563eb; }
+.reconcile-kpi-card.accent-emerald { border-left: 4px solid #059669; }
+.reconcile-kpi-card.accent-amber { border-left: 4px solid #d97706; }
+.reconcile-kpi-card.accent-rose { border-left: 4px solid #e11d48; }
+
+.reconcile-kpi-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.reconcile-kpi-val {
+  font-size: 20px;
+  font-weight: 900;
+  font-family: var(--font-mono);
+  color: #0b3b60;
+  margin: 2px 0;
+}
+
+.reconcile-kpi-sub {
+  font-size: 11px;
+  color: #64748b;
+}
+
+.reconciliation-error-panel {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: var(--radius-md);
+  padding: 12px 16px;
+  margin-top: 12px;
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+.spreadsheet-table-container {
+  overflow-x: auto;
+  max-height: 65vh;
+}
+
+.spreadsheet-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 12px;
+}
+
+.spreadsheet-table thead th {
+  position: sticky;
+  top: 0;
+  background: #0b3b60;
+  color: #ffffff;
+  font-weight: 700;
+  padding: 8px 10px;
+  text-align: left;
+  border-right: 1px solid #1e4b7a;
+  border-bottom: 2px solid #072a46;
+  font-size: 11.5px;
+  white-space: nowrap;
+  z-index: 10;
+}
+
+.spreadsheet-table tbody td {
+  padding: 7px 10px;
+  border-bottom: 1px solid #e2e8f0;
+  border-right: 1px solid #f1f5f9;
+  color: #1e293b;
+  white-space: nowrap;
+}
+
+.spreadsheet-table tbody tr:hover {
+  background-color: #f1f5f9 !important;
+  cursor: pointer;
+}
+
+.spreadsheet-table tr.row-match {
+  background-color: #f0fdf4;
+}
+
+.spreadsheet-table tr.row-justified {
+  background-color: #fffbeb;
+}
+
+.spreadsheet-table tr.row-solo-cert {
+  background-color: #fefce8;
+}
+
+.spreadsheet-table tr.row-alert {
+  background-color: #fff1f2;
+}
+
+.reconcile-status-badge {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 10.5px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.reconcile-status-badge.status-match {
+  background: #dcfce7;
+  color: #15803d;
+  border: 1px solid #bbf7d0;
+}
+
+.reconcile-status-badge.status-justified {
+  background: #fef3c7;
+  color: #b45309;
+  border: 1px solid #fde68a;
+}
+
+.reconcile-status-badge.status-solo-cert {
+  background: #e0f2fe;
+  color: #0369a1;
+  border: 1px solid #bae6fd;
+}
+
+.reconcile-status-badge.status-alert {
+  background: #fee2e2;
+  color: #b91c1c;
+  border: 1px solid #fca5a5;
+}
+
+.reconcile-detail-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.reconcile-detail-field {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  padding: 8px 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.reconcile-detail-field .detail-label {
+  font-size: 10.5px;
+  font-weight: 700;
+  color: #64748b;
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+
+.reconcile-detail-field .detail-val {
+  font-size: 13px;
+  color: #0f172a;
+}
+

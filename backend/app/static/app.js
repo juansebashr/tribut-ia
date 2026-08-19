@@ -196,6 +196,11 @@ const MODULE_METADATA = {
     title: 'Tarifa Marginal Progresiva & Termómetro de Brackets (Art. 241 E.T.)',
     hasSubTabs: true
   },
+  'pn-conciliacion': {
+    breadcrumb: 'RENTA PERSONAS NATURALES / CONCILIACIÓN EXÓGENA',
+    title: 'Hoja de Cálculo Fiscal & Conciliación con Información Exógena DIAN (F210)',
+    hasSubTabs: true
+  },
   'pj': {
     breadcrumb: 'IMPUESTO DE RENTA / PERSONA JURÍDICA',
     title: 'Liquidación Renta Empresarial (F110) & Tasa Mínima TTD (15%)',
@@ -388,6 +393,7 @@ function navigateTo(moduleKey, subTab = 'main') {
   if (moduleKey === 'pn') {
     if (subTab === 'f210') targetPaneId = 'pane-pn-f210';
     else if (subTab === 'marginal') targetPaneId = 'pane-pn-marginal';
+    else if (subTab === 'conciliacion') targetPaneId = 'pane-pn-conciliacion';
     else targetPaneId = 'pane-pn-calc';
   }
 
@@ -426,6 +432,8 @@ function navigateTo(moduleKey, subTab = 'main') {
     document.getElementById('sub-tab-btn-pn-calc').className = subTab === 'calc' ? 'sub-tab-btn active' : 'sub-tab-btn';
     document.getElementById('sub-tab-btn-pn-f210').className = subTab === 'f210' ? 'sub-tab-btn active' : 'sub-tab-btn';
     document.getElementById('sub-tab-btn-pn-marginal').className = subTab === 'marginal' ? 'sub-tab-btn active' : 'sub-tab-btn';
+    const subConcil = document.getElementById('sub-tab-btn-pn-conciliacion');
+    if (subConcil) subConcil.className = subTab === 'conciliacion' ? 'sub-tab-btn active' : 'sub-tab-btn';
   } else {
     subTabsBar.style.display = 'none';
   }
@@ -444,6 +452,10 @@ function navigateTo(moduleKey, subTab = 'main') {
     renderForm210OfficialSheet(lastPnResult);
   } else if (moduleKey === 'pn' && subTab === 'marginal' && lastPnResult) {
     renderPnMarginalThermometer(lastPnResult);
+  } else if (moduleKey === 'pn' && subTab === 'conciliacion') {
+    if (!reconciliationData || !reconciliationData.items || reconciliationData.items.length === 0) {
+      loadReconciliationDemo();
+    }
   } else if (moduleKey === 'beneficios') {
     renderBeneficiosList('all');
   }
@@ -2259,3 +2271,280 @@ function handleJsonFileSelected(e) {
   };
   reader.readAsText(file);
 }
+
+// =========================================================================
+// MÓDULO: SPREADSHEET FISCAL & CONCILIACIÓN EXÓGENA (100% EFÍMERO)
+// =========================================================================
+let reconciliationData = null;
+let reconciliationFilteredItems = [];
+
+function triggerCsvFileUpload() {
+  const input = document.getElementById('reconciliation-file-input');
+  if (input) {
+    input.value = '';
+    input.click();
+  }
+}
+
+async function handleCsvFileInputChange(event) {
+  const file = event.target.files ? event.target.files[0] : null;
+  if (!file) return;
+
+  hideReconciliationErrors();
+  showToast(`⏳ Procesando ${file.name} en memoria...`, 'info', 2000);
+
+  const formData = new FormData();
+  formData.append('file', file);
+
+  try {
+    const res = await fetch('/api/v1/reconciliation/parse-csv', {
+      method: 'POST',
+      body: formData
+    });
+
+    if (res.ok) {
+      const data = await res.json();
+      reconciliationData = data;
+      renderReconciliationSpreadsheet(data);
+      showToast(`✓ Archivo procesado: ${data.items.length} transacciones analizadas en memoria`, 'success', 4000);
+    } else {
+      const err = await res.json();
+      if (res.status === 422 && err.detail) {
+        displayCsvValidationErrors(err.detail.errors || [], err.detail.message || 'Error de validación');
+      } else {
+        showToast(`✕ Error al procesar CSV: ${err.detail || 'Formato no soportado'}`, 'error', 5000);
+      }
+    }
+  } catch (err) {
+    console.error('Error al subir CSV de conciliación:', err);
+    showToast('✕ Error de conexión con el servicio de conciliación', 'error', 4000);
+  }
+}
+
+async function loadReconciliationDemo() {
+  hideReconciliationErrors();
+  try {
+    const res = await fetch('/api/v1/reconciliation/demo');
+    if (res.ok) {
+      const data = await res.json();
+      reconciliationData = data;
+      renderReconciliationSpreadsheet(data);
+      showToast('✓ Ejemplo de conciliación cargado en memoria', 'info', 3000);
+    }
+  } catch (err) {
+    console.error('Error al cargar demo de conciliación:', err);
+  }
+}
+
+function clearReconciliationView() {
+  reconciliationData = null;
+  reconciliationFilteredItems = [];
+  hideReconciliationErrors();
+
+  if (document.getElementById('reconcile-kpi-total-trx')) document.getElementById('reconcile-kpi-total-trx').innerText = '0';
+  if (document.getElementById('reconcile-kpi-total-cop')) document.getElementById('reconcile-kpi-total-cop').innerText = '$0 COP';
+  if (document.getElementById('reconcile-kpi-match-count')) document.getElementById('reconcile-kpi-match-count').innerText = '0';
+  if (document.getElementById('reconcile-kpi-match-pct')) document.getElementById('reconcile-kpi-match-pct').innerText = '0% Conciliado';
+  if (document.getElementById('reconcile-kpi-diff-count')) document.getElementById('reconcile-kpi-diff-count').innerText = '0';
+  if (document.getElementById('reconcile-kpi-alert-count')) document.getElementById('reconcile-kpi-alert-count').innerText = '0';
+  if (document.getElementById('reconcile-rows-count-badge')) document.getElementById('reconcile-rows-count-badge').innerText = '0 filas';
+
+  const tbody = document.getElementById('reconciliation-table-tbody');
+  if (tbody) {
+    tbody.innerHTML = `
+      <tr>
+        <td colspan="11" style="text-align: center; padding: 50px; color: var(--text-muted);">
+          <div style="font-size: 32px; margin-bottom: 8px;">📂</div>
+          <div style="font-size: 14px; font-weight: 700; color: #0b3b60;">No hay archivo CSV cargado en este momento</div>
+          <p style="font-size: 12px; color: #64748b; margin-top: 4px;">
+            Haz clic en <strong>"Cargar Ejemplo (Demo)"</strong> para visualizar una demostración o en <strong>"Subir Archivo CSV"</strong> para analizar tus certificados fiscales.
+          </p>
+        </td>
+      </tr>
+    `;
+  }
+  showToast('Visualización de conciliación reiniciada', 'info', 2000);
+}
+
+function renderReconciliationSpreadsheet(data) {
+  if (!data || !data.kpis) return;
+
+  const kpis = data.kpis;
+  if (document.getElementById('reconcile-kpi-total-trx')) document.getElementById('reconcile-kpi-total-trx').innerText = kpis.total_transacciones;
+  if (document.getElementById('reconcile-kpi-total-cop')) document.getElementById('reconcile-kpi-total-cop').innerText = formatCOP(kpis.total_declarado_cop) + ' COP';
+  if (document.getElementById('reconcile-kpi-match-count')) document.getElementById('reconcile-kpi-match-count').innerText = kpis.total_conciliado_match;
+  if (document.getElementById('reconcile-kpi-match-pct')) document.getElementById('reconcile-kpi-match-pct').innerText = `${kpis.porcentaje_conciliacion}% Conciliado`;
+  if (document.getElementById('reconcile-kpi-diff-count')) document.getElementById('reconcile-kpi-diff-count').innerText = kpis.total_solo_certificados + kpis.total_diferencias_justificadas;
+  if (document.getElementById('reconcile-kpi-alert-count')) document.getElementById('reconcile-kpi-alert-count').innerText = kpis.total_discrepancias_alerta;
+
+  filterReconciliationGrid();
+}
+
+function filterReconciliationGrid() {
+  if (!reconciliationData || !reconciliationData.items) return;
+
+  const cedulaFilter = (document.getElementById('reconcile-filter-cedula')?.value || 'ALL').toUpperCase();
+  const estadoFilter = (document.getElementById('reconcile-filter-estado')?.value || 'ALL').toUpperCase();
+  const searchTerm = (document.getElementById('reconcile-search-input')?.value || '').toLowerCase().trim();
+
+  const filtered = reconciliationData.items.filter(item => {
+    // Filtro por Cédula
+    if (cedulaFilter !== 'ALL') {
+      if (!item.cedula_destino.toUpperCase().includes(cedulaFilter)) return false;
+    }
+    // Filtro por Estado
+    if (estadoFilter !== 'ALL') {
+      if (item.estado_exogena.toUpperCase() !== estadoFilter) return false;
+    }
+    // Filtro por búsqueda
+    if (searchTerm) {
+      const matchSearch = (
+        item.tercero_nombre.toLowerCase().includes(searchTerm) ||
+        item.tercero_nit.toLowerCase().includes(searchTerm) ||
+        item.descripcion.toLowerCase().includes(searchTerm) ||
+        item.concepto_tributario.toLowerCase().includes(searchTerm) ||
+        item.casilla_f210_sugerida.toLowerCase().includes(searchTerm)
+      );
+      if (!matchSearch) return false;
+    }
+    return true;
+  });
+
+  reconciliationFilteredItems = filtered;
+  if (document.getElementById('reconcile-rows-count-badge')) {
+    document.getElementById('reconcile-rows-count-badge').innerText = `${filtered.length} filas`;
+  }
+
+  const tbody = document.getElementById('reconciliation-table-tbody');
+  if (!tbody) return;
+
+  if (filtered.length === 0) {
+    tbody.innerHTML = `
+      <tr>
+        <td colspan="11" style="text-align: center; padding: 40px; color: var(--text-muted);">
+          No se encontraron transacciones con los filtros seleccionados.
+        </td>
+      </tr>
+    `;
+    return;
+  }
+
+  let html = '';
+  filtered.forEach(item => {
+    let rowClass = 'row-match';
+    let badgeClass = 'status-match';
+    let badgeText = '🟢 Match 100%';
+
+    if (item.estado_exogena === 'SOLO_EN_CERTIFICADOS') {
+      rowClass = 'row-solo-cert';
+      badgeClass = 'status-solo-cert';
+      badgeText = '🟡 Solo Certificado';
+    } else if (item.estado_exogena === 'DIFERENCIA_JUSTIFICADA') {
+      rowClass = 'row-justified';
+      badgeClass = 'status-justified';
+      badgeText = '🟡 Justificada';
+    } else if (item.estado_exogena === 'DISCREPANCIA_ALERTA') {
+      rowClass = 'row-alert';
+      badgeClass = 'status-alert';
+      badgeText = '🔴 Discrepancia';
+    }
+
+    const difText = item.diferencia_exogena_cop > 0 ? `+${formatCOP(item.diferencia_exogena_cop)}` : '$0';
+
+    html += `
+      <tr class="${rowClass}" onclick="openReconciliationRowDetail('${item.id}')">
+        <td style="text-align: center; font-weight: 700; color: #64748b;">${item.id}</td>
+        <td>${item.fecha}</td>
+        <td><span class="badge-uvt" style="background:#eff6ff; color:#1e40af; font-size:10px;">${item.cedula_destino}</span></td>
+        <td>
+          <div style="font-weight: 700; color: #0b3b60;">${item.concepto_tributario}</div>
+          <div style="font-size: 10.5px; color: #64748b;">${item.casilla_f210_sugerida}</div>
+        </td>
+        <td>
+          <div style="font-weight: 600;">${item.tercero_nombre}</div>
+          <div style="font-size: 10.5px; color: #64748b;">${item.descripcion}</div>
+        </td>
+        <td style="font-family: var(--font-mono); font-size: 11px;">${item.tercero_nit || '-'}</td>
+        <td style="text-align: right; font-family: var(--font-mono); font-weight: 700; color: #0b3b60;">
+          ${formatCOP(item.valor_cop)}
+        </td>
+        <td style="text-align: right; font-family: var(--font-mono); color: #059669; font-weight: 600;">
+          ${formatCOP(item.valor_exogena_cop)}
+        </td>
+        <td style="text-align: right; font-family: var(--font-mono); font-weight: 700; color: ${item.diferencia_exogena_cop > 0 ? '#b91c1c' : '#64748b'};">
+          ${difText}
+        </td>
+        <td style="text-align: center;">
+          <span class="reconcile-status-badge ${badgeClass}">${badgeText}</span>
+        </td>
+        <td style="text-align: center;">
+          <button class="btn btn-outline btn-sm" style="padding: 2px 7px; font-size: 11px;" onclick="event.stopPropagation(); openReconciliationRowDetail('${item.id}')">
+            🔎 Ver
+          </button>
+        </td>
+      </tr>
+    `;
+  });
+
+  tbody.innerHTML = html;
+}
+
+function openReconciliationRowDetail(rowId) {
+  if (!reconciliationData || !reconciliationData.items) return;
+  const item = reconciliationData.items.find(i => String(i.id) === String(rowId));
+  if (!item) return;
+
+  if (document.getElementById('reconcile-detail-title')) document.getElementById('reconcile-detail-title').innerText = `Auditoría: ${item.concepto_tributario}`;
+  if (document.getElementById('reconcile-detail-subtitle')) document.getElementById('reconcile-detail-subtitle').innerText = `Fila #${item.id} • Cédula ${item.cedula_destino} • ${item.descripcion}`;
+  if (document.getElementById('reconcile-detail-tercero')) document.getElementById('reconcile-detail-tercero').innerText = item.tercero_nombre;
+  if (document.getElementById('reconcile-detail-nit')) document.getElementById('reconcile-detail-nit').innerText = item.tercero_nit || 'No informado';
+  if (document.getElementById('reconcile-detail-archivo')) document.getElementById('reconcile-detail-archivo').innerText = item.archivo_origen || 'No especificado';
+  if (document.getElementById('reconcile-detail-fecha')) document.getElementById('reconcile-detail-fecha').innerText = item.fecha || 'N/A';
+  if (document.getElementById('reconcile-detail-val-declarado')) document.getElementById('reconcile-detail-val-declarado').innerText = formatCOP(item.valor_cop);
+  if (document.getElementById('reconcile-detail-val-exogena')) document.getElementById('reconcile-detail-val-exogena').innerText = formatCOP(item.valor_exogena_cop);
+  if (document.getElementById('reconcile-detail-casilla-badge')) document.getElementById('reconcile-detail-casilla-badge').innerText = item.casilla_f210_sugerida;
+  if (document.getElementById('reconcile-detail-explicacion')) document.getElementById('reconcile-detail-explicacion').innerText = item.explicacion_didactica;
+  if (document.getElementById('reconcile-detail-norma')) document.getElementById('reconcile-detail-norma').innerText = item.beneficio_asociado || 'Estatuto Tributario Nacional';
+
+  const modal = document.getElementById('modal-reconciliation-detail');
+  if (modal) modal.style.display = 'flex';
+}
+
+function closeReconciliationDetailModal() {
+  const modal = document.getElementById('modal-reconciliation-detail');
+  if (modal) modal.style.display = 'none';
+}
+
+function displayCsvValidationErrors(errors, message) {
+  const errorBox = document.getElementById('reconciliation-error-box');
+  const errorTitle = document.getElementById('reconciliation-error-title');
+  const errorList = document.getElementById('reconciliation-error-list');
+  if (!errorBox) return;
+
+  if (errorTitle) errorTitle.innerText = message || 'Errores de Validación en el Archivo CSV';
+
+  if (errorList) {
+    if (!errors || errors.length === 0) {
+      errorList.innerHTML = `<p style="margin:0;">${message}</p>`;
+    } else {
+      let html = '<ul style="margin: 4px 0 0 16px; padding: 0;">';
+      errors.slice(0, 8).forEach(e => {
+        html += `<li><strong>Fila ${e.row || '-'}, Columna "${e.column || '-'}":</strong> ${e.error || 'Dato inválido'} (Valor recibido: <em>"${e.value || ''}"</em>)</li>`;
+      });
+      if (errors.length > 8) {
+        html += `<li>... y ${errors.length - 8} error(es) adicionales.</li>`;
+      }
+      html += '</ul>';
+      errorList.innerHTML = html;
+    }
+  }
+
+  errorBox.style.display = 'block';
+  showToast('✕ Error en el archivo CSV. Revisa los detalles.', 'error', 4000);
+}
+
+function hideReconciliationErrors() {
+  const errorBox = document.getElementById('reconciliation-error-box');
+  if (errorBox) errorBox.style.display = 'none';
+}
+

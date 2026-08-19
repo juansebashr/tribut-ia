@@ -172,3 +172,20 @@ Calcula la depuración de Renta para Personas Naturales (Cédula General, Gananc
 
 - `GET /calendario/vencimientos`: Calendario completo de vencimientos DIAN.
 - `GET /calendario/nit/{nit}`: Consulta de fecha límite de declaración por NIT con cálculo del Dígito de Verificación (Módulo 11).
+
+---
+
+## 6. Módulo de Conciliación Exógena & CSV (`/reconciliation`) — *100% Efímero / Stateless*
+
+### `POST /reconciliation/parse-csv`
+Procesa un archivo `.csv` vía `multipart/form-data`, valida encabezados y tipos de datos numéricos y de fecha, cruza valores contra la Información Exógena DIAN y retorna la estructura del spreadsheet fiscal con explicaciones didácticas de casilla por fila. **No almacena datos en base de datos ni en Redis.**
+
+### `POST /reconciliation/parse-raw`
+Procesa el contenido CSV enviado como texto plano (`text/plain`).
+
+### `GET /reconciliation/demo`
+Retorna el dataset de demostración precargado de 8 transacciones certificadas para visualización inmediata en el spreadsheet.
+
+### `GET /reconciliation/template`
+Descarga la plantilla CSV oficial (`plantilla_transacciones_tributia.csv`) con los encabezados requeridos para diligenciar transacciones.
+

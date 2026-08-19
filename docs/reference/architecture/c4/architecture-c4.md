@@ -70,6 +70,7 @@ Container_Boundary(backend, "FastAPI Backend Application") {
     Component(engine_pn, "Motor Persona Natural", "Python Service (Liquidación PN)", "Calcula Cédula General, 25% exenta, topes 1.340 UVT, F210 y Art. 241.")
     Component(engine_pj, "Motor Persona Jurídica", "Python Service (Liquidación PJ)", "Calcula Formulario 110 y Tasa de Tributación Depurada (TTD 15%).")
     Component(calendar_svc, "Servicio de Calendario & NIT", "Python Service", "Calcula DV DIAN (Módulo 11) y mapea plazos de vencimiento.")
+    Component(reconciliation_svc, "Servicio Conciliación Exógena & CSV", "Python Service (Stateless)", "Valida formato, delimita, audita cédulas y cruza con exógena al vuelo sin tocar Redis.")
     Component(rules_engine, "Rules Loader & Overrides", "Python Service", "Carga matrices JSON y aplica UVT personalizada en memoria.")
 }
 
@@ -82,6 +83,7 @@ Rel(session_store, redis_instance, "Operaciones GET, SETEX y PUBLISH", "redis-py
 Rel(router, engine_pn, "Ejecuta cálculo PN", "Pydantic Model")
 Rel(router, engine_pj, "Ejecuta cálculo PJ", "Pydantic Model")
 Rel(router, calendar_svc, "Consulta vencimientos NIT", "Helper")
+Rel(router, reconciliation_svc, "Procesa y valida CSV efímero", "Multipart / Raw")
 Rel(engine_pn, rules_engine, "Consulta parámetros año", "Rules Object")
 Rel(engine_pj, rules_engine, "Consulta parámetros año", "Rules Object")
 Rel(rules_engine, rules_files, "Lee archivo JSON correspondiente", "File Read")

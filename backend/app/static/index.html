@@ -73,6 +73,13 @@
                 <span class="sidebar-item-tag">Art. 241</span>
               </button>
             </li>
+            <li>
+              <button class="sidebar-item-btn" id="nav-item-pn-conciliacion" onclick="navigateTo('pn', 'conciliacion')">
+                <span class="sidebar-item-icon">📑</span>
+                <span class="sidebar-item-label">Conciliación Exógena & CSV</span>
+                <span class="sidebar-item-tag">Spreadsheet</span>
+              </button>
+            </li>
           </ul>
         </div>
 
@@ -184,6 +191,9 @@
           </button>
           <button class="sub-tab-btn" id="sub-tab-btn-pn-marginal" onclick="navigateTo('pn', 'marginal')">
             <span>🌡️</span> Tarifa Progresiva & Termómetro
+          </button>
+          <button class="sub-tab-btn" id="sub-tab-btn-pn-conciliacion" onclick="navigateTo('pn', 'conciliacion')">
+            <span>📑</span> Conciliación Exógena & CSV
           </button>
         </div>
 
@@ -1623,6 +1633,183 @@
         </div>
 
         <!-- =================================================================
+             MÓDULO 1.4: SPREADSHEET FISCAL & CONCILIACIÓN EXÓGENA (F210)
+             ================================================================= -->
+        <div id="pane-pn-conciliacion" class="module-pane">
+          <!-- AVISO DE PRIVACIDAD Y PROCESAMIENTO EFÍMERO -->
+          <div class="ephemeral-privacy-notice">
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <span style="font-size: 20px;">🔒</span>
+              <div>
+                <strong style="color: #0b3b60; font-size: 13px;">Visualización Efímera en Memoria Local & Cero Persistencia</strong>
+                <p style="font-size: 11.5px; color: #475569; margin: 2px 0 0 0;">
+                  Este archivo CSV se procesa de forma stateless únicamente en la memoria de tu navegador para análisis y conciliación en tiempo real. Los datos no se almacenan ni se guardan en base de datos ni en Redis.
+                </p>
+              </div>
+            </div>
+            <span class="badge-uvt" style="background: #e0f2fe; color: #0284c7; border: 1px solid #bae6fd;">
+              100% Stateless
+            </span>
+          </div>
+
+          <!-- TOP ACTIONS & KPI BAR -->
+          <div class="reconciliation-toolbar-card">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 16px;">
+              <div>
+                <h2 style="font-size: 17px; font-weight: 800; color: #0b3b60; margin: 0 0 3px 0;">
+                  📑 Hoja de Cálculo Fiscal & Conciliación con Información Exógena DIAN
+                </h2>
+                <p style="font-size: 12px; color: #64748b; margin: 0;">
+                  Visualiza tus transacciones como un libro contable, cruza con los reportes de terceros y comprende cómo se llena cada casilla del Formulario 210.
+                </p>
+              </div>
+
+              <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                <!-- HIDDEN FILE INPUT -->
+                <input type="file" id="reconciliation-file-input" accept=".csv,.txt" style="display: none;" onchange="handleCsvFileInputChange(event)">
+                
+                <button class="btn btn-primary btn-sm" onclick="triggerCsvFileUpload()" title="Seleccionar archivo CSV local para procesar en vivo">
+                  <span>📤</span> Subir Archivo CSV
+                </button>
+
+                <button class="btn btn-outline btn-sm" onclick="loadReconciliationDemo()" title="Cargar 8 transacciones reales de demostración">
+                  <span>✨</span> Cargar Ejemplo (Demo)
+                </button>
+
+                <a href="/api/v1/reconciliation/template" download="plantilla_transacciones_tributia.csv" class="btn btn-outline btn-sm" style="text-decoration: none;" title="Descargar estructura oficial CSV para diligenciar">
+                  <span>⬇️</span> Descargar Plantilla
+                </a>
+
+                <button class="btn btn-outline btn-sm" onclick="clearReconciliationView()" title="Limpiar la visualización actual">
+                  <span>🗑️</span> Limpiar
+                </button>
+              </div>
+            </div>
+
+            <!-- SUMMARY KPI CARDS -->
+            <div class="reconciliation-kpi-grid">
+              <div class="reconcile-kpi-card accent-blue">
+                <span class="reconcile-kpi-label">Total Transacciones</span>
+                <span class="reconcile-kpi-val" id="reconcile-kpi-total-trx">0</span>
+                <span class="reconcile-kpi-sub" id="reconcile-kpi-total-cop">$0 COP</span>
+              </div>
+
+              <div class="reconcile-kpi-card accent-emerald">
+                <span class="reconcile-kpi-label">Match Exógena (100%)</span>
+                <span class="reconcile-kpi-val" id="reconcile-kpi-match-count" style="color: #059669;">0</span>
+                <span class="reconcile-kpi-sub" id="reconcile-kpi-match-pct">0% Conciliado</span>
+              </div>
+
+              <div class="reconcile-kpi-card accent-amber">
+                <span class="reconcile-kpi-label">Diferencias / Deducciones</span>
+                <span class="reconcile-kpi-val" id="reconcile-kpi-diff-count" style="color: #d97706;">0</span>
+                <span class="reconcile-kpi-sub" id="reconcile-kpi-diff-sub">Soportadas en certificados</span>
+              </div>
+
+              <div class="reconcile-kpi-card accent-rose">
+                <span class="reconcile-kpi-label">Discrepancias / Alertas</span>
+                <span class="reconcile-kpi-val" id="reconcile-kpi-alert-count" style="color: #e11d48;">0</span>
+                <span class="reconcile-kpi-sub" id="reconcile-kpi-alert-sub">Requieren revisión contable</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- ERROR DIAGNOSTICS CONTAINER -->
+          <div id="reconciliation-error-box" class="reconciliation-error-panel" style="display: none;">
+            <div style="display: flex; align-items: flex-start; gap: 10px;">
+              <span style="font-size: 20px;">⚠️</span>
+              <div style="flex: 1;">
+                <h4 id="reconciliation-error-title" style="color: #991b1b; font-size: 13.5px; font-weight: 800; margin: 0 0 4px 0;">
+                  Errores de Formato o Tipado en el Archivo CSV
+                </h4>
+                <div id="reconciliation-error-list" style="font-size: 12px; color: #7f1d1d;"></div>
+              </div>
+              <button class="btn btn-outline btn-sm" onclick="hideReconciliationErrors()" style="color: #991b1b; border-color: #fca5a5;">
+                Cerrar
+              </button>
+            </div>
+          </div>
+
+          <!-- DATA SPREADSHEET GRID & FILTERS -->
+          <div class="card" style="margin-top: 14px;">
+            <div class="card-header" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+              <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+                <div class="selector-group">
+                  <label style="font-size: 11.5px; font-weight: 700; color: #475569;">Cédula:</label>
+                  <select id="reconcile-filter-cedula" class="select-input" style="font-size: 12px; padding: 4px 8px;" onchange="filterReconciliationGrid()">
+                    <option value="ALL">Todas las Cédulas</option>
+                    <option value="TRABAJO">Rentas de Trabajo</option>
+                    <option value="CAPITAL">Rentas de Capital</option>
+                    <option value="NOLABORAL">Rentas No Laborales</option>
+                    <option value="PATRIMONIO">Patrimonio (Activos / Pasivos)</option>
+                    <option value="DIVIDENDOS">Dividendos</option>
+                    <option value="GANANCIA_OCASIONAL">Ganancias Ocasionales</option>
+                  </select>
+                </div>
+
+                <div class="selector-group">
+                  <label style="font-size: 11.5px; font-weight: 700; color: #475569;">Estado Conciliación:</label>
+                  <select id="reconcile-filter-estado" class="select-input" style="font-size: 12px; padding: 4px 8px;" onchange="filterReconciliationGrid()">
+                    <option value="ALL">Todos los Estados</option>
+                    <option value="MATCH_EXACTO">🟢 Match Exacto (100%)</option>
+                    <option value="SOLO_EN_CERTIFICADOS">🟡 Solo en Certificados (Deducción)</option>
+                    <option value="DIFERENCIA_JUSTIFICADA">🟡 Diferencia Justificada</option>
+                    <option value="DISCREPANCIA_ALERTA">🔴 Discrepancia / Alerta</option>
+                  </select>
+                </div>
+              </div>
+
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <input
+                  type="text"
+                  id="reconcile-search-input"
+                  class="text-input"
+                  placeholder="🔎 Buscar tercero, NIT o concepto..."
+                  style="font-size: 12px; width: 230px; padding: 5px 9px;"
+                  oninput="filterReconciliationGrid()"
+                >
+                <span id="reconcile-rows-count-badge" class="badge-uvt" style="background:#f1f5f9; color:#475569;">
+                  0 filas
+                </span>
+              </div>
+            </div>
+
+            <div class="card-body" style="padding: 0;">
+              <div class="spreadsheet-table-container">
+                <table class="spreadsheet-table" id="reconciliation-table">
+                  <thead>
+                    <tr>
+                      <th style="width: 40px; text-align: center;">#</th>
+                      <th style="width: 90px;">Fecha</th>
+                      <th style="width: 100px;">Cédula</th>
+                      <th style="width: 180px;">Concepto / Casilla F210</th>
+                      <th style="width: 200px;">Tercero / Emisor</th>
+                      <th style="width: 110px;">NIT / Cédula</th>
+                      <th style="width: 130px; text-align: right;">Valor Declarado</th>
+                      <th style="width: 130px; text-align: right;">Exógena DIAN</th>
+                      <th style="width: 120px; text-align: right;">Diferencia</th>
+                      <th style="width: 140px; text-align: center;">Estado Conciliación</th>
+                      <th style="width: 80px; text-align: center;">Auditoría</th>
+                    </tr>
+                  </thead>
+                  <tbody id="reconciliation-table-tbody">
+                    <tr>
+                      <td colspan="11" style="text-align: center; padding: 50px; color: var(--text-muted);">
+                        <div style="font-size: 32px; margin-bottom: 8px;">📂</div>
+                        <div style="font-size: 14px; font-weight: 700; color: #0b3b60;">No hay archivo CSV cargado en este momento</div>
+                        <p style="font-size: 12px; color: #64748b; margin-top: 4px;">
+                          Haz clic en <strong>"Cargar Ejemplo (Demo)"</strong> para visualizar una demostración o en <strong>"Subir Archivo CSV"</strong> para analizar tus certificados fiscales.
+                        </p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- =================================================================
              MÓDULO 2: PERSONA JURÍDICA (FORMULARIO 110 & TTD)
              ================================================================= -->
         <div id="pane-pj" class="module-pane">
@@ -2336,6 +2523,91 @@ Eres un Asistente Contador Tributario en Colombia.
       <div style="display: flex; gap: 10px; justify-content: center;">
         <button class="btn btn-outline" style="min-width: 110px;" onclick="closeConfirmModal()">Cancelar</button>
         <button id="confirm-modal-btn-accept" class="btn btn-primary" style="background: #e11d48; border-color: #be123c; min-width: 130px;">Sobreescribir</button>
+      </div>
+    </div>
+  <!-- =====================================================================
+       MODAL: AUDITORÍA DIDÁCTICA DE FILA DE CONCILIACIÓN
+       ===================================================================== -->
+  <div id="modal-reconciliation-detail" class="modal-backdrop" style="display: none;" onclick="closeReconciliationDetailModal()">
+    <div class="modal-content" style="max-width: 650px;" onclick="event.stopPropagation()">
+      <div class="modal-header" style="border-bottom: 1px solid #e2e8f0; padding-bottom: 12px;">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <span style="font-size: 22px;">🔍</span>
+          <div>
+            <h3 id="reconcile-detail-title" style="font-size: 15px; font-weight: 800; color: #0b3b60; margin: 0;">
+              Auditoría Didáctica de Transacción
+            </h3>
+            <span id="reconcile-detail-subtitle" style="font-size: 12px; color: #64748b;">
+              Fila #1 • Cédula de Trabajo
+            </span>
+          </div>
+        </div>
+        <button class="btn btn-outline btn-sm" onclick="closeReconciliationDetailModal()">✕ Cerrar</button>
+      </div>
+
+      <div class="modal-body" style="padding: 16px 0;">
+        <div class="reconcile-detail-grid">
+          <div class="reconcile-detail-field">
+            <span class="detail-label">Tercero / Emisor</span>
+            <strong id="reconcile-detail-tercero" class="detail-val">-</strong>
+          </div>
+
+          <div class="reconcile-detail-field">
+            <span class="detail-label">NIT / Documento</span>
+            <span id="reconcile-detail-nit" class="detail-val" style="font-family: var(--font-mono); font-weight: 700;">-</span>
+          </div>
+
+          <div class="reconcile-detail-field">
+            <span class="detail-label">Archivo Soporte de Origen</span>
+            <span id="reconcile-detail-archivo" class="detail-val" style="font-size: 11.5px; color: #2563eb;">-</span>
+          </div>
+
+          <div class="reconcile-detail-field">
+            <span class="detail-label">Fecha del Movimiento</span>
+            <span id="reconcile-detail-fecha" class="detail-val">-</span>
+          </div>
+
+          <div class="reconcile-detail-field">
+            <span class="detail-label">Valor Declarado (Certificado)</span>
+            <strong id="reconcile-detail-val-declarado" class="detail-val" style="color: #0b3b60; font-family: var(--font-mono); font-size: 14px;">$0</strong>
+          </div>
+
+          <div class="reconcile-detail-field">
+            <span class="detail-label">Valor Reportado Exógena DIAN</span>
+            <strong id="reconcile-detail-val-exogena" class="detail-val" style="color: #059669; font-family: var(--font-mono); font-size: 14px;">$0</strong>
+          </div>
+        </div>
+
+        <!-- EXPLICACIÓN DIDÁCTICA BOX -->
+        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 14px; margin-top: 14px;">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+            <span style="font-size: 12px; font-weight: 800; color: #0b3b60; text-transform: uppercase;">
+              📋 ¿Cómo alimenta el Formulario 210?
+            </span>
+            <span id="reconcile-detail-casilla-badge" class="badge-uvt" style="background: #eff6ff; color: #1d4ed8;">
+              Casilla F210
+            </span>
+          </div>
+          <p id="reconcile-detail-explicacion" style="font-size: 12.5px; color: #334155; line-height: 1.5; margin: 0;">
+            -
+          </p>
+        </div>
+
+        <!-- BENEFICIO Y FUNDAMENTO LEGAL -->
+        <div style="background: #fffbeb; border: 1px solid #fef3c7; border-radius: 8px; padding: 12px; margin-top: 10px;">
+          <span style="font-size: 11px; font-weight: 800; color: #92400e; text-transform: uppercase;">
+            ⚖️ Fundamento Legal & Estatuto Tributario
+          </span>
+          <div id="reconcile-detail-norma" style="font-size: 12px; color: #78350f; margin-top: 3px;">
+            -
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer" style="border-top: 1px solid #e2e8f0; padding-top: 12px; display: flex; justify-content: flex-end;">
+        <button class="btn btn-primary btn-sm" onclick="closeReconciliationDetailModal()">
+          Entendido
+        </button>
       </div>
     </div>
   </div>
