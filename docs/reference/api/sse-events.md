@@ -8,15 +8,19 @@ Content-Type: `text/event-stream`
 ## 1. Tipos de Eventos Transmitidos
 
 ### Evento: `connected`
+
 Emitido inmediatamente al establecerse la conexión HTTP.
-```
+
+```text
 event: connected
 data: {"session_id": "default", "message": "Conectado al stream de eventos en vivo"}
 ```
 
 ### Evento: `state_update`
+
 Emitido cada vez que un cliente externo o la interfaz actualiza los valores de la sesión.
-```
+
+```text
 event: state_update
 data: {
 "session_id": "default",
@@ -30,9 +34,10 @@ data: {
 ```
 
 ### Evento: `reset`
+
 Emitido cuando la sesión es reiniciada a valores en blanco.
-```
+
+```text
 event: reset
 data: {"session_id": "default", "message": "Sesión restablecida"}
 ```
-

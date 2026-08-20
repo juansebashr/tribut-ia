@@ -1,23 +1,23 @@
-import os
-import yaml
 from pathlib import Path
-from typing import Dict, List, Optional
+
+import yaml
+
 from app.core.rules_engine.schema import TaxYearRules
 
 RULES_DIR = Path(__file__).parent.parent.parent / "rules"
 
-_rules_cache: Dict[int, TaxYearRules] = {}
+_rules_cache: dict[int, TaxYearRules] = {}
 
 
-def load_all_rules() -> Dict[int, TaxYearRules]:
+def load_all_rules() -> dict[int, TaxYearRules]:
     """Carga y valida todos los archivos de reglas YAML disponibles."""
     global _rules_cache
     if not RULES_DIR.exists():
         return {}
 
-    rules_map: Dict[int, TaxYearRules] = {}
+    rules_map: dict[int, TaxYearRules] = {}
     for file in RULES_DIR.glob("*.yaml"):
-        with open(file, "r", encoding="utf-8") as f:
+        with open(file, encoding="utf-8") as f:
             data = yaml.safe_load(f)
             if data and "tax_year" in data:
                 rule_obj = TaxYearRules(**data)
@@ -27,7 +27,7 @@ def load_all_rules() -> Dict[int, TaxYearRules]:
     return _rules_cache
 
 
-def get_rules_for_year(year: int, custom_uvt: Optional[float] = None) -> TaxYearRules:
+def get_rules_for_year(year: int, custom_uvt: float | None = None) -> TaxYearRules:
     """Obtiene las reglas para un año fiscal específico, opcionalmente sobreescribiendo el UVT."""
     global _rules_cache
     if not _rules_cache:
@@ -50,7 +50,7 @@ def get_rules_for_year(year: int, custom_uvt: Optional[float] = None) -> TaxYear
     return rules
 
 
-def get_available_tax_years() -> List[int]:
+def get_available_tax_years() -> list[int]:
     """Retorna la lista ordenada de años gravables disponibles."""
     global _rules_cache
     if not _rules_cache:

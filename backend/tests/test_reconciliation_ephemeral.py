@@ -1,6 +1,7 @@
-import pytest
 import io
+
 from fastapi.testclient import TestClient
+
 from app.main import app
 
 client = TestClient(app)
@@ -39,9 +40,7 @@ def test_reconciliation_parse_csv_file_upload():
         "1,2026-01-15,Cert_Sueldos.pdf,ACME CORP,900555666-1,Salario Enero,INGRESO,15000000,TRABAJO,SALARIO,MATCH_EXACTO,15000000\n"
         "2,2026-06-20,Factura_Medica.pdf,COLSANITAS,860072049-1,Medicina Prepagada,EGRESO,3500000,TRABAJO,PREPAGADA,SOLO_EN_CERTIFICADOS,0\n"
     )
-    files = {
-        "file": ("mis_transacciones.csv", io.BytesIO(csv_content.encode("utf-8")), "text/csv")
-    }
+    files = {"file": ("mis_transacciones.csv", io.BytesIO(csv_content.encode("utf-8")), "text/csv")}
     res = client.post("/api/v1/reconciliation/parse-csv", files=files)
     assert res.status_code == 200
     data = res.json()
@@ -72,7 +71,9 @@ def test_reconciliation_parse_raw_text():
         "id,fecha,tercero_nombre,valor_cop,cedula_destino,concepto_tributario\n"
         "1,2026-03-01,EMPRESA ABC,50000000,TRABAJO,SALARIO\n"
     )
-    res = client.post("/api/v1/reconciliation/parse-raw", content=raw_text, headers={"Content-Type": "text/plain"})
+    res = client.post(
+        "/api/v1/reconciliation/parse-raw", content=raw_text, headers={"Content-Type": "text/plain"}
+    )
     assert res.status_code == 200
     data = res.json()
     assert data["valid"] is True
@@ -81,13 +82,8 @@ def test_reconciliation_parse_raw_text():
 
 def test_reconciliation_missing_required_headers_error_422():
     """Valida error 422 cuando faltan columnas obligatorias."""
-    bad_csv = (
-        "columna_invalida,otra_columna\n"
-        "1,2\n"
-    )
-    files = {
-        "file": ("bad_headers.csv", io.BytesIO(bad_csv.encode("utf-8")), "text/csv")
-    }
+    bad_csv = "columna_invalida,otra_columna\n1,2\n"
+    files = {"file": ("bad_headers.csv", io.BytesIO(bad_csv.encode("utf-8")), "text/csv")}
     res = client.post("/api/v1/reconciliation/parse-csv", files=files)
     assert res.status_code == 422
     err = res.json()
@@ -102,9 +98,7 @@ def test_reconciliation_invalid_numeric_types_error_422():
         "1,2026-01-01,TERCERO UNO,cien_pesos,TRABAJO,SALARIO,0\n"
         "2,2026-01-02,TERCERO DOS,5000,TRABAJO,SALARIO,no_es_numero\n"
     )
-    files = {
-        "file": ("bad_types.csv", io.BytesIO(bad_numbers_csv.encode("utf-8")), "text/csv")
-    }
+    files = {"file": ("bad_types.csv", io.BytesIO(bad_numbers_csv.encode("utf-8")), "text/csv")}
     res = client.post("/api/v1/reconciliation/parse-csv", files=files)
     assert res.status_code == 422
     data = res.json()["detail"]
@@ -116,9 +110,7 @@ def test_reconciliation_invalid_numeric_types_error_422():
 
 def test_reconciliation_invalid_file_extension_error_400():
     """Valida error 400 cuando se sube un archivo que no es CSV."""
-    files = {
-        "file": ("documento.pdf", io.BytesIO(b"%PDF-1.4..."), "application/pdf")
-    }
+    files = {"file": ("documento.pdf", io.BytesIO(b"%PDF-1.4..."), "application/pdf")}
     res = client.post("/api/v1/reconciliation/parse-csv", files=files)
     assert res.status_code == 400
     assert "extensión .csv" in res.json()["detail"]
@@ -126,9 +118,7 @@ def test_reconciliation_invalid_file_extension_error_400():
 
 def test_reconciliation_empty_file_error_400():
     """Valida error 400 cuando el archivo está vacío."""
-    files = {
-        "file": ("vacio.csv", io.BytesIO(b""), "text/csv")
-    }
+    files = {"file": ("vacio.csv", io.BytesIO(b""), "text/csv")}
     res = client.post("/api/v1/reconciliation/parse-csv", files=files)
     assert res.status_code == 400
 
@@ -145,7 +135,11 @@ def test_reconciliation_parse_tab_delimiter_and_various_cedulas():
         "6\t2026-06-01\tEMPLEADOR\t5000000\tTRABAJO\tOTRO_CONCEPTO\tMATCH_EXACTO\t5000000\n"
         "7\t2026-07-01\tENTIDAD\t3000000\tTRABAJO\tINCRNGO_SALUD\tMATCH_EXACTO\t3000000\n"
     )
-    res = client.post("/api/v1/reconciliation/parse-raw", content=tsv_content, headers={"Content-Type": "text/plain"})
+    res = client.post(
+        "/api/v1/reconciliation/parse-raw",
+        content=tsv_content,
+        headers={"Content-Type": "text/plain"},
+    )
     assert res.status_code == 200
     data = res.json()
     assert data["valid"] is True
@@ -154,13 +148,16 @@ def test_reconciliation_parse_tab_delimiter_and_various_cedulas():
 
 def test_reconciliation_empty_raw_400():
     """Valida que texto vacío arroje error 400."""
-    res = client.post("/api/v1/reconciliation/parse-raw", content="   ", headers={"Content-Type": "text/plain"})
+    res = client.post(
+        "/api/v1/reconciliation/parse-raw", content="   ", headers={"Content-Type": "text/plain"}
+    )
     assert res.status_code == 400
 
 
 def test_reconciliation_number_formatting_edge_cases():
     """Valida formatos numéricos colombianos con comas y puntos."""
     from app.api.v1.endpoints.reconciliation import _clean_numeric_value
+
     assert _clean_numeric_value(None) == 0.0
     assert _clean_numeric_value("") == 0.0
     assert _clean_numeric_value("$ 100.000.000,50 COP") == 100000000.5
@@ -178,7 +175,11 @@ def test_reconciliation_didactic_explanations_branches():
         "3,2026-01-03,RETENEDOR,2000000,TRABAJO,RETENCION_FUENTE,MATCH_EXACTO,2000000\n"
         "4,2026-01-04,EMPLEADOR,3000000,TRABAJO,INCRNGO_PENSION,MATCH_EXACTO,3000000\n"
     )
-    res = client.post("/api/v1/reconciliation/parse-raw", content=csv_content, headers={"Content-Type": "text/plain"})
+    res = client.post(
+        "/api/v1/reconciliation/parse-raw",
+        content=csv_content,
+        headers={"Content-Type": "text/plain"},
+    )
     assert res.status_code == 200
     data = res.json()
     assert len(data["items"]) == 4

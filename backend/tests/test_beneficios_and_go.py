@@ -1,13 +1,12 @@
-import pytest
 from app.models.persona_natural import PersonaNaturalInput
-from app.services.liquidacion_pn import liquidar_persona_natural
 from app.services.beneficios import (
-    calcular_beneficio_auditoria,
     BeneficioAuditoriaRequest,
-    calcular_reduccion_sancion,
     ReduccionSancionRequest,
-    get_catalogo_beneficios
+    calcular_beneficio_auditoria,
+    calcular_reduccion_sancion,
+    get_catalogo_beneficios,
 )
+from app.services.liquidacion_pn import liquidar_persona_natural
 
 
 def test_persona_natural_con_ganancia_ocasional():
@@ -23,9 +22,9 @@ def test_persona_natural_con_ganancia_ocasional():
         aporte_pension_obligatorio=3200000,
         aplica_dependiente_general=True,
         ganancias_ocasionales_brutas_activos_fijos=300000000,  # Venta inmueble
-        costos_ganancia_ocasional=200000000,                 # Costo fiscal
+        costos_ganancia_ocasional=200000000,  # Costo fiscal
         ganancias_ocasionales_exentas_solicitadas=0,
-        ganancias_ocasionales_brutas_loterias=10000000        # Lotería (tarifa 20%)
+        ganancias_ocasionales_brutas_loterias=10000000,  # Lotería (tarifa 20%)
     )
 
     result = liquidar_persona_natural(input_data)
@@ -39,7 +38,7 @@ def test_persona_natural_con_ganancia_ocasional():
     # 2. Ganancia Ocasional Bruta = 300M + 10M = 310M (Casilla 104)
     assert result.total_ganancias_ocasionales_brutas == 310000000
     assert result.costos_ganancia_ocasional == 200000000
-    
+
     # GO Gravable = (300M - 200M) + 10M = 110M (Casilla 107)
     assert result.ganancia_ocasional_gravable == 110000000
 
@@ -55,12 +54,10 @@ def test_persona_natural_con_ganancia_ocasional():
 def test_beneficio_auditoria_calculo():
     """Valida el cálculo del beneficio de auditoría para 6 y 12 meses."""
     req = BeneficioAuditoriaRequest(
-        tax_year=2026,
-        impuesto_neto_ano_anterior=10000000,
-        custom_uvt=52350
+        tax_year=2026, impuesto_neto_ano_anterior=10000000, custom_uvt=52350
     )
     res = calcular_beneficio_auditoria(req)
-    
+
     assert res.cumple_impuesto_minimo
     # +35% para 6 meses = 13.500.000
     assert res.impuesto_objetivo_6_meses_cop == 13500000
@@ -73,10 +70,10 @@ def test_reduccion_sanciones():
     req = ReduccionSancionRequest(
         monto_sancion_base_cop=2000000,
         sin_sanciones_ultimos_2_anos=True,
-        sin_sanciones_ultimo_1_ano=True
+        sin_sanciones_ultimo_1_ano=True,
     )
     res = calcular_reduccion_sancion(req)
-    
+
     assert res.porcentaje_reduccion_aplicado == 50.0
     assert res.sancion_final_reducida_cop == 1000000
     assert res.ahorro_sancion_cop == 1000000

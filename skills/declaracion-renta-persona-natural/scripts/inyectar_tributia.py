@@ -4,28 +4,27 @@ inyectar_tributia.py
 Envía el estado consolidado de la liquidación a la API de TributIA (REST & SSE).
 """
 
-import sys
-import json
 import argparse
-import urllib.request
+import json
+import sys
 import urllib.error
+import urllib.request
 from pathlib import Path
 
 # Importar consolidación si se pasa CSV directamente
 from consolidar_transacciones import consolidar_csv_a_payload
 
 
-def inyectar_a_tributia(payload: dict, api_url: str = "http://localhost:8000", session_id: str = "default"):
+def inyectar_a_tributia(
+    payload: dict, api_url: str = "http://localhost:8000", session_id: str = "default"
+):
     url = f"{api_url.rstrip('/')}/api/v1/session/state?source=api"
     data_bytes = json.dumps(payload).encode("utf-8")
 
     req = urllib.request.Request(
         url,
         data=data_bytes,
-        headers={
-            "Content-Type": "application/json",
-            "X-Session-ID": session_id
-        }
+        headers={"Content-Type": "application/json", "X-Session-ID": session_id},
     )
 
     try:
@@ -33,7 +32,7 @@ def inyectar_a_tributia(payload: dict, api_url: str = "http://localhost:8000", s
             res_json = json.loads(response.read().decode("utf-8"))
             return res_json
     except urllib.error.URLError as e:
-        raise ConnectionError(f"No se pudo conectar a la API de TributIA en {api_url}: {e}")
+        raise ConnectionError(f"No se pudo conectar a la API de TributIA en {api_url}: {e}") from e
 
 
 def format_cop(val: float) -> str:
@@ -45,7 +44,7 @@ def format_cop(val: float) -> str:
         rev = list(reversed(abs_str))
         parts = []
         for i in range(0, len(rev), 3):
-            parts.append("".join(reversed(rev[i:i+3])))
+            parts.append("".join(reversed(rev[i : i + 3])))
         formatted = parts[-1]
         for i in range(len(parts) - 2, -1, -1):
             sep = "'" if (i % 2 == 1) else "."
@@ -57,7 +56,9 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Inyecta liquidación a TributIA API")
     parser.add_argument("input_file", help="Ruta a transacciones_depuradas.csv o payload.json")
     parser.add_argument("--api-url", default="http://localhost:8000", help="URL base de TributIA")
-    parser.add_argument("--session-id", default="default", help="ID de la sesión (header X-Session-ID)")
+    parser.add_argument(
+        "--session-id", default="default", help="ID de la sesión (header X-Session-ID)"
+    )
     parser.add_argument("--nombre", default="", help="Nombre del declarante")
     parser.add_argument("--nit", default="", help="NIT del declarante")
 
@@ -70,12 +71,10 @@ if __name__ == "__main__":
 
     if input_path.suffix.lower() == ".csv":
         payload = consolidar_csv_a_payload(
-            csv_path=str(input_path),
-            nombre=args.nombre,
-            nit=args.nit
+            csv_path=str(input_path), nombre=args.nombre, nit=args.nit
         )
     else:
-        with open(input_path, "r", encoding="utf-8") as f:
+        with open(input_path, encoding="utf-8") as f:
             payload = json.load(f)
 
     try:

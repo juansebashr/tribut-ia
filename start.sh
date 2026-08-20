@@ -18,8 +18,10 @@ if command -v lsof >/dev/null 2>&1; then
     fi
 fi
 
-# Activar entorno virtual de backend si existe
-if [ -d "$DIR/backend/venv" ]; then
+# Activar entorno virtual si existe (.venv en raíz o backend/venv)
+if [ -d "$DIR/.venv" ]; then
+    source "$DIR/.venv/bin/activate"
+elif [ -d "$DIR/backend/venv" ]; then
     source "$DIR/backend/venv/bin/activate"
 fi
 

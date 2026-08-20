@@ -37,4 +37,3 @@ curl -X POST http://localhost:8000/api/v1/calculate/persona-juridica/calculate \
 "autorretenciones_practicadas": 20000000
 }'
 ```
-

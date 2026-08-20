@@ -1,5 +1,5 @@
-import pytest
 from fastapi.testclient import TestClient
+
 from app.main import app
 
 client = TestClient(app)
@@ -24,7 +24,7 @@ def test_session_sync_post_and_get_state():
             "nombre": "ALEJANDRO ESCOBAR RESTREPO",
             "nit": "9005554441",
             "tax_year": 2026,
-            "custom_uvt": 52350
+            "custom_uvt": 52350,
         },
         "persona_natural": {
             "patrimonio_bruto": 850000000.0,
@@ -35,10 +35,10 @@ def test_session_sync_post_and_get_state():
             "aplica_dependiente_general": True,
             "medicina_prepagada_anual": 8000000.0,
             "intereses_vivienda_anual": 24000000.0,
-            "retenciones_fuente_practicadas": 75000000.0
-        }
+            "retenciones_fuente_practicadas": 75000000.0,
+        },
     }
-    
+
     post_res = client.post("/api/v1/session/state?session_id=test_sync_1", json=payload)
     assert post_res.status_code == 200
     res_data = post_res.json()
@@ -57,15 +57,19 @@ def test_session_sync_post_and_get_state():
 
 def test_session_sync_partial_updates():
     """Verifica que actualizaciones parciales preserven el resto de los campos."""
-    client.post("/api/v1/session/state?session_id=test_partial", json={
-        "metadata": {"nombre": "LINA MARIA LOPEZ"},
-        "persona_natural": {"rentas_trabajo": 200000000.0, "deudas": 50000000.0}
-    })
-    
+    client.post(
+        "/api/v1/session/state?session_id=test_partial",
+        json={
+            "metadata": {"nombre": "LINA MARIA LOPEZ"},
+            "persona_natural": {"rentas_trabajo": 200000000.0, "deudas": 50000000.0},
+        },
+    )
+
     # Actualizar solo patrimonio_bruto
-    patch_res = client.post("/api/v1/session/state?session_id=test_partial", json={
-        "persona_natural": {"patrimonio_bruto": 600000000.0}
-    })
+    patch_res = client.post(
+        "/api/v1/session/state?session_id=test_partial",
+        json={"persona_natural": {"patrimonio_bruto": 600000000.0}},
+    )
     assert patch_res.status_code == 200
     data = patch_res.json()
     assert data["metadata"]["nombre"] == "LINA MARIA LOPEZ"
@@ -76,14 +80,20 @@ def test_session_sync_partial_updates():
 
 def test_session_sync_multi_sessions_isolation():
     """Valida el aislamiento estricto entre sesiones concurrentes con IDs distintos."""
-    client.post("/api/v1/session/state?session_id=user_alpha", json={
-        "metadata": {"nombre": "USUARIO ALPHA"},
-        "persona_natural": {"rentas_trabajo": 100000000.0}
-    })
-    client.post("/api/v1/session/state?session_id=user_beta", json={
-        "metadata": {"nombre": "USUARIO BETA"},
-        "persona_natural": {"rentas_trabajo": 990000000.0}
-    })
+    client.post(
+        "/api/v1/session/state?session_id=user_alpha",
+        json={
+            "metadata": {"nombre": "USUARIO ALPHA"},
+            "persona_natural": {"rentas_trabajo": 100000000.0},
+        },
+    )
+    client.post(
+        "/api/v1/session/state?session_id=user_beta",
+        json={
+            "metadata": {"nombre": "USUARIO BETA"},
+            "persona_natural": {"rentas_trabajo": 990000000.0},
+        },
+    )
 
     state_a = client.get("/api/v1/session/state?session_id=user_alpha").json()
     state_b = client.get("/api/v1/session/state?session_id=user_beta").json()
@@ -97,11 +107,14 @@ def test_session_sync_multi_sessions_isolation():
 
 def test_session_sync_reset():
     """Valida el reinicio de la sesión."""
-    client.post("/api/v1/session/state?session_id=to_reset", json={
-        "metadata": {"nombre": "NOMBRE MODIFICADO"},
-        "persona_natural": {"rentas_trabajo": 777000000.0}
-    })
-    
+    client.post(
+        "/api/v1/session/state?session_id=to_reset",
+        json={
+            "metadata": {"nombre": "NOMBRE MODIFICADO"},
+            "persona_natural": {"rentas_trabajo": 777000000.0},
+        },
+    )
+
     reset_res = client.post("/api/v1/session/reset?session_id=to_reset")
     assert reset_res.status_code == 200
     data = reset_res.json()
@@ -120,10 +133,12 @@ def test_session_sync_header_resolution():
     """Verifica la resolución de sesión mediante el Header HTTP 'X-Session-ID'."""
     payload = {
         "metadata": {"nombre": "TEST VIA HEADER"},
-        "persona_natural": {"rentas_trabajo": 333000000.0}
+        "persona_natural": {"rentas_trabajo": 333000000.0},
     }
     # Enviar POST con Header X-Session-ID
-    post_res = client.post("/api/v1/session/state", headers={"X-Session-ID": "ses_header_123"}, json=payload)
+    post_res = client.post(
+        "/api/v1/session/state", headers={"X-Session-ID": "ses_header_123"}, json=payload
+    )
     assert post_res.status_code == 200
     assert post_res.json()["session_id"] == "ses_header_123"
     assert post_res.json()["metadata"]["nombre"] == "TEST VIA HEADER"

@@ -5,16 +5,20 @@ Agrega y consolida transacciones desde un archivo CSV clasificado hacia un paylo
 compatible con la API de TributIA (PersonaNaturalInput / SessionState).
 """
 
-import sys
+import argparse
 import csv
 import json
-import argparse
 from pathlib import Path
-from typing import Dict, Any
+from typing import Any
 
 
-def consolidar_csv_a_payload(csv_path: str, tax_year: int = 2026, custom_uvt: float = 52350.0,
-                              nombre: str = "", nit: str = "") -> Dict[str, Any]:
+def consolidar_csv_a_payload(
+    csv_path: str,
+    tax_year: int = 2026,
+    custom_uvt: float = 52350.0,
+    nombre: str = "",
+    nit: str = "",
+) -> dict[str, Any]:
     path = Path(csv_path)
     if not path.exists():
         raise FileNotFoundError(f"No se encontró el archivo CSV en: {csv_path}")
@@ -53,14 +57,21 @@ def consolidar_csv_a_payload(csv_path: str, tax_year: int = 2026, custom_uvt: fl
     anticipo_ano_anterior = 0.0
     saldo_favor_anterior = 0.0
 
-    with open(path, mode="r", encoding="utf-8-sig") as f:
+    with open(path, encoding="utf-8-sig") as f:
         reader = csv.DictReader(f)
         for row in reader:
             concepto = row.get("concepto_tributario", "").strip().upper()
             cedula = row.get("cedula_destino", "").strip().upper()
             tipo_mov = row.get("tipo_movimiento", "").strip().upper()
-            
-            raw_val = row.get("valor_cop", "0").replace("$", "").replace("'", "").replace(".", "").replace(",", "").strip()
+
+            raw_val = (
+                row.get("valor_cop", "0")
+                .replace("$", "")
+                .replace("'", "")
+                .replace(".", "")
+                .replace(",", "")
+                .strip()
+            )
             try:
                 val = float(raw_val) if raw_val else 0.0
             except ValueError:
@@ -70,9 +81,17 @@ def consolidar_csv_a_payload(csv_path: str, tax_year: int = 2026, custom_uvt: fl
                 continue
 
             # Mapeo según concepto y tipo de movimiento
-            if tipo_mov == "PATRIMONIO_ACTIVO" or concepto == "PATRIMONIO_CUENTAS" or concepto == "PATRIMONIO_BIENES":
+            if (
+                tipo_mov == "PATRIMONIO_ACTIVO"
+                or concepto == "PATRIMONIO_CUENTAS"
+                or concepto == "PATRIMONIO_BIENES"
+            ):
                 patrimonio_bruto += val
-            elif tipo_mov == "PATRIMONIO_PASIVO" or concepto == "DEUDA_HIPOTECARIA" or concepto == "DEUDA_FINANCIERA":
+            elif (
+                tipo_mov == "PATRIMONIO_PASIVO"
+                or concepto == "DEUDA_HIPOTECARIA"
+                or concepto == "DEUDA_FINANCIERA"
+            ):
                 deudas += val
             elif concepto in ("SALARIO", "HONORARIOS_LABORALES", "COMPENSACIONES"):
                 rentas_trabajo += val
@@ -82,7 +101,9 @@ def consolidar_csv_a_payload(csv_path: str, tax_year: int = 2026, custom_uvt: fl
                 rentas_capital += val
             elif concepto == "INCRNGO_CAPITAL":
                 incrngo_capital += val
-            elif concepto == "RENTAS_NOLABORALES" or (cedula == "NO_LABORAL" and tipo_mov == "INGRESO"):
+            elif concepto == "RENTAS_NOLABORALES" or (
+                cedula == "NO_LABORAL" and tipo_mov == "INGRESO"
+            ):
                 rentas_nolaborales += val
             elif concepto == "INCRNGO_NOLABORALES":
                 incrngo_nolaborales += val
@@ -136,7 +157,7 @@ def consolidar_csv_a_payload(csv_path: str, tax_year: int = 2026, custom_uvt: fl
         recon_file = Path("estado_conciliacion.json")
     if recon_file.exists():
         try:
-            with open(recon_file, "r", encoding="utf-8") as rf:
+            with open(recon_file, encoding="utf-8") as rf:
                 reconciliation_state = json.load(rf)
         except Exception:
             pass
@@ -149,7 +170,7 @@ def consolidar_csv_a_payload(csv_path: str, tax_year: int = 2026, custom_uvt: fl
             "tax_year": tax_year,
             "custom_uvt": custom_uvt,
             "active_module": "pn",
-            "active_subtab": "calc"
+            "active_subtab": "calc",
         },
         "persona_natural": {
             "tax_year": tax_year,
@@ -181,9 +202,9 @@ def consolidar_csv_a_payload(csv_path: str, tax_year: int = 2026, custom_uvt: fl
             "ganancias_ocasionales_exentas_solicitadas": go_exentas,
             "retenciones_fuente_practicadas": retenciones_fuente,
             "anticipo_ano_anterior": anticipo_ano_anterior,
-            "saldo_a_favor_ano_anterior": saldo_favor_anterior
+            "saldo_a_favor_ano_anterior": saldo_favor_anterior,
         },
-        "reconciliation": reconciliation_state
+        "reconciliation": reconciliation_state,
     }
     return payload
 
@@ -195,7 +216,9 @@ if __name__ == "__main__":
     parser.add_argument("--uvt", type=float, default=52350.0, help="Valor UVT (default: 52350)")
     parser.add_argument("--nombre", type=str, default="", help="Nombre del declarante")
     parser.add_argument("--nit", type=str, default="", help="NIT del declarante")
-    parser.add_argument("--reconciliation", type=str, default=None, help="Ruta a estado_conciliacion.json")
+    parser.add_argument(
+        "--reconciliation", type=str, default=None, help="Ruta a estado_conciliacion.json"
+    )
     parser.add_argument("--out", type=str, default="", help="Ruta para guardar el JSON resultante")
 
     args = parser.parse_args()
@@ -205,11 +228,11 @@ if __name__ == "__main__":
         tax_year=args.year,
         custom_uvt=args.uvt,
         nombre=args.nombre,
-        nit=args.nit
+        nit=args.nit,
     )
 
     if args.reconciliation and Path(args.reconciliation).exists():
-        with open(args.reconciliation, "r", encoding="utf-8") as rf:
+        with open(args.reconciliation, encoding="utf-8") as rf:
             payload["reconciliation"] = json.load(rf)
 
     json_str = json.dumps(payload, indent=2, ensure_ascii=False)
@@ -219,4 +242,3 @@ if __name__ == "__main__":
         print(f"[OK] Payload guardado exitosamente en: {args.out}")
     else:
         print(json_str)
-

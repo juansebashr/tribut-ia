@@ -75,14 +75,16 @@ La documentación completa del proyecto se encuentra en el directorio [`docs/`](
 
 ## Inicio Rápido
 
-### 1. Clonar y ejecutar:
+### 1. Clonar y ejecutar
+
 ```bash
 git clone https://github.com/juansebashr/tribut-ia.git
 cd tribut-ia
 ./start.sh
 ```
 
-### 2. Acceso:
+### 2. Acceso
+
 - **Aplicación Web**: [http://localhost:8000](http://localhost:8000)
 - **Documentación Swagger**: [http://localhost:8000/docs](http://localhost:8000/docs)
 - **Stream SSE**: [http://localhost:8000/api/v1/session/events](http://localhost:8000/api/v1/session/events)
@@ -94,10 +96,9 @@ cd tribut-ia
 Para ejecutar la suite completa de 35 pruebas unitarias y de integración:
 
 ```bash
-cd backend
-./venv/bin/pytest tests -v
+poetry run pytest backend -v
 ```
 
-```
-======================== 35 passed, 3 warnings in 0.43s ========================
+```text
+======================== 70 passed in 0.94s ========================
 ```

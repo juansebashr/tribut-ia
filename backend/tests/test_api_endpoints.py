@@ -1,5 +1,5 @@
-import pytest
 from fastapi.testclient import TestClient
+
 from app.main import app
 
 client = TestClient(app)
@@ -36,10 +36,9 @@ def test_get_rules_2026():
 
 
 def test_convert_uvt():
-    response = client.post("/api/v1/rules/convert-uvt", json={
-        "tax_year": 2026,
-        "amount_cop": 104700000
-    })
+    response = client.post(
+        "/api/v1/rules/convert-uvt", json={"tax_year": 2026, "amount_cop": 104700000}
+    )
     assert response.status_code == 200
     data = response.json()
     assert data["amount_uvt"] > 0
@@ -51,7 +50,7 @@ def test_api_calculate_pn():
         "rentas_trabajo": 100000000,
         "aporte_salud_obligatorio": 4000000,
         "aporte_pension_obligatorio": 4000000,
-        "aplica_dependiente_general": True
+        "aplica_dependiente_general": True,
     }
     response = client.post("/api/v1/calculate/persona-natural/calculate", json=payload)
     assert response.status_code == 200
@@ -67,7 +66,7 @@ def test_api_calculate_pj():
         "ingresos_brutos_operacionales": 500000000,
         "costos_procedentes": 200000000,
         "gastos_administracion": 100000000,
-        "utilidad_contable_antes_impuestos": 200000000
+        "utilidad_contable_antes_impuestos": 200000000,
     }
     response = client.post("/api/v1/calculate/persona-juridica/calculate", json=payload)
     assert response.status_code == 200

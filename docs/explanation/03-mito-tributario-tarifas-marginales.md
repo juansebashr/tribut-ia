@@ -12,4 +12,3 @@ El impuesto sobre la renta en Colombia opera bajo un sistema de **Tarifas Margin
 - El dinero ganado en los tramos inferiores conserva su tarifa original (0%, 19%, 28%, etc.).
 - Por ejemplo, si aumentas tu ingreso en `$1'000.000 COP` y estás en el tramo marginal del **35%**, el impuesto adicional será de `$350.000 COP` y te quedarán **`$650.000 COP` netos en tu bolsillo (65%)**.
 - **Regla de Oro**: Ganar más dinero bruto siempre resulta en un mayor ingreso neto disponible.
-

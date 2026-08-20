@@ -1,32 +1,36 @@
 import asyncio
 from abc import ABC, abstractmethod
-from datetime import datetime, timezone
-from typing import Dict, List, Optional, Any, AsyncGenerator
+from datetime import UTC, datetime
+from typing import Any
+
 from pydantic import BaseModel, Field
 
 
 class SessionState(BaseModel):
     session_id: str = "default"
     revision: int = 1
-    metadata: Dict[str, Any] = Field(default_factory=lambda: {
-        "nombre": "CARLOS ALBERTO PEREZ GOMEZ",
-        "nit": "1234567890",
-        "tax_year": 2026,
-        "custom_uvt": 52350,
-        "active_module": "pn",
-        "active_subtab": "calc"
-    })
-    persona_natural: Dict[str, Any] = Field(default_factory=dict)
-    persona_juridica: Dict[str, Any] = Field(default_factory=dict)
-    calculation_results: Dict[str, Any] = Field(default_factory=dict)
-    reconciliation: Dict[str, Any] = Field(default_factory=dict)
-    last_updated_at: str = Field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
+    metadata: dict[str, Any] = Field(
+        default_factory=lambda: {
+            "nombre": "CARLOS ALBERTO PEREZ GOMEZ",
+            "nit": "1234567890",
+            "tax_year": 2026,
+            "custom_uvt": 52350,
+            "active_module": "pn",
+            "active_subtab": "calc",
+        }
+    )
+    persona_natural: dict[str, Any] = Field(default_factory=dict)
+    persona_juridica: dict[str, Any] = Field(default_factory=dict)
+    calculation_results: dict[str, Any] = Field(default_factory=dict)
+    reconciliation: dict[str, Any] = Field(default_factory=dict)
+    last_updated_at: str = Field(default_factory=lambda: datetime.now(UTC).isoformat())
 
 
 class SessionStoreBase(ABC):
     """
     Clase base abstracta para almacén de sesiones con soporte para Pub/Sub y eventos en tiempo real.
     """
+
     def _create_default_session(self, session_id: str) -> SessionState:
         return SessionState(
             session_id=session_id,
@@ -37,7 +41,7 @@ class SessionStoreBase(ABC):
                 "tax_year": 2026,
                 "custom_uvt": 52350,
                 "active_module": "pn",
-                "active_subtab": "calc"
+                "active_subtab": "calc",
             },
             persona_natural={
                 "patrimonio_bruto": 300000000.0,
@@ -67,7 +71,7 @@ class SessionStoreBase(ABC):
                 "ganancias_ocasionales_exentas_solicitadas": 0.0,
                 "retenciones_fuente_practicadas": 5000000.0,
                 "anticipo_ano_anterior": 0.0,
-                "saldo_a_favor_ano_anterior": 0.0
+                "saldo_a_favor_ano_anterior": 0.0,
             },
             persona_juridica={
                 "ingresos_brutos_operacionales": 1200000000.0,
@@ -80,8 +84,8 @@ class SessionStoreBase(ABC):
                 "ingresos_no_constitutivos_utilidad": 30000000.0,
                 "costos_gastos_no_deducibles": 25000000.0,
                 "retenciones_fuente_practicadas": 35000000.0,
-                "anticipo_ano_anterior": 15000000.0
-            }
+                "anticipo_ano_anterior": 15000000.0,
+            },
         )
 
     @abstractmethod
@@ -90,10 +94,7 @@ class SessionStoreBase(ABC):
 
     @abstractmethod
     async def update_state(
-        self,
-        session_id: str,
-        payload: Dict[str, Any],
-        source: str = "api"
+        self, session_id: str, payload: dict[str, Any], source: str = "api"
     ) -> SessionState:
         pass
 
@@ -110,5 +111,7 @@ class SessionStoreBase(ABC):
         pass
 
     @abstractmethod
-    async def publish_event(self, session_id: str, event_type: str, data: Dict[str, Any], source: str = "api") -> None:
+    async def publish_event(
+        self, session_id: str, event_type: str, data: dict[str, Any], source: str = "api"
+    ) -> None:
         pass

@@ -70,4 +70,3 @@ float excess_rejected_cop "Exceso desconocido por ley"
 float final_allowed_cop "Valor final aceptado en la depuración"
 }
 ```
-

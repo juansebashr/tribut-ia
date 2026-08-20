@@ -8,6 +8,7 @@
 ---
 
 ## 1. Propósito
+
 Automatiza el flujo documental de personas naturales residentes fiscales en Colombia:
 1. Extrae y desglosa entradas y salidas desde extractos bancarios y certificados tributarios (F220 de ingresos y retenciones, medicina prepagada, créditos hipotecarios).
 2. Realiza el cruce y conciliación automática frente al archivo oficial de Información Exógena de la DIAN.
@@ -20,7 +21,9 @@ Automatiza el flujo documental de personas naturales residentes fiscales en Colo
 ## 2. Scripts Disponibles
 
 ### `conciliar_exogena.py`
+
 Cruza el archivo CSV de transacciones depuradas contra el reporte de Información Exógena DIAN (`.xlsx` o `.csv`) y de facturación electrónica:
+
 ```bash
 python skills/declaracion-renta-persona-natural/scripts/conciliar_exogena.py \
   transacciones_depuradas.csv \
@@ -31,7 +34,9 @@ python skills/declaracion-renta-persona-natural/scripts/conciliar_exogena.py \
 ```
 
 ### `consolidar_transacciones.py`
+
 Agrupa las partidas por cédula y concepto tributario generando el payload JSON estructurado:
+
 ```bash
 python skills/declaracion-renta-persona-natural/scripts/consolidar_transacciones.py \
   transacciones_depuradas.csv \
@@ -44,7 +49,9 @@ python skills/declaracion-renta-persona-natural/scripts/consolidar_transacciones
 ```
 
 ### `inyectar_tributia.py`
+
 Envía el payload a la API REST de TributIA con el ID de sesión del usuario para sincronización instantánea:
+
 ```bash
 python skills/declaracion-renta-persona-natural/scripts/inyectar_tributia.py \
   payload_declaracion.json \

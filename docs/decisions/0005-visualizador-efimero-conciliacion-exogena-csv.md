@@ -7,6 +7,7 @@
 ---
 
 ## 1. Contexto y Problema
+
 Los contribuyentes y contadores en Colombia necesitan conciliar sus certificados tributarios privados (Formularios 220 de ingresos y retenciones, extractos bancarios, certificados de vivienda y medicina prepagada) contra la Información Exógena reportada por terceros a la DIAN.
 
 Sin embargo, los extractos y archivos de transacciones contienen datos financieros sensibles. Guardar permanentemente archivos CSV de transacciones bancarias o laborales en bases de datos o en la sesión de Redis representaría un riesgo innecesario de almacenamiento y violaría el principio de mínima retención de datos fiscales.
@@ -14,6 +15,7 @@ Sin embargo, los extractos y archivos de transacciones contienen datos financier
 ---
 
 ## 2. Decisión Arquitectónica
+
 Se adopta un **modelo de procesamiento 100% efímero y stateless**:
 
 1. **Cero Persistencia**:
@@ -65,9 +67,11 @@ sequenceDiagram
 ## 4. Consecuencias
 
 ### Positivas
+
 - **Máxima Privacidad**: Garantía absoluta de que la información financiera de transacciones no queda persistida en servidores de terceros.
 - **Transparencia y Pedagogía Fiscal**: El usuario comprende exactamente el porqué de cada cifra en su Formulario 210.
 - **Resiliencia Operativa**: Diagnóstico claro de errores en archivos CSV sin fallos opacos.
 
 ### Consideraciones
+
 - Si el usuario recarga el navegador, debe volver a cargar su archivo CSV o presionar *Cargar Ejemplo*. Esta característica está claramente señalizada en la interfaz mediante el banner informativo de privacidad.

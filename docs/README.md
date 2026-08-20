@@ -8,7 +8,7 @@ Esta documentacion sigue el estandar internacional **Diataxis** (adoptado por Gi
 
 ## Cuadrantes Diataxis
 
-```
+```text
                ORIENTADO AL APRENDIZAJE
                           ^
                           |
@@ -27,14 +27,17 @@ Esta documentacion sigue el estandar internacional **Diataxis** (adoptado por Gi
 ```
 
 ### 1. [Tutoriales](./tutorials/) - *Orientado al Aprendizaje*
+
 - [01. Primeros pasos liquidando Persona Natural (F210)](./tutorials/01-primeros-pasos-liquidacion-pn.md): Guia practica para realizar una depuracion completa de cedula general con rentas de trabajo y beneficios.
 
 ### 2. [Guias How-To](./how-to/) - *Orientado a Tareas*
+
 - [01. Sincronizacion Bidireccional API <-> UI](./how-to/01-integracion-api-bidireccional.md): Como conectar agentes autonomos y scripts via REST y Server-Sent Events (SSE).
 - [02. Simular Tasa Minima de Tributacion (TTD - PJ)](./how-to/02-simular-tasa-minima-ttd-pj.md): Como calcular la TTD del 15% (Art. 240 Par. 6 E.T.) y generar el Formulario 110.
 - [03. Consultar Vencimientos por NIT y Calendario DIAN](./how-to/03-consultar-calendario-por-nit.md): Calculo de digito de verificacion (Modulo 11) y plazos tributarios 2026.
 
 ### 3. [Referencias Tecnicas](./reference/) - *Orientado a la Informacion*
+
 - **APIs & Sincronizacion**:
   - [Especificacion OpenAPI / REST Endpoints](./reference/api/rest-endpoints.md)
   - [Canal de Eventos en Tiempo Real (SSE)](./reference/api/sse-events.md)
@@ -51,6 +54,7 @@ Esta documentacion sigue el estandar internacional **Diataxis** (adoptado por Gi
   - [Modelo de Entidades & Estado de Sesion](./reference/architecture/erd/session-state-model.md)
 
 ### 4. [Explicaciones](./explanation/) - *Orientado a la Comprension*
+
 - [01. Arquitectura del Sistema TributIA](./explanation/01-arquitectura-sistema-tributia.md): Filosofia de diseno, arquitectura modular y motor desacoplado.
 - [02. El Sistema Cedular en Colombia (Ley 2277 de 2022)](./explanation/02-sistema-cedular-colombiano.md): Como funciona la cedula general, pensiones, dividendos y ganancias ocasionales.
 - [03. Desmitificando las Tarifas Progresivas en Renta](./explanation/03-mito-tributario-tarifas-marginales.md): Por que ganar mas dinero nunca reduce tu ingreso neto.
@@ -58,6 +62,7 @@ Esta documentacion sigue el estandar internacional **Diataxis** (adoptado por Gi
 ---
 
 ## [Registro de Decisiones Arquitectonicas (ADRs)](./decisions/README.md)
+
 Historial formal de decisiones tecnicas (formato Michael Nygard):
 - [ADR 0001: Motor de Reglas Declarativo en JSON](./decisions/0001-motor-de-reglas-declarativo-json.md)
 - [ADR 0002: Sincronizacion en Tiempo Real con Server-Sent Events (SSE)](./decisions/0002-sincronizacion-bidireccional-sse.md)

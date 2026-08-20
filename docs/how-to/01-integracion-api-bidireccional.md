@@ -40,7 +40,8 @@ curl -X POST "http://localhost:8000/api/v1/session/state?source=api" \
   }'
 ```
 
-### Ejemplo en Python `requests` (para Agentes IA):
+### Ejemplo en Python `requests` (para Agentes IA)
+
 ```python
 import requests
 

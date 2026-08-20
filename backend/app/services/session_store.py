@@ -1,7 +1,8 @@
 import asyncio
 import json
-from datetime import datetime, timezone
-from typing import Dict, List, Optional, Any
+from datetime import UTC, datetime
+from typing import Any
+
 import redis.asyncio as aioredis
 
 from app.core.config import settings
@@ -12,9 +13,10 @@ class InMemorySessionStore(SessionStoreBase):
     """
     Almacén de sesiones en memoria RAM para desarrollo local y tests unitarios.
     """
+
     def __init__(self):
-        self._sessions: Dict[str, SessionState] = {}
-        self._subscribers: Dict[str, List[asyncio.Queue]] = {}
+        self._sessions: dict[str, SessionState] = {}
+        self._subscribers: dict[str, list[asyncio.Queue]] = {}
         self._lock = asyncio.Lock()
         self._sessions["default"] = self._create_default_session("default")
 
@@ -25,10 +27,7 @@ class InMemorySessionStore(SessionStoreBase):
             return self._sessions[session_id]
 
     async def update_state(
-        self,
-        session_id: str,
-        payload: Dict[str, Any],
-        source: str = "api"
+        self, session_id: str, payload: dict[str, Any], source: str = "api"
     ) -> SessionState:
         async with self._lock:
             current = self._sessions.get(session_id)
@@ -56,7 +55,9 @@ class InMemorySessionStore(SessionStoreBase):
 
             # Resultados de cálculo
             new_calc = dict(current.calculation_results)
-            if "calculation_results" in payload and isinstance(payload["calculation_results"], dict):
+            if "calculation_results" in payload and isinstance(
+                payload["calculation_results"], dict
+            ):
                 new_calc.update(payload["calculation_results"])
 
             # Reconciliación exógena
@@ -72,7 +73,7 @@ class InMemorySessionStore(SessionStoreBase):
                 persona_juridica=new_pj,
                 calculation_results=new_calc,
                 reconciliation=new_rec,
-                last_updated_at=datetime.now(timezone.utc).isoformat()
+                last_updated_at=datetime.now(UTC).isoformat(),
             )
             self._sessions[session_id] = updated_state
 
@@ -85,9 +86,9 @@ class InMemorySessionStore(SessionStoreBase):
                 "revision": new_revision,
                 "source": source,
                 "timestamp": updated_state.last_updated_at,
-                "state": updated_state.model_dump()
+                "state": updated_state.model_dump(),
             },
-            source=source
+            source=source,
         )
         return updated_state
 
@@ -103,8 +104,8 @@ class InMemorySessionStore(SessionStoreBase):
                 "session_id": session_id,
                 "revision": 1,
                 "timestamp": default_state.last_updated_at,
-                "state": default_state.model_dump()
-            }
+                "state": default_state.model_dump(),
+            },
         )
         return default_state
 
@@ -112,7 +113,7 @@ class InMemorySessionStore(SessionStoreBase):
         async with self._lock:
             if session_id not in self._subscribers:
                 self._subscribers[session_id] = []
-            queue = asyncio.Queue(maxsize=100)
+            queue: asyncio.Queue[Any] = asyncio.Queue(maxsize=100)
             self._subscribers[session_id].append(queue)
             return queue
 
@@ -122,11 +123,7 @@ class InMemorySessionStore(SessionStoreBase):
                 self._subscribers[session_id].remove(queue)
 
     async def publish_event(
-        self,
-        session_id: str,
-        event_type: str,
-        data: Dict[str, Any],
-        source: str = "api"
+        self, session_id: str, event_type: str, data: dict[str, Any], source: str = "api"
     ) -> None:
         async with self._lock:
             subscribers = list(self._subscribers.get(session_id, []))
@@ -144,21 +141,22 @@ class RedisSessionStore(SessionStoreBase):
     Almacén de sesiones distribuido en Redis con TTL de 1 día y Pub/Sub
     para sincronización en tiempo real entre múltiples instancias de GCP Cloud Run.
     """
-    def __init__(self, redis_url: str = settings.REDIS_URL, ttl_seconds: int = settings.REDIS_SESSION_TTL_SECONDS):
+
+    def __init__(
+        self,
+        redis_url: str = settings.REDIS_URL,
+        ttl_seconds: int = settings.REDIS_SESSION_TTL_SECONDS,
+    ):
         self.redis_url = redis_url
         self.ttl_seconds = ttl_seconds
-        self._redis: Optional[aioredis.Redis] = None
-        self._local_subscribers: Dict[str, List[asyncio.Queue]] = {}
-        self._pubsub_tasks: Dict[str, asyncio.Task] = {}
+        self._redis: aioredis.Redis | None = None
+        self._local_subscribers: dict[str, list[asyncio.Queue]] = {}
+        self._pubsub_tasks: dict[str, asyncio.Task] = {}
         self._lock = asyncio.Lock()
 
     async def _get_client(self) -> aioredis.Redis:
         if self._redis is None:
-            self._redis = aioredis.from_url(
-                self.redis_url,
-                encoding="utf-8",
-                decode_responses=True
-            )
+            self._redis = aioredis.from_url(self.redis_url, encoding="utf-8", decode_responses=True)
         return self._redis
 
     def _get_key(self, session_id: str) -> str:
@@ -183,10 +181,7 @@ class RedisSessionStore(SessionStoreBase):
         return SessionState(**data)
 
     async def update_state(
-        self,
-        session_id: str,
-        payload: Dict[str, Any],
-        source: str = "api"
+        self, session_id: str, payload: dict[str, Any], source: str = "api"
     ) -> SessionState:
         client = await self._get_client()
         key = self._get_key(session_id)
@@ -228,7 +223,7 @@ class RedisSessionStore(SessionStoreBase):
             persona_juridica=new_pj,
             calculation_results=new_calc,
             reconciliation=new_rec,
-            last_updated_at=datetime.now(timezone.utc).isoformat()
+            last_updated_at=datetime.now(UTC).isoformat(),
         )
 
         # Guardar en Redis con TTL de 1 día (86.400s)
@@ -243,9 +238,9 @@ class RedisSessionStore(SessionStoreBase):
                 "revision": new_revision,
                 "source": source,
                 "timestamp": updated_state.last_updated_at,
-                "state": updated_state.model_dump()
+                "state": updated_state.model_dump(),
             },
-            source=source
+            source=source,
         )
 
         return updated_state
@@ -264,8 +259,8 @@ class RedisSessionStore(SessionStoreBase):
                 "session_id": session_id,
                 "revision": 1,
                 "timestamp": default_state.last_updated_at,
-                "state": default_state.model_dump()
-            }
+                "state": default_state.model_dump(),
+            },
         )
         return default_state
 
@@ -275,7 +270,7 @@ class RedisSessionStore(SessionStoreBase):
             client = await self._get_client()
             pubsub = client.pubsub()
             await pubsub.subscribe(channel_name)
-            
+
             async for message in pubsub.listen():
                 if message["type"] == "message":
                     payload_str = message["data"]
@@ -295,7 +290,7 @@ class RedisSessionStore(SessionStoreBase):
         async with self._lock:
             if session_id not in self._local_subscribers:
                 self._local_subscribers[session_id] = []
-            queue = asyncio.Queue(maxsize=100)
+            queue: asyncio.Queue[Any] = asyncio.Queue(maxsize=100)
             self._local_subscribers[session_id].append(queue)
 
             # Iniciar listener de Pub/Sub si no existe para esta sesión
@@ -308,7 +303,10 @@ class RedisSessionStore(SessionStoreBase):
 
     async def unsubscribe(self, session_id: str, queue: asyncio.Queue) -> None:
         async with self._lock:
-            if session_id in self._local_subscribers and queue in self._local_subscribers[session_id]:
+            if (
+                session_id in self._local_subscribers
+                and queue in self._local_subscribers[session_id]
+            ):
                 self._local_subscribers[session_id].remove(queue)
                 # Si no quedan clientes en esta instancia, cancelar la tarea de Pub/Sub
                 if len(self._local_subscribers[session_id]) == 0:
@@ -317,11 +315,7 @@ class RedisSessionStore(SessionStoreBase):
                         task.cancel()
 
     async def publish_event(
-        self,
-        session_id: str,
-        event_type: str,
-        data: Dict[str, Any],
-        source: str = "api"
+        self, session_id: str, event_type: str, data: dict[str, Any], source: str = "api"
     ) -> None:
         client = await self._get_client()
         channel = self._get_channel(session_id)
@@ -334,8 +328,7 @@ def create_session_store() -> SessionStoreBase:
     backend_type = settings.SESSION_STORE_BACKEND.lower()
     if backend_type == "redis":
         return RedisSessionStore(
-            redis_url=settings.REDIS_URL,
-            ttl_seconds=settings.REDIS_SESSION_TTL_SECONDS
+            redis_url=settings.REDIS_URL, ttl_seconds=settings.REDIS_SESSION_TTL_SECONDS
         )
     return InMemorySessionStore()
 

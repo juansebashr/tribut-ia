@@ -53,4 +53,3 @@ end
 Liquidator-->>Endpoint: PersonaNaturalOutput (Resultados + Trazabilidad de Auditoría)
 Endpoint-->>UI: JSON HTTP 200
 ```
-

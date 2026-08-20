@@ -1,4 +1,3 @@
-import pytest
 from app.models.persona_juridica import PersonaJuridicaInput
 from app.services.liquidacion_pj import liquidar_persona_juridica
 
@@ -19,7 +18,7 @@ def test_persona_juridica_formulario_110_estandar():
         utilidad_contable_antes_impuestos=200000000,
         descuento_tributario_ica=10000000,
         retenciones_en_la_fuente=30000000,
-        autorretenciones_practicadas=15000000
+        autorretenciones_practicadas=15000000,
     )
 
     result = liquidar_persona_juridica(input_data)
@@ -60,9 +59,9 @@ def test_persona_juridica_tasa_minima_ttd_gatillada():
         ingresos_brutos_operacionales=500000000,
         costos_procedentes=300000000,
         gastos_administracion=150000000,
-        utilidad_contable_antes_impuestos=300000000, # Gran utilidad comercial pero renta gravable baja por beneficios
+        utilidad_contable_antes_impuestos=300000000,  # Gran utilidad comercial pero renta gravable baja por beneficios
         rentas_exentas=40000000,
-        retenciones_en_la_fuente=0
+        retenciones_en_la_fuente=0,
     )
 
     result = liquidar_persona_juridica(input_data)

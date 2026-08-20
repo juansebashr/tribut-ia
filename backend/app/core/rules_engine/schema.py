@@ -1,4 +1,3 @@
-from typing import List, Optional
 from pydantic import BaseModel, Field
 
 
@@ -16,16 +15,10 @@ class DeduccionesRules(BaseModel):
     dependientes_adicionales_72uvt: dict = Field(
         default_factory=lambda: {"tope_uvt_por_dependiente": 72, "max_dependientes": 4}
     )
-    medicina_prepagada: dict = Field(
-        default_factory=lambda: {"tope_uvt_anual": 192}
-    )
-    intereses_vivienda: dict = Field(
-        default_factory=lambda: {"tope_uvt_anual": 1200}
-    )
-    gmf: dict = Field(
-        default_factory=lambda: {"porcentaje_deducible": 0.50}
-    )
-    compras_factura_electronica_1pct: Optional[dict] = Field(
+    medicina_prepagada: dict = Field(default_factory=lambda: {"tope_uvt_anual": 192})
+    intereses_vivienda: dict = Field(default_factory=lambda: {"tope_uvt_anual": 1200})
+    gmf: dict = Field(default_factory=lambda: {"porcentaje_deducible": 0.50})
+    compras_factura_electronica_1pct: dict | None = Field(
         default_factory=lambda: {"porcentaje_compras": 0.01, "tope_uvt": 240}
     )
 
@@ -34,18 +27,16 @@ class RentasExentasRules(BaseModel):
     voluntarias_pension_afc: dict = Field(
         default_factory=lambda: {"porcentaje_max_ingreso": 0.30, "tope_uvt": 3800}
     )
-    laboral_25: dict = Field(
-        default_factory=lambda: {"porcentaje": 0.25, "tope_uvt": 790}
-    )
+    laboral_25: dict = Field(default_factory=lambda: {"porcentaje": 0.25, "tope_uvt": 790})
 
 
 class GananciaOcasionalRules(BaseModel):
     tarifa_general: float = 0.15
     tarifa_loterias_rifas: float = 0.20
     exencion_vivienda_urbana_uvt: float = 3250  # Art. 307 Numeral 1
-    exencion_inmueble_rural_uvt: float = 7700   # Art. 307 Numeral 2
+    exencion_inmueble_rural_uvt: float = 7700  # Art. 307 Numeral 2
     exencion_herencias_donaciones_porcentaje: float = 0.20
-    exencion_herencias_donaciones_tope_uvt: float = 1625 # Art. 307 Numeral 4
+    exencion_herencias_donaciones_tope_uvt: float = 1625  # Art. 307 Numeral 4
 
 
 class LimiteConjuntoRules(BaseModel):
@@ -57,7 +48,7 @@ class CedulaGeneralRules(BaseModel):
     limite_conjunto_rentas_exentas_deducciones: LimiteConjuntoRules
     deducciones: DeduccionesRules
     rentas_exentas: RentasExentasRules
-    tabla_marginal_art241: List[TablaMarginalBracket]
+    tabla_marginal_art241: list[TablaMarginalBracket]
 
 
 class PersonaNaturalRules(BaseModel):
@@ -92,7 +83,7 @@ class BeneficioAuditoriaRules(BaseModel):
 class TaxYearRules(BaseModel):
     tax_year: int
     uvt_value: float
-    description: Optional[str] = None
+    description: str | None = None
     persona_natural: PersonaNaturalRules
     persona_juridica: PersonaJuridicaRules
     beneficio_auditoria: BeneficioAuditoriaRules = Field(default_factory=BeneficioAuditoriaRules)

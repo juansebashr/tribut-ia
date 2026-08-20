@@ -22,13 +22,13 @@ Correspondencia canónica entre el modelo de datos de **TributIA** y las casilla
 | **33** | `incrngo_trabajo` | Ingresos no constitutivos de renta (INCRNGO) | Aportes obligatorios a Salud (4%) y Pensión (4% + FSP). Art. 55-56 E.T. |
 | **34** | `renta_liquida_trabajo` | Renta líquida de trabajo | $\text{C34} = \text{C32} - \text{C33}$ |
 | **35** | `rentas_exentas_trabajo` | Rentas exentas de trabajo | 25% exenta laboral (Art. 206 Num. 10 - tope 790 UVT) + Aportes AFC/FVP. |
-| **36** | `deducciones_imputables_trabajo`| Deducciones imputables ordinarias | 10% dependiente general, intereses vivienda, medicina prepagada, 50% GMF. |
-| **37** | `rentas_exentas_deducciones_limitadas`| Total exenciones y deducciones limitadas | $\min(\text{C35} + \text{C36}, \min(0.40 \times \text{C34}, 1.340 \text{ UVT}))$ |
-| **38** | `renta_liquida_ordinaria_trabajo`| Renta líquida ordinaria | $\text{C38} = \text{C34} - \text{C37}$ |
+| **36** | `deducciones_imputables_trabajo` | Deducciones imputables ordinarias | 10% dependiente general, intereses vivienda, medicina prepagada, 50% GMF. |
+| **37** | `rentas_exentas_deducciones_limitadas` | Total exenciones y deducciones limitadas | $\min(\text{C35} + \text{C36}, \min(0.40 \times \text{C34}, 1.340 \text{ UVT}))$ |
+| **38** | `renta_liquida_ordinaria_trabajo` | Renta líquida ordinaria | $\text{C38} = \text{C34} - \text{C37}$ |
 | **39** | `deduccion_dependientes_72uvt` | Deducción por dependientes adicionales | Hasta 4 dependientes adicionales a 72 UVT c/u (Art. 336 Num. 2). Extra-cupo. |
-| **40** | `deduccion_factura_electronica`| Deducción del 1% compras factura electrónica | 1% de compras pagadas electrónicamente (Tope 240 UVT - Art. 336 Num. 5). Extra-cupo. |
-| **41** | `total_exentas_deducciones_trabajo`| Total rentas exentas y deducciones de trabajo | $\text{C41} = \text{C37} + \text{C39} + \text{C40}$ |
-| **42** | `renta_liquida_gravable_trabajo`| **Renta líquida gravable de trabajo** | $\mathbf{\text{C42} = \max(0, \text{C34} - \text{C41})}$ |
+| **40** | `deduccion_factura_electronica` | Deducción del 1% compras factura electrónica | 1% de compras pagadas electrónicamente (Tope 240 UVT - Art. 336 Num. 5). Extra-cupo. |
+| **41** | `total_exentas_deducciones_trabajo` | Total rentas exentas y deducciones de trabajo | $\text{C41} = \text{C37} + \text{C39} + \text{C40}$ |
+| **42** | `renta_liquida_gravable_trabajo` | **Renta líquida gravable de trabajo** | $\mathbf{\text{C42} = \max(0, \text{C34} - \text{C41})}$ |
 
 ---
 
@@ -39,9 +39,9 @@ Correspondencia canónica entre el modelo de datos de **TributIA** y las casilla
 | **46** | `rentas_capital` | Ingresos brutos por rentas de capital | Intereses, rendimientos financieros, arrendamientos y regalías. |
 | **47** | `incrngo_capital` | INCRNGO rentas de capital | Componente inflacionario sobre rendimientos financieros (Art. 38, 40-1 E.T.). |
 | **48** | `renta_liquida_capital` | Renta líquida rentas de capital | $\text{C48} = \text{C46} - \text{C47}$ |
-| **54** | `rentas_exentas_deducciones_capital`| Rentas exentas y deducciones limitadas de capital | Limitadas al 40% / 1.340 UVT conjunto. |
-| **55** | `deduccion_factura_elec_capital`| Deducción 1% compras factura electrónica (Capital) | Art. 336 Num. 5 E.T. |
-| **56** | `renta_liquida_gravable_capital`| **Renta líquida gravable de capital** | $\mathbf{\text{C56} = \max(0, \text{C48} - \text{C54} - \text{C55})}$ |
+| **54** | `rentas_exentas_deducciones_capital` | Rentas exentas y deducciones limitadas de capital | Limitadas al 40% / 1.340 UVT conjunto. |
+| **55** | `deduccion_factura_elec_capital` | Deducción 1% compras factura electrónica (Capital) | Art. 336 Num. 5 E.T. |
+| **56** | `renta_liquida_gravable_capital` | **Renta líquida gravable de capital** | $\mathbf{\text{C56} = \max(0, \text{C48} - \text{C54} - \text{C55})}$ |
 
 ---
 
@@ -51,11 +51,11 @@ Correspondencia canónica entre el modelo de datos de **TributIA** y las casilla
 | :---: | :--- | :--- | :--- |
 | **58** | `rentas_nolaborales` | Ingresos brutos rentas no laborales | Comercio, honorarios no laborales, venta de activos $< 2$ años. |
 | **59** | `incrngo_nolaborales` | INCRNGO rentas no laborales | Art. 36-1 a 57 E.T. |
-| **60** | `costos_procedentes_nolaborales`| Costos y deducciones procedentes | Costos directos de operación con soporte (Art. 107 E.T.). |
+| **60** | `costos_procedentes_nolaborales` | Costos y deducciones procedentes | Costos directos de operación con soporte (Art. 107 E.T.). |
 | **61** | `renta_liquida_nolaborales` | Renta líquida no laboral | $\text{C61} = \max(0, \text{C58} - \text{C59} - \text{C60})$ |
-| **70** | `rentas_exentas_deducciones_nolab`| Rentas exentas y deducciones limitadas no laborales | Limitadas al 40% / 1.340 UVT conjunto. |
+| **70** | `rentas_exentas_deducciones_nolab` | Rentas exentas y deducciones limitadas no laborales | Limitadas al 40% / 1.340 UVT conjunto. |
 | **71** | `deduccion_factura_elec_nolab` | Deducción 1% compras factura electrónica (No Laboral) | Art. 336 Num. 5 E.T. |
-| **72** | `renta_liquida_gravable_nolaboral`| **Renta líquida gravable no laboral** | $\mathbf{\text{C72} = \max(0, \text{C61} - \text{C70} - \text{C71})}$ |
+| **72** | `renta_liquida_gravable_nolaboral` | **Renta líquida gravable no laboral** | $\mathbf{\text{C72} = \max(0, \text{C61} - \text{C70} - \text{C71})}$ |
 
 ---
 

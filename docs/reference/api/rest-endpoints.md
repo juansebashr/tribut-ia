@@ -24,12 +24,14 @@ X-Session-ID: ses_9b8f2c3d4e5f6a7b
 ## 1. Módulo de Sesión y Sincronización en Tiempo Real (`/session`)
 
 ### `GET /session/current`
+
 Retorna la información y el identificador de la sesión activa asignada al cliente.
 
 **Headers**:
 - `X-Session-ID` (Opcional): Si se provee, retorna y valida esa sesión.
 
 **Response 200 OK**:
+
 ```json
 {
   "session_id": "ses_7c9e6679742540de",
@@ -41,12 +43,14 @@ Retorna la información y el identificador de la sesión activa asignada al clie
 ---
 
 ### `GET /session/state`
+
 Obtiene el estado completo actual de la sesión en Redis (metadatos, datos de Persona Natural, Persona Jurídica y resultados de liquidación del Formulario 210 / 110).
 
 **Headers**:
 - `X-Session-ID: <session_id>`
 
 **Response 200 OK**:
+
 ```json
 {
   "session_id": "ses_7c9e6679742540de",
@@ -76,6 +80,7 @@ Obtiene el estado completo actual de la sesión en Redis (metadatos, datos de Pe
 ---
 
 ### `POST /session/state`
+
 Inyecta o actualiza datos en la sesión activa en Redis, ejecuta el recálculo tributario automático y publica un evento en el canal Pub/Sub `session:{id}:events` para actualizar la pantalla web conectada en tiempo real.
 
 **Headers**:
@@ -86,6 +91,7 @@ Inyecta o actualiza datos en la sesión activa en Redis, ejecuta el recálculo t
 - `source`: `"api"` (por defecto) o `"ui"`.
 
 **Payload Request**:
+
 ```json
 {
   "metadata": {
@@ -106,6 +112,7 @@ Inyecta o actualiza datos en la sesión activa en Redis, ejecuta el recálculo t
 ---
 
 ### `GET /session/events`
+
 Canal de streaming Server-Sent Events (SSE) al que se conecta el navegador para recibir notificaciones en vivo.
 
 **Headers**:
@@ -113,6 +120,7 @@ Canal de streaming Server-Sent Events (SSE) al que se conecta el navegador para 
 - Cookie `tributia_sid` automática o query param `?session_id=...`.
 
 **Formato de Eventos SSE**:
+
 ```http
 event: state_update
 data: {"type": "state_update", "source": "api", "session_id": "ses_7c9e...", "revision": 4, "state": {...}}
@@ -124,6 +132,7 @@ data: {"time": 1723456789.12}
 ---
 
 ### `POST /session/reset`
+
 Restablece todos los datos de la sesión actual a sus valores iniciales en blanco.
 
 **Headers**:
@@ -134,9 +143,11 @@ Restablece todos los datos de la sesión actual a sus valores iniciales en blanc
 ## 2. Módulo de Liquidación Tributaria (`/calculate`)
 
 ### `POST /calculate/persona-natural/calculate`
+
 Calcula la depuración de Renta para Personas Naturales (Cédula General, Ganancias Ocasionales y Formulario 210) sin persistir estado.
 
 **Payload Request**:
+
 ```json
 {
   "tax_year": 2025,
@@ -178,14 +189,17 @@ Calcula la depuración de Renta para Personas Naturales (Cédula General, Gananc
 ## 6. Módulo de Conciliación Exógena & CSV (`/reconciliation`) — *100% Efímero / Stateless*
 
 ### `POST /reconciliation/parse-csv`
+
 Procesa un archivo `.csv` vía `multipart/form-data`, valida encabezados y tipos de datos numéricos y de fecha, cruza valores contra la Información Exógena DIAN y retorna la estructura del spreadsheet fiscal con explicaciones didácticas de casilla por fila. **No almacena datos en base de datos ni en Redis.**
 
 ### `POST /reconciliation/parse-raw`
+
 Procesa el contenido CSV enviado como texto plano (`text/plain`).
 
 ### `GET /reconciliation/demo`
+
 Retorna el dataset de demostración precargado de 8 transacciones certificadas para visualización inmediata en el spreadsheet.
 
 ### `GET /reconciliation/template`
-Descarga la plantilla CSV oficial (`plantilla_transacciones_tributia.csv`) con los encabezados requeridos para diligenciar transacciones.
 
+Descarga la plantilla CSV oficial (`plantilla_transacciones_tributia.csv`) con los encabezados requeridos para diligenciar transacciones.

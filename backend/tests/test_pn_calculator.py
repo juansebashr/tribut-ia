@@ -1,4 +1,5 @@
 import pytest
+
 from app.models.persona_natural import PersonaNaturalInput
 from app.services.liquidacion_pn import liquidar_persona_natural
 
@@ -24,7 +25,7 @@ def test_persona_natural_excel_benchmark_2022():
         descuentos_tributarios=0,
         retenciones_fuente_practicadas=0,
         anticipo_ano_anterior=0,
-        saldo_a_favor_ano_anterior=0
+        saldo_a_favor_ano_anterior=0,
     )
 
     result = liquidar_persona_natural(input_data)
@@ -79,12 +80,12 @@ def test_persona_natural_2026_con_dependientes_adicionales_y_compras():
         aporte_pension_obligatorio=4800000,
         aplica_dependiente_general=True,
         numero_dependientes_adicionales_72uvt=2,  # 2 * 72 UVT = 144 UVT
-        medicina_prepagada_anual=10000000,       # Tope 192 UVT ($10.051.200)
-        intereses_vivienda_anual=15000000,       # Tope 1200 UVT ($62.820.000)
-        gmf_4x1000_total=2000000,                # 50% = $1.000.000
-        compras_factura_electronica=50000000,    # 1% = $500.000 (Tope 240 UVT)
+        medicina_prepagada_anual=10000000,  # Tope 192 UVT ($10.051.200)
+        intereses_vivienda_anual=15000000,  # Tope 1200 UVT ($62.820.000)
+        gmf_4x1000_total=2000000,  # 50% = $1.000.000
+        compras_factura_electronica=50000000,  # 1% = $500.000 (Tope 240 UVT)
         aportes_voluntarios_pension_afc=15000000,
-        retenciones_fuente_practicadas=5000000
+        retenciones_fuente_practicadas=5000000,
     )
 
     result = liquidar_persona_natural(input_data)

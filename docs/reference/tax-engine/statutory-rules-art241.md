@@ -23,4 +23,3 @@ El Artículo 241 del Estatuto Tributario establece la tarifa progresiva para la 
 Todos los valores monetarios en los formularios oficiales de la DIAN se redondean al **múltiplo de mil más cercano**:
 
 $$\text{Valor Redondeado} = \text{round}(\text{Valor COP}, -3)$$
-

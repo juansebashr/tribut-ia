@@ -1,9 +1,11 @@
 # ADR 0004: Persistencia en Redis, Aislamiento de Sesiones por Dispositivo sin Login y Despliegue en GCP Cloud Run
 
 ## Estado
+
 **Aceptado** (2026-08)
 
 ## Contexto
+
 TributIA fue concebida inicialmente como una aplicación de cálculo tributario y sincronización reactiva local con almacenamiento de sesión en memoria volátil de proceso (`InMemorySessionStore`).
 
 Al planear el despliegue a producción en **Google Cloud Platform (GCP) Cloud Run**, surgieron los siguientes requerimientos y limitaciones técnicas:
@@ -42,7 +44,8 @@ graph TD
     API1 -- "Transmite SSE" --> WEB
 ```
 
-### Principios de la Decisión:
+### Principios de la Decisión
+
 1. **Redis como Motor de Sesión Central**:
    - Clave: `session:{session_id}` con serialización JSON de `SessionState` y `revision: int`.
    - **TTL de 1 Día (`86.400 segundos`) con Rolling Renewal**: Cada lectura o escritura renueva el tiempo de vida por otras 24 horas. Sesiones inactivas expiran automáticamente.
@@ -59,11 +62,13 @@ graph TD
 ## Consecuencias
 
 ### Positivas
+
 - **Alta Disponibilidad en Cloud Run**: Contenedores 100% stateless capaces de escalar de 0 a N réplicas sin perder sesiones de usuario.
 - **Rendimiento Sub-Milisegundo**: Lecturas y escrituras atómicas en memoria RAM con Redis.
 - **Cero Fricción**: El usuario abre la URL y comienza a liquidar de inmediato; su sesión queda aislada de manera transparente.
 - **Interoperabilidad Total con Agentes**: Los agentes IA pueden inyectar datos en tiempo real mediante la cabecera `X-Session-ID`.
 
 ### Negativas / Mitigaciones
+
 - **Dependencia de Redis en Producción**: Requiere una instancia de Redis (GCP Cloud Memorystore o servicio gestionado).
   *Mitigación*: Fallback automático a `InMemorySessionStore` en entornos locales y testing.

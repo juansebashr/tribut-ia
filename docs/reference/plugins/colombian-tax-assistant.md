@@ -6,7 +6,7 @@ El plugin **`colombian-tax-assistant`** es el paquete principal de extensiones, 
 
 ## 1. Estructura del Plugin
 
-```
+```text
 colombian-tax-assistant/
 ├── .claude-plugin/
 │   └── plugin.json                    # Manifiesto y registro de habilidades

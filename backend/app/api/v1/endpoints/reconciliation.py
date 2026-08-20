@@ -1,10 +1,10 @@
 import csv
 import io
-import re
-from typing import List, Dict, Any, Optional, Tuple
-from fastapi import APIRouter, UploadFile, File, HTTPException, Body
+from typing import Any
+
+from fastapi import APIRouter, Body, File, HTTPException, UploadFile
 from fastapi.responses import PlainTextResponse
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 
 router = APIRouter()
 
@@ -48,7 +48,9 @@ class ReconciliationItem(BaseModel):
     beneficio_asociado: str
     confianza_clasificacion: str
     observaciones: str
-    estado_exogena: str  # MATCH_EXACTO, DIFERENCIA_JUSTIFICADA, SOLO_EN_CERTIFICADOS, DISCREPANCIA_ALERTA
+    estado_exogena: (
+        str  # MATCH_EXACTO, DIFERENCIA_JUSTIFICADA, SOLO_EN_CERTIFICADOS, DISCREPANCIA_ALERTA
+    )
     valor_exogena_cop: float
     diferencia_exogena_cop: float
     resolucion_usuario: str
@@ -72,9 +74,9 @@ class ReconciliationParseResponse(BaseModel):
     is_ephemeral: bool = True
     notice: str = "🔒 Visualización Efímera en Tiempo Real: Datos procesados únicamente en memoria para auditoría. No se almacena en base de datos ni en Redis."
     kpis: ReconciliationKpis
-    items: List[ReconciliationItem]
+    items: list[ReconciliationItem]
     total_errors: int = 0
-    errors: List[CsvValidationError] = []
+    errors: list[CsvValidationError] = []
 
 
 def _detect_delimiter(sample_text: str) -> str:
@@ -107,7 +109,9 @@ def _clean_numeric_value(val_str: Any) -> float:
     return float(s)
 
 
-def _generate_didactic_explanation(cedula: str, concepto: str, estado: str, dif: float) -> Tuple[str, str]:
+def _generate_didactic_explanation(
+    cedula: str, concepto: str, estado: str, dif: float
+) -> tuple[str, str]:
     """Genera la casilla sugerida del F210 y la justificación didáctica para el contribuyente."""
     cedula_upper = cedula.upper()
     concepto_upper = concepto.upper()
@@ -139,7 +143,9 @@ def _generate_didactic_explanation(cedula: str, concepto: str, estado: str, dif:
         explicacion = "Ingresos por intereses, rendimientos financieros, arrendamientos o regalías."
     elif "NOLABORAL" in cedula_upper:
         casilla = "Casilla 74 a 89 (Rentas No Laborales)"
-        explicacion = "Honorarios no laborales o comercio independiente con costos procedentes soportados."
+        explicacion = (
+            "Honorarios no laborales o comercio independiente con costos procedentes soportados."
+        )
     elif "PATRIMONIO" in cedula_upper:
         if "PASIVO" in concepto_upper or "DEUDA" in concepto_upper:
             casilla = "Casilla 30 (Deudas a 31 de Diciembre)"
@@ -152,7 +158,9 @@ def _generate_didactic_explanation(cedula: str, concepto: str, estado: str, dif:
         explicacion = "Transacción clasificada según naturaleza contable del contribuyente."
 
     if estado == "MATCH_EXACTO":
-        explicacion += " ✓ Conciliado al 100% con el reporte de terceros en la Información Exógena DIAN."
+        explicacion += (
+            " ✓ Conciliado al 100% con el reporte de terceros en la Información Exógena DIAN."
+        )
     elif estado == "SOLO_EN_CERTIFICADOS":
         explicacion += f" ℹ️ Deducción soportada en certificado privado (${dif:,.0f} COP) no reportada obligatoriamente en exógena bancaria estándar."
     elif estado == "DISCREPANCIA_ALERTA":
@@ -171,7 +179,9 @@ def process_csv_content(csv_text: str) -> ReconciliationParseResponse:
     reader = csv.DictReader(f, delimiter=delimiter)
 
     if not reader.fieldnames:
-        raise HTTPException(status_code=400, detail="No se pudieron identificar los encabezados del archivo CSV.")
+        raise HTTPException(
+            status_code=400, detail="No se pudieron identificar los encabezados del archivo CSV."
+        )
 
     # Normalizar encabezados (quitar espacios, minúsculas)
     header_map = {orig: orig.strip().lower() for orig in reader.fieldnames}
@@ -188,12 +198,12 @@ def process_csv_content(csv_text: str) -> ReconciliationParseResponse:
                 "error_type": "MISSING_HEADERS",
                 "message": f"Faltan columnas obligatorias en el archivo CSV: {', '.join(missing)}",
                 "required_columns": list(required_keys),
-                "detected_columns": list(clean_headers)
-            }
+                "detected_columns": list(clean_headers),
+            },
         )
 
-    items: List[ReconciliationItem] = []
-    errors: List[CsvValidationError] = []
+    items: list[ReconciliationItem] = []
+    errors: list[CsvValidationError] = []
 
     total_declarado = 0.0
     total_exogena = 0.0
@@ -206,7 +216,9 @@ def process_csv_content(csv_text: str) -> ReconciliationParseResponse:
     for raw_row in reader:
         row_idx += 1
         # Mapear claves limpias
-        row = {header_map[k]: (v.strip() if v else "") for k, v in raw_row.items() if k in header_map}
+        row = {
+            header_map[k]: (v.strip() if v else "") for k, v in raw_row.items() if k in header_map
+        }
 
         row_id = row.get("id") or str(row_idx - 1)
         fecha = row.get("fecha", "")
@@ -226,37 +238,50 @@ def process_csv_content(csv_text: str) -> ReconciliationParseResponse:
         try:
             val_cop = _clean_numeric_value(row.get("valor_cop", "0"))
         except Exception as e:
-            errors.append(CsvValidationError(
-                row=row_idx,
-                column="valor_cop",
-                value=str(row.get("valor_cop")),
-                error=f"Formato numérico inválido: {e}"
-            ))
+            errors.append(
+                CsvValidationError(
+                    row=row_idx,
+                    column="valor_cop",
+                    value=str(row.get("valor_cop")),
+                    error=f"Formato numérico inválido: {e}",
+                )
+            )
             continue
 
         # Validación de valor exógena
         try:
             val_exo = _clean_numeric_value(row.get("valor_exogena_cop", "0"))
         except Exception as e:
-            errors.append(CsvValidationError(
-                row=row_idx,
-                column="valor_exogena_cop",
-                value=str(row.get("valor_exogena_cop")),
-                error=f"Formato numérico de exógena inválido: {e}"
-            ))
+            errors.append(
+                CsvValidationError(
+                    row=row_idx,
+                    column="valor_exogena_cop",
+                    value=str(row.get("valor_exogena_cop")),
+                    error=f"Formato numérico de exógena inválido: {e}",
+                )
+            )
             continue
 
         # Determinar estado de conciliación si no viene explícito
         estado = row.get("estado_exogena", "").upper()
         diferencia = abs(val_cop - val_exo)
 
-        if not estado or estado not in ("MATCH_EXACTO", "DIFERENCIA_JUSTIFICADA", "SOLO_EN_CERTIFICADOS", "DISCREPANCIA_ALERTA"):
+        if not estado or estado not in (
+            "MATCH_EXACTO",
+            "DIFERENCIA_JUSTIFICADA",
+            "SOLO_EN_CERTIFICADOS",
+            "DISCREPANCIA_ALERTA",
+        ):
             if val_cop > 0 and val_exo > 0 and diferencia == 0:
                 estado = "MATCH_EXACTO"
             elif val_exo == 0 and val_cop > 0:
                 estado = "SOLO_EN_CERTIFICADOS"
             elif diferencia > 0:
-                estado = "DIFERENCIA_JUSTIFICADA" if ("PREPAGADA" in concepto.upper() or "VIVIENDA" in concepto.upper()) else "DISCREPANCIA_ALERTA"
+                estado = (
+                    "DIFERENCIA_JUSTIFICADA"
+                    if ("PREPAGADA" in concepto.upper() or "VIVIENDA" in concepto.upper())
+                    else "DISCREPANCIA_ALERTA"
+                )
             else:
                 estado = "MATCH_EXACTO"
 
@@ -272,29 +297,33 @@ def process_csv_content(csv_text: str) -> ReconciliationParseResponse:
         total_declarado += val_cop
         total_exogena += val_exo
 
-        casilla_sug, explicacion = _generate_didactic_explanation(cedula, concepto, estado, diferencia)
+        casilla_sug, explicacion = _generate_didactic_explanation(
+            cedula, concepto, estado, diferencia
+        )
 
-        items.append(ReconciliationItem(
-            id=str(row_id),
-            fecha=fecha,
-            archivo_origen=archivo_orig,
-            tercero_nombre=tercero_nom,
-            tercero_nit=tercero_nit,
-            descripcion=descripcion,
-            tipo_movimiento=tipo_mov,
-            valor_cop=val_cop,
-            cedula_destino=cedula,
-            concepto_tributario=concepto,
-            beneficio_asociado=beneficio,
-            confianza_clasificacion=confianza,
-            observaciones=observaciones,
-            estado_exogena=estado,
-            valor_exogena_cop=val_exo,
-            diferencia_exogena_cop=diferencia,
-            resolucion_usuario=resolucion,
-            casilla_f210_sugerida=casilla_sug,
-            explicacion_didactica=explicacion
-        ))
+        items.append(
+            ReconciliationItem(
+                id=str(row_id),
+                fecha=fecha,
+                archivo_origen=archivo_orig,
+                tercero_nombre=tercero_nom,
+                tercero_nit=tercero_nit,
+                descripcion=descripcion,
+                tipo_movimiento=tipo_mov,
+                valor_cop=val_cop,
+                cedula_destino=cedula,
+                concepto_tributario=concepto,
+                beneficio_asociado=beneficio,
+                confianza_clasificacion=confianza,
+                observaciones=observaciones,
+                estado_exogena=estado,
+                valor_exogena_cop=val_exo,
+                diferencia_exogena_cop=diferencia,
+                resolucion_usuario=resolucion,
+                casilla_f210_sugerida=casilla_sug,
+                explicacion_didactica=explicacion,
+            )
+        )
 
     if errors:
         raise HTTPException(
@@ -303,8 +332,8 @@ def process_csv_content(csv_text: str) -> ReconciliationParseResponse:
                 "valid": False,
                 "total_errors": len(errors),
                 "errors": [e.model_dump() for e in errors],
-                "message": f"Se encontraron {len(errors)} errores de formato o tipado en el archivo CSV."
-            }
+                "message": f"Se encontraron {len(errors)} errores de formato o tipado en el archivo CSV.",
+            },
         )
 
     total_trx = len(items)
@@ -318,16 +347,11 @@ def process_csv_content(csv_text: str) -> ReconciliationParseResponse:
         total_diferencias_justificadas=count_justified,
         total_solo_certificados=count_solo_cert,
         total_discrepancias_alerta=count_alert,
-        porcentaje_conciliacion=pct_match
+        porcentaje_conciliacion=pct_match,
     )
 
     return ReconciliationParseResponse(
-        valid=True,
-        is_ephemeral=True,
-        kpis=kpis,
-        items=items,
-        total_errors=0,
-        errors=[]
+        valid=True, is_ephemeral=True, kpis=kpis, items=items, total_errors=0, errors=[]
     )
 
 
@@ -335,11 +359,14 @@ def process_csv_content(csv_text: str) -> ReconciliationParseResponse:
     "/parse-csv",
     response_model=ReconciliationParseResponse,
     summary="Parsear y Conciliar CSV en Tiempo Real (100% Efímero / Sin Persistencia)",
-    description="Procesa un archivo CSV de transacciones fiscales, valida encabezados y tipos de datos, calcula diferencias frente a la Información Exógena DIAN y genera la estructura de visualización tipo hoja de cálculo didáctica. NO almacena información en base de datos ni en Redis."
+    description="Procesa un archivo CSV de transacciones fiscales, valida encabezados y tipos de datos, calcula diferencias frente a la Información Exógena DIAN y genera la estructura de visualización tipo hoja de cálculo didáctica. NO almacena información en base de datos ni en Redis.",
 )
 async def parse_reconciliation_csv(file: UploadFile = File(...)):
     if not file.filename.lower().endswith(".csv") and not file.filename.lower().endswith(".txt"):
-        raise HTTPException(status_code=400, detail="Formato de archivo inválido. Por favor sube un archivo con extensión .csv")
+        raise HTTPException(
+            status_code=400,
+            detail="Formato de archivo inválido. Por favor sube un archivo con extensión .csv",
+        )
 
     try:
         content_bytes = await file.read()
@@ -349,7 +376,7 @@ async def parse_reconciliation_csv(file: UploadFile = File(...)):
         except UnicodeDecodeError:
             content_text = content_bytes.decode("latin-1")
     except Exception as e:
-        raise HTTPException(status_code=400, detail=f"No se pudo leer el archivo: {e}")
+        raise HTTPException(status_code=400, detail=f"No se pudo leer el archivo: {e}") from e
 
     return process_csv_content(content_text)
 
@@ -358,7 +385,7 @@ async def parse_reconciliation_csv(file: UploadFile = File(...)):
     "/parse-raw",
     response_model=ReconciliationParseResponse,
     summary="Parsear CSV desde Texto Raw (Efímero)",
-    description="Permite enviar el contenido del CSV como texto plano para agentes IA o scripts CLI."
+    description="Permite enviar el contenido del CSV como texto plano para agentes IA o scripts CLI.",
 )
 async def parse_raw_csv(payload: str = Body(..., media_type="text/plain")):
     return process_csv_content(payload)
@@ -368,7 +395,7 @@ async def parse_raw_csv(payload: str = Body(..., media_type="text/plain")):
     "/demo",
     response_model=ReconciliationParseResponse,
     summary="Obtener Datos de Demostración de Conciliación",
-    description="Retorna el dataset de demostración precargado de transacciones certificadas para visualización inmediata en la hoja de cálculo."
+    description="Retorna el dataset de demostración precargado de transacciones certificadas para visualización inmediata en la hoja de cálculo.",
 )
 async def get_reconciliation_demo():
     full_demo = CSV_TEMPLATE_HEADER + CSV_DEMO_ROWS
@@ -379,7 +406,7 @@ async def get_reconciliation_demo():
     "/template",
     response_class=PlainTextResponse,
     summary="Descargar Plantilla Oficial CSV de Transacciones",
-    description="Descarga el archivo CSV con los encabezados oficiales requeridos para alimentar la conciliación exógena y hoja de cálculo fiscal."
+    description="Descarga el archivo CSV con los encabezados oficiales requeridos para alimentar la conciliación exógena y hoja de cálculo fiscal.",
 )
 async def download_csv_template():
     return PlainTextResponse(
@@ -387,5 +414,5 @@ async def download_csv_template():
         media_type="text/csv",
         headers={
             "Content-Disposition": "attachment; filename=plantilla_transacciones_tributia.csv"
-        }
+        },
     )

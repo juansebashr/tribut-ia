@@ -19,9 +19,9 @@ remainder = s % 11
 return remainder if remainder <= 1 else 11 - remainder
 ```
 
-### Casos Oficiales de Prueba:
+### Casos Oficiales de Prueba
+
 - NIT `800197268` $\rightarrow$ DV **`4`** (800.197.268-4)
 - NIT `860002964` $\rightarrow$ DV **`4`** (860.002.964-4)
 - NIT `900156264` $\rightarrow$ DV **`2`** (900.156.264-2)
 - NIT `900876543` $\rightarrow$ DV **`1`** (900.876.543-1)
-

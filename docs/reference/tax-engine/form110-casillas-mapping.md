@@ -23,4 +23,3 @@ Correspondencia para declaraciones de Personas Jurídicas (Formulario 110 y Tasa
 | **97** | `retenciones_fuente` | Retenciones en la fuente practicadas |
 | **98** | `autorretenciones_practicadas` | Autorretenciones practicadas |
 | **105** | `saldo_a_pagar_impuesto` | Total saldo a pagar |
-
