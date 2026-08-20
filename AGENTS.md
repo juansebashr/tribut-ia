@@ -59,21 +59,45 @@ poetry run uvicorn backend.app.main:app --reload --port 8000
 cd frontend && npm run dev
 ```
 
-### Grafo de Arquitectura (Graphify)
+---
+
+## 🕸️ 3. Navegación de Arquitectura con Graphify (Knowledge Graph)
+
+El proyecto cuenta con un grafo de conocimiento estructural en `graphify-out/`. Los agentes deben usar **Graphify** como mecanismo prioritario para entender dependencias, flujos y arquitectura antes de realizar lecturas masivas de archivos.
+
+### Reglas de Uso de Graphify para Agentes
+
+1. **Consultas de Arquitectura:** Cuando exista `graphify-out/graph.json`, ejecutar primero `graphify query "<pregunta>"` para obtener un subgrafo relevante y reducir el consumo de tokens.
+2. **Explicación de Conceptos o Nodos:** Usar `graphify explain "<archivo o clase>"` para comprender el rol, dependencias directas e impacto de un componente.
+3. **Rutas y Dependencias:** Usar `graphify path "<A>" "<B>"` para inspeccionar la cadena de llamadas entre dos módulos.
+4. **Hubs Centrales:** Usar `graphify god-nodes` para identificar los componentes con mayor número de conexiones en la arquitectura.
+5. **Mantenimiento Obligatorio:** Tras modificar archivos de código, **es obligatorio** ejecutar `graphify update .` para mantener el grafo sincronizado (extracción AST local, sin costo de API).
+
+### Comandos de Graphify
 
 ```bash
-# Actualizar el grafo de conocimiento del repositorio
-graphify update .
-
 # Consultar arquitectura o relaciones de dependencias
-graphify query "<pregunta sobre el código>"
-graphify explain "<concepto o archivo>"
+graphify query "¿Cómo se comunican los endpoints de persona natural con los liquidadores?"
+
+# Explicar un nodo o archivo específico
+graphify explain "backend/app/services/liquidacion_pn.py"
+
+# Inspeccionar el camino de llamadas entre dos componentes
+graphify path "backend/app/api/v1/endpoints/session_sync.py" "backend/app/services/session_store.py"
+
+# Listar los nodos más conectados (hubs arquitectónicos)
 graphify god-nodes
+
+# Generar / actualizar el visualizador interactivo HTML (abrir en navegador)
+graphify tree
+
+# Actualizar el grafo tras modificar código
+graphify update .
 ```
 
 ---
 
-## 🧪 3. Instrucciones de Pruebas y Verificación
+## 🧪 4. Instrucciones de Pruebas y Verificación
 
 Antes de enviar cambios o dar por concluida una tarea, **es obligatorio** ejecutar la suite de verificación completa y corregir cualquier fallo:
 
@@ -126,7 +150,7 @@ cd frontend && npm test && npm run build && cd ..
 
 ---
 
-## 🏛️ 4. Estructura del Repositorio
+## 🏛️ 5. Estructura del Repositorio
 
 ```text
 tribut-ia/
@@ -155,7 +179,7 @@ tribut-ia/
 
 ---
 
-## 📐 5. Reglas de Estilo de Código y Convenciones
+## 📐 6. Reglas de Estilo de Código y Convenciones
 
 ### Python / Backend
 
@@ -180,7 +204,7 @@ tribut-ia/
 
 ---
 
-## 🚀 6. Guía de Contribución y Pull Requests para Agentes
+## 🚀 7. Guía de Contribución y Pull Requests para Agentes
 
 1. **Formato de Commits:** Utilizar Conventional Commits:
    - `feat(...)`: Nueva característica tributaria, endpoint o componente UI.
