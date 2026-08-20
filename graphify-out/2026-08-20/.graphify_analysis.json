@@ -1,0 +1,408 @@
+{
+  "communities": {
+    "0": [
+      "backend_tests_test_coverage_boost",
+      "backend_tests_test_coverage_boost_class_dummystore",
+      "backend_tests_test_coverage_boost_func_get_state",
+      "backend_tests_test_coverage_boost_func_is_disc",
+      "backend_tests_test_coverage_boost_func_publish_event",
+      "backend_tests_test_coverage_boost_func_reset_state",
+      "backend_tests_test_coverage_boost_func_subscribe",
+      "backend_tests_test_coverage_boost_func_test_beneficios_http_endpoints_success",
+      "backend_tests_test_coverage_boost_func_test_beneficios_service_edge_cases",
+      "backend_tests_test_coverage_boost_func_test_calculate_endpoints_error_branches",
+      "backend_tests_test_coverage_boost_func_test_create_session_store_factory",
+      "backend_tests_test_coverage_boost_func_test_in_memory_session_store_full",
+      "backend_tests_test_coverage_boost_func_test_in_memory_session_store_queue_overflow_and_cleanup",
+      "backend_tests_test_coverage_boost_func_test_liquidacion_pj_with_ganancia_ocasional",
+      "backend_tests_test_coverage_boost_func_test_liquidacion_pn_top_bracket_over_31000_uvt",
+      "backend_tests_test_coverage_boost_func_test_redis_session_store_full_methods",
+      "backend_tests_test_coverage_boost_func_test_redis_session_store_merge_all_sections",
+      "backend_tests_test_coverage_boost_func_test_rules_endpoints_complete",
+      "backend_tests_test_coverage_boost_func_test_rules_loader_coverage",
+      "backend_tests_test_coverage_boost_func_test_rules_loader_edge_cases",
+      "backend_tests_test_coverage_boost_func_test_serve_ui_fallback",
+      "backend_tests_test_coverage_boost_func_test_session_current_auto_provisioning_clean_client",
+      "backend_tests_test_coverage_boost_func_test_session_events_stream_generator_mock",
+      "backend_tests_test_coverage_boost_func_test_session_store_base_abstract_methods",
+      "backend_tests_test_coverage_boost_func_test_session_store_redis_pubsub_listener_dispatch",
+      "backend_tests_test_coverage_boost_func_test_session_sync_calc_exception_branches",
+      "backend_tests_test_coverage_boost_func_test_session_sync_pj_mutation",
+      "backend_tests_test_coverage_boost_func_test_simulation_compare_pn_no_savings",
+      "backend_tests_test_coverage_boost_func_test_simulation_compare_pn_with_savings",
+      "backend_tests_test_coverage_boost_func_unsubscribe",
+      "backend_tests_test_coverage_boost_func_update_state"
+    ],
+    "1": [
+      "backend_app_api_v1_endpoints_beneficios",
+      "backend_app_api_v1_endpoints_beneficios_func_listar_beneficios",
+      "backend_app_api_v1_endpoints_beneficios_func_simular_auditoria",
+      "backend_app_api_v1_endpoints_beneficios_func_simular_sancion",
+      "backend_app_api_v1_endpoints_persona_juridica",
+      "backend_app_api_v1_endpoints_persona_juridica_func_calcular_renta_persona_juridica",
+      "backend_app_api_v1_endpoints_persona_natural",
+      "backend_app_api_v1_endpoints_persona_natural_func_calcular_renta_persona_natural",
+      "backend_app_api_v1_endpoints_rules",
+      "backend_app_api_v1_endpoints_rules_func_convertir_uvt",
+      "backend_app_api_v1_endpoints_rules_func_listar_anos",
+      "backend_app_api_v1_endpoints_rules_func_obtener_reglas_ano",
+      "backend_app_api_v1_endpoints_session_sync",
+      "backend_app_api_v1_endpoints_session_sync_func_event_generator",
+      "backend_app_api_v1_endpoints_session_sync_func_get_current_session_info",
+      "backend_app_api_v1_endpoints_session_sync_func_get_session_state",
+      "backend_app_api_v1_endpoints_session_sync_func_reset_session",
+      "backend_app_api_v1_endpoints_session_sync_func_resolve_session_id",
+      "backend_app_api_v1_endpoints_session_sync_func_session_events_stream",
+      "backend_app_api_v1_endpoints_session_sync_func_update_session_state",
+      "backend_app_api_v1_endpoints_simulation",
+      "backend_app_api_v1_endpoints_simulation_class_scenariocomparisonrequest",
+      "backend_app_api_v1_endpoints_simulation_class_scenariocomparisonresponse",
+      "backend_app_api_v1_endpoints_simulation_func_comparar_escenarios_pn",
+      "backend_app_api_v1_router"
+    ],
+    "2": [
+      "backend_app_services_session_store",
+      "backend_app_services_session_store_class_inmemorysessionstore",
+      "backend_app_services_session_store_class_redissessionstore",
+      "backend_app_services_session_store_func_create_session_store",
+      "backend_app_services_session_store_func_get_channel",
+      "backend_app_services_session_store_func_get_client",
+      "backend_app_services_session_store_func_get_key",
+      "backend_app_services_session_store_func_get_state",
+      "backend_app_services_session_store_func_init",
+      "backend_app_services_session_store_func_publish_event",
+      "backend_app_services_session_store_func_redis_pubsub_listener",
+      "backend_app_services_session_store_func_reset_state",
+      "backend_app_services_session_store_func_subscribe",
+      "backend_app_services_session_store_func_unsubscribe",
+      "backend_app_services_session_store_func_update_state"
+    ],
+    "3": [
+      "backend_tests_test_reconciliation_ephemeral",
+      "backend_tests_test_reconciliation_ephemeral_func_test_reconciliation_demo_endpoint",
+      "backend_tests_test_reconciliation_ephemeral_func_test_reconciliation_didactic_explanations_branches",
+      "backend_tests_test_reconciliation_ephemeral_func_test_reconciliation_empty_file_error_400",
+      "backend_tests_test_reconciliation_ephemeral_func_test_reconciliation_empty_raw_400",
+      "backend_tests_test_reconciliation_ephemeral_func_test_reconciliation_invalid_file_extension_error_400",
+      "backend_tests_test_reconciliation_ephemeral_func_test_reconciliation_invalid_numeric_types_error_422",
+      "backend_tests_test_reconciliation_ephemeral_func_test_reconciliation_missing_required_headers_error_422",
+      "backend_tests_test_reconciliation_ephemeral_func_test_reconciliation_number_formatting_edge_cases",
+      "backend_tests_test_reconciliation_ephemeral_func_test_reconciliation_parse_csv_file_upload",
+      "backend_tests_test_reconciliation_ephemeral_func_test_reconciliation_parse_csv_semicolon_delimiter",
+      "backend_tests_test_reconciliation_ephemeral_func_test_reconciliation_parse_raw_text",
+      "backend_tests_test_reconciliation_ephemeral_func_test_reconciliation_parse_tab_delimiter_and_various_cedulas",
+      "backend_tests_test_reconciliation_ephemeral_func_test_reconciliation_template_download"
+    ],
+    "4": [
+      "backend_app_core_rules_engine_schema",
+      "backend_app_core_rules_engine_schema_class_cedulageneralrules",
+      "backend_app_core_rules_engine_schema_class_deduccionesrules",
+      "backend_app_core_rules_engine_schema_class_descuentospjrules",
+      "backend_app_core_rules_engine_schema_class_gananciaocasionalrules",
+      "backend_app_core_rules_engine_schema_class_limiteconjuntorules",
+      "backend_app_core_rules_engine_schema_class_personajuridicarules",
+      "backend_app_core_rules_engine_schema_class_personanaturalrules",
+      "backend_app_core_rules_engine_schema_class_rentasexentasrules",
+      "backend_app_core_rules_engine_schema_class_tablamarginalbracket",
+      "backend_app_core_rules_engine_schema_class_tasaminimarules",
+      "backend_app_core_rules_engine_schema_class_taxyearrules"
+    ],
+    "5": [
+      "backend_app_api_v1_endpoints_reconciliation",
+      "backend_app_api_v1_endpoints_reconciliation_class_csvvalidationerror",
+      "backend_app_api_v1_endpoints_reconciliation_class_reconciliationparseresponse",
+      "backend_app_api_v1_endpoints_reconciliation_func_clean_numeric_value",
+      "backend_app_api_v1_endpoints_reconciliation_func_detect_delimiter",
+      "backend_app_api_v1_endpoints_reconciliation_func_download_csv_template",
+      "backend_app_api_v1_endpoints_reconciliation_func_generate_didactic_explanation",
+      "backend_app_api_v1_endpoints_reconciliation_func_get_reconciliation_demo",
+      "backend_app_api_v1_endpoints_reconciliation_func_parse_raw_csv",
+      "backend_app_api_v1_endpoints_reconciliation_func_parse_reconciliation_csv",
+      "backend_app_api_v1_endpoints_reconciliation_func_process_csv_content"
+    ],
+    "6": [
+      "backend_app_services_beneficios",
+      "backend_app_services_beneficios_class_beneficioauditoriarequest",
+      "backend_app_services_beneficios_class_beneficioauditoriaresponse",
+      "backend_app_services_beneficios_class_beneficioitem",
+      "backend_app_services_beneficios_class_reduccionsancionrequest",
+      "backend_app_services_beneficios_class_reduccionsancionresponse",
+      "backend_app_services_beneficios_func_calcular_beneficio_auditoria",
+      "backend_app_services_beneficios_func_calcular_reduccion_sancion",
+      "backend_app_services_beneficios_func_get_catalogo_beneficios"
+    ],
+    "7": [
+      "backend_app_services_session_store_base",
+      "backend_app_services_session_store_base_class_sessionstate",
+      "backend_app_services_session_store_base_func_create_default_session",
+      "backend_app_services_session_store_base_func_get_state",
+      "backend_app_services_session_store_base_func_publish_event",
+      "backend_app_services_session_store_base_func_reset_state",
+      "backend_app_services_session_store_base_func_subscribe",
+      "backend_app_services_session_store_base_func_unsubscribe",
+      "backend_app_services_session_store_base_func_update_state"
+    ],
+    "8": [
+      "backend_tests_test_session_sync",
+      "backend_tests_test_session_sync_func_test_session_sync_cookie_auto_provisioning",
+      "backend_tests_test_session_sync_func_test_session_sync_get_initial_default_state",
+      "backend_tests_test_session_sync_func_test_session_sync_header_resolution",
+      "backend_tests_test_session_sync_func_test_session_sync_multi_sessions_isolation",
+      "backend_tests_test_session_sync_func_test_session_sync_partial_updates",
+      "backend_tests_test_session_sync_func_test_session_sync_post_and_get_state",
+      "backend_tests_test_session_sync_func_test_session_sync_reset",
+      "backend_tests_test_session_sync_func_test_ui_alias_routes"
+    ],
+    "9": [
+      "backend_tests_test_api_endpoints",
+      "backend_tests_test_api_endpoints_func_test_api_calculate_pn",
+      "backend_tests_test_api_endpoints_func_test_convert_uvt",
+      "backend_tests_test_api_endpoints_func_test_get_rules_2026",
+      "backend_tests_test_api_endpoints_func_test_get_years",
+      "backend_tests_test_api_endpoints_func_test_health_check",
+      "backend_tests_test_api_endpoints_func_test_ui_root_serving"
+    ],
+    "10": [
+      "backend_tests_test_two_way_full_cycle",
+      "backend_tests_test_two_way_full_cycle_func_calc_dv",
+      "backend_tests_test_two_way_full_cycle_func_js_get_num",
+      "backend_tests_test_two_way_full_cycle_func_test_api_pn_full_35pct_bracket_cycle",
+      "backend_tests_test_two_way_full_cycle_func_test_colombian_currency_mask_parsing_logic",
+      "backend_tests_test_two_way_full_cycle_func_test_colombian_dian_dv_algorithm",
+      "backend_tests_test_two_way_full_cycle_func_test_progressive_marginal_slices_integrity"
+    ],
+    "11": [
+      "backend_app_models_common",
+      "backend_app_models_common_class_audittraceitem",
+      "backend_app_models_common_class_reconciliationitem",
+      "backend_app_models_common_class_reconciliationstate",
+      "backend_app_models_common_class_uvtconversionrequest",
+      "backend_app_models_common_class_uvtconversionresponse"
+    ],
+    "12": [
+      "backend_tests_test_beneficios_and_go",
+      "backend_tests_test_beneficios_and_go_func_test_beneficio_auditoria_calculo",
+      "backend_tests_test_beneficios_and_go_func_test_catalogo_beneficios",
+      "backend_tests_test_beneficios_and_go_func_test_persona_natural_con_ganancia_ocasional",
+      "backend_tests_test_beneficios_and_go_func_test_reduccion_sanciones"
+    ],
+    "13": [
+      "backend_tests_test_pj_calculator",
+      "backend_tests_test_pj_calculator_func_test_persona_juridica_formulario_110_estandar",
+      "backend_tests_test_pj_calculator_func_test_persona_juridica_tasa_minima_ttd_gatillada",
+      "backend_tests_test_pn_calculator_func_test_persona_natural_2026_con_dependientes_adicionales_y_compras",
+      "backend_tests_test_pn_calculator_func_test_persona_natural_excel_benchmark_2022"
+    ],
+    "14": [
+      "skills_declaracion_renta_persona_natural_scripts_conciliar_exogena",
+      "skills_declaracion_renta_persona_natural_scripts_conciliar_exogena_func_conciliar_transacciones_con_exogena",
+      "skills_declaracion_renta_persona_natural_scripts_conciliar_exogena_func_normalize_nit",
+      "skills_declaracion_renta_persona_natural_scripts_conciliar_exogena_func_parse_exogena_file",
+      "skills_declaracion_renta_persona_natural_scripts_conciliar_exogena_func_parse_facturas_electronicas"
+    ],
+    "15": [
+      "backend_app_core_rules_engine_loader",
+      "backend_app_core_rules_engine_loader_func_get_available_tax_years",
+      "backend_app_core_rules_engine_loader_func_get_rules_for_year",
+      "backend_app_core_rules_engine_loader_func_load_all_rules"
+    ],
+    "16": [
+      "backend_app_main",
+      "backend_app_main_func_health_check",
+      "backend_app_main_func_serve_ui",
+      "backend_app_main_func_startup_event"
+    ],
+    "17": [
+      "backend_tests_test_skill_renta_pn",
+      "backend_tests_test_skill_renta_pn_func_test_conciliacion_exogena_matching",
+      "backend_tests_test_skill_renta_pn_func_test_consolidar_template_csv",
+      "backend_tests_test_skill_renta_pn_func_test_format_cop_colombian_mask"
+    ],
+    "18": [
+      "run",
+      "run_func_is_port_in_use",
+      "run_func_kill_process_on_port",
+      "run_func_main"
+    ],
+    "19": [
+      "backend_app_models_persona_natural",
+      "backend_app_models_persona_natural_class_personanaturalinput",
+      "backend_app_models_persona_natural_class_personanaturaloutput"
+    ],
+    "20": [
+      "backend_tests_test_rules_engine",
+      "backend_tests_test_rules_engine_func_test_custom_uvt_override",
+      "backend_tests_test_rules_engine_func_test_rules_loader"
+    ],
+    "21": [
+      "backend_tests_test_session_store_redis",
+      "backend_tests_test_session_store_redis_func_test_redis_session_store_lifecycle_and_ttl",
+      "backend_tests_test_session_store_redis_func_test_redis_session_store_pubsub_broadcast"
+    ],
+    "22": [
+      "skills_declaracion_renta_persona_natural_scripts_inyectar_tributia",
+      "skills_declaracion_renta_persona_natural_scripts_inyectar_tributia_func_format_cop",
+      "skills_declaracion_renta_persona_natural_scripts_inyectar_tributia_func_inyectar_a_tributia"
+    ],
+    "23": [
+      "backend_app_core_config",
+      "backend_app_core_config_class_settings"
+    ],
+    "24": [
+      "backend_app_models_persona_juridica",
+      "backend_app_models_persona_juridica_class_personajuridicainput"
+    ],
+    "25": [
+      "backend_app_services_liquidacion_pj",
+      "backend_app_services_liquidacion_pj_func_liquidar_persona_juridica"
+    ],
+    "26": [
+      "backend_app_services_liquidacion_pn",
+      "backend_app_services_liquidacion_pn_func_liquidar_persona_natural"
+    ],
+    "27": [
+      "backend_tests_test_calendario",
+      "backend_tests_test_calendario_func_test_calendario_rules"
+    ],
+    "28": [
+      "skills_declaracion_renta_persona_natural_scripts_consolidar_transacciones",
+      "skills_declaracion_renta_persona_natural_scripts_consolidar_transacciones_func_consolidar_csv_a_payload"
+    ],
+    "29": [
+      "backend_app_agent_toolkit_init"
+    ],
+    "30": [
+      "backend_app_api_init"
+    ],
+    "31": [
+      "backend_app_api_v1_endpoints_init"
+    ],
+    "32": [
+      "backend_app_api_v1_init"
+    ],
+    "33": [
+      "backend_app_core_init"
+    ],
+    "34": [
+      "backend_app_core_rules_engine_init"
+    ],
+    "35": [
+      "backend_app_init"
+    ],
+    "36": [
+      "backend_app_models_init"
+    ],
+    "37": [
+      "backend_app_services_init"
+    ],
+    "38": [
+      "backend_run"
+    ],
+    "39": [
+      "backend_tests_init"
+    ],
+    "40": [
+      "pkg_tribut_ia"
+    ]
+  },
+  "cohesion": {
+    "0": 0.06451612903225806,
+    "1": 0.08,
+    "2": 0.13333333333333333,
+    "3": 0.14285714285714285,
+    "4": 0.16666666666666666,
+    "5": 0.18181818181818182,
+    "6": 0.2222222222222222,
+    "7": 0.2222222222222222,
+    "8": 0.2222222222222222,
+    "9": 0.2857142857142857,
+    "10": 0.2857142857142857,
+    "11": 0.3333333333333333,
+    "12": 0.4,
+    "13": 0.4,
+    "14": 0.4,
+    "15": 0.5,
+    "16": 0.5,
+    "17": 0.5,
+    "18": 0.5,
+    "19": 0.6666666666666666,
+    "20": 0.6666666666666666,
+    "21": 0.6666666666666666,
+    "22": 0.6666666666666666,
+    "23": 1.0,
+    "24": 1.0,
+    "25": 1.0,
+    "26": 1.0,
+    "27": 1.0,
+    "28": 1.0,
+    "29": 1.0,
+    "30": 1.0,
+    "31": 1.0,
+    "32": 1.0,
+    "33": 1.0,
+    "34": 1.0,
+    "35": 1.0,
+    "36": 1.0,
+    "37": 1.0,
+    "38": 1.0,
+    "39": 1.0,
+    "40": 1.0
+  },
+  "gods": [
+    {
+      "id": "backend_app_services_beneficios_class_beneficioauditoriarequest",
+      "label": "BeneficioAuditoriaRequest",
+      "degree": 2
+    },
+    {
+      "id": "backend_app_api_v1_endpoints_beneficios_func_listar_beneficios",
+      "label": "listar_beneficios",
+      "degree": 1
+    },
+    {
+      "id": "backend_app_api_v1_endpoints_beneficios_func_simular_auditoria",
+      "label": "simular_auditoria",
+      "degree": 1
+    },
+    {
+      "id": "backend_app_api_v1_endpoints_beneficios_func_simular_sancion",
+      "label": "simular_sancion",
+      "degree": 1
+    },
+    {
+      "id": "backend_app_api_v1_endpoints_persona_juridica_func_calcular_renta_persona_juridica",
+      "label": "calcular_renta_persona_juridica",
+      "degree": 1
+    },
+    {
+      "id": "backend_app_api_v1_endpoints_persona_natural_func_calcular_renta_persona_natural",
+      "label": "calcular_renta_persona_natural",
+      "degree": 1
+    },
+    {
+      "id": "backend_app_api_v1_endpoints_reconciliation_class_csvvalidationerror",
+      "label": "CsvValidationError",
+      "degree": 1
+    },
+    {
+      "id": "backend_app_api_v1_endpoints_reconciliation_class_reconciliationparseresponse",
+      "label": "ReconciliationParseResponse",
+      "degree": 1
+    },
+    {
+      "id": "backend_app_api_v1_endpoints_reconciliation_func_detect_delimiter",
+      "label": "_detect_delimiter",
+      "degree": 1
+    },
+    {
+      "id": "backend_app_api_v1_endpoints_reconciliation_func_clean_numeric_value",
+      "label": "_clean_numeric_value",
+      "degree": 1
+    }
+  ],
+  "surprises": [],
+  "tokens": {
+    "input": 0,
+    "output": 0
+  }
+}

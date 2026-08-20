@@ -171,11 +171,15 @@ Calcula la depuración de Renta para Personas Naturales (Cédula General, Gananc
 
 ---
 
-## 4. Módulo de Beneficios & Sanciones (`/beneficios`)
+## 4. Módulo de Beneficios, Ajustes Patrimoniales & Sanciones (`/beneficios`)
 
-- `GET /beneficios/catalog`: Catálogo de beneficios y optimizaciones fiscales.
-- `POST /beneficios/simular-auditoria`: Simulación del beneficio de auditoría (Art. 689-3 E.T. - firmeza en 6 o 12 meses).
-- `POST /beneficios/simular-reduccion-sancion`: Reducción de sanciones por corrección o extemporaneidad (Art. 640 E.T.).
+- `GET /beneficios/catalog`: Catálogo integral de beneficios tributarios (INCRNGO, Deducciones, Rentas Exentas, Descuentos, Beneficio de Auditoría, Reducción de Sanciones, Ajuste Fiscal Art. 73 y Cuentas AFC).
+- `GET /beneficios/articulo-73/tabla`: Tabla oficial de factores multiplicadores del Art. 73 E.T. (1955-2024) para bienes raíces urbanos, rurales y acciones/aportes.
+- `POST /beneficios/simular-articulo-73`: Simula el reajuste del costo fiscal de activos fijos según el año de compra y calcula el ahorro en impuesto de Ganancia Ocasional o Renta (Art. 73 E.T.).
+- `POST /beneficios/simular-inmueble-afc`: Simula la exención de hasta 5.000 UVT de ganancia ocasional al vender casa/apartamento de habitación y depositar en cuenta AFC o destinar a vivienda (Art. 311-1 y 126-4 E.T.).
+- `POST /beneficios/simular-auditoria`: Simulación del beneficio de auditoría (Art. 689-3 E.T.) para firmeza en 6 meses ($\ge 35\%$) o 12 meses ($\ge 25\%$) y verificación del piso de 71 UVT.
+- `POST /beneficios/calcular-sancion`: Liquidación integral de sanciones por corrección (Art. 644) o extemporaneidad (Art. 641), aplicando rebajas por favorabilidad (Art. 640) y control de sanción mínima de 10 UVT (Art. 639).
+- `POST /beneficios/simular-reduccion-sancion`: Reducción de sanciones tributarias por corrección voluntaria y principio de favorabilidad/gradualidad (Art. 640 E.T.).
 
 ---
 

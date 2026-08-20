@@ -386,7 +386,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   consultarVencimientoNit();
 });
 
-// SIDEBAR TOGGLE
+// SIDEBAR TOGGLE (DESKTOP)
 function toggleSidebar() {
   const sidebar = document.getElementById('app-sidebar');
   const workspace = document.getElementById('app-workspace');
@@ -404,11 +404,49 @@ function toggleSidebar() {
   }
 }
 
+// SIDEBAR MOBILE DRAWER (OFF-CANVAS)
+function openMobileSidebar() {
+  const sidebar = document.getElementById('app-sidebar');
+  const backdrop = document.getElementById('sidebar-backdrop');
+  if (sidebar) sidebar.classList.add('mobile-open');
+  if (backdrop) backdrop.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeMobileSidebar() {
+  const sidebar = document.getElementById('app-sidebar');
+  const backdrop = document.getElementById('sidebar-backdrop');
+  if (sidebar) sidebar.classList.remove('mobile-open');
+  if (backdrop) backdrop.classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+function toggleMobileSidebar() {
+  const sidebar = document.getElementById('app-sidebar');
+  if (sidebar && sidebar.classList.contains('mobile-open')) {
+    closeMobileSidebar();
+  } else {
+    openMobileSidebar();
+  }
+}
+
+// Window resize listener para limpiar estado de drawer móvil al pasar a desktop
+window.addEventListener('resize', () => {
+  if (window.innerWidth > 768) {
+    closeMobileSidebar();
+  }
+});
+
 // NAVEGACIÓN MODULAR
 function navigateTo(moduleKey, subTab = 'main') {
   hideCasillaPopover();
   currentActiveModule = moduleKey;
   currentActiveSubTab = subTab;
+
+  // Si está en pantalla móvil, cerrar el drawer lateral
+  if (window.innerWidth <= 768) {
+    closeMobileSidebar();
+  }
 
   // Determinar pane target
   let targetPaneId = `pane-${moduleKey}`;
@@ -1463,24 +1501,34 @@ function showCasillaPopover(casillaNum, targetElement) {
   }
 
   popover.style.display = 'block';
-  const rect = targetElement.getBoundingClientRect();
-  const popoverWidth = 330;
-  const popoverHeight = popover.offsetHeight || 260;
-  
-  let left = rect.left;
-  let top = rect.bottom + 6;
 
-  if (left + popoverWidth > window.innerWidth - 20) {
-    left = window.innerWidth - popoverWidth - 20;
-  }
-  if (top + popoverHeight > window.innerHeight - 20) {
-    top = rect.top - popoverHeight - 6;
-  }
-  if (left < 10) left = 10;
-  if (top < 10) top = 10;
+  if (window.innerWidth <= 768) {
+    popover.style.left = '4vw';
+    popover.style.top = 'auto';
+    popover.style.bottom = '20px';
+    popover.style.width = '92vw';
+  } else {
+    const rect = targetElement.getBoundingClientRect();
+    const popoverWidth = 330;
+    const popoverHeight = popover.offsetHeight || 260;
+    
+    let left = rect.left;
+    let top = rect.bottom + 6;
 
-  popover.style.left = `${left}px`;
-  popover.style.top = `${top}px`;
+    if (left + popoverWidth > window.innerWidth - 20) {
+      left = window.innerWidth - popoverWidth - 20;
+    }
+    if (top + popoverHeight > window.innerHeight - 20) {
+      top = rect.top - popoverHeight - 6;
+    }
+    if (left < 10) left = 10;
+    if (top < 10) top = 10;
+
+    popover.style.bottom = 'auto';
+    popover.style.width = '330px';
+    popover.style.left = `${left}px`;
+    popover.style.top = `${top}px`;
+  }
 }
 
 function hideCasillaPopover() {

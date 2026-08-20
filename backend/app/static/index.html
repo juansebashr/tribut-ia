@@ -13,8 +13,11 @@
 <body>
   <div class="app-shell">
     
+    <!-- BACKDROP PARA MÓVIL (CIERRA EL DRAWER AL TOCAR AFUERA) -->
+    <div class="sidebar-backdrop" id="sidebar-backdrop" onclick="closeMobileSidebar()"></div>
+
     <!-- =====================================================================
-         SIDEBAR LATERAL COLAPSABLE
+         SIDEBAR LATERAL COLAPSABLE & OFF-CANVAS MOBILE
          ===================================================================== -->
     <aside class="sidebar" id="app-sidebar">
       <div class="sidebar-header">
@@ -30,6 +33,9 @@
         </a>
         <button class="sidebar-toggle-btn" id="btn-toggle-sidebar" onclick="toggleSidebar()" title="Colapsar / Expandir barra lateral">
           ◀
+        </button>
+        <button class="sidebar-close-mobile-btn" id="btn-close-sidebar-mobile" onclick="closeMobileSidebar()" title="Cerrar barra lateral">
+          ✕
         </button>
       </div>
 
@@ -199,8 +205,13 @@
       <!-- TOP HEADER BAR -->
       <header class="workspace-header">
         <div class="workspace-title-area">
-          <span class="workspace-breadcrumbs" id="header-breadcrumbs">IMPUESTO DE RENTA / PERSONA NATURAL</span>
-          <h1 class="workspace-title" id="header-title">Depuración de Renta Persona Natural</h1>
+          <button class="mobile-menu-btn" id="btn-mobile-menu" onclick="toggleMobileSidebar()" aria-label="Abrir menú" title="Abrir navegación">
+            ☰
+          </button>
+          <div class="workspace-title-text">
+            <span class="workspace-breadcrumbs" id="header-breadcrumbs">IMPUESTO DE RENTA / PERSONA NATURAL</span>
+            <h1 class="workspace-title" id="header-title">Depuración de Renta Persona Natural</h1>
+          </div>
         </div>
 
         <!-- SUB TABS CONTEXTUALES -->
@@ -863,10 +874,14 @@
           </div>
 
           <!-- FORMULARIO 210 EXACT SHEET -->
-          <div class="f210-sheet-wrapper">
-            <div class="f210-watermark">DIAN 210</div>
-            
-            <table class="f210-table">
+          <div class="table-scroll-hint">
+            <span>👉</span> Desliza horizontalmente para ver el Formulario 210 completo ➔
+          </div>
+          <div class="table-responsive">
+            <div class="f210-sheet-wrapper">
+              <div class="f210-watermark">DIAN 210</div>
+              
+              <table class="f210-table">
               <!-- HEADER ROW -->
               <tr>
                 <td class="f210-header-cell-logo">
@@ -1498,6 +1513,7 @@
               <span>Serie: 20269999999999</span>
             </div>
           </div>
+          </div>
         </div>
 
         <!-- =================================================================
@@ -1798,6 +1814,9 @@
             </div>
 
             <div class="card-body" style="padding: 0;">
+              <div class="table-scroll-hint" style="margin: 8px 12px 4px;">
+                <span>👉</span> Desliza horizontalmente para ver la matriz completa de conciliación ➔
+              </div>
               <div class="spreadsheet-table-container">
                 <table class="spreadsheet-table" id="reconciliation-table">
                   <thead>
@@ -2127,7 +2146,7 @@
                 Declaración y pago del IVA generado en ventas de bienes y servicios gravados (19%, 5%, exentos 0% y excluidos) versus IVA descontable en compras, importaciones y servicios.
               </p>
 
-              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 16px 0;">
+              <div class="responsive-grid-equal" style="margin: 16px 0;">
                 <div style="background: #f8fafc; border: 1px solid var(--border-subtle); padding: 14px; border-radius: 8px;">
                   <h4 style="color: #0b3b60; font-weight: 700; margin-bottom: 6px;">IVA Generado (Ventas)</h4>
                   <ul style="padding-left: 18px; font-size: 12px; color: var(--text-muted);">
@@ -2204,7 +2223,7 @@
               </span>
             </div>
             <div class="card-body" style="padding: 18px;">
-              <div style="display: grid; grid-template-columns: 1fr 1.15fr; gap: 20px;">
+              <div class="responsive-grid-2">
                 <!-- COLUMNA 1: FORMULARIO ART 73 -->
                 <div style="background: #f8fafc; border: 1px solid var(--border-color); border-radius: 8px; padding: 14px; display: flex; flex-direction: column; gap: 12px;">
                   <div style="font-size: 12px; font-weight: 800; color: var(--text-primary); border-bottom: 1px solid var(--border-color); padding-bottom: 6px; display: flex; align-items: center; gap: 6px;">
@@ -2302,8 +2321,11 @@
               </div>
             </div>
             <div class="card-body" style="padding: 0;">
-              <div style="max-height: 480px; overflow-y: auto;">
-                <table style="width: 100%; border-collapse: collapse; font-size: 12px; text-align: left;">
+              <div class="table-scroll-hint" style="margin: 8px 12px 4px;">
+                <span>👉</span> Desliza horizontalmente para ver todos los factores ➔
+              </div>
+              <div class="table-responsive" style="max-height: 480px; overflow-y: auto; margin-bottom: 0;">
+                <table id="tabla-art73" style="width: 100%; border-collapse: collapse; font-size: 12px; text-align: left; min-width: 600px;">
                   <thead style="position: sticky; top: 0; background: #f8fafc; border-bottom: 2px solid var(--border-color); z-index: 2;">
                     <tr>
                       <th style="padding: 10px 14px; font-weight: 800; color: var(--text-primary);">Año de Compra</th>
@@ -2403,7 +2425,7 @@
               <p style="margin-bottom: 10px;">
                 Cuando una declaración queda en firme, la DIAN <strong>pierde la facultad legal de fiscalizarla, modificarla, liquidarla de revisión o imponerle sanciones</strong>. Es decir, te protege de cualquier actuación futura de la autoridad tributaria sobre esa vigencia fiscal.
               </p>
-              <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 14px;">
+              <div class="responsive-grid-3" style="margin-bottom: 14px;">
                 <div style="background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 8px; padding: 12px; text-align: center;">
                   <div style="font-size: 22px; margin-bottom: 4px;">⚡</div>
                   <div style="font-weight: 800; color: #1e3a8a; font-size: 13px;">6 Meses</div>
@@ -2435,7 +2457,7 @@
               </div>
               <div style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 6px; padding: 10px;">
                 <div style="font-weight: 700; color: #14532d; margin-bottom: 4px; font-size: 11.5px;">✅ ¿Por qué usar el Beneficio de Auditoría?</div>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px; font-size: 11px; color: #166534;">
+                <div class="responsive-grid-equal" style="gap: 6px; font-size: 11px; color: #166534;">
                   <div>• <strong>Certeza jurídica total</strong> en 6 o 12 meses: sientes que ese año fiscal "cerró".</div>
                   <div>• <strong>Ahorro en costos</strong> de defensa ante posibles auditorías (honorarios, tiempo, estrés).</div>
                   <div>• <strong>Ideal en años de alta utilidad</strong> donde el impuesto sube de todas formas.</div>
@@ -2446,7 +2468,7 @@
           </div>
 
           <!-- Simulador + Guía -->
-          <div style="display: grid; grid-template-columns: 1.1fr 1fr; gap: 16px; margin-bottom: 32px;">
+          <div class="responsive-grid-split" style="margin-bottom: 32px;">
             <!-- SIMULADOR AUDITORIA -->
             <div class="card" style="border: 2px solid var(--primary-border);">
               <div class="card-header" style="background: var(--primary-light);">
@@ -2536,7 +2558,7 @@
               <p style="margin-bottom: 10px;">
                 El <strong>Régimen Sancionatorio Tributario</strong> (Arts. 637 a 688 del Estatuto Tributario) regula las consecuencias jurídicas y económicas derivadas del <strong>incumplimiento de las obligaciones fiscales</strong> ante la DIAN: no presentar, presentar extemporáneamente, presentar con errores o no pagar.
               </p>
-              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px;">
+              <div class="responsive-grid-equal" style="margin-bottom: 14px;">
                 <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px;">
                   <div style="font-weight: 700; color: #0f172a; margin-bottom: 6px; font-size: 12px;">📌 Principios Fundamentales (Art. 640 E.T.)</div>
                   <ul style="margin: 0 0 0 14px; padding: 0; font-size: 11px; color: #475569; line-height: 1.6;">
@@ -2562,7 +2584,7 @@
           </div>
 
           <!-- Sanciones individuales explicadas -->
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 20px;">
+          <div class="responsive-grid-equal" style="margin-bottom: 20px;">
             <!-- Extemporaneidad -->
             <div class="card" style="border-top: 3px solid #f59e0b;">
               <div class="card-header" style="background: #fffbeb;">
@@ -2674,7 +2696,7 @@
               </div>
             </div>
             <div class="card-body" style="padding: 12px 16px;">
-              <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; font-size: 11.5px;">
+              <div class="responsive-grid-3" style="font-size: 11.5px;">
                 <div style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 6px; padding: 10px;">
                   <div style="font-weight: 800; color: #15803d; margin-bottom: 4px;">✅ 1. Corrección Voluntaria</div>
                   <div style="color: #166534; font-size: 11px;">
@@ -2709,7 +2731,7 @@
           </div>
 
           <!-- Calculadora Sanciones -->
-          <div style="display: grid; grid-template-columns: 1.1fr 1fr; gap: 16px;">
+          <div class="responsive-grid-split">
             <!-- PARÁMETROS CALCULADORA -->
             <div class="card" style="border: 2px solid var(--emerald-border);">
               <div class="card-header" style="background: var(--emerald-light);">
@@ -2814,7 +2836,7 @@
           </div>
 
           <!-- GUÍA DIDÁCTICA INMUEBLES Y AFC -->
-          <div style="display: grid; grid-template-columns: 1fr 1.2fr 1fr; gap: 14px; margin-bottom: 24px;">
+          <div class="responsive-grid-3-wide" style="margin-bottom: 24px;">
             <!-- CARD 1 -->
             <div class="card" style="border-top: 3px solid #3b82f6;">
               <div class="card-body" style="padding: 14px;">
@@ -2853,7 +2875,7 @@
           </div>
 
           <!-- SIMULADOR INTERACTIVO INMUEBLE AFC -->
-          <div style="display: grid; grid-template-columns: 1.1fr 1fr; gap: 16px;">
+          <div class="responsive-grid-split">
             <!-- PARÁMETROS VENTA -->
             <div class="card" style="border: 2px solid var(--primary-border);">
               <div class="card-header" style="background: var(--primary-light);">

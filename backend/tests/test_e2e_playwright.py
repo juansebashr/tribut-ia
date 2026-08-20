@@ -358,7 +358,263 @@ class TestTributIAEndToEnd:
         page.wait_for_timeout(300)
         page.click("#cal-filter-btn-iva")
         page.wait_for_timeout(300)
-        page.click("#cal-filter-btn-all")
+        assert len(errors) == 0, f"Errores en Calendario Tributario: {errors}"
+
+
+class TestResponsiveAndMobileMode:
+    """Suite de pruebas E2E especializadas para Modo Mobile y Responsive Design."""
+
+    @pytest.mark.parametrize(
+        ("width", "height", "device_name"),
+        [
+            (375, 667, "iPhone SE"),
+            (390, 844, "iPhone 14"),
+            (768, 1024, "iPad Mini / Tablet"),
+        ],
+    )
+    def test_mobile_drawer_navigation_and_backdrop(
+        self,
+        page_with_error_tracking: tuple[Page, list[str]],
+        live_server_url: str,
+        width: int,
+        height: int,
+        device_name: str,
+    ):
+        """Verifica que el drawer móvil (off-canvas), botón hamburguesa y backdrop funcionen."""
+        page, errors = page_with_error_tracking
+        page.set_viewport_size({"width": width, "height": height})
+        page.goto(live_server_url, wait_until="domcontentloaded")
+        page.wait_for_timeout(600)
+
+        # 1. El botón de menú hamburguesa debe ser visible en pantallas móviles
+        mobile_btn = page.locator("#btn-mobile-menu")
+        assert mobile_btn.is_visible(), f"Botón hamburguesa no visible en {device_name}"
+
+        # 2. El sidebar debe estar inicialmente cerrado/fuera de pantalla
+        sidebar = page.locator("#app-sidebar")
+        assert "mobile-open" not in (sidebar.get_attribute("class") or "")
+
+        # 3. Abrir el drawer con el botón hamburguesa
+        mobile_btn.click()
+        page.wait_for_timeout(300)
+        assert "mobile-open" in (sidebar.get_attribute("class") or "")
+        backdrop = page.locator("#sidebar-backdrop")
+        assert "active" in (backdrop.get_attribute("class") or "")
+
+        # 4. Cerrar tocando el backdrop
+        backdrop.click(force=True)
+        page.wait_for_timeout(300)
+        assert "mobile-open" not in (sidebar.get_attribute("class") or "")
+
+        # 5. Abrir nuevamente y navegar a otro módulo (debe autocerrar el drawer)
+        mobile_btn.click()
+        page.wait_for_timeout(300)
+        page.click("#nav-item-presentacion")
+        page.wait_for_timeout(400)
+        assert "mobile-open" not in (sidebar.get_attribute("class") or "")
+        assert page.locator("#pane-presentacion").is_visible()
+
+        assert len(errors) == 0, f"Errores en drawer móvil en {device_name}: {errors}"
+
+    @pytest.mark.parametrize(
+        ("width", "height", "device_name"),
+        [
+            (375, 667, "iPhone SE"),
+            (390, 844, "iPhone 14"),
+            (412, 915, "Samsung Galaxy / Pixel"),
+        ],
+    )
+    def test_mobile_viewport_no_horizontal_body_overflow(
+        self,
+        page_with_error_tracking: tuple[Page, list[str]],
+        live_server_url: str,
+        width: int,
+        height: int,
+        device_name: str,
+    ):
+        """Verifica que el body/viewport no sufra desbordamiento horizontal en móviles."""
+        page, errors = page_with_error_tracking
+        page.set_viewport_size({"width": width, "height": height})
+        page.goto(live_server_url, wait_until="domcontentloaded")
+        page.wait_for_timeout(600)
+
+        modulos = [
+            ("pn", "calc", "#pane-pn-calc"),
+            ("pn", "marginal", "#pane-pn-marginal"),
+            ("art73", "main", "#pane-art73"),
+            ("presentacion", "main", "#pane-presentacion"),
+            ("inmuebles-afc", "main", "#pane-inmuebles-afc"),
+            ("calendario", "main", "#pane-calendario"),
+        ]
+
+        for mod, sub, selector in modulos:
+            page.evaluate(f"navigateTo('{mod}', '{sub}')")
+            page.wait_for_timeout(400)
+            assert page.locator(selector).is_visible()
+
+            # Verificar que el ancho de scroll del documento sea igual al ancho de la ventana
+            scroll_width = page.evaluate("document.documentElement.scrollWidth")
+            inner_width = page.evaluate("window.innerWidth")
+            assert scroll_width <= inner_width + 1, (
+                f"Desbordamiento horizontal detectado en {device_name} "
+                f"en módulo {mod}/{sub}: scrollWidth={scroll_width}, innerWidth={inner_width}"
+            )
+
+        assert len(errors) == 0, f"Errores en verificación de overflow en {device_name}: {errors}"
+
+    def test_table_horizontal_scroll_containers_on_mobile(
+        self, page_with_error_tracking: tuple[Page, list[str]], live_server_url: str
+    ):
+        """Verifica que las tablas complejas tengan contenedor con scroll horizontal interno."""
+        page, errors = page_with_error_tracking
+        page.set_viewport_size({"width": 375, "height": 667})
+        page.goto(live_server_url, wait_until="domcontentloaded")
+        page.wait_for_timeout(600)
+
+        # 1. Verificar Formulario 210
+        page.evaluate("navigateTo('pn', 'f210')")
+        page.wait_for_timeout(400)
+        f210_container = page.locator("#pane-pn-f210 .table-responsive")
+        assert f210_container.is_visible()
+        # El contenedor interno debe tener scrollWidth > clientWidth permitiendo swipe
+        has_horizontal_scroll = page.evaluate(
+            "document.querySelector('#pane-pn-f210 .table-responsive').scrollWidth > "
+            "document.querySelector('#pane-pn-f210 .table-responsive').clientWidth"
+        )
+        assert has_horizontal_scroll, "El Formulario 210 no tiene scroll horizontal en móvil"
+
+        # 2. Verificar Tabla DANE Art. 73
+        page.evaluate("navigateTo('art73', 'main')")
+        page.wait_for_timeout(400)
+        art73_container = page.locator("#pane-art73 .table-responsive")
+        assert art73_container.is_visible()
+        art73_scroll = page.evaluate(
+            "document.querySelector('#pane-art73 .table-responsive').scrollWidth > "
+            "document.querySelector('#pane-art73 .table-responsive').clientWidth"
+        )
+        assert art73_scroll, "La Tabla Art. 73 no tiene scroll horizontal en móvil"
+
+        assert len(errors) == 0, f"Errores en prueba de tablas móviles: {errors}"
+
+    @pytest.mark.parametrize(
+        ("width", "height", "screen_desc"),
+        [
+            (1024, 768, "Laptop 1024x768"),
+            (1200, 800, "Pantalla Reducida 1200x800"),
+            (1366, 768, "HD Laptop 1366x768"),
+        ],
+    )
+    def test_reduced_desktop_and_laptop_screen_adaptation(
+        self,
+        page_with_error_tracking: tuple[Page, list[str]],
+        live_server_url: str,
+        width: int,
+        height: int,
+        screen_desc: str,
+    ):
+        """Verifica la adaptación de layout en pantallas reducidas de escritorio y laptops."""
+        page, errors = page_with_error_tracking
+        page.set_viewport_size({"width": width, "height": height})
+        page.goto(live_server_url, wait_until="domcontentloaded")
+        page.wait_for_timeout(500)
+
+        # 1. En escritorio/laptop el botón hamburguesa está oculto y el sidebar visible
+        sidebar = page.locator("#app-sidebar")
+        assert sidebar.is_visible()
+        mobile_btn = page.locator("#btn-mobile-menu")
+        assert not mobile_btn.is_visible(), f"El botón hamburguesa no debe verse en {screen_desc}"
+
+        # 2. Probar colapsar y expandir el sidebar en pantalla reducida
+        toggle_btn = page.locator("#btn-toggle-sidebar")
+        assert toggle_btn.is_visible()
+        toggle_btn.click()
+        page.wait_for_timeout(300)
+        assert "collapsed" in (sidebar.get_attribute("class") or "")
+        toggle_btn.click()
+        page.wait_for_timeout(300)
+        assert "collapsed" not in (sidebar.get_attribute("class") or "")
+
+        # 3. Comprobar ausencia de desbordamiento horizontal en pantalla reducida
+        scroll_width = page.evaluate("document.documentElement.scrollWidth")
+        assert scroll_width <= width + 1, (
+            f"Desbordamiento horizontal en {screen_desc}: scrollWidth={scroll_width} vs innerWidth={width}"
+        )
+
+        assert len(errors) == 0, f"Errores en pantalla reducida {screen_desc}: {errors}"
+
+    def test_mobile_casilla_popover_bottom_sheet(
+        self, page_with_error_tracking: tuple[Page, list[str]], live_server_url: str
+    ):
+        """Verifica que los modales y popovers se adapten como bottom-sheets en mobile sin desbordar."""
+        page, errors = page_with_error_tracking
+        page.set_viewport_size({"width": 375, "height": 667})
+        page.goto(live_server_url, wait_until="domcontentloaded")
+        page.wait_for_timeout(600)
+
+        # Navegar al F210 y abrir un popover de casilla
+        page.evaluate("navigateTo('pn', 'f210')")
+        page.wait_for_timeout(400)
+
+        # Disparar popover de casilla
+        page.evaluate("showCasillaPopover(29, document.body)")
         page.wait_for_timeout(300)
 
-        assert len(errors) == 0, f"Errores en Calendario Tributario: {errors}"
+        popover = page.locator("#casilla-popover")
+        assert popover.is_visible()
+
+        # Validar que el popover esté dentro del ancho de la pantalla móvil (width <= 94vw)
+        popover_rect = page.evaluate(
+            "() => { const r = document.getElementById('casilla-popover').getBoundingClientRect(); "
+            "return { left: r.left, right: r.right, width: r.width, bottom: r.bottom }; }"
+        )
+        assert popover_rect["left"] >= 0, "El popover se sale por la izquierda"
+        assert popover_rect["right"] <= 376, "El popover se sale por la derecha"
+
+        # Ocultar popover
+        page.evaluate("hideCasillaPopover()")
+        page.wait_for_timeout(200)
+        assert not popover.is_visible()
+
+        assert len(errors) == 0, f"Errores en popover móvil: {errors}"
+
+    @pytest.mark.parametrize("screen_width", [1024, 1150, 1280])
+    def test_reconciliation_spreadsheet_extended_sidebar_scrolling(
+        self,
+        page_with_error_tracking: tuple[Page, list[str]],
+        live_server_url: str,
+        screen_width: int,
+    ):
+        """Verifica que el spreadsheet de conciliación tenga scroll horizontal interno y no se corte con el menú extendido."""
+        page, errors = page_with_error_tracking
+        page.set_viewport_size({"width": screen_width, "height": 768})
+        page.goto(live_server_url, wait_until="domcontentloaded")
+        page.wait_for_timeout(500)
+
+        # 1. Asegurar que el sidebar está extendido (no colapsado)
+        sidebar = page.locator("#app-sidebar")
+        assert "collapsed" not in (sidebar.get_attribute("class") or "")
+
+        # 2. Navegar al módulo de Conciliación Exógena
+        page.evaluate("navigateTo('pn', 'conciliacion')")
+        page.wait_for_timeout(400)
+
+        # 3. Cargar datos de demostración
+        page.evaluate("loadReconciliationDemo()")
+        page.wait_for_timeout(400)
+
+        # 4. Validar que el contenedor del spreadsheet tenga scroll horizontal interno disponible
+        container_scrolls = page.evaluate(
+            "() => { const el = document.querySelector('.spreadsheet-table-container'); "
+            "return el ? (el.scrollWidth > el.clientWidth) : false; }"
+        )
+        assert container_scrolls, (
+            f"El contenedor del spreadsheet debe permitir scroll horizontal en ancho {screen_width}px con sidebar extendido"
+        )
+
+        # 5. Validar que el documento global NO sufra desbordamiento horizontal
+        scroll_width = page.evaluate("document.documentElement.scrollWidth")
+        assert scroll_width <= screen_width + 1, (
+            f"Desbordamiento global detectado: scrollWidth={scroll_width} vs windowWidth={screen_width}"
+        )
+
+        assert len(errors) == 0, f"Errores en prueba de spreadsheet con sidebar extendido: {errors}"

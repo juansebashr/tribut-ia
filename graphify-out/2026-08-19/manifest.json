@@ -354,15 +354,15 @@
     "semantic_hash": ""
   },
   "AGENTS.md": {
-    "mtime": 1787205666.2224379,
-    "seen": 1787205748.9175758,
-    "ast_hash": "6202767fd13527d71548cc7933d33372",
+    "mtime": 1787186751.9528499,
+    "seen": 1787187794.528641,
+    "ast_hash": "2d748cf33dad05d0cad8244a30d03da8",
     "semantic_hash": ""
   },
   "README.md": {
-    "mtime": 1787205651.0240471,
-    "seen": 1787205748.917577,
-    "ast_hash": "fb51899bebbfcb3510882cbe4edd0875",
+    "mtime": 1787184028.8711164,
+    "seen": 1787187794.528641,
+    "ast_hash": "93322c29900a1c7e7eafc590d973390e",
     "semantic_hash": ""
   },
   "backend/app/rules/2022.yaml": {
@@ -390,9 +390,9 @@
     "semantic_hash": ""
   },
   "backend/app/static/index.html": {
-    "mtime": 1787204201.004535,
-    "seen": 1787204673.3572721,
-    "ast_hash": "96c87fd8673da7a1a62623e93c02de30",
+    "mtime": 1787190572.876176,
+    "seen": 1787190795.684164,
+    "ast_hash": "287c920a4ea6c73813632639ae8de3dc",
     "semantic_hash": ""
   },
   "docs/README.md": {
@@ -432,9 +432,9 @@
     "semantic_hash": ""
   },
   "docs/decisions/README.md": {
-    "mtime": 1787205588.3046334,
-    "seen": 1787205748.917842,
-    "ast_hash": "4e6b8b92d33ff29627351d9353d5a03a",
+    "mtime": 1787100881.2923856,
+    "seen": 1787187794.528648,
+    "ast_hash": "4d7fd33026b100a3cf9b436f02cf91e3",
     "semantic_hash": ""
   },
   "docs/estatuto_tributario.md": {
@@ -480,9 +480,9 @@
     "semantic_hash": ""
   },
   "docs/reference/api/rest-endpoints.md": {
-    "mtime": 1787205626.591542,
-    "seen": 1787205748.918004,
-    "ast_hash": "7e9f6e3ace8d8a9a3b31eda96a61eebc",
+    "mtime": 1787184018.473145,
+    "seen": 1787187794.528652,
+    "ast_hash": "da8dd53d5f64f19a55ef5b5613418de2",
     "semantic_hash": ""
   },
   "docs/reference/api/sse-events.md": {
@@ -618,9 +618,9 @@
     "semantic_hash": ""
   },
   "backend/tests/test_e2e_playwright.py": {
-    "mtime": 1787205298.7331848,
-    "seen": 1787205370.6964202,
-    "ast_hash": "415e2d8c45ac20154c00cc62f998decf",
+    "mtime": 1787190787.4968553,
+    "seen": 1787190795.683594,
+    "ast_hash": "a7550b18f4674f904a50d4915d49c500",
     "semantic_hash": ""
   },
   "skills/declaracion-renta-persona-natural/scripts/simular_inmuebles_afc.py": {
@@ -630,33 +630,9 @@
     "semantic_hash": ""
   },
   "skills/declaracion-renta-persona-natural/scripts/simular_sanciones_auditoria.py": {
-    "mtime": 1787191755.8242872,
-    "seen": 1787191804.504782,
-    "ast_hash": "221c003d52f05be07b051aa331a18d7a",
-    "semantic_hash": ""
-  },
-  "backend/tests/debug_ui_playwright.py": {
-    "mtime": 1787191755.8240538,
-    "seen": 1787191804.504357,
-    "ast_hash": "85df7fef1908306d343cec122a41ea93",
-    "semantic_hash": ""
-  },
-  "docs/decisions/0006-sistema-responsivo-y-modo-mobile.md": {
-    "mtime": 1787205581.2509217,
-    "seen": 1787205748.917841,
-    "ast_hash": "22ab957f9af326cd9c3b1f04c0af716b",
-    "semantic_hash": ""
-  },
-  "docs/how-to/04-simular-reajuste-fiscal-art73.md": {
-    "mtime": 1787205596.5712047,
-    "seen": 1787205748.9180028,
-    "ast_hash": "8e8ca5d85260842a6e589ec57faf8935",
-    "semantic_hash": ""
-  },
-  "docs/how-to/05-calcular-sanciones-y-beneficio-auditoria.md": {
-    "mtime": 1787205605.3309252,
-    "seen": 1787205748.9180028,
-    "ast_hash": "9bcf1902012f58558a04c709268e3e02",
+    "mtime": 1787191091.4199193,
+    "seen": 1787191114.9407392,
+    "ast_hash": "6c5de15a029db41397e7483a93f96026",
     "semantic_hash": ""
   }
 }

@@ -23,9 +23,18 @@ Regla no negociable: nunca quemar en código valores fijos de ejemplos ni parám
   - Sobretasa Financiera y Sobretasa Energética.
   - Descuentos Tributarios (Art. 254 a 258 E.T.).
   - Tasa de Tributación Depurada (TTD mínima del 15% según Art. 240 Parágrafo 6).
-- **Beneficio de Auditoría (Art. 689-3 E.T.):**
-  - Firmeza en 6 meses (incremento $\ge 35\%$).
-  - Firmeza en 12 meses (incremento $\ge 25\%$).
+- **Reajuste Fiscal de Activos Fijos (Art. 73 E.T.):**
+  - Tabla oficial histórica DANE de 70 años (1955-2025) para bienes raíces urbanos, rurales y acciones/aportes.
+  - Simulador interactivo en tiempo real de costo ajustado, ganancia depurada y ahorro neto.
+- **Bienes Inmuebles & Cuentas AFC (Art. 311-1 y 126-4 E.T.):**
+  - Exención de hasta 5.000 UVT en Ganancia Ocasional por venta de casa de habitación con destino a cuenta AFC o adquisición de nueva vivienda.
+- **Presentación, Beneficio de Auditoría & Régimen Sancionatorio (Arts. 689-3, 640, 641, 644, 639 E.T.):**
+  - Firmeza en 6 meses (incremento $\ge 35\%$) y 12 meses (incremento $\ge 25\%$) con control de 71 UVT.
+  - Calculadora didáctica de sanciones (extemporaneidad y corrección) con reducciones del Art. 640 y sanción mínima de 10 UVT.
+- **Hoja de Cálculo Fiscal & Conciliación Exógena CSV (Stateless):**
+  - Procesamiento efímero en memoria local de transacciones bancarias contra Información Exógena DIAN.
+- **Sistema Responsivo & Modo Móvil Nativo:**
+  - Drawer off-canvas con backdrop, grids adaptativos con `minmax(0, ...)` y scroll táctil en tablas complejas.
 - **Sincronización Bidireccional:**
   - Comunicación en tiempo real entre la API, los Agentes CLI y la Interfaz de Usuario mediante Server-Sent Events (SSE) con backend en memoria o Redis.
 

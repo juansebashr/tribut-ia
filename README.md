@@ -46,6 +46,8 @@ La documentación completa del proyecto se encuentra en el directorio [`docs/`](
   - [ADR 0002: Sincronización Reactiva SSE](./docs/decisions/0002-sincronizacion-bidireccional-sse.md)
   - [ADR 0003: Máscara Contable Colombiana en DOM](./docs/decisions/0003-mascara-contable-colombiana-en-dom.md)
   - [ADR 0004: Persistencia en Redis, Aislamiento de Sesiones sin Login y GCP Cloud Run](./docs/decisions/0004-persistencia-redis-cloudrun-aislamiento-sesion.md)
+  - [ADR 0005: Visualizador Efímero de Conciliación Exógena y Transacciones CSV sin Persistencia](./docs/decisions/0005-visualizador-efimero-conciliacion-exogena-csv.md)
+  - [ADR 0006: Sistema Responsivo, Menú Off-Canvas y Modo Mobile](./docs/decisions/0006-sistema-responsivo-y-modo-mobile.md)
 
 ---
 
@@ -59,17 +61,25 @@ La documentación completa del proyecto se encuentra en el directorio [`docs/`](
 2. **Renta Personas Jurídicas (Formulario 110 & TTD)**:
    - Conciliación fiscal societaria (Tarifa general 35%).
    - Cálculo automático de la **Tasa de Tributación Depurada (TTD 15% según Art. 240 Par. 6)** con liquidación del Impuesto Adicional (IA).
-3. **Persistencia Redis & Escalamiento en Cloud Run**:
+3. **Reajuste Fiscal de Activos Fijos (Art. 73 E.T.)**:
+   - Tabla DANE histórica completa de 70 años (1955-2025) con factores multiplicadores oficiales para bienes raíces urbanos, rurales y acciones/aportes.
+   - Simulador en tiempo real de costo fiscal ajustado, ganancia ocasional depurada y ahorro neto en pesos COP.
+4. **Bienes Inmuebles & Cuentas AFC (Art. 311-1 y 126-4 E.T.)**:
+   - Simulación de la exención especial de hasta **5.000 UVT ($261.750.000 COP en 2026)** en ganancia ocasional por enajenación de casa o apartamento de habitación.
+5. **Beneficio de Auditoría & Régimen Sancionatorio (Arts. 689-3, 640, 641, 644, 639 E.T.)**:
+   - Simulador de firmeza en 6 meses (incremento $\ge 35\%$) y 12 meses (incremento $\ge 25\%$) con control de piso de 71 UVT.
+   - Calculadora didáctica de sanciones (extemporaneidad y corrección) con reducciones del Art. 640 y sanción mínima de 10 UVT ($523.500 COP).
+6. **Hoja de Cálculo Fiscal & Conciliación Exógena CSV (100% Stateless)**:
+   - Procesamiento en memoria local de transacciones bancarias y certificados tributarios contra la Información Exógena DIAN.
+   - Diagnóstico didáctico casilla por casilla sin persistencia en base de datos.
+7. **Sistema Responsivo & Modo Mobile Integral**:
+   - Drawer de navegación lateral off-canvas con backdrop de desenfoque y botón hamburguesa accesible.
+   - Contenedores con desplazamiento táctil horizontal en tablas de alta densidad.
+   - Adaptación fluida sin desbordamiento horizontal en smartphones, tablets, laptops y pantallas de escritorio.
+8. **Persistencia Redis & Escalamiento en Cloud Run**:
    - Persistencia en memoria RAM con TTL de 1 día (86.400 segundos) y renovación continua.
    - Difusión multihost con Redis Pub/Sub para Server-Sent Events (SSE).
    - Contenedores Docker stateless optimizados para GCP Cloud Run (`Dockerfile` multi-stage en Python 3.11-slim).
-4. **Aislamiento de Sesión por Dispositivo sin Login (Zero-Login)**:
-   - Identificadores criptográficos UUIDv4 asignados automáticamente vía cookie segura `tributia_sid`.
-   - Control de acceso por cabecera HTTP estándar `X-Session-ID` para APIs, scripts CLI y agentes IA.
-   - Respaldo continuo en `localStorage` con alertas Toast y modales de confirmación para evitar pérdida accidental de datos.
-5. **Calendario Tributario 2026 & DIAN Módulo 11**:
-   - Consulta por NIT con cálculo dinámico del Dígito de Verificación (DV).
-   - Vista de calendario interactivo mes a mes.
 
 ---
 
@@ -93,12 +103,18 @@ cd tribut-ia
 
 ## Suite de Pruebas Automatizadas
 
-Para ejecutar la suite completa de 35 pruebas unitarias y de integración:
+Para ejecutar la suite completa de pruebas unitarias, de integración y E2E Playwright:
 
 ```bash
-poetry run pytest backend -v
+# Pruebas backend (unitarias y de integración)
+poetry run pytest backend -v --ignore=backend/tests/test_e2e_playwright.py
+
+# Pruebas End-to-End con Playwright (multi-viewport desktop y móvil)
+poetry run pytest backend/tests/test_e2e_playwright.py -v
 ```
 
 ```text
-======================== 70 passed in 0.94s ========================
+======================= 100 passed, 2 warnings in 51.00s ========================
+- 78 Pruebas Unitarias y de Integración Backend (100% pasando)
+- 22 Pruebas E2E de Flujos Tributarios, Responsividad y Modo Móvil
 ```

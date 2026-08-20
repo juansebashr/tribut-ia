@@ -2235,39 +2235,6 @@
       "source_location": "L28"
     },
     {
-      "id": "backend_tests_debug_ui_playwright",
-      "label": "debug_ui_playwright.py",
-      "_origin": "ast",
-      "community": 145,
-      "community_name": "debug_ui_playwright.py",
-      "file_type": "concept",
-      "norm_label": "debug_ui_playwright.py",
-      "source_file": "backend/tests/debug_ui_playwright.py",
-      "source_location": "L1"
-    },
-    {
-      "id": "backend_tests_debug_ui_playwright_func_get_free_port",
-      "label": "get_free_port",
-      "_origin": "ast",
-      "community": 145,
-      "community_name": "debug_ui_playwright.py",
-      "file_type": "concept",
-      "norm_label": "get_free_port",
-      "source_file": "backend/tests/debug_ui_playwright.py",
-      "source_location": "L15"
-    },
-    {
-      "id": "backend_tests_debug_ui_playwright_func_run_debug",
-      "label": "run_debug",
-      "_origin": "ast",
-      "community": 145,
-      "community_name": "debug_ui_playwright.py",
-      "file_type": "concept",
-      "norm_label": "run_debug",
-      "source_file": "backend/tests/debug_ui_playwright.py",
-      "source_location": "L21"
-    },
-    {
       "id": "backend_app_core_rules_engine_loader",
       "label": "loader.py",
       "_origin": "ast",
@@ -9517,30 +9484,6 @@
       "source_location": "L32"
     },
     {
-      "id": "docs_estatuto_tributario",
-      "label": "estatuto_tributario.md",
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "LIBRO S\u00c9PTIMO - (Libro, Adicionado por el Art. 139 de la Ley 1819 de 2016)",
-      "file_type": "document",
-      "node_kind": "page",
-      "norm_label": "estatuto_tributario.md",
-      "source_file": "docs/estatuto_tributario.md",
-      "source_location": "L1"
-    },
-    {
-      "id": "docs_estatuto_tributario_art\u00edculo_1_origen_de_la_obligaci\u00f3n_sustancial",
-      "label": "ART\u00cdCULO 1. ORIGEN DE LA OBLIGACI\u00d3N SUSTANCIAL",
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "LIBRO S\u00c9PTIMO - (Libro, Adicionado por el Art. 139 de la Ley 1819 de 2016)",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "articulo 1. origen de la obligacion sustancial",
-      "source_file": "docs/estatuto_tributario.md",
-      "source_location": "L10"
-    },
-    {
       "id": "docs_estatuto_tributario_art\u00edculo_260_7",
       "label": "ART\u00cdCULO 260-7",
       "_origin": "ast",
@@ -9563,222 +9506,6 @@
       "norm_label": "articulo 260-7",
       "source_file": "docs/estatuto_tributario.md",
       "source_location": "L21314"
-    },
-    {
-      "id": "docs_estatuto_tributario_art\u00edculo_2_contribuyentes",
-      "label": "ART\u00cdCULO 2. CONTRIBUYENTES",
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "LIBRO S\u00c9PTIMO - (Libro, Adicionado por el Art. 139 de la Ley 1819 de 2016)",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "articulo 2. contribuyentes",
-      "source_file": "docs/estatuto_tributario.md",
-      "source_location": "L16"
-    },
-    {
-      "id": "docs_estatuto_tributario_art\u00edculo_3_responsables",
-      "label": "ART\u00cdCULO 3. RESPONSABLES",
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "LIBRO S\u00c9PTIMO - (Libro, Adicionado por el Art. 139 de la Ley 1819 de 2016)",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "articulo 3. responsables",
-      "source_file": "docs/estatuto_tributario.md",
-      "source_location": "L21"
-    },
-    {
-      "id": "docs_estatuto_tributario_art\u00edculo_45",
-      "label": "ART\u00cdCULO 45",
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "LIBRO S\u00c9PTIMO - (Libro, Adicionado por el Art. 139 de la Ley 1819 de 2016)",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "articulo 45",
-      "source_file": "docs/estatuto_tributario.md",
-      "source_location": "L21077"
-    },
-    {
-      "id": "docs_estatuto_tributario_art\u00edculo_4_sin\u00f3nimos",
-      "label": "ART\u00cdCULO 4. SIN\u00d3NIMOS",
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "LIBRO S\u00c9PTIMO - (Libro, Adicionado por el Art. 139 de la Ley 1819 de 2016)",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "articulo 4. sinonimos",
-      "source_file": "docs/estatuto_tributario.md",
-      "source_location": "L26"
-    },
-    {
-      "id": "docs_estatuto_tributario_art\u00edculo_870_gravamen_a_los_movimientos_financieros_gmf",
-      "label": "ART\u00cdCULO 870. GRAVAMEN A LOS MOVIMIENTOS FINANCIEROS, GMF",
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "LIBRO S\u00c9PTIMO - (Libro, Adicionado por el Art. 139 de la Ley 1819 de 2016)",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "articulo 870. gravamen a los movimientos financieros, gmf",
-      "source_file": "docs/estatuto_tributario.md",
-      "source_location": "L20689"
-    },
-    {
-      "id": "docs_estatuto_tributario_art\u00edculo_871_hecho_generador_del_gmf",
-      "label": "ART\u00cdCULO 871. HECHO GENERADOR DEL GMF",
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "LIBRO S\u00c9PTIMO - (Libro, Adicionado por el Art. 139 de la Ley 1819 de 2016)",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "articulo 871. hecho generador del gmf",
-      "source_file": "docs/estatuto_tributario.md",
-      "source_location": "L20696"
-    },
-    {
-      "id": "docs_estatuto_tributario_art\u00edculo_872_tarifa_del_gravamen_a_los_movimientos_financieros",
-      "label": "ART\u00cdCULO 872. TARIFA DEL GRAVAMEN A LOS MOVIMIENTOS FINANCIEROS",
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "LIBRO S\u00c9PTIMO - (Libro, Adicionado por el Art. 139 de la Ley 1819 de 2016)",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "articulo 872. tarifa del gravamen a los movimientos financieros",
-      "source_file": "docs/estatuto_tributario.md",
-      "source_location": "L20795"
-    },
-    {
-      "id": "docs_estatuto_tributario_art\u00edculo_873_causaci\u00f3n_del_gmf",
-      "label": "ART\u00cdCULO 873. CAUSACI\u00d3N DEL GMF",
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "LIBRO S\u00c9PTIMO - (Libro, Adicionado por el Art. 139 de la Ley 1819 de 2016)",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "articulo 873. causacion del gmf",
-      "source_file": "docs/estatuto_tributario.md",
-      "source_location": "L20802"
-    },
-    {
-      "id": "docs_estatuto_tributario_art\u00edculo_874_base_gravable_del_gmf",
-      "label": "ART\u00cdCULO 874. BASE GRAVABLE DEL GMF",
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "LIBRO S\u00c9PTIMO - (Libro, Adicionado por el Art. 139 de la Ley 1819 de 2016)",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "articulo 874. base gravable del gmf",
-      "source_file": "docs/estatuto_tributario.md",
-      "source_location": "L20809"
-    },
-    {
-      "id": "docs_estatuto_tributario_art\u00edculo_875_sujetos_pasivos_del_gmf",
-      "label": "ART\u00cdCULO 875. SUJETOS PASIVOS DEL GMF",
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "LIBRO S\u00c9PTIMO - (Libro, Adicionado por el Art. 139 de la Ley 1819 de 2016)",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "articulo 875. sujetos pasivos del gmf",
-      "source_file": "docs/estatuto_tributario.md",
-      "source_location": "L20816"
-    },
-    {
-      "id": "docs_estatuto_tributario_art\u00edculo_876_agentes_de_retenci\u00f3n_del_gmf",
-      "label": "ART\u00cdCULO 876. AGENTES DE RETENCI\u00d3N DEL GMF",
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "LIBRO S\u00c9PTIMO - (Libro, Adicionado por el Art. 139 de la Ley 1819 de 2016)",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "articulo 876. agentes de retencion del gmf",
-      "source_file": "docs/estatuto_tributario.md",
-      "source_location": "L20828"
-    },
-    {
-      "id": "docs_estatuto_tributario_art\u00edculo_877_declaraci\u00f3n_y_pago_del_gmf",
-      "label": "ART\u00cdCULO 877. DECLARACI\u00d3N Y PAGO DEL GMF",
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "LIBRO S\u00c9PTIMO - (Libro, Adicionado por el Art. 139 de la Ley 1819 de 2016)",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "articulo 877. declaracion y pago del gmf",
-      "source_file": "docs/estatuto_tributario.md",
-      "source_location": "L20839"
-    },
-    {
-      "id": "docs_estatuto_tributario_art\u00edculo_878_administraci\u00f3n_del_gmf",
-      "label": "ART\u00cdCULO 878. ADMINISTRACI\u00d3N DEL GMF",
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "LIBRO S\u00c9PTIMO - (Libro, Adicionado por el Art. 139 de la Ley 1819 de 2016)",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "articulo 878. administracion del gmf",
-      "source_file": "docs/estatuto_tributario.md",
-      "source_location": "L20850"
-    },
-    {
-      "id": "docs_estatuto_tributario_art\u00edculo_879",
-      "label": "ART\u00cdCULO 879",
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "LIBRO S\u00c9PTIMO - (Libro, Adicionado por el Art. 139 de la Ley 1819 de 2016)",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "articulo 879",
-      "source_file": "docs/estatuto_tributario.md",
-      "source_location": "L21086"
-    },
-    {
-      "id": "docs_estatuto_tributario_art\u00edculo_879_exenciones_del_gmf",
-      "label": "ART\u00cdCULO 879. EXENCIONES DEL GMF",
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "LIBRO S\u00c9PTIMO - (Libro, Adicionado por el Art. 139 de la Ley 1819 de 2016)",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "articulo 879. exenciones del gmf",
-      "source_file": "docs/estatuto_tributario.md",
-      "source_location": "L20864"
-    },
-    {
-      "id": "docs_estatuto_tributario_art\u00edculo_880_agentes_de_retenci\u00f3n_del_gmf_en_operaciones_de_cuenta_de_dep\u00f3sito",
-      "label": "ART\u00cdCULO 880. AGENTES DE RETENCI\u00d3N DEL GMF EN OPERACIONES DE CUENTA DE DEP\u00d3SITO",
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "LIBRO S\u00c9PTIMO - (Libro, Adicionado por el Art. 139 de la Ley 1819 de 2016)",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "articulo 880. agentes de retencion del gmf en operaciones de cuenta de deposito",
-      "source_file": "docs/estatuto_tributario.md",
-      "source_location": "L21081"
-    },
-    {
-      "id": "docs_estatuto_tributario_art\u00edculo_881_1_control_sobre_operaciones_y_montos_exentos_del_gravamen_a_los_movimientos_financieros",
-      "label": "ART\u00cdCULO 881-1. CONTROL SOBRE OPERACIONES Y MONTOS EXENTOS DEL GRAVAMEN A LOS MOVIMIENTOS FINANCIEROS",
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "LIBRO S\u00c9PTIMO - (Libro, Adicionado por el Art. 139 de la Ley 1819 de 2016)",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "articulo 881-1. control sobre operaciones y montos exentos del gravamen a los movimientos financieros",
-      "source_file": "docs/estatuto_tributario.md",
-      "source_location": "L21114"
-    },
-    {
-      "id": "docs_estatuto_tributario_art\u00edculo_881_devoluci\u00f3n_del_gmf",
-      "label": "ART\u00cdCULO 881. DEVOLUCI\u00d3N DEL GMF",
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "LIBRO S\u00c9PTIMO - (Libro, Adicionado por el Art. 139 de la Ley 1819 de 2016)",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "articulo 881. devolucion del gmf",
-      "source_file": "docs/estatuto_tributario.md",
-      "source_location": "L21094"
     },
     {
       "id": "docs_estatuto_tributario_art\u00edculo_882_entidades_controladas_del_exterior_sin_residencia_fiscal_en_colombia_ece",
@@ -10057,30 +9784,6 @@
       "source_location": "L21399"
     },
     {
-      "id": "docs_estatuto_tributario_estatuto_tributario_nacional_de_colombia",
-      "label": "Estatuto Tributario Nacional de Colombia",
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "LIBRO S\u00c9PTIMO - (Libro, Adicionado por el Art. 139 de la Ley 1819 de 2016)",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "estatuto tributario nacional de colombia",
-      "source_file": "docs/estatuto_tributario.md",
-      "source_location": "L1"
-    },
-    {
-      "id": "docs_estatuto_tributario_libro_sexto",
-      "label": "LIBRO SEXTO - \"",
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "LIBRO S\u00c9PTIMO - (Libro, Adicionado por el Art. 139 de la Ley 1819 de 2016)",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "libro sexto - \"",
-      "source_file": "docs/estatuto_tributario.md",
-      "source_location": "L20684"
-    },
-    {
       "id": "docs_estatuto_tributario_libro_s\u00e9ptimo_libro_adicionado_por_el_art_139_de_la_ley_1819_de_2016",
       "label": "LIBRO S\u00c9PTIMO - (Libro, Adicionado por el Art. 139 de la Ley 1819 de 2016)",
       "_origin": "ast",
@@ -10091,18 +9794,6 @@
       "norm_label": "libro septimo - (libro, adicionado por el art. 139 de la ley 1819 de 2016)",
       "source_file": "docs/estatuto_tributario.md",
       "source_location": "L21131"
-    },
-    {
-      "id": "docs_estatuto_tributario_t\u00edtulo_preliminar_obligaci\u00f3n_tributaria",
-      "label": "T\u00cdTULO PRELIMINAR: Obligaci\u00f3n Tributaria",
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "LIBRO S\u00c9PTIMO - (Libro, Adicionado por el Art. 139 de la Ley 1819 de 2016)",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "titulo preliminar: obligacion tributaria",
-      "source_file": "docs/estatuto_tributario.md",
-      "source_location": "L8"
     },
     {
       "id": "docs_estatuto_tributario_art\u00edculo_514_contribuyentes_o_responsables_son_sujetos_pasivos",
@@ -11050,7 +10741,7 @@
       "node_kind": "heading",
       "norm_label": "1. pruebas unitarias y de integracion (pytest)",
       "source_file": "AGENTS.md",
-      "source_location": "L113"
+      "source_location": "L104"
     },
     {
       "id": "agents_1_resumen_del_proyecto_y_prop\u00f3sito_why_tributia_exists",
@@ -11074,7 +10765,7 @@
       "node_kind": "heading",
       "norm_label": "\ud83d\udee0\ufe0f 2. comandos del entorno de desarrollo",
       "source_file": "AGENTS.md",
-      "source_location": "L43"
+      "source_location": "L34"
     },
     {
       "id": "agents_2_linteo_y_formato_de_c\u00f3digo_ruff",
@@ -11086,7 +10777,7 @@
       "node_kind": "heading",
       "norm_label": "2. linteo y formato de codigo (ruff)",
       "source_file": "AGENTS.md",
-      "source_location": "L127"
+      "source_location": "L118"
     },
     {
       "id": "agents_3_navegaci\u00f3n_de_arquitectura_con_graphify_knowledge_graph",
@@ -11098,7 +10789,7 @@
       "node_kind": "heading",
       "norm_label": "\ud83d\udd78\ufe0f 3. navegacion de arquitectura con graphify (knowledge graph)",
       "source_file": "AGENTS.md",
-      "source_location": "L73"
+      "source_location": "L64"
     },
     {
       "id": "agents_3_tipado_est\u00e1tico_mypy",
@@ -11110,7 +10801,7 @@
       "node_kind": "heading",
       "norm_label": "3. tipado estatico (mypy)",
       "source_file": "AGENTS.md",
-      "source_location": "L140"
+      "source_location": "L131"
     },
     {
       "id": "agents_4_instrucciones_de_pruebas_y_verificaci\u00f3n",
@@ -11122,7 +10813,7 @@
       "node_kind": "heading",
       "norm_label": "\ud83e\uddea 4. instrucciones de pruebas y verificacion",
       "source_file": "AGENTS.md",
-      "source_location": "L109"
+      "source_location": "L100"
     },
     {
       "id": "agents_4_linteo_de_documentaci\u00f3n_markdownlint",
@@ -11134,7 +10825,7 @@
       "node_kind": "heading",
       "norm_label": "4. linteo de documentacion (markdownlint)",
       "source_file": "AGENTS.md",
-      "source_location": "L147"
+      "source_location": "L138"
     },
     {
       "id": "agents_5_estructura_del_repositorio",
@@ -11146,7 +10837,7 @@
       "node_kind": "heading",
       "norm_label": "\ud83c\udfdb\ufe0f 5. estructura del repositorio",
       "source_file": "AGENTS.md",
-      "source_location": "L162"
+      "source_location": "L153"
     },
     {
       "id": "agents_5_pruebas_del_frontend",
@@ -11158,7 +10849,7 @@
       "node_kind": "heading",
       "norm_label": "5. pruebas del frontend",
       "source_file": "AGENTS.md",
-      "source_location": "L154"
+      "source_location": "L145"
     },
     {
       "id": "agents_6_reglas_de_estilo_de_c\u00f3digo_y_convenciones",
@@ -11170,7 +10861,7 @@
       "node_kind": "heading",
       "norm_label": "\ud83d\udcd0 6. reglas de estilo de codigo y convenciones",
       "source_file": "AGENTS.md",
-      "source_location": "L191"
+      "source_location": "L182"
     },
     {
       "id": "agents_7_gu\u00eda_de_contribuci\u00f3n_y_pull_requests_para_agentes",
@@ -11182,7 +10873,7 @@
       "node_kind": "heading",
       "norm_label": "\ud83d\ude80 7. guia de contribucion y pull requests para agentes",
       "source_file": "AGENTS.md",
-      "source_location": "L216"
+      "source_location": "L207"
     },
     {
       "id": "agents_agents_md_protocolo_y_directivas_para_agentes_aut\u00f3nomos_en_tributia",
@@ -11206,7 +10897,7 @@
       "node_kind": "heading",
       "norm_label": "comandos de graphify",
       "source_file": "AGENTS.md",
-      "source_location": "L85"
+      "source_location": "L76"
     },
     {
       "id": "agents_configuraci\u00f3n_e_instalaci\u00f3n",
@@ -11218,7 +10909,7 @@
       "node_kind": "heading",
       "norm_label": "configuracion e instalacion",
       "source_file": "AGENTS.md",
-      "source_location": "L45"
+      "source_location": "L36"
     },
     {
       "id": "agents_documentaci\u00f3n_y_normativa",
@@ -11230,7 +10921,7 @@
       "node_kind": "heading",
       "norm_label": "documentacion y normativa",
       "source_file": "AGENTS.md",
-      "source_location": "L209"
+      "source_location": "L200"
     },
     {
       "id": "agents_ejecuci\u00f3n_de_la_aplicaci\u00f3n",
@@ -11242,7 +10933,7 @@
       "node_kind": "heading",
       "norm_label": "ejecucion de la aplicacion",
       "source_file": "AGENTS.md",
-      "source_location": "L55"
+      "source_location": "L46"
     },
     {
       "id": "agents_frontend_ui",
@@ -11254,7 +10945,7 @@
       "node_kind": "heading",
       "norm_label": "frontend / ui",
       "source_file": "AGENTS.md",
-      "source_location": "L203"
+      "source_location": "L194"
     },
     {
       "id": "agents_m\u00f3dulos_principales",
@@ -11278,7 +10969,7 @@
       "node_kind": "heading",
       "norm_label": "python / backend",
       "source_file": "AGENTS.md",
-      "source_location": "L193"
+      "source_location": "L184"
     },
     {
       "id": "agents_reglas_de_uso_de_graphify_para_agentes",
@@ -11290,7 +10981,7 @@
       "node_kind": "heading",
       "norm_label": "reglas de uso de graphify para agentes",
       "source_file": "AGENTS.md",
-      "source_location": "L77"
+      "source_location": "L68"
     },
     {
       "id": "claude_docs_why",
@@ -11365,136 +11056,172 @@
       "source_location": "L1"
     },
     {
-      "id": "docs_how_to_05_calcular_sanciones_y_beneficio_auditoria",
-      "label": "05-calcular-sanciones-y-beneficio-auditoria.md",
+      "id": "docs_explanation_03_mito_tributario_tarifas_marginales",
+      "label": "03-mito-tributario-tarifas-marginales.md",
       "_origin": "ast",
       "community": 48,
-      "community_name": "2. Liquidaci\u00f3n de Sanciones (Arts. 641, 644, 640 y 639 E.T.)",
+      "community_name": "docs/README.md",
       "file_type": "document",
       "node_kind": "page",
-      "norm_label": "05-calcular-sanciones-y-beneficio-auditoria.md",
-      "source_file": "docs/how-to/05-calcular-sanciones-y-beneficio-auditoria.md",
+      "norm_label": "03-mito-tributario-tarifas-marginales.md",
+      "source_file": "docs/explanation/03-mito-tributario-tarifas-marginales.md",
       "source_location": "L1"
     },
     {
-      "id": "docs_how_to_05_calcular_sanciones_y_beneficio_auditoria_1_beneficio_de_auditor\u00eda_art_689_3_e_t",
-      "label": "1. Beneficio de Auditor\u00eda (Art. 689-3 E.T.)",
+      "id": "docs_explanation_03_mito_tributario_tarifas_marginales_1_por_qu\u00e9_este_mito_es_matem\u00e1ticamente_falso",
+      "label": "1. Por qu\u00e9 este mito es matem\u00e1ticamente falso",
       "_origin": "ast",
       "community": 48,
-      "community_name": "2. Liquidaci\u00f3n de Sanciones (Arts. 641, 644, 640 y 639 E.T.)",
+      "community_name": "docs/README.md",
       "file_type": "document",
       "node_kind": "heading",
-      "norm_label": "1. beneficio de auditoria (art. 689-3 e.t.)",
-      "source_file": "docs/how-to/05-calcular-sanciones-y-beneficio-auditoria.md",
+      "norm_label": "1. por que este mito es matematicamente falso",
+      "source_file": "docs/explanation/03-mito-tributario-tarifas-marginales.md",
       "source_location": "L7"
     },
     {
-      "id": "docs_how_to_05_calcular_sanciones_y_beneficio_auditoria_2_liquidaci\u00f3n_de_sanciones_arts_641_644_640_y_639_e_t",
-      "label": "2. Liquidaci\u00f3n de Sanciones (Arts. 641, 644, 640 y 639 E.T.)",
+      "id": "docs_explanation_03_mito_tributario_tarifas_marginales_explicaci\u00f3n_el_mito_tributario_de_las_tarifas_marginales",
+      "label": "Explicaci\u00f3n: El Mito Tributario de las Tarifas Marginales",
       "_origin": "ast",
       "community": 48,
-      "community_name": "2. Liquidaci\u00f3n de Sanciones (Arts. 641, 644, 640 y 639 E.T.)",
+      "community_name": "docs/README.md",
       "file_type": "document",
       "node_kind": "heading",
-      "norm_label": "2. liquidacion de sanciones (arts. 641, 644, 640 y 639 e.t.)",
-      "source_file": "docs/how-to/05-calcular-sanciones-y-beneficio-auditoria.md",
-      "source_location": "L31"
-    },
-    {
-      "id": "docs_how_to_05_calcular_sanciones_y_beneficio_auditoria_control_de_sanci\u00f3n_m\u00ednima_art_639",
-      "label": "Control de Sanci\u00f3n M\u00ednima (Art. 639)",
-      "_origin": "ast",
-      "community": 48,
-      "community_name": "2. Liquidaci\u00f3n de Sanciones (Arts. 641, 644, 640 y 639 E.T.)",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "control de sancion minima (art. 639)",
-      "source_file": "docs/how-to/05-calcular-sanciones-y-beneficio-auditoria.md",
-      "source_location": "L45"
-    },
-    {
-      "id": "docs_how_to_05_calcular_sanciones_y_beneficio_auditoria_c\u00f3mo_calcular_sanciones_tributarias_y_simular_el_beneficio_de_auditor\u00eda",
-      "label": "C\u00f3mo Calcular Sanciones Tributarias y Simular el Beneficio de Auditor\u00eda",
-      "_origin": "ast",
-      "community": 48,
-      "community_name": "2. Liquidaci\u00f3n de Sanciones (Arts. 641, 644, 640 y 639 E.T.)",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "como calcular sanciones tributarias y simular el beneficio de auditoria",
-      "source_file": "docs/how-to/05-calcular-sanciones-y-beneficio-auditoria.md",
+      "norm_label": "explicacion: el mito tributario de las tarifas marginales",
+      "source_file": "docs/explanation/03-mito-tributario-tarifas-marginales.md",
       "source_location": "L1"
     },
     {
-      "id": "docs_how_to_05_calcular_sanciones_y_beneficio_auditoria_ejemplo_de_c\u00e1lculo_v\u00eda_api_post_api_v1_beneficios_calcular_sancion",
-      "label": "Ejemplo de C\u00e1lculo v\u00eda API (`POST /api/v1/beneficios/calcular-sancion`)",
+      "id": "docs_readme",
+      "label": "docs/README.md",
       "_origin": "ast",
       "community": 48,
-      "community_name": "2. Liquidaci\u00f3n de Sanciones (Arts. 641, 644, 640 y 639 E.T.)",
+      "community_name": "docs/README.md",
       "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "ejemplo de calculo via api (`post /api/v1/beneficios/calcular-sancion`)",
-      "source_file": "docs/how-to/05-calcular-sanciones-y-beneficio-auditoria.md",
-      "source_location": "L48"
+      "node_kind": "page",
+      "norm_label": "docs/readme.md",
+      "source_file": "docs/README.md",
+      "source_location": "L1"
     },
     {
-      "id": "docs_how_to_05_calcular_sanciones_y_beneficio_auditoria_ejemplo_v\u00eda_api_rest_post_api_v1_beneficios_simular_auditoria",
-      "label": "Ejemplo v\u00eda API REST (`POST /api/v1/beneficios/simular-auditoria`)",
+      "id": "docs_readme_documentacion_tecnica_de_tributia",
+      "label": "Documentacion Tecnica de TributIA",
       "_origin": "ast",
       "community": 48,
-      "community_name": "2. Liquidaci\u00f3n de Sanciones (Arts. 641, 644, 640 y 639 E.T.)",
+      "community_name": "docs/README.md",
       "file_type": "document",
       "node_kind": "heading",
-      "norm_label": "ejemplo via api rest (`post /api/v1/beneficios/simular-auditoria`)",
-      "source_file": "docs/how-to/05-calcular-sanciones-y-beneficio-auditoria.md",
-      "source_location": "L18"
+      "norm_label": "documentacion tecnica de tributia",
+      "source_file": "docs/README.md",
+      "source_location": "L1"
     },
     {
-      "id": "docs_how_to_05_calcular_sanciones_y_beneficio_auditoria_reducciones_del_principio_de_favorabilidad_art_640",
-      "label": "Reducciones del Principio de Favorabilidad (Art. 640)",
+      "id": "docs_readme_registro_de_decisiones_arquitectonicas_adrs_decisions_readme_md",
+      "label": "[Registro de Decisiones Arquitectonicas (ADRs)](./decisions/README.md)",
       "_origin": "ast",
       "community": 48,
-      "community_name": "2. Liquidaci\u00f3n de Sanciones (Arts. 641, 644, 640 y 639 E.T.)",
+      "community_name": "docs/README.md",
       "file_type": "document",
       "node_kind": "heading",
-      "norm_label": "reducciones del principio de favorabilidad (art. 640)",
-      "source_file": "docs/how-to/05-calcular-sanciones-y-beneficio-auditoria.md",
-      "source_location": "L41"
+      "norm_label": "[registro de decisiones arquitectonicas (adrs)](./decisions/readme.md)",
+      "source_file": "docs/README.md",
+      "source_location": "L64"
     },
     {
-      "id": "docs_how_to_05_calcular_sanciones_y_beneficio_auditoria_reglas_de_aplicaci\u00f3n",
-      "label": "Reglas de Aplicaci\u00f3n",
+      "id": "docs_reference_architecture_flow_flow_cedula_general_deductions",
+      "label": "flow-cedula-general-deductions.md",
       "_origin": "ast",
       "community": 48,
-      "community_name": "2. Liquidaci\u00f3n de Sanciones (Arts. 641, 644, 640 y 639 E.T.)",
+      "community_name": "docs/README.md",
       "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "reglas de aplicacion",
-      "source_file": "docs/how-to/05-calcular-sanciones-y-beneficio-auditoria.md",
-      "source_location": "L11"
+      "node_kind": "page",
+      "norm_label": "flow-cedula-general-deductions.md",
+      "source_file": "docs/reference/architecture/flow/flow-cedula-general-deductions.md",
+      "source_location": "L1"
     },
     {
-      "id": "docs_how_to_05_calcular_sanciones_y_beneficio_auditoria_sanci\u00f3n_por_correcci\u00f3n_art_644",
-      "label": "Sanci\u00f3n por Correcci\u00f3n (Art. 644)",
+      "id": "docs_reference_architecture_flow_flow_cedula_general_deductions_flowchart_algoritmo_de_topes_de_rentas_exentas_y_deducciones",
+      "label": "Flowchart: Algoritmo de Topes de Rentas Exentas y Deducciones",
       "_origin": "ast",
       "community": 48,
-      "community_name": "2. Liquidaci\u00f3n de Sanciones (Arts. 641, 644, 640 y 639 E.T.)",
+      "community_name": "docs/README.md",
       "file_type": "document",
       "node_kind": "heading",
-      "norm_label": "sancion por correccion (art. 644)",
-      "source_file": "docs/how-to/05-calcular-sanciones-y-beneficio-auditoria.md",
-      "source_location": "L33"
+      "norm_label": "flowchart: algoritmo de topes de rentas exentas y deducciones",
+      "source_file": "docs/reference/architecture/flow/flow-cedula-general-deductions.md",
+      "source_location": "L1"
     },
     {
-      "id": "docs_how_to_05_calcular_sanciones_y_beneficio_auditoria_sanci\u00f3n_por_extemporaneidad_art_641",
-      "label": "Sanci\u00f3n por Extemporaneidad (Art. 641)",
+      "id": "docs_reference_architecture_sequence_seq_two_way_sync",
+      "label": "seq-two-way-sync.md",
       "_origin": "ast",
       "community": 48,
-      "community_name": "2. Liquidaci\u00f3n de Sanciones (Arts. 641, 644, 640 y 639 E.T.)",
+      "community_name": "docs/README.md",
+      "file_type": "document",
+      "node_kind": "page",
+      "norm_label": "seq-two-way-sync.md",
+      "source_file": "docs/reference/architecture/sequence/seq-two-way-sync.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "docs_reference_architecture_sequence_seq_two_way_sync_diagrama_de_secuencia_sincronizaci\u00f3n_bidireccional_api_ui_en_redis",
+      "label": "Diagrama de Secuencia: Sincronizaci\u00f3n Bidireccional API \u2194 UI en Redis",
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "docs/README.md",
       "file_type": "document",
       "node_kind": "heading",
-      "norm_label": "sancion por extemporaneidad (art. 641)",
-      "source_file": "docs/how-to/05-calcular-sanciones-y-beneficio-auditoria.md",
-      "source_location": "L37"
+      "norm_label": "diagrama de secuencia: sincronizacion bidireccional api \u2194 ui en redis",
+      "source_file": "docs/reference/architecture/sequence/seq-two-way-sync.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "docs_reference_tax_engine_statutory_rules_art241",
+      "label": "statutory-rules-art241.md",
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "docs/README.md",
+      "file_type": "document",
+      "node_kind": "page",
+      "norm_label": "statutory-rules-art241.md",
+      "source_file": "docs/reference/tax-engine/statutory-rules-art241.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "docs_reference_tax_engine_statutory_rules_art241_1_tabla_de_tramos_marginales",
+      "label": "1. Tabla de Tramos Marginales",
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "docs/README.md",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "1. tabla de tramos marginales",
+      "source_file": "docs/reference/tax-engine/statutory-rules-art241.md",
+      "source_location": "L7"
+    },
+    {
+      "id": "docs_reference_tax_engine_statutory_rules_art241_2_regla_de_redondeo_dian_art_868_e_t",
+      "label": "2. Regla de Redondeo DIAN (Art. 868 E.T.)",
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "docs/README.md",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "2. regla de redondeo dian (art. 868 e.t.)",
+      "source_file": "docs/reference/tax-engine/statutory-rules-art241.md",
+      "source_location": "L21"
+    },
+    {
+      "id": "docs_reference_tax_engine_statutory_rules_art241_algoritmo_matem\u00e1tico_de_la_tabla_marginal_art_241_e_t",
+      "label": "Algoritmo Matem\u00e1tico de la Tabla Marginal (Art. 241 E.T.)",
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "docs/README.md",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "algoritmo matematico de la tabla marginal (art. 241 e.t.)",
+      "source_file": "docs/reference/tax-engine/statutory-rules-art241.md",
+      "source_location": "L1"
     },
     {
       "id": "docs_reference_api_rest_endpoints",
@@ -11545,14 +11272,14 @@
       "source_location": "L166"
     },
     {
-      "id": "docs_reference_api_rest_endpoints_4_m\u00f3dulo_de_beneficios_ajustes_patrimoniales_sanciones_beneficios",
-      "label": "4. M\u00f3dulo de Beneficios, Ajustes Patrimoniales & Sanciones (`/beneficios`)",
+      "id": "docs_reference_api_rest_endpoints_4_m\u00f3dulo_de_beneficios_sanciones_beneficios",
+      "label": "4. M\u00f3dulo de Beneficios & Sanciones (`/beneficios`)",
       "_origin": "ast",
       "community": 49,
       "community_name": "Referencia de Endpoints REST \u2014 TributIA API (v1)",
       "file_type": "document",
       "node_kind": "heading",
-      "norm_label": "4. modulo de beneficios, ajustes patrimoniales & sanciones (`/beneficios`)",
+      "norm_label": "4. modulo de beneficios & sanciones (`/beneficios`)",
       "source_file": "docs/reference/api/rest-endpoints.md",
       "source_location": "L174"
     },
@@ -11566,7 +11293,7 @@
       "node_kind": "heading",
       "norm_label": "5. modulo de calendario tributario (`/calendario`)",
       "source_file": "docs/reference/api/rest-endpoints.md",
-      "source_location": "L186"
+      "source_location": "L182"
     },
     {
       "id": "docs_reference_api_rest_endpoints_6_m\u00f3dulo_de_conciliaci\u00f3n_ex\u00f3gena_csv_reconciliation_100_ef\u00edmero_stateless",
@@ -11578,7 +11305,7 @@
       "node_kind": "heading",
       "norm_label": "6. modulo de conciliacion exogena & csv (`/reconciliation`) \u2014 *100% efimero / stateless*",
       "source_file": "docs/reference/api/rest-endpoints.md",
-      "source_location": "L193"
+      "source_location": "L189"
     },
     {
       "id": "docs_reference_api_rest_endpoints_control_de_acceso_y_aislamiento_de_sesi\u00f3n",
@@ -11602,7 +11329,7 @@
       "node_kind": "heading",
       "norm_label": "`get /reconciliation/demo`",
       "source_file": "docs/reference/api/rest-endpoints.md",
-      "source_location": "L203"
+      "source_location": "L199"
     },
     {
       "id": "docs_reference_api_rest_endpoints_get_reconciliation_template",
@@ -11614,7 +11341,7 @@
       "node_kind": "heading",
       "norm_label": "`get /reconciliation/template`",
       "source_file": "docs/reference/api/rest-endpoints.md",
-      "source_location": "L207"
+      "source_location": "L203"
     },
     {
       "id": "docs_reference_api_rest_endpoints_get_session_current",
@@ -11674,7 +11401,7 @@
       "node_kind": "heading",
       "norm_label": "`post /reconciliation/parse-csv`",
       "source_file": "docs/reference/api/rest-endpoints.md",
-      "source_location": "L195"
+      "source_location": "L191"
     },
     {
       "id": "docs_reference_api_rest_endpoints_post_reconciliation_parse_raw",
@@ -11686,7 +11413,7 @@
       "node_kind": "heading",
       "norm_label": "`post /reconciliation/parse-raw`",
       "source_file": "docs/reference/api/rest-endpoints.md",
-      "source_location": "L199"
+      "source_location": "L195"
     },
     {
       "id": "docs_reference_api_rest_endpoints_post_session_reset",
@@ -17114,7 +16841,7 @@
       "node_kind": "heading",
       "norm_label": "1. clonar y ejecutar",
       "source_file": "README.md",
-      "source_location": "L88"
+      "source_location": "L78"
     },
     {
       "id": "readme_2_acceso",
@@ -17126,7 +16853,7 @@
       "node_kind": "heading",
       "norm_label": "2. acceso",
       "source_file": "README.md",
-      "source_location": "L96"
+      "source_location": "L86"
     },
     {
       "id": "readme_caracter\u00edsticas_principales",
@@ -17138,7 +16865,7 @@
       "node_kind": "heading",
       "norm_label": "caracteristicas principales",
       "source_file": "README.md",
-      "source_location": "L54"
+      "source_location": "L52"
     },
     {
       "id": "readme_documentaci\u00f3n_t\u00e9cnica_di\u00e1taxis",
@@ -17162,7 +16889,7 @@
       "node_kind": "heading",
       "norm_label": "inicio rapido",
       "source_file": "README.md",
-      "source_location": "L86"
+      "source_location": "L76"
     },
     {
       "id": "readme_suite_de_pruebas_automatizadas",
@@ -17174,7 +16901,7 @@
       "node_kind": "heading",
       "norm_label": "suite de pruebas automatizadas",
       "source_file": "README.md",
-      "source_location": "L104"
+      "source_location": "L94"
     },
     {
       "id": "readme_tributia_colombia_suite_tributaria_motor_de_liquidaci\u00f3n_dian_2026",
@@ -17890,124 +17617,64 @@
       "source_location": "L1"
     },
     {
-      "id": "docs_explanation_03_mito_tributario_tarifas_marginales",
-      "label": "03-mito-tributario-tarifas-marginales.md",
+      "id": "docs_reference_architecture_c4_architecture_c4",
+      "label": "architecture-c4.md",
       "_origin": "ast",
       "community": 66,
       "community_name": "README.md",
       "file_type": "document",
       "node_kind": "page",
-      "norm_label": "03-mito-tributario-tarifas-marginales.md",
-      "source_file": "docs/explanation/03-mito-tributario-tarifas-marginales.md",
+      "norm_label": "architecture-c4.md",
+      "source_file": "docs/reference/architecture/c4/architecture-c4.md",
       "source_location": "L1"
     },
     {
-      "id": "docs_explanation_03_mito_tributario_tarifas_marginales_1_por_qu\u00e9_este_mito_es_matem\u00e1ticamente_falso",
-      "label": "1. Por qu\u00e9 este mito es matem\u00e1ticamente falso",
+      "id": "docs_reference_architecture_c4_architecture_c4_1_nivel_1_diagrama_de_contexto_del_sistema_c1",
+      "label": "1. Nivel 1: Diagrama de Contexto del Sistema (C1)",
       "_origin": "ast",
       "community": 66,
       "community_name": "README.md",
       "file_type": "document",
       "node_kind": "heading",
-      "norm_label": "1. por que este mito es matematicamente falso",
-      "source_file": "docs/explanation/03-mito-tributario-tarifas-marginales.md",
+      "norm_label": "1. nivel 1: diagrama de contexto del sistema (c1)",
+      "source_file": "docs/reference/architecture/c4/architecture-c4.md",
       "source_location": "L7"
     },
     {
-      "id": "docs_explanation_03_mito_tributario_tarifas_marginales_explicaci\u00f3n_el_mito_tributario_de_las_tarifas_marginales",
-      "label": "Explicaci\u00f3n: El Mito Tributario de las Tarifas Marginales",
+      "id": "docs_reference_architecture_c4_architecture_c4_2_nivel_2_diagrama_de_contenedores_c2",
+      "label": "2. Nivel 2: Diagrama de Contenedores (C2)",
       "_origin": "ast",
       "community": 66,
       "community_name": "README.md",
       "file_type": "document",
       "node_kind": "heading",
-      "norm_label": "explicacion: el mito tributario de las tarifas marginales",
-      "source_file": "docs/explanation/03-mito-tributario-tarifas-marginales.md",
+      "norm_label": "2. nivel 2: diagrama de contenedores (c2)",
+      "source_file": "docs/reference/architecture/c4/architecture-c4.md",
+      "source_location": "L29"
+    },
+    {
+      "id": "docs_reference_architecture_c4_architecture_c4_3_nivel_3_diagrama_de_componentes_del_backend_c3",
+      "label": "3. Nivel 3: Diagrama de Componentes del Backend (C3)",
+      "_origin": "ast",
+      "community": 66,
+      "community_name": "README.md",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "3. nivel 3: diagrama de componentes del backend (c3)",
+      "source_file": "docs/reference/architecture/c4/architecture-c4.md",
+      "source_location": "L58"
+    },
+    {
+      "id": "docs_reference_architecture_c4_architecture_c4_arquitectura_c4_tributia",
+      "label": "Arquitectura C4 \u2014 TributIA",
+      "_origin": "ast",
+      "community": 66,
+      "community_name": "README.md",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "arquitectura c4 \u2014 tributia",
+      "source_file": "docs/reference/architecture/c4/architecture-c4.md",
       "source_location": "L1"
-    },
-    {
-      "id": "docs_how_to_02_simular_tasa_minima_ttd_pj",
-      "label": "02-simular-tasa-minima-ttd-pj.md",
-      "_origin": "ast",
-      "community": 66,
-      "community_name": "README.md",
-      "file_type": "document",
-      "node_kind": "page",
-      "norm_label": "02-simular-tasa-minima-ttd-pj.md",
-      "source_file": "docs/how-to/02-simular-tasa-minima-ttd-pj.md",
-      "source_location": "L1"
-    },
-    {
-      "id": "docs_how_to_02_simular_tasa_minima_ttd_pj_1_fundamento_de_la_tasa_m\u00ednima_de_tributaci\u00f3n_ttd",
-      "label": "1. Fundamento de la Tasa M\u00ednima de Tributaci\u00f3n (TTD)",
-      "_origin": "ast",
-      "community": 66,
-      "community_name": "README.md",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "1. fundamento de la tasa minima de tributacion (ttd)",
-      "source_file": "docs/how-to/02-simular-tasa-minima-ttd-pj.md",
-      "source_location": "L7"
-    },
-    {
-      "id": "docs_how_to_02_simular_tasa_minima_ttd_pj_2_ejecuci\u00f3n_v\u00eda_api",
-      "label": "2. Ejecuci\u00f3n v\u00eda API",
-      "_origin": "ast",
-      "community": 66,
-      "community_name": "README.md",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "2. ejecucion via api",
-      "source_file": "docs/how-to/02-simular-tasa-minima-ttd-pj.md",
-      "source_location": "L17"
-    },
-    {
-      "id": "docs_how_to_02_simular_tasa_minima_ttd_pj_gu\u00eda_how_to_simular_tasa_m\u00ednima_de_tributaci\u00f3n_ttd_15_pj",
-      "label": "Gu\u00eda How-To: Simular Tasa M\u00ednima de Tributaci\u00f3n (TTD 15% - PJ)",
-      "_origin": "ast",
-      "community": 66,
-      "community_name": "README.md",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "guia how-to: simular tasa minima de tributacion (ttd 15% - pj)",
-      "source_file": "docs/how-to/02-simular-tasa-minima-ttd-pj.md",
-      "source_location": "L1"
-    },
-    {
-      "id": "docs_readme",
-      "label": "docs/README.md",
-      "_origin": "ast",
-      "community": 66,
-      "community_name": "README.md",
-      "file_type": "document",
-      "node_kind": "page",
-      "norm_label": "docs/readme.md",
-      "source_file": "docs/README.md",
-      "source_location": "L1"
-    },
-    {
-      "id": "docs_readme_documentacion_tecnica_de_tributia",
-      "label": "Documentacion Tecnica de TributIA",
-      "_origin": "ast",
-      "community": 66,
-      "community_name": "README.md",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "documentacion tecnica de tributia",
-      "source_file": "docs/README.md",
-      "source_location": "L1"
-    },
-    {
-      "id": "docs_readme_registro_de_decisiones_arquitectonicas_adrs_decisions_readme_md",
-      "label": "[Registro de Decisiones Arquitectonicas (ADRs)](./decisions/README.md)",
-      "_origin": "ast",
-      "community": 66,
-      "community_name": "README.md",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "[registro de decisiones arquitectonicas (adrs)](./decisions/readme.md)",
-      "source_file": "docs/README.md",
-      "source_location": "L64"
     },
     {
       "id": "docs_reference_architecture_erd_session_state_model",
@@ -18034,30 +17701,6 @@
       "source_location": "L1"
     },
     {
-      "id": "docs_reference_architecture_flow_flow_cedula_general_deductions",
-      "label": "flow-cedula-general-deductions.md",
-      "_origin": "ast",
-      "community": 66,
-      "community_name": "README.md",
-      "file_type": "document",
-      "node_kind": "page",
-      "norm_label": "flow-cedula-general-deductions.md",
-      "source_file": "docs/reference/architecture/flow/flow-cedula-general-deductions.md",
-      "source_location": "L1"
-    },
-    {
-      "id": "docs_reference_architecture_flow_flow_cedula_general_deductions_flowchart_algoritmo_de_topes_de_rentas_exentas_y_deducciones",
-      "label": "Flowchart: Algoritmo de Topes de Rentas Exentas y Deducciones",
-      "_origin": "ast",
-      "community": 66,
-      "community_name": "README.md",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "flowchart: algoritmo de topes de rentas exentas y deducciones",
-      "source_file": "docs/reference/architecture/flow/flow-cedula-general-deductions.md",
-      "source_location": "L1"
-    },
-    {
       "id": "docs_reference_architecture_sequence_seq_tax_calculation_pipeline",
       "label": "seq-tax-calculation-pipeline.md",
       "_origin": "ast",
@@ -18079,30 +17722,6 @@
       "node_kind": "heading",
       "norm_label": "diagrama de secuencia: pipeline de liquidacion tributaria",
       "source_file": "docs/reference/architecture/sequence/seq-tax-calculation-pipeline.md",
-      "source_location": "L1"
-    },
-    {
-      "id": "docs_reference_architecture_sequence_seq_two_way_sync",
-      "label": "seq-two-way-sync.md",
-      "_origin": "ast",
-      "community": 66,
-      "community_name": "README.md",
-      "file_type": "document",
-      "node_kind": "page",
-      "norm_label": "seq-two-way-sync.md",
-      "source_file": "docs/reference/architecture/sequence/seq-two-way-sync.md",
-      "source_location": "L1"
-    },
-    {
-      "id": "docs_reference_architecture_sequence_seq_two_way_sync_diagrama_de_secuencia_sincronizaci\u00f3n_bidireccional_api_ui_en_redis",
-      "label": "Diagrama de Secuencia: Sincronizaci\u00f3n Bidireccional API \u2194 UI en Redis",
-      "_origin": "ast",
-      "community": 66,
-      "community_name": "README.md",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "diagrama de secuencia: sincronizacion bidireccional api \u2194 ui en redis",
-      "source_file": "docs/reference/architecture/sequence/seq-two-way-sync.md",
       "source_location": "L1"
     },
     {
@@ -18473,31 +18092,31 @@
       "source_location": "L7"
     },
     {
-      "id": "docs_decisions_0002_sincronizacion_bidireccional_sse",
-      "label": "0002-sincronizacion-bidireccional-sse.md",
+      "id": "docs_decisions_0001_motor_de_reglas_declarativo_json",
+      "label": "0001-motor-de-reglas-declarativo-json.md",
       "_origin": "ast",
       "community": 71,
       "community_name": "decisions/README.md",
       "file_type": "document",
       "node_kind": "page",
-      "norm_label": "0002-sincronizacion-bidireccional-sse.md",
-      "source_file": "docs/decisions/0002-sincronizacion-bidireccional-sse.md",
+      "norm_label": "0001-motor-de-reglas-declarativo-json.md",
+      "source_file": "docs/decisions/0001-motor-de-reglas-declarativo-json.md",
       "source_location": "L1"
     },
     {
-      "id": "docs_decisions_0002_sincronizacion_bidireccional_sse_adr_0002_sincronizaci\u00f3n_bidireccional_en_tiempo_real_con_server_sent_events_sse",
-      "label": "ADR 0002: Sincronizaci\u00f3n Bidireccional en Tiempo Real con Server-Sent Events (SSE)",
+      "id": "docs_decisions_0001_motor_de_reglas_declarativo_json_adr_0001_motor_de_reglas_tributarias_declarativo_en_archivos_json_versionados",
+      "label": "ADR 0001: Motor de Reglas Tributarias Declarativo en Archivos JSON Versionados",
       "_origin": "ast",
       "community": 71,
       "community_name": "decisions/README.md",
       "file_type": "document",
       "node_kind": "heading",
-      "norm_label": "adr 0002: sincronizacion bidireccional en tiempo real con server-sent events (sse)",
-      "source_file": "docs/decisions/0002-sincronizacion-bidireccional-sse.md",
+      "norm_label": "adr 0001: motor de reglas tributarias declarativo en archivos json versionados",
+      "source_file": "docs/decisions/0001-motor-de-reglas-declarativo-json.md",
       "source_location": "L1"
     },
     {
-      "id": "docs_decisions_0002_sincronizacion_bidireccional_sse_consecuencias",
+      "id": "docs_decisions_0001_motor_de_reglas_declarativo_json_consecuencias",
       "label": "Consecuencias",
       "_origin": "ast",
       "community": 71,
@@ -18505,11 +18124,11 @@
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "consecuencias",
-      "source_file": "docs/decisions/0002-sincronizacion-bidireccional-sse.md",
-      "source_location": "L18"
+      "source_file": "docs/decisions/0001-motor-de-reglas-declarativo-json.md",
+      "source_location": "L15"
     },
     {
-      "id": "docs_decisions_0002_sincronizacion_bidireccional_sse_contexto",
+      "id": "docs_decisions_0001_motor_de_reglas_declarativo_json_contexto",
       "label": "Contexto",
       "_origin": "ast",
       "community": 71,
@@ -18517,11 +18136,11 @@
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "contexto",
-      "source_file": "docs/decisions/0002-sincronizacion-bidireccional-sse.md",
+      "source_file": "docs/decisions/0001-motor-de-reglas-declarativo-json.md",
       "source_location": "L7"
     },
     {
-      "id": "docs_decisions_0002_sincronizacion_bidireccional_sse_decisi\u00f3n",
+      "id": "docs_decisions_0001_motor_de_reglas_declarativo_json_decisi\u00f3n",
       "label": "Decisi\u00f3n",
       "_origin": "ast",
       "community": 71,
@@ -18529,7 +18148,7 @@
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "decision",
-      "source_file": "docs/decisions/0002-sincronizacion-bidireccional-sse.md",
+      "source_file": "docs/decisions/0001-motor-de-reglas-declarativo-json.md",
       "source_location": "L11"
     },
     {
@@ -18593,66 +18212,6 @@
       "source_location": "L11"
     },
     {
-      "id": "docs_decisions_0006_sistema_responsivo_y_modo_mobile",
-      "label": "0006-sistema-responsivo-y-modo-mobile.md",
-      "_origin": "ast",
-      "community": 71,
-      "community_name": "decisions/README.md",
-      "file_type": "document",
-      "node_kind": "page",
-      "norm_label": "0006-sistema-responsivo-y-modo-mobile.md",
-      "source_file": "docs/decisions/0006-sistema-responsivo-y-modo-mobile.md",
-      "source_location": "L1"
-    },
-    {
-      "id": "docs_decisions_0006_sistema_responsivo_y_modo_mobile_1_contexto_y_problema",
-      "label": "1. Contexto y Problema",
-      "_origin": "ast",
-      "community": 71,
-      "community_name": "decisions/README.md",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "1. contexto y problema",
-      "source_file": "docs/decisions/0006-sistema-responsivo-y-modo-mobile.md",
-      "source_location": "L9"
-    },
-    {
-      "id": "docs_decisions_0006_sistema_responsivo_y_modo_mobile_2_decisi\u00f3n_tomada",
-      "label": "2. Decisi\u00f3n Tomada",
-      "_origin": "ast",
-      "community": 71,
-      "community_name": "decisions/README.md",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "2. decision tomada",
-      "source_file": "docs/decisions/0006-sistema-responsivo-y-modo-mobile.md",
-      "source_location": "L22"
-    },
-    {
-      "id": "docs_decisions_0006_sistema_responsivo_y_modo_mobile_3_consecuencias_y_beneficios",
-      "label": "3. Consecuencias y Beneficios",
-      "_origin": "ast",
-      "community": 71,
-      "community_name": "decisions/README.md",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "3. consecuencias y beneficios",
-      "source_file": "docs/decisions/0006-sistema-responsivo-y-modo-mobile.md",
-      "source_location": "L45"
-    },
-    {
-      "id": "docs_decisions_0006_sistema_responsivo_y_modo_mobile_adr_0006_sistema_responsivo_men\u00fa_off_canvas_y_modo_mobile",
-      "label": "ADR 0006: Sistema Responsivo, Men\u00fa Off-Canvas y Modo Mobile",
-      "_origin": "ast",
-      "community": 71,
-      "community_name": "decisions/README.md",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "adr 0006: sistema responsivo, menu off-canvas y modo mobile",
-      "source_file": "docs/decisions/0006-sistema-responsivo-y-modo-mobile.md",
-      "source_location": "L1"
-    },
-    {
       "id": "docs_decisions_readme",
       "label": "decisions/README.md",
       "_origin": "ast",
@@ -18677,88 +18236,64 @@
       "source_location": "L1"
     },
     {
-      "id": "docs_how_to_04_simular_reajuste_fiscal_art73",
-      "label": "04-simular-reajuste-fiscal-art73.md",
+      "id": "docs_decisions_0002_sincronizacion_bidireccional_sse",
+      "label": "0002-sincronizacion-bidireccional-sse.md",
       "_origin": "ast",
       "community": 72,
-      "community_name": "C\u00f3mo Simular el Reajuste Fiscal de Activos Fijos (Art. 73 E.T.)",
+      "community_name": "0002-sincronizacion-bidireccional-sse.md",
       "file_type": "document",
       "node_kind": "page",
-      "norm_label": "04-simular-reajuste-fiscal-art73.md",
-      "source_file": "docs/how-to/04-simular-reajuste-fiscal-art73.md",
+      "norm_label": "0002-sincronizacion-bidireccional-sse.md",
+      "source_file": "docs/decisions/0002-sincronizacion-bidireccional-sse.md",
       "source_location": "L1"
     },
     {
-      "id": "docs_how_to_04_simular_reajuste_fiscal_art73_1_fundamento_legal_art_73_e_t",
-      "label": "1. Fundamento Legal (Art. 73 E.T.)",
+      "id": "docs_decisions_0002_sincronizacion_bidireccional_sse_adr_0002_sincronizaci\u00f3n_bidireccional_en_tiempo_real_con_server_sent_events_sse",
+      "label": "ADR 0002: Sincronizaci\u00f3n Bidireccional en Tiempo Real con Server-Sent Events (SSE)",
       "_origin": "ast",
       "community": 72,
-      "community_name": "C\u00f3mo Simular el Reajuste Fiscal de Activos Fijos (Art. 73 E.T.)",
+      "community_name": "0002-sincronizacion-bidireccional-sse.md",
       "file_type": "document",
       "node_kind": "heading",
-      "norm_label": "1. fundamento legal (art. 73 e.t.)",
-      "source_file": "docs/how-to/04-simular-reajuste-fiscal-art73.md",
+      "norm_label": "adr 0002: sincronizacion bidireccional en tiempo real con server-sent events (sse)",
+      "source_file": "docs/decisions/0002-sincronizacion-bidireccional-sse.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "docs_decisions_0002_sincronizacion_bidireccional_sse_consecuencias",
+      "label": "Consecuencias",
+      "_origin": "ast",
+      "community": 72,
+      "community_name": "0002-sincronizacion-bidireccional-sse.md",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "consecuencias",
+      "source_file": "docs/decisions/0002-sincronizacion-bidireccional-sse.md",
+      "source_location": "L18"
+    },
+    {
+      "id": "docs_decisions_0002_sincronizacion_bidireccional_sse_contexto",
+      "label": "Contexto",
+      "_origin": "ast",
+      "community": 72,
+      "community_name": "0002-sincronizacion-bidireccional-sse.md",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "contexto",
+      "source_file": "docs/decisions/0002-sincronizacion-bidireccional-sse.md",
       "source_location": "L7"
     },
     {
-      "id": "docs_how_to_04_simular_reajuste_fiscal_art73_2_tipos_de_activos_y_factores",
-      "label": "2. Tipos de Activos y Factores",
+      "id": "docs_decisions_0002_sincronizacion_bidireccional_sse_decisi\u00f3n",
+      "label": "Decisi\u00f3n",
       "_origin": "ast",
       "community": 72,
-      "community_name": "C\u00f3mo Simular el Reajuste Fiscal de Activos Fijos (Art. 73 E.T.)",
+      "community_name": "0002-sincronizacion-bidireccional-sse.md",
       "file_type": "document",
       "node_kind": "heading",
-      "norm_label": "2. tipos de activos y factores",
-      "source_file": "docs/how-to/04-simular-reajuste-fiscal-art73.md",
-      "source_location": "L17"
-    },
-    {
-      "id": "docs_how_to_04_simular_reajuste_fiscal_art73_3_ejemplo_de_uso_v\u00eda_api_rest",
-      "label": "3. Ejemplo de Uso v\u00eda API REST",
-      "_origin": "ast",
-      "community": 72,
-      "community_name": "C\u00f3mo Simular el Reajuste Fiscal de Activos Fijos (Art. 73 E.T.)",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "3. ejemplo de uso via api rest",
-      "source_file": "docs/how-to/04-simular-reajuste-fiscal-art73.md",
-      "source_location": "L27"
-    },
-    {
-      "id": "docs_how_to_04_simular_reajuste_fiscal_art73_c\u00f3mo_simular_el_reajuste_fiscal_de_activos_fijos_art_73_e_t",
-      "label": "C\u00f3mo Simular el Reajuste Fiscal de Activos Fijos (Art. 73 E.T.)",
-      "_origin": "ast",
-      "community": 72,
-      "community_name": "C\u00f3mo Simular el Reajuste Fiscal de Activos Fijos (Art. 73 E.T.)",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "como simular el reajuste fiscal de activos fijos (art. 73 e.t.)",
-      "source_file": "docs/how-to/04-simular-reajuste-fiscal-art73.md",
-      "source_location": "L1"
-    },
-    {
-      "id": "docs_how_to_04_simular_reajuste_fiscal_art73_petici\u00f3n_http_post_api_v1_beneficios_simular_articulo_73",
-      "label": "Petici\u00f3n HTTP (`POST /api/v1/beneficios/simular-articulo-73`)",
-      "_origin": "ast",
-      "community": 72,
-      "community_name": "C\u00f3mo Simular el Reajuste Fiscal de Activos Fijos (Art. 73 E.T.)",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "peticion http (`post /api/v1/beneficios/simular-articulo-73`)",
-      "source_file": "docs/how-to/04-simular-reajuste-fiscal-art73.md",
-      "source_location": "L29"
-    },
-    {
-      "id": "docs_how_to_04_simular_reajuste_fiscal_art73_respuesta",
-      "label": "Respuesta",
-      "_origin": "ast",
-      "community": 72,
-      "community_name": "C\u00f3mo Simular el Reajuste Fiscal de Activos Fijos (Art. 73 E.T.)",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "respuesta",
-      "source_file": "docs/how-to/04-simular-reajuste-fiscal-art73.md",
-      "source_location": "L43"
+      "norm_label": "decision",
+      "source_file": "docs/decisions/0002-sincronizacion-bidireccional-sse.md",
+      "source_location": "L11"
     },
     {
       "id": "backend_tests_test_e2e_playwright",
@@ -18770,17 +18305,6 @@
       "norm_label": "test_e2e_playwright.py",
       "source_file": "backend/tests/test_e2e_playwright.py",
       "source_location": "L1"
-    },
-    {
-      "id": "backend_tests_test_e2e_playwright_class_testresponsiveandmobilemode",
-      "label": "TestResponsiveAndMobileMode",
-      "_origin": "ast",
-      "community": 73,
-      "community_name": "test_e2e_playwright.py",
-      "file_type": "concept",
-      "norm_label": "testresponsiveandmobilemode",
-      "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L364"
     },
     {
       "id": "backend_tests_test_e2e_playwright_class_testtributiaendtoend",
@@ -18915,39 +18439,6 @@
       "source_location": "L273"
     },
     {
-      "id": "backend_tests_test_e2e_playwright_func_test_mobile_casilla_popover_bottom_sheet",
-      "label": "test_mobile_casilla_popover_bottom_sheet",
-      "_origin": "ast",
-      "community": 73,
-      "community_name": "test_e2e_playwright.py",
-      "file_type": "concept",
-      "norm_label": "test_mobile_casilla_popover_bottom_sheet",
-      "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L545"
-    },
-    {
-      "id": "backend_tests_test_e2e_playwright_func_test_mobile_drawer_navigation_and_backdrop",
-      "label": "test_mobile_drawer_navigation_and_backdrop",
-      "_origin": "ast",
-      "community": 73,
-      "community_name": "test_e2e_playwright.py",
-      "file_type": "concept",
-      "norm_label": "test_mobile_drawer_navigation_and_backdrop",
-      "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L375"
-    },
-    {
-      "id": "backend_tests_test_e2e_playwright_func_test_mobile_viewport_no_horizontal_body_overflow",
-      "label": "test_mobile_viewport_no_horizontal_body_overflow",
-      "_origin": "ast",
-      "community": 73,
-      "community_name": "test_e2e_playwright.py",
-      "file_type": "concept",
-      "norm_label": "test_mobile_viewport_no_horizontal_body_overflow",
-      "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L427"
-    },
-    {
       "id": "backend_tests_test_e2e_playwright_func_test_navigation_across_all_modules",
       "label": "test_navigation_across_all_modules",
       "_origin": "ast",
@@ -18992,97 +18483,52 @@
       "source_location": "L221"
     },
     {
-      "id": "backend_tests_test_e2e_playwright_func_test_reconciliation_spreadsheet_extended_sidebar_scrolling",
-      "label": "test_reconciliation_spreadsheet_extended_sidebar_scrolling",
-      "_origin": "ast",
-      "community": 73,
-      "community_name": "test_e2e_playwright.py",
-      "file_type": "concept",
-      "norm_label": "test_reconciliation_spreadsheet_extended_sidebar_scrolling",
-      "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L581"
-    },
-    {
-      "id": "backend_tests_test_e2e_playwright_func_test_reduced_desktop_and_laptop_screen_adaptation",
-      "label": "test_reduced_desktop_and_laptop_screen_adaptation",
-      "_origin": "ast",
-      "community": 73,
-      "community_name": "test_e2e_playwright.py",
-      "file_type": "concept",
-      "norm_label": "test_reduced_desktop_and_laptop_screen_adaptation",
-      "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L507"
-    },
-    {
-      "id": "backend_tests_test_e2e_playwright_func_test_table_horizontal_scroll_containers_on_mobile",
-      "label": "test_table_horizontal_scroll_containers_on_mobile",
-      "_origin": "ast",
-      "community": 73,
-      "community_name": "test_e2e_playwright.py",
-      "file_type": "concept",
-      "norm_label": "test_table_horizontal_scroll_containers_on_mobile",
-      "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L465"
-    },
-    {
-      "id": "docs_decisions_0001_motor_de_reglas_declarativo_json",
-      "label": "0001-motor-de-reglas-declarativo-json.md",
+      "id": "docs_how_to_02_simular_tasa_minima_ttd_pj",
+      "label": "02-simular-tasa-minima-ttd-pj.md",
       "_origin": "ast",
       "community": 74,
-      "community_name": "0001-motor-de-reglas-declarativo-json.md",
+      "community_name": "02-simular-tasa-minima-ttd-pj.md",
       "file_type": "document",
       "node_kind": "page",
-      "norm_label": "0001-motor-de-reglas-declarativo-json.md",
-      "source_file": "docs/decisions/0001-motor-de-reglas-declarativo-json.md",
+      "norm_label": "02-simular-tasa-minima-ttd-pj.md",
+      "source_file": "docs/how-to/02-simular-tasa-minima-ttd-pj.md",
       "source_location": "L1"
     },
     {
-      "id": "docs_decisions_0001_motor_de_reglas_declarativo_json_adr_0001_motor_de_reglas_tributarias_declarativo_en_archivos_json_versionados",
-      "label": "ADR 0001: Motor de Reglas Tributarias Declarativo en Archivos JSON Versionados",
+      "id": "docs_how_to_02_simular_tasa_minima_ttd_pj_1_fundamento_de_la_tasa_m\u00ednima_de_tributaci\u00f3n_ttd",
+      "label": "1. Fundamento de la Tasa M\u00ednima de Tributaci\u00f3n (TTD)",
       "_origin": "ast",
       "community": 74,
-      "community_name": "0001-motor-de-reglas-declarativo-json.md",
+      "community_name": "02-simular-tasa-minima-ttd-pj.md",
       "file_type": "document",
       "node_kind": "heading",
-      "norm_label": "adr 0001: motor de reglas tributarias declarativo en archivos json versionados",
-      "source_file": "docs/decisions/0001-motor-de-reglas-declarativo-json.md",
-      "source_location": "L1"
-    },
-    {
-      "id": "docs_decisions_0001_motor_de_reglas_declarativo_json_consecuencias",
-      "label": "Consecuencias",
-      "_origin": "ast",
-      "community": 74,
-      "community_name": "0001-motor-de-reglas-declarativo-json.md",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "consecuencias",
-      "source_file": "docs/decisions/0001-motor-de-reglas-declarativo-json.md",
-      "source_location": "L15"
-    },
-    {
-      "id": "docs_decisions_0001_motor_de_reglas_declarativo_json_contexto",
-      "label": "Contexto",
-      "_origin": "ast",
-      "community": 74,
-      "community_name": "0001-motor-de-reglas-declarativo-json.md",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "contexto",
-      "source_file": "docs/decisions/0001-motor-de-reglas-declarativo-json.md",
+      "norm_label": "1. fundamento de la tasa minima de tributacion (ttd)",
+      "source_file": "docs/how-to/02-simular-tasa-minima-ttd-pj.md",
       "source_location": "L7"
     },
     {
-      "id": "docs_decisions_0001_motor_de_reglas_declarativo_json_decisi\u00f3n",
-      "label": "Decisi\u00f3n",
+      "id": "docs_how_to_02_simular_tasa_minima_ttd_pj_2_ejecuci\u00f3n_v\u00eda_api",
+      "label": "2. Ejecuci\u00f3n v\u00eda API",
       "_origin": "ast",
       "community": 74,
-      "community_name": "0001-motor-de-reglas-declarativo-json.md",
+      "community_name": "02-simular-tasa-minima-ttd-pj.md",
       "file_type": "document",
       "node_kind": "heading",
-      "norm_label": "decision",
-      "source_file": "docs/decisions/0001-motor-de-reglas-declarativo-json.md",
-      "source_location": "L11"
+      "norm_label": "2. ejecucion via api",
+      "source_file": "docs/how-to/02-simular-tasa-minima-ttd-pj.md",
+      "source_location": "L17"
+    },
+    {
+      "id": "docs_how_to_02_simular_tasa_minima_ttd_pj_gu\u00eda_how_to_simular_tasa_m\u00ednima_de_tributaci\u00f3n_ttd_15_pj",
+      "label": "Gu\u00eda How-To: Simular Tasa M\u00ednima de Tributaci\u00f3n (TTD 15% - PJ)",
+      "_origin": "ast",
+      "community": 74,
+      "community_name": "02-simular-tasa-minima-ttd-pj.md",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "guia how-to: simular tasa minima de tributacion (ttd 15% - pj)",
+      "source_file": "docs/how-to/02-simular-tasa-minima-ttd-pj.md",
+      "source_location": "L1"
     },
     {
       "id": "docs_how_to_03_consultar_calendario_por_nit",
@@ -19133,64 +18579,196 @@
       "source_location": "L1"
     },
     {
-      "id": "docs_reference_architecture_c4_architecture_c4",
-      "label": "architecture-c4.md",
+      "id": "docs_estatuto_tributario_art\u00edculo_45",
+      "label": "ART\u00cdCULO 45",
       "_origin": "ast",
       "community": 76,
-      "community_name": "Arquitectura C4 \u2014 TributIA",
-      "file_type": "document",
-      "node_kind": "page",
-      "norm_label": "architecture-c4.md",
-      "source_file": "docs/reference/architecture/c4/architecture-c4.md",
-      "source_location": "L1"
-    },
-    {
-      "id": "docs_reference_architecture_c4_architecture_c4_1_nivel_1_diagrama_de_contexto_del_sistema_c1",
-      "label": "1. Nivel 1: Diagrama de Contexto del Sistema (C1)",
-      "_origin": "ast",
-      "community": 76,
-      "community_name": "Arquitectura C4 \u2014 TributIA",
+      "community_name": "LIBRO SEXTO - \"",
       "file_type": "document",
       "node_kind": "heading",
-      "norm_label": "1. nivel 1: diagrama de contexto del sistema (c1)",
-      "source_file": "docs/reference/architecture/c4/architecture-c4.md",
-      "source_location": "L7"
+      "norm_label": "articulo 45",
+      "source_file": "docs/estatuto_tributario.md",
+      "source_location": "L21077"
     },
     {
-      "id": "docs_reference_architecture_c4_architecture_c4_2_nivel_2_diagrama_de_contenedores_c2",
-      "label": "2. Nivel 2: Diagrama de Contenedores (C2)",
+      "id": "docs_estatuto_tributario_art\u00edculo_870_gravamen_a_los_movimientos_financieros_gmf",
+      "label": "ART\u00cdCULO 870. GRAVAMEN A LOS MOVIMIENTOS FINANCIEROS, GMF",
       "_origin": "ast",
       "community": 76,
-      "community_name": "Arquitectura C4 \u2014 TributIA",
+      "community_name": "LIBRO SEXTO - \"",
       "file_type": "document",
       "node_kind": "heading",
-      "norm_label": "2. nivel 2: diagrama de contenedores (c2)",
-      "source_file": "docs/reference/architecture/c4/architecture-c4.md",
-      "source_location": "L29"
+      "norm_label": "articulo 870. gravamen a los movimientos financieros, gmf",
+      "source_file": "docs/estatuto_tributario.md",
+      "source_location": "L20689"
     },
     {
-      "id": "docs_reference_architecture_c4_architecture_c4_3_nivel_3_diagrama_de_componentes_del_backend_c3",
-      "label": "3. Nivel 3: Diagrama de Componentes del Backend (C3)",
+      "id": "docs_estatuto_tributario_art\u00edculo_871_hecho_generador_del_gmf",
+      "label": "ART\u00cdCULO 871. HECHO GENERADOR DEL GMF",
       "_origin": "ast",
       "community": 76,
-      "community_name": "Arquitectura C4 \u2014 TributIA",
+      "community_name": "LIBRO SEXTO - \"",
       "file_type": "document",
       "node_kind": "heading",
-      "norm_label": "3. nivel 3: diagrama de componentes del backend (c3)",
-      "source_file": "docs/reference/architecture/c4/architecture-c4.md",
-      "source_location": "L58"
+      "norm_label": "articulo 871. hecho generador del gmf",
+      "source_file": "docs/estatuto_tributario.md",
+      "source_location": "L20696"
     },
     {
-      "id": "docs_reference_architecture_c4_architecture_c4_arquitectura_c4_tributia",
-      "label": "Arquitectura C4 \u2014 TributIA",
+      "id": "docs_estatuto_tributario_art\u00edculo_872_tarifa_del_gravamen_a_los_movimientos_financieros",
+      "label": "ART\u00cdCULO 872. TARIFA DEL GRAVAMEN A LOS MOVIMIENTOS FINANCIEROS",
       "_origin": "ast",
       "community": 76,
-      "community_name": "Arquitectura C4 \u2014 TributIA",
+      "community_name": "LIBRO SEXTO - \"",
       "file_type": "document",
       "node_kind": "heading",
-      "norm_label": "arquitectura c4 \u2014 tributia",
-      "source_file": "docs/reference/architecture/c4/architecture-c4.md",
-      "source_location": "L1"
+      "norm_label": "articulo 872. tarifa del gravamen a los movimientos financieros",
+      "source_file": "docs/estatuto_tributario.md",
+      "source_location": "L20795"
+    },
+    {
+      "id": "docs_estatuto_tributario_art\u00edculo_873_causaci\u00f3n_del_gmf",
+      "label": "ART\u00cdCULO 873. CAUSACI\u00d3N DEL GMF",
+      "_origin": "ast",
+      "community": 76,
+      "community_name": "LIBRO SEXTO - \"",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "articulo 873. causacion del gmf",
+      "source_file": "docs/estatuto_tributario.md",
+      "source_location": "L20802"
+    },
+    {
+      "id": "docs_estatuto_tributario_art\u00edculo_874_base_gravable_del_gmf",
+      "label": "ART\u00cdCULO 874. BASE GRAVABLE DEL GMF",
+      "_origin": "ast",
+      "community": 76,
+      "community_name": "LIBRO SEXTO - \"",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "articulo 874. base gravable del gmf",
+      "source_file": "docs/estatuto_tributario.md",
+      "source_location": "L20809"
+    },
+    {
+      "id": "docs_estatuto_tributario_art\u00edculo_875_sujetos_pasivos_del_gmf",
+      "label": "ART\u00cdCULO 875. SUJETOS PASIVOS DEL GMF",
+      "_origin": "ast",
+      "community": 76,
+      "community_name": "LIBRO SEXTO - \"",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "articulo 875. sujetos pasivos del gmf",
+      "source_file": "docs/estatuto_tributario.md",
+      "source_location": "L20816"
+    },
+    {
+      "id": "docs_estatuto_tributario_art\u00edculo_876_agentes_de_retenci\u00f3n_del_gmf",
+      "label": "ART\u00cdCULO 876. AGENTES DE RETENCI\u00d3N DEL GMF",
+      "_origin": "ast",
+      "community": 76,
+      "community_name": "LIBRO SEXTO - \"",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "articulo 876. agentes de retencion del gmf",
+      "source_file": "docs/estatuto_tributario.md",
+      "source_location": "L20828"
+    },
+    {
+      "id": "docs_estatuto_tributario_art\u00edculo_877_declaraci\u00f3n_y_pago_del_gmf",
+      "label": "ART\u00cdCULO 877. DECLARACI\u00d3N Y PAGO DEL GMF",
+      "_origin": "ast",
+      "community": 76,
+      "community_name": "LIBRO SEXTO - \"",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "articulo 877. declaracion y pago del gmf",
+      "source_file": "docs/estatuto_tributario.md",
+      "source_location": "L20839"
+    },
+    {
+      "id": "docs_estatuto_tributario_art\u00edculo_878_administraci\u00f3n_del_gmf",
+      "label": "ART\u00cdCULO 878. ADMINISTRACI\u00d3N DEL GMF",
+      "_origin": "ast",
+      "community": 76,
+      "community_name": "LIBRO SEXTO - \"",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "articulo 878. administracion del gmf",
+      "source_file": "docs/estatuto_tributario.md",
+      "source_location": "L20850"
+    },
+    {
+      "id": "docs_estatuto_tributario_art\u00edculo_879",
+      "label": "ART\u00cdCULO 879",
+      "_origin": "ast",
+      "community": 76,
+      "community_name": "LIBRO SEXTO - \"",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "articulo 879",
+      "source_file": "docs/estatuto_tributario.md",
+      "source_location": "L21086"
+    },
+    {
+      "id": "docs_estatuto_tributario_art\u00edculo_879_exenciones_del_gmf",
+      "label": "ART\u00cdCULO 879. EXENCIONES DEL GMF",
+      "_origin": "ast",
+      "community": 76,
+      "community_name": "LIBRO SEXTO - \"",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "articulo 879. exenciones del gmf",
+      "source_file": "docs/estatuto_tributario.md",
+      "source_location": "L20864"
+    },
+    {
+      "id": "docs_estatuto_tributario_art\u00edculo_880_agentes_de_retenci\u00f3n_del_gmf_en_operaciones_de_cuenta_de_dep\u00f3sito",
+      "label": "ART\u00cdCULO 880. AGENTES DE RETENCI\u00d3N DEL GMF EN OPERACIONES DE CUENTA DE DEP\u00d3SITO",
+      "_origin": "ast",
+      "community": 76,
+      "community_name": "LIBRO SEXTO - \"",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "articulo 880. agentes de retencion del gmf en operaciones de cuenta de deposito",
+      "source_file": "docs/estatuto_tributario.md",
+      "source_location": "L21081"
+    },
+    {
+      "id": "docs_estatuto_tributario_art\u00edculo_881_1_control_sobre_operaciones_y_montos_exentos_del_gravamen_a_los_movimientos_financieros",
+      "label": "ART\u00cdCULO 881-1. CONTROL SOBRE OPERACIONES Y MONTOS EXENTOS DEL GRAVAMEN A LOS MOVIMIENTOS FINANCIEROS",
+      "_origin": "ast",
+      "community": 76,
+      "community_name": "LIBRO SEXTO - \"",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "articulo 881-1. control sobre operaciones y montos exentos del gravamen a los movimientos financieros",
+      "source_file": "docs/estatuto_tributario.md",
+      "source_location": "L21114"
+    },
+    {
+      "id": "docs_estatuto_tributario_art\u00edculo_881_devoluci\u00f3n_del_gmf",
+      "label": "ART\u00cdCULO 881. DEVOLUCI\u00d3N DEL GMF",
+      "_origin": "ast",
+      "community": 76,
+      "community_name": "LIBRO SEXTO - \"",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "articulo 881. devolucion del gmf",
+      "source_file": "docs/estatuto_tributario.md",
+      "source_location": "L21094"
+    },
+    {
+      "id": "docs_estatuto_tributario_libro_sexto",
+      "label": "LIBRO SEXTO - \"",
+      "_origin": "ast",
+      "community": 76,
+      "community_name": "LIBRO SEXTO - \"",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "libro sexto - \"",
+      "source_file": "docs/estatuto_tributario.md",
+      "source_location": "L20684"
     },
     {
       "id": "frontend_readme",
@@ -19274,52 +18852,88 @@
       "source_location": "L7"
     },
     {
-      "id": "docs_reference_tax_engine_statutory_rules_art241",
-      "label": "statutory-rules-art241.md",
+      "id": "docs_estatuto_tributario",
+      "label": "estatuto_tributario.md",
       "_origin": "ast",
       "community": 79,
-      "community_name": "statutory-rules-art241.md",
+      "community_name": "Estatuto Tributario Nacional de Colombia",
       "file_type": "document",
       "node_kind": "page",
-      "norm_label": "statutory-rules-art241.md",
-      "source_file": "docs/reference/tax-engine/statutory-rules-art241.md",
+      "norm_label": "estatuto_tributario.md",
+      "source_file": "docs/estatuto_tributario.md",
       "source_location": "L1"
     },
     {
-      "id": "docs_reference_tax_engine_statutory_rules_art241_1_tabla_de_tramos_marginales",
-      "label": "1. Tabla de Tramos Marginales",
+      "id": "docs_estatuto_tributario_art\u00edculo_1_origen_de_la_obligaci\u00f3n_sustancial",
+      "label": "ART\u00cdCULO 1. ORIGEN DE LA OBLIGACI\u00d3N SUSTANCIAL",
       "_origin": "ast",
       "community": 79,
-      "community_name": "statutory-rules-art241.md",
+      "community_name": "Estatuto Tributario Nacional de Colombia",
       "file_type": "document",
       "node_kind": "heading",
-      "norm_label": "1. tabla de tramos marginales",
-      "source_file": "docs/reference/tax-engine/statutory-rules-art241.md",
-      "source_location": "L7"
+      "norm_label": "articulo 1. origen de la obligacion sustancial",
+      "source_file": "docs/estatuto_tributario.md",
+      "source_location": "L10"
     },
     {
-      "id": "docs_reference_tax_engine_statutory_rules_art241_2_regla_de_redondeo_dian_art_868_e_t",
-      "label": "2. Regla de Redondeo DIAN (Art. 868 E.T.)",
+      "id": "docs_estatuto_tributario_art\u00edculo_2_contribuyentes",
+      "label": "ART\u00cdCULO 2. CONTRIBUYENTES",
       "_origin": "ast",
       "community": 79,
-      "community_name": "statutory-rules-art241.md",
+      "community_name": "Estatuto Tributario Nacional de Colombia",
       "file_type": "document",
       "node_kind": "heading",
-      "norm_label": "2. regla de redondeo dian (art. 868 e.t.)",
-      "source_file": "docs/reference/tax-engine/statutory-rules-art241.md",
+      "norm_label": "articulo 2. contribuyentes",
+      "source_file": "docs/estatuto_tributario.md",
+      "source_location": "L16"
+    },
+    {
+      "id": "docs_estatuto_tributario_art\u00edculo_3_responsables",
+      "label": "ART\u00cdCULO 3. RESPONSABLES",
+      "_origin": "ast",
+      "community": 79,
+      "community_name": "Estatuto Tributario Nacional de Colombia",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "articulo 3. responsables",
+      "source_file": "docs/estatuto_tributario.md",
       "source_location": "L21"
     },
     {
-      "id": "docs_reference_tax_engine_statutory_rules_art241_algoritmo_matem\u00e1tico_de_la_tabla_marginal_art_241_e_t",
-      "label": "Algoritmo Matem\u00e1tico de la Tabla Marginal (Art. 241 E.T.)",
+      "id": "docs_estatuto_tributario_art\u00edculo_4_sin\u00f3nimos",
+      "label": "ART\u00cdCULO 4. SIN\u00d3NIMOS",
       "_origin": "ast",
       "community": 79,
-      "community_name": "statutory-rules-art241.md",
+      "community_name": "Estatuto Tributario Nacional de Colombia",
       "file_type": "document",
       "node_kind": "heading",
-      "norm_label": "algoritmo matematico de la tabla marginal (art. 241 e.t.)",
-      "source_file": "docs/reference/tax-engine/statutory-rules-art241.md",
+      "norm_label": "articulo 4. sinonimos",
+      "source_file": "docs/estatuto_tributario.md",
+      "source_location": "L26"
+    },
+    {
+      "id": "docs_estatuto_tributario_estatuto_tributario_nacional_de_colombia",
+      "label": "Estatuto Tributario Nacional de Colombia",
+      "_origin": "ast",
+      "community": 79,
+      "community_name": "Estatuto Tributario Nacional de Colombia",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "estatuto tributario nacional de colombia",
+      "source_file": "docs/estatuto_tributario.md",
       "source_location": "L1"
+    },
+    {
+      "id": "docs_estatuto_tributario_t\u00edtulo_preliminar_obligaci\u00f3n_tributaria",
+      "label": "T\u00cdTULO PRELIMINAR: Obligaci\u00f3n Tributaria",
+      "_origin": "ast",
+      "community": 79,
+      "community_name": "Estatuto Tributario Nacional de Colombia",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "titulo preliminar: obligacion tributaria",
+      "source_file": "docs/estatuto_tributario.md",
+      "source_location": "L8"
     },
     {
       "id": "backend_tests_test_session_sync",
@@ -20049,7 +19663,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "AGENTS.md",
-      "source_location": "L45",
+      "source_location": "L36",
       "weight": 1.0
     },
     {
@@ -20060,7 +19674,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "AGENTS.md",
-      "source_location": "L55",
+      "source_location": "L46",
       "weight": 1.0
     },
     {
@@ -20071,7 +19685,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "AGENTS.md",
-      "source_location": "L77",
+      "source_location": "L68",
       "weight": 1.0
     },
     {
@@ -20082,7 +19696,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "AGENTS.md",
-      "source_location": "L85",
+      "source_location": "L76",
       "weight": 1.0
     },
     {
@@ -20093,7 +19707,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "AGENTS.md",
-      "source_location": "L113",
+      "source_location": "L104",
       "weight": 1.0
     },
     {
@@ -20104,7 +19718,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "AGENTS.md",
-      "source_location": "L127",
+      "source_location": "L118",
       "weight": 1.0
     },
     {
@@ -20115,7 +19729,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "AGENTS.md",
-      "source_location": "L140",
+      "source_location": "L131",
       "weight": 1.0
     },
     {
@@ -20126,7 +19740,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "AGENTS.md",
-      "source_location": "L147",
+      "source_location": "L138",
       "weight": 1.0
     },
     {
@@ -20137,7 +19751,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "AGENTS.md",
-      "source_location": "L154",
+      "source_location": "L145",
       "weight": 1.0
     },
     {
@@ -20148,7 +19762,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "AGENTS.md",
-      "source_location": "L193",
+      "source_location": "L184",
       "weight": 1.0
     },
     {
@@ -20159,7 +19773,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "AGENTS.md",
-      "source_location": "L203",
+      "source_location": "L194",
       "weight": 1.0
     },
     {
@@ -20170,7 +19784,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "AGENTS.md",
-      "source_location": "L209",
+      "source_location": "L200",
       "weight": 1.0
     },
     {
@@ -20181,7 +19795,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "AGENTS.md",
-      "source_location": "L109",
+      "source_location": "L100",
       "weight": 1.0
     },
     {
@@ -20192,7 +19806,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "AGENTS.md",
-      "source_location": "L162",
+      "source_location": "L153",
       "weight": 1.0
     },
     {
@@ -20203,7 +19817,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "AGENTS.md",
-      "source_location": "L191",
+      "source_location": "L182",
       "weight": 1.0
     },
     {
@@ -20214,7 +19828,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "AGENTS.md",
-      "source_location": "L216",
+      "source_location": "L207",
       "weight": 1.0
     },
     {
@@ -20225,7 +19839,18 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "AGENTS.md",
-      "source_location": "L43",
+      "source_location": "L34",
+      "weight": 1.0
+    },
+    {
+      "source": "agents_agents_md_protocolo_y_directivas_para_agentes_aut\u00f3nomos_en_tributia",
+      "target": "agents_3_navegaci\u00f3n_de_arquitectura_con_graphify_knowledge_graph",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "AGENTS.md",
+      "source_location": "L64",
       "weight": 1.0
     },
     {
@@ -20237,17 +19862,6 @@
       "confidence_score": 1.0,
       "source_file": "AGENTS.md",
       "source_location": "L7",
-      "weight": 1.0
-    },
-    {
-      "source": "agents_agents_md_protocolo_y_directivas_para_agentes_aut\u00f3nomos_en_tributia",
-      "target": "agents_3_navegaci\u00f3n_de_arquitectura_con_graphify_knowledge_graph",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "AGENTS.md",
-      "source_location": "L73",
       "weight": 1.0
     },
     {
@@ -21450,28 +21064,6 @@
       "weight": 1.0
     },
     {
-      "source": "backend_tests_debug_ui_playwright",
-      "target": "backend_tests_debug_ui_playwright_func_get_free_port",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "backend/tests/debug_ui_playwright.py",
-      "source_location": "L15",
-      "weight": 1.0
-    },
-    {
-      "source": "backend_tests_debug_ui_playwright",
-      "target": "backend_tests_debug_ui_playwright_func_run_debug",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "backend/tests/debug_ui_playwright.py",
-      "source_location": "L21",
-      "weight": 1.0
-    },
-    {
       "source": "backend_tests_test_api_endpoints",
       "target": "backend_tests_test_api_endpoints_func_test_health_check",
       "relation": "contains",
@@ -22140,83 +21732,6 @@
       "confidence_score": 1.0,
       "source_file": "backend/tests/test_e2e_playwright.py",
       "source_location": "L35",
-      "weight": 1.0
-    },
-    {
-      "source": "backend_tests_test_e2e_playwright",
-      "target": "backend_tests_test_e2e_playwright_class_testresponsiveandmobilemode",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L364",
-      "weight": 1.0
-    },
-    {
-      "source": "backend_tests_test_e2e_playwright",
-      "target": "backend_tests_test_e2e_playwright_func_test_mobile_drawer_navigation_and_backdrop",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L375",
-      "weight": 1.0
-    },
-    {
-      "source": "backend_tests_test_e2e_playwright",
-      "target": "backend_tests_test_e2e_playwright_func_test_mobile_viewport_no_horizontal_body_overflow",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L427",
-      "weight": 1.0
-    },
-    {
-      "source": "backend_tests_test_e2e_playwright",
-      "target": "backend_tests_test_e2e_playwright_func_test_table_horizontal_scroll_containers_on_mobile",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L465",
-      "weight": 1.0
-    },
-    {
-      "source": "backend_tests_test_e2e_playwright",
-      "target": "backend_tests_test_e2e_playwright_func_test_reduced_desktop_and_laptop_screen_adaptation",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L507",
-      "weight": 1.0
-    },
-    {
-      "source": "backend_tests_test_e2e_playwright",
-      "target": "backend_tests_test_e2e_playwright_func_test_mobile_casilla_popover_bottom_sheet",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L545",
-      "weight": 1.0
-    },
-    {
-      "source": "backend_tests_test_e2e_playwright",
-      "target": "backend_tests_test_e2e_playwright_func_test_reconciliation_spreadsheet_extended_sidebar_scrolling",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L581",
       "weight": 1.0
     },
     {
@@ -23294,50 +22809,6 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/decisions/0005-visualizador-efimero-conciliacion-exogena-csv.md",
-      "source_location": "L9",
-      "weight": 1.0
-    },
-    {
-      "source": "docs_decisions_0006_sistema_responsivo_y_modo_mobile",
-      "target": "docs_decisions_0006_sistema_responsivo_y_modo_mobile_adr_0006_sistema_responsivo_men\u00fa_off_canvas_y_modo_mobile",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/decisions/0006-sistema-responsivo-y-modo-mobile.md",
-      "source_location": "L1",
-      "weight": 1.0
-    },
-    {
-      "source": "docs_decisions_0006_sistema_responsivo_y_modo_mobile_adr_0006_sistema_responsivo_men\u00fa_off_canvas_y_modo_mobile",
-      "target": "docs_decisions_0006_sistema_responsivo_y_modo_mobile_2_decisi\u00f3n_tomada",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/decisions/0006-sistema-responsivo-y-modo-mobile.md",
-      "source_location": "L22",
-      "weight": 1.0
-    },
-    {
-      "source": "docs_decisions_0006_sistema_responsivo_y_modo_mobile_adr_0006_sistema_responsivo_men\u00fa_off_canvas_y_modo_mobile",
-      "target": "docs_decisions_0006_sistema_responsivo_y_modo_mobile_3_consecuencias_y_beneficios",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/decisions/0006-sistema-responsivo-y-modo-mobile.md",
-      "source_location": "L45",
-      "weight": 1.0
-    },
-    {
-      "source": "docs_decisions_0006_sistema_responsivo_y_modo_mobile_adr_0006_sistema_responsivo_men\u00fa_off_canvas_y_modo_mobile",
-      "target": "docs_decisions_0006_sistema_responsivo_y_modo_mobile_1_contexto_y_problema",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/decisions/0006-sistema-responsivo-y-modo-mobile.md",
       "source_location": "L9",
       "weight": 1.0
     },
@@ -35981,182 +35452,6 @@
       "weight": 1.0
     },
     {
-      "source": "docs_how_to_04_simular_reajuste_fiscal_art73",
-      "target": "docs_how_to_04_simular_reajuste_fiscal_art73_c\u00f3mo_simular_el_reajuste_fiscal_de_activos_fijos_art_73_e_t",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/how-to/04-simular-reajuste-fiscal-art73.md",
-      "source_location": "L1",
-      "weight": 1.0
-    },
-    {
-      "source": "docs_how_to_04_simular_reajuste_fiscal_art73_3_ejemplo_de_uso_v\u00eda_api_rest",
-      "target": "docs_how_to_04_simular_reajuste_fiscal_art73_petici\u00f3n_http_post_api_v1_beneficios_simular_articulo_73",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/how-to/04-simular-reajuste-fiscal-art73.md",
-      "source_location": "L29",
-      "weight": 1.0
-    },
-    {
-      "source": "docs_how_to_04_simular_reajuste_fiscal_art73_3_ejemplo_de_uso_v\u00eda_api_rest",
-      "target": "docs_how_to_04_simular_reajuste_fiscal_art73_respuesta",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/how-to/04-simular-reajuste-fiscal-art73.md",
-      "source_location": "L43",
-      "weight": 1.0
-    },
-    {
-      "source": "docs_how_to_04_simular_reajuste_fiscal_art73_c\u00f3mo_simular_el_reajuste_fiscal_de_activos_fijos_art_73_e_t",
-      "target": "docs_how_to_04_simular_reajuste_fiscal_art73_2_tipos_de_activos_y_factores",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/how-to/04-simular-reajuste-fiscal-art73.md",
-      "source_location": "L17",
-      "weight": 1.0
-    },
-    {
-      "source": "docs_how_to_04_simular_reajuste_fiscal_art73_c\u00f3mo_simular_el_reajuste_fiscal_de_activos_fijos_art_73_e_t",
-      "target": "docs_how_to_04_simular_reajuste_fiscal_art73_3_ejemplo_de_uso_v\u00eda_api_rest",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/how-to/04-simular-reajuste-fiscal-art73.md",
-      "source_location": "L27",
-      "weight": 1.0
-    },
-    {
-      "source": "docs_how_to_04_simular_reajuste_fiscal_art73_c\u00f3mo_simular_el_reajuste_fiscal_de_activos_fijos_art_73_e_t",
-      "target": "docs_how_to_04_simular_reajuste_fiscal_art73_1_fundamento_legal_art_73_e_t",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/how-to/04-simular-reajuste-fiscal-art73.md",
-      "source_location": "L7",
-      "weight": 1.0
-    },
-    {
-      "source": "docs_how_to_05_calcular_sanciones_y_beneficio_auditoria",
-      "target": "docs_how_to_05_calcular_sanciones_y_beneficio_auditoria_c\u00f3mo_calcular_sanciones_tributarias_y_simular_el_beneficio_de_auditor\u00eda",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/how-to/05-calcular-sanciones-y-beneficio-auditoria.md",
-      "source_location": "L1",
-      "weight": 1.0
-    },
-    {
-      "source": "docs_how_to_05_calcular_sanciones_y_beneficio_auditoria_1_beneficio_de_auditor\u00eda_art_689_3_e_t",
-      "target": "docs_how_to_05_calcular_sanciones_y_beneficio_auditoria_reglas_de_aplicaci\u00f3n",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/how-to/05-calcular-sanciones-y-beneficio-auditoria.md",
-      "source_location": "L11",
-      "weight": 1.0
-    },
-    {
-      "source": "docs_how_to_05_calcular_sanciones_y_beneficio_auditoria_1_beneficio_de_auditor\u00eda_art_689_3_e_t",
-      "target": "docs_how_to_05_calcular_sanciones_y_beneficio_auditoria_ejemplo_v\u00eda_api_rest_post_api_v1_beneficios_simular_auditoria",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/how-to/05-calcular-sanciones-y-beneficio-auditoria.md",
-      "source_location": "L18",
-      "weight": 1.0
-    },
-    {
-      "source": "docs_how_to_05_calcular_sanciones_y_beneficio_auditoria_2_liquidaci\u00f3n_de_sanciones_arts_641_644_640_y_639_e_t",
-      "target": "docs_how_to_05_calcular_sanciones_y_beneficio_auditoria_sanci\u00f3n_por_correcci\u00f3n_art_644",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/how-to/05-calcular-sanciones-y-beneficio-auditoria.md",
-      "source_location": "L33",
-      "weight": 1.0
-    },
-    {
-      "source": "docs_how_to_05_calcular_sanciones_y_beneficio_auditoria_2_liquidaci\u00f3n_de_sanciones_arts_641_644_640_y_639_e_t",
-      "target": "docs_how_to_05_calcular_sanciones_y_beneficio_auditoria_sanci\u00f3n_por_extemporaneidad_art_641",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/how-to/05-calcular-sanciones-y-beneficio-auditoria.md",
-      "source_location": "L37",
-      "weight": 1.0
-    },
-    {
-      "source": "docs_how_to_05_calcular_sanciones_y_beneficio_auditoria_2_liquidaci\u00f3n_de_sanciones_arts_641_644_640_y_639_e_t",
-      "target": "docs_how_to_05_calcular_sanciones_y_beneficio_auditoria_reducciones_del_principio_de_favorabilidad_art_640",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/how-to/05-calcular-sanciones-y-beneficio-auditoria.md",
-      "source_location": "L41",
-      "weight": 1.0
-    },
-    {
-      "source": "docs_how_to_05_calcular_sanciones_y_beneficio_auditoria_2_liquidaci\u00f3n_de_sanciones_arts_641_644_640_y_639_e_t",
-      "target": "docs_how_to_05_calcular_sanciones_y_beneficio_auditoria_control_de_sanci\u00f3n_m\u00ednima_art_639",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/how-to/05-calcular-sanciones-y-beneficio-auditoria.md",
-      "source_location": "L45",
-      "weight": 1.0
-    },
-    {
-      "source": "docs_how_to_05_calcular_sanciones_y_beneficio_auditoria_2_liquidaci\u00f3n_de_sanciones_arts_641_644_640_y_639_e_t",
-      "target": "docs_how_to_05_calcular_sanciones_y_beneficio_auditoria_ejemplo_de_c\u00e1lculo_v\u00eda_api_post_api_v1_beneficios_calcular_sancion",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/how-to/05-calcular-sanciones-y-beneficio-auditoria.md",
-      "source_location": "L48",
-      "weight": 1.0
-    },
-    {
-      "source": "docs_how_to_05_calcular_sanciones_y_beneficio_auditoria_c\u00f3mo_calcular_sanciones_tributarias_y_simular_el_beneficio_de_auditor\u00eda",
-      "target": "docs_how_to_05_calcular_sanciones_y_beneficio_auditoria_2_liquidaci\u00f3n_de_sanciones_arts_641_644_640_y_639_e_t",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/how-to/05-calcular-sanciones-y-beneficio-auditoria.md",
-      "source_location": "L31",
-      "weight": 1.0
-    },
-    {
-      "source": "docs_how_to_05_calcular_sanciones_y_beneficio_auditoria_c\u00f3mo_calcular_sanciones_tributarias_y_simular_el_beneficio_de_auditor\u00eda",
-      "target": "docs_how_to_05_calcular_sanciones_y_beneficio_auditoria_1_beneficio_de_auditor\u00eda_art_689_3_e_t",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/how-to/05-calcular-sanciones-y-beneficio-auditoria.md",
-      "source_location": "L7",
-      "weight": 1.0
-    },
-    {
       "source": "docs_readme",
       "target": "docs_readme_documentacion_tecnica_de_tributia",
       "relation": "contains",
@@ -36318,7 +35613,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/reference/api/rest-endpoints.md",
-      "source_location": "L195",
+      "source_location": "L191",
       "weight": 1.0
     },
     {
@@ -36329,7 +35624,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/reference/api/rest-endpoints.md",
-      "source_location": "L199",
+      "source_location": "L195",
       "weight": 1.0
     },
     {
@@ -36340,7 +35635,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/reference/api/rest-endpoints.md",
-      "source_location": "L203",
+      "source_location": "L199",
       "weight": 1.0
     },
     {
@@ -36351,7 +35646,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/reference/api/rest-endpoints.md",
-      "source_location": "L207",
+      "source_location": "L203",
       "weight": 1.0
     },
     {
@@ -36378,7 +35673,7 @@
     },
     {
       "source": "docs_reference_api_rest_endpoints_referencia_de_endpoints_rest_tributia_api_v1",
-      "target": "docs_reference_api_rest_endpoints_4_m\u00f3dulo_de_beneficios_ajustes_patrimoniales_sanciones_beneficios",
+      "target": "docs_reference_api_rest_endpoints_4_m\u00f3dulo_de_beneficios_sanciones_beneficios",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -36395,7 +35690,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/reference/api/rest-endpoints.md",
-      "source_location": "L186",
+      "source_location": "L182",
       "weight": 1.0
     },
     {
@@ -36406,7 +35701,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/reference/api/rest-endpoints.md",
-      "source_location": "L193",
+      "source_location": "L189",
       "weight": 1.0
     },
     {
@@ -36956,7 +36251,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L88",
+      "source_location": "L78",
       "weight": 1.0
     },
     {
@@ -36967,18 +36262,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L96",
-      "weight": 1.0
-    },
-    {
-      "source": "readme_tributia_colombia_suite_tributaria_motor_de_liquidaci\u00f3n_dian_2026",
-      "target": "readme_suite_de_pruebas_automatizadas",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "README.md",
-      "source_location": "L104",
+      "source_location": "L86",
       "weight": 1.0
     },
     {
@@ -37000,7 +36284,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L54",
+      "source_location": "L52",
       "weight": 1.0
     },
     {
@@ -37011,7 +36295,18 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L86",
+      "source_location": "L76",
+      "weight": 1.0
+    },
+    {
+      "source": "readme_tributia_colombia_suite_tributaria_motor_de_liquidaci\u00f3n_dian_2026",
+      "target": "readme_suite_de_pruebas_automatizadas",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source_location": "L94",
       "weight": 1.0
     },
     {
@@ -37594,7 +36889,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "AGENTS.md",
-      "source_location": "L211",
+      "source_location": "L202",
       "weight": 1.0
     },
     {
@@ -37617,17 +36912,6 @@
       "confidence_score": 1.0,
       "source_file": "docs/decisions/README.md",
       "source_location": "L11",
-      "weight": 1.0
-    },
-    {
-      "source": "docs_decisions_readme",
-      "target": "docs_decisions_0006_sistema_responsivo_y_modo_mobile",
-      "relation": "references",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/decisions/README.md",
-      "source_location": "L12",
       "weight": 1.0
     },
     {
@@ -38135,30 +37419,8 @@
       "source_file": "README.md",
       "source_location": "L48",
       "weight": 1.0
-    },
-    {
-      "source": "readme",
-      "target": "docs_decisions_0005_visualizador_efimero_conciliacion_exogena_csv",
-      "relation": "references",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "README.md",
-      "source_location": "L49",
-      "weight": 1.0
-    },
-    {
-      "source": "readme",
-      "target": "docs_decisions_0006_sistema_responsivo_y_modo_mobile",
-      "relation": "references",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "README.md",
-      "source_location": "L50",
-      "weight": 1.0
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "5a870210f0a64399b289eff8502a0ae121d46a27"
+  "built_at_commit": "0f57a88ea8b838bb9705e0799adb2386f4a76b2a"
 }
