@@ -221,6 +221,11 @@ const MODULE_METADATA = {
     title: 'Retención en la Fuente Mensual (Formulario 350 DIAN)',
     hasSubTabs: false
   },
+  'art73': {
+    breadcrumb: 'OPTIMIZACIÓN / REAJUSTE DE ACTIVOS',
+    title: 'Reajuste Fiscal de Bienes Raíces y Acciones (Art. 73 E.T. - DUR 1.2.1.17.21)',
+    hasSubTabs: false
+  },
   'beneficios': {
     breadcrumb: 'OPTIMIZACIÓN / BENEFICIOS FISCALES',
     title: 'Catálogo de Beneficios, Firmeza de Auditoría & Sanciones',
@@ -458,8 +463,13 @@ function navigateTo(moduleKey, subTab = 'main') {
     if (!reconciliationData || !reconciliationData.items || reconciliationData.items.length === 0) {
       loadReconciliationDemo();
     }
+  } else if (moduleKey === 'art73') {
+    loadTablaArticulo73();
+    runSimulacionArticulo73();
   } else if (moduleKey === 'beneficios') {
     renderBeneficiosList('all');
+    runSimulacionAuditoria();
+    runSimulacionSanciones();
   }
 
   // Scroll suave al top
@@ -1844,13 +1854,15 @@ let tablaArticulo73Data = [];
 
 async function loadTablaArticulo73() {
   try {
-    const res = await fetch('/api/v1/beneficios/articulo-73/tabla');
-    if (!res.ok) throw new Error('Error al cargar tabla Art. 73');
-    tablaArticulo73Data = await res.json();
+    if (!tablaArticulo73Data || tablaArticulo73Data.length === 0) {
+      const res = await fetch('/api/v1/beneficios/articulo-73/tabla');
+      if (!res.ok) throw new Error('Error al cargar tabla Art. 73');
+      tablaArticulo73Data = await res.json();
+    }
 
     // Poblar select de años
     const anoSelect = document.getElementById('sim-art73-ano');
-    if (anoSelect && anoSelect.options.length === 0) {
+    if (anoSelect && anoSelect.options.length <= 1) {
       anoSelect.innerHTML = '';
       tablaArticulo73Data.forEach(item => {
         const opt = document.createElement('option');
@@ -1872,6 +1884,17 @@ function renderTablaArticulo73(items) {
   if (!tbody) return;
   tbody.innerHTML = '';
 
+  if (!items || items.length === 0) {
+    tbody.innerHTML = `
+      <tr>
+        <td colspan="6" style="padding: 24px; text-align: center; color: var(--text-muted); font-style: italic;">
+          No se encontraron resultados para la búsqueda.
+        </td>
+      </tr>
+    `;
+    return;
+  }
+
   items.forEach(item => {
     const tr = document.createElement('tr');
     tr.style.cursor = 'pointer';
@@ -1880,11 +1903,16 @@ function renderTablaArticulo73(items) {
     tr.onclick = () => selectAnoArt73(item.ano_adquisicion);
 
     tr.innerHTML = `
-      <td style="padding: 6px 10px; font-weight: 700; color: var(--primary);">${item.ano_adquisicion_texto}</td>
-      <td style="padding: 6px 10px; font-family: var(--font-mono);">${item.acciones_aportes.toLocaleString('es-CO', { minimumFractionDigits: 2 })}x</td>
-      <td style="padding: 6px 10px; font-family: var(--font-mono); font-weight: 600; color: #1e3a8a;">${item.bienes_raices_urbanos.toLocaleString('es-CO', { minimumFractionDigits: 2 })}x</td>
-      <td style="padding: 6px 10px; font-family: var(--font-mono); color: #047857;">${item.bienes_raices_rurales_agro.toLocaleString('es-CO', { minimumFractionDigits: 2 })}x</td>
-      <td style="padding: 6px 10px; font-family: var(--font-mono); color: #0284c7;">${item.bienes_raices_rurales.toLocaleString('es-CO', { minimumFractionDigits: 2 })}x</td>
+      <td style="padding: 10px 14px; font-weight: 800; color: var(--primary); font-size: 13px;">${item.ano_adquisicion_texto}</td>
+      <td style="padding: 10px 14px; font-family: var(--font-mono); font-weight: 600; color: #1e40af;">${item.acciones_aportes.toLocaleString('es-CO', { minimumFractionDigits: 2 })}x</td>
+      <td style="padding: 10px 14px; font-family: var(--font-mono); font-weight: 700; color: #0b3b60;">${item.bienes_raices_urbanos.toLocaleString('es-CO', { minimumFractionDigits: 2 })}x</td>
+      <td style="padding: 10px 14px; font-family: var(--font-mono); font-weight: 600; color: #047857;">${item.bienes_raices_rurales_agro.toLocaleString('es-CO', { minimumFractionDigits: 2 })}x</td>
+      <td style="padding: 10px 14px; font-family: var(--font-mono); font-weight: 600; color: #0284c7;">${item.bienes_raices_rurales.toLocaleString('es-CO', { minimumFractionDigits: 2 })}x</td>
+      <td style="padding: 10px 14px; text-align: center;">
+        <button class="btn btn-outline btn-xs" style="padding: 3px 8px; font-size: 11px; border-radius: 4px;" onclick="event.stopPropagation(); selectAnoArt73(${item.ano_adquisicion})">
+          ⚡ Simular
+        </button>
+      </td>
     `;
     tbody.appendChild(tr);
   });
@@ -1908,7 +1936,9 @@ function selectAnoArt73(ano) {
   if (anoSelect) {
     anoSelect.value = String(ano);
     runSimulacionArticulo73();
-    showToast(`✓ Año ${ano} seleccionado para simulación Art. 73`, 'info', 2000);
+    showToast(`✓ Año ${ano} cargado al simulador Art. 73`, 'info', 2000);
+    const pane = document.getElementById('pane-art73');
+    if (pane) pane.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 }
 
