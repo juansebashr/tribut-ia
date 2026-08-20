@@ -1,0 +1,118 @@
+{
+  "claudifyVersion": "1.2.0",
+  "generatedAt": "2026-08-19T19:33:00-05:00",
+  "projectName": "tribut-ia",
+  "detection": {
+    "languages": [
+      "python",
+      "typescript"
+    ],
+    "frameworks": [
+      "fastapi",
+      "react",
+      "vite",
+      "tailwind"
+    ],
+    "runtime": "python-3.11",
+    "packageManager": "poetry",
+    "buildCommand": "poetry install",
+    "testCommand": "poetry run pytest backend",
+    "lintCommand": "poetry run ruff check backend skills run.py",
+    "hasFuryFile": false,
+    "hasPreCommitConfig": false
+  },
+  "layers": {
+    "tax-engine": {
+      "paths": [
+        "backend/app/services/**/*.py",
+        "backend/app/core/rules_engine/**/*.py"
+      ],
+      "technologies": [
+        "python",
+        "pydantic"
+      ],
+      "ruleFile": ".claude/rules/tax-engine.md"
+    },
+    "api-handlers": {
+      "paths": [
+        "backend/app/api/**/*.py",
+        "backend/app/main.py"
+      ],
+      "technologies": [
+        "fastapi",
+        "sse-starlette"
+      ],
+      "ruleFile": ".claude/rules/api-handlers.md"
+    },
+    "schemas-models": {
+      "paths": [
+        "backend/app/models/**/*.py"
+      ],
+      "technologies": [
+        "pydantic"
+      ],
+      "ruleFile": ".claude/rules/schemas-models.md"
+    },
+    "frontend-ui": {
+      "paths": [
+        "frontend/src/**/*.tsx",
+        "frontend/src/**/*.ts"
+      ],
+      "technologies": [
+        "react",
+        "typescript",
+        "tailwind",
+        "vite"
+      ],
+      "ruleFile": ".claude/rules/frontend-ui.md"
+    },
+    "skills-agents": {
+      "paths": [
+        "skills/**/*.py",
+        "skills/**/*.md"
+      ],
+      "technologies": [
+        "python",
+        "cli"
+      ],
+      "ruleFile": ".claude/rules/skills-agents.md"
+    },
+    "documentation": {
+      "paths": [
+        "docs/**/*.md",
+        "README.md"
+      ],
+      "technologies": [
+        "markdown",
+        "diataxis"
+      ],
+      "ruleFile": ".claude/rules/documentation.md"
+    }
+  },
+  "generatedFiles": {
+    "CLAUDE.md": {
+      "managed": true
+    },
+    "AGENTS.md": {
+      "managed": true
+    },
+    ".claude/rules/tax-engine.md": {
+      "managed": true
+    },
+    ".claude/rules/api-handlers.md": {
+      "managed": true
+    },
+    ".claude/rules/schemas-models.md": {
+      "managed": true
+    },
+    ".claude/rules/frontend-ui.md": {
+      "managed": true
+    },
+    ".claude/rules/skills-agents.md": {
+      "managed": true
+    },
+    ".claude/rules/documentation.md": {
+      "managed": true
+    }
+  }
+}

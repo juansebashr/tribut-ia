@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "run_command:poetry run pytest*",
+      "run_command:poetry run ruff*",
+      "run_command:poetry run mypy*",
+      "run_command:markdownlint*"
+    ]
+  }
+}
