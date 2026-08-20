@@ -228,7 +228,17 @@ const MODULE_METADATA = {
   },
   'beneficios': {
     breadcrumb: 'OPTIMIZACIÓN / BENEFICIOS FISCALES',
-    title: 'Catálogo de Beneficios, Firmeza de Auditoría & Sanciones',
+    title: 'Catálogo de Beneficios y Alivios Tributarios (Estatuto Tributario)',
+    hasSubTabs: false
+  },
+  'presentacion': {
+    breadcrumb: 'PROCEDIMIENTO / AUDITORÍA & SANCIONES',
+    title: 'Presentación de la Declaración, Beneficio de Auditoría & Régimen Sancionatorio',
+    hasSubTabs: false
+  },
+  'inmuebles-afc': {
+    breadcrumb: 'OPTIMIZACIÓN / INMUEBLES & CUENTAS AFC',
+    title: 'Beneficios sobre Bienes Inmuebles & Cuentas AFC (Art. 311-1 y 126-4 E.T.)',
     hasSubTabs: false
   },
   'rules': {
@@ -321,9 +331,14 @@ document.addEventListener('DOMContentLoaded', async () => {
   renderVisualCalendar();
   loadBeneficiosCatalog();
   loadTablaArticulo73();
-  runSimulacionAuditoria();
-  runSimulacionSanciones();
-  runSimulacionArticulo73();
+  // Defer simulation calls: aunque los panes están en el DOM desde el inicio,
+  // los currency-inputs necesitan estar enmascarados antes de leer sus valores.
+  setTimeout(() => {
+    runSimulacionAuditoria();
+    runCalculadoraSanciones();
+    runSimulacionInmuebleAfc();
+    runSimulacionArticulo73();
+  }, 300);
 
   // Resolver ID de sesión activa (Cookie, Header o URL)
   try {
@@ -468,8 +483,11 @@ function navigateTo(moduleKey, subTab = 'main') {
     runSimulacionArticulo73();
   } else if (moduleKey === 'beneficios') {
     renderBeneficiosList('all');
+  } else if (moduleKey === 'presentacion') {
     runSimulacionAuditoria();
-    runSimulacionSanciones();
+    runCalculadoraSanciones();
+  } else if (moduleKey === 'inmuebles-afc') {
+    runSimulacionInmuebleAfc();
   }
 
   // Scroll suave al top
@@ -1740,7 +1758,10 @@ async function loadBeneficiosCatalog() {
   }
 }
 
+let currentBeneficioCategory = 'all';
+
 function filterBeneficios(cat, btn) {
+  currentBeneficioCategory = cat;
   document.querySelectorAll('.beneficio-filter-bar button').forEach(b => {
     b.className = 'btn btn-outline btn-sm';
   });
@@ -1748,12 +1769,38 @@ function filterBeneficios(cat, btn) {
   renderBeneficiosList(cat);
 }
 
-function renderBeneficiosList(cat) {
+function filterBeneficiosByText() {
+  const searchInput = document.getElementById('search-beneficios-input');
+  const query = searchInput ? searchInput.value.toLowerCase().trim() : '';
+  renderBeneficiosList(currentBeneficioCategory, query);
+}
+
+function renderBeneficiosList(cat, query = '') {
   const container = document.getElementById('beneficios-list-container');
   if (!container) return;
   
-  const filtered = cat === 'all' ? allBeneficios : allBeneficios.filter(b => b.categoria === cat);
+  let filtered = cat === 'all' ? allBeneficios : allBeneficios.filter(b => b.categoria === cat);
+
+  if (query) {
+    filtered = filtered.filter(b => 
+      b.nombre.toLowerCase().includes(query) ||
+      b.articulo_et.toLowerCase().includes(query) ||
+      b.descripcion.toLowerCase().includes(query) ||
+      b.tope_legal_texto.toLowerCase().includes(query)
+    );
+  }
+
   container.innerHTML = '';
+
+  if (!filtered || filtered.length === 0) {
+    container.innerHTML = `
+      <div style="text-align: center; padding: 40px; color: #64748b; background: white; border-radius: 8px; border: 1px dashed #cbd5e1;">
+        <div style="font-size: 24px; margin-bottom: 8px;">🔍</div>
+        <div style="font-weight: 600;">No se encontraron beneficios tributarios que coincidan con la búsqueda.</div>
+      </div>
+    `;
+    return;
+  }
 
   filtered.forEach(b => {
     const div = document.createElement('div');
@@ -1773,6 +1820,7 @@ function renderBeneficiosList(cat) {
   });
 }
 
+// SIMULADOR BENEFICIO DE AUDITORÍA (Art. 689-3 E.T.)
 async function runSimulacionAuditoria() {
   const inputVal = getNum('sim-aud-impuesto-ant');
   const resDiv = document.getElementById('sim-aud-result');
@@ -1792,23 +1840,25 @@ async function runSimulacionAuditoria() {
 
     if (data.cumple_impuesto_minimo) {
       resDiv.innerHTML = `
-        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:8px; margin-bottom:6px;">
-          <div style="background:#eff6ff; border:1px solid #bfdbfe; padding:6px; border-radius:4px;">
-            <div style="font-weight:700; color:#002e5b; font-size:10.5px;">⚡ FIRMEZA EN 6 MESES (+35%)</div>
-            <div style="font-size:14px; font-weight:800; font-family:var(--font-mono); color:#002e5b;">${formatCOP(data.impuesto_objetivo_6_meses_cop)}</div>
-            <div style="font-size:10px; color:#64748b;">Incremento: +${formatCOP(data.incremento_requerido_6_meses_cop)}</div>
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:8px; margin-bottom:8px;">
+          <div style="background:#eff6ff; border:1px solid #bfdbfe; padding:8px; border-radius:6px;">
+            <div style="font-weight:800; color:#1e3a8a; font-size:11px;">⚡ FIRMEZA EN 6 MESES (+35%)</div>
+            <div style="font-size:15px; font-weight:800; font-family:var(--font-mono); color:#1e3a8a;">${formatCOP(data.impuesto_objetivo_6_meses_cop)}</div>
+            <div style="font-size:10px; color:#475569; margin-top:2px;">Incremento requerido: +${formatCOP(data.incremento_requerido_6_meses_cop)}</div>
           </div>
-          <div style="background:#f0fdf4; border:1px solid #bbf7d0; padding:6px; border-radius:4px;">
-            <div style="font-weight:700; color:#15803d; font-size:10.5px;">⚡ FIRMEZA EN 12 MESES (+25%)</div>
-            <div style="font-size:14px; font-weight:800; font-family:var(--font-mono); color:#15803d;">${formatCOP(data.impuesto_objetivo_12_meses_cop)}</div>
-            <div style="font-size:10px; color:#64748b;">Incremento: +${formatCOP(data.incremento_requerido_12_meses_cop)}</div>
+          <div style="background:#f0fdf4; border:1px solid #bbf7d0; padding:8px; border-radius:6px;">
+            <div style="font-weight:800; color:#15803d; font-size:11px;">⚡ FIRMEZA EN 12 MESES (+25%)</div>
+            <div style="font-size:15px; font-weight:800; font-family:var(--font-mono); color:#15803d;">${formatCOP(data.impuesto_objetivo_12_meses_cop)}</div>
+            <div style="font-size:10px; color:#475569; margin-top:2px;">Incremento requerido: +${formatCOP(data.incremento_requerido_12_meses_cop)}</div>
           </div>
         </div>
-        <p style="font-size:11px; color:#475569; margin:0;">${data.recomendacion}</p>
+        <div style="font-size:11px; color:#334155; line-height:1.4;">${data.recomendacion}</div>
       `;
     } else {
       resDiv.innerHTML = `
-        <div style="color:#b45309; font-size:11px;">⚠️ ${data.recomendacion}</div>
+        <div style="color:#b45309; font-size:11px; background:#fffbeb; padding:8px; border-radius:6px; border:1px solid #fde68a;">
+          ⚠️ ${data.recomendacion}
+        </div>
       `;
     }
   } catch (err) {
@@ -1816,33 +1866,166 @@ async function runSimulacionAuditoria() {
   }
 }
 
-async function runSimulacionSanciones() {
-  const baseVal = getNum('sim-sancion-base');
-  const chk2 = document.getElementById('sim-sancion-check-2anos').checked;
-  const resDiv = document.getElementById('sim-sancion-result');
+// CALCULADORA INTEGRAL DE SANCIONES (Art. 640, 641, 642, 644, 639)
+function toggleSancionFields() {
+  const tipo = document.getElementById('sancion-calc-tipo')?.value || 'correccion';
+  const label = document.getElementById('sancion-monto-base-label');
+  const mesesContainer = document.getElementById('sancion-meses-container');
+
+  if (tipo === 'extemporaneidad') {
+    if (label) label.innerText = 'Impuesto a Cargo Liquidado ($ COP)';
+    if (mesesContainer) mesesContainer.style.display = 'block';
+  } else {
+    if (label) label.innerText = 'Mayor Valor a Pagar por Corrección ($ COP)';
+    if (mesesContainer) mesesContainer.style.display = 'none';
+  }
+}
+
+function handleSancionHistoryCheck(source) {
+  const chk2 = document.getElementById('sancion-calc-check-2anos');
+  const chk1 = document.getElementById('sancion-calc-check-1ano');
+  if (source === '2anos' && chk2 && chk2.checked && chk1) {
+    chk1.checked = true;
+  }
+}
+
+async function runCalculadoraSanciones() {
+  const tipo = document.getElementById('sancion-calc-tipo')?.value || 'correccion';
+  const montoBase = getNum('sancion-calc-monto-base');
+  const meses = parseInt(document.getElementById('sancion-calc-meses')?.value || '1', 10);
+  const esVoluntario = document.getElementById('sancion-calc-voluntario')?.checked ?? true;
+  const sinSanciones2 = document.getElementById('sancion-calc-check-2anos')?.checked ?? true;
+  const sinSanciones1 = document.getElementById('sancion-calc-check-1ano')?.checked ?? true;
+  const resDiv = document.getElementById('sancion-calc-result-box');
   if (!resDiv) return;
 
   try {
-    const res = await fetch('/api/v1/beneficios/simular-reduccion-sancion', {
+    const res = await fetch('/api/v1/beneficios/calcular-sancion', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        monto_sancion_base_cop: baseVal,
-        sin_sanciones_ultimos_2_anos: chk2,
-        sin_sanciones_ultimo_1_ano: true
+        tipo_sancion: tipo,
+        monto_base_cop: montoBase,
+        meses_fraccion_retraso: meses,
+        es_voluntario_sin_emplazamiento: esVoluntario,
+        sin_sanciones_ultimos_2_anos: sinSanciones2,
+        sin_sanciones_ultimo_1_ano: sinSanciones1,
+        tax_year: currentYear,
+        custom_uvt: currentUvt
       })
     });
     const data = await res.json();
 
+    let pasosHtml = data.pasos_calculo.map(p => `<li>${p}</li>`).join('');
+
     resDiv.innerHTML = `
-      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
-        <span style="font-weight:700; color:#059669;">Sanción Reducida:</span>
-        <span style="font-size:15px; font-weight:800; font-family:var(--font-mono); color:#059669;">${formatCOP(data.sancion_final_reducida_cop)} COP</span>
+      <div style="background: white; border: 1px solid #cbd5e1; border-radius: 8px; padding: 12px; margin-bottom: 12px;">
+        <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px;">
+          <span style="font-weight: 700; color: #0f172a;">Sanción Final a Pagar:</span>
+          <span style="font-size: 18px; font-weight: 900; font-family: var(--font-mono); color: #059669;">
+            ${formatCOP(data.sancion_final_a_pagar_cop)} COP
+          </span>
+        </div>
+        <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 8px;">
+          <span class="badge ${data.aplico_sancion_minima ? 'badge-warning' : 'badge-success'}">
+            ${data.aplico_sancion_minima ? '⚠️ Aplica Sanción Mínima (10 UVT)' : `Descuento Art. 640: ${data.porcentaje_reduccion_art640_pct.toFixed(0)}%`}
+          </span>
+          <span class="badge badge-info">Tarifa Base: ${data.tarifa_base_pct.toFixed(0)}%</span>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 11px; background: #f8fafc; padding: 8px; border-radius: 6px;">
+          <div>Sanción Plena (Sin Descuento): <strong>${formatCOP(data.sancion_plena_sin_reduccion_cop)}</strong></div>
+          <div>Sanción si la DIAN Emplaza: <strong style="color:#b91c1c;">${formatCOP(data.comparativa_sancion_con_emplazamiento_dian_cop)}</strong></div>
+          <div>Ahorro por Favorabilidad: <strong style="color:#166534;">${formatCOP(data.ahorro_favorabilidad_art640_cop)}</strong></div>
+          <div>Ahorro vs Emplazamiento: <strong style="color:#166534;">${formatCOP(data.ahorro_por_corregir_antes_de_dian_cop)}</strong></div>
+        </div>
       </div>
-      <div style="font-size:11px; color:#64748b; margin-bottom:2px;">
-        Ahorro Legal: <strong>${formatCOP(data.ahorro_sancion_cop)} COP (${data.porcentaje_reduccion_aplicado.toFixed(0)}% de rebaja)</strong>
+
+      <div style="font-size: 11.5px; color: #334155; line-height: 1.45; margin-bottom: 8px;">
+        ${data.explicacion_didactica}
       </div>
-      <p style="font-size:10.5px; color:#475569; margin:0;">${data.explicacion}</p>
+
+      <details style="font-size: 11px; color: #475569; cursor: pointer;">
+        <summary style="font-weight: 700; color: var(--primary);">Desglose Matemático y Fundamento Legal ▾</summary>
+        <ul style="margin: 6px 0 0 16px; padding: 0; line-height: 1.5;">
+          ${pasosHtml}
+        </ul>
+      </details>
+    `;
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+function runSimulacionSanciones() {
+  return runCalculadoraSanciones();
+}
+
+// SIMULADOR INMUEBLES & CUENTAS AFC (Art. 311-1 y 126-4 E.T.)
+async function runSimulacionInmuebleAfc() {
+  const precioVenta = getNum('afc-sim-precio-venta');
+  const costoFiscal = getNum('afc-sim-costo-fiscal');
+  const montoAfc = getNum('afc-sim-monto-afc');
+  const esVivienda = document.getElementById('afc-sim-check-vivienda')?.checked ?? true;
+  const esPosesion = document.getElementById('afc-sim-check-posesion')?.checked ?? true;
+  const resDiv = document.getElementById('afc-sim-result-box');
+  if (!resDiv) return;
+
+  try {
+    const res = await fetch('/api/v1/beneficios/simular-inmueble-afc', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        precio_venta_cop: precioVenta,
+        costo_fiscal_inmueble_cop: costoFiscal,
+        es_vivienda_habitacion: esVivienda,
+        posesion_mas_2_anos: esPosesion,
+        monto_depositado_afc_o_vivienda_cop: montoAfc,
+        tax_year: currentYear,
+        custom_uvt: currentUvt
+      })
+    });
+    const data = await res.json();
+
+    let pasosHtml = data.explicacion_paso_a_paso.map(p => `<li>${p}</li>`).join('');
+
+    resDiv.innerHTML = `
+      <div style="background: white; border: 1px solid #bbf7d0; border-radius: 8px; padding: 12px; margin-bottom: 12px; border-left: 4px solid #10b981;">
+        <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px;">
+          <span style="font-weight: 700; color: #065f46;">AHORRO TRIBUTARIO ESTIMADO:</span>
+          <span style="font-size: 20px; font-weight: 900; font-family: var(--font-mono); color: #059669;">
+            ${formatCOP(data.ahorro_impuesto_afc_cop)} COP
+          </span>
+        </div>
+        <div style="font-size: 11px; color: #047857; font-weight: 600;">
+          Ahorro directo del 15% por concepto de Ganancia Ocasional Exenta (Art. 311-1 E.T.)
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px; font-size: 11.5px;">
+        <div style="background: #f8fafc; padding: 8px; border-radius: 6px; border: 1px solid #e2e8f0;">
+          <div style="color: #64748b; font-size: 10px; text-transform: uppercase;">Utilidad Bruta Inmueble:</div>
+          <div style="font-weight: 800; font-size: 13px; color: #0f172a; font-family: var(--font-mono);">${formatCOP(data.ganancia_ocasional_bruta_cop)}</div>
+        </div>
+        <div style="background: #eff6ff; padding: 8px; border-radius: 6px; border: 1px solid #bfdbfe;">
+          <div style="color: #1e40af; font-size: 10px; text-transform: uppercase;">Utilidad Exenta AFC:</div>
+          <div style="font-weight: 800; font-size: 13px; color: #1e3a8a; font-family: var(--font-mono);">${formatCOP(data.ganancia_ocasional_exenta_cop)}</div>
+        </div>
+        <div style="background: #fffbeb; padding: 8px; border-radius: 6px; border: 1px solid #fde68a;">
+          <div style="color: #b45309; font-size: 10px; text-transform: uppercase;">Utilidad Gravada Final:</div>
+          <div style="font-weight: 800; font-size: 13px; color: #92400e; font-family: var(--font-mono);">${formatCOP(data.ganancia_ocasional_gravada_final_cop)}</div>
+        </div>
+        <div style="background: #f0fdf4; padding: 8px; border-radius: 6px; border: 1px solid #bbf7d0;">
+          <div style="color: #15803d; font-size: 10px; text-transform: uppercase;">Impuesto Final a Pagar:</div>
+          <div style="font-weight: 800; font-size: 13px; color: #166534; font-family: var(--font-mono);">${formatCOP(data.impuesto_go_con_afc_cop)}</div>
+        </div>
+      </div>
+
+      <details style="font-size: 11px; color: #475569; cursor: pointer;">
+        <summary style="font-weight: 700; color: var(--primary);">Desglose Matemático & Requisitos Legales ▾</summary>
+        <ul style="margin: 6px 0 0 16px; padding: 0; line-height: 1.5;">
+          ${pasosHtml}
+        </ul>
+      </details>
     `;
   } catch (err) {
     console.error(err);

@@ -130,6 +130,20 @@
           <div class="sidebar-group-title">Optimización & Auditoría</div>
           <ul class="sidebar-menu">
             <li>
+              <button class="sidebar-item-btn" id="nav-item-beneficios" onclick="navigateTo('beneficios', 'all')">
+                <span class="sidebar-item-icon">🎁</span>
+                <span class="sidebar-item-label">Catálogo de Beneficios</span>
+                <span class="sidebar-item-tag">E.T.</span>
+              </button>
+            </li>
+            <li>
+              <button class="sidebar-item-btn" id="nav-item-presentacion" onclick="navigateTo('presentacion', 'main')">
+                <span class="sidebar-item-icon">⚖️</span>
+                <span class="sidebar-item-label">Presentación, Auditoría & Sanciones</span>
+                <span class="sidebar-item-tag">DIAN</span>
+              </button>
+            </li>
+            <li>
               <button class="sidebar-item-btn" id="nav-item-art73" onclick="navigateTo('art73', 'main')">
                 <span class="sidebar-item-icon">🏢</span>
                 <span class="sidebar-item-label">Reajuste de Activos (Art. 73)</span>
@@ -137,9 +151,10 @@
               </button>
             </li>
             <li>
-              <button class="sidebar-item-btn" id="nav-item-beneficios" onclick="navigateTo('beneficios', 'all')">
-                <span class="sidebar-item-icon">🎁</span>
-                <span class="sidebar-item-label">Beneficios, Auditoría & Sanciones</span>
+              <button class="sidebar-item-btn" id="nav-item-inmuebles-afc" onclick="navigateTo('inmuebles-afc', 'main')">
+                <span class="sidebar-item-icon">🏡</span>
+                <span class="sidebar-item-label">Inmuebles & Cuentas AFC</span>
+                <span class="sidebar-item-tag">5.000 UVT</span>
               </button>
             </li>
           </ul>
@@ -2311,30 +2326,141 @@
         <!-- =================================================================
              MÓDULO 7: BENEFICIOS TRIBUTARIOS, AUDITORÍA & SANCIONES
              ================================================================= -->
+        <!-- =================================================================
+             MÓDULO: CATÁLOGO DE BENEFICIOS TRIBUTARIOS
+             ================================================================= -->
         <div id="pane-beneficios" class="module-pane">
-          <div style="margin-bottom: 16px;">
-            <h2 style="font-size: 17px; font-weight: 800; color: var(--text-primary);">Catálogo de Beneficios y Alivios Tributarios (E.T. Colombia)</h2>
-            <p style="font-size: 12px; color: var(--text-muted);">
-              Guía legal interactiva con topes en UVT, requisitos y simuladores de Beneficio de Auditoría y Reducción de Sanciones.
+          <div style="margin-bottom: 20px;">
+            <h2 style="font-size: 18px; font-weight: 800; color: var(--text-primary); margin-bottom: 4px;">
+              🎁 Catálogo Completo de Beneficios y Alivios Tributarios
+            </h2>
+            <p style="font-size: 12.5px; color: var(--text-muted);">
+              Guía legal exhaustiva con todos los beneficios tributarios del Estatuto Tributario colombiano (INCRNGO, Deducciones, Rentas Exentas, Descuentos y Ajustes Patrimoniales).
             </p>
           </div>
 
-          <!-- SIMULADORES -->
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px;">
-            <!-- AUDITORIA WIDGET -->
+          <!-- SEARCH & FILTER BAR -->
+          <div style="display: flex; gap: 12px; margin-bottom: 18px; flex-wrap: wrap; align-items: center;">
+            <div style="flex: 1; min-width: 260px;">
+              <input
+                type="text"
+                id="search-beneficios-input"
+                class="text-input"
+                placeholder="🔍 Buscar beneficio por nombre, artículo o palabra clave..."
+                oninput="filterBeneficiosByText()"
+              />
+            </div>
+            <div class="beneficio-filter-bar" style="margin-bottom: 0;">
+              <button class="btn btn-primary btn-sm" onclick="filterBeneficios('all', this)">Todos</button>
+              <button class="btn btn-outline btn-sm" onclick="filterBeneficios('ajustes_patrimonio', this)">🏢 Ajuste Activos & Bienes</button>
+              <button class="btn btn-outline btn-sm" onclick="filterBeneficios('incrngo', this)">INCRNGO</button>
+              <button class="btn btn-outline btn-sm" onclick="filterBeneficios('deducciones', this)">Deducciones</button>
+              <button class="btn btn-outline btn-sm" onclick="filterBeneficios('rentas_exentas', this)">Rentas Exentas</button>
+              <button class="btn btn-outline btn-sm" onclick="filterBeneficios('auditoria_sanciones', this)">Auditoría & Procedimiento</button>
+            </div>
+          </div>
+
+          <!-- LIST OF BENEFITS -->
+          <div id="beneficios-list-container">
+            <!-- Populated dynamically via JS -->
+          </div>
+        </div>
+
+        <!-- =================================================================
+             MÓDULO: PRESENTACIÓN, AUDITORÍA & SANCIONES TRIBUTARIAS
+             ================================================================= -->
+        <div id="pane-presentacion" class="module-pane">
+          <div style="margin-bottom: 24px;">
+            <h2 style="font-size: 18px; font-weight: 800; color: var(--text-primary); margin-bottom: 4px;">
+              ⚖️ Presentación de la Declaración, Beneficio de Auditoría &amp; Régimen Sancionatorio
+            </h2>
+            <p style="font-size: 12.5px; color: var(--text-muted);">
+              Guía completa para presentar correctamente tu declaración de renta, obtener firmeza legal anticipada (Art. 689-3 E.T.) y entender las consecuencias de no cumplir o de corregir bajo el Régimen Sancionatorio del Estatuto Tributario.
+            </p>
+          </div>
+
+          <!-- ============================================================
+               SECCIÓN 1: BENEFICIO DE AUDITORÍA (ART. 689-3 E.T.)
+               ============================================================ -->
+          <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+            <div style="flex: 1; height: 2px; background: linear-gradient(to right, #3b82f6, transparent);"></div>
+            <div style="background: #1e3a8a; color: white; font-size: 11px; font-weight: 800; padding: 4px 14px; border-radius: 20px; white-space: nowrap;">
+              ⚡ SECCIÓN 1 — BENEFICIO DE AUDITORÍA (ART. 689-3 E.T.)
+            </div>
+            <div style="flex: 1; height: 2px; background: linear-gradient(to left, #3b82f6, transparent);"></div>
+          </div>
+
+          <!-- Explicación ampliada del beneficio de auditoría -->
+          <div class="card" style="margin-bottom: 20px; border-left: 4px solid #3b82f6;">
+            <div class="card-header" style="background: #eff6ff;">
+              <div class="card-title" style="color: #1e3a8a; font-size: 14px;">📖 ¿Qué es el Beneficio de Auditoría y para qué sirve?</div>
+              <span class="badge badge-info" style="font-size: 10px;">Art. 689-3 E.T.</span>
+            </div>
+            <div class="card-body" style="font-size: 12px; line-height: 1.6; color: #334155;">
+              <p style="margin-bottom: 10px;">
+                El <strong>Beneficio de Auditoría</strong> es un mecanismo legal del Estatuto Tributario colombiano que permite a los contribuyentes obtener <strong>firmeza de su declaración de renta en un plazo reducido</strong> (6 o 12 meses), en lugar de los <strong>3 años ordinarios</strong> que establece el Art. 714 E.T.
+              </p>
+              <p style="margin-bottom: 10px;">
+                Cuando una declaración queda en firme, la DIAN <strong>pierde la facultad legal de fiscalizarla, modificarla, liquidarla de revisión o imponerle sanciones</strong>. Es decir, te protege de cualquier actuación futura de la autoridad tributaria sobre esa vigencia fiscal.
+              </p>
+              <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 14px;">
+                <div style="background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 8px; padding: 12px; text-align: center;">
+                  <div style="font-size: 22px; margin-bottom: 4px;">⚡</div>
+                  <div style="font-weight: 800; color: #1e3a8a; font-size: 13px;">6 Meses</div>
+                  <div style="font-size: 11px; color: #3b82f6; margin-top: 2px;">Incremento &ge; 35%</div>
+                  <div style="font-size: 10px; color: #64748b; margin-top: 4px;">La firmeza más rápida del sistema tributario colombiano</div>
+                </div>
+                <div style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px; padding: 12px; text-align: center;">
+                  <div style="font-size: 22px; margin-bottom: 4px;">📅</div>
+                  <div style="font-weight: 800; color: #15803d; font-size: 13px;">12 Meses</div>
+                  <div style="font-size: 11px; color: #16a34a; margin-top: 2px;">Incremento &ge; 25%</div>
+                  <div style="font-size: 10px; color: #64748b; margin-top: 4px;">Alternativa asequible para contribuyentes con menor crecimiento</div>
+                </div>
+                <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px; text-align: center;">
+                  <div style="font-size: 22px; margin-bottom: 4px;">🕐</div>
+                  <div style="font-weight: 800; color: #475569; font-size: 13px;">3 Años</div>
+                  <div style="font-size: 11px; color: #64748b; margin-top: 2px;">Firmeza Ordinaria</div>
+                  <div style="font-size: 10px; color: #64748b; margin-top: 4px;">Sin beneficio — Art. 714 E.T.</div>
+                </div>
+              </div>
+              <div style="background: #fef9c3; border: 1px solid #fde047; border-radius: 6px; padding: 10px; margin-bottom: 10px;">
+                <div style="font-weight: 700; color: #713f12; margin-bottom: 4px; font-size: 11.5px;">⚠️ Condiciones para Aplicar el Beneficio (son acumulativas)</div>
+                <ul style="margin: 0 0 0 16px; padding: 0; font-size: 11px; color: #78350f; line-height: 1.6;">
+                  <li><strong>Incremento mínimo</strong> del impuesto neto de renta respecto al año anterior (&ge; 35% para 6 meses, &ge; 25% para 12 meses).</li>
+                  <li><strong>Impuesto neto año anterior</strong> debe ser al menos <strong>71 UVT</strong> ($3.716.850 COP en 2026) — Art. 689-3 Par. 3.</li>
+                  <li><strong>Presentación oportuna</strong> dentro de los plazos legales fijados por el Gobierno Nacional.</li>
+                  <li><strong>Pago total</strong> del impuesto y las sanciones al momento de la presentación.</li>
+                  <li><strong>No imputar retenciones ficticias</strong> ni compensar pérdidas con operaciones irregulares.</li>
+                </ul>
+              </div>
+              <div style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 6px; padding: 10px;">
+                <div style="font-weight: 700; color: #14532d; margin-bottom: 4px; font-size: 11.5px;">✅ ¿Por qué usar el Beneficio de Auditoría?</div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px; font-size: 11px; color: #166534;">
+                  <div>• <strong>Certeza jurídica total</strong> en 6 o 12 meses: sientes que ese año fiscal "cerró".</div>
+                  <div>• <strong>Ahorro en costos</strong> de defensa ante posibles auditorías (honorarios, tiempo, estrés).</div>
+                  <div>• <strong>Ideal en años de alta utilidad</strong> donde el impuesto sube de todas formas.</div>
+                  <div>• <strong>Evita la prescripción larga</strong> de 3 años y los riesgos de cambios normativos.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Simulador + Guía -->
+          <div style="display: grid; grid-template-columns: 1.1fr 1fr; gap: 16px; margin-bottom: 32px;">
+            <!-- SIMULADOR AUDITORIA -->
             <div class="card" style="border: 2px solid var(--primary-border);">
               <div class="card-header" style="background: var(--primary-light);">
-                <div class="card-title" style="color: var(--primary);">
+                <div class="card-title" style="color: var(--primary); font-size: 14px;">
                   ⚡ Simulador de Beneficio de Auditoría (Art. 689-3 E.T.)
                 </div>
               </div>
               <div class="card-body">
-                <p style="font-size: 11.5px; color: var(--text-secondary); margin-bottom: 10px;">
-                  Obtén <strong>firmeza definitiva en 6 meses</strong> (+35%) o en <strong>12 meses</strong> (+25%) frente a la DIAN.
+                <p style="font-size: 11.5px; color: var(--text-secondary); margin-bottom: 12px;">
+                  Ingresa tu Impuesto Neto de Renta del año gravable anterior para calcular las metas de incremento requeridas para obtener <strong>firmeza definitiva en 6 o 12 meses</strong>.
                 </p>
 
-                <div class="input-field" style="margin-bottom: 10px;">
-                  <label class="input-label">Impuesto Neto de Renta del Año Anterior</label>
+                <div class="input-field" style="margin-bottom: 12px;">
+                  <label class="input-label">Impuesto Neto de Renta del Año Anterior (Casilla 112 F210)</label>
                   <div class="input-wrapper">
                     <span class="input-prefix">$</span>
                     <input
@@ -2348,66 +2474,472 @@
                   </div>
                 </div>
 
-                <div id="sim-aud-result" style="background: var(--bg-subtle); padding: 10px; border-radius: 6px; font-size: 12px;">
+                <div id="sim-aud-result" style="background: var(--bg-subtle); padding: 12px; border-radius: 6px; font-size: 12px;">
                   <!-- Populated via JS -->
                 </div>
               </div>
             </div>
 
-            <!-- SANCIONES WIDGET -->
+            <!-- GUÍA PLAZOS Y REQUISITOS -->
+            <div class="card" style="background: #f8fafc; border: 1px solid #e2e8f0;">
+              <div class="card-header">
+                <div class="card-title" style="font-size: 13px;">📋 Plazos Legales de Presentación 2026</div>
+              </div>
+              <div class="card-body" style="font-size: 11.5px; line-height: 1.55; color: #334155;">
+                <div style="background: white; border: 1px solid #e2e8f0; border-radius: 6px; padding: 10px; margin-bottom: 10px;">
+                  <div style="font-weight: 700; color: #0f172a; margin-bottom: 6px;">📆 Calendario de Vencimientos para Personas Naturales</div>
+                  <div style="font-size: 11px; color: #475569; line-height: 1.6;">
+                    • Los plazos se fijan anualmente por Decreto del Ministerio de Hacienda.<br/>
+                    • Dos últimos dígitos del NIT determinan tu fecha exacta.<br/>
+                    • Generalmente entre <strong>agosto y octubre</strong> del año siguiente al gravable.<br/>
+                    • Presentar extemporáneamente genera <strong>Sanción por Extemporaneidad</strong> (ver Sección 2).
+                  </div>
+                </div>
+                <div style="background: #fef9c3; border: 1px solid #fde047; border-radius: 6px; padding: 10px; margin-bottom: 10px;">
+                  <div style="font-weight: 700; color: #713f12; margin-bottom: 4px;">💡 Estrategia Óptima con Beneficio de Auditoría</div>
+                  <div style="font-size: 11px; color: #78350f; line-height: 1.6;">
+                    1. Calcular el impuesto neto con <strong>Depuración Cédula General</strong>.<br/>
+                    2. Verificar si el incremento es &ge; 25% o &ge; 35% respecto al año anterior.<br/>
+                    3. Si aplica, presentar y pagar completo en el plazo legal.<br/>
+                    4. La firmeza opera de pleno derecho: <strong>no necesitas solicitarla</strong>.
+                  </div>
+                </div>
+                <div style="background: #fef2f2; border: 1px solid #fecaca; border-radius: 6px; padding: 10px;">
+                  <div style="font-weight: 700; color: #b91c1c; margin-bottom: 4px;">🚫 Causas de Pérdida del Beneficio</div>
+                  <div style="font-size: 11px; color: #991b1b; line-height: 1.6;">
+                    • Corrección posterior que reduzca el impuesto por debajo del umbral.<br/>
+                    • Retenciones ficticias o compensación de pérdidas improcedentes.<br/>
+                    • No pagar el saldo a cargo en la fecha de presentación.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ============================================================
+               SECCIÓN 2: RÉGIMEN SANCIONATORIO TRIBUTARIO
+               ============================================================ -->
+          <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+            <div style="flex: 1; height: 2px; background: linear-gradient(to right, #dc2626, transparent);"></div>
+            <div style="background: #7f1d1d; color: white; font-size: 11px; font-weight: 800; padding: 4px 14px; border-radius: 20px; white-space: nowrap;">
+              ⚖️ SECCIÓN 2 — RÉGIMEN SANCIONATORIO TRIBUTARIO
+            </div>
+            <div style="flex: 1; height: 2px; background: linear-gradient(to left, #dc2626, transparent);"></div>
+          </div>
+
+          <!-- Introducción al régimen -->
+          <div class="card" style="margin-bottom: 20px; border-left: 4px solid #dc2626;">
+            <div class="card-header" style="background: #fff5f5;">
+              <div class="card-title" style="color: #7f1d1d; font-size: 14px;">📚 ¿Qué es el Régimen Sancionatorio Tributario?</div>
+            </div>
+            <div class="card-body" style="font-size: 12px; line-height: 1.65; color: #334155;">
+              <p style="margin-bottom: 10px;">
+                El <strong>Régimen Sancionatorio Tributario</strong> (Arts. 637 a 688 del Estatuto Tributario) regula las consecuencias jurídicas y económicas derivadas del <strong>incumplimiento de las obligaciones fiscales</strong> ante la DIAN: no presentar, presentar extemporáneamente, presentar con errores o no pagar.
+              </p>
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px;">
+                <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px;">
+                  <div style="font-weight: 700; color: #0f172a; margin-bottom: 6px; font-size: 12px;">📌 Principios Fundamentales (Art. 640 E.T.)</div>
+                  <ul style="margin: 0 0 0 14px; padding: 0; font-size: 11px; color: #475569; line-height: 1.6;">
+                    <li><strong>Lesividad:</strong> La sanción debe responder a un daño real al fisco.</li>
+                    <li><strong>Proporcionalidad:</strong> Monto de la sanción proporcional a la infracción.</li>
+                    <li><strong>Gradualidad:</strong> Rebaja del 50% si no tienes sanciones en 2 años; 25% si no tienes en 1 año.</li>
+                    <li><strong>Favorabilidad:</strong> Siempre se aplica la norma más favorable al contribuyente.</li>
+                    <li><strong>Non bis in idem:</strong> No se puede sancionar dos veces por el mismo hecho.</li>
+                  </ul>
+                </div>
+                <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px;">
+                  <div style="font-weight: 700; color: #0f172a; margin-bottom: 6px; font-size: 12px;">🔑 Tipos de Sanciones Más Comunes en Renta PN</div>
+                  <ul style="margin: 0 0 0 14px; padding: 0; font-size: 11px; color: #475569; line-height: 1.6;">
+                    <li><strong>Extemporaneidad (Art. 641):</strong> No presentar en el plazo legal.</li>
+                    <li><strong>Corrección (Art. 644):</strong> Corregir aumentando el impuesto.</li>
+                    <li><strong>Inexactitud (Art. 648):</strong> Datos falsos, incompletos o equivocados.</li>
+                    <li><strong>No declarar (Art. 643):</strong> No presentar estando obligado.</li>
+                    <li><strong>Intereses moratorios (Art. 634):</strong> Por pago fuera de plazo.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Sanciones individuales explicadas -->
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 20px;">
+            <!-- Extemporaneidad -->
+            <div class="card" style="border-top: 3px solid #f59e0b;">
+              <div class="card-header" style="background: #fffbeb;">
+                <div class="card-title" style="color: #92400e; font-size: 13px;">⏰ Sanción por Extemporaneidad (Art. 641 E.T.)</div>
+              </div>
+              <div class="card-body" style="font-size: 11.5px; color: #334155; line-height: 1.6;">
+                <p style="margin-bottom: 8px;">Se aplica cuando presentas la declaración <strong>después del plazo legal</strong>. La tarifa depende de si la presentas voluntariamente o tras requerimiento de la DIAN.</p>
+                <div style="background: white; border: 1px solid #fde68a; border-radius: 6px; padding: 8px; margin-bottom: 8px;">
+                  <div style="font-weight: 700; color: #b45309; margin-bottom: 4px;">Presentación Voluntaria (Art. 641)</div>
+                  <div style="font-size: 11px; color: #78350f;">
+                    • <strong>5% por cada mes o fracción</strong> del impuesto a cargo.<br/>
+                    • Máximo: <strong>150%</strong> del impuesto a cargo.<br/>
+                    • Mínimo: 10 UVT ($523.500 COP en 2026).<br/>
+                    • Si no hay impuesto a cargo: 0,5% del patrimonio líquido.
+                  </div>
+                </div>
+                <div style="background: white; border: 1px solid #fecaca; border-radius: 6px; padding: 8px;">
+                  <div style="font-weight: 700; color: #b91c1c; margin-bottom: 4px;">Tras Emplazamiento DIAN (Art. 642)</div>
+                  <div style="font-size: 11px; color: #991b1b;">
+                    • <strong>10% por cada mes o fracción</strong> del impuesto a cargo.<br/>
+                    • Máximo: <strong>200%</strong> del impuesto a cargo.<br/>
+                    • La tarifa se <strong>duplica</strong> respecto a la voluntaria.
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Corrección -->
+            <div class="card" style="border-top: 3px solid #f97316;">
+              <div class="card-header" style="background: #fff7ed;">
+                <div class="card-title" style="color: #7c2d12; font-size: 13px;">✏️ Sanción por Corrección (Art. 644 E.T.)</div>
+              </div>
+              <div class="card-body" style="font-size: 11.5px; color: #334155; line-height: 1.6;">
+                <p style="margin-bottom: 8px;">Se aplica cuando corriges una declaración ya presentada <strong>aumentando el impuesto o disminuyendo el saldo a favor</strong>. La tarifa varía según si actúas antes o después de la DIAN.</p>
+                <div style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 6px; padding: 8px; margin-bottom: 8px;">
+                  <div style="font-weight: 700; color: #14532d; margin-bottom: 4px;">✅ Voluntariamente (antes de emplazamiento)</div>
+                  <div style="font-size: 11px; color: #166534;">
+                    • <strong>10%</strong> del mayor valor a pagar o menor saldo a favor.<br/>
+                    • Con Art. 640 (sin sanciones 2 años): rebaja al <strong>5% efectivo</strong>.<br/>
+                    • Mínimo: 10 UVT ($523.500 en 2026).
+                  </div>
+                </div>
+                <div style="background: #fffbeb; border: 1px solid #fde68a; border-radius: 6px; padding: 8px; margin-bottom: 8px;">
+                  <div style="font-weight: 700; color: #b45309; margin-bottom: 4px;">⚠️ Tras Emplazamiento DIAN</div>
+                  <div style="font-size: 11px; color: #78350f;">
+                    • <strong>20%</strong> del mayor valor a pagar.<br/>
+                    • Con Art. 640: rebaja máxima al <strong>70%</strong> → tarifa efectiva 14%.<br/>
+                    • Casi el <strong>triple</strong> de la corrección voluntaria.
+                  </div>
+                </div>
+                <div style="background: #fef2f2; border: 1px solid #fecaca; border-radius: 6px; padding: 8px;">
+                  <div style="font-weight: 700; color: #b91c1c; margin-bottom: 4px;">🚫 Liquidación Oficial de Revisión (Art. 648)</div>
+                  <div style="font-size: 11px; color: #991b1b;">
+                    • Sanción por Inexactitud del <strong>100%</strong> del mayor impuesto.<br/>
+                    • Si hay conductas dolosas: hasta <strong>200%</strong>.<br/>
+                    • No aplica Art. 640. Cobro coactivo e intereses plenos.
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- No Declarar -->
+            <div class="card" style="border-top: 3px solid #dc2626;">
+              <div class="card-header" style="background: #fef2f2;">
+                <div class="card-title" style="color: #7f1d1d; font-size: 13px;">🚫 Sanción por No Declarar (Art. 643 E.T.)</div>
+              </div>
+              <div class="card-body" style="font-size: 11.5px; color: #334155; line-height: 1.6;">
+                <p style="margin-bottom: 8px;">La más grave para personas naturales. Aplica cuando la DIAN determina que eras <strong>obligado a declarar y no lo hiciste</strong>.</p>
+                <div style="background: #fef2f2; border: 1px solid #fecaca; border-radius: 6px; padding: 8px;">
+                  <div style="font-size: 11px; color: #991b1b; line-height: 1.7;">
+                    • <strong>20%</strong> del valor de las consignaciones bancarias del año o de los ingresos brutos reportados por terceros.<br/>
+                    • Si no hay información: <strong>20%</strong> del patrimonio bruto.<br/>
+                    • La DIAN liquida de oficio con la emplazamiento y proferimiento.<br/>
+                    • <strong>No aplica reducción</strong> del Art. 640 en todos los casos.<br/>
+                    • Importante: la DIAN tiene <strong>5 años</strong> para determinar la sanción si el contribuyente no declaró.
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Intereses Moratorios -->
+            <div class="card" style="border-top: 3px solid #7c3aed;">
+              <div class="card-header" style="background: #f5f3ff;">
+                <div class="card-title" style="color: #4c1d95; font-size: 13px;">💸 Intereses Moratorios (Art. 634 E.T.)</div>
+              </div>
+              <div class="card-body" style="font-size: 11.5px; color: #334155; line-height: 1.6;">
+                <p style="margin-bottom: 8px;">Los intereses se generan sobre cualquier saldo a pagar que no se cancele en la fecha de vencimiento legal. Corren automáticamente <strong>día a día</strong> desde el vencimiento.</p>
+                <div style="background: #f5f3ff; border: 1px solid #ddd6fe; border-radius: 6px; padding: 8px; margin-bottom: 8px;">
+                  <div style="font-size: 11px; color: #5b21b6; line-height: 1.7;">
+                    • Tasa: <strong>Tasa de Usura certificada por la Superfinanciera</strong> del período de mora.<br/>
+                    • Se liquidan sobre el impuesto y las sanciones no pagadas.<br/>
+                    • Se acumulan <strong>exponencialmente</strong>: a mayor mora, mayor costo.<br/>
+                    • No se pueden condona por ningún principio — son de orden público.
+                  </div>
+                </div>
+                <div style="background: #fef9c3; border: 1px solid #fde047; border-radius: 6px; padding: 8px;">
+                  <div style="font-weight: 700; color: #713f12; font-size: 11px;">💡 Estrategia: Paga el capital aunque no puedas todo</div>
+                  <div style="font-size: 11px; color: #78350f; margin-top: 2px;">Aunque no puedas pagar la sanción, pagar el impuesto base reduce la base de los intereses que siguen corriendo.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Comparativa: Voluntario vs DIAN -->
+          <div class="card" style="margin-bottom: 20px; border-left: 4px solid var(--primary);">
+            <div class="card-header" style="background: #f8fafc;">
+              <div class="card-title" style="font-size: 13.5px;">
+                💡 Diferencia Vital: Corregir Voluntariamente vs Actuación de la DIAN
+              </div>
+            </div>
+            <div class="card-body" style="padding: 12px 16px;">
+              <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; font-size: 11.5px;">
+                <div style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 6px; padding: 10px;">
+                  <div style="font-weight: 800; color: #15803d; margin-bottom: 4px;">✅ 1. Corrección Voluntaria</div>
+                  <div style="color: #166534; font-size: 11px;">
+                    • Sanción del <strong>10%</strong> del mayor valor (Art. 644).<br/>
+                    • Reducción al <strong>50%</strong> (Art. 640) sin sanciones en 2 años.<br/>
+                    • <strong>Tarifa efectiva final: solo 5%</strong>.<br/>
+                    • Puedes hacerlo sin autorización previa.
+                  </div>
+                </div>
+
+                <div style="background: #fffbeb; border: 1px solid #fde68a; border-radius: 6px; padding: 10px;">
+                  <div style="font-weight: 800; color: #b45309; margin-bottom: 4px;">⚠️ 2. Tras Emplazamiento DIAN</div>
+                  <div style="color: #92400e; font-size: 11px;">
+                    • Sanción se duplica al <strong>20%</strong> del mayor valor.<br/>
+                    • Reducción limitada al <strong>70%</strong>.<br/>
+                    • <strong>Tarifa efectiva final: 14%</strong> (casi el triple).<br/>
+                    • Tienes un plazo perentorio para responder.
+                  </div>
+                </div>
+
+                <div style="background: #fef2f2; border: 1px solid #fecaca; border-radius: 6px; padding: 10px;">
+                  <div style="font-weight: 800; color: #b91c1c; margin-bottom: 4px;">🚫 3. Liquidación Oficial de Revisión</div>
+                  <div style="color: #991b1b; font-size: 11px;">
+                    • Sanción por Inexactitud del <strong>100% al 200%</strong> (Art. 648).<br/>
+                    • No aplica principio de favorabilidad Art. 640.<br/>
+                    • Cobro coactivo e intereses moratorios plenos.<br/>
+                    • Proceso adversarial con derechos restringidos.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Calculadora Sanciones -->
+          <div style="display: grid; grid-template-columns: 1.1fr 1fr; gap: 16px;">
+            <!-- PARÁMETROS CALCULADORA -->
             <div class="card" style="border: 2px solid var(--emerald-border);">
               <div class="card-header" style="background: var(--emerald-light);">
-                <div class="card-title" style="color: var(--emerald);">
-                  ⚖️ Reducción de Sanciones por Corrección (Art. 640 y 644 E.T.)
+                <div class="card-title" style="color: var(--emerald); font-size: 14px;">
+                  🧮 Calculadora de Sanciones Tributarias &amp; Descuentos (Art. 640, 641, 644, 639)
                 </div>
               </div>
               <div class="card-body">
-                <p style="font-size: 11.5px; color: var(--text-secondary); margin-bottom: 10px;">
-                  Calcula el descuento de favorabilidad (50% o 75% de rebaja) al corregir voluntariamente.
-                </p>
+                <!-- TIPO DE SANCIÓN -->
+                <div class="input-field" style="margin-bottom: 10px;">
+                  <label class="input-label">Tipo de Infracción / Sanción a Liquidar</label>
+                  <select id="sancion-calc-tipo" class="text-input" onchange="toggleSancionFields(); runCalculadoraSanciones();">
+                    <option value="correccion" selected>Sanción por Corrección (Art. 644 E.T.)</option>
+                    <option value="extemporaneidad">Sanción por Extemporaneidad (Art. 641 y 642 E.T.)</option>
+                  </select>
+                </div>
 
-                <div class="input-field" style="margin-bottom: 8px;">
-                  <label class="input-label">Monto de la Sanción Plena (Ej. 10% del mayor valor)</label>
+                <!-- MONTO BASE -->
+                <div class="input-field" style="margin-bottom: 10px;">
+                  <label class="input-label" id="sancion-monto-base-label">Mayor Valor a Pagar por Corrección ($)</label>
                   <div class="input-wrapper">
                     <span class="input-prefix">$</span>
                     <input
                       type="text"
                       inputmode="numeric"
-                      id="sim-sancion-base"
+                      id="sancion-calc-monto-base"
                       class="currency-input"
-                      value="2'000.000"
-                      oninput="runSimulacionSanciones()"
+                      value="5'000.000"
+                      oninput="runCalculadoraSanciones()"
                     />
                   </div>
                 </div>
 
-                <div style="margin-bottom: 8px;">
-                  <label class="checkbox-group" style="padding: 4px 8px;">
-                    <input type="checkbox" id="sim-sancion-check-2anos" checked onchange="runSimulacionSanciones()">
-                    <span style="font-size: 11.5px;">Sin sanciones en los últimos 2 años (Rebaja al 50%)</span>
+                <!-- MESES RETRASO (CONDICIONAL) -->
+                <div class="input-field" id="sancion-meses-container" style="display: none; margin-bottom: 10px;">
+                  <label class="input-label">Meses o Fracción de Mes Calendario de Retraso</label>
+                  <input
+                    type="number"
+                    min="1"
+                    max="60"
+                    id="sancion-calc-meses"
+                    class="text-input"
+                    value="2"
+                    oninput="runCalculadoraSanciones()"
+                  />
+                </div>
+
+                <!-- ES VOLUNTARIO O EMPLAZADO -->
+                <div style="margin-bottom: 10px;">
+                  <label class="checkbox-group" style="padding: 6px 10px; background: var(--bg-subtle); border-radius: 6px;">
+                    <input type="checkbox" id="sancion-calc-voluntario" checked onchange="runCalculadoraSanciones()">
+                    <span style="font-size: 11.5px; font-weight: 600;">
+                      ⚡ Liquidación Voluntaria (Antes de que la DIAN notifique emplazamiento)
+                    </span>
                   </label>
                 </div>
 
-                <div id="sim-sancion-result" style="background: var(--bg-subtle); padding: 10px; border-radius: 6px; font-size: 12px;">
-                  <!-- Populated via JS -->
+                <!-- HISTORIAL SANCIONATORIO (ART. 640) -->
+                <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 10px; margin-bottom: 10px;">
+                  <div style="font-size: 11px; font-weight: 700; color: #0f172a; margin-bottom: 6px;">
+                    Principio de Proporcionalidad &amp; Favorabilidad (Art. 640 E.T.):
+                  </div>
+                  <label class="checkbox-group" style="margin-bottom: 4px;">
+                    <input type="checkbox" id="sancion-calc-check-2anos" checked onchange="handleSancionHistoryCheck('2anos'); runCalculadoraSanciones();">
+                    <span style="font-size: 11px;">Sin sanciones en los últimos 2 años (Rebaja máxima del 50%)</span>
+                  </label>
+                  <label class="checkbox-group">
+                    <input type="checkbox" id="sancion-calc-check-1ano" checked onchange="handleSancionHistoryCheck('1ano'); runCalculadoraSanciones();">
+                    <span style="font-size: 11px;">Sin sanciones en el último año (Rebaja del 25%)</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <!-- RESULTADOS CALCULADORA -->
+            <div class="card" style="border: 2px solid var(--primary-border);">
+              <div class="card-header" style="background: var(--primary-light);">
+                <div class="card-title" style="color: var(--primary); font-size: 14px;">
+                  📊 Liquidación de la Sanción &amp; Descuento Obtenido
+                </div>
+              </div>
+              <div class="card-body">
+                <div id="sancion-calc-result-box" style="font-size: 12px;">
+                  <!-- Populated dynamically via JS -->
                 </div>
               </div>
             </div>
           </div>
+        </div>
 
-          <!-- FILTER BAR -->
-          <div class="beneficio-filter-bar">
-            <button class="btn btn-primary btn-sm" onclick="filterBeneficios('all', this)">Todos</button>
-            <button class="btn btn-outline btn-sm" onclick="filterBeneficios('ajustes_patrimonio', this)">🏢 Ajuste Activos (Art. 73)</button>
-            <button class="btn btn-outline btn-sm" onclick="filterBeneficios('incrngo', this)">INCRNGO</button>
-            <button class="btn btn-outline btn-sm" onclick="filterBeneficios('deducciones', this)">Deducciones</button>
-            <button class="btn btn-outline btn-sm" onclick="filterBeneficios('rentas_exentas', this)">Rentas Exentas</button>
-            <button class="btn btn-outline btn-sm" onclick="filterBeneficios('auditoria_sanciones', this)">Auditoría & Sanciones</button>
+        <!-- =================================================================
+             MÓDULO: BIENES INMUEBLES & CUENTAS AFC (ART. 311-1 Y 126-4 E.T.)
+             ================================================================= -->
+        <div id="pane-inmuebles-afc" class="module-pane">
+          <div style="margin-bottom: 20px;">
+            <h2 style="font-size: 18px; font-weight: 800; color: var(--text-primary); margin-bottom: 4px;">
+              🏡 Beneficios sobre Bienes Inmuebles & Cuentas AFC (Art. 311-1 y 126-4 E.T.)
+            </h2>
+            <p style="font-size: 12.5px; color: var(--text-muted);">
+              Estrategia legal de optimización tributaria: exención de hasta 5.000 UVT en Ganancia Ocasional al vender tu casa o apartamento de habitación y destinar los recursos a cuentas AFC o vivienda.
+            </p>
           </div>
 
-          <!-- LIST OF BENEFITS -->
-          <div id="beneficios-list-container">
-            <!-- Populated dynamically via JS -->
+          <!-- GUÍA DIDÁCTICA INMUEBLES Y AFC -->
+          <div style="display: grid; grid-template-columns: 1fr 1.2fr 1fr; gap: 14px; margin-bottom: 24px;">
+            <!-- CARD 1 -->
+            <div class="card" style="border-top: 3px solid #3b82f6;">
+              <div class="card-body" style="padding: 14px;">
+                <div style="font-size: 13px; font-weight: 800; color: #1e40af; margin-bottom: 6px;">
+                  🏦 ¿Qué es una Cuenta AFC?
+                </div>
+                <p style="font-size: 11.5px; color: #475569; line-height: 1.45; margin: 0;">
+                  Es una cuenta de <strong>Ahorro para el Fomento de la Construcción</strong> (Art. 126-4 E.T.) regulada por la Superintendencia Financiera. Los depósitos allí realizados tienen tratamiento de <strong>Renta Exenta</strong> o <strong>Ganancia Ocasional Exenta</strong> siempre que se destinen a vivienda.
+                </p>
+              </div>
+            </div>
+
+            <!-- CARD 2 -->
+            <div class="card" style="border-top: 3px solid #10b981; background: #f0fdf4;">
+              <div class="card-body" style="padding: 14px;">
+                <div style="font-size: 13px; font-weight: 800; color: #065f46; margin-bottom: 6px;">
+                  ✨ Exención Especial por Venta (Art. 311-1 E.T.)
+                </div>
+                <p style="font-size: 11.5px; color: #166534; line-height: 1.45; margin: 0;">
+                  Al vender tu <strong>casa o apartamento de habitación</strong> (poseído por 2+ años), las primeras <strong>5.000 UVT de utilidad ($261.750.000 COP en 2026)</strong> están <strong>100% EXENTAS del impuesto de Ganancia Ocasional (0% en vez del 15%)</strong> si depositas el dinero en una cuenta AFC o lo destinas a la compra de otra vivienda.
+                </p>
+              </div>
+            </div>
+
+            <!-- CARD 3 -->
+            <div class="card" style="border-top: 3px solid #f59e0b;">
+              <div class="card-body" style="padding: 14px;">
+                <div style="font-size: 13px; font-weight: 800; color: #92400e; margin-bottom: 6px;">
+                  ⚠️ Requisitos de Permanencia
+                </div>
+                <p style="font-size: 11.5px; color: #78350f; line-height: 1.45; margin: 0;">
+                  Los recursos deben permanecer en la cuenta AFC al menos <strong>10 años</strong> o retirarse anticipadamente <strong>exclusivamente para compra de otra vivienda o pago de crédito hipotecario</strong>. Si se retiran para otro fin, se pierde la exención.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- SIMULADOR INTERACTIVO INMUEBLE AFC -->
+          <div style="display: grid; grid-template-columns: 1.1fr 1fr; gap: 16px;">
+            <!-- PARÁMETROS VENTA -->
+            <div class="card" style="border: 2px solid var(--primary-border);">
+              <div class="card-header" style="background: var(--primary-light);">
+                <div class="card-title" style="color: var(--primary); font-size: 14px;">
+                  1. Parámetros de la Enajenación del Inmueble
+                </div>
+              </div>
+              <div class="card-body">
+                <!-- PRECIO VENTA -->
+                <div class="input-field" style="margin-bottom: 10px;">
+                  <label class="input-label">Precio de Venta Pactado en Escritura ($ COP)</label>
+                  <div class="input-wrapper">
+                    <span class="input-prefix">$</span>
+                    <input
+                      type="text"
+                      inputmode="numeric"
+                      id="afc-sim-precio-venta"
+                      class="currency-input"
+                      value="600'000.000"
+                      oninput="runSimulacionInmuebleAfc()"
+                    />
+                  </div>
+                </div>
+
+                <!-- COSTO FISCAL -->
+                <div class="input-field" style="margin-bottom: 10px;">
+                  <label class="input-label">Costo Fiscal del Inmueble (Adquisición / Reajuste Art. 73)</label>
+                  <div class="input-wrapper">
+                    <span class="input-prefix">$</span>
+                    <input
+                      type="text"
+                      inputmode="numeric"
+                      id="afc-sim-costo-fiscal"
+                      class="currency-input"
+                      value="350'000.000"
+                      oninput="runSimulacionInmuebleAfc()"
+                    />
+                  </div>
+                </div>
+
+                <!-- MONTO DEPOSITADO AFC -->
+                <div class="input-field" style="margin-bottom: 12px;">
+                  <label class="input-label">Monto Depositado en Cuenta AFC o Destinado a Vivienda ($ COP)</label>
+                  <div class="input-wrapper">
+                    <span class="input-prefix">$</span>
+                    <input
+                      type="text"
+                      inputmode="numeric"
+                      id="afc-sim-monto-afc"
+                      class="currency-input"
+                      value="250'000.000"
+                      oninput="runSimulacionInmuebleAfc()"
+                    />
+                  </div>
+                  <div style="font-size: 10.5px; color: #64748b; margin-top: 2px;">
+                    Tope legal máximo de exención: 5.000 UVT ($261.750.000 COP para 2026).
+                  </div>
+                </div>
+
+                <!-- CONDICIONES LEGALES CHECKBOXES -->
+                <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 10px;">
+                  <label class="checkbox-group" style="margin-bottom: 6px;">
+                    <input type="checkbox" id="afc-sim-check-vivienda" checked onchange="runSimulacionInmuebleAfc()">
+                    <span style="font-size: 11.5px;">El inmueble vendido es la <strong>casa o apartamento de habitación</strong> del declarante.</span>
+                  </label>
+                  <label class="checkbox-group">
+                    <input type="checkbox" id="afc-sim-check-posesion" checked onchange="runSimulacionInmuebleAfc()">
+                    <span style="font-size: 11.5px;">Poseído por <strong>dos (2) años o más</strong> (clasifica como Ganancia Ocasional).</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <!-- RESULTADO Y AHORRO AFC -->
+            <div class="card" style="border: 2px solid var(--emerald-border);">
+              <div class="card-header" style="background: var(--emerald-light);">
+                <div class="card-title" style="color: var(--emerald); font-size: 14px;">
+                  2. Liquidación de Utilidad Exenta & Ahorro Tributario (15%)
+                </div>
+              </div>
+              <div class="card-body">
+                <div id="afc-sim-result-box" style="font-size: 12px;">
+                  <!-- Populated dynamically via JS -->
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -2774,8 +3306,8 @@ Eres un Asistente Contador Tributario en Colombia.
   <!-- TOAST CONTAINER -->
   <div id="tributia-toast-container" style="position: fixed; bottom: 24px; right: 24px; z-index: 99999; display: flex; flex-direction: column; gap: 8px; pointer-events: none;"></div>
 
-  <script src="/static/casillas_info.js?v=20260819_art73_v3"></script>
-  <script src="/static/calendario_data.js?v=20260819_art73_v3"></script>
-  <script src="/static/app.js?v=20260819_art73_v3"></script>
+  <script src="/static/casillas_info.js?v=20260819_reorg_v4"></script>
+  <script src="/static/calendario_data.js?v=20260819_reorg_v4"></script>
+  <script src="/static/app.js?v=20260819_reorg_v4"></script>
 </body>
 </html>

@@ -123,8 +123,40 @@ Permite a las personas naturales aumentar el costo fiscal de adquisición de sus
 
 ## 10. Beneficio de Auditoría y Firmeza Especial (Art. 689-3 E.T.)
 
-Otorga firmeza definitiva a la declaración del contribuyente en un plazo abreviado, impidiendo que la DIAN inicie procesos de fiscalización posterior:
+Otorga firmeza definitiva a la declaración del contribuyente en un plazo abreviado, impidiendo que la DIAN inicie procesos de fiscalización o profiera requerimiento especial posterior:
 
-- **Firmeza en 6 Meses:** Si el impuesto neto de renta se incrementa al menos en un **35%** respecto al año anterior (con impuesto previo $\ge 71\text{ UVT}$).
+- **Firmeza en 6 Meses:** Si el impuesto neto de renta se incrementa al menos en un **35%** respecto al año anterior (con impuesto previo $\ge 71\text{ UVT}$ = $3.717.000 COP en 2026).
 - **Firmeza en 12 Meses:** Si el impuesto neto de renta se incrementa al menos en un **25%** respecto al año anterior (con impuesto previo $\ge 71\text{ UVT}$).
+- **Requisitos Formales Ineludibles**:
+  1. Presentación oportuna dentro de los plazos del calendario tributario.
+  2. Pago total del valor liquidado dentro del plazo de presentación.
+  3. No aplica si la declaración contiene retenciones en la fuente inexistentes o si se omitieron activos / incluyeron pasivos inexistentes.
+
+---
+
+## 11. Régimen Sancionatorio y Principio de Favorabilidad (Art. 640, 641, 642, 644 y 639 E.T.)
+
+Calcula las sanciones aplicables cuando el contribuyente corrige su declaración o declara de forma extemporánea, aplicando el régimen de gradualidad y favorabilidad legal:
+
+| Tipo de Sanción | Base de Cálculo | Tarifa Base | Reducción Art. 640 E.T. | Sanción Mínima (Art. 639) |
+| :--- | :--- | :--- | :--- | :--- |
+| **Corrección Voluntaria (Art. 644 Num. 1)** | Mayor valor a pagar liquidado | **10%** del mayor valor | - **50% de descuento** si no hubo sanciones en 2 años.<br/>- **25% de descuento** si no hubo sanciones en 1 año. | **10 UVT** ($524.000 COP en 2026) |
+| **Corrección tras Emplazamiento DIAN (Art. 644 Num. 2)** | Mayor valor a pagar liquidado | **20%** del mayor valor | - **30% de descuento** si no hubo sanciones en 2 años (paga el 70%).<br/>- **15% de descuento** si no hubo sanciones en 1 año (paga el 85%). | **10 UVT** ($524.000 COP en 2026) |
+| **Extemporaneidad Voluntaria (Art. 641)** | Impuesto a cargo liquidado | **5% por mes o fracción** (Tope 100%) | - **50% de descuento** (sin sanciones 2 años).<br/>- **25% de descuento** (sin sanciones 1 año). | **10 UVT** ($524.000 COP en 2026) |
+| **Extemporaneidad con Emplazamiento (Art. 642)** | Impuesto a cargo liquidado | **10% por mes o fracción** (Tope 200%) | - **30% de descuento** (sin sanciones 2 años).<br/>- **15% de descuento** (sin sanciones 1 año). | **10 UVT** ($524.000 COP en 2026) |
+| **Inexactitud por Liquidación Oficial (Art. 648)** | Mayor impuesto determinado por la DIAN | **100% a 200%** del mayor valor | No aplica reducción simplificada voluntaria; requiere allanamiento formal en vía gubernativa. | No aplica |
+
+---
+
+## 12. Venta de Inmuebles de Habitación & Cuentas AFC (Art. 311-1 y 126-4 E.T.)
+
+Mecanismo de optimización patrimonial para familias y propietarios que enajenan su vivienda:
+
+1. **Condición de Habitación:** El inmueble enajenado debe haber sido la casa o apartamento de habitación del contribuyente (poseído por $\ge 2$ años).
+2. **Exención de las Primeras 5.000 UVT:** La utilidad neta (Precio de venta - Costo fiscal reajustado por Art. 73) está exenta hasta **5.000 UVT** ($261.750.000 COP en 2026).
+3. **Destinación de Fondos:** El 100% de los dineros percibidos de la venta (o la porción que se desee exentar) debe:
+   - Depositarse en una **Cuenta de Ahorro para el Fomento de la Construcción (AFC)**.
+   - O destinarse a la compra de otra casa o apartamento de habitación.
+   - O aplicarse al pago de un crédito hipotecario o leasing habitacional vigente sobre vivienda del contribuyente.
+4. **Ahorro Fiscal Directo:** Al quedar exenta la ganancia ocasional, el contribuyente ahorra directamente el **15%** de tarifa impositiva (hasta **$39.262.500 COP** de ahorro líquido).
 

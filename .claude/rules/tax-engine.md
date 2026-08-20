@@ -1,4 +1,4 @@
----
+  ---
 paths:
   - "backend/app/services/**/*.py"
   - "backend/app/core/rules_engine/**/*.py"

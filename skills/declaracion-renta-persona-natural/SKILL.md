@@ -69,6 +69,9 @@ El script clasifica cada partida en:
      - Si el activo/accion fue poseido por **menos de 2 anos**: La utilidad neta (precio de venta - costo fiscal de adquisicion) se clasifica en la **Cedula General (Rentas No Laborales)** y tributa a la tarifa marginal del Art. 241 (hasta el 39%).
      - Si el activo/accion fue poseido por **2 anos o mas**: La utilidad neta se clasifica como **Ganancia Ocasional (Art. 300 E.T.)** y tributa a la tarifa fija del **15%** (Art. 313 y 314 E.T.).
      - En ambos casos, se debe restar el **Costo Fiscal de Adquisicion (Art. 71, 73 y 90 E.T.)** para no tributar sobre el capital recuperado.
+   - **Paso 2.4 (Exención Inmobiliaria y Cuentas AFC - Art. 311-1 y 126-4 E.T.)**:
+     - En la venta de la casa o apartamento de habitación del contribuyente (poseída por $\ge 2$ años), las primeras **5.000 UVT** ($261.750.000 COP en 2026) de utilidad constituyen **Ganancia Ocasional Exenta** (Casilla 109) si el producto de la venta se deposita en una Cuenta AFC o se destina al pago de un crédito hipotecario o compra de otra vivienda propia.
+     - CLI de soporte: `python skills/declaracion-renta-persona-natural/scripts/simular_inmuebles_afc.py --precio-venta 700000000 --costo-fiscal 350000000 --monto-afc 300000000`
 3. Agrupar transacciones en sus respectivas cedulas (Trabajo, Capital, No Laborales, Pensiones, Dividendos, Ganancias Ocasionales).
 4. Aplicar las deducciones y rentas exentas (INCRNGO, Deducciones ordinarias, 25% exenta laboral, tope 1.340 UVT, y deducciones extra-cupo).
 
@@ -100,6 +103,19 @@ Si el reporte de conciliacion contiene partidas `SOLO_EN_EXOGENA` o `DIFERENCIA_
 
 ---
 
+### Fase 4: Auditoría, Sanciones y Optimización Post-Liquidación
+
+1. **Beneficio de Auditoría (Art. 689-3 E.T.)**:
+   - Verificar si el impuesto neto de renta del año anterior fue $\ge 71\text{ UVT}$ ($3.717.000 COP en 2026).
+   - Simular el incremento para obtener firmeza en 6 meses (+35%) o 12 meses (+25%).
+   - CLI: `python skills/declaracion-renta-persona-natural/scripts/simular_sanciones_auditoria.py auditoria --impuesto-ant 15000000`
+2. **Liquidación Didáctica de Sanciones (Art. 640, 641, 642, 644, 639 E.T.)**:
+   - Si el contribuyente requiere presentar una corrección o declaración extemporánea, calcular la sanción voluntaria (10% en corrección / 5% mes en extemporaneidad) vs. escenario con emplazamiento de la DIAN (20% en corrección / 10% mes).
+   - Aplicar el principio de favorabilidad del Art. 640 (rebaja al 50% o al 75%) y garantizar la sanción mínima legal de 10 UVT (Art. 639).
+   - CLI: `python skills/declaracion-renta-persona-natural/scripts/simular_sanciones_auditoria.py sancion --tipo correccion --monto-base 20000000 --sin-sanciones-2anos`
+
+---
+
 ## Heuristicas de Clasificacion Documental
 
 | Tipo de Documento | Campos y Datos Clave a Extraer | Concepto Tributario a Asignar |
@@ -110,7 +126,7 @@ Si el reporte de conciliacion contiene partidas `SOLO_EN_EXOGENA` o `DIFERENCIA_
 | **Certificado Medicina Prepagada** | Pagos anuales por contratos de cobertura de salud | `DED_PREPAGADA` |
 | **Certificado Fondos Voluntarios / Cuentas AFC** | Aportes voluntarios realizados en el ano gravable | `EXENTA_AFC` o `EXENTA_FVP` |
 | **Facturas Electronicas de Compras Personales** | Sumatoria total de compras pagadas con medios electronicos | `DED_FACTURA_ELEC` |
-| **Escrituras de Venta de Inmuebles** | Precio de venta, costo fiscal de adquisicion, anos de posesion | `GO_ACTIVOS` (si posesion >= 2 anos) o `RENTAS_NOLABORALES` |
+| **Escrituras de Venta de Inmuebles & Certificado AFC** | Precio de venta, costo fiscal de adquisicion, anos de posesion, deposito AFC | `GO_ACTIVOS` (si posesion >= 2 anos) o `RENTAS_NOLABORALES`, `EXENTA_AFC_INMUEBLE` |
 
 ---
 
@@ -121,4 +137,6 @@ Si el reporte de conciliacion contiene partidas `SOLO_EN_EXOGENA` o `DIFERENCIA_
 | Tratar las deducciones de dependientes de 72 UVT dentro del limite del 40% | Las deducciones del Art. 336 Num. 2 (72 UVT por dependiente) estan legalmente excluidas del limite del 40% y de las 1.340 UVT. |
 | Incluir el 1% de compras en factura electronica dentro del tope de 1.340 UVT | La deduccion del 1% del Art. 336 Num. 5 es extra-cupo, no consume las 1.340 UVT. |
 | Mezclar ganancias ocasionales en la tabla del Art. 241 | Las ganancias ocasionales van a tarifa fija (15% o 35% loterias) y disfrutan de exenciones del Art. 307 y 311-1. |
+| Olvidar la exencion de 5.000 UVT en venta de casa de habitacion (Art. 311-1) | Si el contribuyente vende su vivienda y deposita en AFC o compra otra vivienda, las primeras 5.000 UVT de ganancia estan 100% exentas. |
+| Calcular sanciones sin aplicar el Art. 640 E.T. | Todo contribuyente sin antecedentes sancionatorios en 2 años tiene derecho a reducir la sanción al 50% (o 75% si es 1 año), respetando la mínima de 10 UVT (Art. 639). |
 | Olvidar restar los INCRNGO antes de calcular el 25% de renta exenta laboral | El 25% del Art. 206 Num. 10 se calcula sobre la base neta residual tras detraer INCRNGO y demas deducciones. |

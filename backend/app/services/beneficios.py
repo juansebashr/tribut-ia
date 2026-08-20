@@ -500,6 +500,331 @@ def get_catalogo_beneficios() -> list[BeneficioItem]:
     ]
 
 
+class LiquidacionSancionRequest(BaseModel):
+    tipo_sancion: str = Field(
+        "correccion",
+        description="Tipo de sanción: 'correccion' (Art. 644) o 'extemporaneidad' (Art. 641/642)",
+    )
+    monto_base_cop: float = Field(
+        ...,
+        description="Monto base: Mayor valor a pagar (corrección) o Impuesto a cargo (extemporaneidad)",
+    )
+    meses_fraccion_retraso: int = Field(
+        1,
+        description="Número de meses o fracción de mes calendario de retraso (aplica para extemporaneidad)",
+    )
+    es_voluntario_sin_emplazamiento: bool = Field(
+        True,
+        description="¿Es voluntaria antes de cualquier emplazamiento o auto de la DIAN?",
+    )
+    sin_sanciones_ultimos_2_anos: bool = Field(
+        True,
+        description="¿No ha sido objeto de sanción tributaria en los últimos 2 años? (Art. 640)",
+    )
+    sin_sanciones_ultimo_1_ano: bool = Field(
+        True,
+        description="¿No ha sido objeto de sanción tributaria en el último año? (Art. 640)",
+    )
+    tax_year: int = Field(2026, description="Año gravable")
+    custom_uvt: float | None = Field(None, description="UVT personalizado opcional")
+
+
+class LiquidacionSancionResponse(BaseModel):
+    tipo_sancion: str
+    tax_year: int
+    uvt_value: float
+    monto_base_cop: float
+    meses_retraso: int
+    es_voluntario: bool
+    tarifa_base_pct: float
+    sancion_plena_sin_reduccion_cop: float
+    porcentaje_reduccion_art640_pct: float
+    sancion_con_reduccion_cop: float
+    sancion_minima_dian_cop: float
+    sancion_final_a_pagar_cop: float
+    aplico_sancion_minima: bool
+    ahorro_favorabilidad_art640_cop: float
+    comparativa_sancion_con_emplazamiento_dian_cop: float
+    ahorro_por_corregir_antes_de_dian_cop: float
+    articulos_aplicados: list[str]
+    explicacion_didactica: str
+    pasos_calculo: list[str]
+
+
+class SimulacionInmuebleAfcRequest(BaseModel):
+    precio_venta_cop: float = Field(
+        ..., description="Precio pactado en la enajenación de la vivienda"
+    )
+    costo_fiscal_inmueble_cop: float = Field(
+        ...,
+        description="Costo fiscal del inmueble (adquisición + mejoras o avalúo / reajuste Art. 73)",
+    )
+    es_vivienda_habitacion: bool = Field(
+        True,
+        description="¿El inmueble vendido corresponde a la casa o apartamento de habitación del contribuyente?",
+    )
+    posesion_mas_2_anos: bool = Field(
+        True,
+        description="¿El inmueble fue poseído por dos (2) años o más? (Califica como Ganancia Ocasional)",
+    )
+    monto_depositado_afc_o_vivienda_cop: float = Field(
+        ...,
+        description="Monto depositado en Cuenta AFC o destinado a adquisición de nueva vivienda o pago hipotecario",
+    )
+    tax_year: int = Field(2026, description="Año gravable")
+    custom_uvt: float | None = Field(None, description="UVT personalizado opcional")
+
+
+class SimulacionInmuebleAfcResponse(BaseModel):
+    tax_year: int
+    uvt_value: float
+    precio_venta_cop: float
+    costo_fiscal_cop: float
+    ganancia_ocasional_bruta_cop: float
+    es_vivienda_habitacion: bool
+    posesion_mas_2_anos: bool
+    monto_depositado_afc_cop: float
+    tope_maximo_exencion_uvt: float
+    tope_maximo_exencion_cop: float
+    ganancia_ocasional_exenta_cop: float
+    ganancia_ocasional_gravada_final_cop: float
+    tarifa_ganancia_ocasional_pct: float
+    impuesto_go_sin_afc_cop: float
+    impuesto_go_con_afc_cop: float
+    ahorro_impuesto_afc_cop: float
+    requisitos_estatuto: list[str]
+    advertencias_legales: list[str]
+    explicacion_paso_a_paso: list[str]
+
+
+def calcular_sancion_tributaria(req: LiquidacionSancionRequest) -> LiquidacionSancionResponse:
+    """Calcula de manera integral las sanciones tributarias con Art. 640 y sanción mínima Art. 639."""
+    from app.core.rules_engine.loader import get_rules_for_year
+
+    rules = get_rules_for_year(req.tax_year, req.custom_uvt)
+    uvt = rules.uvt_value
+    sancion_minima_cop = round(10.0 * uvt / 1000.0) * 1000.0  # 10 UVT (Art. 639)
+
+    monto_base = max(0.0, req.monto_base_cop)
+    meses = max(1, req.meses_fraccion_retraso)
+    tipo = req.tipo_sancion.lower().strip()
+
+    articulos = []
+    pasos = []
+
+    # 1. Determinación de la sanción base plena
+    if tipo == "correccion":
+        articulos.append("Art. 644 E.T. (Sanción por Corrección)")
+        if req.es_voluntario_sin_emplazamiento:
+            tarifa_base = 0.10  # 10%
+            sancion_plena = round(monto_base * 0.10)
+            pasos.append(
+                f"1. Sanción por corrección voluntaria: 10% sobre mayor valor (${monto_base:,.0f}) = ${sancion_plena:,.0f} COP."
+            )
+            # Si hubiese sido con emplazamiento:
+            sancion_emplazada = round(monto_base * 0.20)
+        else:
+            tarifa_base = 0.20  # 20% tras emplazamiento
+            sancion_plena = round(monto_base * 0.20)
+            pasos.append(
+                f"1. Sanción por corrección tras emplazamiento DIAN: 20% sobre mayor valor (${monto_base:,.0f}) = ${sancion_plena:,.0f} COP."
+            )
+            sancion_emplazada = sancion_plena
+    else:
+        # Extemporaneidad
+        if req.es_voluntario_sin_emplazamiento:
+            articulos.append("Art. 641 E.T. (Extemporaneidad voluntaria)")
+            tarifa_base = round(min(1.0, 0.05 * meses), 4)  # 5% por mes, tope 100%
+            sancion_plena = round(min(monto_base * tarifa_base, monto_base * 1.0))
+            pasos.append(
+                f"1. Sanción extemporánea voluntaria: 5% x {meses} mes(es) ({tarifa_base * 100:.0f}%) sobre impuesto (${monto_base:,.0f}) = ${sancion_plena:,.0f} COP (Tope 100%)."
+            )
+            sancion_emplazada = round(min(monto_base * (0.10 * meses), monto_base * 2.0))
+        else:
+            articulos.append("Art. 642 E.T. (Extemporaneidad con emplazamiento)")
+            tarifa_base = round(min(2.0, 0.10 * meses), 4)  # 10% por mes, tope 200%
+            sancion_plena = round(min(monto_base * tarifa_base, monto_base * 2.0))
+            pasos.append(
+                f"1. Sanción extemporánea tras emplazamiento: 10% x {meses} mes(es) ({tarifa_base * 100:.0f}%) sobre impuesto (${monto_base:,.0f}) = ${sancion_plena:,.0f} COP (Tope 200%)."
+            )
+            sancion_emplazada = sancion_plena
+
+    # 2. Aplicación del Principio de Proporcionalidad y Gradualidad (Art. 640 E.T.)
+    articulos.append("Art. 640 E.T. (Principio de Favorabilidad y Gradualidad)")
+    if req.es_voluntario_sin_emplazamiento:
+        if req.sin_sanciones_ultimos_2_anos:
+            factor_reduccion = 0.50  # Paga el 50% (descuento del 50%)
+            pct_desc = 50.0
+            pasos.append(
+                "2. Reducción Art. 640 Numeral 1 Literal a): Descuento del 50% por no haber cometido sanción en los últimos 2 años."
+            )
+        elif req.sin_sanciones_ultimo_1_ano:
+            factor_reduccion = 0.75  # Paga el 75% (descuento del 25%)
+            pct_desc = 25.0
+            pasos.append(
+                "2. Reducción Art. 640 Numeral 2 Literal a): Descuento del 25% por no haber cometido sanción en el último año."
+            )
+        else:
+            factor_reduccion = 1.00
+            pct_desc = 0.0
+            pasos.append(
+                "2. Sin reducción de Art. 640: Registra sanciones recientes, aplica tarifa plena."
+            )
+    else:
+        # Tras emplazamiento
+        if req.sin_sanciones_ultimos_2_anos:
+            factor_reduccion = 0.70  # Paga el 70% (descuento del 30%)
+            pct_desc = 30.0
+            pasos.append(
+                "2. Reducción Art. 640 Numeral 1 Literal b) (con emplazamiento): Descuento del 30% por no haber cometido sanción en los últimos 2 años."
+            )
+        elif req.sin_sanciones_ultimo_1_ano:
+            factor_reduccion = 0.85  # Paga el 85% (descuento del 15%)
+            pct_desc = 15.0
+            pasos.append(
+                "2. Reducción Art. 640 Numeral 2 Literal b) (con emplazamiento): Descuento del 15% por no haber cometido sanción en el último año."
+            )
+        else:
+            factor_reduccion = 1.00
+            pct_desc = 0.0
+            pasos.append("2. Sin reducción de Art. 640.")
+
+    sancion_con_reduccion = sancion_plena * factor_reduccion
+    ahorro_art640 = max(0.0, sancion_plena - sancion_con_reduccion)
+
+    # 3. Control de Sanción Mínima DIAN (Art. 639 E.T. = 10 UVT)
+    articulos.append("Art. 639 E.T. (Sanción Mínima Legal 10 UVT)")
+    if sancion_con_reduccion < sancion_minima_cop:
+        sancion_final = sancion_minima_cop
+        aplico_minima = True
+        pasos.append(
+            f"3. Sanción Mínima: El valor calculado (${sancion_con_reduccion:,.0f}) es inferior a 10 UVT (${sancion_minima_cop:,.0f}), por lo que se ajusta a la sanción mínima legal."
+        )
+    else:
+        sancion_final = round(sancion_con_reduccion / 1000.0) * 1000.0
+        aplico_minima = False
+        pasos.append(f"3. Sanción final ajustada al múltiplo de mil: ${sancion_final:,.0f} COP.")
+
+    # Comparativa con emplazamiento
+    ahorro_voluntario = max(0.0, sancion_emplazada - sancion_final)
+
+    exp = (
+        f"La sanción liquidada a pagar es de ${sancion_final:,.0f} COP. "
+        f"Al corregir/declarar voluntariamente antes de actuación DIAN y contar con buen historial tributario, "
+        f"obtuviste un ahorro estimado de ${ahorro_voluntario:,.0f} COP frente a un escenario de fiscalización coactiva."
+    )
+
+    return LiquidacionSancionResponse(
+        tipo_sancion=tipo,
+        tax_year=req.tax_year,
+        uvt_value=uvt,
+        monto_base_cop=monto_base,
+        meses_retraso=meses,
+        es_voluntario=req.es_voluntario_sin_emplazamiento,
+        tarifa_base_pct=tarifa_base * 100.0,
+        sancion_plena_sin_reduccion_cop=sancion_plena,
+        porcentaje_reduccion_art640_pct=pct_desc,
+        sancion_con_reduccion_cop=sancion_con_reduccion,
+        sancion_minima_dian_cop=sancion_minima_cop,
+        sancion_final_a_pagar_cop=sancion_final,
+        aplico_sancion_minima=aplico_minima,
+        ahorro_favorabilidad_art640_cop=ahorro_art640,
+        comparativa_sancion_con_emplazamiento_dian_cop=sancion_emplazada,
+        ahorro_por_corregir_antes_de_dian_cop=ahorro_voluntario,
+        articulos_aplicados=articulos,
+        explicacion_didactica=exp,
+        pasos_calculo=pasos,
+    )
+
+
+def calcular_exencion_inmueble_afc(
+    req: SimulacionInmuebleAfcRequest,
+) -> SimulacionInmuebleAfcResponse:
+    """Calcula la exención de Ganancia Ocasional por venta de casa/apto de habitación consignada en AFC (Art. 311-1)."""
+    from app.core.rules_engine.loader import get_rules_for_year
+
+    rules = get_rules_for_year(req.tax_year, req.custom_uvt)
+    uvt = rules.uvt_value
+
+    tope_5000_uvt_cop = round(5000.0 * uvt)
+    precio_venta = max(0.0, req.precio_venta_cop)
+    costo_fiscal = max(0.0, req.costo_fiscal_inmueble_cop)
+    ganancia_bruta = max(0.0, precio_venta - costo_fiscal)
+    monto_afc = max(0.0, req.monto_depositado_afc_o_vivienda_cop)
+
+    pasos = [
+        f"1. Determinación de la Ganancia Ocasional Bruta: Precio de venta (${precio_venta:,.0f}) - Costo fiscal (${costo_fiscal:,.0f}) = ${ganancia_bruta:,.0f} COP.",
+    ]
+
+    # Validar condiciones del Art. 311-1 E.T.
+    if req.es_vivienda_habitacion and req.posesion_mas_2_anos and ganancia_bruta > 0:
+        # Exención limitada al menor entre: monto depositado en AFC, ganancia bruta y 5.000 UVT
+        ganancia_exenta = min(monto_afc, ganancia_bruta, float(tope_5000_uvt_cop))
+        pasos.append(
+            f"2. Aplicación del Art. 311-1 E.T.: El contribuyente cumple los requisitos (vivienda de habitación poseída por 2+ años). "
+            f"La utilidad exenta es el menor entre el valor depositado en AFC (${monto_afc:,.0f}), la utilidad (${ganancia_bruta:,.0f}) "
+            f"y el tope legal de 5.000 UVT (${tope_5000_uvt_cop:,.0f}) => Exención calculada: ${ganancia_exenta:,.0f} COP."
+        )
+    else:
+        ganancia_exenta = 0.0
+        if not req.posesion_mas_2_anos:
+            pasos.append(
+                "2. El activo fue poseído por menos de 2 años, por lo que tributa como renta ordinaria en cédula general y no aplica el Art. 311-1."
+            )
+        elif not req.es_vivienda_habitacion:
+            pasos.append(
+                "2. El inmueble no corresponde a la casa o apartamento de habitación del contribuyente (Art. 311-1 aplica exclusivamente a vivienda personal)."
+            )
+
+    ganancia_gravada = max(0.0, ganancia_bruta - ganancia_exenta)
+    tarifa_go = 0.15  # 15% Ley 2277 de 2022
+
+    impuesto_sin_afc = round(ganancia_bruta * tarifa_go)
+    impuesto_con_afc = round(ganancia_gravada * tarifa_go)
+    ahorro = max(0, impuesto_sin_afc - impuesto_con_afc)
+
+    pasos.append(
+        f"3. Liquidación del Impuesto de Ganancia Ocasional (Tarifa 15%): "
+        f"Base gravable final = ${ganancia_gravada:,.0f} COP => Impuesto a pagar = ${impuesto_con_afc:,.0f} COP. "
+        f"(Sin el beneficio AFC habría pagado ${impuesto_sin_afc:,.0f} COP, logrando un ahorro directo de ${ahorro:,.0f} COP)."
+    )
+
+    requisitos = [
+        "El inmueble enajenado debe corresponder a la casa o apartamento de habitación del contribuyente.",
+        "Haber poseído el inmueble durante al menos dos (2) años continuos a la fecha de la escritura.",
+        "Depositar la totalidad o parte de la utilidad en una Cuenta de Ahorro para el Fomento de la Construcción (AFC), o destinarla directamente al pago de un crédito hipotecario o compra de otra vivienda de habitación.",
+        "El retiro de los fondos de la cuenta AFC debe destinarse exclusivamente a la adquisición de otra vivienda de habitación dentro de los plazos fijados por la DIAN o permanecer al menos 10 años en la cuenta.",
+    ]
+
+    advertencias = [
+        "Si retira los recursos de la cuenta AFC para fines distintos a vivienda antes de 10 años, el banco retendrá el 15% del impuesto más sanciones e intereses.",
+        "En la notaría se practica una retención en la fuente del 1% por enajenación de activos fijos (Art. 398 E.T.), la cual podrá imputarse en la declaración de renta como anticipo.",
+        "El tope de 5.000 UVT opera por contribuyente y por el año gravable de la venta.",
+    ]
+
+    return SimulacionInmuebleAfcResponse(
+        tax_year=req.tax_year,
+        uvt_value=uvt,
+        precio_venta_cop=precio_venta,
+        costo_fiscal_cop=costo_fiscal,
+        ganancia_ocasional_bruta_cop=ganancia_bruta,
+        es_vivienda_habitacion=req.es_vivienda_habitacion,
+        posesion_mas_2_anos=req.posesion_mas_2_anos,
+        monto_depositado_afc_cop=monto_afc,
+        tope_maximo_exencion_uvt=5000.0,
+        tope_maximo_exencion_cop=float(tope_5000_uvt_cop),
+        ganancia_ocasional_exenta_cop=ganancia_exenta,
+        ganancia_ocasional_gravada_final_cop=ganancia_gravada,
+        tarifa_ganancia_ocasional_pct=tarifa_go * 100.0,
+        impuesto_go_sin_afc_cop=float(impuesto_sin_afc),
+        impuesto_go_con_afc_cop=float(impuesto_con_afc),
+        ahorro_impuesto_afc_cop=float(ahorro),
+        requisitos_estatuto=requisitos,
+        advertencias_legales=advertencias,
+        explicacion_paso_a_paso=pasos,
+    )
+
+
 def calcular_beneficio_auditoria(req: BeneficioAuditoriaRequest) -> BeneficioAuditoriaResponse:
     from app.core.rules_engine.loader import get_rules_for_year
 

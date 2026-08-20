@@ -30,9 +30,9 @@
     "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
   },
   "backend/app/api/v1/endpoints/beneficios.py": {
-    "mtime": 1787187414.8933897,
-    "seen": 1787187794.527655,
-    "ast_hash": "744ff96fcad8319d7a17228c6a9bb6db",
+    "mtime": 1787190465.6272593,
+    "seen": 1787190795.682967,
+    "ast_hash": "cf03513d7aa518ba2552e4943386971b",
     "semantic_hash": ""
   },
   "backend/app/api/v1/endpoints/persona_juridica.py": {
@@ -144,9 +144,9 @@
     "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
   },
   "backend/app/services/beneficios.py": {
-    "mtime": 1787187762.0425754,
-    "seen": 1787187794.528106,
-    "ast_hash": "58a26fce78035a3e4c6b1e73d561b3ae",
+    "mtime": 1787190787.4970245,
+    "seen": 1787190795.683389,
+    "ast_hash": "40cf0e860ad2f4ff166a98dec789999f",
     "semantic_hash": ""
   },
   "backend/app/services/liquidacion_pj.py": {
@@ -192,10 +192,10 @@
     "semantic_hash": "893fa7465543d9824ea44cdbcab4e8b7"
   },
   "backend/tests/test_beneficios_and_go.py": {
-    "mtime": 1787182915.058097,
-    "seen": 1787184713.910176,
-    "ast_hash": "e99db06de680d0482462a731e4d0b625",
-    "semantic_hash": "e99db06de680d0482462a731e4d0b625"
+    "mtime": 1787190582.978762,
+    "seen": 1787190795.683553,
+    "ast_hash": "6b327ea89ee5dde26a648f03c4037fb9",
+    "semantic_hash": ""
   },
   "backend/tests/test_calendario.py": {
     "mtime": 1787182844.6772926,
@@ -348,9 +348,9 @@
     "semantic_hash": ""
   },
   ".claude/rules/tax-engine.md": {
-    "mtime": 1787186020.3348858,
-    "seen": 1787187794.52864,
-    "ast_hash": "1fc675c9686795c7d859fbb6035ab055",
+    "mtime": 1787190431.2992482,
+    "seen": 1787190795.684045,
+    "ast_hash": "56c2b42be1029a047d7e603a6af1714f",
     "semantic_hash": ""
   },
   "AGENTS.md": {
@@ -390,9 +390,9 @@
     "semantic_hash": ""
   },
   "backend/app/static/index.html": {
-    "mtime": 1787189767.3199382,
-    "seen": 1787189785.9270241,
-    "ast_hash": "3da1c522c314915fd696221c9d30f5ea",
+    "mtime": 1787192386.1451807,
+    "seen": 1787192636.51536,
+    "ast_hash": "b7ff036f498349ab5cd3fb0abac9c7b2",
     "semantic_hash": ""
   },
   "docs/README.md": {
@@ -576,15 +576,15 @@
     "semantic_hash": ""
   },
   "skills/declaracion-renta-persona-natural/SKILL.md": {
-    "mtime": 1787101732.0448139,
-    "seen": 1787187794.528662,
-    "ast_hash": "3b41df11490b2aef5cab87bd51e854e3",
+    "mtime": 1787191038.9968557,
+    "seen": 1787191114.9417212,
+    "ast_hash": "d68da3f8a0497b192aa41d8e64bcaafa",
     "semantic_hash": ""
   },
   "skills/declaracion-renta-persona-natural/beneficios_tributarios_pn.md": {
-    "mtime": 1787187519.1335146,
-    "seen": 1787187794.5286632,
-    "ast_hash": "120d26f3edabda3a129278c2df911175",
+    "mtime": 1787191046.8143063,
+    "seen": 1787191114.9417222,
+    "ast_hash": "21316d2c4d36bd1ac88c3cb17867315f",
     "semantic_hash": ""
   },
   "frontend/public/favicon.svg": {
@@ -618,9 +618,27 @@
     "semantic_hash": ""
   },
   "backend/tests/test_e2e_playwright.py": {
-    "mtime": 1787190270.9227178,
-    "seen": 1787190286.047858,
-    "ast_hash": "380025f334449f53b045507492ad8c96",
+    "mtime": 1787190787.4968553,
+    "seen": 1787190795.683594,
+    "ast_hash": "a7550b18f4674f904a50d4915d49c500",
+    "semantic_hash": ""
+  },
+  "skills/declaracion-renta-persona-natural/scripts/simular_inmuebles_afc.py": {
+    "mtime": 1787191019.3461473,
+    "seen": 1787191114.940738,
+    "ast_hash": "441e651bbe3d507e1ea7fd3f7b41ea39",
+    "semantic_hash": ""
+  },
+  "skills/declaracion-renta-persona-natural/scripts/simular_sanciones_auditoria.py": {
+    "mtime": 1787191755.8242872,
+    "seen": 1787191804.504782,
+    "ast_hash": "221c003d52f05be07b051aa331a18d7a",
+    "semantic_hash": ""
+  },
+  "backend/tests/debug_ui_playwright.py": {
+    "mtime": 1787191755.8240538,
+    "seen": 1787191804.504357,
+    "ast_hash": "85df7fef1908306d343cec122a41ea93",
     "semantic_hash": ""
   }
 }

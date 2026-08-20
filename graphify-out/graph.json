@@ -356,6 +356,17 @@
       "source_location": "L1"
     },
     {
+      "id": "backend_app_api_v1_endpoints_beneficios_func_liquidar_sancion",
+      "label": "liquidar_sancion",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "reconciliation.py",
+      "file_type": "concept",
+      "norm_label": "liquidar_sancion",
+      "source_file": "backend/app/api/v1/endpoints/beneficios.py",
+      "source_location": "L74"
+    },
+    {
       "id": "backend_app_api_v1_endpoints_beneficios_func_listar_beneficios",
       "label": "listar_beneficios",
       "_origin": "ast",
@@ -364,7 +375,7 @@
       "file_type": "concept",
       "norm_label": "listar_beneficios",
       "source_file": "backend/app/api/v1/endpoints/beneficios.py",
-      "source_location": "L28"
+      "source_location": "L34"
     },
     {
       "id": "backend_app_api_v1_endpoints_beneficios_func_obtener_tabla_articulo_73",
@@ -375,7 +386,7 @@
       "file_type": "concept",
       "norm_label": "obtener_tabla_articulo_73",
       "source_file": "backend/app/api/v1/endpoints/beneficios.py",
-      "source_location": "L38"
+      "source_location": "L44"
     },
     {
       "id": "backend_app_api_v1_endpoints_beneficios_func_simular_articulo_73",
@@ -386,7 +397,7 @@
       "file_type": "concept",
       "norm_label": "simular_articulo_73",
       "source_file": "backend/app/api/v1/endpoints/beneficios.py",
-      "source_location": "L48"
+      "source_location": "L54"
     },
     {
       "id": "backend_app_api_v1_endpoints_beneficios_func_simular_auditoria",
@@ -397,7 +408,18 @@
       "file_type": "concept",
       "norm_label": "simular_auditoria",
       "source_file": "backend/app/api/v1/endpoints/beneficios.py",
-      "source_location": "L58"
+      "source_location": "L64"
+    },
+    {
+      "id": "backend_app_api_v1_endpoints_beneficios_func_simular_inmueble_afc",
+      "label": "simular_inmueble_afc",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "reconciliation.py",
+      "file_type": "concept",
+      "norm_label": "simular_inmueble_afc",
+      "source_file": "backend/app/api/v1/endpoints/beneficios.py",
+      "source_location": "L94"
     },
     {
       "id": "backend_app_api_v1_endpoints_beneficios_func_simular_sancion",
@@ -408,7 +430,7 @@
       "file_type": "concept",
       "norm_label": "simular_sancion",
       "source_file": "backend/app/api/v1/endpoints/beneficios.py",
-      "source_location": "L68"
+      "source_location": "L84"
     },
     {
       "id": "backend_app_api_v1_endpoints_persona_juridica",
@@ -1430,6 +1452,50 @@
       "source_location": "L54"
     },
     {
+      "id": "backend_tests_test_beneficios_and_go_func_test_calcular_exencion_inmueble_afc_art311_1",
+      "label": "test_calcular_exencion_inmueble_afc_art311_1",
+      "_origin": "ast",
+      "community": 12,
+      "community_name": "test_beneficios_and_go.py",
+      "file_type": "concept",
+      "norm_label": "test_calcular_exencion_inmueble_afc_art311_1",
+      "source_file": "backend/tests/test_beneficios_and_go.py",
+      "source_location": "L164"
+    },
+    {
+      "id": "backend_tests_test_beneficios_and_go_func_test_calcular_sancion_control_minima_10_uvt",
+      "label": "test_calcular_sancion_control_minima_10_uvt",
+      "_origin": "ast",
+      "community": 12,
+      "community_name": "test_beneficios_and_go.py",
+      "file_type": "concept",
+      "norm_label": "test_calcular_sancion_control_minima_10_uvt",
+      "source_file": "backend/tests/test_beneficios_and_go.py",
+      "source_location": "L120"
+    },
+    {
+      "id": "backend_tests_test_beneficios_and_go_func_test_calcular_sancion_correccion_voluntaria_con_reduccion",
+      "label": "test_calcular_sancion_correccion_voluntaria_con_reduccion",
+      "_origin": "ast",
+      "community": 12,
+      "community_name": "test_beneficios_and_go.py",
+      "file_type": "concept",
+      "norm_label": "test_calcular_sancion_correccion_voluntaria_con_reduccion",
+      "source_file": "backend/tests/test_beneficios_and_go.py",
+      "source_location": "L93"
+    },
+    {
+      "id": "backend_tests_test_beneficios_and_go_func_test_calcular_sancion_extemporaneidad_mensual",
+      "label": "test_calcular_sancion_extemporaneidad_mensual",
+      "_origin": "ast",
+      "community": 12,
+      "community_name": "test_beneficios_and_go.py",
+      "file_type": "concept",
+      "norm_label": "test_calcular_sancion_extemporaneidad_mensual",
+      "source_file": "backend/tests/test_beneficios_and_go.py",
+      "source_location": "L140"
+    },
+    {
       "id": "backend_tests_test_beneficios_and_go_func_test_catalogo_beneficios",
       "label": "test_catalogo_beneficios",
       "_origin": "ast",
@@ -2101,6 +2167,105 @@
       "norm_label": "titulo x: (titulo adicionado por el art. 54 de la ley 2277 de 2022)",
       "source_file": "docs/estatuto_tributario.md",
       "source_location": "L13156"
+    },
+    {
+      "id": "skills_declaracion_renta_persona_natural_scripts_simular_inmuebles_afc",
+      "label": "simular_inmuebles_afc.py",
+      "_origin": "ast",
+      "community": 143,
+      "community_name": "simular_inmuebles_afc.py",
+      "file_type": "concept",
+      "norm_label": "simular_inmuebles_afc.py",
+      "source_file": "skills/declaracion-renta-persona-natural/scripts/simular_inmuebles_afc.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "skills_declaracion_renta_persona_natural_scripts_simular_inmuebles_afc_func_format_cop",
+      "label": "format_cop",
+      "_origin": "ast",
+      "community": 143,
+      "community_name": "simular_inmuebles_afc.py",
+      "file_type": "concept",
+      "norm_label": "format_cop",
+      "source_file": "skills/declaracion-renta-persona-natural/scripts/simular_inmuebles_afc.py",
+      "source_location": "L20"
+    },
+    {
+      "id": "skills_declaracion_renta_persona_natural_scripts_simular_inmuebles_afc_func_main",
+      "label": "main",
+      "_origin": "ast",
+      "community": 143,
+      "community_name": "simular_inmuebles_afc.py",
+      "file_type": "concept",
+      "norm_label": "main",
+      "source_file": "skills/declaracion-renta-persona-natural/scripts/simular_inmuebles_afc.py",
+      "source_location": "L26"
+    },
+    {
+      "id": "skills_declaracion_renta_persona_natural_scripts_simular_sanciones_auditoria",
+      "label": "simular_sanciones_auditoria.py",
+      "_origin": "ast",
+      "community": 144,
+      "community_name": "simular_sanciones_auditoria.py",
+      "file_type": "concept",
+      "norm_label": "simular_sanciones_auditoria.py",
+      "source_file": "skills/declaracion-renta-persona-natural/scripts/simular_sanciones_auditoria.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "skills_declaracion_renta_persona_natural_scripts_simular_sanciones_auditoria_func_format_cop",
+      "label": "format_cop",
+      "_origin": "ast",
+      "community": 144,
+      "community_name": "simular_sanciones_auditoria.py",
+      "file_type": "concept",
+      "norm_label": "format_cop",
+      "source_file": "skills/declaracion-renta-persona-natural/scripts/simular_sanciones_auditoria.py",
+      "source_location": "L22"
+    },
+    {
+      "id": "skills_declaracion_renta_persona_natural_scripts_simular_sanciones_auditoria_func_main",
+      "label": "main",
+      "_origin": "ast",
+      "community": 144,
+      "community_name": "simular_sanciones_auditoria.py",
+      "file_type": "concept",
+      "norm_label": "main",
+      "source_file": "skills/declaracion-renta-persona-natural/scripts/simular_sanciones_auditoria.py",
+      "source_location": "L28"
+    },
+    {
+      "id": "backend_tests_debug_ui_playwright",
+      "label": "debug_ui_playwright.py",
+      "_origin": "ast",
+      "community": 145,
+      "community_name": "debug_ui_playwright.py",
+      "file_type": "concept",
+      "norm_label": "debug_ui_playwright.py",
+      "source_file": "backend/tests/debug_ui_playwright.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "backend_tests_debug_ui_playwright_func_get_free_port",
+      "label": "get_free_port",
+      "_origin": "ast",
+      "community": 145,
+      "community_name": "debug_ui_playwright.py",
+      "file_type": "concept",
+      "norm_label": "get_free_port",
+      "source_file": "backend/tests/debug_ui_playwright.py",
+      "source_location": "L15"
+    },
+    {
+      "id": "backend_tests_debug_ui_playwright_func_run_debug",
+      "label": "run_debug",
+      "_origin": "ast",
+      "community": 145,
+      "community_name": "debug_ui_playwright.py",
+      "file_type": "concept",
+      "norm_label": "run_debug",
+      "source_file": "backend/tests/debug_ui_playwright.py",
+      "source_location": "L21"
     },
     {
       "id": "backend_app_core_rules_engine_loader",
@@ -11200,131 +11365,11 @@
       "source_location": "L1"
     },
     {
-      "id": "docs_explanation_03_mito_tributario_tarifas_marginales",
-      "label": "03-mito-tributario-tarifas-marginales.md",
-      "_origin": "ast",
-      "community": 48,
-      "community_name": "docs/README.md",
-      "file_type": "document",
-      "node_kind": "page",
-      "norm_label": "03-mito-tributario-tarifas-marginales.md",
-      "source_file": "docs/explanation/03-mito-tributario-tarifas-marginales.md",
-      "source_location": "L1"
-    },
-    {
-      "id": "docs_explanation_03_mito_tributario_tarifas_marginales_1_por_qu\u00e9_este_mito_es_matem\u00e1ticamente_falso",
-      "label": "1. Por qu\u00e9 este mito es matem\u00e1ticamente falso",
-      "_origin": "ast",
-      "community": 48,
-      "community_name": "docs/README.md",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "1. por que este mito es matematicamente falso",
-      "source_file": "docs/explanation/03-mito-tributario-tarifas-marginales.md",
-      "source_location": "L7"
-    },
-    {
-      "id": "docs_explanation_03_mito_tributario_tarifas_marginales_explicaci\u00f3n_el_mito_tributario_de_las_tarifas_marginales",
-      "label": "Explicaci\u00f3n: El Mito Tributario de las Tarifas Marginales",
-      "_origin": "ast",
-      "community": 48,
-      "community_name": "docs/README.md",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "explicacion: el mito tributario de las tarifas marginales",
-      "source_file": "docs/explanation/03-mito-tributario-tarifas-marginales.md",
-      "source_location": "L1"
-    },
-    {
-      "id": "docs_readme",
-      "label": "docs/README.md",
-      "_origin": "ast",
-      "community": 48,
-      "community_name": "docs/README.md",
-      "file_type": "document",
-      "node_kind": "page",
-      "norm_label": "docs/readme.md",
-      "source_file": "docs/README.md",
-      "source_location": "L1"
-    },
-    {
-      "id": "docs_readme_documentacion_tecnica_de_tributia",
-      "label": "Documentacion Tecnica de TributIA",
-      "_origin": "ast",
-      "community": 48,
-      "community_name": "docs/README.md",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "documentacion tecnica de tributia",
-      "source_file": "docs/README.md",
-      "source_location": "L1"
-    },
-    {
-      "id": "docs_readme_registro_de_decisiones_arquitectonicas_adrs_decisions_readme_md",
-      "label": "[Registro de Decisiones Arquitectonicas (ADRs)](./decisions/README.md)",
-      "_origin": "ast",
-      "community": 48,
-      "community_name": "docs/README.md",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "[registro de decisiones arquitectonicas (adrs)](./decisions/readme.md)",
-      "source_file": "docs/README.md",
-      "source_location": "L64"
-    },
-    {
-      "id": "docs_reference_architecture_flow_flow_cedula_general_deductions",
-      "label": "flow-cedula-general-deductions.md",
-      "_origin": "ast",
-      "community": 48,
-      "community_name": "docs/README.md",
-      "file_type": "document",
-      "node_kind": "page",
-      "norm_label": "flow-cedula-general-deductions.md",
-      "source_file": "docs/reference/architecture/flow/flow-cedula-general-deductions.md",
-      "source_location": "L1"
-    },
-    {
-      "id": "docs_reference_architecture_flow_flow_cedula_general_deductions_flowchart_algoritmo_de_topes_de_rentas_exentas_y_deducciones",
-      "label": "Flowchart: Algoritmo de Topes de Rentas Exentas y Deducciones",
-      "_origin": "ast",
-      "community": 48,
-      "community_name": "docs/README.md",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "flowchart: algoritmo de topes de rentas exentas y deducciones",
-      "source_file": "docs/reference/architecture/flow/flow-cedula-general-deductions.md",
-      "source_location": "L1"
-    },
-    {
-      "id": "docs_reference_architecture_sequence_seq_two_way_sync",
-      "label": "seq-two-way-sync.md",
-      "_origin": "ast",
-      "community": 48,
-      "community_name": "docs/README.md",
-      "file_type": "document",
-      "node_kind": "page",
-      "norm_label": "seq-two-way-sync.md",
-      "source_file": "docs/reference/architecture/sequence/seq-two-way-sync.md",
-      "source_location": "L1"
-    },
-    {
-      "id": "docs_reference_architecture_sequence_seq_two_way_sync_diagrama_de_secuencia_sincronizaci\u00f3n_bidireccional_api_ui_en_redis",
-      "label": "Diagrama de Secuencia: Sincronizaci\u00f3n Bidireccional API \u2194 UI en Redis",
-      "_origin": "ast",
-      "community": 48,
-      "community_name": "docs/README.md",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "diagrama de secuencia: sincronizacion bidireccional api \u2194 ui en redis",
-      "source_file": "docs/reference/architecture/sequence/seq-two-way-sync.md",
-      "source_location": "L1"
-    },
-    {
       "id": "docs_reference_tax_engine_statutory_rules_art241",
       "label": "statutory-rules-art241.md",
       "_origin": "ast",
       "community": 48,
-      "community_name": "docs/README.md",
+      "community_name": "statutory-rules-art241.md",
       "file_type": "document",
       "node_kind": "page",
       "norm_label": "statutory-rules-art241.md",
@@ -11336,7 +11381,7 @@
       "label": "1. Tabla de Tramos Marginales",
       "_origin": "ast",
       "community": 48,
-      "community_name": "docs/README.md",
+      "community_name": "statutory-rules-art241.md",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "1. tabla de tramos marginales",
@@ -11348,7 +11393,7 @@
       "label": "2. Regla de Redondeo DIAN (Art. 868 E.T.)",
       "_origin": "ast",
       "community": 48,
-      "community_name": "docs/README.md",
+      "community_name": "statutory-rules-art241.md",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "2. regla de redondeo dian (art. 868 e.t.)",
@@ -11360,7 +11405,7 @@
       "label": "Algoritmo Matem\u00e1tico de la Tabla Marginal (Art. 241 E.T.)",
       "_origin": "ast",
       "community": 48,
-      "community_name": "docs/README.md",
+      "community_name": "statutory-rules-art241.md",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "algoritmo matematico de la tabla marginal (art. 241 e.t.)",
@@ -16061,7 +16106,7 @@
       "node_kind": "heading",
       "norm_label": "common mistakes",
       "source_file": "skills/declaracion-renta-persona-natural/SKILL.md",
-      "source_location": "L117"
+      "source_location": "L133"
     },
     {
       "id": "skills_declaracion_renta_persona_natural_skill_declaraci\u00f3n_de_renta_personas_naturales_colombia_formulario_210",
@@ -16109,7 +16154,19 @@
       "node_kind": "heading",
       "norm_label": "fase 3: consolidacion e inyeccion a la api de tributia",
       "source_file": "skills/declaracion-renta-persona-natural/SKILL.md",
-      "source_location": "L86"
+      "source_location": "L89"
+    },
+    {
+      "id": "skills_declaracion_renta_persona_natural_skill_fase_4_auditor\u00eda_sanciones_y_optimizaci\u00f3n_post_liquidaci\u00f3n",
+      "label": "Fase 4: Auditor\u00eda, Sanciones y Optimizaci\u00f3n Post-Liquidaci\u00f3n",
+      "_origin": "ast",
+      "community": 50,
+      "community_name": "Workflow en 4 Fases con Conciliacion Exogena",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "fase 4: auditoria, sanciones y optimizacion post-liquidacion",
+      "source_file": "skills/declaracion-renta-persona-natural/SKILL.md",
+      "source_location": "L106"
     },
     {
       "id": "skills_declaracion_renta_persona_natural_skill_heuristicas_de_clasificacion_documental",
@@ -16121,7 +16178,7 @@
       "node_kind": "heading",
       "norm_label": "heuristicas de clasificacion documental",
       "source_file": "skills/declaracion-renta-persona-natural/SKILL.md",
-      "source_location": "L103"
+      "source_location": "L119"
     },
     {
       "id": "skills_declaracion_renta_persona_natural_skill_overview",
@@ -16169,7 +16226,7 @@
       "node_kind": "heading",
       "norm_label": "paso 2.5: aclaracion interactiva con el usuario sobre discrepancias",
       "source_file": "skills/declaracion-renta-persona-natural/SKILL.md",
-      "source_location": "L77"
+      "source_location": "L80"
     },
     {
       "id": "skills_declaracion_renta_persona_natural_skill_when_to_use",
@@ -16218,6 +16275,30 @@
       "norm_label": "10. beneficio de auditoria y firmeza especial (art. 689-3 e.t.)",
       "source_file": "skills/declaracion-renta-persona-natural/beneficios_tributarios_pn.md",
       "source_location": "L124"
+    },
+    {
+      "id": "skills_declaracion_renta_persona_natural_beneficios_tributarios_pn_11_r\u00e9gimen_sancionatorio_y_principio_de_favorabilidad_art_640_641_642_644_y_639_e_t",
+      "label": "11. R\u00e9gimen Sancionatorio y Principio de Favorabilidad (Art. 640, 641, 642, 644 y 639 E.T.)",
+      "_origin": "ast",
+      "community": 51,
+      "community_name": "Catalogo Exhaustivo de Beneficios Tributarios para Personas Naturales en Colombia",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "11. regimen sancionatorio y principio de favorabilidad (art. 640, 641, 642, 644 y 639 e.t.)",
+      "source_file": "skills/declaracion-renta-persona-natural/beneficios_tributarios_pn.md",
+      "source_location": "L137"
+    },
+    {
+      "id": "skills_declaracion_renta_persona_natural_beneficios_tributarios_pn_12_venta_de_inmuebles_de_habitaci\u00f3n_cuentas_afc_art_311_1_y_126_4_e_t",
+      "label": "12. Venta de Inmuebles de Habitaci\u00f3n & Cuentas AFC (Art. 311-1 y 126-4 E.T.)",
+      "_origin": "ast",
+      "community": 51,
+      "community_name": "Catalogo Exhaustivo de Beneficios Tributarios para Personas Naturales en Colombia",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "12. venta de inmuebles de habitacion & cuentas afc (art. 311-1 y 126-4 e.t.)",
+      "source_file": "skills/declaracion-renta-persona-natural/beneficios_tributarios_pn.md",
+      "source_location": "L151"
     },
     {
       "id": "skills_declaracion_renta_persona_natural_beneficios_tributarios_pn_1_ingresos_no_constitutivos_de_renta_ni_ganancia_ocasional_incrngo",
@@ -16553,18 +16634,6 @@
       "node_kind": "heading",
       "norm_label": "tutorial: primeros pasos liquidando renta de persona natural (f210)",
       "source_file": "docs/tutorials/01-primeros-pasos-liquidacion-pn.md",
-      "source_location": "L1"
-    },
-    {
-      "id": "docs_decisions_0004_persistencia_redis_cloudrun_aislamiento_sesion",
-      "label": "0004-persistencia-redis-cloudrun-aislamiento-sesion.md",
-      "_origin": "ast",
-      "community": 54,
-      "community_name": "ADR 0004: Persistencia en Redis, Aislamiento de Sesiones por Dispositivo sin Login y Despliegue en GCP Cloud Run",
-      "file_type": "document",
-      "node_kind": "page",
-      "norm_label": "0004-persistencia-redis-cloudrun-aislamiento-sesion.md",
-      "source_file": "docs/decisions/0004-persistencia-redis-cloudrun-aislamiento-sesion.md",
       "source_location": "L1"
     },
     {
@@ -17151,6 +17220,28 @@
       "source_location": "L9"
     },
     {
+      "id": "backend_app_services_beneficios_class_liquidacionsancionrequest",
+      "label": "LiquidacionSancionRequest",
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "services/beneficios.py",
+      "file_type": "concept",
+      "norm_label": "liquidacionsancionrequest",
+      "source_file": "backend/app/services/beneficios.py",
+      "source_location": "L503"
+    },
+    {
+      "id": "backend_app_services_beneficios_class_liquidacionsancionresponse",
+      "label": "LiquidacionSancionResponse",
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "services/beneficios.py",
+      "file_type": "concept",
+      "norm_label": "liquidacionsancionresponse",
+      "source_file": "backend/app/services/beneficios.py",
+      "source_location": "L532"
+    },
+    {
       "id": "backend_app_services_beneficios_class_reduccionsancionrequest",
       "label": "ReduccionSancionRequest",
       "_origin": "ast",
@@ -17195,6 +17286,28 @@
       "source_location": "L114"
     },
     {
+      "id": "backend_app_services_beneficios_class_simulacioninmuebleafcrequest",
+      "label": "SimulacionInmuebleAfcRequest",
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "services/beneficios.py",
+      "file_type": "concept",
+      "norm_label": "simulacioninmuebleafcrequest",
+      "source_file": "backend/app/services/beneficios.py",
+      "source_location": "L554"
+    },
+    {
+      "id": "backend_app_services_beneficios_class_simulacioninmuebleafcresponse",
+      "label": "SimulacionInmuebleAfcResponse",
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "services/beneficios.py",
+      "file_type": "concept",
+      "norm_label": "simulacioninmuebleafcresponse",
+      "source_file": "backend/app/services/beneficios.py",
+      "source_location": "L578"
+    },
+    {
       "id": "backend_app_services_beneficios_func_calcular_ajuste_articulo_73",
       "label": "calcular_ajuste_articulo_73",
       "_origin": "ast",
@@ -17214,7 +17327,18 @@
       "file_type": "concept",
       "norm_label": "calcular_beneficio_auditoria",
       "source_file": "backend/app/services/beneficios.py",
-      "source_location": "L503"
+      "source_location": "L828"
+    },
+    {
+      "id": "backend_app_services_beneficios_func_calcular_exencion_inmueble_afc",
+      "label": "calcular_exencion_inmueble_afc",
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "services/beneficios.py",
+      "file_type": "concept",
+      "norm_label": "calcular_exencion_inmueble_afc",
+      "source_file": "backend/app/services/beneficios.py",
+      "source_location": "L740"
     },
     {
       "id": "backend_app_services_beneficios_func_calcular_reduccion_sancion",
@@ -17225,7 +17349,18 @@
       "file_type": "concept",
       "norm_label": "calcular_reduccion_sancion",
       "source_file": "backend/app/services/beneficios.py",
-      "source_location": "L554"
+      "source_location": "L879"
+    },
+    {
+      "id": "backend_app_services_beneficios_func_calcular_sancion_tributaria",
+      "label": "calcular_sancion_tributaria",
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "services/beneficios.py",
+      "file_type": "concept",
+      "norm_label": "calcular_sancion_tributaria",
+      "source_file": "backend/app/services/beneficios.py",
+      "source_location": "L600"
     },
     {
       "id": "backend_app_services_beneficios_func_get_catalogo_beneficios",
@@ -17623,6 +17758,102 @@
       "source_location": "L9"
     },
     {
+      "id": "docs_readme_documentacion_tecnica_de_tributia",
+      "label": "Documentacion Tecnica de TributIA",
+      "_origin": "ast",
+      "community": 65,
+      "community_name": "Cuadrantes Diataxis",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "documentacion tecnica de tributia",
+      "source_file": "docs/README.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "docs_readme_registro_de_decisiones_arquitectonicas_adrs_decisions_readme_md",
+      "label": "[Registro de Decisiones Arquitectonicas (ADRs)](./decisions/README.md)",
+      "_origin": "ast",
+      "community": 65,
+      "community_name": "Cuadrantes Diataxis",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "[registro de decisiones arquitectonicas (adrs)](./decisions/readme.md)",
+      "source_file": "docs/README.md",
+      "source_location": "L64"
+    },
+    {
+      "id": "docs_decisions_0001_motor_de_reglas_declarativo_json",
+      "label": "0001-motor-de-reglas-declarativo-json.md",
+      "_origin": "ast",
+      "community": 66,
+      "community_name": "README.md",
+      "file_type": "document",
+      "node_kind": "page",
+      "norm_label": "0001-motor-de-reglas-declarativo-json.md",
+      "source_file": "docs/decisions/0001-motor-de-reglas-declarativo-json.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "docs_decisions_0002_sincronizacion_bidireccional_sse",
+      "label": "0002-sincronizacion-bidireccional-sse.md",
+      "_origin": "ast",
+      "community": 66,
+      "community_name": "README.md",
+      "file_type": "document",
+      "node_kind": "page",
+      "norm_label": "0002-sincronizacion-bidireccional-sse.md",
+      "source_file": "docs/decisions/0002-sincronizacion-bidireccional-sse.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "docs_decisions_0003_mascara_contable_colombiana_en_dom",
+      "label": "0003-mascara-contable-colombiana-en-dom.md",
+      "_origin": "ast",
+      "community": 66,
+      "community_name": "README.md",
+      "file_type": "document",
+      "node_kind": "page",
+      "norm_label": "0003-mascara-contable-colombiana-en-dom.md",
+      "source_file": "docs/decisions/0003-mascara-contable-colombiana-en-dom.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "docs_decisions_0004_persistencia_redis_cloudrun_aislamiento_sesion",
+      "label": "0004-persistencia-redis-cloudrun-aislamiento-sesion.md",
+      "_origin": "ast",
+      "community": 66,
+      "community_name": "README.md",
+      "file_type": "document",
+      "node_kind": "page",
+      "norm_label": "0004-persistencia-redis-cloudrun-aislamiento-sesion.md",
+      "source_file": "docs/decisions/0004-persistencia-redis-cloudrun-aislamiento-sesion.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "docs_decisions_readme",
+      "label": "decisions/README.md",
+      "_origin": "ast",
+      "community": 66,
+      "community_name": "README.md",
+      "file_type": "document",
+      "node_kind": "page",
+      "norm_label": "decisions/readme.md",
+      "source_file": "docs/decisions/README.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "docs_decisions_readme_registro_de_decisiones_de_arquitectura_adrs",
+      "label": "Registro de Decisiones de Arquitectura (ADRs)",
+      "_origin": "ast",
+      "community": 66,
+      "community_name": "README.md",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "registro de decisiones de arquitectura (adrs)",
+      "source_file": "docs/decisions/README.md",
+      "source_location": "L1"
+    },
+    {
       "id": "docs_explanation_02_sistema_cedular_colombiano",
       "label": "02-sistema-cedular-colombiano.md",
       "_origin": "ast",
@@ -17659,63 +17890,51 @@
       "source_location": "L1"
     },
     {
-      "id": "docs_reference_architecture_c4_architecture_c4",
-      "label": "architecture-c4.md",
+      "id": "docs_explanation_03_mito_tributario_tarifas_marginales",
+      "label": "03-mito-tributario-tarifas-marginales.md",
       "_origin": "ast",
       "community": 66,
       "community_name": "README.md",
       "file_type": "document",
       "node_kind": "page",
-      "norm_label": "architecture-c4.md",
-      "source_file": "docs/reference/architecture/c4/architecture-c4.md",
+      "norm_label": "03-mito-tributario-tarifas-marginales.md",
+      "source_file": "docs/explanation/03-mito-tributario-tarifas-marginales.md",
       "source_location": "L1"
     },
     {
-      "id": "docs_reference_architecture_c4_architecture_c4_1_nivel_1_diagrama_de_contexto_del_sistema_c1",
-      "label": "1. Nivel 1: Diagrama de Contexto del Sistema (C1)",
+      "id": "docs_explanation_03_mito_tributario_tarifas_marginales_1_por_qu\u00e9_este_mito_es_matem\u00e1ticamente_falso",
+      "label": "1. Por qu\u00e9 este mito es matem\u00e1ticamente falso",
       "_origin": "ast",
       "community": 66,
       "community_name": "README.md",
       "file_type": "document",
       "node_kind": "heading",
-      "norm_label": "1. nivel 1: diagrama de contexto del sistema (c1)",
-      "source_file": "docs/reference/architecture/c4/architecture-c4.md",
+      "norm_label": "1. por que este mito es matematicamente falso",
+      "source_file": "docs/explanation/03-mito-tributario-tarifas-marginales.md",
       "source_location": "L7"
     },
     {
-      "id": "docs_reference_architecture_c4_architecture_c4_2_nivel_2_diagrama_de_contenedores_c2",
-      "label": "2. Nivel 2: Diagrama de Contenedores (C2)",
+      "id": "docs_explanation_03_mito_tributario_tarifas_marginales_explicaci\u00f3n_el_mito_tributario_de_las_tarifas_marginales",
+      "label": "Explicaci\u00f3n: El Mito Tributario de las Tarifas Marginales",
       "_origin": "ast",
       "community": 66,
       "community_name": "README.md",
       "file_type": "document",
       "node_kind": "heading",
-      "norm_label": "2. nivel 2: diagrama de contenedores (c2)",
-      "source_file": "docs/reference/architecture/c4/architecture-c4.md",
-      "source_location": "L29"
+      "norm_label": "explicacion: el mito tributario de las tarifas marginales",
+      "source_file": "docs/explanation/03-mito-tributario-tarifas-marginales.md",
+      "source_location": "L1"
     },
     {
-      "id": "docs_reference_architecture_c4_architecture_c4_3_nivel_3_diagrama_de_componentes_del_backend_c3",
-      "label": "3. Nivel 3: Diagrama de Componentes del Backend (C3)",
+      "id": "docs_readme",
+      "label": "docs/README.md",
       "_origin": "ast",
       "community": 66,
       "community_name": "README.md",
       "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "3. nivel 3: diagrama de componentes del backend (c3)",
-      "source_file": "docs/reference/architecture/c4/architecture-c4.md",
-      "source_location": "L58"
-    },
-    {
-      "id": "docs_reference_architecture_c4_architecture_c4_arquitectura_c4_tributia",
-      "label": "Arquitectura C4 \u2014 TributIA",
-      "_origin": "ast",
-      "community": 66,
-      "community_name": "README.md",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "arquitectura c4 \u2014 tributia",
-      "source_file": "docs/reference/architecture/c4/architecture-c4.md",
+      "node_kind": "page",
+      "norm_label": "docs/readme.md",
+      "source_file": "docs/README.md",
       "source_location": "L1"
     },
     {
@@ -17743,6 +17962,30 @@
       "source_location": "L1"
     },
     {
+      "id": "docs_reference_architecture_flow_flow_cedula_general_deductions",
+      "label": "flow-cedula-general-deductions.md",
+      "_origin": "ast",
+      "community": 66,
+      "community_name": "README.md",
+      "file_type": "document",
+      "node_kind": "page",
+      "norm_label": "flow-cedula-general-deductions.md",
+      "source_file": "docs/reference/architecture/flow/flow-cedula-general-deductions.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "docs_reference_architecture_flow_flow_cedula_general_deductions_flowchart_algoritmo_de_topes_de_rentas_exentas_y_deducciones",
+      "label": "Flowchart: Algoritmo de Topes de Rentas Exentas y Deducciones",
+      "_origin": "ast",
+      "community": 66,
+      "community_name": "README.md",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "flowchart: algoritmo de topes de rentas exentas y deducciones",
+      "source_file": "docs/reference/architecture/flow/flow-cedula-general-deductions.md",
+      "source_location": "L1"
+    },
+    {
       "id": "docs_reference_architecture_sequence_seq_tax_calculation_pipeline",
       "label": "seq-tax-calculation-pipeline.md",
       "_origin": "ast",
@@ -17764,6 +18007,30 @@
       "node_kind": "heading",
       "norm_label": "diagrama de secuencia: pipeline de liquidacion tributaria",
       "source_file": "docs/reference/architecture/sequence/seq-tax-calculation-pipeline.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "docs_reference_architecture_sequence_seq_two_way_sync",
+      "label": "seq-two-way-sync.md",
+      "_origin": "ast",
+      "community": 66,
+      "community_name": "README.md",
+      "file_type": "document",
+      "node_kind": "page",
+      "norm_label": "seq-two-way-sync.md",
+      "source_file": "docs/reference/architecture/sequence/seq-two-way-sync.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "docs_reference_architecture_sequence_seq_two_way_sync_diagrama_de_secuencia_sincronizaci\u00f3n_bidireccional_api_ui_en_redis",
+      "label": "Diagrama de Secuencia: Sincronizaci\u00f3n Bidireccional API \u2194 UI en Redis",
+      "_origin": "ast",
+      "community": 66,
+      "community_name": "README.md",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "diagrama de secuencia: sincronizacion bidireccional api \u2194 ui en redis",
+      "source_file": "docs/reference/architecture/sequence/seq-two-way-sync.md",
       "source_location": "L1"
     },
     {
@@ -18134,23 +18401,11 @@
       "source_location": "L7"
     },
     {
-      "id": "docs_decisions_0001_motor_de_reglas_declarativo_json",
-      "label": "0001-motor-de-reglas-declarativo-json.md",
-      "_origin": "ast",
-      "community": 71,
-      "community_name": "decisions/README.md",
-      "file_type": "document",
-      "node_kind": "page",
-      "norm_label": "0001-motor-de-reglas-declarativo-json.md",
-      "source_file": "docs/decisions/0001-motor-de-reglas-declarativo-json.md",
-      "source_location": "L1"
-    },
-    {
       "id": "docs_decisions_0001_motor_de_reglas_declarativo_json_adr_0001_motor_de_reglas_tributarias_declarativo_en_archivos_json_versionados",
       "label": "ADR 0001: Motor de Reglas Tributarias Declarativo en Archivos JSON Versionados",
       "_origin": "ast",
       "community": 71,
-      "community_name": "decisions/README.md",
+      "community_name": "ADR 0001: Motor de Reglas Tributarias Declarativo en Archivos JSON Versionados",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "adr 0001: motor de reglas tributarias declarativo en archivos json versionados",
@@ -18162,7 +18417,7 @@
       "label": "Consecuencias",
       "_origin": "ast",
       "community": 71,
-      "community_name": "decisions/README.md",
+      "community_name": "ADR 0001: Motor de Reglas Tributarias Declarativo en Archivos JSON Versionados",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "consecuencias",
@@ -18174,7 +18429,7 @@
       "label": "Contexto",
       "_origin": "ast",
       "community": 71,
-      "community_name": "decisions/README.md",
+      "community_name": "ADR 0001: Motor de Reglas Tributarias Declarativo en Archivos JSON Versionados",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "contexto",
@@ -18186,7 +18441,7 @@
       "label": "Decisi\u00f3n",
       "_origin": "ast",
       "community": 71,
-      "community_name": "decisions/README.md",
+      "community_name": "ADR 0001: Motor de Reglas Tributarias Declarativo en Archivos JSON Versionados",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "decision",
@@ -18194,107 +18449,11 @@
       "source_location": "L11"
     },
     {
-      "id": "docs_decisions_0003_mascara_contable_colombiana_en_dom",
-      "label": "0003-mascara-contable-colombiana-en-dom.md",
-      "_origin": "ast",
-      "community": 71,
-      "community_name": "decisions/README.md",
-      "file_type": "document",
-      "node_kind": "page",
-      "norm_label": "0003-mascara-contable-colombiana-en-dom.md",
-      "source_file": "docs/decisions/0003-mascara-contable-colombiana-en-dom.md",
-      "source_location": "L1"
-    },
-    {
-      "id": "docs_decisions_0003_mascara_contable_colombiana_en_dom_adr_0003_manejo_de_m\u00e1scara_contable_colombiana_en_el_dom_y_sanitizaci\u00f3n_num\u00e9rica",
-      "label": "ADR 0003: Manejo de M\u00e1scara Contable Colombiana en el DOM y Sanitizaci\u00f3n Num\u00e9rica",
-      "_origin": "ast",
-      "community": 71,
-      "community_name": "decisions/README.md",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "adr 0003: manejo de mascara contable colombiana en el dom y sanitizacion numerica",
-      "source_file": "docs/decisions/0003-mascara-contable-colombiana-en-dom.md",
-      "source_location": "L1"
-    },
-    {
-      "id": "docs_decisions_0003_mascara_contable_colombiana_en_dom_consecuencias",
-      "label": "Consecuencias",
-      "_origin": "ast",
-      "community": 71,
-      "community_name": "decisions/README.md",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "consecuencias",
-      "source_file": "docs/decisions/0003-mascara-contable-colombiana-en-dom.md",
-      "source_location": "L17"
-    },
-    {
-      "id": "docs_decisions_0003_mascara_contable_colombiana_en_dom_contexto",
-      "label": "Contexto",
-      "_origin": "ast",
-      "community": 71,
-      "community_name": "decisions/README.md",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "contexto",
-      "source_file": "docs/decisions/0003-mascara-contable-colombiana-en-dom.md",
-      "source_location": "L7"
-    },
-    {
-      "id": "docs_decisions_0003_mascara_contable_colombiana_en_dom_decisi\u00f3n",
-      "label": "Decisi\u00f3n",
-      "_origin": "ast",
-      "community": 71,
-      "community_name": "decisions/README.md",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "decision",
-      "source_file": "docs/decisions/0003-mascara-contable-colombiana-en-dom.md",
-      "source_location": "L11"
-    },
-    {
-      "id": "docs_decisions_readme",
-      "label": "decisions/README.md",
-      "_origin": "ast",
-      "community": 71,
-      "community_name": "decisions/README.md",
-      "file_type": "document",
-      "node_kind": "page",
-      "norm_label": "decisions/readme.md",
-      "source_file": "docs/decisions/README.md",
-      "source_location": "L1"
-    },
-    {
-      "id": "docs_decisions_readme_registro_de_decisiones_de_arquitectura_adrs",
-      "label": "Registro de Decisiones de Arquitectura (ADRs)",
-      "_origin": "ast",
-      "community": 71,
-      "community_name": "decisions/README.md",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "registro de decisiones de arquitectura (adrs)",
-      "source_file": "docs/decisions/README.md",
-      "source_location": "L1"
-    },
-    {
-      "id": "docs_decisions_0002_sincronizacion_bidireccional_sse",
-      "label": "0002-sincronizacion-bidireccional-sse.md",
-      "_origin": "ast",
-      "community": 72,
-      "community_name": "0002-sincronizacion-bidireccional-sse.md",
-      "file_type": "document",
-      "node_kind": "page",
-      "norm_label": "0002-sincronizacion-bidireccional-sse.md",
-      "source_file": "docs/decisions/0002-sincronizacion-bidireccional-sse.md",
-      "source_location": "L1"
-    },
-    {
       "id": "docs_decisions_0002_sincronizacion_bidireccional_sse_adr_0002_sincronizaci\u00f3n_bidireccional_en_tiempo_real_con_server_sent_events_sse",
       "label": "ADR 0002: Sincronizaci\u00f3n Bidireccional en Tiempo Real con Server-Sent Events (SSE)",
       "_origin": "ast",
       "community": 72,
-      "community_name": "0002-sincronizacion-bidireccional-sse.md",
+      "community_name": "ADR 0002: Sincronizaci\u00f3n Bidireccional en Tiempo Real con Server-Sent Events (SSE)",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "adr 0002: sincronizacion bidireccional en tiempo real con server-sent events (sse)",
@@ -18306,7 +18465,7 @@
       "label": "Consecuencias",
       "_origin": "ast",
       "community": 72,
-      "community_name": "0002-sincronizacion-bidireccional-sse.md",
+      "community_name": "ADR 0002: Sincronizaci\u00f3n Bidireccional en Tiempo Real con Server-Sent Events (SSE)",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "consecuencias",
@@ -18318,7 +18477,7 @@
       "label": "Contexto",
       "_origin": "ast",
       "community": 72,
-      "community_name": "0002-sincronizacion-bidireccional-sse.md",
+      "community_name": "ADR 0002: Sincronizaci\u00f3n Bidireccional en Tiempo Real con Server-Sent Events (SSE)",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "contexto",
@@ -18330,7 +18489,7 @@
       "label": "Decisi\u00f3n",
       "_origin": "ast",
       "community": 72,
-      "community_name": "0002-sincronizacion-bidireccional-sse.md",
+      "community_name": "ADR 0002: Sincronizaci\u00f3n Bidireccional en Tiempo Real con Server-Sent Events (SSE)",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "decision",
@@ -18357,7 +18516,7 @@
       "file_type": "concept",
       "norm_label": "testtributiaendtoend",
       "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L103"
+      "source_location": "L104"
     },
     {
       "id": "backend_tests_test_e2e_playwright_func_browser",
@@ -18368,7 +18527,7 @@
       "file_type": "concept",
       "norm_label": "browser",
       "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L63"
+      "source_location": "L64"
     },
     {
       "id": "backend_tests_test_e2e_playwright_func_context",
@@ -18379,7 +18538,7 @@
       "file_type": "concept",
       "norm_label": "context",
       "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L72"
+      "source_location": "L73"
     },
     {
       "id": "backend_tests_test_e2e_playwright_func_get_free_port",
@@ -18390,7 +18549,7 @@
       "file_type": "concept",
       "norm_label": "get_free_port",
       "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L26"
+      "source_location": "L27"
     },
     {
       "id": "backend_tests_test_e2e_playwright_func_live_server_url",
@@ -18401,7 +18560,7 @@
       "file_type": "concept",
       "norm_label": "live_server_url",
       "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L34"
+      "source_location": "L35"
     },
     {
       "id": "backend_tests_test_e2e_playwright_func_on_console",
@@ -18412,7 +18571,7 @@
       "file_type": "concept",
       "norm_label": "on_console",
       "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L87"
+      "source_location": "L88"
     },
     {
       "id": "backend_tests_test_e2e_playwright_func_on_page_error",
@@ -18423,7 +18582,7 @@
       "file_type": "concept",
       "norm_label": "on_page_error",
       "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L93"
+      "source_location": "L94"
     },
     {
       "id": "backend_tests_test_e2e_playwright_func_page_with_error_tracking",
@@ -18434,7 +18593,7 @@
       "file_type": "concept",
       "norm_label": "page_with_error_tracking",
       "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L80"
+      "source_location": "L81"
     },
     {
       "id": "backend_tests_test_e2e_playwright_func_test_app_title_and_main_structure",
@@ -18445,18 +18604,7 @@
       "file_type": "concept",
       "norm_label": "test_app_title_and_main_structure",
       "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L106"
-    },
-    {
-      "id": "backend_tests_test_e2e_playwright_func_test_beneficios_and_auditoria_simulators",
-      "label": "test_beneficios_and_auditoria_simulators",
-      "_origin": "ast",
-      "community": 73,
-      "community_name": "test_e2e_playwright.py",
-      "file_type": "concept",
-      "norm_label": "test_beneficios_and_auditoria_simulators",
-      "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L282"
+      "source_location": "L107"
     },
     {
       "id": "backend_tests_test_e2e_playwright_func_test_calendario_tributario_nit_search_and_filters",
@@ -18467,7 +18615,29 @@
       "file_type": "concept",
       "norm_label": "test_calendario_tributario_nit_search_and_filters",
       "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L252"
+      "source_location": "L336"
+    },
+    {
+      "id": "backend_tests_test_e2e_playwright_func_test_catalogo_beneficios_filtering_and_search",
+      "label": "test_catalogo_beneficios_filtering_and_search",
+      "_origin": "ast",
+      "community": 73,
+      "community_name": "test_e2e_playwright.py",
+      "file_type": "concept",
+      "norm_label": "test_catalogo_beneficios_filtering_and_search",
+      "source_file": "backend/tests/test_e2e_playwright.py",
+      "source_location": "L158"
+    },
+    {
+      "id": "backend_tests_test_e2e_playwright_func_test_inmuebles_afc_simulator",
+      "label": "test_inmuebles_afc_simulator",
+      "_origin": "ast",
+      "community": 73,
+      "community_name": "test_e2e_playwright.py",
+      "file_type": "concept",
+      "norm_label": "test_inmuebles_afc_simulator",
+      "source_file": "backend/tests/test_e2e_playwright.py",
+      "source_location": "L273"
     },
     {
       "id": "backend_tests_test_e2e_playwright_func_test_navigation_across_all_modules",
@@ -18489,7 +18659,18 @@
       "file_type": "concept",
       "norm_label": "test_persona_natural_capture_and_subtabs",
       "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L214"
+      "source_location": "L298"
+    },
+    {
+      "id": "backend_tests_test_e2e_playwright_func_test_presentacion_auditoria_and_calculadora_sanciones",
+      "label": "test_presentacion_auditoria_and_calculadora_sanciones",
+      "_origin": "ast",
+      "community": 73,
+      "community_name": "test_e2e_playwright.py",
+      "file_type": "concept",
+      "norm_label": "test_presentacion_auditoria_and_calculadora_sanciones",
+      "source_file": "backend/tests/test_e2e_playwright.py",
+      "source_location": "L186"
     },
     {
       "id": "backend_tests_test_e2e_playwright_func_test_reajuste_fiscal_articulo_73_complete_flow",
@@ -18500,7 +18681,7 @@
       "file_type": "concept",
       "norm_label": "test_reajuste_fiscal_articulo_73_complete_flow",
       "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L156"
+      "source_location": "L221"
     },
     {
       "id": "docs_how_to_02_simular_tasa_minima_ttd_pj",
@@ -18599,6 +18780,66 @@
       "source_location": "L1"
     },
     {
+      "id": "docs_reference_architecture_c4_architecture_c4",
+      "label": "architecture-c4.md",
+      "_origin": "ast",
+      "community": 76,
+      "community_name": "Arquitectura C4 \u2014 TributIA",
+      "file_type": "document",
+      "node_kind": "page",
+      "norm_label": "architecture-c4.md",
+      "source_file": "docs/reference/architecture/c4/architecture-c4.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "docs_reference_architecture_c4_architecture_c4_1_nivel_1_diagrama_de_contexto_del_sistema_c1",
+      "label": "1. Nivel 1: Diagrama de Contexto del Sistema (C1)",
+      "_origin": "ast",
+      "community": 76,
+      "community_name": "Arquitectura C4 \u2014 TributIA",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "1. nivel 1: diagrama de contexto del sistema (c1)",
+      "source_file": "docs/reference/architecture/c4/architecture-c4.md",
+      "source_location": "L7"
+    },
+    {
+      "id": "docs_reference_architecture_c4_architecture_c4_2_nivel_2_diagrama_de_contenedores_c2",
+      "label": "2. Nivel 2: Diagrama de Contenedores (C2)",
+      "_origin": "ast",
+      "community": 76,
+      "community_name": "Arquitectura C4 \u2014 TributIA",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "2. nivel 2: diagrama de contenedores (c2)",
+      "source_file": "docs/reference/architecture/c4/architecture-c4.md",
+      "source_location": "L29"
+    },
+    {
+      "id": "docs_reference_architecture_c4_architecture_c4_3_nivel_3_diagrama_de_componentes_del_backend_c3",
+      "label": "3. Nivel 3: Diagrama de Componentes del Backend (C3)",
+      "_origin": "ast",
+      "community": 76,
+      "community_name": "Arquitectura C4 \u2014 TributIA",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "3. nivel 3: diagrama de componentes del backend (c3)",
+      "source_file": "docs/reference/architecture/c4/architecture-c4.md",
+      "source_location": "L58"
+    },
+    {
+      "id": "docs_reference_architecture_c4_architecture_c4_arquitectura_c4_tributia",
+      "label": "Arquitectura C4 \u2014 TributIA",
+      "_origin": "ast",
+      "community": 76,
+      "community_name": "Arquitectura C4 \u2014 TributIA",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "arquitectura c4 \u2014 tributia",
+      "source_file": "docs/reference/architecture/c4/architecture-c4.md",
+      "source_location": "L1"
+    },
+    {
       "id": "frontend_readme",
       "label": "frontend/README.md",
       "_origin": "ast",
@@ -18678,6 +18919,54 @@
       "norm_label": "test_persona_natural_excel_benchmark_2022",
       "source_file": "backend/tests/test_pn_calculator.py",
       "source_location": "L7"
+    },
+    {
+      "id": "docs_decisions_0003_mascara_contable_colombiana_en_dom_adr_0003_manejo_de_m\u00e1scara_contable_colombiana_en_el_dom_y_sanitizaci\u00f3n_num\u00e9rica",
+      "label": "ADR 0003: Manejo de M\u00e1scara Contable Colombiana en el DOM y Sanitizaci\u00f3n Num\u00e9rica",
+      "_origin": "ast",
+      "community": 79,
+      "community_name": "ADR 0003: Manejo de M\u00e1scara Contable Colombiana en el DOM y Sanitizaci\u00f3n Num\u00e9rica",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "adr 0003: manejo de mascara contable colombiana en el dom y sanitizacion numerica",
+      "source_file": "docs/decisions/0003-mascara-contable-colombiana-en-dom.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "docs_decisions_0003_mascara_contable_colombiana_en_dom_consecuencias",
+      "label": "Consecuencias",
+      "_origin": "ast",
+      "community": 79,
+      "community_name": "ADR 0003: Manejo de M\u00e1scara Contable Colombiana en el DOM y Sanitizaci\u00f3n Num\u00e9rica",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "consecuencias",
+      "source_file": "docs/decisions/0003-mascara-contable-colombiana-en-dom.md",
+      "source_location": "L17"
+    },
+    {
+      "id": "docs_decisions_0003_mascara_contable_colombiana_en_dom_contexto",
+      "label": "Contexto",
+      "_origin": "ast",
+      "community": 79,
+      "community_name": "ADR 0003: Manejo de M\u00e1scara Contable Colombiana en el DOM y Sanitizaci\u00f3n Num\u00e9rica",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "contexto",
+      "source_file": "docs/decisions/0003-mascara-contable-colombiana-en-dom.md",
+      "source_location": "L7"
+    },
+    {
+      "id": "docs_decisions_0003_mascara_contable_colombiana_en_dom_decisi\u00f3n",
+      "label": "Decisi\u00f3n",
+      "_origin": "ast",
+      "community": 79,
+      "community_name": "ADR 0003: Manejo de M\u00e1scara Contable Colombiana en el DOM y Sanitizaci\u00f3n Num\u00e9rica",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "decision",
+      "source_file": "docs/decisions/0003-mascara-contable-colombiana-en-dom.md",
+      "source_location": "L11"
     },
     {
       "id": "backend_tests_test_session_sync",
@@ -19638,7 +19927,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/app/api/v1/endpoints/beneficios.py",
-      "source_location": "L28",
+      "source_location": "L34",
       "weight": 1.0
     },
     {
@@ -19649,7 +19938,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/app/api/v1/endpoints/beneficios.py",
-      "source_location": "L38",
+      "source_location": "L44",
       "weight": 1.0
     },
     {
@@ -19660,7 +19949,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/app/api/v1/endpoints/beneficios.py",
-      "source_location": "L48",
+      "source_location": "L54",
       "weight": 1.0
     },
     {
@@ -19671,7 +19960,18 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/app/api/v1/endpoints/beneficios.py",
-      "source_location": "L58",
+      "source_location": "L64",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_app_api_v1_endpoints_beneficios",
+      "target": "backend_app_api_v1_endpoints_beneficios_func_liquidar_sancion",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/api/v1/endpoints/beneficios.py",
+      "source_location": "L74",
       "weight": 1.0
     },
     {
@@ -19682,7 +19982,18 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/app/api/v1/endpoints/beneficios.py",
-      "source_location": "L68",
+      "source_location": "L84",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_app_api_v1_endpoints_beneficios",
+      "target": "backend_app_api_v1_endpoints_beneficios_func_simular_inmueble_afc",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/api/v1/endpoints/beneficios.py",
+      "source_location": "L94",
       "weight": 1.0
     },
     {
@@ -20380,7 +20691,7 @@
     },
     {
       "source": "backend_app_services_beneficios",
-      "target": "backend_app_services_beneficios_func_calcular_beneficio_auditoria",
+      "target": "backend_app_services_beneficios_class_liquidacionsancionrequest",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -20391,13 +20702,46 @@
     },
     {
       "source": "backend_app_services_beneficios",
-      "target": "backend_app_services_beneficios_func_calcular_reduccion_sancion",
+      "target": "backend_app_services_beneficios_class_liquidacionsancionresponse",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/services/beneficios.py",
+      "source_location": "L532",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_app_services_beneficios",
+      "target": "backend_app_services_beneficios_class_simulacioninmuebleafcrequest",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/app/services/beneficios.py",
       "source_location": "L554",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_app_services_beneficios",
+      "target": "backend_app_services_beneficios_class_simulacioninmuebleafcresponse",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/services/beneficios.py",
+      "source_location": "L578",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_app_services_beneficios",
+      "target": "backend_app_services_beneficios_func_calcular_sancion_tributaria",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/services/beneficios.py",
+      "source_location": "L600",
       "weight": 1.0
     },
     {
@@ -20420,6 +20764,39 @@
       "confidence_score": 1.0,
       "source_file": "backend/app/services/beneficios.py",
       "source_location": "L73",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_app_services_beneficios",
+      "target": "backend_app_services_beneficios_func_calcular_exencion_inmueble_afc",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/services/beneficios.py",
+      "source_location": "L740",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_app_services_beneficios",
+      "target": "backend_app_services_beneficios_func_calcular_beneficio_auditoria",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/services/beneficios.py",
+      "source_location": "L828",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_app_services_beneficios",
+      "target": "backend_app_services_beneficios_func_calcular_reduccion_sancion",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/services/beneficios.py",
+      "source_location": "L879",
       "weight": 1.0
     },
     {
@@ -20720,6 +21097,28 @@
       "weight": 1.0
     },
     {
+      "source": "backend_tests_debug_ui_playwright",
+      "target": "backend_tests_debug_ui_playwright_func_get_free_port",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/tests/debug_ui_playwright.py",
+      "source_location": "L15",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_tests_debug_ui_playwright",
+      "target": "backend_tests_debug_ui_playwright_func_run_debug",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/tests/debug_ui_playwright.py",
+      "source_location": "L21",
+      "weight": 1.0
+    },
+    {
       "source": "backend_tests_test_api_endpoints",
       "target": "backend_tests_test_api_endpoints_func_test_health_check",
       "relation": "contains",
@@ -20853,6 +21252,39 @@
     },
     {
       "source": "backend_tests_test_beneficios_and_go",
+      "target": "backend_tests_test_beneficios_and_go_func_test_calcular_sancion_control_minima_10_uvt",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/tests/test_beneficios_and_go.py",
+      "source_location": "L120",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_tests_test_beneficios_and_go",
+      "target": "backend_tests_test_beneficios_and_go_func_test_calcular_sancion_extemporaneidad_mensual",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/tests/test_beneficios_and_go.py",
+      "source_location": "L140",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_tests_test_beneficios_and_go",
+      "target": "backend_tests_test_beneficios_and_go_func_test_calcular_exencion_inmueble_afc_art311_1",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/tests/test_beneficios_and_go.py",
+      "source_location": "L164",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_tests_test_beneficios_and_go",
       "target": "backend_tests_test_beneficios_and_go_func_test_beneficio_auditoria_calculo",
       "relation": "contains",
       "_origin": "ast",
@@ -20882,6 +21314,17 @@
       "confidence_score": 1.0,
       "source_file": "backend/tests/test_beneficios_and_go.py",
       "source_location": "L82",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_tests_test_beneficios_and_go",
+      "target": "backend_tests_test_beneficios_and_go_func_test_calcular_sancion_correccion_voluntaria_con_reduccion",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/tests/test_beneficios_and_go.py",
+      "source_location": "L93",
       "weight": 1.0
     },
     {
@@ -21233,7 +21676,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L103",
+      "source_location": "L104",
       "weight": 1.0
     },
     {
@@ -21244,7 +21687,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L106",
+      "source_location": "L107",
       "weight": 1.0
     },
     {
@@ -21260,35 +21703,35 @@
     },
     {
       "source": "backend_tests_test_e2e_playwright",
+      "target": "backend_tests_test_e2e_playwright_func_test_catalogo_beneficios_filtering_and_search",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/tests/test_e2e_playwright.py",
+      "source_location": "L158",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_tests_test_e2e_playwright",
+      "target": "backend_tests_test_e2e_playwright_func_test_presentacion_auditoria_and_calculadora_sanciones",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/tests/test_e2e_playwright.py",
+      "source_location": "L186",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_tests_test_e2e_playwright",
       "target": "backend_tests_test_e2e_playwright_func_test_reajuste_fiscal_articulo_73_complete_flow",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L156",
-      "weight": 1.0
-    },
-    {
-      "source": "backend_tests_test_e2e_playwright",
-      "target": "backend_tests_test_e2e_playwright_func_test_persona_natural_capture_and_subtabs",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L214",
-      "weight": 1.0
-    },
-    {
-      "source": "backend_tests_test_e2e_playwright",
-      "target": "backend_tests_test_e2e_playwright_func_test_calendario_tributario_nit_search_and_filters",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L252",
+      "source_location": "L221",
       "weight": 1.0
     },
     {
@@ -21299,18 +21742,40 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L26",
+      "source_location": "L27",
       "weight": 1.0
     },
     {
       "source": "backend_tests_test_e2e_playwright",
-      "target": "backend_tests_test_e2e_playwright_func_test_beneficios_and_auditoria_simulators",
+      "target": "backend_tests_test_e2e_playwright_func_test_inmuebles_afc_simulator",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L282",
+      "source_location": "L273",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_tests_test_e2e_playwright",
+      "target": "backend_tests_test_e2e_playwright_func_test_persona_natural_capture_and_subtabs",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/tests/test_e2e_playwright.py",
+      "source_location": "L298",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_tests_test_e2e_playwright",
+      "target": "backend_tests_test_e2e_playwright_func_test_calendario_tributario_nit_search_and_filters",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/tests/test_e2e_playwright.py",
+      "source_location": "L336",
       "weight": 1.0
     },
     {
@@ -21321,7 +21786,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L34",
+      "source_location": "L35",
       "weight": 1.0
     },
     {
@@ -21332,7 +21797,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L63",
+      "source_location": "L64",
       "weight": 1.0
     },
     {
@@ -21343,7 +21808,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L72",
+      "source_location": "L73",
       "weight": 1.0
     },
     {
@@ -21354,7 +21819,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L80",
+      "source_location": "L81",
       "weight": 1.0
     },
     {
@@ -21365,7 +21830,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L87",
+      "source_location": "L88",
       "weight": 1.0
     },
     {
@@ -21376,7 +21841,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L93",
+      "source_location": "L94",
       "weight": 1.0
     },
     {
@@ -35978,6 +36443,28 @@
     },
     {
       "source": "skills_declaracion_renta_persona_natural_beneficios_tributarios_pn_catalogo_exhaustivo_de_beneficios_tributarios_para_personas_naturales_en_colombia",
+      "target": "skills_declaracion_renta_persona_natural_beneficios_tributarios_pn_11_r\u00e9gimen_sancionatorio_y_principio_de_favorabilidad_art_640_641_642_644_y_639_e_t",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "skills/declaracion-renta-persona-natural/beneficios_tributarios_pn.md",
+      "source_location": "L137",
+      "weight": 1.0
+    },
+    {
+      "source": "skills_declaracion_renta_persona_natural_beneficios_tributarios_pn_catalogo_exhaustivo_de_beneficios_tributarios_para_personas_naturales_en_colombia",
+      "target": "skills_declaracion_renta_persona_natural_beneficios_tributarios_pn_12_venta_de_inmuebles_de_habitaci\u00f3n_cuentas_afc_art_311_1_y_126_4_e_t",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "skills/declaracion-renta-persona-natural/beneficios_tributarios_pn.md",
+      "source_location": "L151",
+      "weight": 1.0
+    },
+    {
+      "source": "skills_declaracion_renta_persona_natural_beneficios_tributarios_pn_catalogo_exhaustivo_de_beneficios_tributarios_para_personas_naturales_en_colombia",
       "target": "skills_declaracion_renta_persona_natural_beneficios_tributarios_pn_2_deducciones_imputables_a_la_cedula_general_sujetas_al_limite_conjunto",
       "relation": "contains",
       "_origin": "ast",
@@ -36175,6 +36662,50 @@
       "weight": 1.0
     },
     {
+      "source": "skills_declaracion_renta_persona_natural_scripts_simular_inmuebles_afc",
+      "target": "skills_declaracion_renta_persona_natural_scripts_simular_inmuebles_afc_func_format_cop",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "skills/declaracion-renta-persona-natural/scripts/simular_inmuebles_afc.py",
+      "source_location": "L20",
+      "weight": 1.0
+    },
+    {
+      "source": "skills_declaracion_renta_persona_natural_scripts_simular_inmuebles_afc",
+      "target": "skills_declaracion_renta_persona_natural_scripts_simular_inmuebles_afc_func_main",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "skills/declaracion-renta-persona-natural/scripts/simular_inmuebles_afc.py",
+      "source_location": "L26",
+      "weight": 1.0
+    },
+    {
+      "source": "skills_declaracion_renta_persona_natural_scripts_simular_sanciones_auditoria",
+      "target": "skills_declaracion_renta_persona_natural_scripts_simular_sanciones_auditoria_func_format_cop",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "skills/declaracion-renta-persona-natural/scripts/simular_sanciones_auditoria.py",
+      "source_location": "L22",
+      "weight": 1.0
+    },
+    {
+      "source": "skills_declaracion_renta_persona_natural_scripts_simular_sanciones_auditoria",
+      "target": "skills_declaracion_renta_persona_natural_scripts_simular_sanciones_auditoria_func_main",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "skills/declaracion-renta-persona-natural/scripts/simular_sanciones_auditoria.py",
+      "source_location": "L28",
+      "weight": 1.0
+    },
+    {
       "source": "skills_declaracion_renta_persona_natural_skill",
       "target": "skills_declaracion_renta_persona_natural_skill_declaraci\u00f3n_de_renta_personas_naturales_colombia_formulario_210",
       "relation": "contains",
@@ -36193,7 +36724,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "skills/declaracion-renta-persona-natural/SKILL.md",
-      "source_location": "L103",
+      "source_location": "L119",
       "weight": 1.0
     },
     {
@@ -36204,7 +36735,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "skills/declaracion-renta-persona-natural/SKILL.md",
-      "source_location": "L117",
+      "source_location": "L133",
       "weight": 1.0
     },
     {
@@ -36238,6 +36769,17 @@
       "confidence_score": 1.0,
       "source_file": "skills/declaracion-renta-persona-natural/SKILL.md",
       "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "skills_declaracion_renta_persona_natural_skill_workflow_en_4_fases_con_conciliacion_exogena",
+      "target": "skills_declaracion_renta_persona_natural_skill_fase_4_auditor\u00eda_sanciones_y_optimizaci\u00f3n_post_liquidaci\u00f3n",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "skills/declaracion-renta-persona-natural/SKILL.md",
+      "source_location": "L106",
       "weight": 1.0
     },
     {
@@ -36292,7 +36834,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "skills/declaracion-renta-persona-natural/SKILL.md",
-      "source_location": "L77",
+      "source_location": "L80",
       "weight": 1.0
     },
     {
@@ -36303,7 +36845,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "skills/declaracion-renta-persona-natural/SKILL.md",
-      "source_location": "L86",
+      "source_location": "L89",
       "weight": 1.0
     },
     {
@@ -36935,5 +37477,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "fcaa18e294984a8520a250f2db86337f6ed37c0d"
+  "built_at_commit": "0f57a88ea8b838bb9705e0799adb2386f4a76b2a"
 }

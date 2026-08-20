@@ -5,13 +5,19 @@ from app.services.beneficios import (
     BeneficioAuditoriaRequest,
     BeneficioAuditoriaResponse,
     BeneficioItem,
+    LiquidacionSancionRequest,
+    LiquidacionSancionResponse,
     ReduccionSancionRequest,
     ReduccionSancionResponse,
     SimulacionAjusteArticulo73Request,
     SimulacionAjusteArticulo73Response,
+    SimulacionInmuebleAfcRequest,
+    SimulacionInmuebleAfcResponse,
     calcular_ajuste_articulo_73,
     calcular_beneficio_auditoria,
+    calcular_exencion_inmueble_afc,
     calcular_reduccion_sancion,
+    calcular_sancion_tributaria,
     get_catalogo_beneficios,
     get_tabla_articulo_73,
 )
@@ -60,6 +66,16 @@ async def simular_auditoria(payload: BeneficioAuditoriaRequest):
 
 
 @router.post(
+    "/calcular-sancion",
+    response_model=LiquidacionSancionResponse,
+    summary="Liquidación Integral de Sanciones Tributarias (Art. 641, 642, 644, 640 y 639 E.T.)",
+    description="Calcula sanciones por corrección o extemporaneidad con reducción del principio de favorabilidad/gradualidad y control de sanción mínima.",
+)
+async def liquidar_sancion(payload: LiquidacionSancionRequest):
+    return calcular_sancion_tributaria(payload)
+
+
+@router.post(
     "/simular-reduccion-sancion",
     response_model=ReduccionSancionResponse,
     summary="Simular Reducción de Sanciones (Art. 640 y 644 E.T.)",
@@ -67,3 +83,13 @@ async def simular_auditoria(payload: BeneficioAuditoriaRequest):
 )
 async def simular_sancion(payload: ReduccionSancionRequest):
     return calcular_reduccion_sancion(payload)
+
+
+@router.post(
+    "/simular-inmueble-afc",
+    response_model=SimulacionInmuebleAfcResponse,
+    summary="Simular Exención de Ganancia Ocasional en Venta de Inmueble con Cuenta AFC (Art. 311-1 y 126-4 E.T.)",
+    description="Calcula la exención de hasta 5.000 UVT de ganancia ocasional al enajenar la casa o apartamento de habitación y destinar los fondos a una cuenta AFC o pago de vivienda.",
+)
+async def simular_inmueble_afc(payload: SimulacionInmuebleAfcRequest):
+    return calcular_exencion_inmueble_afc(payload)
