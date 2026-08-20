@@ -90,9 +90,6 @@
     }
   },
   "generatedFiles": {
-    "CLAUDE.md": {
-      "managed": true
-    },
     "AGENTS.md": {
       "managed": true
     },
