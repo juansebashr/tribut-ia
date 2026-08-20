@@ -2045,23 +2045,48 @@ async function runCalculadoraSanciones() {
     });
     const data = await res.json();
 
-    let pasosHtml = data.pasos_calculo.map(p => `<li>${p}</li>`).join('');
+    const montoCapital = data.monto_base_cop !== undefined ? data.monto_base_cop : montoBase;
+    const sancionPagar = data.sancion_final_a_pagar_cop !== undefined ? data.sancion_final_a_pagar_cop : 0;
+    const esFavor = data.es_saldo_a_favor ?? esSaldoFavor;
+
+    // Si el backend es de una versión previa o no trae intereses_mora_cop, calcularlos con la fórmula oficial
+    let interesesMora = 0;
+    if (!esFavor && incluirMora && montoCapital > 0 && diasMora > 0) {
+      if (data.intereses_mora_cop !== undefined) {
+        interesesMora = data.intereses_mora_cop;
+      } else {
+        const factor = Math.pow(1.0 + (tasaMora / 100.0), diasMora / 365.0) - 1.0;
+        interesesMora = Math.round((montoCapital * factor) / 1000.0) * 1000.0;
+      }
+    }
+
+    const totalConsolidado = data.total_consolidado_a_pagar_cop !== undefined
+      ? data.total_consolidado_a_pagar_cop
+      : (esFavor ? sancionPagar : (montoCapital + sancionPagar + interesesMora));
+
+    const tieneMora = !esFavor && incluirMora && interesesMora > 0;
+    const diasMoraVal = data.dias_mora !== undefined ? data.dias_mora : diasMora;
+    const tasaMoraVal = data.tasa_interes_anual_pct !== undefined ? data.tasa_interes_anual_pct : tasaMora;
+
+    let pasosHtml = Array.isArray(data.pasos_calculo) 
+      ? data.pasos_calculo.map(p => `<li>${p}</li>`).join('')
+      : `<li>Sanción liquidada: ${formatCOP(sancionPagar)} COP</li><li>Capital base: ${formatCOP(montoCapital)} COP</li>`;
 
     resDiv.innerHTML = `
       <div style="background: white; border: 1px solid #cbd5e1; border-radius: 8px; padding: 12px; margin-bottom: 12px;">
         <!-- GRAN TOTAL CONSOLIDADO -->
-        <div style="background: ${data.es_saldo_a_favor ? '#f0fdf4' : '#f0fdf4'}; border: 1px solid #86efac; border-radius: 6px; padding: 10px; margin-bottom: 10px;">
+        <div style="background: #f0fdf4; border: 1px solid #86efac; border-radius: 6px; padding: 10px; margin-bottom: 10px;">
           <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 6px;">
             <div>
               <div style="font-size: 11px; font-weight: 800; color: #166534; text-transform: uppercase;">
-                ${data.es_saldo_a_favor ? 'Total Sanción a Pagar (Sin Intereses por Saldo a Favor):' : 'Gran Total Consolidado a Pagar (Capital + Sanción + Mora):'}
+                ${esFavor ? 'Total Sanción a Pagar (Sin Intereses por Saldo a Favor):' : 'Gran Total Consolidado a Pagar (Capital + Sanción + Mora):'}
               </div>
               <div style="font-size: 20px; font-weight: 900; font-family: var(--font-mono); color: #15803d;">
-                ${formatCOP(data.total_consolidado_a_pagar_cop)} COP
+                ${formatCOP(totalConsolidado)} COP
               </div>
             </div>
             <span class="badge badge-success" style="font-size: 11px;">
-              ${data.es_saldo_a_favor ? '🛡️ Saldo a Favor ($0 Mora)' : (data.incluye_intereses_mora ? `Con ${data.dias_mora} días de mora` : 'Sin intereses')}
+              ${esFavor ? '🛡️ Saldo a Favor ($0 Mora)' : (tieneMora ? `Con ${diasMoraVal} días de mora` : 'Sin intereses')}
             </span>
           </div>
         </div>
@@ -2069,36 +2094,36 @@ async function runCalculadoraSanciones() {
         <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px;">
           <span style="font-weight: 700; color: #0f172a; font-size: 13px;">1. Sanción Liquidada a Pagar:</span>
           <span style="font-size: 16px; font-weight: 900; font-family: var(--font-mono); color: #059669;">
-            ${formatCOP(data.sancion_final_a_pagar_cop)} COP
+            ${formatCOP(sancionPagar)} COP
           </span>
         </div>
 
-        ${data.incluye_intereses_mora ? `
+        ${tieneMora ? `
           <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px; padding-bottom: 6px; border-bottom: 1px dashed #e2e8f0;">
-            <span style="font-weight: 700; color: #6b21a8; font-size: 13px;">2. Intereses Moratorios (${data.dias_mora} días @ ${data.tasa_interes_anual_pct.toFixed(1)}% E.A.):</span>
+            <span style="font-weight: 700; color: #6b21a8; font-size: 13px;">2. Intereses Moratorios (${diasMoraVal} días @ ${tasaMoraVal.toFixed(1)}% E.A.):</span>
             <span style="font-size: 16px; font-weight: 900; font-family: var(--font-mono); color: #7e22ce;">
-              ${formatCOP(data.intereses_mora_cop)} COP
+              ${formatCOP(interesesMora)} COP
             </span>
           </div>
         ` : ''}
 
         <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 8px;">
           <span class="badge ${data.aplico_sancion_minima ? 'badge-warning' : 'badge-success'}">
-            ${data.aplico_sancion_minima ? '⚠️ Aplica Sanción Mínima (10 UVT)' : `Descuento Art. 640: ${data.porcentaje_reduccion_art640_pct.toFixed(0)}%`}
+            ${data.aplico_sancion_minima ? '⚠️ Aplica Sanción Mínima (10 UVT)' : `Descuento Art. 640: ${(data.porcentaje_reduccion_art640_pct || 0).toFixed(0)}%`}
           </span>
-          <span class="badge badge-info">Tarifa Base: ${data.tarifa_base_pct.toFixed(0)}%</span>
+          <span class="badge badge-info">Tarifa Base: ${(data.tarifa_base_pct || 10).toFixed(0)}%</span>
         </div>
 
         <div class="responsive-grid-equal" style="gap: 8px; font-size: 11px; background: #f8fafc; padding: 8px; border-radius: 6px;">
-          <div>Capital Base Insoluto: <strong>${formatCOP(data.monto_base_cop)}</strong></div>
-          <div>Sanción Plena (Sin Descuento): <strong>${formatCOP(data.sancion_plena_sin_reduccion_cop)}</strong></div>
-          <div>Ahorro Favorabilidad Art. 640: <strong style="color:#166534;">${formatCOP(data.ahorro_favorabilidad_art640_cop)}</strong></div>
-          <div>Ahorro vs Escenario Emplazado: <strong style="color:#166534;">${formatCOP(data.ahorro_por_corregir_antes_de_dian_cop)}</strong></div>
+          <div>Capital Base Insoluto: <strong>${formatCOP(montoCapital)}</strong></div>
+          <div>Sanción Plena (Sin Descuento): <strong>${formatCOP(data.sancion_plena_sin_reduccion_cop || sancionPagar)}</strong></div>
+          <div>Ahorro Favorabilidad Art. 640: <strong style="color:#166534;">${formatCOP(data.ahorro_favorabilidad_art640_cop || 0)}</strong></div>
+          <div>Ahorro vs Escenario Emplazado: <strong style="color:#166534;">${formatCOP(data.ahorro_por_corregir_antes_de_dian_cop || 0)}</strong></div>
         </div>
       </div>
 
       <div style="font-size: 11.5px; color: #334155; line-height: 1.45; margin-bottom: 8px;">
-        ${data.explicacion_didactica}
+        ${data.explicacion_didactica || ''}
       </div>
 
       <details style="font-size: 11px; color: #475569; cursor: pointer;">
