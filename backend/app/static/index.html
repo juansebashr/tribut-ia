@@ -2164,6 +2164,110 @@
             </p>
           </div>
 
+          <!-- WIDGET DESTACADO: REAJUSTE FISCAL DE ACTIVOS (ART. 73 E.T.) -->
+          <div class="card" style="border: 2px solid var(--primary-border); margin-bottom: 20px; background: linear-gradient(180deg, rgba(239, 246, 255, 0.4) 0%, rgba(255, 255, 255, 1) 100%);">
+            <div class="card-header" style="background: var(--primary-light); display: flex; justify-content: space-between; align-items: center;">
+              <div class="card-title" style="color: var(--primary); font-size: 14px; font-weight: 800; display: flex; align-items: center; gap: 8px;">
+                <span>🏢</span> Reajuste Fiscal de Bienes Raíces y Acciones (Art. 73 E.T. - DUR 1.2.1.17.21)
+              </div>
+              <span class="badge" style="background: var(--primary); color: #fff; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 12px;">Oficial DANE 2025/2026</span>
+            </div>
+            <div class="card-body">
+              <div style="background: rgba(59, 130, 246, 0.08); border-left: 4px solid var(--primary); padding: 10px 14px; border-radius: 6px; margin-bottom: 14px; font-size: 11.5px; color: var(--text-secondary); line-height: 1.5;">
+                <strong>¿Cómo funciona?</strong> El Art. 73 del E.T. faculta a las personas naturales para multiplicar el costo de compra histórico de sus inmuebles y acciones por el multiplicador oficial certificado por el DANE. Al incrementar legalmente el costo fiscal, la utilidad en venta disminuye, <strong>generando un ahorro directo del 15% en el impuesto de Ganancia Ocasional</strong>.
+              </div>
+
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;">
+                <!-- FORMULARIO ART 73 -->
+                <div style="display: flex; flex-direction: column; gap: 10px;">
+                  <div class="input-field">
+                    <label class="input-label">1. Tipo de Activo Fijo</label>
+                    <select id="sim-art73-tipo" class="select-input" style="width: 100%;" onchange="runSimulacionArticulo73()">
+                      <option value="bienes_raices_urbanos">🏢 Bienes Raíces Urbanos (Casas, Aptos, Locales)</option>
+                      <option value="bienes_raices_rurales">🌳 Bienes Raíces Rurales Generales</option>
+                      <option value="bienes_raices_rurales_agro">🌾 Bienes Raíces Rurales (Actividad Agropecuaria)</option>
+                      <option value="acciones_aportes">📈 Acciones o Aportes en Sociedades</option>
+                    </select>
+                  </div>
+
+                  <div class="input-field">
+                    <label class="input-label">2. Año de Adquisición o Compra</label>
+                    <select id="sim-art73-ano" class="select-input" style="width: 100%;" onchange="runSimulacionArticulo73()">
+                      <!-- Populated via JS -->
+                    </select>
+                  </div>
+
+                  <div class="input-field">
+                    <label class="input-label">3. Costo Histórico de Adquisición (Escritura/Soporte)</label>
+                    <div class="input-wrapper">
+                      <span class="input-prefix">$</span>
+                      <input
+                        type="text"
+                        inputmode="numeric"
+                        id="sim-art73-costo-hist"
+                        class="currency-input"
+                        value="20'000.000"
+                        oninput="runSimulacionArticulo73()"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="input-field">
+                    <label class="input-label">4. Precio de Venta Estimado (Opcional)</label>
+                    <div class="input-wrapper">
+                      <span class="input-prefix">$</span>
+                      <input
+                        type="text"
+                        inputmode="numeric"
+                        id="sim-art73-precio-venta"
+                        class="currency-input"
+                        value="500'000.000"
+                        oninput="runSimulacionArticulo73()"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <!-- RESULTADO EN VIVO ART 73 -->
+                <div id="sim-art73-result" style="background: var(--bg-subtle); padding: 14px; border-radius: 8px; font-size: 12px; border: 1px solid var(--border-color); display: flex; flex-direction: column; justify-content: space-between;">
+                  <!-- Populated via JS -->
+                </div>
+              </div>
+
+              <!-- TABLA DESPLEGABLE OFICIAL -->
+              <div style="border-top: 1px solid var(--border-color); padding-top: 12px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                  <span style="font-weight: 700; font-size: 12px; color: var(--text-primary);">
+                    📋 Tabla Oficial de Factores Multiplicadores (1955 - 2024)
+                  </span>
+                  <input
+                    type="text"
+                    id="search-tabla-art73"
+                    placeholder="🔍 Buscar año (ej. 1995)..."
+                    style="padding: 4px 8px; font-size: 11px; border: 1px solid var(--border-color); border-radius: 4px; width: 160px;"
+                    oninput="filterTablaArticulo73(this.value)"
+                  />
+                </div>
+                <div style="max-height: 220px; overflow-y: auto; border: 1px solid var(--border-color); border-radius: 6px;">
+                  <table style="width: 100%; border-collapse: collapse; font-size: 11px; text-align: left;">
+                    <thead style="position: sticky; top: 0; background: var(--bg-card); border-bottom: 2px solid var(--border-color); z-index: 1;">
+                      <tr>
+                        <th style="padding: 6px 10px;">Año Adquisición</th>
+                        <th style="padding: 6px 10px;">Acciones/Aportes</th>
+                        <th style="padding: 6px 10px;">Inmuebles Urbanos</th>
+                        <th style="padding: 6px 10px;">Rural Agropecuario</th>
+                        <th style="padding: 6px 10px;">Rural General</th>
+                      </tr>
+                    </thead>
+                    <tbody id="tabla-art73-tbody">
+                      <!-- Populated via JS -->
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <!-- SIMULADORES -->
           <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px;">
             <!-- AUDITORIA WIDGET -->
@@ -2243,6 +2347,7 @@
           <!-- FILTER BAR -->
           <div class="beneficio-filter-bar">
             <button class="btn btn-primary btn-sm" onclick="filterBeneficios('all', this)">Todos</button>
+            <button class="btn btn-outline btn-sm" onclick="filterBeneficios('ajustes_patrimonio', this)">🏢 Ajuste Activos (Art. 73)</button>
             <button class="btn btn-outline btn-sm" onclick="filterBeneficios('incrngo', this)">INCRNGO</button>
             <button class="btn btn-outline btn-sm" onclick="filterBeneficios('deducciones', this)">Deducciones</button>
             <button class="btn btn-outline btn-sm" onclick="filterBeneficios('rentas_exentas', this)">Rentas Exentas</button>

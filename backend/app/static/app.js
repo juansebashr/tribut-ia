@@ -315,8 +315,10 @@ document.addEventListener('DOMContentLoaded', async () => {
   initCasillaPopovers();
   renderVisualCalendar();
   loadBeneficiosCatalog();
+  loadTablaArticulo73();
   runSimulacionAuditoria();
   runSimulacionSanciones();
+  runSimulacionArticulo73();
 
   // Resolver ID de sesión activa (Cookie, Header o URL)
   try {
@@ -1831,6 +1833,145 @@ async function runSimulacionSanciones() {
         Ahorro Legal: <strong>${formatCOP(data.ahorro_sancion_cop)} COP (${data.porcentaje_reduccion_aplicado.toFixed(0)}% de rebaja)</strong>
       </div>
       <p style="font-size:10.5px; color:#475569; margin:0;">${data.explicacion}</p>
+    `;
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+// ARTÍCULO 73 E.T. - REAJUSTE FISCAL DE ACTIVOS
+let tablaArticulo73Data = [];
+
+async function loadTablaArticulo73() {
+  try {
+    const res = await fetch('/api/v1/beneficios/articulo-73/tabla');
+    if (!res.ok) throw new Error('Error al cargar tabla Art. 73');
+    tablaArticulo73Data = await res.json();
+
+    // Poblar select de años
+    const anoSelect = document.getElementById('sim-art73-ano');
+    if (anoSelect && anoSelect.options.length === 0) {
+      anoSelect.innerHTML = '';
+      tablaArticulo73Data.forEach(item => {
+        const opt = document.createElement('option');
+        opt.value = item.ano_adquisicion;
+        opt.innerText = item.ano_adquisicion_texto;
+        if (item.ano_adquisicion === 1995) opt.selected = true;
+        anoSelect.appendChild(opt);
+      });
+    }
+
+    renderTablaArticulo73(tablaArticulo73Data);
+  } catch (err) {
+    console.error('Error cargando tabla Art 73:', err);
+  }
+}
+
+function renderTablaArticulo73(items) {
+  const tbody = document.getElementById('tabla-art73-tbody');
+  if (!tbody) return;
+  tbody.innerHTML = '';
+
+  items.forEach(item => {
+    const tr = document.createElement('tr');
+    tr.style.cursor = 'pointer';
+    tr.style.borderBottom = '1px solid var(--border-color)';
+    tr.className = 'hover-row';
+    tr.onclick = () => selectAnoArt73(item.ano_adquisicion);
+
+    tr.innerHTML = `
+      <td style="padding: 6px 10px; font-weight: 700; color: var(--primary);">${item.ano_adquisicion_texto}</td>
+      <td style="padding: 6px 10px; font-family: var(--font-mono);">${item.acciones_aportes.toLocaleString('es-CO', { minimumFractionDigits: 2 })}x</td>
+      <td style="padding: 6px 10px; font-family: var(--font-mono); font-weight: 600; color: #1e3a8a;">${item.bienes_raices_urbanos.toLocaleString('es-CO', { minimumFractionDigits: 2 })}x</td>
+      <td style="padding: 6px 10px; font-family: var(--font-mono); color: #047857;">${item.bienes_raices_rurales_agro.toLocaleString('es-CO', { minimumFractionDigits: 2 })}x</td>
+      <td style="padding: 6px 10px; font-family: var(--font-mono); color: #0284c7;">${item.bienes_raices_rurales.toLocaleString('es-CO', { minimumFractionDigits: 2 })}x</td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+function filterTablaArticulo73(query) {
+  if (!query || !query.trim()) {
+    renderTablaArticulo73(tablaArticulo73Data);
+    return;
+  }
+  const q = query.trim().toLowerCase();
+  const filtered = tablaArticulo73Data.filter(i => 
+    i.ano_adquisicion.toString().includes(q) || 
+    i.ano_adquisicion_texto.toLowerCase().includes(q)
+  );
+  renderTablaArticulo73(filtered);
+}
+
+function selectAnoArt73(ano) {
+  const anoSelect = document.getElementById('sim-art73-ano');
+  if (anoSelect) {
+    anoSelect.value = String(ano);
+    runSimulacionArticulo73();
+    showToast(`✓ Año ${ano} seleccionado para simulación Art. 73`, 'info', 2000);
+  }
+}
+
+async function runSimulacionArticulo73() {
+  const anoSelect = document.getElementById('sim-art73-ano');
+  const tipoSelect = document.getElementById('sim-art73-tipo');
+  const costoHist = getNum('sim-art73-costo-hist');
+  const precioVenta = getNum('sim-art73-precio-venta');
+  const resDiv = document.getElementById('sim-art73-result');
+  if (!resDiv || !anoSelect || !tipoSelect) return;
+
+  const ano = parseInt(anoSelect.value) || 1995;
+  const tipo = tipoSelect.value || 'bienes_raices_urbanos';
+
+  try {
+    const res = await fetch('/api/v1/beneficios/simular-articulo-73', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        ano_adquisicion: ano,
+        tipo_activo: tipo,
+        costo_historico_cop: costoHist,
+        precio_venta_cop: precioVenta > 0 ? precioVenta : null
+      })
+    });
+    if (!res.ok) throw new Error('Error al simular Art. 73');
+    const data = await res.json();
+
+    resDiv.innerHTML = `
+      <div>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; border-bottom: 1px dashed var(--border-color); padding-bottom: 6px;">
+          <span style="font-size: 11px; font-weight: 700; color: var(--text-muted);">FACTOR APLICADO:</span>
+          <span class="badge" style="background: #1e40af; color: #ffffff; font-size: 13px; font-weight: 800; font-family: var(--font-mono); padding: 2px 8px; border-radius: 4px;">
+            ${data.multiplicador_aplicado.toLocaleString('es-CO', { minimumFractionDigits: 2 })}x
+          </span>
+        </div>
+
+        <div style="margin-bottom: 10px;">
+          <div style="font-size: 10.5px; color: var(--text-muted);">NUEVO COSTO FISCAL AJUSTADO:</div>
+          <div style="font-size: 18px; font-weight: 900; font-family: var(--font-mono); color: #1e3a8a;">
+            ${formatCOP(data.costo_fiscal_ajustado_cop)}
+          </div>
+          <div style="font-size: 10px; color: #059669; font-weight: 600;">
+            +${formatCOP(data.incremento_costo_cop)} COP de costo fiscal legal adicional
+          </div>
+        </div>
+
+        ${precioVenta > 0 ? `
+          <div style="background: #f0fdf4; border: 1px solid #86efac; border-radius: 6px; padding: 8px 10px; margin-bottom: 8px;">
+            <div style="font-size: 10px; font-weight: 700; color: #166534; text-transform: uppercase;">Ahorro Tributario Estimado (Ganancia Ocasional 15%):</div>
+            <div style="font-size: 16px; font-weight: 900; font-family: var(--font-mono); color: #15803d;">
+              ${formatCOP(data.ahorro_estimado_impuesto_cop)}
+            </div>
+            <div style="font-size: 9.5px; color: #166534; margin-top: 2px;">
+              Utilidad sin reajuste: <strong>${formatCOP(data.ganancia_sin_ajuste_cop)}</strong> → Con reajuste: <strong>${formatCOP(data.ganancia_con_ajuste_cop)}</strong>
+            </div>
+          </div>
+        ` : ''}
+      </div>
+
+      <div style="font-size: 10px; color: var(--text-muted); line-height: 1.3; border-top: 1px solid var(--border-color); pt: 4px;">
+        📌 <strong>Fundamento:</strong> Art. 73 E.T. y Decreto reglamentario anual. Venta tras 2+ años de posesión tributa como Ganancia Ocasional al 15%.
+      </div>
     `;
   } catch (err) {
     console.error(err);
