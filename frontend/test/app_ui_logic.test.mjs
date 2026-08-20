@@ -105,7 +105,9 @@ const sandbox = {
   navigator: mockNavigator,
   window: {
     location: { search: '?session_id=test_ui_session' },
-    navigator: mockNavigator
+    navigator: mockNavigator,
+    addEventListener: () => {},
+    innerWidth: 1200
   },
   document: {
     getElementById(id) {
@@ -157,8 +159,8 @@ const sandbox = {
           id: '2',
           fecha: '2026-02-15',
           archivo_origen: 'Cert_Salud.pdf',
-          tercero_nombre: 'EPS SURA',
-          tercero_nit: '800088702-2',
+          tercero_nombre: 'ENTIDAD PROMOTORA DE SALUD DEMO EPS',
+          tercero_nit: '800111222-3',
           descripcion: 'Aportes salud',
           tipo_movimiento: 'EGRESO',
           valor_cop: 5000000,
@@ -253,21 +255,21 @@ test('Actualización del Badge de Sesión e Iniciar Nueva Sesión', () => {
 test('Reconciliación CSV - Carga de Demo y Renderizado Spreadsheet', async () => {
   await sandbox.loadReconciliationDemo();
   assert.equal(elementsMap['reconcile-kpi-total-trx'].innerText, 2);
-  assert.ok(elementsMap['reconciliation-table-tbody'].innerHTML.includes('EMPRESA SAS'));
+  assert.ok(elementsMap['reconciliation-table-tbody'].innerHTML.includes('EMPRESA'));
 });
 
 test('Reconciliación CSV - Filtrado y Búsqueda en Grid', async () => {
   await sandbox.loadReconciliationDemo();
-  elementsMap['reconcile-search-input'].value = 'SURA';
+  elementsMap['reconcile-search-input'].value = 'SALUD';
   sandbox.filterReconciliationGrid();
-  assert.ok(elementsMap['reconciliation-table-tbody'].innerHTML.includes('EPS SURA'));
+  assert.ok(elementsMap['reconciliation-table-tbody'].innerHTML.includes('SALUD'));
 });
 
 test('Reconciliación CSV - Auditoría Didáctica por Fila (Modal)', async () => {
   await sandbox.loadReconciliationDemo();
   sandbox.openReconciliationRowDetail('1');
   assert.equal(elementsMap['modal-reconciliation-detail'].style.display, 'flex');
-  assert.equal(elementsMap['reconcile-detail-tercero'].innerText, 'EMPRESA SAS');
+  assert.ok(elementsMap['reconcile-detail-tercero'].innerText.includes('EMPRESA'));
   
   sandbox.closeReconciliationDetailModal();
   assert.equal(elementsMap['modal-reconciliation-detail'].style.display, 'none');

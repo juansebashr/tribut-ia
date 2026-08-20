@@ -17,8 +17,8 @@ Liquidar a un empleado con ingresos brutos de **$120'000.000 COP**, aportes obli
 1. Abre [http://localhost:8000](http://localhost:8000).
 2. En la cabecera, verifica que el año seleccionado sea **2026** y el valor UVT sea **$52.350**.
 3. En la sección **Identificación del Declarante**, ingresa:
-- **Nombre**: `CARLOS ALBERTO PEREZ GOMEZ`
-- **NIT**: `1234567890` (El sistema calculará automáticamente el DV `4` usando Módulo 11).
+   - **Nombre**: `CONTRIBUYENTE PERSONA NATURAL DEMO`
+   - **NIT**: `9001234567` (El sistema calculará automáticamente el DV `1` usando Módulo 11).
 
 ### Paso 2: Diligenciamiento de Ingresos Laborales
 

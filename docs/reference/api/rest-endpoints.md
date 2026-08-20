@@ -56,8 +56,8 @@ Obtiene el estado completo actual de la sesión en Redis (metadatos, datos de Pe
   "session_id": "ses_7c9e6679742540de",
   "revision": 3,
   "metadata": {
-    "nombre": "CARLOS ALBERTO PEREZ GOMEZ",
-    "nit": "1022440206",
+    "nombre": "CONTRIBUYENTE PERSONA NATURAL DEMO",
+    "nit": "9001234567",
     "tax_year": 2025,
     "custom_uvt": 49799.0
   },
@@ -95,8 +95,8 @@ Inyecta o actualiza datos en la sesión activa en Redis, ejecuta el recálculo t
 ```json
 {
   "metadata": {
-    "nombre": "CARLOS ALBERTO PEREZ",
-    "nit": "1022440206",
+    "nombre": "CONTRIBUYENTE PERSONA NATURAL DEMO",
+    "nit": "9001234567",
     "tax_year": 2025
   },
   "persona_natural": {

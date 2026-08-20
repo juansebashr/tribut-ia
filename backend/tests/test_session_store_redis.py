@@ -31,7 +31,7 @@ def test_redis_session_store_lifecycle_and_ttl():
 
                 # 2. update_state debe incrementar revisión y guardar cambios
                 update_payload = {
-                    "metadata": {"nombre": "JUAN SEBASTIAN HERNANDEZ", "tax_year": 2025},
+                    "metadata": {"nombre": "CONTRIBUYENTE DEMO EJEMPLO", "tax_year": 2025},
                     "persona_natural": {
                         "rentas_trabajo": 206083000.0,
                         "aporte_salud_obligatorio": 6868000.0,
@@ -39,7 +39,7 @@ def test_redis_session_store_lifecycle_and_ttl():
                 }
                 updated = await store.update_state("test_user_1", update_payload, source="api")
                 assert updated.revision == 2
-                assert updated.metadata["nombre"] == "JUAN SEBASTIAN HERNANDEZ"
+                assert updated.metadata["nombre"] == "CONTRIBUYENTE DEMO EJEMPLO"
                 assert updated.persona_natural["rentas_trabajo"] == 206083000.0
 
                 # 3. get_state posterior recupera el estado actualizado y renueva el TTL

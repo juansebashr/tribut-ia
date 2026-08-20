@@ -24,8 +24,8 @@ curl -X POST "http://localhost:8000/api/v1/session/state?source=api" \
   -H "X-Session-ID: $SESSION_ID" \
   -d '{
     "metadata": {
-      "nombre": "CARLOS ALBERTO PEREZ GOMEZ",
-      "nit": "1022440206",
+      "nombre": "CONTRIBUYENTE PERSONA NATURAL DEMO",
+      "nit": "9001234567",
       "tax_year": 2025
     },
     "persona_natural": {
@@ -55,8 +55,8 @@ headers = {
 
 payload = {
     "metadata": {
-        "nombre": "CARLOS ALBERTO PEREZ",
-        "nit": "1022440206",
+        "nombre": "CONTRIBUYENTE PERSONA NATURAL DEMO",
+        "nit": "9001234567",
         "tax_year": 2025
     },
     "persona_natural": {

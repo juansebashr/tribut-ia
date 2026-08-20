@@ -28,12 +28,12 @@ def test_consolidar_template_csv():
         csv_path=str(template_path),
         tax_year=2026,
         custom_uvt=52350.0,
-        nombre="MARIA FERNANDA ROJAS",
-        nit="987654321",
+        nombre="CONTRIBUYENTE DEMO EJEMPLO",
+        nit="9001234567",
     )
 
-    assert payload["metadata"]["nombre"] == "MARIA FERNANDA ROJAS"
-    assert payload["metadata"]["nit"] == "987654321"
+    assert payload["metadata"]["nombre"] == "CONTRIBUYENTE DEMO EJEMPLO"
+    assert payload["metadata"]["nit"] == "9001234567"
     assert payload["metadata"]["tax_year"] == 2026
 
     pn = payload["persona_natural"]

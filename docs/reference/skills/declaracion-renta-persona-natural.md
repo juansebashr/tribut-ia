@@ -42,8 +42,8 @@ python skills/declaracion-renta-persona-natural/scripts/consolidar_transacciones
   transacciones_depuradas.csv \
   --year 2025 \
   --uvt 49799 \
-  --nombre "JUAN PEREZ" \
-  --nit "123456789" \
+  --nombre "CONTRIBUYENTE PERSONA NATURAL DEMO" \
+  --nit "9001234567" \
   --reconciliation estado_conciliacion.json \
   --out payload_declaracion.json
 ```

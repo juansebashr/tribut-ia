@@ -48,9 +48,9 @@
     "semantic_hash": "841cf1b6d236f6f90e5390dd095aecb3"
   },
   "backend/app/api/v1/endpoints/reconciliation.py": {
-    "mtime": 1787187777.4077182,
-    "seen": 1787187794.527713,
-    "ast_hash": "79d943db863325a835601d5546277e77",
+    "mtime": 1787208604.2380767,
+    "seen": 1787208893.0600152,
+    "ast_hash": "652afa3343f2f7825b6e7a06431cc971",
     "semantic_hash": ""
   },
   "backend/app/api/v1/endpoints/rules.py": {
@@ -168,10 +168,10 @@
     "semantic_hash": "a6c3ddea11479f4531805f254d7d0865"
   },
   "backend/app/services/session_store_base.py": {
-    "mtime": 1787182915.0576396,
-    "seen": 1787184713.910174,
-    "ast_hash": "07b6ac546dea43900749c029c20c2d53",
-    "semantic_hash": "07b6ac546dea43900749c029c20c2d53"
+    "mtime": 1787208770.0785875,
+    "seen": 1787208893.060483,
+    "ast_hash": "f148690987b8fe18619a07e93a61e7c1",
+    "semantic_hash": ""
   },
   "backend/run.py": {
     "mtime": 1787182844.6770062,
@@ -204,10 +204,10 @@
     "semantic_hash": "c83a23781ec894bac4a47427896dc2b2"
   },
   "backend/tests/test_coverage_boost.py": {
-    "mtime": 1787182915.0570748,
-    "seen": 1787184713.910177,
-    "ast_hash": "da730738dd039597384b8870ef466501",
-    "semantic_hash": "da730738dd039597384b8870ef466501"
+    "mtime": 1787208630.0166533,
+    "seen": 1787208893.0606341,
+    "ast_hash": "436972efe502c21bd533d43998fcde12",
+    "semantic_hash": ""
   },
   "backend/tests/test_pj_calculator.py": {
     "mtime": 1787182915.055907,
@@ -234,22 +234,22 @@
     "semantic_hash": "8127009b2bf480928718a759941c29d6"
   },
   "backend/tests/test_session_store_redis.py": {
-    "mtime": 1787190270.9224436,
-    "seen": 1787190286.047946,
-    "ast_hash": "ef93d695df864e49a4814c1069b3e9ff",
+    "mtime": 1787208626.133246,
+    "seen": 1787208893.06074,
+    "ast_hash": "e441d31ef9e62eb1dd36c13472d7110a",
     "semantic_hash": ""
   },
   "backend/tests/test_session_sync.py": {
-    "mtime": 1787182915.057721,
-    "seen": 1787184713.91018,
-    "ast_hash": "8a3c67151efaaf1dea6c3d24c2b519d9",
-    "semantic_hash": "8a3c67151efaaf1dea6c3d24c2b519d9"
+    "mtime": 1787208775.3591702,
+    "seen": 1787208893.0607412,
+    "ast_hash": "d40efba5223b3f66e6661027b4b5d424",
+    "semantic_hash": ""
   },
   "backend/tests/test_skill_renta_pn.py": {
-    "mtime": 1787182915.0578034,
-    "seen": 1787184713.910181,
-    "ast_hash": "e4e524846eebe80545142be2c797597c",
-    "semantic_hash": "e4e524846eebe80545142be2c797597c"
+    "mtime": 1787208684.2653692,
+    "seen": 1787208893.0607412,
+    "ast_hash": "287dd73ff4413ce70e1462822a586b64",
+    "semantic_hash": ""
   },
   "backend/tests/test_two_way_full_cycle.py": {
     "mtime": 1787182915.0577292,
@@ -390,9 +390,9 @@
     "semantic_hash": ""
   },
   "backend/app/static/index.html": {
-    "mtime": 1787207691.4424047,
-    "seen": 1787207816.469285,
-    "ast_hash": "121c2b95c95c21d237a659ea2786efb9",
+    "mtime": 1787208667.9955187,
+    "seen": 1787208893.0612538,
+    "ast_hash": "f53aaad153c696693a5a2fec58d89c0a",
     "semantic_hash": ""
   },
   "docs/README.md": {
@@ -462,9 +462,9 @@
     "semantic_hash": ""
   },
   "docs/how-to/01-integracion-api-bidireccional.md": {
-    "mtime": 1787184018.4666266,
-    "seen": 1787187794.528651,
-    "ast_hash": "391ad59aef902a2b3f8fe1dbfd7e10e8",
+    "mtime": 1787208782.2649534,
+    "seen": 1787208893.061502,
+    "ast_hash": "17de0018c93314d14dfcae7f7e1a0af4",
     "semantic_hash": ""
   },
   "docs/how-to/02-simular-tasa-minima-ttd-pj.md": {
@@ -480,15 +480,15 @@
     "semantic_hash": ""
   },
   "docs/reference/api/rest-endpoints.md": {
-    "mtime": 1787205626.591542,
-    "seen": 1787205748.918004,
-    "ast_hash": "7e9f6e3ace8d8a9a3b31eda96a61eebc",
+    "mtime": 1787208788.7369547,
+    "seen": 1787208893.061585,
+    "ast_hash": "4974446703746dfe77e3a5fce1e256e5",
     "semantic_hash": ""
   },
   "docs/reference/api/sse-events.md": {
-    "mtime": 1787184042.7128496,
-    "seen": 1787187794.5286531,
-    "ast_hash": "4dd6b0274b3b4576caa537c88cd00a36",
+    "mtime": 1787208795.3111713,
+    "seen": 1787208893.061585,
+    "ast_hash": "62edf9bf6644c32a295cd10b5e2e09be",
     "semantic_hash": ""
   },
   "docs/reference/architecture/c4/architecture-c4.md": {
@@ -528,9 +528,9 @@
     "semantic_hash": ""
   },
   "docs/reference/skills/declaracion-renta-persona-natural.md": {
-    "mtime": 1787184018.4826968,
-    "seen": 1787187794.528658,
-    "ast_hash": "33830fc1815a73d8c021d9fa2d7d5432",
+    "mtime": 1787208800.8212004,
+    "seen": 1787208893.061737,
+    "ast_hash": "ba3a4d51bd86511f20a9188da7011f5a",
     "semantic_hash": ""
   },
   "docs/reference/tax-engine/form110-casillas-mapping.md": {
@@ -552,9 +552,9 @@
     "semantic_hash": ""
   },
   "docs/tutorials/01-primeros-pasos-liquidacion-pn.md": {
-    "mtime": 1787184018.4975576,
-    "seen": 1787187794.52866,
-    "ast_hash": "f0d4f2a07f34605feec1e31161667c48",
+    "mtime": 1787208809.1351616,
+    "seen": 1787208893.061806,
+    "ast_hash": "16e639e06c42bf9b47f98543475579e9",
     "semantic_hash": ""
   },
   "frontend/README.md": {

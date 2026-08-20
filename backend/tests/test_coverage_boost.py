@@ -250,7 +250,7 @@ async def test_in_memory_session_store_full():
     """Valida métodos completos de InMemorySessionStore."""
     store = InMemorySessionStore()
     q = await store.subscribe("sess_1")
-    await store.update_state("sess_1", {"metadata": {"nombre": "JUAN"}})
+    await store.update_state("sess_1", {"metadata": {"nombre": "DECLARANTE DEMO"}})
     msg = await q.get()
     assert "state_update" in msg
     await store.unsubscribe("sess_1", q)

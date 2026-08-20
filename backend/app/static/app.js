@@ -1035,7 +1035,7 @@ function parseColombianFullName(fullName) {
   }
 
   if (words.length === 2) {
-    // Ej: "JUAN PEREZ" -> 1er Nombre: JUAN, 1er Apellido: PEREZ
+    // Ej: "CONTRIBUYENTE EJEMPLO" -> 1er Nombre: CONTRIBUYENTE, 1er Apellido: EJEMPLO
     return {
       primerNombre: words[0],
       otrosNombres: '',
@@ -1045,7 +1045,7 @@ function parseColombianFullName(fullName) {
   }
 
   if (words.length === 3) {
-    // Ej: "JUAN PEREZ GOMEZ" -> 1er Nombre: JUAN, 1er Apellido: PEREZ, 2do Apellido: GOMEZ
+    // Ej: "CONTRIBUYENTE PERSONA EJEMPLO" -> 1er Nombre: CONTRIBUYENTE, 1er Apellido: PERSONA, 2do Apellido: EJEMPLO
     return {
       primerNombre: words[0],
       otrosNombres: '',
@@ -1055,7 +1055,7 @@ function parseColombianFullName(fullName) {
   }
 
   if (words.length === 4) {
-    // Ej: "CARLOS ALBERTO PEREZ GOMEZ" -> 1er Nombre: CARLOS, Otros: ALBERTO, 1er Apellido: PEREZ, 2do Apellido: GOMEZ
+    // Ej: "CONTRIBUYENTE PERSONA EJEMPLO DEMO" -> 1er Nombre: CONTRIBUYENTE, Otros: PERSONA, 1er Apellido: EJEMPLO, 2do Apellido: DEMO
     return {
       primerNombre: words[0],
       otrosNombres: words[1],
@@ -1102,8 +1102,8 @@ function parseColombianFullName(fullName) {
 function renderForm210OfficialSheet(data) {
   if (!data) return;
 
-  const nombre = document.getElementById('pn_nombre_declarante') ? document.getElementById('pn_nombre_declarante').value : "CARLOS ALBERTO PEREZ GOMEZ";
-  const nit = document.getElementById('pn_nit_declarante') ? document.getElementById('pn_nit_declarante').value : "1234567890";
+  const nombre = document.getElementById('pn_nombre_declarante') ? document.getElementById('pn_nombre_declarante').value : "CONTRIBUYENTE PERSONA NATURAL DEMO";
+  const nit = document.getElementById('pn_nit_declarante') ? document.getElementById('pn_nit_declarante').value : "9001234567";
   
   // Traslado inteligente de nombres y apellidos según casillas 5, 6, 7, 8 del RUT/F210
   const parsed = parseColombianFullName(nombre);
@@ -1546,9 +1546,9 @@ function loadPnDefaultDummy() {
   currentYear = 2026;
   currentUvt = 52350;
   document.getElementById('input-custom-uvt').value = '52350';
-  document.getElementById('pn_nombre_declarante').value = 'CARLOS ALBERTO PEREZ GOMEZ';
-  document.getElementById('pn_nit_declarante').value = '1234567890';
-  document.getElementById('cal-search-nit').value = '1234567890';
+  document.getElementById('pn_nombre_declarante').value = 'CONTRIBUYENTE DEMO EJEMPLO UNO';
+  document.getElementById('pn_nit_declarante').value = '9001234567';
+  document.getElementById('cal-search-nit').value = '9001234567';
   setNum('pn_patrimonio_bruto', 300000000);
   setNum('pn_deudas', 80000000);
   setNum('pn_rentas_trabajo', 120000000);
@@ -1587,7 +1587,7 @@ function loadPn35PercentPreset() {
   currentYear = 2026;
   currentUvt = 52350;
   document.getElementById('input-custom-uvt').value = '52350';
-  document.getElementById('pn_nombre_declarante').value = 'MARIANA RESTREPO BOTERO';
+  document.getElementById('pn_nombre_declarante').value = 'CONTRIBUYENTE DEMO EJEMPLO DOS';
   document.getElementById('pn_nit_declarante').value = '9008765432';
   document.getElementById('cal-search-nit').value = '9008765432';
   setNum('pn_patrimonio_bruto', 1200000000);
@@ -1628,7 +1628,7 @@ function loadPnWithGoDummy() {
   currentYear = 2026;
   currentUvt = 52350;
   document.getElementById('input-custom-uvt').value = '52350';
-  document.getElementById('pn_nombre_declarante').value = 'MARIA FERNANDA LOPEZ RIVERA';
+  document.getElementById('pn_nombre_declarante').value = 'CONTRIBUYENTE DEMO EJEMPLO TRES';
   document.getElementById('pn_nit_declarante').value = '9876543210';
   document.getElementById('cal-search-nit').value = '9876543210';
   setNum('pn_patrimonio_bruto', 500000000);

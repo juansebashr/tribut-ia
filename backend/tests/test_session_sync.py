@@ -118,7 +118,7 @@ def test_session_sync_reset():
     reset_res = client.post("/api/v1/session/reset?session_id=to_reset")
     assert reset_res.status_code == 200
     data = reset_res.json()
-    assert data["metadata"]["nombre"] == "CARLOS ALBERTO PEREZ GOMEZ"
+    assert data["metadata"]["nombre"] == "CONTRIBUYENTE PERSONA NATURAL DEMO"
     assert data["persona_natural"]["rentas_trabajo"] == 120000000.0
 
 

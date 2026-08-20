@@ -26,7 +26,7 @@ data: {
 "session_id": "default",
 "source": "api",
 "state": {
-"metadata": { "nombre": "MARIANA RESTREPO BOTERO", "nit": "9008765432" },
+"metadata": { "nombre": "CONTRIBUYENTE DEMO EJEMPLO DOS", "nit": "9008765432" },
 "persona_natural": { "rentas_trabajo": 700000000 },
 "calculation_results": { "persona_natural": { "impuesto_bruto_renta": 162187000 } }
 }

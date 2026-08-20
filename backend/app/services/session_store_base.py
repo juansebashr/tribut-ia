@@ -11,8 +11,8 @@ class SessionState(BaseModel):
     revision: int = 1
     metadata: dict[str, Any] = Field(
         default_factory=lambda: {
-            "nombre": "CARLOS ALBERTO PEREZ GOMEZ",
-            "nit": "1234567890",
+            "nombre": "CONTRIBUYENTE PERSONA NATURAL DEMO",
+            "nit": "9001234567",
             "tax_year": 2026,
             "custom_uvt": 52350,
             "active_module": "pn",
@@ -36,8 +36,8 @@ class SessionStoreBase(ABC):
             session_id=session_id,
             revision=1,
             metadata={
-                "nombre": "CARLOS ALBERTO PEREZ GOMEZ",
-                "nit": "1234567890",
+                "nombre": "CONTRIBUYENTE PERSONA NATURAL DEMO",
+                "nit": "9001234567",
                 "tax_year": 2026,
                 "custom_uvt": 52350,
                 "active_module": "pn",
