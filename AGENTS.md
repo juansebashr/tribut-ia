@@ -4,9 +4,12 @@ Bienvenido agente. Este archivo es el **manual central y punto de entrada unific
 
 ---
 
-## 🎯 1. Resumen del Proyecto y Capacidades
+## 🎯 1. Resumen del Proyecto y Propósito (Why TributIA Exists)
 
-**TributIA** es una plataforma integral para la liquidación, conciliación y auditoría tributaria en Colombia bajo la normativa del Estatuto Tributario Nacional (Decreto Ley 624 de 1989 y Ley 2277 de 2022).
+Plataforma didáctica y asistente contable para la liquidación de impuestos en Colombia (PN y PJ), utilizada por contribuyentes, estudiantes y contadores.
+Priorizar la calidad de código, exactitud matemática, estricto cumplimiento normativo y una experiencia de usuario clara e intuitiva.
+Regla no negociable: nunca quemar en código valores fijos de ejemplos ni parámetros anuales (UVT), y mantener la arquitectura simple y directa sin sobrecomplicaciones.
+*(Para contexto profundo sobre propósito, usuarios y restricciones, consultar [`.claude/docs/why.md`](.claude/docs/why.md))*.
 
 ### Módulos Principales
 
