@@ -503,11 +503,11 @@ def get_catalogo_beneficios() -> list[BeneficioItem]:
 class LiquidacionSancionRequest(BaseModel):
     tipo_sancion: str = Field(
         "correccion",
-        description="Tipo de sanción: 'correccion' (Art. 644) o 'extemporaneidad' (Art. 641/642)",
+        description="Tipo de sanción: 'correccion' (Art. 644), 'extemporaneidad' (Art. 641/642), 'inexactitud_general' (Art. 648 - 100%), 'inexactitud_facturas_falsas' (Art. 648 Num. 2 - 160%), 'inexactitud_abuso' (Art. 648 Num. 1 - 200%), 'inexactitud_req_especial' (Art. 709 - 35%), 'inexactitud_recurso' (Art. 710 - 70%)",
     )
     monto_base_cop: float = Field(
         ...,
-        description="Monto base: Mayor valor a pagar (corrección) o Impuesto a cargo (extemporaneidad)",
+        description="Monto base: Mayor valor a pagar (corrección/inexactitud) o Impuesto a cargo (extemporaneidad)",
     )
     meses_fraccion_retraso: int = Field(
         1,
@@ -524,6 +524,18 @@ class LiquidacionSancionRequest(BaseModel):
     sin_sanciones_ultimo_1_ano: bool = Field(
         True,
         description="¿No ha sido objeto de sanción tributaria en el último año? (Art. 640)",
+    )
+    incluir_intereses_mora: bool = Field(
+        True,
+        description="¿Calcular e incluir intereses moratorios sobre el impuesto insoluto? (Art. 634 y 635 E.T.)",
+    )
+    dias_mora: int = Field(
+        60,
+        description="Número de días calendario de mora transcurridos desde el vencimiento legal",
+    )
+    tasa_interes_anual_pct: float = Field(
+        23.0,
+        description="Tasa efectiva anual de interés moratorio DIAN certificada por Superfinanciera (Tasa Usura - 2 puntos)",
     )
     tax_year: int = Field(2026, description="Año gravable")
     custom_uvt: float | None = Field(None, description="UVT personalizado opcional")
@@ -546,6 +558,12 @@ class LiquidacionSancionResponse(BaseModel):
     ahorro_favorabilidad_art640_cop: float
     comparativa_sancion_con_emplazamiento_dian_cop: float
     ahorro_por_corregir_antes_de_dian_cop: float
+    # Intereses de mora
+    incluye_intereses_mora: bool
+    dias_mora: int
+    tasa_interes_anual_pct: float
+    intereses_mora_cop: float
+    total_consolidado_a_pagar_cop: float
     articulos_aplicados: list[str]
     explicacion_didactica: str
     pasos_calculo: list[str]
@@ -598,7 +616,10 @@ class SimulacionInmuebleAfcResponse(BaseModel):
 
 
 def calcular_sancion_tributaria(req: LiquidacionSancionRequest) -> LiquidacionSancionResponse:
-    """Calcula de manera integral las sanciones tributarias con Art. 640 y sanción mínima Art. 639."""
+    """Calcula de manera integral las sanciones tributarias (Corrección, Extemporaneidad, Inexactitud),
+
+    los intereses moratorios diarios (Art. 634 y 635 E.T.), reducciones del Art. 640 y sanción mínima Art. 639.
+    """
     from app.core.rules_engine.loader import get_rules_for_year
 
     rules = get_rules_for_year(req.tax_year, req.custom_uvt)
@@ -621,7 +642,6 @@ def calcular_sancion_tributaria(req: LiquidacionSancionRequest) -> LiquidacionSa
             pasos.append(
                 f"1. Sanción por corrección voluntaria: 10% sobre mayor valor (${monto_base:,.0f}) = ${sancion_plena:,.0f} COP."
             )
-            # Si hubiese sido con emplazamiento:
             sancion_emplazada = round(monto_base * 0.20)
         else:
             tarifa_base = 0.20  # 20% tras emplazamiento
@@ -630,8 +650,8 @@ def calcular_sancion_tributaria(req: LiquidacionSancionRequest) -> LiquidacionSa
                 f"1. Sanción por corrección tras emplazamiento DIAN: 20% sobre mayor valor (${monto_base:,.0f}) = ${sancion_plena:,.0f} COP."
             )
             sancion_emplazada = sancion_plena
-    else:
-        # Extemporaneidad
+
+    elif tipo == "extemporaneidad":
         if req.es_voluntario_sin_emplazamiento:
             articulos.append("Art. 641 E.T. (Extemporaneidad voluntaria)")
             tarifa_base = round(min(1.0, 0.05 * meses), 4)  # 5% por mes, tope 100%
@@ -649,9 +669,77 @@ def calcular_sancion_tributaria(req: LiquidacionSancionRequest) -> LiquidacionSa
             )
             sancion_emplazada = sancion_plena
 
+    elif tipo == "inexactitud_facturas_falsas":
+        articulos.append(
+            "Arts. 647 y 648 Numeral 2 E.T. (Inexactitud por Facturas Falsas o Proveedores Ficticios)"
+        )
+        tarifa_base = 1.60  # 160%
+        sancion_plena = round(monto_base * 1.60)
+        sancion_emplazada = sancion_plena
+        pasos.append(
+            f"1. Sanción por inexactitud agravada (proveedores ficticios o compras simuladas): 160% sobre mayor valor (${monto_base:,.0f}) = ${sancion_plena:,.0f} COP."
+        )
+
+    elif tipo == "inexactitud_abuso":
+        articulos.append(
+            "Arts. 647 y 648 Numeral 1 E.T. (Inexactitud por Abuso en Materia Tributaria)"
+        )
+        tarifa_base = 2.00  # 200%
+        sancion_plena = round(monto_base * 2.00)
+        sancion_emplazada = sancion_plena
+        pasos.append(
+            f"1. Sanción por inexactitud por abuso tributario / fraude de ley: 200% sobre mayor valor (${monto_base:,.0f}) = ${sancion_plena:,.0f} COP."
+        )
+
+    elif tipo == "inexactitud_req_especial":
+        articulos.append(
+            "Arts. 647 y 709 E.T. (Inexactitud con Aceptación en Requerimiento Especial)"
+        )
+        tarifa_base = 0.35  # Reducción legal al 35%
+        sancion_plena = round(monto_base * 0.35)
+        sancion_emplazada = round(monto_base * 1.00)  # Si no aceptara pagaría el 100%
+        pasos.append(
+            f"1. Sanción por inexactitud reducida con respuesta al Requerimiento Especial (Art. 709 E.T.): 35% sobre mayor valor (${monto_base:,.0f}) = ${sancion_plena:,.0f} COP (frente al 100% ordinario de ${sancion_emplazada:,.0f})."
+        )
+
+    elif tipo == "inexactitud_recurso":
+        articulos.append(
+            "Arts. 647 y 710 E.T. (Inexactitud con Aceptación en Recurso de Reconsideración)"
+        )
+        tarifa_base = 0.70  # Reducción legal al 70%
+        sancion_plena = round(monto_base * 0.70)
+        sancion_emplazada = round(monto_base * 1.00)  # Si no aceptara pagaría el 100%
+        pasos.append(
+            f"1. Sanción por inexactitud reducida con interposición del Recurso de Reconsideración (Art. 710 E.T.): 70% sobre mayor valor (${monto_base:,.0f}) = ${sancion_plena:,.0f} COP (frente al 100% ordinario de ${sancion_emplazada:,.0f})."
+        )
+
+    else:
+        # inexactitud_general (100%)
+        articulos.append("Arts. 647 y 648 E.T. (Sanción General por Inexactitud)")
+        tarifa_base = 1.00  # 100%
+        sancion_plena = round(monto_base * 1.00)
+        sancion_emplazada = sancion_plena
+        pasos.append(
+            f"1. Sanción general por inexactitud (omisión de ingresos o deducciones improcedentes): 100% sobre mayor valor (${monto_base:,.0f}) = ${sancion_plena:,.0f} COP."
+        )
+
     # 2. Aplicación del Principio de Proporcionalidad y Gradualidad (Art. 640 E.T.)
     articulos.append("Art. 640 E.T. (Principio de Favorabilidad y Gradualidad)")
-    if req.es_voluntario_sin_emplazamiento:
+
+    # Excepción: Conductas de abuso o facturas falsas no tienen reducción por Art. 640 Parágrafo 3
+    if tipo in ("inexactitud_facturas_falsas", "inexactitud_abuso"):
+        factor_reduccion = 1.00
+        pct_desc = 0.0
+        pasos.append(
+            "2. Sin reducción de Art. 640: El Parágrafo 3 del Art. 640 prohibe expresamente aplicar favorabilidad en conductas dolosas, abusivas o facturas falsas."
+        )
+    elif tipo in ("inexactitud_req_especial", "inexactitud_recurso"):
+        factor_reduccion = 1.00
+        pct_desc = 0.0
+        pasos.append(
+            "2. Reducción procesal especial: La tarifa liquidada ya incorpora la reducción legal fijada en los Arts. 709 o 710 E.T."
+        )
+    elif req.es_voluntario_sin_emplazamiento:
         if req.sin_sanciones_ultimos_2_anos:
             factor_reduccion = 0.50  # Paga el 50% (descuento del 50%)
             pct_desc = 50.0
@@ -705,13 +793,39 @@ def calcular_sancion_tributaria(req: LiquidacionSancionRequest) -> LiquidacionSa
         aplico_minima = False
         pasos.append(f"3. Sanción final ajustada al múltiplo de mil: ${sancion_final:,.0f} COP.")
 
+    # 4. Cálculo de Intereses de Mora (Arts. 634 y 635 E.T.)
+    dias_mora = max(1, req.dias_mora) if req.dias_mora > 0 else meses * 30
+    tasa_ea = max(0.0, req.tasa_interes_anual_pct)
+    intereses_mora_cop = 0.0
+
+    if req.incluir_intereses_mora and monto_base > 0 and dias_mora > 0:
+        articulos.append("Arts. 634 y 635 E.T. (Intereses Moratorios Diarios Compuestos)")
+        # Fórmula de interés compuesto diario: I = K * ((1 + r_ea)^(D / 365) - 1)
+        tasa_decimal = tasa_ea / 100.0
+        factor_compuesto = ((1.0 + tasa_decimal) ** (dias_mora / 365.0)) - 1.0
+        intereses_mora_cop = round((monto_base * factor_compuesto) / 1000.0) * 1000.0
+        pasos.append(
+            f"4. Intereses Moratorios: Tasa efectiva anual de {tasa_ea:.2f}% E.A. aplicada por {dias_mora} días calendario sobre capital adeudado (${monto_base:,.0f}) = ${intereses_mora_cop:,.0f} COP."
+        )
+        pasos.append(
+            "💡 Nota: La sanción mínima del Art. 639 (10 UVT) NO aplica a los intereses de mora; estos se liquidan proporcionalmente día a día."
+        )
+
+    total_consolidado_cop = monto_base + sancion_final + intereses_mora_cop
+
     # Comparativa con emplazamiento
     ahorro_voluntario = max(0.0, sancion_emplazada - sancion_final)
 
     exp = (
-        f"La sanción liquidada a pagar es de ${sancion_final:,.0f} COP. "
-        f"Al corregir/declarar voluntariamente antes de actuación DIAN y contar con buen historial tributario, "
-        f"obtuviste un ahorro estimado de ${ahorro_voluntario:,.0f} COP frente a un escenario de fiscalización coactiva."
+        f"La sanción liquidada a pagar es de ${sancion_final:,.0f} COP"
+        + (
+            f" más ${intereses_mora_cop:,.0f} COP de intereses moratorios por {dias_mora} días de mora"
+            if req.incluir_intereses_mora
+            else ""
+        )
+        + f", para un gran total consolidado de ${total_consolidado_cop:,.0f} COP (incluyendo capital adeudado de ${monto_base:,.0f} COP). "
+        f"Al corregir/declarar voluntariamente antes de actuación coactiva de la DIAN y contar con historial favorable, "
+        f"obtuviste un ahorro estimado de ${ahorro_voluntario:,.0f} COP en la sanción."
     )
 
     return LiquidacionSancionResponse(
@@ -731,6 +845,11 @@ def calcular_sancion_tributaria(req: LiquidacionSancionRequest) -> LiquidacionSa
         ahorro_favorabilidad_art640_cop=ahorro_art640,
         comparativa_sancion_con_emplazamiento_dian_cop=sancion_emplazada,
         ahorro_por_corregir_antes_de_dian_cop=ahorro_voluntario,
+        incluye_intereses_mora=req.incluir_intereses_mora,
+        dias_mora=dias_mora,
+        tasa_interes_anual_pct=tasa_ea,
+        intereses_mora_cop=intereses_mora_cop,
+        total_consolidado_a_pagar_cop=total_consolidado_cop,
         articulos_aplicados=articulos,
         explicacion_didactica=exp,
         pasos_calculo=pasos,

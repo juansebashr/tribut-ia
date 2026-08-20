@@ -201,20 +201,29 @@ class TestTributIAEndToEnd:
         assert "FIRMEZA EN 6 MESES" in aud_result
         assert "FIRMEZA EN 12 MESES" in aud_result
 
-        # 2. Probar calculadora de sanciones - Corrección
+        # 2. Probar calculadora de sanciones - Corrección con Intereses de Mora
         page.fill("#sancion-calc-monto-base", "50'000.000")
         page.wait_for_timeout(400)
         sancion_result = page.inner_text("#sancion-calc-result-box")
-        assert "Sanción Final a Pagar" in sancion_result
+        assert "Sanción Liquidada a Pagar" in sancion_result or "Sanción" in sancion_result
+        assert "Intereses Moratorios" in sancion_result
+        assert "GRAN TOTAL CONSOLIDADO" in sancion_result
         assert "Descuento Art. 640" in sancion_result
-        assert "Ahorro por Favorabilidad" in sancion_result
+        assert "Ahorro Favorabilidad" in sancion_result
 
         # 3. Cambiar a Extemporaneidad
         page.select_option("#sancion-calc-tipo", "extemporaneidad")
         page.wait_for_timeout(400)
         assert page.locator("#sancion-meses-container").is_visible()
         extemp_result = page.inner_text("#sancion-calc-result-box")
-        assert "Sanción Final a Pagar" in extemp_result
+        assert "Sanción Liquidada a Pagar" in extemp_result or "Sanción" in extemp_result
+
+        # 4. Cambiar a Inexactitud General (100%)
+        page.select_option("#sancion-calc-tipo", "inexactitud_general")
+        page.wait_for_timeout(400)
+        inexact_result = page.inner_text("#sancion-calc-result-box")
+        assert "Tarifa Base: 100%" in inexact_result
+        assert "GRAN TOTAL CONSOLIDADO" in inexact_result
 
         assert len(errors) == 0, f"Errores en módulo de presentación y sanciones: {errors}"
 

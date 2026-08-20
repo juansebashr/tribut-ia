@@ -1463,6 +1463,17 @@
       "source_location": "L164"
     },
     {
+      "id": "backend_tests_test_beneficios_and_go_func_test_calcular_sancion_con_intereses_de_mora_compuestos",
+      "label": "test_calcular_sancion_con_intereses_de_mora_compuestos",
+      "_origin": "ast",
+      "community": 12,
+      "community_name": "test_beneficios_and_go.py",
+      "file_type": "concept",
+      "norm_label": "test_calcular_sancion_con_intereses_de_mora_compuestos",
+      "source_file": "backend/tests/test_beneficios_and_go.py",
+      "source_location": "L197"
+    },
+    {
       "id": "backend_tests_test_beneficios_and_go_func_test_calcular_sancion_control_minima_10_uvt",
       "label": "test_calcular_sancion_control_minima_10_uvt",
       "_origin": "ast",
@@ -1494,6 +1505,17 @@
       "norm_label": "test_calcular_sancion_extemporaneidad_mensual",
       "source_file": "backend/tests/test_beneficios_and_go.py",
       "source_location": "L140"
+    },
+    {
+      "id": "backend_tests_test_beneficios_and_go_func_test_calcular_sancion_inexactitud_tarifas_y_procesos",
+      "label": "test_calcular_sancion_inexactitud_tarifas_y_procesos",
+      "_origin": "ast",
+      "community": 12,
+      "community_name": "test_beneficios_and_go.py",
+      "file_type": "concept",
+      "norm_label": "test_calcular_sancion_inexactitud_tarifas_y_procesos",
+      "source_file": "backend/tests/test_beneficios_and_go.py",
+      "source_location": "L229"
     },
     {
       "id": "backend_tests_test_beneficios_and_go_func_test_catalogo_beneficios",
@@ -2266,6 +2288,114 @@
       "norm_label": "run_debug",
       "source_file": "backend/tests/debug_ui_playwright.py",
       "source_location": "L21"
+    },
+    {
+      "id": "docs_decisions_0003_mascara_contable_colombiana_en_dom",
+      "label": "0003-mascara-contable-colombiana-en-dom.md",
+      "_origin": "ast",
+      "community": 146,
+      "community_name": "0003-mascara-contable-colombiana-en-dom.md",
+      "file_type": "document",
+      "node_kind": "page",
+      "norm_label": "0003-mascara-contable-colombiana-en-dom.md",
+      "source_file": "docs/decisions/0003-mascara-contable-colombiana-en-dom.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "docs_decisions_0003_mascara_contable_colombiana_en_dom_adr_0003_manejo_de_m\u00e1scara_contable_colombiana_en_el_dom_y_sanitizaci\u00f3n_num\u00e9rica",
+      "label": "ADR 0003: Manejo de M\u00e1scara Contable Colombiana en el DOM y Sanitizaci\u00f3n Num\u00e9rica",
+      "_origin": "ast",
+      "community": 146,
+      "community_name": "0003-mascara-contable-colombiana-en-dom.md",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "adr 0003: manejo de mascara contable colombiana en el dom y sanitizacion numerica",
+      "source_file": "docs/decisions/0003-mascara-contable-colombiana-en-dom.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "docs_decisions_0003_mascara_contable_colombiana_en_dom_consecuencias",
+      "label": "Consecuencias",
+      "_origin": "ast",
+      "community": 146,
+      "community_name": "0003-mascara-contable-colombiana-en-dom.md",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "consecuencias",
+      "source_file": "docs/decisions/0003-mascara-contable-colombiana-en-dom.md",
+      "source_location": "L17"
+    },
+    {
+      "id": "docs_decisions_0003_mascara_contable_colombiana_en_dom_contexto",
+      "label": "Contexto",
+      "_origin": "ast",
+      "community": 146,
+      "community_name": "0003-mascara-contable-colombiana-en-dom.md",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "contexto",
+      "source_file": "docs/decisions/0003-mascara-contable-colombiana-en-dom.md",
+      "source_location": "L7"
+    },
+    {
+      "id": "docs_decisions_0003_mascara_contable_colombiana_en_dom_decisi\u00f3n",
+      "label": "Decisi\u00f3n",
+      "_origin": "ast",
+      "community": 146,
+      "community_name": "0003-mascara-contable-colombiana-en-dom.md",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "decision",
+      "source_file": "docs/decisions/0003-mascara-contable-colombiana-en-dom.md",
+      "source_location": "L11"
+    },
+    {
+      "id": "docs_how_to_02_simular_tasa_minima_ttd_pj",
+      "label": "02-simular-tasa-minima-ttd-pj.md",
+      "_origin": "ast",
+      "community": 147,
+      "community_name": "02-simular-tasa-minima-ttd-pj.md",
+      "file_type": "document",
+      "node_kind": "page",
+      "norm_label": "02-simular-tasa-minima-ttd-pj.md",
+      "source_file": "docs/how-to/02-simular-tasa-minima-ttd-pj.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "docs_how_to_02_simular_tasa_minima_ttd_pj_1_fundamento_de_la_tasa_m\u00ednima_de_tributaci\u00f3n_ttd",
+      "label": "1. Fundamento de la Tasa M\u00ednima de Tributaci\u00f3n (TTD)",
+      "_origin": "ast",
+      "community": 147,
+      "community_name": "02-simular-tasa-minima-ttd-pj.md",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "1. fundamento de la tasa minima de tributacion (ttd)",
+      "source_file": "docs/how-to/02-simular-tasa-minima-ttd-pj.md",
+      "source_location": "L7"
+    },
+    {
+      "id": "docs_how_to_02_simular_tasa_minima_ttd_pj_2_ejecuci\u00f3n_v\u00eda_api",
+      "label": "2. Ejecuci\u00f3n v\u00eda API",
+      "_origin": "ast",
+      "community": 147,
+      "community_name": "02-simular-tasa-minima-ttd-pj.md",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "2. ejecucion via api",
+      "source_file": "docs/how-to/02-simular-tasa-minima-ttd-pj.md",
+      "source_location": "L17"
+    },
+    {
+      "id": "docs_how_to_02_simular_tasa_minima_ttd_pj_gu\u00eda_how_to_simular_tasa_m\u00ednima_de_tributaci\u00f3n_ttd_15_pj",
+      "label": "Gu\u00eda How-To: Simular Tasa M\u00ednima de Tributaci\u00f3n (TTD 15% - PJ)",
+      "_origin": "ast",
+      "community": 147,
+      "community_name": "02-simular-tasa-minima-ttd-pj.md",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "guia how-to: simular tasa minima de tributacion (ttd 15% - pj)",
+      "source_file": "docs/how-to/02-simular-tasa-minima-ttd-pj.md",
+      "source_location": "L1"
     },
     {
       "id": "backend_app_core_rules_engine_loader",
@@ -11369,7 +11499,7 @@
       "label": "05-calcular-sanciones-y-beneficio-auditoria.md",
       "_origin": "ast",
       "community": 48,
-      "community_name": "2. Liquidaci\u00f3n de Sanciones (Arts. 641, 644, 640 y 639 E.T.)",
+      "community_name": "2. Liquidaci\u00f3n de Sanciones (Arts. 641, 644, 647, 648, 640 y 639 E.T.)",
       "file_type": "document",
       "node_kind": "page",
       "norm_label": "05-calcular-sanciones-y-beneficio-auditoria.md",
@@ -11381,7 +11511,7 @@
       "label": "1. Beneficio de Auditor\u00eda (Art. 689-3 E.T.)",
       "_origin": "ast",
       "community": 48,
-      "community_name": "2. Liquidaci\u00f3n de Sanciones (Arts. 641, 644, 640 y 639 E.T.)",
+      "community_name": "2. Liquidaci\u00f3n de Sanciones (Arts. 641, 644, 647, 648, 640 y 639 E.T.)",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "1. beneficio de auditoria (art. 689-3 e.t.)",
@@ -11389,35 +11519,59 @@
       "source_location": "L7"
     },
     {
-      "id": "docs_how_to_05_calcular_sanciones_y_beneficio_auditoria_2_liquidaci\u00f3n_de_sanciones_arts_641_644_640_y_639_e_t",
-      "label": "2. Liquidaci\u00f3n de Sanciones (Arts. 641, 644, 640 y 639 E.T.)",
+      "id": "docs_how_to_05_calcular_sanciones_y_beneficio_auditoria_2_liquidaci\u00f3n_de_sanciones_arts_641_644_647_648_640_y_639_e_t",
+      "label": "2. Liquidaci\u00f3n de Sanciones (Arts. 641, 644, 647, 648, 640 y 639 E.T.)",
       "_origin": "ast",
       "community": 48,
-      "community_name": "2. Liquidaci\u00f3n de Sanciones (Arts. 641, 644, 640 y 639 E.T.)",
+      "community_name": "2. Liquidaci\u00f3n de Sanciones (Arts. 641, 644, 647, 648, 640 y 639 E.T.)",
       "file_type": "document",
       "node_kind": "heading",
-      "norm_label": "2. liquidacion de sanciones (arts. 641, 644, 640 y 639 e.t.)",
+      "norm_label": "2. liquidacion de sanciones (arts. 641, 644, 647, 648, 640 y 639 e.t.)",
       "source_file": "docs/how-to/05-calcular-sanciones-y-beneficio-auditoria.md",
       "source_location": "L31"
+    },
+    {
+      "id": "docs_how_to_05_calcular_sanciones_y_beneficio_auditoria_3_intereses_moratorios_diarios_compuestos_arts_634_y_635_e_t",
+      "label": "3. Intereses Moratorios Diarios Compuestos (Arts. 634 y 635 E.T.)",
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "2. Liquidaci\u00f3n de Sanciones (Arts. 641, 644, 647, 648, 640 y 639 E.T.)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "3. intereses moratorios diarios compuestos (arts. 634 y 635 e.t.)",
+      "source_file": "docs/how-to/05-calcular-sanciones-y-beneficio-auditoria.md",
+      "source_location": "L61"
+    },
+    {
+      "id": "docs_how_to_05_calcular_sanciones_y_beneficio_auditoria_4_ejemplo_de_c\u00e1lculo_v\u00eda_api_post_api_v1_beneficios_calcular_sancion",
+      "label": "4. Ejemplo de C\u00e1lculo v\u00eda API (`POST /api/v1/beneficios/calcular-sancion`)",
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "2. Liquidaci\u00f3n de Sanciones (Arts. 641, 644, 647, 648, 640 y 639 E.T.)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "4. ejemplo de calculo via api (`post /api/v1/beneficios/calcular-sancion`)",
+      "source_file": "docs/how-to/05-calcular-sanciones-y-beneficio-auditoria.md",
+      "source_location": "L73"
     },
     {
       "id": "docs_how_to_05_calcular_sanciones_y_beneficio_auditoria_control_de_sanci\u00f3n_m\u00ednima_art_639",
       "label": "Control de Sanci\u00f3n M\u00ednima (Art. 639)",
       "_origin": "ast",
       "community": 48,
-      "community_name": "2. Liquidaci\u00f3n de Sanciones (Arts. 641, 644, 640 y 639 E.T.)",
+      "community_name": "2. Liquidaci\u00f3n de Sanciones (Arts. 641, 644, 647, 648, 640 y 639 E.T.)",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "control de sancion minima (art. 639)",
       "source_file": "docs/how-to/05-calcular-sanciones-y-beneficio-auditoria.md",
-      "source_location": "L45"
+      "source_location": "L56"
     },
     {
       "id": "docs_how_to_05_calcular_sanciones_y_beneficio_auditoria_c\u00f3mo_calcular_sanciones_tributarias_y_simular_el_beneficio_de_auditor\u00eda",
       "label": "C\u00f3mo Calcular Sanciones Tributarias y Simular el Beneficio de Auditor\u00eda",
       "_origin": "ast",
       "community": 48,
-      "community_name": "2. Liquidaci\u00f3n de Sanciones (Arts. 641, 644, 640 y 639 E.T.)",
+      "community_name": "2. Liquidaci\u00f3n de Sanciones (Arts. 641, 644, 647, 648, 640 y 639 E.T.)",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "como calcular sanciones tributarias y simular el beneficio de auditoria",
@@ -11425,23 +11579,11 @@
       "source_location": "L1"
     },
     {
-      "id": "docs_how_to_05_calcular_sanciones_y_beneficio_auditoria_ejemplo_de_c\u00e1lculo_v\u00eda_api_post_api_v1_beneficios_calcular_sancion",
-      "label": "Ejemplo de C\u00e1lculo v\u00eda API (`POST /api/v1/beneficios/calcular-sancion`)",
-      "_origin": "ast",
-      "community": 48,
-      "community_name": "2. Liquidaci\u00f3n de Sanciones (Arts. 641, 644, 640 y 639 E.T.)",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "ejemplo de calculo via api (`post /api/v1/beneficios/calcular-sancion`)",
-      "source_file": "docs/how-to/05-calcular-sanciones-y-beneficio-auditoria.md",
-      "source_location": "L48"
-    },
-    {
       "id": "docs_how_to_05_calcular_sanciones_y_beneficio_auditoria_ejemplo_v\u00eda_api_rest_post_api_v1_beneficios_simular_auditoria",
       "label": "Ejemplo v\u00eda API REST (`POST /api/v1/beneficios/simular-auditoria`)",
       "_origin": "ast",
       "community": 48,
-      "community_name": "2. Liquidaci\u00f3n de Sanciones (Arts. 641, 644, 640 y 639 E.T.)",
+      "community_name": "2. Liquidaci\u00f3n de Sanciones (Arts. 641, 644, 647, 648, 640 y 639 E.T.)",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "ejemplo via api rest (`post /api/v1/beneficios/simular-auditoria`)",
@@ -11453,19 +11595,19 @@
       "label": "Reducciones del Principio de Favorabilidad (Art. 640)",
       "_origin": "ast",
       "community": 48,
-      "community_name": "2. Liquidaci\u00f3n de Sanciones (Arts. 641, 644, 640 y 639 E.T.)",
+      "community_name": "2. Liquidaci\u00f3n de Sanciones (Arts. 641, 644, 647, 648, 640 y 639 E.T.)",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "reducciones del principio de favorabilidad (art. 640)",
       "source_file": "docs/how-to/05-calcular-sanciones-y-beneficio-auditoria.md",
-      "source_location": "L41"
+      "source_location": "L51"
     },
     {
       "id": "docs_how_to_05_calcular_sanciones_y_beneficio_auditoria_reglas_de_aplicaci\u00f3n",
       "label": "Reglas de Aplicaci\u00f3n",
       "_origin": "ast",
       "community": 48,
-      "community_name": "2. Liquidaci\u00f3n de Sanciones (Arts. 641, 644, 640 y 639 E.T.)",
+      "community_name": "2. Liquidaci\u00f3n de Sanciones (Arts. 641, 644, 647, 648, 640 y 639 E.T.)",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "reglas de aplicacion",
@@ -11477,7 +11619,7 @@
       "label": "Sanci\u00f3n por Correcci\u00f3n (Art. 644)",
       "_origin": "ast",
       "community": 48,
-      "community_name": "2. Liquidaci\u00f3n de Sanciones (Arts. 641, 644, 640 y 639 E.T.)",
+      "community_name": "2. Liquidaci\u00f3n de Sanciones (Arts. 641, 644, 647, 648, 640 y 639 E.T.)",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "sancion por correccion (art. 644)",
@@ -11489,12 +11631,24 @@
       "label": "Sanci\u00f3n por Extemporaneidad (Art. 641)",
       "_origin": "ast",
       "community": 48,
-      "community_name": "2. Liquidaci\u00f3n de Sanciones (Arts. 641, 644, 640 y 639 E.T.)",
+      "community_name": "2. Liquidaci\u00f3n de Sanciones (Arts. 641, 644, 647, 648, 640 y 639 E.T.)",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "sancion por extemporaneidad (art. 641)",
       "source_file": "docs/how-to/05-calcular-sanciones-y-beneficio-auditoria.md",
       "source_location": "L37"
+    },
+    {
+      "id": "docs_how_to_05_calcular_sanciones_y_beneficio_auditoria_sanci\u00f3n_por_inexactitud_arts_647_648_709_y_710",
+      "label": "Sanci\u00f3n por Inexactitud (Arts. 647, 648, 709 y 710)",
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "2. Liquidaci\u00f3n de Sanciones (Arts. 641, 644, 647, 648, 640 y 639 E.T.)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "sancion por inexactitud (arts. 647, 648, 709 y 710)",
+      "source_file": "docs/how-to/05-calcular-sanciones-y-beneficio-auditoria.md",
+      "source_location": "L41"
     },
     {
       "id": "docs_reference_api_rest_endpoints",
@@ -17335,7 +17489,7 @@
       "file_type": "concept",
       "norm_label": "liquidacionsancionresponse",
       "source_file": "backend/app/services/beneficios.py",
-      "source_location": "L532"
+      "source_location": "L544"
     },
     {
       "id": "backend_app_services_beneficios_class_reduccionsancionrequest",
@@ -17390,7 +17544,7 @@
       "file_type": "concept",
       "norm_label": "simulacioninmuebleafcrequest",
       "source_file": "backend/app/services/beneficios.py",
-      "source_location": "L554"
+      "source_location": "L572"
     },
     {
       "id": "backend_app_services_beneficios_class_simulacioninmuebleafcresponse",
@@ -17401,7 +17555,7 @@
       "file_type": "concept",
       "norm_label": "simulacioninmuebleafcresponse",
       "source_file": "backend/app/services/beneficios.py",
-      "source_location": "L578"
+      "source_location": "L596"
     },
     {
       "id": "backend_app_services_beneficios_func_calcular_ajuste_articulo_73",
@@ -17423,7 +17577,7 @@
       "file_type": "concept",
       "norm_label": "calcular_beneficio_auditoria",
       "source_file": "backend/app/services/beneficios.py",
-      "source_location": "L828"
+      "source_location": "L947"
     },
     {
       "id": "backend_app_services_beneficios_func_calcular_exencion_inmueble_afc",
@@ -17434,7 +17588,7 @@
       "file_type": "concept",
       "norm_label": "calcular_exencion_inmueble_afc",
       "source_file": "backend/app/services/beneficios.py",
-      "source_location": "L740"
+      "source_location": "L859"
     },
     {
       "id": "backend_app_services_beneficios_func_calcular_reduccion_sancion",
@@ -17445,7 +17599,7 @@
       "file_type": "concept",
       "norm_label": "calcular_reduccion_sancion",
       "source_file": "backend/app/services/beneficios.py",
-      "source_location": "L879"
+      "source_location": "L998"
     },
     {
       "id": "backend_app_services_beneficios_func_calcular_sancion_tributaria",
@@ -17456,7 +17610,7 @@
       "file_type": "concept",
       "norm_label": "calcular_sancion_tributaria",
       "source_file": "backend/app/services/beneficios.py",
-      "source_location": "L600"
+      "source_location": "L618"
     },
     {
       "id": "backend_app_services_beneficios_func_get_catalogo_beneficios",
@@ -17854,6 +18008,30 @@
       "source_location": "L9"
     },
     {
+      "id": "docs_readme_documentacion_tecnica_de_tributia",
+      "label": "Documentacion Tecnica de TributIA",
+      "_origin": "ast",
+      "community": 65,
+      "community_name": "Cuadrantes Diataxis",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "documentacion tecnica de tributia",
+      "source_file": "docs/README.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "docs_readme_registro_de_decisiones_arquitectonicas_adrs_decisions_readme_md",
+      "label": "[Registro de Decisiones Arquitectonicas (ADRs)](./decisions/README.md)",
+      "_origin": "ast",
+      "community": 65,
+      "community_name": "Cuadrantes Diataxis",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "[registro de decisiones arquitectonicas (adrs)](./decisions/readme.md)",
+      "source_file": "docs/README.md",
+      "source_location": "L64"
+    },
+    {
       "id": "docs_explanation_02_sistema_cedular_colombiano",
       "label": "02-sistema-cedular-colombiano.md",
       "_origin": "ast",
@@ -17926,54 +18104,6 @@
       "source_location": "L1"
     },
     {
-      "id": "docs_how_to_02_simular_tasa_minima_ttd_pj",
-      "label": "02-simular-tasa-minima-ttd-pj.md",
-      "_origin": "ast",
-      "community": 66,
-      "community_name": "README.md",
-      "file_type": "document",
-      "node_kind": "page",
-      "norm_label": "02-simular-tasa-minima-ttd-pj.md",
-      "source_file": "docs/how-to/02-simular-tasa-minima-ttd-pj.md",
-      "source_location": "L1"
-    },
-    {
-      "id": "docs_how_to_02_simular_tasa_minima_ttd_pj_1_fundamento_de_la_tasa_m\u00ednima_de_tributaci\u00f3n_ttd",
-      "label": "1. Fundamento de la Tasa M\u00ednima de Tributaci\u00f3n (TTD)",
-      "_origin": "ast",
-      "community": 66,
-      "community_name": "README.md",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "1. fundamento de la tasa minima de tributacion (ttd)",
-      "source_file": "docs/how-to/02-simular-tasa-minima-ttd-pj.md",
-      "source_location": "L7"
-    },
-    {
-      "id": "docs_how_to_02_simular_tasa_minima_ttd_pj_2_ejecuci\u00f3n_v\u00eda_api",
-      "label": "2. Ejecuci\u00f3n v\u00eda API",
-      "_origin": "ast",
-      "community": 66,
-      "community_name": "README.md",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "2. ejecucion via api",
-      "source_file": "docs/how-to/02-simular-tasa-minima-ttd-pj.md",
-      "source_location": "L17"
-    },
-    {
-      "id": "docs_how_to_02_simular_tasa_minima_ttd_pj_gu\u00eda_how_to_simular_tasa_m\u00ednima_de_tributaci\u00f3n_ttd_15_pj",
-      "label": "Gu\u00eda How-To: Simular Tasa M\u00ednima de Tributaci\u00f3n (TTD 15% - PJ)",
-      "_origin": "ast",
-      "community": 66,
-      "community_name": "README.md",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "guia how-to: simular tasa minima de tributacion (ttd 15% - pj)",
-      "source_file": "docs/how-to/02-simular-tasa-minima-ttd-pj.md",
-      "source_location": "L1"
-    },
-    {
       "id": "docs_readme",
       "label": "docs/README.md",
       "_origin": "ast",
@@ -17984,30 +18114,6 @@
       "norm_label": "docs/readme.md",
       "source_file": "docs/README.md",
       "source_location": "L1"
-    },
-    {
-      "id": "docs_readme_documentacion_tecnica_de_tributia",
-      "label": "Documentacion Tecnica de TributIA",
-      "_origin": "ast",
-      "community": 66,
-      "community_name": "README.md",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "documentacion tecnica de tributia",
-      "source_file": "docs/README.md",
-      "source_location": "L1"
-    },
-    {
-      "id": "docs_readme_registro_de_decisiones_arquitectonicas_adrs_decisions_readme_md",
-      "label": "[Registro de Decisiones Arquitectonicas (ADRs)](./decisions/README.md)",
-      "_origin": "ast",
-      "community": 66,
-      "community_name": "README.md",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "[registro de decisiones arquitectonicas (adrs)](./decisions/readme.md)",
-      "source_file": "docs/README.md",
-      "source_location": "L64"
     },
     {
       "id": "docs_reference_architecture_erd_session_state_model",
@@ -18473,31 +18579,31 @@
       "source_location": "L7"
     },
     {
-      "id": "docs_decisions_0002_sincronizacion_bidireccional_sse",
-      "label": "0002-sincronizacion-bidireccional-sse.md",
+      "id": "docs_decisions_0001_motor_de_reglas_declarativo_json",
+      "label": "0001-motor-de-reglas-declarativo-json.md",
       "_origin": "ast",
       "community": 71,
       "community_name": "decisions/README.md",
       "file_type": "document",
       "node_kind": "page",
-      "norm_label": "0002-sincronizacion-bidireccional-sse.md",
-      "source_file": "docs/decisions/0002-sincronizacion-bidireccional-sse.md",
+      "norm_label": "0001-motor-de-reglas-declarativo-json.md",
+      "source_file": "docs/decisions/0001-motor-de-reglas-declarativo-json.md",
       "source_location": "L1"
     },
     {
-      "id": "docs_decisions_0002_sincronizacion_bidireccional_sse_adr_0002_sincronizaci\u00f3n_bidireccional_en_tiempo_real_con_server_sent_events_sse",
-      "label": "ADR 0002: Sincronizaci\u00f3n Bidireccional en Tiempo Real con Server-Sent Events (SSE)",
+      "id": "docs_decisions_0001_motor_de_reglas_declarativo_json_adr_0001_motor_de_reglas_tributarias_declarativo_en_archivos_json_versionados",
+      "label": "ADR 0001: Motor de Reglas Tributarias Declarativo en Archivos JSON Versionados",
       "_origin": "ast",
       "community": 71,
       "community_name": "decisions/README.md",
       "file_type": "document",
       "node_kind": "heading",
-      "norm_label": "adr 0002: sincronizacion bidireccional en tiempo real con server-sent events (sse)",
-      "source_file": "docs/decisions/0002-sincronizacion-bidireccional-sse.md",
+      "norm_label": "adr 0001: motor de reglas tributarias declarativo en archivos json versionados",
+      "source_file": "docs/decisions/0001-motor-de-reglas-declarativo-json.md",
       "source_location": "L1"
     },
     {
-      "id": "docs_decisions_0002_sincronizacion_bidireccional_sse_consecuencias",
+      "id": "docs_decisions_0001_motor_de_reglas_declarativo_json_consecuencias",
       "label": "Consecuencias",
       "_origin": "ast",
       "community": 71,
@@ -18505,11 +18611,11 @@
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "consecuencias",
-      "source_file": "docs/decisions/0002-sincronizacion-bidireccional-sse.md",
-      "source_location": "L18"
+      "source_file": "docs/decisions/0001-motor-de-reglas-declarativo-json.md",
+      "source_location": "L15"
     },
     {
-      "id": "docs_decisions_0002_sincronizacion_bidireccional_sse_contexto",
+      "id": "docs_decisions_0001_motor_de_reglas_declarativo_json_contexto",
       "label": "Contexto",
       "_origin": "ast",
       "community": 71,
@@ -18517,11 +18623,11 @@
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "contexto",
-      "source_file": "docs/decisions/0002-sincronizacion-bidireccional-sse.md",
+      "source_file": "docs/decisions/0001-motor-de-reglas-declarativo-json.md",
       "source_location": "L7"
     },
     {
-      "id": "docs_decisions_0002_sincronizacion_bidireccional_sse_decisi\u00f3n",
+      "id": "docs_decisions_0001_motor_de_reglas_declarativo_json_decisi\u00f3n",
       "label": "Decisi\u00f3n",
       "_origin": "ast",
       "community": 71,
@@ -18529,67 +18635,7 @@
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "decision",
-      "source_file": "docs/decisions/0002-sincronizacion-bidireccional-sse.md",
-      "source_location": "L11"
-    },
-    {
-      "id": "docs_decisions_0003_mascara_contable_colombiana_en_dom",
-      "label": "0003-mascara-contable-colombiana-en-dom.md",
-      "_origin": "ast",
-      "community": 71,
-      "community_name": "decisions/README.md",
-      "file_type": "document",
-      "node_kind": "page",
-      "norm_label": "0003-mascara-contable-colombiana-en-dom.md",
-      "source_file": "docs/decisions/0003-mascara-contable-colombiana-en-dom.md",
-      "source_location": "L1"
-    },
-    {
-      "id": "docs_decisions_0003_mascara_contable_colombiana_en_dom_adr_0003_manejo_de_m\u00e1scara_contable_colombiana_en_el_dom_y_sanitizaci\u00f3n_num\u00e9rica",
-      "label": "ADR 0003: Manejo de M\u00e1scara Contable Colombiana en el DOM y Sanitizaci\u00f3n Num\u00e9rica",
-      "_origin": "ast",
-      "community": 71,
-      "community_name": "decisions/README.md",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "adr 0003: manejo de mascara contable colombiana en el dom y sanitizacion numerica",
-      "source_file": "docs/decisions/0003-mascara-contable-colombiana-en-dom.md",
-      "source_location": "L1"
-    },
-    {
-      "id": "docs_decisions_0003_mascara_contable_colombiana_en_dom_consecuencias",
-      "label": "Consecuencias",
-      "_origin": "ast",
-      "community": 71,
-      "community_name": "decisions/README.md",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "consecuencias",
-      "source_file": "docs/decisions/0003-mascara-contable-colombiana-en-dom.md",
-      "source_location": "L17"
-    },
-    {
-      "id": "docs_decisions_0003_mascara_contable_colombiana_en_dom_contexto",
-      "label": "Contexto",
-      "_origin": "ast",
-      "community": 71,
-      "community_name": "decisions/README.md",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "contexto",
-      "source_file": "docs/decisions/0003-mascara-contable-colombiana-en-dom.md",
-      "source_location": "L7"
-    },
-    {
-      "id": "docs_decisions_0003_mascara_contable_colombiana_en_dom_decisi\u00f3n",
-      "label": "Decisi\u00f3n",
-      "_origin": "ast",
-      "community": 71,
-      "community_name": "decisions/README.md",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "decision",
-      "source_file": "docs/decisions/0003-mascara-contable-colombiana-en-dom.md",
+      "source_file": "docs/decisions/0001-motor-de-reglas-declarativo-json.md",
       "source_location": "L11"
     },
     {
@@ -18780,7 +18826,7 @@
       "file_type": "concept",
       "norm_label": "testresponsiveandmobilemode",
       "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L364"
+      "source_location": "L373"
     },
     {
       "id": "backend_tests_test_e2e_playwright_class_testtributiaendtoend",
@@ -18890,7 +18936,7 @@
       "file_type": "concept",
       "norm_label": "test_calendario_tributario_nit_search_and_filters",
       "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L336"
+      "source_location": "L345"
     },
     {
       "id": "backend_tests_test_e2e_playwright_func_test_catalogo_beneficios_filtering_and_search",
@@ -18912,7 +18958,7 @@
       "file_type": "concept",
       "norm_label": "test_inmuebles_afc_simulator",
       "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L273"
+      "source_location": "L282"
     },
     {
       "id": "backend_tests_test_e2e_playwright_func_test_mobile_casilla_popover_bottom_sheet",
@@ -18923,7 +18969,7 @@
       "file_type": "concept",
       "norm_label": "test_mobile_casilla_popover_bottom_sheet",
       "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L545"
+      "source_location": "L554"
     },
     {
       "id": "backend_tests_test_e2e_playwright_func_test_mobile_drawer_navigation_and_backdrop",
@@ -18934,7 +18980,7 @@
       "file_type": "concept",
       "norm_label": "test_mobile_drawer_navigation_and_backdrop",
       "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L375"
+      "source_location": "L384"
     },
     {
       "id": "backend_tests_test_e2e_playwright_func_test_mobile_viewport_no_horizontal_body_overflow",
@@ -18945,7 +18991,7 @@
       "file_type": "concept",
       "norm_label": "test_mobile_viewport_no_horizontal_body_overflow",
       "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L427"
+      "source_location": "L436"
     },
     {
       "id": "backend_tests_test_e2e_playwright_func_test_navigation_across_all_modules",
@@ -18967,7 +19013,7 @@
       "file_type": "concept",
       "norm_label": "test_persona_natural_capture_and_subtabs",
       "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L298"
+      "source_location": "L307"
     },
     {
       "id": "backend_tests_test_e2e_playwright_func_test_presentacion_auditoria_and_calculadora_sanciones",
@@ -18989,7 +19035,7 @@
       "file_type": "concept",
       "norm_label": "test_reajuste_fiscal_articulo_73_complete_flow",
       "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L221"
+      "source_location": "L230"
     },
     {
       "id": "backend_tests_test_e2e_playwright_func_test_reconciliation_spreadsheet_extended_sidebar_scrolling",
@@ -19000,7 +19046,7 @@
       "file_type": "concept",
       "norm_label": "test_reconciliation_spreadsheet_extended_sidebar_scrolling",
       "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L581"
+      "source_location": "L590"
     },
     {
       "id": "backend_tests_test_e2e_playwright_func_test_reduced_desktop_and_laptop_screen_adaptation",
@@ -19011,7 +19057,7 @@
       "file_type": "concept",
       "norm_label": "test_reduced_desktop_and_laptop_screen_adaptation",
       "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L507"
+      "source_location": "L516"
     },
     {
       "id": "backend_tests_test_e2e_playwright_func_test_table_horizontal_scroll_containers_on_mobile",
@@ -19022,66 +19068,66 @@
       "file_type": "concept",
       "norm_label": "test_table_horizontal_scroll_containers_on_mobile",
       "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L465"
+      "source_location": "L474"
     },
     {
-      "id": "docs_decisions_0001_motor_de_reglas_declarativo_json",
-      "label": "0001-motor-de-reglas-declarativo-json.md",
+      "id": "docs_decisions_0002_sincronizacion_bidireccional_sse",
+      "label": "0002-sincronizacion-bidireccional-sse.md",
       "_origin": "ast",
       "community": 74,
-      "community_name": "0001-motor-de-reglas-declarativo-json.md",
+      "community_name": "0002-sincronizacion-bidireccional-sse.md",
       "file_type": "document",
       "node_kind": "page",
-      "norm_label": "0001-motor-de-reglas-declarativo-json.md",
-      "source_file": "docs/decisions/0001-motor-de-reglas-declarativo-json.md",
+      "norm_label": "0002-sincronizacion-bidireccional-sse.md",
+      "source_file": "docs/decisions/0002-sincronizacion-bidireccional-sse.md",
       "source_location": "L1"
     },
     {
-      "id": "docs_decisions_0001_motor_de_reglas_declarativo_json_adr_0001_motor_de_reglas_tributarias_declarativo_en_archivos_json_versionados",
-      "label": "ADR 0001: Motor de Reglas Tributarias Declarativo en Archivos JSON Versionados",
+      "id": "docs_decisions_0002_sincronizacion_bidireccional_sse_adr_0002_sincronizaci\u00f3n_bidireccional_en_tiempo_real_con_server_sent_events_sse",
+      "label": "ADR 0002: Sincronizaci\u00f3n Bidireccional en Tiempo Real con Server-Sent Events (SSE)",
       "_origin": "ast",
       "community": 74,
-      "community_name": "0001-motor-de-reglas-declarativo-json.md",
+      "community_name": "0002-sincronizacion-bidireccional-sse.md",
       "file_type": "document",
       "node_kind": "heading",
-      "norm_label": "adr 0001: motor de reglas tributarias declarativo en archivos json versionados",
-      "source_file": "docs/decisions/0001-motor-de-reglas-declarativo-json.md",
+      "norm_label": "adr 0002: sincronizacion bidireccional en tiempo real con server-sent events (sse)",
+      "source_file": "docs/decisions/0002-sincronizacion-bidireccional-sse.md",
       "source_location": "L1"
     },
     {
-      "id": "docs_decisions_0001_motor_de_reglas_declarativo_json_consecuencias",
+      "id": "docs_decisions_0002_sincronizacion_bidireccional_sse_consecuencias",
       "label": "Consecuencias",
       "_origin": "ast",
       "community": 74,
-      "community_name": "0001-motor-de-reglas-declarativo-json.md",
+      "community_name": "0002-sincronizacion-bidireccional-sse.md",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "consecuencias",
-      "source_file": "docs/decisions/0001-motor-de-reglas-declarativo-json.md",
-      "source_location": "L15"
+      "source_file": "docs/decisions/0002-sincronizacion-bidireccional-sse.md",
+      "source_location": "L18"
     },
     {
-      "id": "docs_decisions_0001_motor_de_reglas_declarativo_json_contexto",
+      "id": "docs_decisions_0002_sincronizacion_bidireccional_sse_contexto",
       "label": "Contexto",
       "_origin": "ast",
       "community": 74,
-      "community_name": "0001-motor-de-reglas-declarativo-json.md",
+      "community_name": "0002-sincronizacion-bidireccional-sse.md",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "contexto",
-      "source_file": "docs/decisions/0001-motor-de-reglas-declarativo-json.md",
+      "source_file": "docs/decisions/0002-sincronizacion-bidireccional-sse.md",
       "source_location": "L7"
     },
     {
-      "id": "docs_decisions_0001_motor_de_reglas_declarativo_json_decisi\u00f3n",
+      "id": "docs_decisions_0002_sincronizacion_bidireccional_sse_decisi\u00f3n",
       "label": "Decisi\u00f3n",
       "_origin": "ast",
       "community": 74,
-      "community_name": "0001-motor-de-reglas-declarativo-json.md",
+      "community_name": "0002-sincronizacion-bidireccional-sse.md",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "decision",
-      "source_file": "docs/decisions/0001-motor-de-reglas-declarativo-json.md",
+      "source_file": "docs/decisions/0002-sincronizacion-bidireccional-sse.md",
       "source_location": "L11"
     },
     {
@@ -21061,7 +21107,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/app/services/beneficios.py",
-      "source_location": "L532",
+      "source_location": "L544",
       "weight": 1.0
     },
     {
@@ -21072,7 +21118,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/app/services/beneficios.py",
-      "source_location": "L554",
+      "source_location": "L572",
       "weight": 1.0
     },
     {
@@ -21083,7 +21129,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/app/services/beneficios.py",
-      "source_location": "L578",
+      "source_location": "L596",
       "weight": 1.0
     },
     {
@@ -21094,7 +21140,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/app/services/beneficios.py",
-      "source_location": "L600",
+      "source_location": "L618",
       "weight": 1.0
     },
     {
@@ -21127,29 +21173,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/app/services/beneficios.py",
-      "source_location": "L740",
-      "weight": 1.0
-    },
-    {
-      "source": "backend_app_services_beneficios",
-      "target": "backend_app_services_beneficios_func_calcular_beneficio_auditoria",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "backend/app/services/beneficios.py",
-      "source_location": "L828",
-      "weight": 1.0
-    },
-    {
-      "source": "backend_app_services_beneficios",
-      "target": "backend_app_services_beneficios_func_calcular_reduccion_sancion",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "backend/app/services/beneficios.py",
-      "source_location": "L879",
+      "source_location": "L859",
       "weight": 1.0
     },
     {
@@ -21172,6 +21196,28 @@
       "confidence_score": 1.0,
       "source_file": "backend/app/services/beneficios.py",
       "source_location": "L90",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_app_services_beneficios",
+      "target": "backend_app_services_beneficios_func_calcular_beneficio_auditoria",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/services/beneficios.py",
+      "source_location": "L947",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_app_services_beneficios",
+      "target": "backend_app_services_beneficios_func_calcular_reduccion_sancion",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/services/beneficios.py",
+      "source_location": "L998",
       "weight": 1.0
     },
     {
@@ -21638,6 +21684,28 @@
     },
     {
       "source": "backend_tests_test_beneficios_and_go",
+      "target": "backend_tests_test_beneficios_and_go_func_test_calcular_sancion_con_intereses_de_mora_compuestos",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/tests/test_beneficios_and_go.py",
+      "source_location": "L197",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_tests_test_beneficios_and_go",
+      "target": "backend_tests_test_beneficios_and_go_func_test_calcular_sancion_inexactitud_tarifas_y_procesos",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/tests/test_beneficios_and_go.py",
+      "source_location": "L229",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_tests_test_beneficios_and_go",
       "target": "backend_tests_test_beneficios_and_go_func_test_beneficio_auditoria_calculo",
       "relation": "contains",
       "_origin": "ast",
@@ -22084,7 +22152,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L221",
+      "source_location": "L230",
       "weight": 1.0
     },
     {
@@ -22106,7 +22174,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L273",
+      "source_location": "L282",
       "weight": 1.0
     },
     {
@@ -22117,7 +22185,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L298",
+      "source_location": "L307",
       "weight": 1.0
     },
     {
@@ -22128,7 +22196,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L336",
+      "source_location": "L345",
       "weight": 1.0
     },
     {
@@ -22150,7 +22218,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L364",
+      "source_location": "L373",
       "weight": 1.0
     },
     {
@@ -22161,7 +22229,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L375",
+      "source_location": "L384",
       "weight": 1.0
     },
     {
@@ -22172,7 +22240,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L427",
+      "source_location": "L436",
       "weight": 1.0
     },
     {
@@ -22183,7 +22251,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L465",
+      "source_location": "L474",
       "weight": 1.0
     },
     {
@@ -22194,7 +22262,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L507",
+      "source_location": "L516",
       "weight": 1.0
     },
     {
@@ -22205,7 +22273,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L545",
+      "source_location": "L554",
       "weight": 1.0
     },
     {
@@ -22216,7 +22284,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L581",
+      "source_location": "L590",
       "weight": 1.0
     },
     {
@@ -36080,7 +36148,7 @@
       "weight": 1.0
     },
     {
-      "source": "docs_how_to_05_calcular_sanciones_y_beneficio_auditoria_2_liquidaci\u00f3n_de_sanciones_arts_641_644_640_y_639_e_t",
+      "source": "docs_how_to_05_calcular_sanciones_y_beneficio_auditoria_2_liquidaci\u00f3n_de_sanciones_arts_641_644_647_648_640_y_639_e_t",
       "target": "docs_how_to_05_calcular_sanciones_y_beneficio_auditoria_sanci\u00f3n_por_correcci\u00f3n_art_644",
       "relation": "contains",
       "_origin": "ast",
@@ -36091,7 +36159,7 @@
       "weight": 1.0
     },
     {
-      "source": "docs_how_to_05_calcular_sanciones_y_beneficio_auditoria_2_liquidaci\u00f3n_de_sanciones_arts_641_644_640_y_639_e_t",
+      "source": "docs_how_to_05_calcular_sanciones_y_beneficio_auditoria_2_liquidaci\u00f3n_de_sanciones_arts_641_644_647_648_640_y_639_e_t",
       "target": "docs_how_to_05_calcular_sanciones_y_beneficio_auditoria_sanci\u00f3n_por_extemporaneidad_art_641",
       "relation": "contains",
       "_origin": "ast",
@@ -36102,8 +36170,8 @@
       "weight": 1.0
     },
     {
-      "source": "docs_how_to_05_calcular_sanciones_y_beneficio_auditoria_2_liquidaci\u00f3n_de_sanciones_arts_641_644_640_y_639_e_t",
-      "target": "docs_how_to_05_calcular_sanciones_y_beneficio_auditoria_reducciones_del_principio_de_favorabilidad_art_640",
+      "source": "docs_how_to_05_calcular_sanciones_y_beneficio_auditoria_2_liquidaci\u00f3n_de_sanciones_arts_641_644_647_648_640_y_639_e_t",
+      "target": "docs_how_to_05_calcular_sanciones_y_beneficio_auditoria_sanci\u00f3n_por_inexactitud_arts_647_648_709_y_710",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -36113,36 +36181,47 @@
       "weight": 1.0
     },
     {
-      "source": "docs_how_to_05_calcular_sanciones_y_beneficio_auditoria_2_liquidaci\u00f3n_de_sanciones_arts_641_644_640_y_639_e_t",
+      "source": "docs_how_to_05_calcular_sanciones_y_beneficio_auditoria_2_liquidaci\u00f3n_de_sanciones_arts_641_644_647_648_640_y_639_e_t",
+      "target": "docs_how_to_05_calcular_sanciones_y_beneficio_auditoria_reducciones_del_principio_de_favorabilidad_art_640",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/how-to/05-calcular-sanciones-y-beneficio-auditoria.md",
+      "source_location": "L51",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_how_to_05_calcular_sanciones_y_beneficio_auditoria_2_liquidaci\u00f3n_de_sanciones_arts_641_644_647_648_640_y_639_e_t",
       "target": "docs_how_to_05_calcular_sanciones_y_beneficio_auditoria_control_de_sanci\u00f3n_m\u00ednima_art_639",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/how-to/05-calcular-sanciones-y-beneficio-auditoria.md",
-      "source_location": "L45",
-      "weight": 1.0
-    },
-    {
-      "source": "docs_how_to_05_calcular_sanciones_y_beneficio_auditoria_2_liquidaci\u00f3n_de_sanciones_arts_641_644_640_y_639_e_t",
-      "target": "docs_how_to_05_calcular_sanciones_y_beneficio_auditoria_ejemplo_de_c\u00e1lculo_v\u00eda_api_post_api_v1_beneficios_calcular_sancion",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/how-to/05-calcular-sanciones-y-beneficio-auditoria.md",
-      "source_location": "L48",
+      "source_location": "L56",
       "weight": 1.0
     },
     {
       "source": "docs_how_to_05_calcular_sanciones_y_beneficio_auditoria_c\u00f3mo_calcular_sanciones_tributarias_y_simular_el_beneficio_de_auditor\u00eda",
-      "target": "docs_how_to_05_calcular_sanciones_y_beneficio_auditoria_2_liquidaci\u00f3n_de_sanciones_arts_641_644_640_y_639_e_t",
+      "target": "docs_how_to_05_calcular_sanciones_y_beneficio_auditoria_2_liquidaci\u00f3n_de_sanciones_arts_641_644_647_648_640_y_639_e_t",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/how-to/05-calcular-sanciones-y-beneficio-auditoria.md",
       "source_location": "L31",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_how_to_05_calcular_sanciones_y_beneficio_auditoria_c\u00f3mo_calcular_sanciones_tributarias_y_simular_el_beneficio_de_auditor\u00eda",
+      "target": "docs_how_to_05_calcular_sanciones_y_beneficio_auditoria_3_intereses_moratorios_diarios_compuestos_arts_634_y_635_e_t",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/how-to/05-calcular-sanciones-y-beneficio-auditoria.md",
+      "source_location": "L61",
       "weight": 1.0
     },
     {
@@ -36154,6 +36233,17 @@
       "confidence_score": 1.0,
       "source_file": "docs/how-to/05-calcular-sanciones-y-beneficio-auditoria.md",
       "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_how_to_05_calcular_sanciones_y_beneficio_auditoria_c\u00f3mo_calcular_sanciones_tributarias_y_simular_el_beneficio_de_auditor\u00eda",
+      "target": "docs_how_to_05_calcular_sanciones_y_beneficio_auditoria_4_ejemplo_de_c\u00e1lculo_v\u00eda_api_post_api_v1_beneficios_calcular_sancion",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/how-to/05-calcular-sanciones-y-beneficio-auditoria.md",
+      "source_location": "L73",
       "weight": 1.0
     },
     {
@@ -38160,5 +38250,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "5a870210f0a64399b289eff8502a0ae121d46a27"
+  "built_at_commit": "a619e9f858a54e1fad355f30069398c0eb80ce15"
 }

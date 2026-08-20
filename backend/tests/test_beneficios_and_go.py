@@ -192,3 +192,84 @@ def test_calcular_exencion_inmueble_afc_art311_1():
     assert res.impuesto_go_con_afc_cop == 13237500
     # Ahorro = 261.75M * 15% = 39.262.500
     assert res.ahorro_impuesto_afc_cop == 39262500
+
+
+def test_calcular_sancion_con_intereses_de_mora_compuestos():
+    """Valida el cálculo de intereses de mora diarios compuestos (Arts. 634 y 635 E.T.) y total consolidado."""
+    from app.services.beneficios import LiquidacionSancionRequest, calcular_sancion_tributaria
+
+    # 10M base, 60 días de mora, 23.0% E.A.
+    req = LiquidacionSancionRequest(
+        tipo_sancion="correccion",
+        monto_base_cop=10000000,
+        es_voluntario_sin_emplazamiento=True,
+        sin_sanciones_ultimos_2_anos=True,
+        incluir_intereses_mora=True,
+        dias_mora=60,
+        tasa_interes_anual_pct=23.0,
+        tax_year=2026,
+        custom_uvt=52350,
+    )
+    res = calcular_sancion_tributaria(req)
+
+    assert res.incluye_intereses_mora
+    assert res.dias_mora == 60
+    assert res.tasa_interes_anual_pct == 23.0
+    # Sanción: 10% de 10M = 1M, reducida al 50% = 500k (ajustado a mínima 10 UVT: 524.000)
+    assert res.sancion_final_a_pagar_cop == 524000
+    # Factor compuesto: (1 + 0.23)^(60/365) - 1 ≈ 0.034873 => ~349.000 COP
+    assert res.intereses_mora_cop > 340000 and res.intereses_mora_cop < 360000
+    # Total consolidado = 10.000.000 + 524.000 + ~349.000 = ~10.873.000
+    assert (
+        res.total_consolidado_a_pagar_cop
+        == 10000000 + res.sancion_final_a_pagar_cop + res.intereses_mora_cop
+    )
+
+
+def test_calcular_sancion_inexactitud_tarifas_y_procesos():
+    """Valida las tarifas de sanción por inexactitud (General 100%, Facturas Falsas 160%, Abuso 200%, Req Especial 35%)."""
+    from app.services.beneficios import LiquidacionSancionRequest, calcular_sancion_tributaria
+
+    # 1. Inexactitud General (100% con rebaja 50% Art. 640)
+    res_gen = calcular_sancion_tributaria(
+        LiquidacionSancionRequest(
+            tipo_sancion="inexactitud_general",
+            monto_base_cop=20000000,
+            sin_sanciones_ultimos_2_anos=True,
+            incluir_intereses_mora=False,
+            tax_year=2026,
+            custom_uvt=52350,
+        )
+    )
+    assert res_gen.tarifa_base_pct == 100.0
+    assert res_gen.sancion_plena_sin_reduccion_cop == 20000000
+    assert res_gen.sancion_final_a_pagar_cop == 10000000  # 50% rebaja
+
+    # 2. Inexactitud Facturas Falsas (160% sin rebaja Art. 640 Par. 3)
+    res_fact = calcular_sancion_tributaria(
+        LiquidacionSancionRequest(
+            tipo_sancion="inexactitud_facturas_falsas",
+            monto_base_cop=10000000,
+            sin_sanciones_ultimos_2_anos=True,
+            incluir_intereses_mora=False,
+            tax_year=2026,
+            custom_uvt=52350,
+        )
+    )
+    assert res_fact.tarifa_base_pct == 160.0
+    assert res_fact.sancion_final_a_pagar_cop == 16000000
+    assert res_fact.porcentaje_reduccion_art640_pct == 0.0
+
+    # 3. Inexactitud con Aceptación en Requerimiento Especial (Art. 709 - 35%)
+    res_req = calcular_sancion_tributaria(
+        LiquidacionSancionRequest(
+            tipo_sancion="inexactitud_req_especial",
+            monto_base_cop=30000000,
+            incluir_intereses_mora=False,
+            tax_year=2026,
+            custom_uvt=52350,
+        )
+    )
+    assert res_req.tarifa_base_pct == 35.0
+    assert res_req.sancion_final_a_pagar_cop == 10500000  # 35% de 30M
+    assert res_req.comparativa_sancion_con_emplazamiento_dian_cop == 30000000  # 100% si no aceptara

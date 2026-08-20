@@ -1914,18 +1914,47 @@ async function runSimulacionAuditoria() {
   }
 }
 
-// CALCULADORA INTEGRAL DE SANCIONES (Art. 640, 641, 642, 644, 639)
+// CALCULADORA INTEGRAL DE SANCIONES (Art. 640, 641, 642, 644, 647, 648, 634, 635, 639)
 function toggleSancionFields() {
   const tipo = document.getElementById('sancion-calc-tipo')?.value || 'correccion';
   const label = document.getElementById('sancion-monto-base-label');
   const mesesContainer = document.getElementById('sancion-meses-container');
+  const voluntarioContainer = document.getElementById('sancion-voluntario-container');
+  const art640Container = document.getElementById('sancion-art640-container');
 
   if (tipo === 'extemporaneidad') {
     if (label) label.innerText = 'Impuesto a Cargo Liquidado ($ COP)';
     if (mesesContainer) mesesContainer.style.display = 'block';
-  } else {
+    if (voluntarioContainer) voluntarioContainer.style.display = 'block';
+    if (art640Container) art640Container.style.display = 'block';
+  } else if (tipo === 'correccion') {
     if (label) label.innerText = 'Mayor Valor a Pagar por Corrección ($ COP)';
     if (mesesContainer) mesesContainer.style.display = 'none';
+    if (voluntarioContainer) voluntarioContainer.style.display = 'block';
+    if (art640Container) art640Container.style.display = 'block';
+  } else if (tipo === 'inexactitud_general') {
+    if (label) label.innerText = 'Mayor Valor Determinado / Menor Saldo a Favor ($ COP)';
+    if (mesesContainer) mesesContainer.style.display = 'none';
+    if (voluntarioContainer) voluntarioContainer.style.display = 'none';
+    if (art640Container) art640Container.style.display = 'block';
+  } else if (tipo === 'inexactitud_facturas_falsas' || tipo === 'inexactitud_abuso') {
+    if (label) label.innerText = 'Mayor Valor por Costos/Deducciones Falsas ($ COP)';
+    if (mesesContainer) mesesContainer.style.display = 'none';
+    if (voluntarioContainer) voluntarioContainer.style.display = 'none';
+    if (art640Container) art640Container.style.display = 'none';
+  } else if (tipo === 'inexactitud_req_especial' || tipo === 'inexactitud_recurso') {
+    if (label) label.innerText = 'Mayor Valor Propuesto en Requerimiento/Liquidación ($ COP)';
+    if (mesesContainer) mesesContainer.style.display = 'none';
+    if (voluntarioContainer) voluntarioContainer.style.display = 'none';
+    if (art640Container) art640Container.style.display = 'none';
+  }
+}
+
+function toggleMoraFields() {
+  const chk = document.getElementById('sancion-calc-check-mora');
+  const grid = document.getElementById('sancion-mora-inputs-grid');
+  if (grid) {
+    grid.style.display = (chk && chk.checked) ? 'grid' : 'none';
   }
 }
 
@@ -1944,6 +1973,9 @@ async function runCalculadoraSanciones() {
   const esVoluntario = document.getElementById('sancion-calc-voluntario')?.checked ?? true;
   const sinSanciones2 = document.getElementById('sancion-calc-check-2anos')?.checked ?? true;
   const sinSanciones1 = document.getElementById('sancion-calc-check-1ano')?.checked ?? true;
+  const incluirMora = document.getElementById('sancion-calc-check-mora')?.checked ?? true;
+  const diasMora = parseInt(document.getElementById('sancion-calc-dias-mora')?.value || '60', 10);
+  const tasaMora = parseFloat(document.getElementById('sancion-calc-tasa-mora')?.value || '23.0');
   const resDiv = document.getElementById('sancion-calc-result-box');
   if (!resDiv) return;
 
@@ -1958,6 +1990,9 @@ async function runCalculadoraSanciones() {
         es_voluntario_sin_emplazamiento: esVoluntario,
         sin_sanciones_ultimos_2_anos: sinSanciones2,
         sin_sanciones_ultimo_1_ano: sinSanciones1,
+        incluir_intereses_mora: incluirMora,
+        dias_mora: diasMora,
+        tasa_interes_anual_pct: tasaMora,
         tax_year: currentYear,
         custom_uvt: currentUvt
       })
@@ -1968,23 +2003,51 @@ async function runCalculadoraSanciones() {
 
     resDiv.innerHTML = `
       <div style="background: white; border: 1px solid #cbd5e1; border-radius: 8px; padding: 12px; margin-bottom: 12px;">
-        <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px;">
-          <span style="font-weight: 700; color: #0f172a;">Sanción Final a Pagar:</span>
-          <span style="font-size: 18px; font-weight: 900; font-family: var(--font-mono); color: #059669;">
+        <!-- GRAN TOTAL CONSOLIDADO -->
+        <div style="background: #f0fdf4; border: 1px solid #86efac; border-radius: 6px; padding: 10px; margin-bottom: 10px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 6px;">
+            <div>
+              <div style="font-size: 11px; font-weight: 800; color: #166534; text-transform: uppercase;">
+                Gran Total Consolidado a Pagar (Capital + Sanción + Mora):
+              </div>
+              <div style="font-size: 20px; font-weight: 900; font-family: var(--font-mono); color: #15803d;">
+                ${formatCOP(data.total_consolidado_a_pagar_cop)} COP
+              </div>
+            </div>
+            <span class="badge badge-success" style="font-size: 11px;">
+              ${data.incluye_intereses_mora ? `Con ${data.dias_mora} días de mora` : 'Sin intereses'}
+            </span>
+          </div>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px;">
+          <span style="font-weight: 700; color: #0f172a; font-size: 13px;">1. Sanción Liquidada a Pagar:</span>
+          <span style="font-size: 16px; font-weight: 900; font-family: var(--font-mono); color: #059669;">
             ${formatCOP(data.sancion_final_a_pagar_cop)} COP
           </span>
         </div>
+
+        ${data.incluye_intereses_mora ? `
+          <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px; padding-bottom: 6px; border-bottom: 1px dashed #e2e8f0;">
+            <span style="font-weight: 700; color: #6b21a8; font-size: 13px;">2. Intereses Moratorios (${data.dias_mora} días @ ${data.tasa_interes_anual_pct.toFixed(1)}% E.A.):</span>
+            <span style="font-size: 16px; font-weight: 900; font-family: var(--font-mono); color: #7e22ce;">
+              ${formatCOP(data.intereses_mora_cop)} COP
+            </span>
+          </div>
+        ` : ''}
+
         <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 8px;">
           <span class="badge ${data.aplico_sancion_minima ? 'badge-warning' : 'badge-success'}">
             ${data.aplico_sancion_minima ? '⚠️ Aplica Sanción Mínima (10 UVT)' : `Descuento Art. 640: ${data.porcentaje_reduccion_art640_pct.toFixed(0)}%`}
           </span>
           <span class="badge badge-info">Tarifa Base: ${data.tarifa_base_pct.toFixed(0)}%</span>
         </div>
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 11px; background: #f8fafc; padding: 8px; border-radius: 6px;">
+
+        <div class="responsive-grid-equal" style="gap: 8px; font-size: 11px; background: #f8fafc; padding: 8px; border-radius: 6px;">
+          <div>Capital Base Insoluto: <strong>${formatCOP(data.monto_base_cop)}</strong></div>
           <div>Sanción Plena (Sin Descuento): <strong>${formatCOP(data.sancion_plena_sin_reduccion_cop)}</strong></div>
-          <div>Sanción si la DIAN Emplaza: <strong style="color:#b91c1c;">${formatCOP(data.comparativa_sancion_con_emplazamiento_dian_cop)}</strong></div>
-          <div>Ahorro por Favorabilidad: <strong style="color:#166534;">${formatCOP(data.ahorro_favorabilidad_art640_cop)}</strong></div>
-          <div>Ahorro vs Emplazamiento: <strong style="color:#166534;">${formatCOP(data.ahorro_por_corregir_antes_de_dian_cop)}</strong></div>
+          <div>Ahorro Favorabilidad Art. 640: <strong style="color:#166534;">${formatCOP(data.ahorro_favorabilidad_art640_cop)}</strong></div>
+          <div>Ahorro vs Escenario Emplazado: <strong style="color:#166534;">${formatCOP(data.ahorro_por_corregir_antes_de_dian_cop)}</strong></div>
         </div>
       </div>
 
