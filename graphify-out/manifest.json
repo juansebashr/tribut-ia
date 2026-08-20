@@ -144,9 +144,9 @@
     "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
   },
   "backend/app/services/beneficios.py": {
-    "mtime": 1787206829.6031678,
-    "seen": 1787207087.5721421,
-    "ast_hash": "dddd3e7e29775e6c5009061a601724ca",
+    "mtime": 1787207672.8419678,
+    "seen": 1787207816.468291,
+    "ast_hash": "0cfbd0a6ed4f488200d90098b7549838",
     "semantic_hash": ""
   },
   "backend/app/services/liquidacion_pj.py": {
@@ -192,9 +192,9 @@
     "semantic_hash": "893fa7465543d9824ea44cdbcab4e8b7"
   },
   "backend/tests/test_beneficios_and_go.py": {
-    "mtime": 1787206921.5960698,
-    "seen": 1787207087.57236,
-    "ast_hash": "dd8a5ccca042a86e60a752ab80506d50",
+    "mtime": 1787207740.7316492,
+    "seen": 1787207816.468498,
+    "ast_hash": "9975ddbe4ca9f0c02d725f0f9847c79e",
     "semantic_hash": ""
   },
   "backend/tests/test_calendario.py": {
@@ -390,9 +390,9 @@
     "semantic_hash": ""
   },
   "backend/app/static/index.html": {
-    "mtime": 1787206853.7905562,
-    "seen": 1787207087.573121,
-    "ast_hash": "f256e789fa166bde0cc8577e04a71472",
+    "mtime": 1787207691.4424047,
+    "seen": 1787207816.469285,
+    "ast_hash": "121c2b95c95c21d237a659ea2786efb9",
     "semantic_hash": ""
   },
   "docs/README.md": {

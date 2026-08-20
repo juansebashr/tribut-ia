@@ -1518,6 +1518,17 @@
       "source_location": "L229"
     },
     {
+      "id": "backend_tests_test_beneficios_and_go_func_test_calcular_sancion_saldo_a_favor_sin_intereses",
+      "label": "test_calcular_sancion_saldo_a_favor_sin_intereses",
+      "_origin": "ast",
+      "community": 12,
+      "community_name": "test_beneficios_and_go.py",
+      "file_type": "concept",
+      "norm_label": "test_calcular_sancion_saldo_a_favor_sin_intereses",
+      "source_file": "backend/tests/test_beneficios_and_go.py",
+      "source_location": "L278"
+    },
+    {
       "id": "backend_tests_test_beneficios_and_go_func_test_catalogo_beneficios",
       "label": "test_catalogo_beneficios",
       "_origin": "ast",
@@ -2290,23 +2301,11 @@
       "source_location": "L21"
     },
     {
-      "id": "docs_decisions_0003_mascara_contable_colombiana_en_dom",
-      "label": "0003-mascara-contable-colombiana-en-dom.md",
-      "_origin": "ast",
-      "community": 146,
-      "community_name": "0003-mascara-contable-colombiana-en-dom.md",
-      "file_type": "document",
-      "node_kind": "page",
-      "norm_label": "0003-mascara-contable-colombiana-en-dom.md",
-      "source_file": "docs/decisions/0003-mascara-contable-colombiana-en-dom.md",
-      "source_location": "L1"
-    },
-    {
       "id": "docs_decisions_0003_mascara_contable_colombiana_en_dom_adr_0003_manejo_de_m\u00e1scara_contable_colombiana_en_el_dom_y_sanitizaci\u00f3n_num\u00e9rica",
       "label": "ADR 0003: Manejo de M\u00e1scara Contable Colombiana en el DOM y Sanitizaci\u00f3n Num\u00e9rica",
       "_origin": "ast",
       "community": 146,
-      "community_name": "0003-mascara-contable-colombiana-en-dom.md",
+      "community_name": "ADR 0003: Manejo de M\u00e1scara Contable Colombiana en el DOM y Sanitizaci\u00f3n Num\u00e9rica",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "adr 0003: manejo de mascara contable colombiana en el dom y sanitizacion numerica",
@@ -2318,7 +2317,7 @@
       "label": "Consecuencias",
       "_origin": "ast",
       "community": 146,
-      "community_name": "0003-mascara-contable-colombiana-en-dom.md",
+      "community_name": "ADR 0003: Manejo de M\u00e1scara Contable Colombiana en el DOM y Sanitizaci\u00f3n Num\u00e9rica",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "consecuencias",
@@ -2330,7 +2329,7 @@
       "label": "Contexto",
       "_origin": "ast",
       "community": 146,
-      "community_name": "0003-mascara-contable-colombiana-en-dom.md",
+      "community_name": "ADR 0003: Manejo de M\u00e1scara Contable Colombiana en el DOM y Sanitizaci\u00f3n Num\u00e9rica",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "contexto",
@@ -2342,7 +2341,7 @@
       "label": "Decisi\u00f3n",
       "_origin": "ast",
       "community": 146,
-      "community_name": "0003-mascara-contable-colombiana-en-dom.md",
+      "community_name": "ADR 0003: Manejo de M\u00e1scara Contable Colombiana en el DOM y Sanitizaci\u00f3n Num\u00e9rica",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "decision",
@@ -2395,6 +2394,90 @@
       "node_kind": "heading",
       "norm_label": "guia how-to: simular tasa minima de tributacion (ttd 15% - pj)",
       "source_file": "docs/how-to/02-simular-tasa-minima-ttd-pj.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "docs_decisions_0006_sistema_responsivo_y_modo_mobile_1_contexto_y_problema",
+      "label": "1. Contexto y Problema",
+      "_origin": "ast",
+      "community": 148,
+      "community_name": "ADR 0006: Sistema Responsivo, Men\u00fa Off-Canvas y Modo Mobile",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "1. contexto y problema",
+      "source_file": "docs/decisions/0006-sistema-responsivo-y-modo-mobile.md",
+      "source_location": "L9"
+    },
+    {
+      "id": "docs_decisions_0006_sistema_responsivo_y_modo_mobile_2_decisi\u00f3n_tomada",
+      "label": "2. Decisi\u00f3n Tomada",
+      "_origin": "ast",
+      "community": 148,
+      "community_name": "ADR 0006: Sistema Responsivo, Men\u00fa Off-Canvas y Modo Mobile",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "2. decision tomada",
+      "source_file": "docs/decisions/0006-sistema-responsivo-y-modo-mobile.md",
+      "source_location": "L22"
+    },
+    {
+      "id": "docs_decisions_0006_sistema_responsivo_y_modo_mobile_3_consecuencias_y_beneficios",
+      "label": "3. Consecuencias y Beneficios",
+      "_origin": "ast",
+      "community": 148,
+      "community_name": "ADR 0006: Sistema Responsivo, Men\u00fa Off-Canvas y Modo Mobile",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "3. consecuencias y beneficios",
+      "source_file": "docs/decisions/0006-sistema-responsivo-y-modo-mobile.md",
+      "source_location": "L45"
+    },
+    {
+      "id": "docs_decisions_0006_sistema_responsivo_y_modo_mobile_adr_0006_sistema_responsivo_men\u00fa_off_canvas_y_modo_mobile",
+      "label": "ADR 0006: Sistema Responsivo, Men\u00fa Off-Canvas y Modo Mobile",
+      "_origin": "ast",
+      "community": 148,
+      "community_name": "ADR 0006: Sistema Responsivo, Men\u00fa Off-Canvas y Modo Mobile",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "adr 0006: sistema responsivo, menu off-canvas y modo mobile",
+      "source_file": "docs/decisions/0006-sistema-responsivo-y-modo-mobile.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "docs_explanation_02_sistema_cedular_colombiano",
+      "label": "02-sistema-cedular-colombiano.md",
+      "_origin": "ast",
+      "community": 149,
+      "community_name": "02-sistema-cedular-colombiano.md",
+      "file_type": "document",
+      "node_kind": "page",
+      "norm_label": "02-sistema-cedular-colombiano.md",
+      "source_file": "docs/explanation/02-sistema-cedular-colombiano.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "docs_explanation_02_sistema_cedular_colombiano_1_c\u00e9dulas_de_tributaci\u00f3n",
+      "label": "1. C\u00e9dulas de Tributaci\u00f3n",
+      "_origin": "ast",
+      "community": 149,
+      "community_name": "02-sistema-cedular-colombiano.md",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "1. cedulas de tributacion",
+      "source_file": "docs/explanation/02-sistema-cedular-colombiano.md",
+      "source_location": "L7"
+    },
+    {
+      "id": "docs_explanation_02_sistema_cedular_colombiano_explicaci\u00f3n_el_sistema_cedular_en_colombia_ley_2277_de_2022",
+      "label": "Explicaci\u00f3n: El Sistema Cedular en Colombia (Ley 2277 de 2022)",
+      "_origin": "ast",
+      "community": 149,
+      "community_name": "02-sistema-cedular-colombiano.md",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "explicacion: el sistema cedular en colombia (ley 2277 de 2022)",
+      "source_file": "docs/explanation/02-sistema-cedular-colombiano.md",
       "source_location": "L1"
     },
     {
@@ -11651,18 +11734,6 @@
       "source_location": "L41"
     },
     {
-      "id": "docs_reference_api_rest_endpoints",
-      "label": "rest-endpoints.md",
-      "_origin": "ast",
-      "community": 49,
-      "community_name": "Referencia de Endpoints REST \u2014 TributIA API (v1)",
-      "file_type": "document",
-      "node_kind": "page",
-      "norm_label": "rest-endpoints.md",
-      "source_file": "docs/reference/api/rest-endpoints.md",
-      "source_location": "L1"
-    },
-    {
       "id": "docs_reference_api_rest_endpoints_1_m\u00f3dulo_de_sesi\u00f3n_y_sincronizaci\u00f3n_en_tiempo_real_session",
       "label": "1. M\u00f3dulo de Sesi\u00f3n y Sincronizaci\u00f3n en Tiempo Real (`/session`)",
       "_origin": "ast",
@@ -16767,18 +16838,6 @@
       "source_location": "L1"
     },
     {
-      "id": "docs_tutorials_01_primeros_pasos_liquidacion_pn",
-      "label": "01-primeros-pasos-liquidacion-pn.md",
-      "_origin": "ast",
-      "community": 53,
-      "community_name": "Pasos a Seguir",
-      "file_type": "document",
-      "node_kind": "page",
-      "norm_label": "01-primeros-pasos-liquidacion-pn.md",
-      "source_file": "docs/tutorials/01-primeros-pasos-liquidacion-pn.md",
-      "source_location": "L1"
-    },
-    {
       "id": "docs_tutorials_01_primeros_pasos_liquidacion_pn_objetivo",
       "label": "Objetivo",
       "_origin": "ast",
@@ -16872,18 +16931,6 @@
       "node_kind": "heading",
       "norm_label": "tutorial: primeros pasos liquidando renta de persona natural (f210)",
       "source_file": "docs/tutorials/01-primeros-pasos-liquidacion-pn.md",
-      "source_location": "L1"
-    },
-    {
-      "id": "docs_decisions_0004_persistencia_redis_cloudrun_aislamiento_sesion",
-      "label": "0004-persistencia-redis-cloudrun-aislamiento-sesion.md",
-      "_origin": "ast",
-      "community": 54,
-      "community_name": "ADR 0004: Persistencia en Redis, Aislamiento de Sesiones por Dispositivo sin Login y Despliegue en GCP Cloud Run",
-      "file_type": "document",
-      "node_kind": "page",
-      "norm_label": "0004-persistencia-redis-cloudrun-aislamiento-sesion.md",
-      "source_file": "docs/decisions/0004-persistencia-redis-cloudrun-aislamiento-sesion.md",
       "source_location": "L1"
     },
     {
@@ -16981,18 +17028,6 @@
       "norm_label": "principios de la decision",
       "source_file": "docs/decisions/0004-persistencia-redis-cloudrun-aislamiento-sesion.md",
       "source_location": "L47"
-    },
-    {
-      "id": "docs_decisions_0005_visualizador_efimero_conciliacion_exogena_csv",
-      "label": "0005-visualizador-efimero-conciliacion-exogena-csv.md",
-      "_origin": "ast",
-      "community": 55,
-      "community_name": "ADR 0005: Visualizador Ef\u00edmero de Conciliaci\u00f3n Ex\u00f3gena y Transacciones CSV sin Persistencia",
-      "file_type": "document",
-      "node_kind": "page",
-      "norm_label": "0005-visualizador-efimero-conciliacion-exogena-csv.md",
-      "source_file": "docs/decisions/0005-visualizador-efimero-conciliacion-exogena-csv.md",
-      "source_location": "L1"
     },
     {
       "id": "docs_decisions_0005_visualizador_efimero_conciliacion_exogena_csv_1_contexto_y_problema",
@@ -17489,7 +17524,7 @@
       "file_type": "concept",
       "norm_label": "liquidacionsancionresponse",
       "source_file": "backend/app/services/beneficios.py",
-      "source_location": "L544"
+      "source_location": "L548"
     },
     {
       "id": "backend_app_services_beneficios_class_reduccionsancionrequest",
@@ -17544,7 +17579,7 @@
       "file_type": "concept",
       "norm_label": "simulacioninmuebleafcrequest",
       "source_file": "backend/app/services/beneficios.py",
-      "source_location": "L572"
+      "source_location": "L576"
     },
     {
       "id": "backend_app_services_beneficios_class_simulacioninmuebleafcresponse",
@@ -17555,7 +17590,7 @@
       "file_type": "concept",
       "norm_label": "simulacioninmuebleafcresponse",
       "source_file": "backend/app/services/beneficios.py",
-      "source_location": "L596"
+      "source_location": "L600"
     },
     {
       "id": "backend_app_services_beneficios_func_calcular_ajuste_articulo_73",
@@ -17577,7 +17612,7 @@
       "file_type": "concept",
       "norm_label": "calcular_beneficio_auditoria",
       "source_file": "backend/app/services/beneficios.py",
-      "source_location": "L947"
+      "source_location": "L962"
     },
     {
       "id": "backend_app_services_beneficios_func_calcular_exencion_inmueble_afc",
@@ -17588,7 +17623,7 @@
       "file_type": "concept",
       "norm_label": "calcular_exencion_inmueble_afc",
       "source_file": "backend/app/services/beneficios.py",
-      "source_location": "L859"
+      "source_location": "L874"
     },
     {
       "id": "backend_app_services_beneficios_func_calcular_reduccion_sancion",
@@ -17599,7 +17634,7 @@
       "file_type": "concept",
       "norm_label": "calcular_reduccion_sancion",
       "source_file": "backend/app/services/beneficios.py",
-      "source_location": "L998"
+      "source_location": "L1013"
     },
     {
       "id": "backend_app_services_beneficios_func_calcular_sancion_tributaria",
@@ -17610,7 +17645,7 @@
       "file_type": "concept",
       "norm_label": "calcular_sancion_tributaria",
       "source_file": "backend/app/services/beneficios.py",
-      "source_location": "L618"
+      "source_location": "L622"
     },
     {
       "id": "backend_app_services_beneficios_func_get_catalogo_beneficios",
@@ -18032,39 +18067,99 @@
       "source_location": "L64"
     },
     {
-      "id": "docs_explanation_02_sistema_cedular_colombiano",
-      "label": "02-sistema-cedular-colombiano.md",
+      "id": "docs_decisions_0001_motor_de_reglas_declarativo_json",
+      "label": "0001-motor-de-reglas-declarativo-json.md",
       "_origin": "ast",
       "community": 66,
       "community_name": "README.md",
       "file_type": "document",
       "node_kind": "page",
-      "norm_label": "02-sistema-cedular-colombiano.md",
-      "source_file": "docs/explanation/02-sistema-cedular-colombiano.md",
+      "norm_label": "0001-motor-de-reglas-declarativo-json.md",
+      "source_file": "docs/decisions/0001-motor-de-reglas-declarativo-json.md",
       "source_location": "L1"
     },
     {
-      "id": "docs_explanation_02_sistema_cedular_colombiano_1_c\u00e9dulas_de_tributaci\u00f3n",
-      "label": "1. C\u00e9dulas de Tributaci\u00f3n",
+      "id": "docs_decisions_0002_sincronizacion_bidireccional_sse",
+      "label": "0002-sincronizacion-bidireccional-sse.md",
       "_origin": "ast",
       "community": 66,
       "community_name": "README.md",
       "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "1. cedulas de tributacion",
-      "source_file": "docs/explanation/02-sistema-cedular-colombiano.md",
-      "source_location": "L7"
+      "node_kind": "page",
+      "norm_label": "0002-sincronizacion-bidireccional-sse.md",
+      "source_file": "docs/decisions/0002-sincronizacion-bidireccional-sse.md",
+      "source_location": "L1"
     },
     {
-      "id": "docs_explanation_02_sistema_cedular_colombiano_explicaci\u00f3n_el_sistema_cedular_en_colombia_ley_2277_de_2022",
-      "label": "Explicaci\u00f3n: El Sistema Cedular en Colombia (Ley 2277 de 2022)",
+      "id": "docs_decisions_0003_mascara_contable_colombiana_en_dom",
+      "label": "0003-mascara-contable-colombiana-en-dom.md",
+      "_origin": "ast",
+      "community": 66,
+      "community_name": "README.md",
+      "file_type": "document",
+      "node_kind": "page",
+      "norm_label": "0003-mascara-contable-colombiana-en-dom.md",
+      "source_file": "docs/decisions/0003-mascara-contable-colombiana-en-dom.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "docs_decisions_0004_persistencia_redis_cloudrun_aislamiento_sesion",
+      "label": "0004-persistencia-redis-cloudrun-aislamiento-sesion.md",
+      "_origin": "ast",
+      "community": 66,
+      "community_name": "README.md",
+      "file_type": "document",
+      "node_kind": "page",
+      "norm_label": "0004-persistencia-redis-cloudrun-aislamiento-sesion.md",
+      "source_file": "docs/decisions/0004-persistencia-redis-cloudrun-aislamiento-sesion.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "docs_decisions_0005_visualizador_efimero_conciliacion_exogena_csv",
+      "label": "0005-visualizador-efimero-conciliacion-exogena-csv.md",
+      "_origin": "ast",
+      "community": 66,
+      "community_name": "README.md",
+      "file_type": "document",
+      "node_kind": "page",
+      "norm_label": "0005-visualizador-efimero-conciliacion-exogena-csv.md",
+      "source_file": "docs/decisions/0005-visualizador-efimero-conciliacion-exogena-csv.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "docs_decisions_0006_sistema_responsivo_y_modo_mobile",
+      "label": "0006-sistema-responsivo-y-modo-mobile.md",
+      "_origin": "ast",
+      "community": 66,
+      "community_name": "README.md",
+      "file_type": "document",
+      "node_kind": "page",
+      "norm_label": "0006-sistema-responsivo-y-modo-mobile.md",
+      "source_file": "docs/decisions/0006-sistema-responsivo-y-modo-mobile.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "docs_decisions_readme",
+      "label": "decisions/README.md",
+      "_origin": "ast",
+      "community": 66,
+      "community_name": "README.md",
+      "file_type": "document",
+      "node_kind": "page",
+      "norm_label": "decisions/readme.md",
+      "source_file": "docs/decisions/README.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "docs_decisions_readme_registro_de_decisiones_de_arquitectura_adrs",
+      "label": "Registro de Decisiones de Arquitectura (ADRs)",
       "_origin": "ast",
       "community": 66,
       "community_name": "README.md",
       "file_type": "document",
       "node_kind": "heading",
-      "norm_label": "explicacion: el sistema cedular en colombia (ley 2277 de 2022)",
-      "source_file": "docs/explanation/02-sistema-cedular-colombiano.md",
+      "norm_label": "registro de decisiones de arquitectura (adrs)",
+      "source_file": "docs/decisions/README.md",
       "source_location": "L1"
     },
     {
@@ -18113,6 +18208,18 @@
       "node_kind": "page",
       "norm_label": "docs/readme.md",
       "source_file": "docs/README.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "docs_reference_api_rest_endpoints",
+      "label": "rest-endpoints.md",
+      "_origin": "ast",
+      "community": 66,
+      "community_name": "README.md",
+      "file_type": "document",
+      "node_kind": "page",
+      "norm_label": "rest-endpoints.md",
+      "source_file": "docs/reference/api/rest-endpoints.md",
       "source_location": "L1"
     },
     {
@@ -18233,6 +18340,18 @@
       "node_kind": "heading",
       "norm_label": "mapeo oficial de casillas \u2014 formulario 110 dian & ttd",
       "source_file": "docs/reference/tax-engine/form110-casillas-mapping.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "docs_tutorials_01_primeros_pasos_liquidacion_pn",
+      "label": "01-primeros-pasos-liquidacion-pn.md",
+      "_origin": "ast",
+      "community": 66,
+      "community_name": "README.md",
+      "file_type": "document",
+      "node_kind": "page",
+      "norm_label": "01-primeros-pasos-liquidacion-pn.md",
+      "source_file": "docs/tutorials/01-primeros-pasos-liquidacion-pn.md",
       "source_location": "L1"
     },
     {
@@ -18579,23 +18698,11 @@
       "source_location": "L7"
     },
     {
-      "id": "docs_decisions_0001_motor_de_reglas_declarativo_json",
-      "label": "0001-motor-de-reglas-declarativo-json.md",
-      "_origin": "ast",
-      "community": 71,
-      "community_name": "decisions/README.md",
-      "file_type": "document",
-      "node_kind": "page",
-      "norm_label": "0001-motor-de-reglas-declarativo-json.md",
-      "source_file": "docs/decisions/0001-motor-de-reglas-declarativo-json.md",
-      "source_location": "L1"
-    },
-    {
       "id": "docs_decisions_0001_motor_de_reglas_declarativo_json_adr_0001_motor_de_reglas_tributarias_declarativo_en_archivos_json_versionados",
       "label": "ADR 0001: Motor de Reglas Tributarias Declarativo en Archivos JSON Versionados",
       "_origin": "ast",
       "community": 71,
-      "community_name": "decisions/README.md",
+      "community_name": "ADR 0001: Motor de Reglas Tributarias Declarativo en Archivos JSON Versionados",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "adr 0001: motor de reglas tributarias declarativo en archivos json versionados",
@@ -18607,7 +18714,7 @@
       "label": "Consecuencias",
       "_origin": "ast",
       "community": 71,
-      "community_name": "decisions/README.md",
+      "community_name": "ADR 0001: Motor de Reglas Tributarias Declarativo en Archivos JSON Versionados",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "consecuencias",
@@ -18619,7 +18726,7 @@
       "label": "Contexto",
       "_origin": "ast",
       "community": 71,
-      "community_name": "decisions/README.md",
+      "community_name": "ADR 0001: Motor de Reglas Tributarias Declarativo en Archivos JSON Versionados",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "contexto",
@@ -18631,96 +18738,12 @@
       "label": "Decisi\u00f3n",
       "_origin": "ast",
       "community": 71,
-      "community_name": "decisions/README.md",
+      "community_name": "ADR 0001: Motor de Reglas Tributarias Declarativo en Archivos JSON Versionados",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "decision",
       "source_file": "docs/decisions/0001-motor-de-reglas-declarativo-json.md",
       "source_location": "L11"
-    },
-    {
-      "id": "docs_decisions_0006_sistema_responsivo_y_modo_mobile",
-      "label": "0006-sistema-responsivo-y-modo-mobile.md",
-      "_origin": "ast",
-      "community": 71,
-      "community_name": "decisions/README.md",
-      "file_type": "document",
-      "node_kind": "page",
-      "norm_label": "0006-sistema-responsivo-y-modo-mobile.md",
-      "source_file": "docs/decisions/0006-sistema-responsivo-y-modo-mobile.md",
-      "source_location": "L1"
-    },
-    {
-      "id": "docs_decisions_0006_sistema_responsivo_y_modo_mobile_1_contexto_y_problema",
-      "label": "1. Contexto y Problema",
-      "_origin": "ast",
-      "community": 71,
-      "community_name": "decisions/README.md",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "1. contexto y problema",
-      "source_file": "docs/decisions/0006-sistema-responsivo-y-modo-mobile.md",
-      "source_location": "L9"
-    },
-    {
-      "id": "docs_decisions_0006_sistema_responsivo_y_modo_mobile_2_decisi\u00f3n_tomada",
-      "label": "2. Decisi\u00f3n Tomada",
-      "_origin": "ast",
-      "community": 71,
-      "community_name": "decisions/README.md",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "2. decision tomada",
-      "source_file": "docs/decisions/0006-sistema-responsivo-y-modo-mobile.md",
-      "source_location": "L22"
-    },
-    {
-      "id": "docs_decisions_0006_sistema_responsivo_y_modo_mobile_3_consecuencias_y_beneficios",
-      "label": "3. Consecuencias y Beneficios",
-      "_origin": "ast",
-      "community": 71,
-      "community_name": "decisions/README.md",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "3. consecuencias y beneficios",
-      "source_file": "docs/decisions/0006-sistema-responsivo-y-modo-mobile.md",
-      "source_location": "L45"
-    },
-    {
-      "id": "docs_decisions_0006_sistema_responsivo_y_modo_mobile_adr_0006_sistema_responsivo_men\u00fa_off_canvas_y_modo_mobile",
-      "label": "ADR 0006: Sistema Responsivo, Men\u00fa Off-Canvas y Modo Mobile",
-      "_origin": "ast",
-      "community": 71,
-      "community_name": "decisions/README.md",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "adr 0006: sistema responsivo, menu off-canvas y modo mobile",
-      "source_file": "docs/decisions/0006-sistema-responsivo-y-modo-mobile.md",
-      "source_location": "L1"
-    },
-    {
-      "id": "docs_decisions_readme",
-      "label": "decisions/README.md",
-      "_origin": "ast",
-      "community": 71,
-      "community_name": "decisions/README.md",
-      "file_type": "document",
-      "node_kind": "page",
-      "norm_label": "decisions/readme.md",
-      "source_file": "docs/decisions/README.md",
-      "source_location": "L1"
-    },
-    {
-      "id": "docs_decisions_readme_registro_de_decisiones_de_arquitectura_adrs",
-      "label": "Registro de Decisiones de Arquitectura (ADRs)",
-      "_origin": "ast",
-      "community": 71,
-      "community_name": "decisions/README.md",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "registro de decisiones de arquitectura (adrs)",
-      "source_file": "docs/decisions/README.md",
-      "source_location": "L1"
     },
     {
       "id": "docs_how_to_04_simular_reajuste_fiscal_art73",
@@ -19071,23 +19094,11 @@
       "source_location": "L474"
     },
     {
-      "id": "docs_decisions_0002_sincronizacion_bidireccional_sse",
-      "label": "0002-sincronizacion-bidireccional-sse.md",
-      "_origin": "ast",
-      "community": 74,
-      "community_name": "0002-sincronizacion-bidireccional-sse.md",
-      "file_type": "document",
-      "node_kind": "page",
-      "norm_label": "0002-sincronizacion-bidireccional-sse.md",
-      "source_file": "docs/decisions/0002-sincronizacion-bidireccional-sse.md",
-      "source_location": "L1"
-    },
-    {
       "id": "docs_decisions_0002_sincronizacion_bidireccional_sse_adr_0002_sincronizaci\u00f3n_bidireccional_en_tiempo_real_con_server_sent_events_sse",
       "label": "ADR 0002: Sincronizaci\u00f3n Bidireccional en Tiempo Real con Server-Sent Events (SSE)",
       "_origin": "ast",
       "community": 74,
-      "community_name": "0002-sincronizacion-bidireccional-sse.md",
+      "community_name": "ADR 0002: Sincronizaci\u00f3n Bidireccional en Tiempo Real con Server-Sent Events (SSE)",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "adr 0002: sincronizacion bidireccional en tiempo real con server-sent events (sse)",
@@ -19099,7 +19110,7 @@
       "label": "Consecuencias",
       "_origin": "ast",
       "community": 74,
-      "community_name": "0002-sincronizacion-bidireccional-sse.md",
+      "community_name": "ADR 0002: Sincronizaci\u00f3n Bidireccional en Tiempo Real con Server-Sent Events (SSE)",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "consecuencias",
@@ -19111,7 +19122,7 @@
       "label": "Contexto",
       "_origin": "ast",
       "community": 74,
-      "community_name": "0002-sincronizacion-bidireccional-sse.md",
+      "community_name": "ADR 0002: Sincronizaci\u00f3n Bidireccional en Tiempo Real con Server-Sent Events (SSE)",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "contexto",
@@ -19123,7 +19134,7 @@
       "label": "Decisi\u00f3n",
       "_origin": "ast",
       "community": 74,
-      "community_name": "0002-sincronizacion-bidireccional-sse.md",
+      "community_name": "ADR 0002: Sincronizaci\u00f3n Bidireccional en Tiempo Real con Server-Sent Events (SSE)",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "decision",
@@ -21013,6 +21024,17 @@
     },
     {
       "source": "backend_app_services_beneficios",
+      "target": "backend_app_services_beneficios_func_calcular_reduccion_sancion",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/services/beneficios.py",
+      "source_location": "L1013",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_app_services_beneficios",
       "target": "backend_app_services_beneficios_class_simulacionajustearticulo73response",
       "relation": "contains",
       "_origin": "ast",
@@ -21107,7 +21129,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/app/services/beneficios.py",
-      "source_location": "L544",
+      "source_location": "L548",
       "weight": 1.0
     },
     {
@@ -21118,7 +21140,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/app/services/beneficios.py",
-      "source_location": "L572",
+      "source_location": "L576",
       "weight": 1.0
     },
     {
@@ -21129,7 +21151,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/app/services/beneficios.py",
-      "source_location": "L596",
+      "source_location": "L600",
       "weight": 1.0
     },
     {
@@ -21140,7 +21162,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/app/services/beneficios.py",
-      "source_location": "L618",
+      "source_location": "L622",
       "weight": 1.0
     },
     {
@@ -21173,7 +21195,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/app/services/beneficios.py",
-      "source_location": "L859",
+      "source_location": "L874",
       "weight": 1.0
     },
     {
@@ -21206,18 +21228,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/app/services/beneficios.py",
-      "source_location": "L947",
-      "weight": 1.0
-    },
-    {
-      "source": "backend_app_services_beneficios",
-      "target": "backend_app_services_beneficios_func_calcular_reduccion_sancion",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "backend/app/services/beneficios.py",
-      "source_location": "L998",
+      "source_location": "L962",
       "weight": 1.0
     },
     {
@@ -21702,6 +21713,17 @@
       "confidence_score": 1.0,
       "source_file": "backend/tests/test_beneficios_and_go.py",
       "source_location": "L229",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_tests_test_beneficios_and_go",
+      "target": "backend_tests_test_beneficios_and_go_func_test_calcular_sancion_saldo_a_favor_sin_intereses",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/tests/test_beneficios_and_go.py",
+      "source_location": "L278",
       "weight": 1.0
     },
     {
@@ -38250,5 +38272,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "a619e9f858a54e1fad355f30069398c0eb80ce15"
+  "built_at_commit": "2fc5b8f05ca23e10ae3065ab1f3fecb55faca325"
 }

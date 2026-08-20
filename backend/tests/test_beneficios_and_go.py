@@ -273,3 +273,30 @@ def test_calcular_sancion_inexactitud_tarifas_y_procesos():
     assert res_req.tarifa_base_pct == 35.0
     assert res_req.sancion_final_a_pagar_cop == 10500000  # 35% de 30M
     assert res_req.comparativa_sancion_con_emplazamiento_dian_cop == 30000000  # 100% si no aceptara
+
+
+def test_calcular_sancion_saldo_a_favor_sin_intereses():
+    """Valida que una declaración con saldo a favor pague sanción pero cero intereses moratorios (Art. 634 E.T.)."""
+    from app.services.beneficios import LiquidacionSancionRequest, calcular_sancion_tributaria
+
+    req = LiquidacionSancionRequest(
+        tipo_sancion="extemporaneidad",
+        monto_base_cop=50000000,  # 50M de saldo a favor base
+        meses_fraccion_retraso=2,
+        es_voluntario_sin_emplazamiento=True,
+        sin_sanciones_ultimos_2_anos=True,
+        es_saldo_a_favor=True,
+        incluir_intereses_mora=True,
+        dias_mora=60,
+        tasa_interes_anual_pct=23.0,
+        tax_year=2026,
+        custom_uvt=52350,
+    )
+    res = calcular_sancion_tributaria(req)
+
+    # 10% de 50M = 5M, reducida al 50% = 2.500.000
+    assert res.sancion_final_a_pagar_cop == 2500000
+    # Por saldo a favor los intereses son 0
+    assert res.intereses_mora_cop == 0.0
+    # Total consolidado a pagar es SOLO la sanción (no hay capital a deber)
+    assert res.total_consolidado_a_pagar_cop == 2500000

@@ -955,6 +955,7 @@ async function runPnCalc() {
 }
 
 function renderPnResult(data) {
+  window._lastPnResult = data;
   const kpiBox = document.getElementById('pn-kpi-box');
   const kpiLabel = document.getElementById('pn-kpi-label');
   const kpiValue = document.getElementById('pn-kpi-value');
@@ -1714,6 +1715,7 @@ async function runPjCalc() {
 }
 
 function renderPjResult(data) {
+  window._lastPjResult = data;
   const kpiBox = document.getElementById('pj-kpi-box');
   const kpiLabel = document.getElementById('pj-kpi-label');
   const kpiValue = document.getElementById('pj-kpi-value');
@@ -1958,6 +1960,48 @@ function toggleMoraFields() {
   }
 }
 
+function toggleSaldoFavor() {
+  const chk = document.getElementById('sancion-calc-saldo-favor');
+  const moraWrapper = document.getElementById('sancion-mora-wrapper');
+  if (chk && chk.checked) {
+    if (moraWrapper) moraWrapper.style.opacity = '0.5';
+  } else {
+    if (moraWrapper) moraWrapper.style.opacity = '1';
+  }
+}
+
+function cargarSaldoActualParaSanciones() {
+  const saldoPn = window._lastPnResult?.saldo_a_pagar || 0;
+  const saldoPnFavor = window._lastPnResult?.saldo_a_favor || 0;
+  const saldoPj = window._lastPjResult?.saldo_a_pagar || 0;
+  const saldoPjFavor = window._lastPjResult?.saldo_a_favor || 0;
+
+  const saldo = saldoPn || saldoPj || 0;
+  const esFavor = (saldoPnFavor > 0 && saldoPn === 0) || (saldoPjFavor > 0 && saldoPj === 0);
+
+  const input = document.getElementById('sancion-calc-monto-base');
+  const chkFavor = document.getElementById('sancion-calc-saldo-favor');
+
+  if (saldo > 0) {
+    if (input) input.value = formatCOP(saldo, false);
+    if (chkFavor) chkFavor.checked = false;
+    toggleSaldoFavor();
+    runCalculadoraSanciones();
+  } else if (esFavor) {
+    const favorMonto = saldoPnFavor || saldoPjFavor;
+    if (input) input.value = formatCOP(favorMonto, false);
+    if (chkFavor) chkFavor.checked = true;
+    toggleSaldoFavor();
+    runCalculadoraSanciones();
+  } else {
+    // Si aún no se ha liquidado PN o PJ, cargar un valor sugerido de 10.000.000 COP
+    if (input) input.value = "10'000.000";
+    if (chkFavor) chkFavor.checked = false;
+    toggleSaldoFavor();
+    runCalculadoraSanciones();
+  }
+}
+
 function handleSancionHistoryCheck(source) {
   const chk2 = document.getElementById('sancion-calc-check-2anos');
   const chk1 = document.getElementById('sancion-calc-check-1ano');
@@ -1969,13 +2013,14 @@ function handleSancionHistoryCheck(source) {
 async function runCalculadoraSanciones() {
   const tipo = document.getElementById('sancion-calc-tipo')?.value || 'correccion';
   const montoBase = getNum('sancion-calc-monto-base');
-  const meses = parseInt(document.getElementById('sancion-calc-meses')?.value || '1', 10);
+  const meses = parseInt(document.getElementById('sancion-calc-meses')?.value || '1', 10) || 1;
   const esVoluntario = document.getElementById('sancion-calc-voluntario')?.checked ?? true;
   const sinSanciones2 = document.getElementById('sancion-calc-check-2anos')?.checked ?? true;
   const sinSanciones1 = document.getElementById('sancion-calc-check-1ano')?.checked ?? true;
+  const esSaldoFavor = document.getElementById('sancion-calc-saldo-favor')?.checked ?? false;
   const incluirMora = document.getElementById('sancion-calc-check-mora')?.checked ?? true;
-  const diasMora = parseInt(document.getElementById('sancion-calc-dias-mora')?.value || '60', 10);
-  const tasaMora = parseFloat(document.getElementById('sancion-calc-tasa-mora')?.value || '23.0');
+  const diasMora = parseInt(document.getElementById('sancion-calc-dias-mora')?.value || '60', 10) || 0;
+  const tasaMora = parseFloat(document.getElementById('sancion-calc-tasa-mora')?.value || '23.0') || 0.0;
   const resDiv = document.getElementById('sancion-calc-result-box');
   if (!resDiv) return;
 
@@ -1990,6 +2035,7 @@ async function runCalculadoraSanciones() {
         es_voluntario_sin_emplazamiento: esVoluntario,
         sin_sanciones_ultimos_2_anos: sinSanciones2,
         sin_sanciones_ultimo_1_ano: sinSanciones1,
+        es_saldo_a_favor: esSaldoFavor,
         incluir_intereses_mora: incluirMora,
         dias_mora: diasMora,
         tasa_interes_anual_pct: tasaMora,
@@ -2004,18 +2050,18 @@ async function runCalculadoraSanciones() {
     resDiv.innerHTML = `
       <div style="background: white; border: 1px solid #cbd5e1; border-radius: 8px; padding: 12px; margin-bottom: 12px;">
         <!-- GRAN TOTAL CONSOLIDADO -->
-        <div style="background: #f0fdf4; border: 1px solid #86efac; border-radius: 6px; padding: 10px; margin-bottom: 10px;">
+        <div style="background: ${data.es_saldo_a_favor ? '#f0fdf4' : '#f0fdf4'}; border: 1px solid #86efac; border-radius: 6px; padding: 10px; margin-bottom: 10px;">
           <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 6px;">
             <div>
               <div style="font-size: 11px; font-weight: 800; color: #166534; text-transform: uppercase;">
-                Gran Total Consolidado a Pagar (Capital + Sanción + Mora):
+                ${data.es_saldo_a_favor ? 'Total Sanción a Pagar (Sin Intereses por Saldo a Favor):' : 'Gran Total Consolidado a Pagar (Capital + Sanción + Mora):'}
               </div>
               <div style="font-size: 20px; font-weight: 900; font-family: var(--font-mono); color: #15803d;">
                 ${formatCOP(data.total_consolidado_a_pagar_cop)} COP
               </div>
             </div>
             <span class="badge badge-success" style="font-size: 11px;">
-              ${data.incluye_intereses_mora ? `Con ${data.dias_mora} días de mora` : 'Sin intereses'}
+              ${data.es_saldo_a_favor ? '🛡️ Saldo a Favor ($0 Mora)' : (data.incluye_intereses_mora ? `Con ${data.dias_mora} días de mora` : 'Sin intereses')}
             </span>
           </div>
         </div>

@@ -144,9 +144,9 @@
     "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
   },
   "backend/app/services/beneficios.py": {
-    "mtime": 1787190787.4970245,
-    "seen": 1787190795.683389,
-    "ast_hash": "40cf0e860ad2f4ff166a98dec789999f",
+    "mtime": 1787206829.6031678,
+    "seen": 1787207087.5721421,
+    "ast_hash": "dddd3e7e29775e6c5009061a601724ca",
     "semantic_hash": ""
   },
   "backend/app/services/liquidacion_pj.py": {
@@ -192,9 +192,9 @@
     "semantic_hash": "893fa7465543d9824ea44cdbcab4e8b7"
   },
   "backend/tests/test_beneficios_and_go.py": {
-    "mtime": 1787190582.978762,
-    "seen": 1787190795.683553,
-    "ast_hash": "6b327ea89ee5dde26a648f03c4037fb9",
+    "mtime": 1787206921.5960698,
+    "seen": 1787207087.57236,
+    "ast_hash": "dd8a5ccca042a86e60a752ab80506d50",
     "semantic_hash": ""
   },
   "backend/tests/test_calendario.py": {
@@ -390,9 +390,9 @@
     "semantic_hash": ""
   },
   "backend/app/static/index.html": {
-    "mtime": 1787204201.004535,
-    "seen": 1787204673.3572721,
-    "ast_hash": "96c87fd8673da7a1a62623e93c02de30",
+    "mtime": 1787206853.7905562,
+    "seen": 1787207087.573121,
+    "ast_hash": "f256e789fa166bde0cc8577e04a71472",
     "semantic_hash": ""
   },
   "docs/README.md": {
@@ -618,9 +618,9 @@
     "semantic_hash": ""
   },
   "backend/tests/test_e2e_playwright.py": {
-    "mtime": 1787205298.7331848,
-    "seen": 1787205370.6964202,
-    "ast_hash": "415e2d8c45ac20154c00cc62f998decf",
+    "mtime": 1787207005.819554,
+    "seen": 1787207087.572406,
+    "ast_hash": "742687311ac4a0133607391a5e853ca0",
     "semantic_hash": ""
   },
   "skills/declaracion-renta-persona-natural/scripts/simular_inmuebles_afc.py": {
@@ -654,9 +654,9 @@
     "semantic_hash": ""
   },
   "docs/how-to/05-calcular-sanciones-y-beneficio-auditoria.md": {
-    "mtime": 1787205605.3309252,
-    "seen": 1787205748.9180028,
-    "ast_hash": "9bcf1902012f58558a04c709268e3e02",
+    "mtime": 1787206912.4077346,
+    "seen": 1787207087.573478,
+    "ast_hash": "0a7965bef330f80ea01b7f6e54b7c15c",
     "semantic_hash": ""
   }
 }

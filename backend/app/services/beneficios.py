@@ -529,6 +529,10 @@ class LiquidacionSancionRequest(BaseModel):
         True,
         description="¿Calcular e incluir intereses moratorios sobre el impuesto insoluto? (Art. 634 y 635 E.T.)",
     )
+    es_saldo_a_favor: bool = Field(
+        False,
+        description="¿La declaración arroja Saldo a Favor o $0 impuesto a cargo? (En saldo a favor no se generan intereses moratorios)",
+    )
     dias_mora: int = Field(
         60,
         description="Número de días calendario de mora transcurridos desde el vencimiento legal",
@@ -798,7 +802,13 @@ def calcular_sancion_tributaria(req: LiquidacionSancionRequest) -> LiquidacionSa
     tasa_ea = max(0.0, req.tasa_interes_anual_pct)
     intereses_mora_cop = 0.0
 
-    if req.incluir_intereses_mora and monto_base > 0 and dias_mora > 0:
+    if req.es_saldo_a_favor:
+        articulos.append("Art. 634 E.T. (Inaplicabilidad de Intereses en Saldo a Favor)")
+        pasos.append(
+            "4. Intereses Moratorios: $0 COP. Las declaraciones con Saldo a Favor o sin impuesto a pagar no generan intereses moratorios (Art. 634 E.T.)."
+        )
+        total_consolidado_cop = sancion_final
+    elif req.incluir_intereses_mora and monto_base > 0 and dias_mora > 0:
         articulos.append("Arts. 634 y 635 E.T. (Intereses Moratorios Diarios Compuestos)")
         # Fórmula de interés compuesto diario: I = K * ((1 + r_ea)^(D / 365) - 1)
         tasa_decimal = tasa_ea / 100.0
@@ -808,10 +818,11 @@ def calcular_sancion_tributaria(req: LiquidacionSancionRequest) -> LiquidacionSa
             f"4. Intereses Moratorios: Tasa efectiva anual de {tasa_ea:.2f}% E.A. aplicada por {dias_mora} días calendario sobre capital adeudado (${monto_base:,.0f}) = ${intereses_mora_cop:,.0f} COP."
         )
         pasos.append(
-            "💡 Nota: La sanción mínima del Art. 639 (10 UVT) NO aplica a los intereses de mora; estos se liquidan proporcionalmente día a día."
+            "💡 Regla DIAN / Consejo de Estado: Los intereses de mora se liquidan exclusivamente sobre el impuesto o mayor valor a cargo (capital principal), NUNCA sobre la sanción."
         )
-
-    total_consolidado_cop = monto_base + sancion_final + intereses_mora_cop
+        total_consolidado_cop = monto_base + sancion_final + intereses_mora_cop
+    else:
+        total_consolidado_cop = monto_base + sancion_final
 
     # Comparativa con emplazamiento
     ahorro_voluntario = max(0.0, sancion_emplazada - sancion_final)
@@ -820,11 +831,15 @@ def calcular_sancion_tributaria(req: LiquidacionSancionRequest) -> LiquidacionSa
         f"La sanción liquidada a pagar es de ${sancion_final:,.0f} COP"
         + (
             f" más ${intereses_mora_cop:,.0f} COP de intereses moratorios por {dias_mora} días de mora"
-            if req.incluir_intereses_mora
+            if (req.incluir_intereses_mora and not req.es_saldo_a_favor and intereses_mora_cop > 0)
             else ""
         )
-        + f", para un gran total consolidado de ${total_consolidado_cop:,.0f} COP (incluyendo capital adeudado de ${monto_base:,.0f} COP). "
-        f"Al corregir/declarar voluntariamente antes de actuación coactiva de la DIAN y contar con historial favorable, "
+        + (
+            f", para un gran total consolidado de ${total_consolidado_cop:,.0f} COP (incluyendo capital adeudado de ${monto_base:,.0f} COP)."
+            if not req.es_saldo_a_favor
+            else f", para un gran total a pagar de ${total_consolidado_cop:,.0f} COP (únicamente sanción, sin intereses por saldo a favor)."
+        )
+        + f" Al corregir/declarar voluntariamente antes de actuación coactiva de la DIAN y contar con historial favorable, "
         f"obtuviste un ahorro estimado de ${ahorro_voluntario:,.0f} COP en la sanción."
     )
 
