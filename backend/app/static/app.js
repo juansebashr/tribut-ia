@@ -1867,8 +1867,8 @@ async function loadTablaArticulo73() {
       tablaArticulo73Data.forEach(item => {
         const opt = document.createElement('option');
         opt.value = item.ano_adquisicion;
-        opt.innerText = item.ano_adquisicion_texto;
-        if (item.ano_adquisicion === 1995) opt.selected = true;
+        opt.innerText = item.ano_adquisicion;
+        if (item.ano_adquisicion === '1995') opt.selected = true;
         anoSelect.appendChild(opt);
       });
     }
@@ -1903,13 +1903,13 @@ function renderTablaArticulo73(items) {
     tr.onclick = () => selectAnoArt73(item.ano_adquisicion);
 
     tr.innerHTML = `
-      <td style="padding: 10px 14px; font-weight: 800; color: var(--primary); font-size: 13px;">${item.ano_adquisicion_texto}</td>
-      <td style="padding: 10px 14px; font-family: var(--font-mono); font-weight: 600; color: #1e40af;">${item.acciones_aportes.toLocaleString('es-CO', { minimumFractionDigits: 2 })}x</td>
-      <td style="padding: 10px 14px; font-family: var(--font-mono); font-weight: 700; color: #0b3b60;">${item.bienes_raices_urbanos.toLocaleString('es-CO', { minimumFractionDigits: 2 })}x</td>
-      <td style="padding: 10px 14px; font-family: var(--font-mono); font-weight: 600; color: #047857;">${item.bienes_raices_rurales_agro.toLocaleString('es-CO', { minimumFractionDigits: 2 })}x</td>
-      <td style="padding: 10px 14px; font-family: var(--font-mono); font-weight: 600; color: #0284c7;">${item.bienes_raices_rurales.toLocaleString('es-CO', { minimumFractionDigits: 2 })}x</td>
+      <td style="padding: 10px 14px; font-weight: 800; color: var(--primary); font-size: 13px;">${item.ano_adquisicion}</td>
+      <td style="padding: 10px 14px; font-family: var(--font-mono); font-weight: 600; color: #1e40af;">${Number(item.acciones_aportes).toLocaleString('es-CO', { minimumFractionDigits: 2 })}x</td>
+      <td style="padding: 10px 14px; font-family: var(--font-mono); font-weight: 700; color: #0b3b60;">${Number(item.bienes_raices_urbanos).toLocaleString('es-CO', { minimumFractionDigits: 2 })}x</td>
+      <td style="padding: 10px 14px; font-family: var(--font-mono); font-weight: 600; color: #047857;">${Number(item.bienes_raices_rurales_agro).toLocaleString('es-CO', { minimumFractionDigits: 2 })}x</td>
+      <td style="padding: 10px 14px; font-family: var(--font-mono); font-weight: 600; color: #0284c7;">${Number(item.bienes_raices_rurales).toLocaleString('es-CO', { minimumFractionDigits: 2 })}x</td>
       <td style="padding: 10px 14px; text-align: center;">
-        <button class="btn btn-outline btn-xs" style="padding: 3px 8px; font-size: 11px; border-radius: 4px;" onclick="event.stopPropagation(); selectAnoArt73(${item.ano_adquisicion})">
+        <button class="btn btn-outline btn-xs" style="padding: 3px 8px; font-size: 11px; border-radius: 4px;" onclick="event.stopPropagation(); selectAnoArt73('${item.ano_adquisicion}')">
           ⚡ Simular
         </button>
       </td>
@@ -1925,8 +1925,7 @@ function filterTablaArticulo73(query) {
   }
   const q = query.trim().toLowerCase();
   const filtered = tablaArticulo73Data.filter(i => 
-    i.ano_adquisicion.toString().includes(q) || 
-    i.ano_adquisicion_texto.toLowerCase().includes(q)
+    i.ano_adquisicion.toString().toLowerCase().includes(q)
   );
   renderTablaArticulo73(filtered);
 }
@@ -1950,7 +1949,7 @@ async function runSimulacionArticulo73() {
   const resDiv = document.getElementById('sim-art73-result');
   if (!resDiv || !anoSelect || !tipoSelect) return;
 
-  const ano = parseInt(anoSelect.value) || 1995;
+  const ano = anoSelect.value || '1995';
   const tipo = tipoSelect.value || 'bienes_raices_urbanos';
 
   try {
@@ -1958,31 +1957,36 @@ async function runSimulacionArticulo73() {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        ano_adquisicion: ano,
+        ano_adquisicion: String(ano),
         tipo_activo: tipo,
-        costo_historico_cop: costoHist,
-        precio_venta_cop: precioVenta > 0 ? precioVenta : null
+        costo_adquisicion_historico_cop: costoHist > 0 ? costoHist : 1000000,
+        precio_venta_estimado_cop: precioVenta > 0 ? precioVenta : null
       })
     });
     if (!res.ok) throw new Error('Error al simular Art. 73');
     const data = await res.json();
 
+    const factor = Number(data.factor_multiplicador || 1);
+    const costoAjustado = Number(data.costo_fiscal_ajustado_art73_cop || 0);
+    const incremento = Number(data.incremento_costo_fiscal_cop || 0);
+    const ahorroImpuesto = Number(data.ahorro_impuesto_estimado_cop || 0);
+
     resDiv.innerHTML = `
       <div>
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; border-bottom: 1px dashed var(--border-color); padding-bottom: 6px;">
-          <span style="font-size: 11px; font-weight: 700; color: var(--text-muted);">FACTOR APLICADO:</span>
+          <span style="font-size: 11px; font-weight: 700; color: var(--text-muted);">FACTOR APLICADO (DANE):</span>
           <span class="badge" style="background: #1e40af; color: #ffffff; font-size: 13px; font-weight: 800; font-family: var(--font-mono); padding: 2px 8px; border-radius: 4px;">
-            ${data.multiplicador_aplicado.toLocaleString('es-CO', { minimumFractionDigits: 2 })}x
+            ${factor.toLocaleString('es-CO', { minimumFractionDigits: 2 })}x
           </span>
         </div>
 
         <div style="margin-bottom: 10px;">
           <div style="font-size: 10.5px; color: var(--text-muted);">NUEVO COSTO FISCAL AJUSTADO:</div>
           <div style="font-size: 18px; font-weight: 900; font-family: var(--font-mono); color: #1e3a8a;">
-            ${formatCOP(data.costo_fiscal_ajustado_cop)}
+            ${formatCOP(costoAjustado)}
           </div>
           <div style="font-size: 10px; color: #059669; font-weight: 600;">
-            +${formatCOP(data.incremento_costo_cop)} COP de costo fiscal legal adicional
+            +${formatCOP(incremento)} COP de costo fiscal legal adicional
           </div>
         </div>
 
@@ -1990,7 +1994,7 @@ async function runSimulacionArticulo73() {
           <div style="background: #f0fdf4; border: 1px solid #86efac; border-radius: 6px; padding: 8px 10px; margin-bottom: 8px;">
             <div style="font-size: 10px; font-weight: 700; color: #166534; text-transform: uppercase;">Ahorro Tributario Estimado (Ganancia Ocasional 15%):</div>
             <div style="font-size: 16px; font-weight: 900; font-family: var(--font-mono); color: #15803d;">
-              ${formatCOP(data.ahorro_estimado_impuesto_cop)}
+              ${formatCOP(ahorroImpuesto)}
             </div>
             <div style="font-size: 9.5px; color: #166534; margin-top: 2px;">
               Utilidad sin reajuste: <strong>${formatCOP(data.ganancia_sin_ajuste_cop)}</strong> → Con reajuste: <strong>${formatCOP(data.ganancia_con_ajuste_cop)}</strong>
@@ -1999,7 +2003,7 @@ async function runSimulacionArticulo73() {
         ` : ''}
       </div>
 
-      <div style="font-size: 10px; color: var(--text-muted); line-height: 1.3; border-top: 1px solid var(--border-color); pt: 4px;">
+      <div style="font-size: 10px; color: var(--text-muted); line-height: 1.3; border-top: 1px solid var(--border-color); padding-top: 6px;">
         📌 <strong>Fundamento:</strong> Art. 73 E.T. y Decreto reglamentario anual. Venta tras 2+ años de posesión tributa como Ganancia Ocasional al 15%.
       </div>
     `;
