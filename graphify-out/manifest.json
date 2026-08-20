@@ -234,10 +234,10 @@
     "semantic_hash": "8127009b2bf480928718a759941c29d6"
   },
   "backend/tests/test_session_store_redis.py": {
-    "mtime": 1787182915.0575519,
-    "seen": 1787184713.91018,
-    "ast_hash": "3fbc563449ca342dc9fbdef0434bca97",
-    "semantic_hash": "3fbc563449ca342dc9fbdef0434bca97"
+    "mtime": 1787190270.9224436,
+    "seen": 1787190286.047946,
+    "ast_hash": "ef93d695df864e49a4814c1069b3e9ff",
+    "semantic_hash": ""
   },
   "backend/tests/test_session_sync.py": {
     "mtime": 1787182915.057721,
@@ -258,10 +258,10 @@
     "semantic_hash": "011c3e2311e7bbf70a32a08ef3b48bd5"
   },
   "pyproject.toml": {
-    "mtime": 1787184577.5583684,
-    "seen": 1787184713.910184,
-    "ast_hash": "6567a03cbc400b007d40e684649ce654",
-    "semantic_hash": "6567a03cbc400b007d40e684649ce654"
+    "mtime": 1787189939.7494402,
+    "seen": 1787190286.048009,
+    "ast_hash": "69be289aa12adfe1bc3b34de32084a60",
+    "semantic_hash": ""
   },
   "run.py": {
     "mtime": 1787183062.1394851,
@@ -615,6 +615,12 @@
     "mtime": 1786750481.4920151,
     "seen": 1787187794.528666,
     "ast_hash": "9960a24288958394ac50e57ff638b036",
+    "semantic_hash": ""
+  },
+  "backend/tests/test_e2e_playwright.py": {
+    "mtime": 1787190270.9227178,
+    "seen": 1787190286.047858,
+    "ast_hash": "380025f334449f53b045507492ad8c96",
     "semantic_hash": ""
   }
 }
