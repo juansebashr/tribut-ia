@@ -1,16 +1,16 @@
 # Graph Report - tribut-ia  (2026-08-19)
 
 ## Corpus Check
-- 124 files · ~363,983 words
+- 124 files · ~363,998 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 1614 nodes · 1579 edges · 143 communities (66 shown, 77 thin omitted)
+- 1615 nodes · 1580 edges · 143 communities (66 shown, 77 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `c7a2202e`
+- Built from commit: `f9f2c400`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -229,8 +229,8 @@ Cohesion: 0.50
 Nodes (3): get_available_tax_years, get_rules_for_year, load_all_rules
 
 ### Community 16 - "main.py"
-Cohesion: 0.50
-Nodes (3): health_check, serve_ui, startup_event
+Cohesion: 0.40
+Nodes (4): chrome_devtools_endpoint, health_check, serve_ui, startup_event
 
 ### Community 17 - "test_skill_renta_pn.py"
 Cohesion: 0.50
@@ -269,8 +269,8 @@ Cohesion: 0.07
 Nodes (26): 1. Pruebas Unitarias y de Integración (Pytest), 🎯 1. Resumen del Proyecto y Propósito (Why TributIA Exists), 🛠️ 2. Comandos del Entorno de Desarrollo, 2. Linteo y Formato de Código (Ruff), 🕸️ 3. Navegación de Arquitectura con Graphify (Knowledge Graph), 3. Tipado Estático (Mypy), 🧪 4. Instrucciones de Pruebas y Verificación, 4. Linteo de Documentación (Markdownlint) (+18 more)
 
 ### Community 48 - "README.md"
-Cohesion: 0.14
-Nodes (10): Registro de Decisiones de Arquitectura (ADRs), 1. Por qué este mito es matemáticamente falso, Explicación: El Mito Tributario de las Tarifas Marginales, Documentacion Tecnica de TributIA, [Registro de Decisiones Arquitectonicas (ADRs)](./decisions/README.md), Modelo de Entidades y Estado de Sesión, Flowchart: Algoritmo de Topes de Rentas Exentas y Deducciones, Diagrama de Secuencia: Pipeline de Liquidación Tributaria (+2 more)
+Cohesion: 0.16
+Nodes (8): Registro de Decisiones de Arquitectura (ADRs), 1. Por qué este mito es matemáticamente falso, Explicación: El Mito Tributario de las Tarifas Marginales, Modelo de Entidades y Estado de Sesión, Flowchart: Algoritmo de Topes de Rentas Exentas y Deducciones, Diagrama de Secuencia: Pipeline de Liquidación Tributaria, Diagrama de Secuencia: Sincronización Bidireccional API ↔ UI en Redis, Mapeo Oficial de Casillas — Formulario 110 DIAN & TTD
 
 ### Community 49 - "Referencia de Endpoints REST — TributIA API (v1)"
 Cohesion: 0.11
@@ -337,8 +337,8 @@ Cohesion: 0.40
 Nodes (4): 1. Principios de Diseño, 2. Diagrama de Arquitectura Global, 3. Manejo de Concurrencia y Resiliencia en Frontend, Explicación: Arquitectura del Sistema TributIA
 
 ### Community 65 - "Cuadrantes Diataxis"
-Cohesion: 0.40
-Nodes (5): 1. [Tutoriales](./tutorials/) - *Orientado al Aprendizaje*, 2. [Guias How-To](./how-to/) - *Orientado a Tareas*, 3. [Referencias Tecnicas](./reference/) - *Orientado a la Informacion*, 4. [Explicaciones](./explanation/) - *Orientado a la Comprension*, Cuadrantes Diataxis
+Cohesion: 0.29
+Nodes (7): 1. [Tutoriales](./tutorials/) - *Orientado al Aprendizaje*, 2. [Guias How-To](./how-to/) - *Orientado a Tareas*, 3. [Referencias Tecnicas](./reference/) - *Orientado a la Informacion*, 4. [Explicaciones](./explanation/) - *Orientado a la Comprension*, Cuadrantes Diataxis, Documentacion Tecnica de TributIA, [Registro de Decisiones Arquitectonicas (ADRs)](./decisions/README.md)
 
 ### Community 66 - "Arquitectura C4 — TributIA"
 Cohesion: 0.40
@@ -389,7 +389,7 @@ Cohesion: 0.50
 Nodes (3): Expanding the Oxlint configuration, React Compiler, React + TypeScript + Vite
 
 ## Knowledge Gaps
-- **1402 isolated node(s):** `listar_beneficios`, `obtener_tabla_articulo_73`, `simular_articulo_73`, `simular_auditoria`, `simular_sancion` (+1397 more)
+- **1403 isolated node(s):** `listar_beneficios`, `obtener_tabla_articulo_73`, `simular_articulo_73`, `simular_auditoria`, `simular_sancion` (+1398 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **77 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -397,13 +397,13 @@ Nodes (3): Expanding the Oxlint configuration, React Compiler, React + TypeScrip
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `Estatuto Tributario Nacional de Colombia` connect `LIBRO SÉPTIMO - (Libro, Adicionado por el Art. 139 de la Ley 1819 de 2016)` to `LIBRO PRIMERO - de este Estatuto`, `LIBRO QUINTO - PROCEDIMIENTO TRIBUTARIO, SANCIONES Y ESTRUCTURA DE LA DIRECCION GENERAL DE IMPUESTOS NACIONALES`, `LIBRO TERCERO - IMPUESTO SOBRE LAS VENTAS`, `LIBRO PRIMERO - IMPUESTO SOBRE LA RENTA Y COMPLEMENTARIOS`, `LIBRO CUARTO - IMPUESTOS DE TIMBRE NACIONAL`, `LIBRO OCTAVO - (Libro, Sustituido por el Art. 74 de la Ley 2010 de 2019)`?**
-  _High betweenness centrality (0.348) - this node is a cross-community bridge._
+  _High betweenness centrality (0.350) - this node is a cross-community bridge._
 - **Why does `LIBRO PRIMERO - de este Estatuto` connect `LIBRO PRIMERO - de este Estatuto` to `ARTÍCULO 57-2`, `ARTÍCULO 88-1. DESCONOCIMIENTO DE COSTOS Y GASTOS POR CAMPAÑAS DE PUBLICIDAD DE PRODUCTOS EXTRANJEROS`, `ARTÍCULO 90-3. ENAJENACIONES INDIRECTAS`, `LIBRO SÉPTIMO - (Libro, Adicionado por el Art. 139 de la Ley 1819 de 2016)`, `ARTÍCULO 103. DEFINICIÓN`, `ARTÍCULO 177. LAS LIMITACIONES A COSTOS SE APLICAN A LAS DEDUCCIONES`, `ARTÍCULO 205. RENTA GRAVABLE POR CERTIFICADOS DE DESARROLLO TURÍSTICO`, `ARTÍCULO 235. LAS EXENCIONES SOLO BENEFICIAN A SU TITULAR`, `ARTÍCULO 239. NO HABRÁ LUGAR A LA COMPARACIÓN PATRIMONIAL`, `ARTÍCULO 248. TARIFA ESPECIAL PARA ALGUNOS PAGOS AL EXTERIOR EFECTUADOS POR CONSTRUCTORES COLOMBIANOS`, `ARTÍCULO 259-1`, `ARTÍCULO 260-5`, `ARTÍCULO 260. INTRANSFERIBILIDAD DE LOS DESCUENTOS TRIBUTARIOS`, `ARTÍCULO 281. EFECTOS DEL REAJUSTE FISCAL`, `ARTÍCULO 282. CONCEPTO`, `ARTÍCULO 287. VALOR PATRIMONIAL DE LAS DEUDAS`, `ARTÍCULO 291. RÉGIMEN DE TRANSICIÓN POR LOS AJUSTES DE DIFERENCIA EN CAMBIO`, `ARTÍCULO 298-8. REMISIÓN`, `ARTÍCULO 306. EL IMPUESTO DEBE SER RETENIDO EN LA FUENTE`, `ARTÍCULO 310. OTRAS EXENCIONES`, `ARTÍCULO 312. CASOS EN LOS CUALES NO SE ACEPTAN PÉRDIDAS OCASIONALES`, `ARTÍCULO 318. TRATAMIENTO DE LA GANANCIA OCASIONAL COMO RENTA`, `ARTÍCULO 319. APORTES A SOCIEDADES NACIONALES`, `ARTÍCULO 320. CASO EN EL QUE SE PRESUME LA TRANSFERENCIA`, `ARTÍCULO 321. CONCEPTOS, BASE GRAVABLE Y TARIFAS`, `ARTÍCULO 324. EXENCIÓN A LAS REGALÍAS`, `ARTÍCULO 328. RECAUDO Y CONTROL`, `ARTÍCULO 334. FACULTADES DE FISCALIZACIÓN`, `ARTÍCULO 336-1`, `ARTÍCULO 337. INGRESOS DE LAS RENTAS DE PENSIONES`, `ARTÍCULO 339. RENTA LÍQUIDA CEDULAR DE LAS RENTAS DE CAPITAL`, `ARTÍCULO 341. RENTA LÍQUIDA CEDULAR DE LAS RENTAS NO LABORALES`, `ARTÍCULO 344. REGISTRO CONTABLE DE LOS AJUSTES A LOS PASIVOS`, `ARTÍCULO 347. AJUSTES AL PATRIMONIO LÍQUIDO QUE HA SUFRIDO DISMINUCIONES O AUMENTOS DURANTE EL AÑO`, `ARTÍCULO 352. TRATAMIENTOS DE LAS GANANCIAS OCASIONALES`, `ARTÍCULO 382. OBLIGACIÓN DE DECLARAR`, `ARTÍCULO 388`, `ARTÍCULO 391. TARIFAS`, `ARTÍCULO 394. CÓMO OPERA LA RETENCIÓN POR ARRENDAMIENTOS CUANDO HAY INTERMEDIACIÓN`, `ARTÍCULO 397. RETENCIÓN EN LA FUENTE EN TÍTULOS CON DESCUENTO`, `ARTÍCULO 400. EXCEPCIÓN`, `ARTÍCULO 401-4. RETENCIÓN EN LA FUENTE EN PAGOS DE TARJETAS DÉBITO Y CRÉDITO`, `ARTÍCULO 404. TRATAMIENTO DE LAS APUESTAS`, `ARTÍCULO 405. LA RETENCIÓN ES REQUISITOS PARA LA ACEPTACIÓN DE LA DEUDA`, `ARTÍCULO 49`?**
   _High betweenness centrality (0.314) - this node is a cross-community bridge._
 - **Why does `LIBRO QUINTO - PROCEDIMIENTO TRIBUTARIO, SANCIONES Y ESTRUCTURA DE LA DIRECCION GENERAL DE IMPUESTOS NACIONALES` connect `LIBRO QUINTO - PROCEDIMIENTO TRIBUTARIO, SANCIONES Y ESTRUCTURA DE LA DIRECCION GENERAL DE IMPUESTOS NACIONALES` to `ARTÍCULO 570. CONSTANCIA DE LOS RECURSOS`, `ARTÍCULO 573. RESPONSABILIDAD SUBSIDIARIA DE LOS REPRESENTANTES POR INCUMPLIMIENTO DE DEBERES FORMALES`, `ARTÍCULO 611. CASOS EN QUE INTERVIENEN LAS MISMAS PARTES`, `ARTÍCULO 682. INCUMPLIMIENTO DE LOS TÉRMINOS PARA DEVOLVER`, `ARTÍCULO 696. UN REQUERIMIENTO Y UNA LIQUIDACIÓN PUEDEN REFERIRSE A RENTA Y VENTAS`, `ARTÍCULO 741. RECURSO EQUIVOCADOS`, `ARTÍCULO 746. PRESUNCIÓN DE VERACIDAD`, `ARTÍCULO 785. VALORACIÓN DEL DICTAMEN`, `ARTÍCULO 791. DE LAS TRANSACCIONES EFECTUADAS CON PERSONAS FALLECIDAS`, `ARTÍCULO 799. RESPONSABILIDAD DE LOS BANCOS POR PAGO IRREGULAR DE CHEQUE FISCALES`, `LIBRO SÉPTIMO - (Libro, Adicionado por el Art. 139 de la Ley 1819 de 2016)`?**
   _High betweenness centrality (0.265) - this node is a cross-community bridge._
 - **What connects `listar_beneficios`, `obtener_tabla_articulo_73`, `simular_articulo_73` to the rest of the system?**
-  _1402 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _1403 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `test_coverage_boost.py` be split into smaller, more focused modules?**
   _Cohesion score 0.06451612903225806 - nodes in this community are weakly interconnected._
 - **Should `reconciliation.py` be split into smaller, more focused modules?**

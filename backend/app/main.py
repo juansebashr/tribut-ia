@@ -70,3 +70,9 @@ def serve_ui():
 @app.get("/api/v1/health", tags=["Health"])
 def health_check():
     return {"status": "ok", "app": "TributIA"}
+
+
+@app.get("/.well-known/appspecific/com.chrome.devtools.json", include_in_schema=False)
+def chrome_devtools_endpoint():
+    """Silencia la solicitud interna automática de Google Chrome DevTools."""
+    return {}

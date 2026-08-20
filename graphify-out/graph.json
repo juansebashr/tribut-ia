@@ -2158,6 +2158,17 @@
       "source_location": "L1"
     },
     {
+      "id": "backend_app_main_func_chrome_devtools_endpoint",
+      "label": "chrome_devtools_endpoint",
+      "_origin": "ast",
+      "community": 16,
+      "community_name": "main.py",
+      "file_type": "concept",
+      "norm_label": "chrome_devtools_endpoint",
+      "source_file": "backend/app/main.py",
+      "source_location": "L76"
+    },
+    {
       "id": "backend_app_main_func_health_check",
       "label": "health_check",
       "_origin": "ast",
@@ -11287,30 +11298,6 @@
       "source_location": "L1"
     },
     {
-      "id": "docs_readme_documentacion_tecnica_de_tributia",
-      "label": "Documentacion Tecnica de TributIA",
-      "_origin": "ast",
-      "community": 48,
-      "community_name": "README.md",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "documentacion tecnica de tributia",
-      "source_file": "docs/README.md",
-      "source_location": "L1"
-    },
-    {
-      "id": "docs_readme_registro_de_decisiones_arquitectonicas_adrs_decisions_readme_md",
-      "label": "[Registro de Decisiones Arquitectonicas (ADRs)](./decisions/README.md)",
-      "_origin": "ast",
-      "community": 48,
-      "community_name": "README.md",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "[registro de decisiones arquitectonicas (adrs)](./decisions/readme.md)",
-      "source_file": "docs/README.md",
-      "source_location": "L64"
-    },
-    {
       "id": "docs_reference_architecture_erd_session_state_model",
       "label": "session-state-model.md",
       "_origin": "ast",
@@ -17686,6 +17673,30 @@
       "source_location": "L9"
     },
     {
+      "id": "docs_readme_documentacion_tecnica_de_tributia",
+      "label": "Documentacion Tecnica de TributIA",
+      "_origin": "ast",
+      "community": 65,
+      "community_name": "Cuadrantes Diataxis",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "documentacion tecnica de tributia",
+      "source_file": "docs/README.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "docs_readme_registro_de_decisiones_arquitectonicas_adrs_decisions_readme_md",
+      "label": "[Registro de Decisiones Arquitectonicas (ADRs)](./decisions/README.md)",
+      "_origin": "ast",
+      "community": 65,
+      "community_name": "Cuadrantes Diataxis",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "[registro de decisiones arquitectonicas (adrs)](./decisions/readme.md)",
+      "source_file": "docs/README.md",
+      "source_location": "L64"
+    },
+    {
       "id": "docs_reference_architecture_c4_architecture_c4",
       "label": "architecture-c4.md",
       "_origin": "ast",
@@ -19991,6 +20002,17 @@
       "confidence_score": 1.0,
       "source_file": "backend/app/main.py",
       "source_location": "L71",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_app_main",
+      "target": "backend_app_main_func_chrome_devtools_endpoint",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/main.py",
+      "source_location": "L76",
       "weight": 1.0
     },
     {
@@ -36550,5 +36572,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "c7a2202eb6e7bcc1d264ac5b202dd77177de3ea5"
+  "built_at_commit": "f9f2c40058930540962f29ac4e2ed1daabf5ca4c"
 }
