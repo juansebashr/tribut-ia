@@ -2166,7 +2166,7 @@
       "file_type": "concept",
       "norm_label": "health_check",
       "source_file": "backend/app/main.py",
-      "source_location": "L64"
+      "source_location": "L71"
     },
     {
       "id": "backend_app_main_func_serve_ui",
@@ -19990,7 +19990,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/app/main.py",
-      "source_location": "L64",
+      "source_location": "L71",
       "weight": 1.0
     },
     {
@@ -36550,5 +36550,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "38ef752eae8583ca91b9fd1c5f6030119afd5d4a"
+  "built_at_commit": "c7a2202eb6e7bcc1d264ac5b202dd77177de3ea5"
 }

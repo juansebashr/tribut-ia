@@ -1862,7 +1862,7 @@ async function loadTablaArticulo73() {
 
     // Poblar select de años
     const anoSelect = document.getElementById('sim-art73-ano');
-    if (anoSelect && anoSelect.options.length <= 1) {
+    if (anoSelect) {
       anoSelect.innerHTML = '';
       tablaArticulo73Data.forEach(item => {
         const opt = document.createElement('option');
@@ -1874,6 +1874,7 @@ async function loadTablaArticulo73() {
     }
 
     renderTablaArticulo73(tablaArticulo73Data);
+    await runSimulacionArticulo73();
   } catch (err) {
     console.error('Error cargando tabla Art 73:', err);
   }

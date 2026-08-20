@@ -55,7 +55,14 @@ app.include_router(api_router, prefix="/api/v1")
 def serve_ui():
     index_file = STATIC_DIR / "index.html"
     if index_file.exists():
-        return FileResponse(str(index_file))
+        return FileResponse(
+            str(index_file),
+            headers={
+                "Cache-Control": "no-cache, no-store, must-revalidate",
+                "Pragma": "no-cache",
+                "Expires": "0",
+            },
+        )
     return {"app": "TributIA API", "status": "online", "docs": "/docs", "version": "1.0.0"}
 
 

@@ -108,10 +108,10 @@
     "semantic_hash": "667cee6d8bc44b8bd3d3f15e317b1776"
   },
   "backend/app/main.py": {
-    "mtime": 1787182915.0559618,
-    "seen": 1787184713.9101691,
-    "ast_hash": "98cae0ca9ef44a6333d1e7f3203c47a9",
-    "semantic_hash": "98cae0ca9ef44a6333d1e7f3203c47a9"
+    "mtime": 1787189758.2613745,
+    "seen": 1787189785.9260821,
+    "ast_hash": "34dce1bc118f1d967fb2432b1e2195b9",
+    "semantic_hash": ""
   },
   "backend/app/models/__init__.py": {
     "mtime": 1786750458.7234235,
@@ -390,9 +390,9 @@
     "semantic_hash": ""
   },
   "backend/app/static/index.html": {
-    "mtime": 1787188743.308137,
-    "seen": 1787188785.292313,
-    "ast_hash": "43217a745b6134d48b3a7d68ef570708",
+    "mtime": 1787189767.3199382,
+    "seen": 1787189785.9270241,
+    "ast_hash": "3da1c522c314915fd696221c9d30f5ea",
     "semantic_hash": ""
   },
   "docs/README.md": {

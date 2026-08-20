@@ -2180,17 +2180,24 @@
 
           <!-- SIMULADOR INTERACTIVO ART 73 -->
           <div class="card" style="border: 2px solid var(--primary-border); margin-bottom: 20px; background: #ffffff;">
-            <div class="card-header" style="background: var(--primary-light);">
-              <div class="card-title" style="color: var(--primary); font-size: 14px; font-weight: 800;">
-                ⚡ Simulador de Costo Fiscal y Ahorro Tributario
+            <div class="card-header" style="background: var(--primary-light); display: flex; justify-content: space-between; align-items: center;">
+              <div class="card-title" style="color: var(--primary); font-size: 14px; font-weight: 800; display: flex; align-items: center; gap: 8px;">
+                <span>⚡</span> Simulador de Reajuste Fiscal & Beneficio Tributario (Art. 73 E.T.)
               </div>
+              <span class="badge" style="background: var(--primary); color: #ffffff; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 4px;">
+                Cálculo Automático en Vivo
+              </span>
             </div>
-            <div class="card-body">
-              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-                <!-- FORMULARIO ART 73 -->
-                <div style="display: flex; flex-direction: column; gap: 12px;">
+            <div class="card-body" style="padding: 18px;">
+              <div style="display: grid; grid-template-columns: 1fr 1.15fr; gap: 20px;">
+                <!-- COLUMNA 1: FORMULARIO ART 73 -->
+                <div style="background: #f8fafc; border: 1px solid var(--border-color); border-radius: 8px; padding: 14px; display: flex; flex-direction: column; gap: 12px;">
+                  <div style="font-size: 12px; font-weight: 800; color: var(--text-primary); border-bottom: 1px solid var(--border-color); padding-bottom: 6px; display: flex; align-items: center; gap: 6px;">
+                    <span>📝</span> <strong>1. Parámetros del Activo a Vender / Declarar</strong>
+                  </div>
+
                   <div class="input-field">
-                    <label class="input-label" style="font-weight: 700;">1. Tipo de Activo Fijo</label>
+                    <label class="input-label" style="font-weight: 700;">Tipo de Activo Fijo</label>
                     <select id="sim-art73-tipo" class="select-input" style="width: 100%; font-size: 12.5px; padding: 8px;" onchange="runSimulacionArticulo73()">
                       <option value="bienes_raices_urbanos">🏢 Bienes Raíces Urbanos (Casas, Aptos, Locales)</option>
                       <option value="bienes_raices_rurales">🌳 Bienes Raíces Rurales Generales</option>
@@ -2200,14 +2207,14 @@
                   </div>
 
                   <div class="input-field">
-                    <label class="input-label" style="font-weight: 700;">2. Año de Adquisición o Compra</label>
+                    <label class="input-label" style="font-weight: 700;">Año de Adquisición o Compra</label>
                     <select id="sim-art73-ano" class="select-input" style="width: 100%; font-size: 12.5px; padding: 8px;" onchange="runSimulacionArticulo73()">
-                      <!-- Populated via JS -->
+                      <option value="1995">1995 (Cargando tabla oficial...)</option>
                     </select>
                   </div>
 
                   <div class="input-field">
-                    <label class="input-label" style="font-weight: 700;">3. Costo Histórico de Compra / Adquisición</label>
+                    <label class="input-label" style="font-weight: 700;">Costo Histórico de Compra / Adquisición</label>
                     <div class="input-wrapper">
                       <span class="input-prefix">$</span>
                       <input
@@ -2222,7 +2229,7 @@
                   </div>
 
                   <div class="input-field">
-                    <label class="input-label" style="font-weight: 700;">4. Precio de Venta Estimado (Proyección)</label>
+                    <label class="input-label" style="font-weight: 700;">Precio de Venta Estimado (Proyección)</label>
                     <div class="input-wrapper">
                       <span class="input-prefix">$</span>
                       <input
@@ -2237,9 +2244,22 @@
                   </div>
                 </div>
 
-                <!-- RESULTADO EN VIVO ART 73 -->
-                <div id="sim-art73-result" style="background: var(--bg-subtle); padding: 16px; border-radius: 8px; font-size: 12px; border: 1px solid var(--border-color); display: flex; flex-direction: column; justify-content: space-between;">
-                  <!-- Populated via JS -->
+                <!-- COLUMNA 2: RESULTADO EN VIVO ART 73 -->
+                <div style="background: #ffffff; border: 1.5px solid #cbd5e1; border-radius: 8px; padding: 14px; display: flex; flex-direction: column; justify-content: space-between;">
+                  <div style="font-size: 12px; font-weight: 800; color: #1e3a8a; border-bottom: 1px solid var(--border-color); padding-bottom: 6px; display: flex; align-items: center; justify-content: space-between;">
+                    <span style="display: flex; align-items: center; gap: 6px;">
+                      <span>📊</span> <strong>2. Liquidación del Reajuste & Ahorro Estimado</strong>
+                    </span>
+                    <span class="badge" style="background: #10b981; color: #ffffff; font-size: 11px; font-weight: 700; padding: 2px 6px; border-radius: 4px;">
+                      DUR 1.2.1.17.21
+                    </span>
+                  </div>
+
+                  <div id="sim-art73-result" style="margin-top: 10px; font-size: 12px; display: flex; flex-direction: column; gap: 8px;">
+                    <div style="text-align: center; color: var(--text-muted); padding: 20px;">
+                      Calculando reajuste fiscal...
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -2754,8 +2774,8 @@ Eres un Asistente Contador Tributario en Colombia.
   <!-- TOAST CONTAINER -->
   <div id="tributia-toast-container" style="position: fixed; bottom: 24px; right: 24px; z-index: 99999; display: flex; flex-direction: column; gap: 8px; pointer-events: none;"></div>
 
-  <script src="/static/casillas_info.js?v=20260818_5"></script>
-  <script src="/static/calendario_data.js?v=20260818_5"></script>
-  <script src="/static/app.js?v=20260818_5"></script>
+  <script src="/static/casillas_info.js?v=20260819_art73_v3"></script>
+  <script src="/static/calendario_data.js?v=20260819_art73_v3"></script>
+  <script src="/static/app.js?v=20260819_art73_v3"></script>
 </body>
 </html>

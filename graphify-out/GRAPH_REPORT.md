@@ -1,7 +1,7 @@
 # Graph Report - tribut-ia  (2026-08-19)
 
 ## Corpus Check
-- 124 files · ~362,577 words
+- 124 files · ~363,983 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
@@ -10,7 +10,7 @@
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `38ef752e`
+- Built from commit: `c7a2202e`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
