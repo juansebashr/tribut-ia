@@ -362,7 +362,8 @@ def process_csv_content(csv_text: str) -> ReconciliationParseResponse:
     description="Procesa un archivo CSV de transacciones fiscales, valida encabezados y tipos de datos, calcula diferencias frente a la Información Exógena DIAN y genera la estructura de visualización tipo hoja de cálculo didáctica. NO almacena información en base de datos ni en Redis.",
 )
 async def parse_reconciliation_csv(file: UploadFile = File(...)):
-    if not file.filename.lower().endswith(".csv") and not file.filename.lower().endswith(".txt"):
+    filename = file.filename or ""
+    if not filename.lower().endswith(".csv") and not filename.lower().endswith(".txt"):
         raise HTTPException(
             status_code=400,
             detail="Formato de archivo inválido. Por favor sube un archivo con extensión .csv",

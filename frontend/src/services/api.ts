@@ -59,13 +59,65 @@ export async function convertUvt(taxYear: number, amountCop?: number, amountUvt?
   const res = await fetch(`${API_BASE_URL}/rules/convert-uvt`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      tax_year: taxYear,
-      amount_cop: amountCop,
-      amount_uvt: amountUvt,
-      custom_uvt: customUvt,
-    }),
+    body: JSON.stringify({ tax_year: taxYear, amount_cop: amountCop, amount_uvt: amountUvt, custom_uvt: customUvt }),
   });
-  if (!res.ok) throw new Error('Error al convertir UVT');
+  if (!res.ok) throw new Error('Error en conversión UVT');
+  return await res.json();
+}
+
+export async function fetchBeneficiosCatalog(): Promise<import('../types/tax').BeneficioItem[]> {
+  const res = await fetch(`${API_BASE_URL}/beneficios/catalog`);
+  if (!res.ok) throw new Error('Error al obtener catálogo de beneficios');
+  return await res.json();
+}
+
+export async function fetchTablaArticulo73(): Promise<import('../types/tax').AjusteArticulo73Item[]> {
+  const res = await fetch(`${API_BASE_URL}/beneficios/articulo-73/tabla`);
+  if (!res.ok) throw new Error('Error al obtener tabla del Artículo 73');
+  return await res.json();
+}
+
+export async function simularArticulo73(
+  payload: import('../types/tax').SimulacionAjusteArticulo73Request
+): Promise<import('../types/tax').SimulacionAjusteArticulo73Response> {
+  const res = await fetch(`${API_BASE_URL}/beneficios/simular-articulo-73`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
+  });
+  if (!res.ok) {
+    const errorData = await res.json().catch(() => ({}));
+    throw new Error(errorData.detail || 'Error al simular ajuste del Art. 73');
+  }
+  return await res.json();
+}
+
+export async function simularAuditoria(
+  payload: import('../types/tax').BeneficioAuditoriaRequest
+): Promise<import('../types/tax').BeneficioAuditoriaResponse> {
+  const res = await fetch(`${API_BASE_URL}/beneficios/simular-auditoria`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
+  });
+  if (!res.ok) {
+    const errorData = await res.json().catch(() => ({}));
+    throw new Error(errorData.detail || 'Error al simular beneficio de auditoría');
+  }
+  return await res.json();
+}
+
+export async function simularSancion(
+  payload: import('../types/tax').ReduccionSancionRequest
+): Promise<import('../types/tax').ReduccionSancionResponse> {
+  const res = await fetch(`${API_BASE_URL}/beneficios/simular-reduccion-sancion`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
+  });
+  if (!res.ok) {
+    const errorData = await res.json().catch(() => ({}));
+    throw new Error(errorData.detail || 'Error al simular reducción de sanciones');
+  }
   return await res.json();
 }

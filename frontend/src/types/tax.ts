@@ -153,3 +153,88 @@ export interface TaxYearRules {
     descuentos: { ica_descuento_porcentaje: number; donaciones_porcentaje: number };
   };
 }
+
+export interface BeneficioItem {
+  id: string;
+  categoria: string;
+  nombre: string;
+  articulo_et: string;
+  descripcion: string;
+  tope_legal_texto: string;
+  requisitos: string[];
+  ejemplo_calculo: string;
+}
+
+export interface BeneficioAuditoriaRequest {
+  tax_year: number;
+  impuesto_neto_ano_anterior: number;
+  custom_uvt?: number;
+}
+
+export interface BeneficioAuditoriaResponse {
+  tax_year: number;
+  uvt_value: number;
+  impuesto_neto_ano_anterior: number;
+  impuesto_minimo_requerido_uvt: number;
+  impuesto_minimo_requerido_cop: number;
+  cumple_impuesto_minimo: boolean;
+  impuesto_objetivo_6_meses_cop: number;
+  incremento_requerido_6_meses_cop: number;
+  impuesto_objetivo_12_meses_cop: number;
+  incremento_requerido_12_meses_cop: number;
+  requisitos_legales: string[];
+  recomendacion: string;
+}
+
+export interface ReduccionSancionRequest {
+  monto_sancion_base_cop: number;
+  sin_sanciones_ultimos_2_anos: boolean;
+  sin_sanciones_ultimo_1_ano: boolean;
+}
+
+export interface ReduccionSancionResponse {
+  monto_sancion_plena_cop: number;
+  porcentaje_reduccion_aplicado: number;
+  sancion_final_reducida_cop: number;
+  ahorro_sancion_cop: number;
+  articulo_aplicable: string;
+  explicacion: string;
+}
+
+export interface AjusteArticulo73Item {
+  ano_adquisicion: string;
+  acciones_aportes: number;
+  bienes_raices_urbanos: number;
+  bienes_raices_rurales_agro: number;
+  bienes_raices_rurales: number;
+}
+
+export interface SimulacionAjusteArticulo73Request {
+  ano_adquisicion: string;
+  tipo_activo: string;
+  costo_adquisicion_historico_cop: number;
+  precio_venta_estimado_cop?: number;
+  ano_gravable_enajenacion?: number;
+}
+
+export interface SimulacionAjusteArticulo73Response {
+  ano_adquisicion: string;
+  tipo_activo: string;
+  tipo_activo_label: string;
+  factor_multiplicador: number;
+  costo_adquisicion_historico_cop: number;
+  costo_fiscal_ajustado_art73_cop: number;
+  incremento_costo_fiscal_cop: number;
+  precio_venta_cop?: number;
+  ganancia_sin_ajuste_cop?: number;
+  ganancia_con_ajuste_cop?: number;
+  ahorro_base_gravable_cop?: number;
+  tarifa_ganancia_ocasional_pct: number;
+  impuesto_estimado_sin_ajuste_cop?: number;
+  impuesto_estimado_con_ajuste_cop?: number;
+  ahorro_impuesto_estimado_cop?: number;
+  es_ganancia_ocasional: boolean;
+  fundamento_legal: string;
+  explicacion_didactica: string;
+  pasos_calculo: string[];
+}

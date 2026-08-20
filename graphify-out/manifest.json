@@ -30,10 +30,10 @@
     "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
   },
   "backend/app/api/v1/endpoints/beneficios.py": {
-    "mtime": 1787182915.055854,
-    "seen": 1787184713.910155,
-    "ast_hash": "b0eeb62fae2e516762e5bbfaf44c975a",
-    "semantic_hash": "b0eeb62fae2e516762e5bbfaf44c975a"
+    "mtime": 1787187414.8933897,
+    "seen": 1787187794.527655,
+    "ast_hash": "744ff96fcad8319d7a17228c6a9bb6db",
+    "semantic_hash": ""
   },
   "backend/app/api/v1/endpoints/persona_juridica.py": {
     "mtime": 1787182915.0558739,
@@ -48,10 +48,10 @@
     "semantic_hash": "841cf1b6d236f6f90e5390dd095aecb3"
   },
   "backend/app/api/v1/endpoints/reconciliation.py": {
-    "mtime": 1787182915.0584831,
-    "seen": 1787184713.910163,
-    "ast_hash": "de13c43908702d4580a14c5ede4cd948",
-    "semantic_hash": "de13c43908702d4580a14c5ede4cd948"
+    "mtime": 1787187777.4077182,
+    "seen": 1787187794.527713,
+    "ast_hash": "79d943db863325a835601d5546277e77",
+    "semantic_hash": ""
   },
   "backend/app/api/v1/endpoints/rules.py": {
     "mtime": 1787182915.058078,
@@ -144,10 +144,10 @@
     "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
   },
   "backend/app/services/beneficios.py": {
-    "mtime": 1787182915.0573878,
-    "seen": 1787184713.910172,
-    "ast_hash": "4042e4fff6c5a4624fd679c5860e0bb8",
-    "semantic_hash": "4042e4fff6c5a4624fd679c5860e0bb8"
+    "mtime": 1787187762.0425754,
+    "seen": 1787187794.528106,
+    "ast_hash": "58a26fce78035a3e4c6b1e73d561b3ae",
+    "semantic_hash": ""
   },
   "backend/app/services/liquidacion_pj.py": {
     "mtime": 1787182915.058081,
@@ -286,5 +286,335 @@
     "seen": 1787184713.910186,
     "ast_hash": "714a11110de9f53ee31c171d203ffe92",
     "semantic_hash": "714a11110de9f53ee31c171d203ffe92"
+  },
+  "backend/tests/test_articulo_73.py": {
+    "mtime": 1787187448.2208872,
+    "seen": 1787187794.52827,
+    "ast_hash": "f12584424a21bbb8fb1992c6e9eb6e39",
+    "semantic_hash": ""
+  },
+  "skills/declaracion-renta-persona-natural/scripts/simular_articulo_73.py": {
+    "mtime": 1787187762.0417175,
+    "seen": 1787187794.528634,
+    "ast_hash": "12180eb2bed6fea6b470a53d81005840",
+    "semantic_hash": ""
+  },
+  ".agents/rules/graphify.md": {
+    "mtime": 1787184722.2213974,
+    "seen": 1787187794.5286348,
+    "ast_hash": "f1e53ecc9194573d3c28fc116c743a2e",
+    "semantic_hash": ""
+  },
+  ".agents/workflows/graphify.md": {
+    "mtime": 1787184722.2219036,
+    "seen": 1787187794.528636,
+    "ast_hash": "6d73634a678cf1e1c71930adf80bd1f0",
+    "semantic_hash": ""
+  },
+  ".claude/docs/why.md": {
+    "mtime": 1787186679.3090012,
+    "seen": 1787187794.528636,
+    "ast_hash": "5d8a96317da599e80fc97337b4186814",
+    "semantic_hash": ""
+  },
+  ".claude/rules/api-handlers.md": {
+    "mtime": 1787186020.3243425,
+    "seen": 1787187794.528637,
+    "ast_hash": "981890aa792f56502689eba569a83f7e",
+    "semantic_hash": ""
+  },
+  ".claude/rules/documentation.md": {
+    "mtime": 1787186020.32863,
+    "seen": 1787187794.528638,
+    "ast_hash": "302d08bec95685b8dc5818bea60226cf",
+    "semantic_hash": ""
+  },
+  ".claude/rules/frontend-ui.md": {
+    "mtime": 1787186020.330109,
+    "seen": 1787187794.528638,
+    "ast_hash": "54ace25a0efe250029c22dcea61c3a0f",
+    "semantic_hash": ""
+  },
+  ".claude/rules/schemas-models.md": {
+    "mtime": 1787186020.331494,
+    "seen": 1787187794.528639,
+    "ast_hash": "9b3c07d73182e74ee6689762b665e92a",
+    "semantic_hash": ""
+  },
+  ".claude/rules/skills-agents.md": {
+    "mtime": 1787186020.33281,
+    "seen": 1787187794.528639,
+    "ast_hash": "6337f965d2270eb4602a152d2a10fbef",
+    "semantic_hash": ""
+  },
+  ".claude/rules/tax-engine.md": {
+    "mtime": 1787186020.3348858,
+    "seen": 1787187794.52864,
+    "ast_hash": "1fc675c9686795c7d859fbb6035ab055",
+    "semantic_hash": ""
+  },
+  "AGENTS.md": {
+    "mtime": 1787186751.9528499,
+    "seen": 1787187794.528641,
+    "ast_hash": "2d748cf33dad05d0cad8244a30d03da8",
+    "semantic_hash": ""
+  },
+  "README.md": {
+    "mtime": 1787184028.8711164,
+    "seen": 1787187794.528641,
+    "ast_hash": "93322c29900a1c7e7eafc590d973390e",
+    "semantic_hash": ""
+  },
+  "backend/app/rules/2022.yaml": {
+    "mtime": 1786750364.9017384,
+    "seen": 1787187794.528642,
+    "ast_hash": "8a11c100bdfc29eaf0d2bad4766ca8de",
+    "semantic_hash": ""
+  },
+  "backend/app/rules/2024.yaml": {
+    "mtime": 1786751566.2629185,
+    "seen": 1787187794.528642,
+    "ast_hash": "d54f882cf17df30e246bb39948942708",
+    "semantic_hash": ""
+  },
+  "backend/app/rules/2025.yaml": {
+    "mtime": 1786751562.2955277,
+    "seen": 1787187794.5286431,
+    "ast_hash": "25ec7dc67df4b50f591cb4a7c4da6130",
+    "semantic_hash": ""
+  },
+  "backend/app/rules/2026.yaml": {
+    "mtime": 1786751558.22745,
+    "seen": 1787187794.528644,
+    "ast_hash": "66cc21894b3d8f44c1446506ca98a7ab",
+    "semantic_hash": ""
+  },
+  "backend/app/static/index.html": {
+    "mtime": 1787101573.4398863,
+    "seen": 1787187794.528644,
+    "ast_hash": "6be8eac6f4e2dcdcc7985ab4a50c6afc",
+    "semantic_hash": ""
+  },
+  "docs/README.md": {
+    "mtime": 1787184035.4358428,
+    "seen": 1787187794.528645,
+    "ast_hash": "e930278306eb7cd207f5468fea2ed9ba",
+    "semantic_hash": ""
+  },
+  "docs/decisions/0001-motor-de-reglas-declarativo-json.md": {
+    "mtime": 1787184017.7316048,
+    "seen": 1787187794.528645,
+    "ast_hash": "9f074a4a362e8596f031192631c09a6d",
+    "semantic_hash": ""
+  },
+  "docs/decisions/0002-sincronizacion-bidireccional-sse.md": {
+    "mtime": 1787184017.7336676,
+    "seen": 1787187794.528646,
+    "ast_hash": "111bafd7e341c70bdf848f91d0691eb4",
+    "semantic_hash": ""
+  },
+  "docs/decisions/0003-mascara-contable-colombiana-en-dom.md": {
+    "mtime": 1787184017.7354772,
+    "seen": 1787187794.528646,
+    "ast_hash": "e0a97573f2b7ecfe694c0e4862d03a86",
+    "semantic_hash": ""
+  },
+  "docs/decisions/0004-persistencia-redis-cloudrun-aislamiento-sesion.md": {
+    "mtime": 1787184017.740024,
+    "seen": 1787187794.528647,
+    "ast_hash": "b55a5d63af5fea41222002ba82d1cbfe",
+    "semantic_hash": ""
+  },
+  "docs/decisions/0005-visualizador-efimero-conciliacion-exogena-csv.md": {
+    "mtime": 1787184017.7466865,
+    "seen": 1787187794.528647,
+    "ast_hash": "d040584f02ec560a387d339c3edc2f11",
+    "semantic_hash": ""
+  },
+  "docs/decisions/README.md": {
+    "mtime": 1787100881.2923856,
+    "seen": 1787187794.528648,
+    "ast_hash": "4d7fd33026b100a3cf9b436f02cf91e3",
+    "semantic_hash": ""
+  },
+  "docs/estatuto_tributario.md": {
+    "mtime": 1787184004.1003182,
+    "seen": 1787187794.528648,
+    "ast_hash": "3f75255b31f3f498a9db547a7d440467",
+    "semantic_hash": ""
+  },
+  "docs/explanation/01-arquitectura-sistema-tributia.md": {
+    "mtime": 1787099189.1246269,
+    "seen": 1787187794.5286489,
+    "ast_hash": "5aecfe89cd7ab6c341bdb8aee1052448",
+    "semantic_hash": ""
+  },
+  "docs/explanation/02-sistema-cedular-colombiano.md": {
+    "mtime": 1787184018.4623687,
+    "seen": 1787187794.52865,
+    "ast_hash": "ba69156f61ad173d216099d032b0bc4e",
+    "semantic_hash": ""
+  },
+  "docs/explanation/03-mito-tributario-tarifas-marginales.md": {
+    "mtime": 1787184018.463747,
+    "seen": 1787187794.52865,
+    "ast_hash": "f4a5b10fbfeb7b925e1b4f8c0ebcc980",
+    "semantic_hash": ""
+  },
+  "docs/how-to/01-integracion-api-bidireccional.md": {
+    "mtime": 1787184018.4666266,
+    "seen": 1787187794.528651,
+    "ast_hash": "391ad59aef902a2b3f8fe1dbfd7e10e8",
+    "semantic_hash": ""
+  },
+  "docs/how-to/02-simular-tasa-minima-ttd-pj.md": {
+    "mtime": 1787184018.4678586,
+    "seen": 1787187794.528651,
+    "ast_hash": "aa12140e6b966f6e6035d3f313412487",
+    "semantic_hash": ""
+  },
+  "docs/how-to/03-consultar-calendario-por-nit.md": {
+    "mtime": 1787184018.4691541,
+    "seen": 1787187794.528652,
+    "ast_hash": "5edec6e039e25ab025f2e9c39ec7f383",
+    "semantic_hash": ""
+  },
+  "docs/reference/api/rest-endpoints.md": {
+    "mtime": 1787184018.473145,
+    "seen": 1787187794.528652,
+    "ast_hash": "da8dd53d5f64f19a55ef5b5613418de2",
+    "semantic_hash": ""
+  },
+  "docs/reference/api/sse-events.md": {
+    "mtime": 1787184042.7128496,
+    "seen": 1787187794.5286531,
+    "ast_hash": "4dd6b0274b3b4576caa537c88cd00a36",
+    "semantic_hash": ""
+  },
+  "docs/reference/architecture/c4/architecture-c4.md": {
+    "mtime": 1787100896.382447,
+    "seen": 1787187794.5286531,
+    "ast_hash": "b55824b9073bd7201d8174e4ecddd01d",
+    "semantic_hash": ""
+  },
+  "docs/reference/architecture/erd/session-state-model.md": {
+    "mtime": 1787184018.4769137,
+    "seen": 1787187794.528654,
+    "ast_hash": "d04425643b870d7ca4e005115e44cacb",
+    "semantic_hash": ""
+  },
+  "docs/reference/architecture/flow/flow-cedula-general-deductions.md": {
+    "mtime": 1786764719.9611716,
+    "seen": 1787187794.528654,
+    "ast_hash": "4ba1007cdfdc07fd7022db7620828069",
+    "semantic_hash": ""
+  },
+  "docs/reference/architecture/sequence/seq-tax-calculation-pipeline.md": {
+    "mtime": 1787184018.4785893,
+    "seen": 1787187794.528655,
+    "ast_hash": "4b02de6583f5723cb47e44a1ded97bde",
+    "semantic_hash": ""
+  },
+  "docs/reference/architecture/sequence/seq-two-way-sync.md": {
+    "mtime": 1787099205.408206,
+    "seen": 1787187794.528657,
+    "ast_hash": "dafd9181313466bd188f2d132beebee3",
+    "semantic_hash": ""
+  },
+  "docs/reference/plugins/colombian-tax-assistant.md": {
+    "mtime": 1787184049.743511,
+    "seen": 1787187794.528657,
+    "ast_hash": "7846e8e0445cf7ef740d849ced3e0f25",
+    "semantic_hash": ""
+  },
+  "docs/reference/skills/declaracion-renta-persona-natural.md": {
+    "mtime": 1787184018.4826968,
+    "seen": 1787187794.528658,
+    "ast_hash": "33830fc1815a73d8c021d9fa2d7d5432",
+    "semantic_hash": ""
+  },
+  "docs/reference/tax-engine/form110-casillas-mapping.md": {
+    "mtime": 1787184018.4847636,
+    "seen": 1787187794.528658,
+    "ast_hash": "ce158a064e28d09b6bce90933c862042",
+    "semantic_hash": ""
+  },
+  "docs/reference/tax-engine/form210-casillas-mapping.md": {
+    "mtime": 1787184018.4929786,
+    "seen": 1787187794.5286589,
+    "ast_hash": "ef90c98b80f8dc8c22b063b30eb5dfcb",
+    "semantic_hash": ""
+  },
+  "docs/reference/tax-engine/statutory-rules-art241.md": {
+    "mtime": 1787184018.4949963,
+    "seen": 1787187794.52866,
+    "ast_hash": "e5649676f9dd5a038b8be163faca3eaa",
+    "semantic_hash": ""
+  },
+  "docs/tutorials/01-primeros-pasos-liquidacion-pn.md": {
+    "mtime": 1787184018.4975576,
+    "seen": 1787187794.52866,
+    "ast_hash": "f0d4f2a07f34605feec1e31161667c48",
+    "semantic_hash": ""
+  },
+  "frontend/README.md": {
+    "mtime": 1786750481.4752333,
+    "seen": 1787187794.528661,
+    "ast_hash": "10495bfcc6c568eca4dab6dd5df795d3",
+    "semantic_hash": ""
+  },
+  "frontend/index.html": {
+    "mtime": 1786750481.477294,
+    "seen": 1787187794.528661,
+    "ast_hash": "33bd262affcefea92f1509cda449a19c",
+    "semantic_hash": ""
+  },
+  "skills/declaracion-renta-persona-natural/README.md": {
+    "mtime": 1787101752.4009888,
+    "seen": 1787187794.528662,
+    "ast_hash": "2e06ac70049101c4092bcebe4d56d559",
+    "semantic_hash": ""
+  },
+  "skills/declaracion-renta-persona-natural/SKILL.md": {
+    "mtime": 1787101732.0448139,
+    "seen": 1787187794.528662,
+    "ast_hash": "3b41df11490b2aef5cab87bd51e854e3",
+    "semantic_hash": ""
+  },
+  "skills/declaracion-renta-persona-natural/beneficios_tributarios_pn.md": {
+    "mtime": 1787187519.1335146,
+    "seen": 1787187794.5286632,
+    "ast_hash": "120d26f3edabda3a129278c2df911175",
+    "semantic_hash": ""
+  },
+  "frontend/public/favicon.svg": {
+    "mtime": 1786750481.4850476,
+    "seen": 1787187794.5286632,
+    "ast_hash": "7e840862161341271697daa99a40d76b",
+    "semantic_hash": ""
+  },
+  "frontend/public/icons.svg": {
+    "mtime": 1786750481.486526,
+    "seen": 1787187794.528664,
+    "ast_hash": "3b4fcfcf393eca4d264dca4a4663bc37",
+    "semantic_hash": ""
+  },
+  "frontend/src/assets/hero.png": {
+    "mtime": 1786750481.4903173,
+    "seen": 1787187794.528664,
+    "ast_hash": "aead493361b27e7510691c5d7072dfc1",
+    "semantic_hash": ""
+  },
+  "frontend/src/assets/react.svg": {
+    "mtime": 1786750481.4914846,
+    "seen": 1787187794.528665,
+    "ast_hash": "f0402b67b6ce880f65666bb49e841696",
+    "semantic_hash": ""
+  },
+  "frontend/src/assets/vite.svg": {
+    "mtime": 1786750481.4920151,
+    "seen": 1787187794.528666,
+    "ast_hash": "9960a24288958394ac50e57ff638b036",
+    "semantic_hash": ""
   }
 }

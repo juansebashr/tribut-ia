@@ -107,3 +107,24 @@ Se restan directamente del impuesto bruto liquidado (Casilla 108):
 | **Donaciones a Entidades sin Animo de Lucro (ESAL) Régimen Especial** | Art. 257 E.T. | **25% del valor donado** | Donaciones a fundaciones y asociaciones calificadas en el RTE o entidades no contribuyentes del Art. 22 y 23 E.T. |
 | **Impuestos Pagados en el Exterior (Tax Credit)** | Art. 254 E.T. | Hasta el monto del impuesto colombiano sobre la misma renta | Evita la doble tributacion internacional sobre rentas de fuente extranjera de residentes fiscales. |
 | **Inversiones en Investigacion e Innovacion (MinCiencias)** | Art. 256 E.T. | **30% del valor invertido** | Inversiones en proyectos certificados por el Consejo Nacional de Beneficios Tributarios. |
+
+---
+
+## 9. Reajuste Fiscal de Activos Fijos (Art. 73 y 70 E.T.)
+
+Permite a las personas naturales aumentar el costo fiscal de adquisición de sus activos fijos (inmuebles, acciones y participaciones) para reducir legalmente la renta líquida o ganancia ocasional gravable generada en su enajenación.
+
+| Mecanismo de Ajuste | Articulo E.T. | Factor o Regla de Cálculo | Aplicación y Ventajas |
+| :--- | :--- | :--- | :--- |
+| **Ajuste Fiscal por Tablas de Inflación y Avalúo** | Art. 73 E.T. (DUR 1.2.1.17.21) | Multiplicador oficial según año de adquisición (hasta **36.085x** para inmuebles y **4.664x** para acciones) | Se multiplica el costo histórico de adquisición por el factor decretado anualmente por el Gobierno Nacional. Reduce de forma drástica la utilidad gravable y el impuesto de Ganancia Ocasional al 15%. |
+| **Reajuste Fiscal Anual Opcional** | Art. 70 E.T. | Porcentaje anual fijado por decreto (ej. **5,17% en 2024 / 2025**) | Incrementa opcionalmente el costo fiscal año a año para mitigar la erosión monetaria por inflación. |
+
+---
+
+## 10. Beneficio de Auditoría y Firmeza Especial (Art. 689-3 E.T.)
+
+Otorga firmeza definitiva a la declaración del contribuyente en un plazo abreviado, impidiendo que la DIAN inicie procesos de fiscalización posterior:
+
+- **Firmeza en 6 Meses:** Si el impuesto neto de renta se incrementa al menos en un **35%** respecto al año anterior (con impuesto previo $\ge 71\text{ UVT}$).
+- **Firmeza en 12 Meses:** Si el impuesto neto de renta se incrementa al menos en un **25%** respecto al año anterior (con impuesto previo $\ge 71\text{ UVT}$).
+

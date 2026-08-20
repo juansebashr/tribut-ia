@@ -3,13 +3,14 @@ import { Navbar } from './components/Navbar';
 import { UvtConverterWidget } from './components/UvtConverterWidget';
 import { PersonaNaturalCalculator } from './components/PersonaNaturalCalculator';
 import { PersonaJuridicaCalculator } from './components/PersonaJuridicaCalculator';
+import { BeneficiosAuditoriaTab } from './components/BeneficiosAuditoriaTab';
 import { RulesInspector } from './components/RulesInspector';
 import { AgentToolkitDocs } from './components/AgentToolkitDocs';
 import { fetchAvailableYears, fetchRulesForYear } from './services/api';
 import { Calendar, Layers } from 'lucide-react';
 
 export const App: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<'pn' | 'pj' | 'rules' | 'docs'>('pn');
+  const [activeTab, setActiveTab] = useState<'pn' | 'pj' | 'beneficios' | 'rules' | 'docs'>('pn');
   const [availableYears, setAvailableYears] = useState<number[]>([2026, 2025, 2024, 2022]);
   const [selectedYear, setSelectedYear] = useState<number>(2026);
   const [currentUvt, setCurrentUvt] = useState<number>(52350);
@@ -112,6 +113,10 @@ export const App: React.FC = () => {
           <PersonaJuridicaCalculator taxYear={selectedYear} uvtValue={currentUvt} />
         )}
 
+        {activeTab === 'beneficios' && (
+          <BeneficiosAuditoriaTab taxYear={selectedYear} uvtValue={currentUvt} />
+        )}
+
         {activeTab === 'rules' && (
           <RulesInspector taxYear={selectedYear} uvtValue={currentUvt} />
         )}
@@ -121,5 +126,3 @@ export const App: React.FC = () => {
     </div>
   );
 };
-
-export default App;

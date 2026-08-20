@@ -1,9 +1,9 @@
 import React from 'react';
-import { Calculator, Building2, Sliders, FileText } from 'lucide-react';
+import { Calculator, Building2, TrendingUp, Sliders, FileText } from 'lucide-react';
 
 interface NavbarProps {
-  activeTab: 'pn' | 'pj' | 'rules' | 'docs';
-  setActiveTab: (tab: 'pn' | 'pj' | 'rules' | 'docs') => void;
+  activeTab: 'pn' | 'pj' | 'beneficios' | 'rules' | 'docs';
+  setActiveTab: (tab: 'pn' | 'pj' | 'beneficios' | 'rules' | 'docs') => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab }) => {
@@ -32,6 +32,13 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab }) => {
           >
             <Building2 size={17} />
             Persona Jurídica (F110)
+          </button>
+          <button
+            className={`nav-tab ${activeTab === 'beneficios' ? 'active' : ''}`}
+            onClick={() => setActiveTab('beneficios')}
+          >
+            <TrendingUp size={17} />
+            Beneficios & Auditoría
           </button>
           <button
             className={`nav-tab ${activeTab === 'rules' ? 'active' : ''}`}

@@ -1,0 +1,492 @@
+[
+  {
+    "ano_adquisicion": "1955 y anteriores",
+    "acciones_aportes": 4664.64,
+    "bienes_raices_urbanos": 36085.1,
+    "bienes_raices_rurales_agro": 34963.67,
+    "bienes_raices_rurales": 35631.92
+  },
+  {
+    "ano_adquisicion": "1956",
+    "acciones_aportes": 4571.26,
+    "bienes_raices_urbanos": 35363.86,
+    "bienes_raices_rurales_agro": 34264.84,
+    "bienes_raices_rurales": 34919.74
+  },
+  {
+    "ano_adquisicion": "1957",
+    "acciones_aportes": 4232.67,
+    "bienes_raices_urbanos": 32744.71,
+    "bienes_raices_rurales_agro": 31727.09,
+    "bienes_raices_rurales": 32333.48
+  },
+  {
+    "ano_adquisicion": "1958",
+    "acciones_aportes": 3571.2,
+    "bienes_raices_urbanos": 27626.91,
+    "bienes_raices_rurales_agro": 26768.34,
+    "bienes_raices_rurales": 27279.95
+  },
+  {
+    "ano_adquisicion": "1959",
+    "acciones_aportes": 3264.9,
+    "bienes_raices_urbanos": 25257.62,
+    "bienes_raices_rurales_agro": 24472.68,
+    "bienes_raices_rurales": 24940.42
+  },
+  {
+    "ano_adquisicion": "1960",
+    "acciones_aportes": 3047.31,
+    "bienes_raices_urbanos": 23574.13,
+    "bienes_raices_rurales_agro": 22841.51,
+    "bienes_raices_rurales": 23278.07
+  },
+  {
+    "ano_adquisicion": "1961",
+    "acciones_aportes": 2856.78,
+    "bienes_raices_urbanos": 21981.02,
+    "bienes_raices_rurales_agro": 21297.91,
+    "bienes_raices_rurales": 21704.97
+  },
+  {
+    "ano_adquisicion": "1962",
+    "acciones_aportes": 2688.94,
+    "bienes_raices_urbanos": 20800.81,
+    "bienes_raices_rurales_agro": 20154.38,
+    "bienes_raices_rurales": 20539.58
+  },
+  {
+    "ano_adquisicion": "1963",
+    "acciones_aportes": 2511.5,
+    "bienes_raices_urbanos": 19429.21,
+    "bienes_raices_rurales_agro": 18825.4,
+    "bienes_raices_rurales": 19185.21
+  },
+  {
+    "ano_adquisicion": "1964",
+    "acciones_aportes": 1920.42,
+    "bienes_raices_urbanos": 14857.22,
+    "bienes_raices_rurales_agro": 14395.49,
+    "bienes_raices_rurales": 14670.63
+  },
+  {
+    "ano_adquisicion": "1965",
+    "acciones_aportes": 1758.11,
+    "bienes_raices_urbanos": 13600.8,
+    "bienes_raices_rurales_agro": 13178.13,
+    "bienes_raices_rurales": 13429.99
+  },
+  {
+    "ano_adquisicion": "1966",
+    "acciones_aportes": 1533.84,
+    "bienes_raices_urbanos": 11865.93,
+    "bienes_raices_rurales_agro": 11497.16,
+    "bienes_raices_rurales": 11716.9
+  },
+  {
+    "ano_adquisicion": "1967",
+    "acciones_aportes": 1352.33,
+    "bienes_raices_urbanos": 10462.43,
+    "bienes_raices_rurales_agro": 10137.28,
+    "bienes_raices_rurales": 10331.03
+  },
+  {
+    "ano_adquisicion": "1968",
+    "acciones_aportes": 1255.75,
+    "bienes_raices_urbanos": 9714.61,
+    "bienes_raices_rurales_agro": 9412.7,
+    "bienes_raices_rurales": 9592.6
+  },
+  {
+    "ano_adquisicion": "1969",
+    "acciones_aportes": 1178.09,
+    "bienes_raices_urbanos": 9113.87,
+    "bienes_raices_rurales_agro": 8830.63,
+    "bienes_raices_rurales": 8999.41
+  },
+  {
+    "ano_adquisicion": "1970",
+    "acciones_aportes": 1083.26,
+    "bienes_raices_urbanos": 8380.22,
+    "bienes_raices_rurales_agro": 8119.79,
+    "bienes_raices_rurales": 8274.98
+  },
+  {
+    "ano_adquisicion": "1971",
+    "acciones_aportes": 1011.41,
+    "bienes_raices_urbanos": 7823.78,
+    "bienes_raices_rurales_agro": 7580.64,
+    "bienes_raices_rurales": 7725.53
+  },
+  {
+    "ano_adquisicion": "1972",
+    "acciones_aportes": 896.22,
+    "bienes_raices_urbanos": 6934.19,
+    "bienes_raices_rurales_agro": 6718.7,
+    "bienes_raices_rurales": 6847.11
+  },
+  {
+    "ano_adquisicion": "1973",
+    "acciones_aportes": 788.01,
+    "bienes_raices_urbanos": 6097.77,
+    "bienes_raices_rurales_agro": 5908.26,
+    "bienes_raices_rurales": 6021.19
+  },
+  {
+    "ano_adquisicion": "1974",
+    "acciones_aportes": 643.73,
+    "bienes_raices_urbanos": 4981.35,
+    "bienes_raices_rurales_agro": 4826.54,
+    "bienes_raices_rurales": 4918.79
+  },
+  {
+    "ano_adquisicion": "1975",
+    "acciones_aportes": 514.87,
+    "bienes_raices_urbanos": 3981.89,
+    "bienes_raices_rurales_agro": 3858.14,
+    "bienes_raices_rurales": 3931.88
+  },
+  {
+    "ano_adquisicion": "1976",
+    "acciones_aportes": 437.78,
+    "bienes_raices_urbanos": 3386.47,
+    "bienes_raices_rurales_agro": 3281.22,
+    "bienes_raices_rurales": 3343.94
+  },
+  {
+    "ano_adquisicion": "1977",
+    "acciones_aportes": 349.06,
+    "bienes_raices_urbanos": 2698.9,
+    "bienes_raices_rurales_agro": 2615.02,
+    "bienes_raices_rurales": 2665.0
+  },
+  {
+    "ano_adquisicion": "1978",
+    "acciones_aportes": 273.72,
+    "bienes_raices_urbanos": 2117.65,
+    "bienes_raices_rurales_agro": 2051.84,
+    "bienes_raices_rurales": 2091.05
+  },
+  {
+    "ano_adquisicion": "1979",
+    "acciones_aportes": 228.64,
+    "bienes_raices_urbanos": 1768.55,
+    "bienes_raices_rurales_agro": 1713.59,
+    "bienes_raices_rurales": 1746.34
+  },
+  {
+    "ano_adquisicion": "1980",
+    "acciones_aportes": 180.64,
+    "bienes_raices_urbanos": 1398.18,
+    "bienes_raices_rurales_agro": 1354.73,
+    "bienes_raices_rurales": 1380.62
+  },
+  {
+    "ano_adquisicion": "1981",
+    "acciones_aportes": 145.15,
+    "bienes_raices_urbanos": 1121.73,
+    "bienes_raices_rurales_agro": 1086.87,
+    "bienes_raices_rurales": 1107.65
+  },
+  {
+    "ano_adquisicion": "1982",
+    "acciones_aportes": 115.48,
+    "bienes_raices_urbanos": 893.13,
+    "bienes_raices_rurales_agro": 865.38,
+    "bienes_raices_rurales": 881.92
+  },
+  {
+    "ano_adquisicion": "1983",
+    "acciones_aportes": 92.79,
+    "bienes_raices_urbanos": 717.7,
+    "bienes_raices_rurales_agro": 695.39,
+    "bienes_raices_rurales": 708.68
+  },
+  {
+    "ano_adquisicion": "1984",
+    "acciones_aportes": 79.7,
+    "bienes_raices_urbanos": 616.69,
+    "bienes_raices_rurales_agro": 597.52,
+    "bienes_raices_rurales": 608.94
+  },
+  {
+    "ano_adquisicion": "1985",
+    "acciones_aportes": 67.49,
+    "bienes_raices_urbanos": 535.17,
+    "bienes_raices_rurales_agro": 518.54,
+    "bienes_raices_rurales": 528.45
+  },
+  {
+    "ano_adquisicion": "1986",
+    "acciones_aportes": 55.27,
+    "bienes_raices_urbanos": 443.02,
+    "bienes_raices_rurales_agro": 429.25,
+    "bienes_raices_rurales": 437.46
+  },
+  {
+    "ano_adquisicion": "1987",
+    "acciones_aportes": 45.67,
+    "bienes_raices_urbanos": 375.68,
+    "bienes_raices_rurales_agro": 364.01,
+    "bienes_raices_rurales": 370.97
+  },
+  {
+    "ano_adquisicion": "1988",
+    "acciones_aportes": 37.23,
+    "bienes_raices_urbanos": 283.53,
+    "bienes_raices_rurales_agro": 274.72,
+    "bienes_raices_rurales": 279.97
+  },
+  {
+    "ano_adquisicion": "1989",
+    "acciones_aportes": 29.17,
+    "bienes_raices_urbanos": 176.77,
+    "bienes_raices_rurales_agro": 171.27,
+    "bienes_raices_rurales": 174.55
+  },
+  {
+    "ano_adquisicion": "1990",
+    "acciones_aportes": 23.14,
+    "bienes_raices_urbanos": 122.25,
+    "bienes_raices_rurales_agro": 118.45,
+    "bienes_raices_rurales": 120.71
+  },
+  {
+    "ano_adquisicion": "1991",
+    "acciones_aportes": 17.54,
+    "bienes_raices_urbanos": 85.19,
+    "bienes_raices_rurales_agro": 82.54,
+    "bienes_raices_rurales": 84.12
+  },
+  {
+    "ano_adquisicion": "1992",
+    "acciones_aportes": 13.82,
+    "bienes_raices_urbanos": 63.81,
+    "bienes_raices_rurales_agro": 61.83,
+    "bienes_raices_rurales": 63.01
+  },
+  {
+    "ano_adquisicion": "1993",
+    "acciones_aportes": 11.09,
+    "bienes_raices_urbanos": 45.35,
+    "bienes_raices_rurales_agro": 43.94,
+    "bienes_raices_rurales": 44.78
+  },
+  {
+    "ano_adquisicion": "1994",
+    "acciones_aportes": 9.05,
+    "bienes_raices_urbanos": 32.98,
+    "bienes_raices_rurales_agro": 31.96,
+    "bienes_raices_rurales": 32.57
+  },
+  {
+    "ano_adquisicion": "1995",
+    "acciones_aportes": 7.41,
+    "bienes_raices_urbanos": 23.5,
+    "bienes_raices_rurales_agro": 22.77,
+    "bienes_raices_rurales": 23.2
+  },
+  {
+    "ano_adquisicion": "1996",
+    "acciones_aportes": 6.28,
+    "bienes_raices_urbanos": 17.37,
+    "bienes_raices_rurales_agro": 16.83,
+    "bienes_raices_rurales": 17.15
+  },
+  {
+    "ano_adquisicion": "1997",
+    "acciones_aportes": 5.41,
+    "bienes_raices_urbanos": 14.41,
+    "bienes_raices_rurales_agro": 13.97,
+    "bienes_raices_rurales": 14.23
+  },
+  {
+    "ano_adquisicion": "1998",
+    "acciones_aportes": 4.61,
+    "bienes_raices_urbanos": 11.07,
+    "bienes_raices_rurales_agro": 10.73,
+    "bienes_raices_rurales": 10.93
+  },
+  {
+    "ano_adquisicion": "1999",
+    "acciones_aportes": 3.97,
+    "bienes_raices_urbanos": 9.23,
+    "bienes_raices_rurales_agro": 8.94,
+    "bienes_raices_rurales": 9.11
+  },
+  {
+    "ano_adquisicion": "2000",
+    "acciones_aportes": 3.64,
+    "bienes_raices_urbanos": 9.16,
+    "bienes_raices_rurales_agro": 8.88,
+    "bienes_raices_rurales": 9.05
+  },
+  {
+    "ano_adquisicion": "2001",
+    "acciones_aportes": 3.36,
+    "bienes_raices_urbanos": 8.86,
+    "bienes_raices_rurales_agro": 8.59,
+    "bienes_raices_rurales": 8.75
+  },
+  {
+    "ano_adquisicion": "2002",
+    "acciones_aportes": 3.13,
+    "bienes_raices_urbanos": 8.19,
+    "bienes_raices_rurales_agro": 7.94,
+    "bienes_raices_rurales": 8.09
+  },
+  {
+    "ano_adquisicion": "2003",
+    "acciones_aportes": 2.93,
+    "bienes_raices_urbanos": 7.35,
+    "bienes_raices_rurales_agro": 7.12,
+    "bienes_raices_rurales": 7.26
+  },
+  {
+    "ano_adquisicion": "2004",
+    "acciones_aportes": 2.75,
+    "bienes_raices_urbanos": 6.92,
+    "bienes_raices_rurales_agro": 6.7,
+    "bienes_raices_rurales": 6.83
+  },
+  {
+    "ano_adquisicion": "2005",
+    "acciones_aportes": 2.61,
+    "bienes_raices_urbanos": 6.5,
+    "bienes_raices_rurales_agro": 6.29,
+    "bienes_raices_rurales": 6.41
+  },
+  {
+    "ano_adquisicion": "2006",
+    "acciones_aportes": 2.48,
+    "bienes_raices_urbanos": 6.15,
+    "bienes_raices_rurales_agro": 5.96,
+    "bienes_raices_rurales": 6.07
+  },
+  {
+    "ano_adquisicion": "2007",
+    "acciones_aportes": 2.37,
+    "bienes_raices_urbanos": 4.67,
+    "bienes_raices_rurales_agro": 4.53,
+    "bienes_raices_rurales": 4.62
+  },
+  {
+    "ano_adquisicion": "2008",
+    "acciones_aportes": 2.24,
+    "bienes_raices_urbanos": 4.16,
+    "bienes_raices_rurales_agro": 4.03,
+    "bienes_raices_rurales": 4.11
+  },
+  {
+    "ano_adquisicion": "2009",
+    "acciones_aportes": 2.07,
+    "bienes_raices_urbanos": 3.43,
+    "bienes_raices_rurales_agro": 3.32,
+    "bienes_raices_rurales": 3.38
+  },
+  {
+    "ano_adquisicion": "2010",
+    "acciones_aportes": 2.03,
+    "bienes_raices_urbanos": 3.12,
+    "bienes_raices_rurales_agro": 3.02,
+    "bienes_raices_rurales": 3.08
+  },
+  {
+    "ano_adquisicion": "2011",
+    "acciones_aportes": 1.97,
+    "bienes_raices_urbanos": 2.86,
+    "bienes_raices_rurales_agro": 2.77,
+    "bienes_raices_rurales": 2.82
+  },
+  {
+    "ano_adquisicion": "2012",
+    "acciones_aportes": 1.9,
+    "bienes_raices_urbanos": 2.39,
+    "bienes_raices_rurales_agro": 2.32,
+    "bienes_raices_rurales": 2.36
+  },
+  {
+    "ano_adquisicion": "2013",
+    "acciones_aportes": 1.85,
+    "bienes_raices_urbanos": 2.05,
+    "bienes_raices_rurales_agro": 1.99,
+    "bienes_raices_rurales": 2.03
+  },
+  {
+    "ano_adquisicion": "2014",
+    "acciones_aportes": 1.82,
+    "bienes_raices_urbanos": 1.81,
+    "bienes_raices_rurales_agro": 1.76,
+    "bienes_raices_rurales": 1.79
+  },
+  {
+    "ano_adquisicion": "2015",
+    "acciones_aportes": 1.75,
+    "bienes_raices_urbanos": 1.68,
+    "bienes_raices_rurales_agro": 1.63,
+    "bienes_raices_rurales": 1.66
+  },
+  {
+    "ano_adquisicion": "2016",
+    "acciones_aportes": 1.64,
+    "bienes_raices_urbanos": 1.6,
+    "bienes_raices_rurales_agro": 1.55,
+    "bienes_raices_rurales": 1.58
+  },
+  {
+    "ano_adquisicion": "2017",
+    "acciones_aportes": 1.56,
+    "bienes_raices_urbanos": 1.52,
+    "bienes_raices_rurales_agro": 1.48,
+    "bienes_raices_rurales": 1.5
+  },
+  {
+    "ano_adquisicion": "2018",
+    "acciones_aportes": 1.5,
+    "bienes_raices_urbanos": 1.41,
+    "bienes_raices_rurales_agro": 1.36,
+    "bienes_raices_rurales": 1.39
+  },
+  {
+    "ano_adquisicion": "2019",
+    "acciones_aportes": 1.45,
+    "bienes_raices_urbanos": 1.3,
+    "bienes_raices_rurales_agro": 1.26,
+    "bienes_raices_rurales": 1.28
+  },
+  {
+    "ano_adquisicion": "2020",
+    "acciones_aportes": 1.4,
+    "bienes_raices_urbanos": 1.22,
+    "bienes_raices_rurales_agro": 1.18,
+    "bienes_raices_rurales": 1.21
+  },
+  {
+    "ano_adquisicion": "2021",
+    "acciones_aportes": 1.38,
+    "bienes_raices_urbanos": 1.16,
+    "bienes_raices_rurales_agro": 1.12,
+    "bienes_raices_rurales": 1.14
+  },
+  {
+    "ano_adquisicion": "2022",
+    "acciones_aportes": 1.3,
+    "bienes_raices_urbanos": 1.12,
+    "bienes_raices_rurales_agro": 1.09,
+    "bienes_raices_rurales": 1.11
+  },
+  {
+    "ano_adquisicion": "2023",
+    "acciones_aportes": 1.15,
+    "bienes_raices_urbanos": 1.09,
+    "bienes_raices_rurales_agro": 1.06,
+    "bienes_raices_rurales": 1.08
+  },
+  {
+    "ano_adquisicion": "2024",
+    "acciones_aportes": 1.05,
+    "bienes_raices_urbanos": 1.05,
+    "bienes_raices_rurales_agro": 1.03,
+    "bienes_raices_rurales": 1.05
+  }
+]

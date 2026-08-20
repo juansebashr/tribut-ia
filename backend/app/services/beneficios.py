@@ -1,11 +1,14 @@
+import json
+from pathlib import Path
+
 from pydantic import BaseModel, Field
+
+TABLA_ART73_PATH = Path(__file__).parent.parent / "rules" / "tabla_articulo_73_et.json"
 
 
 class BeneficioItem(BaseModel):
     id: str
-    categoria: (
-        str  # "incrngo", "deducciones", "rentas_exentas", "descuentos", "auditoria_sanciones"
-    )
+    categoria: str  # "incrngo", "deducciones", "rentas_exentas", "descuentos", "auditoria_sanciones", "ajustes_patrimonio"
     nombre: str
     articulo_et: str
     descripcion: str
@@ -67,8 +70,231 @@ class ReduccionSancionResponse(BaseModel):
     explicacion: str
 
 
+class AjusteArticulo73Item(BaseModel):
+    ano_adquisicion: str = Field(..., description="Año en el cual fue adquirido el activo")
+    acciones_aportes: float = Field(
+        ..., description="Factor multiplicador para acciones o aportes en sociedades"
+    )
+    bienes_raices_urbanos: float = Field(
+        ..., description="Factor multiplicador para bienes raíces urbanos"
+    )
+    bienes_raices_rurales_agro: float = Field(
+        ...,
+        description="Factor multiplicador para bienes raíces rurales dedicados a actividades agropecuarias",
+    )
+    bienes_raices_rurales: float = Field(
+        ..., description="Factor multiplicador para bienes raíces rurales generales"
+    )
+
+
+class SimulacionAjusteArticulo73Request(BaseModel):
+    ano_adquisicion: str = Field(
+        ...,
+        description="Año de adquisición (ej. '2015', '1990', '1955 y anteriores')",
+    )
+    tipo_activo: str = Field(
+        ...,
+        description="Tipo de activo: 'acciones_aportes', 'bienes_raices_urbanos', 'bienes_raices_rurales_agro', 'bienes_raices_rurales'",
+    )
+    costo_adquisicion_historico_cop: float = Field(
+        ...,
+        gt=0,
+        description="Costo de adquisición histórico comprobado o valor de compra original en pesos COP",
+    )
+    precio_venta_estimado_cop: float | None = Field(
+        None,
+        description="Precio de venta o enajenación estimado/real del activo en pesos COP",
+    )
+    ano_gravable_enajenacion: int = Field(
+        2025,
+        description="Año gravable de enajenación o declaración del activo",
+    )
+
+
+class SimulacionAjusteArticulo73Response(BaseModel):
+    ano_adquisicion: str
+    tipo_activo: str
+    tipo_activo_label: str
+    factor_multiplicador: float
+    costo_adquisicion_historico_cop: float
+    costo_fiscal_ajustado_art73_cop: float
+    incremento_costo_fiscal_cop: float
+    precio_venta_cop: float | None
+    ganancia_sin_ajuste_cop: float | None
+    ganancia_con_ajuste_cop: float | None
+    ahorro_base_gravable_cop: float | None
+    tarifa_ganancia_ocasional_pct: float
+    impuesto_estimado_sin_ajuste_cop: float | None
+    impuesto_estimado_con_ajuste_cop: float | None
+    ahorro_impuesto_estimado_cop: float | None
+    es_ganancia_ocasional: bool
+    fundamento_legal: str
+    explicacion_didactica: str
+    pasos_calculo: list[str]
+
+
+_tabla_art73_cache: list[AjusteArticulo73Item] | None = None
+
+
+def get_tabla_articulo_73() -> list[AjusteArticulo73Item]:
+    """Carga y retorna la tabla oficial de factores de ajuste del Artículo 73 del E.T."""
+    global _tabla_art73_cache
+    if _tabla_art73_cache is None:
+        if not TABLA_ART73_PATH.exists():
+            return []
+        with open(TABLA_ART73_PATH, encoding="utf-8") as f:
+            raw_data = json.load(f)
+            _tabla_art73_cache = [AjusteArticulo73Item(**item) for item in raw_data]
+    return _tabla_art73_cache
+
+
+def calcular_ajuste_articulo_73(
+    req: SimulacionAjusteArticulo73Request,
+) -> SimulacionAjusteArticulo73Response:
+    """Calcula el costo fiscal ajustado según el Artículo 73 del E.T.
+
+    y la simulación del ahorro en Ganancia Ocasional o Renta.
+    """
+    tabla = get_tabla_articulo_73()
+    norm_ano = " ".join(req.ano_adquisicion.strip().split())
+
+    # Buscar la fila correspondiente
+    item_encontrado: AjusteArticulo73Item | None = None
+    for item in tabla:
+        if item.ano_adquisicion.lower() == norm_ano.lower():
+            item_encontrado = item
+            break
+
+    if not item_encontrado:
+        # Fallback a 2024 o último año si no se encuentra
+        item_encontrado = tabla[-1] if tabla else None
+
+    if not item_encontrado:
+        raise ValueError(
+            f"No se encontró factor de ajuste para el año de adquisición '{req.ano_adquisicion}'"
+        )
+
+    labels_map = {
+        "acciones_aportes": "Acciones o Aportes en Sociedades",
+        "bienes_raices_urbanos": "Bienes Raíces Urbanos (Inmuebles Urbanos)",
+        "bienes_raices_rurales_agro": "Bienes Raíces Rurales (Actividades Agropecuarias)",
+        "bienes_raices_rurales": "Bienes Raíces Rurales Generales",
+    }
+    label = labels_map.get(req.tipo_activo, req.tipo_activo)
+
+    # Determinar factor multiplicador
+    factor: float = 1.0
+    if req.tipo_activo == "acciones_aportes":
+        factor = item_encontrado.acciones_aportes
+    elif req.tipo_activo == "bienes_raices_urbanos":
+        factor = item_encontrado.bienes_raices_urbanos
+    elif req.tipo_activo == "bienes_raices_rurales_agro":
+        factor = item_encontrado.bienes_raices_rurales_agro
+    elif req.tipo_activo == "bienes_raices_rurales":
+        factor = item_encontrado.bienes_raices_rurales
+    else:
+        factor = item_encontrado.bienes_raices_urbanos
+
+    costo_historico = req.costo_adquisicion_historico_cop
+    costo_ajustado = round(costo_historico * factor)
+    incremento_costo = max(0.0, costo_ajustado - costo_historico)
+
+    # Evaluación de posesión (para determinar si es Ganancia Ocasional o Renta Ordinaria)
+    # Si fue adquirido hace 2 o más años respecto al año gravable
+    try:
+        ano_adq_num = int(norm_ano)
+    except ValueError:
+        # "1955 y anteriores"
+        ano_adq_num = 1955
+
+    anos_posesion = req.ano_gravable_enajenacion - ano_adq_num
+    es_ganancia_ocasional = anos_posesion >= 2
+    tarifa_impuesto_pct = 15.0 if es_ganancia_ocasional else 35.0  # 15% GO vs 35% aprox ordinaria
+
+    precio_venta = req.precio_venta_estimado_cop
+    ganancia_sin = None
+    ganancia_con = None
+    ahorro_base = None
+    impuesto_sin = None
+    impuesto_con = None
+    ahorro_impuesto = None
+
+    pasos = [
+        f"1. Identificación del activo: {label} adquirido en {item_encontrado.ano_adquisicion}.",
+        f"2. Factor de ajuste oficial del Art. 73 E.T.: {factor:,.2f}x (según certificación DANE y decreto reglamentario).",
+        f"3. Multiplicación del costo histórico (${costo_historico:,.0f}) por el factor {factor:,.2f}x = Costo Fiscal Ajustado de ${costo_ajustado:,.0f} COP.",
+        f"4. Incremento legal del costo fiscal patrimonial: +${incremento_costo:,.0f} COP sin constituir renta gravable.",
+    ]
+
+    if precio_venta is not None and precio_venta > 0:
+        ganancia_sin = max(0.0, precio_venta - costo_historico)
+        ganancia_con = max(0.0, precio_venta - costo_ajustado)
+        ahorro_base = max(0.0, ganancia_sin - ganancia_con)
+
+        impuesto_sin = round(ganancia_sin * (tarifa_impuesto_pct / 100.0))
+        impuesto_con = round(ganancia_con * (tarifa_impuesto_pct / 100.0))
+        ahorro_impuesto = max(0.0, impuesto_sin - impuesto_con)
+
+        pasos.extend(
+            [
+                f"5. Venta estimada en ${precio_venta:,.0f} COP.",
+                f"6. Ganancia gravable SIN ajuste: ${precio_venta:,.0f} - ${costo_historico:,.0f} = ${ganancia_sin:,.0f} COP (Impuesto: ${impuesto_sin:,.0f} COP al {tarifa_impuesto_pct}%).",
+                f"7. Ganancia gravable CON ajuste Art. 73: ${precio_venta:,.0f} - ${costo_ajustado:,.0f} = ${ganancia_con:,.0f} COP (Impuesto: ${impuesto_con:,.0f} COP al {tarifa_impuesto_pct}%).",
+                f"8. AHORRO TRIBUTARIO NETO: Reducción de base en ${ahorro_base:,.0f} COP → Ahorro estimado de ${ahorro_impuesto:,.0f} COP en impuestos.",
+            ]
+        )
+
+    explicacion = (
+        f"El Artículo 73 del Estatuto Tributario permite a las personas naturales reajustar el costo fiscal de "
+        f"sus activos fijos (inmuebles o acciones) multiplicando el costo histórico de compra por el factor de {factor:,.2f}x. "
+        f"Esto eleva legalmente el costo fiscal de ${costo_historico:,.0f} a ${costo_ajustado:,.0f} COP. "
+    )
+    if ahorro_impuesto:
+        explicacion += (
+            f"Al vender el bien, la utilidad gravable disminuye drásticamente, generando un ahorro directo "
+            f"estimado de ${ahorro_impuesto:,.0f} COP en el impuesto de Ganancia Ocasional."
+        )
+
+    return SimulacionAjusteArticulo73Response(
+        ano_adquisicion=item_encontrado.ano_adquisicion,
+        tipo_activo=req.tipo_activo,
+        tipo_activo_label=label,
+        factor_multiplicador=factor,
+        costo_adquisicion_historico_cop=costo_historico,
+        costo_fiscal_ajustado_art73_cop=costo_ajustado,
+        incremento_costo_fiscal_cop=incremento_costo,
+        precio_venta_cop=precio_venta,
+        ganancia_sin_ajuste_cop=ganancia_sin,
+        ganancia_con_ajuste_cop=ganancia_con,
+        ahorro_base_gravable_cop=ahorro_base,
+        tarifa_ganancia_ocasional_pct=tarifa_impuesto_pct,
+        impuesto_estimado_sin_ajuste_cop=impuesto_sin,
+        impuesto_estimado_con_ajuste_cop=impuesto_con,
+        ahorro_impuesto_estimado_cop=ahorro_impuesto,
+        es_ganancia_ocasional=es_ganancia_ocasional,
+        fundamento_legal="Artículo 73 del Estatuto Tributario Nacional (Sustituido anualmente en el DUR 1625 de 2016)",
+        explicacion_didactica=explicacion,
+        pasos_calculo=pasos,
+    )
+
+
 def get_catalogo_beneficios() -> list[BeneficioItem]:
     return [
+        # 0. AJUSTE FISCAL DE ACTIVOS FIJOS (Art. 73 E.T.)
+        BeneficioItem(
+            id="reajuste_fiscal_activos_art73",
+            categoria="ajustes_patrimonio",
+            nombre="Ajuste Fiscal de Bienes Raíces y Acciones (Art. 73 E.T.)",
+            articulo_et="Art. 73 E.T. (DUR 1.2.1.17.21)",
+            descripcion="Mecanismo legal que permite a las personas naturales multiplicar el costo histórico de adquisición de inmuebles y acciones por factores oficiales de inflación y avalúo para determinar un costo fiscal mayor, reduciendo drásticamente la ganancia ocasional o renta en la venta.",
+            tope_legal_texto="Factor multiplicador oficial según año de adquisición (hasta 36.085x para inmuebles y 4.664x para acciones)",
+            requisitos=[
+                "Ser persona natural.",
+                "Que el bien inmueble o las acciones califiquen como activo fijo (no inventario).",
+                "Comprobante o escritura pública con la fecha y costo de adquisición histórico.",
+            ],
+            ejemplo_calculo="Un inmueble urbano comprado en 1995 por $20.000.000 se multiplica por 23,50x = Costo fiscal ajustado de $470.000.000. Si se vende en $500.000.000, solo tributa sobre $30.000.000 de utilidad en lugar de $480.000.000.",
+        ),
         # 1. INCRNGO
         BeneficioItem(
             id="incrngo_salud",
