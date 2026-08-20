@@ -1,0 +1,290 @@
+{
+  "backend/app/__init__.py": {
+    "mtime": 1786750458.719023,
+    "seen": 1787184713.910151,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "backend/app/agent_toolkit/__init__.py": {
+    "mtime": 1786750458.7237325,
+    "seen": 1787184713.910152,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "backend/app/api/__init__.py": {
+    "mtime": 1786750458.722193,
+    "seen": 1787184713.910153,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "backend/app/api/v1/__init__.py": {
+    "mtime": 1786750458.7226906,
+    "seen": 1787184713.9101539,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "backend/app/api/v1/endpoints/__init__.py": {
+    "mtime": 1786750458.722934,
+    "seen": 1787184713.910155,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "backend/app/api/v1/endpoints/beneficios.py": {
+    "mtime": 1787182915.055854,
+    "seen": 1787184713.910155,
+    "ast_hash": "b0eeb62fae2e516762e5bbfaf44c975a",
+    "semantic_hash": "b0eeb62fae2e516762e5bbfaf44c975a"
+  },
+  "backend/app/api/v1/endpoints/persona_juridica.py": {
+    "mtime": 1787182915.0558739,
+    "seen": 1787184713.910156,
+    "ast_hash": "e9de34ffdffc68c457bf63f41b2755c2",
+    "semantic_hash": "e9de34ffdffc68c457bf63f41b2755c2"
+  },
+  "backend/app/api/v1/endpoints/persona_natural.py": {
+    "mtime": 1787182915.0573695,
+    "seen": 1787184713.910162,
+    "ast_hash": "841cf1b6d236f6f90e5390dd095aecb3",
+    "semantic_hash": "841cf1b6d236f6f90e5390dd095aecb3"
+  },
+  "backend/app/api/v1/endpoints/reconciliation.py": {
+    "mtime": 1787182915.0584831,
+    "seen": 1787184713.910163,
+    "ast_hash": "de13c43908702d4580a14c5ede4cd948",
+    "semantic_hash": "de13c43908702d4580a14c5ede4cd948"
+  },
+  "backend/app/api/v1/endpoints/rules.py": {
+    "mtime": 1787182915.058078,
+    "seen": 1787184713.9101639,
+    "ast_hash": "7370ea6bae8b461b7dc73b04521e07a0",
+    "semantic_hash": "7370ea6bae8b461b7dc73b04521e07a0"
+  },
+  "backend/app/api/v1/endpoints/session_sync.py": {
+    "mtime": 1787182915.0565321,
+    "seen": 1787184713.910165,
+    "ast_hash": "6f0fd429fd44567109e7a2ec40437a3c",
+    "semantic_hash": "6f0fd429fd44567109e7a2ec40437a3c"
+  },
+  "backend/app/api/v1/endpoints/simulation.py": {
+    "mtime": 1787182915.058267,
+    "seen": 1787184713.910165,
+    "ast_hash": "1a84c7cae63f42446ee7eab679acacab",
+    "semantic_hash": "1a84c7cae63f42446ee7eab679acacab"
+  },
+  "backend/app/api/v1/router.py": {
+    "mtime": 1787182915.0568316,
+    "seen": 1787184713.910166,
+    "ast_hash": "3a5298d6e2caf364f59629877ddea6a5",
+    "semantic_hash": "3a5298d6e2caf364f59629877ddea6a5"
+  },
+  "backend/app/core/__init__.py": {
+    "mtime": 1786750458.723098,
+    "seen": 1787184713.910166,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "backend/app/core/config.py": {
+    "mtime": 1787182915.0559027,
+    "seen": 1787184713.910167,
+    "ast_hash": "8189548b29be3706d13efd2cea498909",
+    "semantic_hash": "8189548b29be3706d13efd2cea498909"
+  },
+  "backend/app/core/rules_engine/__init__.py": {
+    "mtime": 1786750458.7232673,
+    "seen": 1787184713.910167,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "backend/app/core/rules_engine/loader.py": {
+    "mtime": 1787182844.6814966,
+    "seen": 1787184713.9101682,
+    "ast_hash": "6ea3defc361bb242d31277137bc72410",
+    "semantic_hash": "6ea3defc361bb242d31277137bc72410"
+  },
+  "backend/app/core/rules_engine/schema.py": {
+    "mtime": 1787182915.0556943,
+    "seen": 1787184713.9101682,
+    "ast_hash": "667cee6d8bc44b8bd3d3f15e317b1776",
+    "semantic_hash": "667cee6d8bc44b8bd3d3f15e317b1776"
+  },
+  "backend/app/main.py": {
+    "mtime": 1787182915.0559618,
+    "seen": 1787184713.9101691,
+    "ast_hash": "98cae0ca9ef44a6333d1e7f3203c47a9",
+    "semantic_hash": "98cae0ca9ef44a6333d1e7f3203c47a9"
+  },
+  "backend/app/models/__init__.py": {
+    "mtime": 1786750458.7234235,
+    "seen": 1787184713.9101691,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "backend/app/models/common.py": {
+    "mtime": 1787182915.0566862,
+    "seen": 1787184713.91017,
+    "ast_hash": "36042492c05b27f941a9934949532a5d",
+    "semantic_hash": "36042492c05b27f941a9934949532a5d"
+  },
+  "backend/app/models/persona_juridica.py": {
+    "mtime": 1787182915.0558894,
+    "seen": 1787184713.9101708,
+    "ast_hash": "be3163c6395fc98cb88b6292e61f2354",
+    "semantic_hash": "be3163c6395fc98cb88b6292e61f2354"
+  },
+  "backend/app/models/persona_natural.py": {
+    "mtime": 1787182915.0557022,
+    "seen": 1787184713.9101708,
+    "ast_hash": "0e93fdf8173b64e8f85d1d60673e3a35",
+    "semantic_hash": "0e93fdf8173b64e8f85d1d60673e3a35"
+  },
+  "backend/app/services/__init__.py": {
+    "mtime": 1786750458.7235575,
+    "seen": 1787184713.910172,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "backend/app/services/beneficios.py": {
+    "mtime": 1787182915.0573878,
+    "seen": 1787184713.910172,
+    "ast_hash": "4042e4fff6c5a4624fd679c5860e0bb8",
+    "semantic_hash": "4042e4fff6c5a4624fd679c5860e0bb8"
+  },
+  "backend/app/services/liquidacion_pj.py": {
+    "mtime": 1787182915.058081,
+    "seen": 1787184713.910173,
+    "ast_hash": "55443dd72385707c6b09b65f3644f50c",
+    "semantic_hash": "55443dd72385707c6b09b65f3644f50c"
+  },
+  "backend/app/services/liquidacion_pn.py": {
+    "mtime": 1787182915.0575447,
+    "seen": 1787184713.910173,
+    "ast_hash": "d6ff75fcef06a19fc30c34058a4eab39",
+    "semantic_hash": "d6ff75fcef06a19fc30c34058a4eab39"
+  },
+  "backend/app/services/session_store.py": {
+    "mtime": 1787182915.0563562,
+    "seen": 1787184713.910174,
+    "ast_hash": "a6c3ddea11479f4531805f254d7d0865",
+    "semantic_hash": "a6c3ddea11479f4531805f254d7d0865"
+  },
+  "backend/app/services/session_store_base.py": {
+    "mtime": 1787182915.0576396,
+    "seen": 1787184713.910174,
+    "ast_hash": "07b6ac546dea43900749c029c20c2d53",
+    "semantic_hash": "07b6ac546dea43900749c029c20c2d53"
+  },
+  "backend/run.py": {
+    "mtime": 1787182844.6770062,
+    "seen": 1787184713.910175,
+    "ast_hash": "c0a14ff0fa0e3ab6584eec99e3eeead5",
+    "semantic_hash": "c0a14ff0fa0e3ab6584eec99e3eeead5"
+  },
+  "backend/tests/__init__.py": {
+    "mtime": 1786750458.7239144,
+    "seen": 1787184713.910175,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "backend/tests/test_api_endpoints.py": {
+    "mtime": 1787182915.0568671,
+    "seen": 1787184713.910176,
+    "ast_hash": "893fa7465543d9824ea44cdbcab4e8b7",
+    "semantic_hash": "893fa7465543d9824ea44cdbcab4e8b7"
+  },
+  "backend/tests/test_beneficios_and_go.py": {
+    "mtime": 1787182915.058097,
+    "seen": 1787184713.910176,
+    "ast_hash": "e99db06de680d0482462a731e4d0b625",
+    "semantic_hash": "e99db06de680d0482462a731e4d0b625"
+  },
+  "backend/tests/test_calendario.py": {
+    "mtime": 1787182844.6772926,
+    "seen": 1787184713.910177,
+    "ast_hash": "c83a23781ec894bac4a47427896dc2b2",
+    "semantic_hash": "c83a23781ec894bac4a47427896dc2b2"
+  },
+  "backend/tests/test_coverage_boost.py": {
+    "mtime": 1787182915.0570748,
+    "seen": 1787184713.910177,
+    "ast_hash": "da730738dd039597384b8870ef466501",
+    "semantic_hash": "da730738dd039597384b8870ef466501"
+  },
+  "backend/tests/test_pj_calculator.py": {
+    "mtime": 1787182915.055907,
+    "seen": 1787184713.910178,
+    "ast_hash": "7ae41ff85908eb4929bccae663742512",
+    "semantic_hash": "7ae41ff85908eb4929bccae663742512"
+  },
+  "backend/tests/test_pn_calculator.py": {
+    "mtime": 1787182915.0568144,
+    "seen": 1787184713.910178,
+    "ast_hash": "adaab24079304700eb7e15840c1038a4",
+    "semantic_hash": "adaab24079304700eb7e15840c1038a4"
+  },
+  "backend/tests/test_reconciliation_ephemeral.py": {
+    "mtime": 1787182915.056878,
+    "seen": 1787184713.9101791,
+    "ast_hash": "dd06010dfd364463c0d08601f0696999",
+    "semantic_hash": "dd06010dfd364463c0d08601f0696999"
+  },
+  "backend/tests/test_rules_engine.py": {
+    "mtime": 1786750451.9087045,
+    "seen": 1787184713.9101791,
+    "ast_hash": "8127009b2bf480928718a759941c29d6",
+    "semantic_hash": "8127009b2bf480928718a759941c29d6"
+  },
+  "backend/tests/test_session_store_redis.py": {
+    "mtime": 1787182915.0575519,
+    "seen": 1787184713.91018,
+    "ast_hash": "3fbc563449ca342dc9fbdef0434bca97",
+    "semantic_hash": "3fbc563449ca342dc9fbdef0434bca97"
+  },
+  "backend/tests/test_session_sync.py": {
+    "mtime": 1787182915.057721,
+    "seen": 1787184713.91018,
+    "ast_hash": "8a3c67151efaaf1dea6c3d24c2b519d9",
+    "semantic_hash": "8a3c67151efaaf1dea6c3d24c2b519d9"
+  },
+  "backend/tests/test_skill_renta_pn.py": {
+    "mtime": 1787182915.0578034,
+    "seen": 1787184713.910181,
+    "ast_hash": "e4e524846eebe80545142be2c797597c",
+    "semantic_hash": "e4e524846eebe80545142be2c797597c"
+  },
+  "backend/tests/test_two_way_full_cycle.py": {
+    "mtime": 1787182915.0577292,
+    "seen": 1787184713.910181,
+    "ast_hash": "011c3e2311e7bbf70a32a08ef3b48bd5",
+    "semantic_hash": "011c3e2311e7bbf70a32a08ef3b48bd5"
+  },
+  "pyproject.toml": {
+    "mtime": 1787184577.5583684,
+    "seen": 1787184713.910184,
+    "ast_hash": "6567a03cbc400b007d40e684649ce654",
+    "semantic_hash": "6567a03cbc400b007d40e684649ce654"
+  },
+  "run.py": {
+    "mtime": 1787183062.1394851,
+    "seen": 1787184713.910184,
+    "ast_hash": "09b652b67548b3689af150623e8deb76",
+    "semantic_hash": "09b652b67548b3689af150623e8deb76"
+  },
+  "skills/declaracion-renta-persona-natural/scripts/conciliar_exogena.py": {
+    "mtime": 1787182964.002656,
+    "seen": 1787184713.9101849,
+    "ast_hash": "62b8f40dccecdda2e85d43b64fc331af",
+    "semantic_hash": "62b8f40dccecdda2e85d43b64fc331af"
+  },
+  "skills/declaracion-renta-persona-natural/scripts/consolidar_transacciones.py": {
+    "mtime": 1787182915.0576458,
+    "seen": 1787184713.9101849,
+    "ast_hash": "6d9440ccc57c2fbc7ead57d4647445e6",
+    "semantic_hash": "6d9440ccc57c2fbc7ead57d4647445e6"
+  },
+  "skills/declaracion-renta-persona-natural/scripts/inyectar_tributia.py": {
+    "mtime": 1787182915.0579956,
+    "seen": 1787184713.910186,
+    "ast_hash": "714a11110de9f53ee31c171d203ffe92",
+    "semantic_hash": "714a11110de9f53ee31c171d203ffe92"
+  }
+}
