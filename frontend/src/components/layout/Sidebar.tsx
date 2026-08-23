@@ -6,6 +6,7 @@ export const Sidebar: React.FC = () => {
     activeModule,
     activeSubTab,
     navigateTo,
+    navigateToView,
     isSidebarCollapsed,
     toggleSidebar,
     isMobileSidebarOpen,
@@ -43,8 +44,9 @@ export const Sidebar: React.FC = () => {
             className="sidebar-logo"
             onClick={(e) => {
               e.preventDefault();
-              navigateTo('pn', 'calc');
+              navigateToView('landing');
             }}
+            title="Ir a la página principal de bienvenida"
           >
             <div className="sidebar-logo-badge">
               <span className="logo-full">TributIA</span>
@@ -74,6 +76,39 @@ export const Sidebar: React.FC = () => {
         </div>
 
         <nav className="sidebar-nav">
+          {/* GRUPO: INICIO & IA SKILLS */}
+          <div>
+            <div className="sidebar-group-title">Inicio & Asistente IA</div>
+            <ul className="sidebar-menu">
+              <li>
+                <button
+                  className="sidebar-item-btn"
+                  id="nav-item-landing"
+                  onClick={() => navigateToView('landing')}
+                >
+                  <span className="sidebar-item-icon">🏠</span>
+                  <span className="sidebar-item-label">Inicio / Bienvenida</span>
+                  <span className="sidebar-item-tag" style={{ background: '#0284c7', color: 'white' }}>
+                    Hero
+                  </span>
+                </button>
+              </li>
+              <li>
+                <button
+                  className="sidebar-item-btn"
+                  id="nav-item-skill-tutorial"
+                  onClick={() => navigateToView('skill-tutorial')}
+                >
+                  <span className="sidebar-item-icon">🤖</span>
+                  <span className="sidebar-item-label">Instalar Skill de IA</span>
+                  <span className="sidebar-item-tag" style={{ background: '#7c3aed', color: 'white' }}>
+                    Skills
+                  </span>
+                </button>
+              </li>
+            </ul>
+          </div>
+
           {/* GRUPO: CALENDARIO & VENCIMIENTOS */}
           <div>
             <div className="sidebar-group-title">Calendario & Vencimientos</div>

@@ -6,6 +6,7 @@ export const HeaderBar: React.FC = () => {
     activeModule,
     activeSubTab,
     navigateTo,
+    navigateToView,
     openMobileSidebar,
     taxYear,
     setTaxYear,
@@ -257,6 +258,18 @@ export const HeaderBar: React.FC = () => {
             ✨ Nueva
           </button>
         </div>
+
+        {/* ACCESO RÁPIDO A SKILL DE IA */}
+        <button
+          id="header-btn-skill-tutorial"
+          className="btn btn-outline btn-sm"
+          onClick={() => navigateToView('skill-tutorial')}
+          style={{ display: 'flex', alignItems: 'center', gap: '5px', padding: '5px 10px', fontSize: '11.5px', fontWeight: 600 }}
+          title="Ver tutorial e instalar Skill de IA"
+        >
+          <span>🤖</span>
+          <span className="hidden sm:inline">Skill IA</span>
+        </button>
 
         {/* BOTÓN MODO OSCURO / CLARO */}
         <button

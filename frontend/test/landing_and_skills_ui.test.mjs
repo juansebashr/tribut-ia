@@ -55,3 +55,27 @@ description: TributIA Income Tax Assistant
   assert.ok(files['templates/transacciones_template.csv'].includes('cedula_destino'));
   assert.ok(files['claude_desktop_config.json'].includes('tributia'));
 });
+
+test('Landing Page - Verificación de CTAs y Enlaces Clave', () => {
+  const ctaButtons = [
+    { id: 'btn-cta-start', label: 'Empecemos', targetView: 'app' },
+    { id: 'btn-cta-download-skill', label: 'Descarga la Skill de IA', targetView: 'skill-tutorial' }
+  ];
+
+  assert.equal(ctaButtons.length, 2);
+  assert.equal(ctaButtons[0].id, 'btn-cta-start');
+  assert.equal(ctaButtons[1].id, 'btn-cta-download-skill');
+});
+
+test('Plataformas de IA Soportadas en el Tutorial', () => {
+  const platforms = [
+    { id: 'claude', name: 'Anthropic Claude', modes: ['desktop', 'cli'] },
+    { id: 'antigravity', name: 'Google Antigravity / AGY', modes: ['desktop', 'cli'] },
+    { id: 'chatgpt', name: 'OpenAI ChatGPT & Codex', modes: ['custom-gpt', 'codex'] }
+  ];
+
+  assert.equal(platforms.length, 3);
+  assert.deepEqual(platforms.map(p => p.id), ['claude', 'antigravity', 'chatgpt']);
+  assert.ok(platforms.every(p => p.modes.length === 2));
+});
+
