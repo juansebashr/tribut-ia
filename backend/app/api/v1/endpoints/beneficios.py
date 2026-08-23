@@ -5,24 +5,66 @@ from app.services.beneficios import (
     BeneficioAuditoriaRequest,
     BeneficioAuditoriaResponse,
     BeneficioItem,
+    ItemTablaComponenteInflacionario,
     LiquidacionSancionRequest,
     LiquidacionSancionResponse,
     ReduccionSancionRequest,
     ReduccionSancionResponse,
     SimulacionAjusteArticulo73Request,
     SimulacionAjusteArticulo73Response,
+    SimulacionCombinabilidadRequest,
+    SimulacionCombinabilidadResponse,
+    SimulacionComponenteInflacionarioRequest,
+    SimulacionComponenteInflacionarioResponse,
     SimulacionInmuebleAfcRequest,
     SimulacionInmuebleAfcResponse,
     calcular_ajuste_articulo_73,
     calcular_beneficio_auditoria,
+    calcular_componente_inflacionario,
     calcular_exencion_inmueble_afc,
     calcular_reduccion_sancion,
     calcular_sancion_tributaria,
     get_catalogo_beneficios,
     get_tabla_articulo_73,
+    get_tabla_componente_inflacionario,
+    simular_combinabilidad_inflacion_art73,
 )
 
 router = APIRouter()
+
+
+@router.get(
+    "/componente-inflacionario/tabla",
+    response_model=list[ItemTablaComponenteInflacionario],
+    summary="Tabla Histórica de Decretos y Porcentajes del Componente Inflacionario (2018-2026)",
+    description="Retorna el histórico oficial de decretos reglamentarios, tasas de inflación DANE, captación Superfinanciera y porcentajes no gravados para rendimientos nacionales, FICs y moneda extranjera.",
+)
+async def obtener_tabla_componente_inflacionario():
+    return get_tabla_componente_inflacionario()
+
+
+@router.post(
+    "/simular-componente-inflacionario",
+    response_model=SimulacionComponenteInflacionarioResponse,
+    summary="Simular Componente Inflacionario de Rendimientos y Gastos Financieros (Art. 38, 40-1, 41 y 118 E.T.)",
+    description="Calcula la porción no gravada (INCRNGO - Casilla 59 F210) de rendimientos financieros o la porción no deducible de intereses pagados para personas naturales no obligadas a llevar contabilidad.",
+)
+async def simular_componente_inflacionario_endpoint(
+    payload: SimulacionComponenteInflacionarioRequest,
+):
+    return calcular_componente_inflacionario(payload)
+
+
+@router.post(
+    "/simular-combinabilidad-inflacion-art73",
+    response_model=SimulacionCombinabilidadResponse,
+    summary="Simular Combinabilidad de Componente Inflacionario + Reajuste Fiscal Art. 73",
+    description="Calcula el ahorro tributario consolidado al combinar el beneficio de Componente Inflacionario en Rentas de Capital y el Reajuste Fiscal Art. 73 en Ganancia Ocasional.",
+)
+async def simular_combinabilidad_endpoint(
+    payload: SimulacionCombinabilidadRequest,
+):
+    return simular_combinabilidad_inflacion_art73(payload)
 
 
 @router.get(

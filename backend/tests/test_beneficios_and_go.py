@@ -413,3 +413,44 @@ def test_inmueble_pre_1987_art44_y_retencion_art399():
     assert res_1975.porcentaje_reduccion_retefuente_art399_pct == 100.0
     assert res_1975.retefuente_notarial_final_cop == 0
     assert res_1975.ahorro_retefuente_notarial_cop == 5000000
+
+
+def test_calcular_inmueble_afc_frontend_aliases_and_art72():
+    """Valida que todos los nombres de campos y aliases enviados por el formulario frontend funcionen correctamente."""
+    from app.services.beneficios import SimulacionInmuebleAfcRequest, calcular_exencion_inmueble_afc
+
+    req = SimulacionInmuebleAfcRequest(
+        precio_venta_cop=700000000,
+        costo_historico_cop=200000000,
+        ano_adquisicion="2015",
+        tipo_inmueble="bienes_raices_urbanos",
+        metodo_costo="art72",
+        costo_personalizado_cop=550000000,
+        mejoras_adiciones_cop=10000000,
+        depreciacion_acumulada_cop=5000000,
+        monto_consignado_afc_cop=50000000,
+        es_casa_habitacion=True,
+        posesion_mayor_a_2_anos=True,
+        tax_year=2026,
+        custom_uvt=52350,
+    )
+    res = calcular_exencion_inmueble_afc(req)
+
+    # Costo fiscal determinado = 550M (autoavalúo) + 10M (mejoras) - 5M (deprec) = 555M
+    assert res.costo_fiscal_determinado_cop == 555000000
+    # Utilidad bruta = 700M - 555M = 145M
+    assert res.ganancia_ocasional_bruta_cop == 145000000
+    # Exención AFC = min(50M, 145M, 5.000 UVT) = 50M
+    assert res.ganancia_exenta_afc_art311_1_cop == 50000000
+    assert res.total_ganancia_exenta_cop == 50000000
+    # Gravada final = 145M - 50M = 95M
+    assert res.ganancia_ocasional_gravada_final_cop == 95000000
+    # Impuesto = 95M * 15% = 14.250.000
+    assert res.casilla_87_impuesto_go_cop == 14250000
+    # Escenarios comparativos
+    assert len(res.escenarios) == 5
+    assert len(res.matriz_comparativa_escenarios) == 5
+    assert res.casilla_80_ingresos_brutos_cop == 700000000
+    assert res.casilla_81_costos_cop == 555000000
+    assert res.casilla_82_exentas_cop == 50000000
+    assert res.casilla_83_gravables_cop == 95000000

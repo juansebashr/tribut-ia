@@ -14,9 +14,16 @@ export interface AuditTraceItem {
 export interface PersonaNaturalInput {
   tax_year: number;
   custom_uvt?: number;
+  patrimonio_bruto?: number;
+  deudas?: number;
   rentas_trabajo: number;
   viaticos: number;
   otros_ingresos_brutos: number;
+  rentas_capital?: number;
+  incrngo_capital?: number;
+  rentas_nolaborales?: number;
+  incrngo_nolaborales?: number;
+  costos_nolaborales?: number;
   aporte_salud_obligatorio: number;
   aporte_pension_obligatorio: number;
   otros_incrngo: number;
@@ -28,6 +35,11 @@ export interface PersonaNaturalInput {
   compras_factura_electronica: number;
   aportes_voluntarios_pension_afc: number;
   otras_rentas_exentas: number;
+  ganancias_ocasionales_brutas_activos_fijos?: number;
+  ganancias_ocasionales_brutas_herencias?: number;
+  ganancias_ocasionales_brutas_loterias?: number;
+  costos_ganancia_ocasional?: number;
+  ganancias_ocasionales_exentas_solicitadas?: number;
   descuentos_tributarios: number;
   retenciones_fuente_practicadas: number;
   anticipo_ano_anterior: number;
@@ -37,6 +49,9 @@ export interface PersonaNaturalInput {
 export interface PersonaNaturalOutput {
   tax_year: number;
   uvt_value: number;
+  patrimonio_bruto?: number;
+  deudas?: number;
+  patrimonio_liquido?: number;
   total_ingresos_brutos: number;
   total_incrngo: number;
   ingreso_neto: number;
@@ -57,9 +72,16 @@ export interface PersonaNaturalOutput {
   impuesto_bruto_renta: number;
   descuentos_tributarios: number;
   impuesto_neto_renta: number;
+  total_ganancias_ocasionales_brutas?: number;
+  costos_ganancia_ocasional?: number;
+  ganancias_ocasionales_exentas_aceptadas?: number;
+  ganancia_ocasional_gravable?: number;
+  impuesto_ganancias_ocasionales?: number;
+  total_impuesto_a_cargo?: number;
   total_anticipos_y_retenciones: number;
   saldo_a_pagar: number;
   saldo_a_favor: number;
+  form_210_casillas?: Record<string, number>;
   audit_trace: AuditTraceItem[];
   resumen_ejecutivo: string;
 }
@@ -255,16 +277,24 @@ export interface EscenarioComparativoInmueble {
 export interface SimulacionInmuebleAfcRequest {
   precio_venta_cop: number;
   costo_adquisicion_historico_cop?: number;
+  costo_historico_cop?: number;
   costo_fiscal_inmueble_cop?: number;
   ano_adquisicion?: string;
   tipo_inmueble?: string;
   metodo_costo_fiscal?: string;
+  metodo_costo?: string;
   costo_fiscal_personalizado_cop?: number;
+  costo_personalizado_cop?: number;
   mejoras_y_contribuciones_cop?: number;
+  mejoras_adiciones_cop?: number;
   depreciacion_acumulada_deducida_cop?: number;
+  depreciacion_acumulada_cop?: number;
   es_vivienda_habitacion?: boolean;
+  es_casa_habitacion?: boolean;
   posesion_mas_2_anos?: boolean;
+  posesion_mayor_a_2_anos?: boolean;
   monto_depositado_afc_o_vivienda_cop?: number;
+  monto_consignado_afc_cop?: number;
   tax_year?: number;
   custom_uvt?: number;
 }
@@ -303,6 +333,7 @@ export interface SimulacionInmuebleAfcResponse {
 
   // Impuestos y ahorros
   impuesto_go_sin_planeacion_cop: number;
+  impuesto_go_sin_beneficios_cop?: number;
   impuesto_go_con_beneficios_cop: number;
   impuesto_go_sin_afc_cop: number;
   impuesto_go_con_afc_cop: number;
@@ -315,14 +346,101 @@ export interface SimulacionInmuebleAfcResponse {
   porcentaje_reduccion_retefuente_art399_pct: number;
   retefuente_notarial_sin_beneficio_cop: number;
   retefuente_notarial_final_cop: number;
+  retencion_en_fuente_notarial_cop?: number;
   ahorro_retefuente_notarial_cop: number;
+
+  // Casillas oficiales Formulario 210
+  total_ganancia_exenta_cop?: number;
+  casilla_80_ingresos_brutos_cop?: number;
+  casilla_81_costos_cop?: number;
+  casilla_82_exentas_cop?: number;
+  casilla_83_gravables_cop?: number;
+  casilla_87_impuesto_go_cop?: number;
 
   // Escenarios
   escenarios: EscenarioComparativoInmueble[];
+  matriz_comparativa_escenarios?: any[];
 
   // Didáctica
   estrategias_aplicadas: string[];
   requisitos_estatuto: string[];
   advertencias_legales: string[];
   explicacion_paso_a_paso: string[];
+}
+
+export interface ItemTablaComponenteInflacionario {
+  ano_gravable: number;
+  decreto_reglamentario: string;
+  porcentaje_rendimientos_nacionales: number;
+  porcentaje_fics_fondos: number;
+  porcentaje_moneda_extranjera: number;
+  porcentaje_no_deducible_gastos_interes: number;
+  inflacion_dane_pct: number;
+  tasa_captacion_superfinanciera_pct: number;
+  reajuste_fiscal_art70_pct: number;
+  es_proyectado: boolean;
+}
+
+export interface SimulacionComponenteInflacionarioRequest {
+  tax_year: number;
+  tipo_instrumento: 'nacional_financiero' | 'fics_fondos_mutuos' | 'moneda_extranjera' | 'gastos_intereses_costo' | string;
+  monto_bruto_cop: number;
+  porcentaje_personalizado_pct?: number | null;
+  tarifa_marginal_estimada_pct?: number;
+}
+
+export interface SimulacionComponenteInflacionarioResponse {
+  tax_year: number;
+  decreto_reglamentario: string;
+  tipo_instrumento: string;
+  tipo_instrumento_label: string;
+  monto_bruto_cop: number;
+  porcentaje_inflacionario_aplicado: number;
+  es_porcentaje_personalizado: boolean;
+  monto_incrngo_no_gravado_cop: number;
+  monto_gravable_real_cop: number;
+  monto_no_deducible_intereses_cop?: number | null;
+  monto_deducible_intereses_reales_cop?: number | null;
+  tarifa_marginal_estimada_pct: number;
+  ahorro_estimado_impuesto_cop: number;
+  casilla_f210_asociada: string;
+  casilla_f210_numero: number;
+  fundamento_legal: string;
+  explicacion_didactica: string;
+  pasos_calculo: string[];
+  combinabilidad_art73: {
+    combinable_con_art73: boolean;
+    acumulable_art70_con_art73_mismo_activo: boolean;
+    explicacion_combinabilidad: string;
+  };
+}
+
+export interface SimulacionCombinabilidadRequest {
+  tax_year: number;
+  rendimientos_financieros_brutos_cop: number;
+  ano_adquisicion_activo: string;
+  tipo_activo: string;
+  costo_historico_activo_cop: number;
+  precio_venta_activo_cop: number;
+  tarifa_marginal_renta_pct: number;
+}
+
+export interface SimulacionCombinabilidadResponse {
+  tax_year: number;
+  rendimientos_brutos_cop: number;
+  porcentaje_inflacionario_aplicado: number;
+  incrngo_inflacionario_cop: number;
+  rendimiento_gravado_cop: number;
+  ahorro_renta_capital_cop: number;
+  costo_historico_activo_cop: number;
+  factor_art73_aplicado: number;
+  costo_ajustado_art73_cop: number;
+  precio_venta_activo_cop: number;
+  ganancia_sin_art73_cop: number;
+  ganancia_con_art73_cop: number;
+  ahorro_impuesto_go_cop: number;
+  ahorro_total_combinado_cop: number;
+  se_pueden_combinar: boolean;
+  conclusion_juridica: string;
+  advertencia_art70_vs_art73: string;
 }

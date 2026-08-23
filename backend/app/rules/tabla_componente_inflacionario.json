@@ -1,0 +1,110 @@
+[
+  {
+    "ano_gravable": 2026,
+    "decreto_reglamentario": "Proyección Oficial MinHacienda / Banco de la República",
+    "porcentaje_rendimientos_nacionales": 52.00,
+    "porcentaje_fics_fondos": 52.00,
+    "porcentaje_moneda_extranjera": 100.00,
+    "porcentaje_no_deducible_gastos_interes": 52.00,
+    "inflacion_dane_pct": 5.20,
+    "tasa_captacion_superfinanciera_pct": 10.00,
+    "reajuste_fiscal_art70_pct": 5.20,
+    "es_proyectado": true
+  },
+  {
+    "ano_gravable": 2025,
+    "decreto_reglamentario": "Decreto Reglamentario MinHacienda (Estimado / Certificado DANE)",
+    "porcentaje_rendimientos_nacionales": 55.00,
+    "porcentaje_fics_fondos": 55.00,
+    "porcentaje_moneda_extranjera": 100.00,
+    "porcentaje_no_deducible_gastos_interes": 55.00,
+    "inflacion_dane_pct": 5.20,
+    "tasa_captacion_superfinanciera_pct": 9.45,
+    "reajuste_fiscal_art70_pct": 5.20,
+    "es_proyectado": true
+  },
+  {
+    "ano_gravable": 2024,
+    "decreto_reglamentario": "Decreto 0572 de 2025",
+    "porcentaje_rendimientos_nacionales": 60.32,
+    "porcentaje_fics_fondos": 60.32,
+    "porcentaje_moneda_extranjera": 100.00,
+    "porcentaje_no_deducible_gastos_interes": 60.32,
+    "inflacion_dane_pct": 5.20,
+    "tasa_captacion_superfinanciera_pct": 8.62,
+    "reajuste_fiscal_art70_pct": 9.28,
+    "es_proyectado": false
+  },
+  {
+    "ano_gravable": 2023,
+    "decreto_reglamentario": "Decreto 1006 de 2024",
+    "porcentaje_rendimientos_nacionales": 55.43,
+    "porcentaje_fics_fondos": 55.43,
+    "porcentaje_moneda_extranjera": 100.00,
+    "porcentaje_no_deducible_gastos_interes": 55.43,
+    "inflacion_dane_pct": 9.28,
+    "tasa_captacion_superfinanciera_pct": 16.74,
+    "reajuste_fiscal_art70_pct": 10.97,
+    "es_proyectado": false
+  },
+  {
+    "ano_gravable": 2022,
+    "decreto_reglamentario": "Decreto 203 de 2023",
+    "porcentaje_rendimientos_nacionales": 100.00,
+    "porcentaje_fics_fondos": 100.00,
+    "porcentaje_moneda_extranjera": 100.00,
+    "porcentaje_no_deducible_gastos_interes": 100.00,
+    "inflacion_dane_pct": 13.12,
+    "tasa_captacion_superfinanciera_pct": 11.50,
+    "reajuste_fiscal_art70_pct": 13.12,
+    "es_proyectado": false
+  },
+  {
+    "ano_gravable": 2021,
+    "decreto_reglamentario": "Decreto 1846 de 2021",
+    "porcentaje_rendimientos_nacionales": 100.00,
+    "porcentaje_fics_fondos": 100.00,
+    "porcentaje_moneda_extranjera": 100.00,
+    "porcentaje_no_deducible_gastos_interes": 100.00,
+    "inflacion_dane_pct": 5.62,
+    "tasa_captacion_superfinanciera_pct": 3.20,
+    "reajuste_fiscal_art70_pct": 1.97,
+    "es_proyectado": false
+  },
+  {
+    "ano_gravable": 2020,
+    "decreto_reglamentario": "Decreto 453 de 2021",
+    "porcentaje_rendimientos_nacionales": 44.23,
+    "porcentaje_fics_fondos": 44.23,
+    "porcentaje_moneda_extranjera": 100.00,
+    "porcentaje_no_deducible_gastos_interes": 44.23,
+    "inflacion_dane_pct": 1.61,
+    "tasa_captacion_superfinanciera_pct": 3.64,
+    "reajuste_fiscal_art70_pct": 3.90,
+    "es_proyectado": false
+  },
+  {
+    "ano_gravable": 2019,
+    "decreto_reglamentario": "Decreto 849 de 2020",
+    "porcentaje_rendimientos_nacionales": 50.78,
+    "porcentaje_fics_fondos": 50.78,
+    "porcentaje_moneda_extranjera": 100.00,
+    "porcentaje_no_deducible_gastos_interes": 50.78,
+    "inflacion_dane_pct": 3.80,
+    "tasa_captacion_superfinanciera_pct": 7.48,
+    "reajuste_fiscal_art70_pct": 3.36,
+    "es_proyectado": false
+  },
+  {
+    "ano_gravable": 2018,
+    "decreto_reglamentario": "Decreto 703 de 2019",
+    "porcentaje_rendimientos_nacionales": 60.10,
+    "porcentaje_fics_fondos": 60.10,
+    "porcentaje_moneda_extranjera": 100.00,
+    "porcentaje_no_deducible_gastos_interes": 60.10,
+    "inflacion_dane_pct": 3.18,
+    "tasa_captacion_superfinanciera_pct": 5.29,
+    "reajuste_fiscal_art70_pct": 4.07,
+    "es_proyectado": false
+  }
+]

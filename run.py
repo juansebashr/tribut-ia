@@ -33,7 +33,7 @@ def kill_process_on_port(port: int):
 
 def main():
     parser = argparse.ArgumentParser(
-        description="TributIA - Motor Tributario Colombiano (FastAPI + HTML)"
+        description="TributIA - Motor Tributario Colombiano (FastAPI + React + TypeScript)"
     )
     parser.add_argument(
         "--host", default="0.0.0.0", help="Dirección host de escucha (por defecto 0.0.0.0)"
@@ -69,7 +69,7 @@ def main():
         kill_process_on_port(args.port)
 
     print("=" * 65)
-    print("🇨🇴 TributIA - Motor Tributario Colombiano (FastAPI + HTML Puro)")
+    print("🇨🇴 TributIA - Motor Tributario Colombiano (FastAPI + React + TypeScript)")
     print(f"🌐 Aplicación Web:    http://localhost:{args.port}")
     print(f"📖 Swagger API Docs:  http://localhost:{args.port}/docs")
     print("=" * 65)

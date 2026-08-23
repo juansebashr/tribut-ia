@@ -8,7 +8,7 @@ client = TestClient(app)
 def test_ui_root_serving():
     response = client.get("/")
     assert response.status_code == 200
-    assert "TributIA Colombia" in response.text
+    assert "TributIA" in response.text
 
 
 def test_health_check():

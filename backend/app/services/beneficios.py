@@ -1,9 +1,148 @@
 import json
 from pathlib import Path
+from typing import Any
 
 from pydantic import BaseModel, Field
 
 TABLA_ART73_PATH = Path(__file__).parent.parent / "rules" / "tabla_articulo_73_et.json"
+TABLA_INFLACIONARIO_PATH = (
+    Path(__file__).parent.parent / "rules" / "tabla_componente_inflacionario.json"
+)
+
+
+class ItemTablaComponenteInflacionario(BaseModel):
+    ano_gravable: int = Field(..., description="Año gravable tributario")
+    decreto_reglamentario: str = Field(
+        ...,
+        description="Decreto reglamentario expedido por el Ministerio de Hacienda",
+    )
+    porcentaje_rendimientos_nacionales: float = Field(
+        ...,
+        description="Porcentaje de rendimientos financieros en moneda nacional que constituye INCRNGO",
+    )
+    porcentaje_fics_fondos: float = Field(
+        ...,
+        description="Porcentaje aplicable a fondos de inversión colectiva y fondos mutuos",
+    )
+    porcentaje_moneda_extranjera: float = Field(
+        ...,
+        description="Porcentaje aplicable a rendimientos en moneda extranjera",
+    )
+    porcentaje_no_deducible_gastos_interes: float = Field(
+        ...,
+        description="Porcentaje no deducible de costos y gastos financieros (Art. 81-1 y 118 E.T.)",
+    )
+    inflacion_dane_pct: float = Field(
+        ..., description="Tasa de inflación anual certificada por el DANE"
+    )
+    tasa_captacion_superfinanciera_pct: float = Field(
+        ...,
+        description="Tasa de captación representativa del mercado certificada por la Superfinanciera",
+    )
+    reajuste_fiscal_art70_pct: float = Field(
+        ...,
+        description="Porcentaje de reajuste fiscal ordinario para activos fijos (Art. 70 E.T.)",
+    )
+    es_proyectado: bool = Field(
+        False,
+        description="Indica si el decreto es proyectado/estimado o ya fue expedido oficialmente",
+    )
+
+
+class SimulacionComponenteInflacionarioRequest(BaseModel):
+    tax_year: int = Field(2026, description="Año gravable a simular")
+    tipo_instrumento: str = Field(
+        "nacional_financiero",
+        description="Tipo de instrumento: 'nacional_financiero', 'fics_fondos_mutuos', 'moneda_extranjera', 'gastos_intereses_costo'",
+    )
+    monto_bruto_cop: float = Field(
+        ...,
+        gt=0,
+        description="Monto bruto de rendimientos financieros percibidos o de intereses pagados en COP",
+    )
+    porcentaje_personalizado_pct: float | None = Field(
+        None,
+        description="Porcentaje manual opcional de componente inflacionario para simulaciones personalizadas",
+    )
+    tarifa_marginal_estimada_pct: float = Field(
+        19.0,
+        description="Tarifa marginal estimada del contribuyente para calcular el ahorro neto en impuesto de renta (ej. 19%, 28%, 33%, 35%, 39%)",
+    )
+
+
+class SimulacionComponenteInflacionarioResponse(BaseModel):
+    tax_year: int
+    decreto_reglamentario: str
+    tipo_instrumento: str
+    tipo_instrumento_label: str
+    monto_bruto_cop: float
+    porcentaje_inflacionario_aplicado: float
+    es_porcentaje_personalizado: bool
+    monto_incrngo_no_gravado_cop: float
+    monto_gravable_real_cop: float
+    monto_no_deducible_intereses_cop: float | None = None
+    monto_deducible_intereses_reales_cop: float | None = None
+    tarifa_marginal_estimada_pct: float
+    ahorro_estimado_impuesto_cop: float
+    casilla_f210_asociada: str
+    casilla_f210_numero: int
+    fundamento_legal: str
+    explicacion_didactica: str
+    pasos_calculo: list[str]
+    combinabilidad_art73: dict[str, str | bool]
+
+
+class SimulacionCombinabilidadRequest(BaseModel):
+    tax_year: int = Field(2025, description="Año gravable de la declaración")
+    rendimientos_financieros_brutos_cop: float = Field(
+        10000000.0,
+        description="Total de rendimientos financieros percibidos en el año (Rentas de Capital)",
+    )
+    ano_adquisicion_activo: str = Field(
+        "2010",
+        description="Año de adquisición del bien raíz o acciones enajenadas",
+    )
+    tipo_activo: str = Field(
+        "bienes_raices_urbanos",
+        description="Tipo de activo enajenado para Art. 73",
+    )
+    costo_historico_activo_cop: float = Field(
+        50000000.0,
+        description="Costo de adquisición histórico del activo en COP",
+    )
+    precio_venta_activo_cop: float = Field(
+        250000000.0,
+        description="Precio de venta del activo en COP",
+    )
+    tarifa_marginal_renta_pct: float = Field(
+        28.0,
+        description="Tarifa marginal estimada en la Cédula General",
+    )
+
+
+class SimulacionCombinabilidadResponse(BaseModel):
+    tax_year: int
+    # 1. Beneficio en Rentas de Capital (Componente Inflacionario)
+    rendimientos_brutos_cop: float
+    porcentaje_inflacionario_aplicado: float
+    incrngo_inflacionario_cop: float
+    rendimiento_gravado_cop: float
+    ahorro_renta_capital_cop: float
+
+    # 2. Beneficio en Ganancias Ocasionales (Reajuste Art. 73)
+    costo_historico_activo_cop: float
+    factor_art73_aplicado: float
+    costo_ajustado_art73_cop: float
+    precio_venta_activo_cop: float
+    ganancia_sin_art73_cop: float
+    ganancia_con_art73_cop: float
+    ahorro_impuesto_go_cop: float
+
+    # 3. Consolidado Combinado
+    ahorro_total_combinado_cop: float
+    se_pueden_combinar: bool
+    conclusion_juridica: str
+    advertencia_art70_vs_art73: str
 
 
 class BeneficioItem(BaseModel):
@@ -134,6 +273,242 @@ class SimulacionAjusteArticulo73Response(BaseModel):
 
 
 _tabla_art73_cache: list[AjusteArticulo73Item] | None = None
+_tabla_inflacionario_cache: list[ItemTablaComponenteInflacionario] | None = None
+
+
+def get_tabla_componente_inflacionario() -> list[ItemTablaComponenteInflacionario]:
+    """Carga y retorna la tabla histórica oficial de porcentajes del componente inflacionario (2018-2026)."""
+    global _tabla_inflacionario_cache
+    if _tabla_inflacionario_cache is None:
+        if not TABLA_INFLACIONARIO_PATH.exists():
+            return []
+        with open(TABLA_INFLACIONARIO_PATH, encoding="utf-8") as f:
+            raw_data = json.load(f)
+            _tabla_inflacionario_cache = [
+                ItemTablaComponenteInflacionario(**item) for item in raw_data
+            ]
+    return _tabla_inflacionario_cache
+
+
+def calcular_componente_inflacionario(
+    req: SimulacionComponenteInflacionarioRequest,
+) -> SimulacionComponenteInflacionarioResponse:
+    """Calcula el componente inflacionario no constitutivo de renta ni ganancia ocasional (INCRNGO).
+
+    según los Artículos 38, 39, 40-1 y 41 del Estatuto Tributario, o la porción no deducible
+    de intereses y gastos financieros según los Artículos 81-1 y 118 del E.T.
+    """
+    tabla = get_tabla_componente_inflacionario()
+    item_encontrado: ItemTablaComponenteInflacionario | None = None
+    for item in tabla:
+        if item.ano_gravable == req.tax_year:
+            item_encontrado = item
+            break
+
+    if not item_encontrado:
+        # Fallback a la primera fila (más reciente) o un valor estándar por defecto
+        item_encontrado = (
+            tabla[0]
+            if tabla
+            else ItemTablaComponenteInflacionario(
+                ano_gravable=req.tax_year,
+                decreto_reglamentario="Estimación General MinHacienda",
+                porcentaje_rendimientos_nacionales=52.0,
+                porcentaje_fics_fondos=52.0,
+                porcentaje_moneda_extranjera=100.0,
+                porcentaje_no_deducible_gastos_interes=52.0,
+                inflacion_dane_pct=5.2,
+                tasa_captacion_superfinanciera_pct=10.0,
+                reajuste_fiscal_art70_pct=5.2,
+                es_proyectado=True,
+            )
+        )
+
+    labels_map = {
+        "nacional_financiero": "Rendimientos Financieros en Moneda Nacional (CDTs, Cuentas de Ahorro, Pagarés)",
+        "fics_fondos_mutuos": "Utilidades en Fondos de Inversión Colectiva (FICs) y Fondos Mutuos (Art. 39 E.T.)",
+        "moneda_extranjera": "Rendimientos en Moneda Extranjera / Ajuste por Diferencia en Cambio",
+        "gastos_intereses_costo": "Intereses y Gastos Financieros Pagados (Art. 81-1 y 118 E.T. - Porción No Deducible)",
+    }
+    label = labels_map.get(req.tipo_instrumento, req.tipo_instrumento)
+
+    # Determinación del porcentaje inflacionario aplicable
+    es_manual = req.porcentaje_personalizado_pct is not None
+    if es_manual and req.porcentaje_personalizado_pct is not None:
+        pct_aplicado = float(max(0.0, min(100.0, req.porcentaje_personalizado_pct)))
+    else:
+        if req.tipo_instrumento == "nacional_financiero":
+            pct_aplicado = item_encontrado.porcentaje_rendimientos_nacionales
+        elif req.tipo_instrumento == "fics_fondos_mutuos":
+            pct_aplicado = item_encontrado.porcentaje_fics_fondos
+        elif req.tipo_instrumento == "moneda_extranjera":
+            pct_aplicado = item_encontrado.porcentaje_moneda_extranjera
+        elif req.tipo_instrumento == "gastos_intereses_costo":
+            pct_aplicado = item_encontrado.porcentaje_no_deducible_gastos_interes
+        else:
+            pct_aplicado = item_encontrado.porcentaje_rendimientos_nacionales
+
+    monto_bruto = float(req.monto_bruto_cop)
+    tarifa_marginal = float(req.tarifa_marginal_estimada_pct)
+
+    if req.tipo_instrumento == "gastos_intereses_costo":
+        no_deducible = float(round(monto_bruto * (pct_aplicado / 100.0)))
+        deducible_real = float(max(0.0, monto_bruto - no_deducible))
+        monto_incrngo = 0.0
+        monto_gravable_real = deducible_real
+        ahorro_estimado = float(round(deducible_real * (tarifa_marginal / 100.0)))
+        casilla_asociada = "Casilla 61 - Costos y deducciones procedentes (Rentas de Capital)"
+        casilla_num = 61
+        fundamento = "Artículos 81, 81-1 y 118 del Estatuto Tributario Nacional (Gastos Financieros no Deducibles por Inflación)"
+        explicacion = (
+            f"Para personas naturales no obligadas a llevar contabilidad, el {pct_aplicado:.2f}% de los intereses "
+            f"pagados (${no_deducible:,.0f} COP) corresponde al componente inflacionario y NO es deducible ni constituye costo. "
+            f"Solo se puede solicitar como deducción procedente en la Casilla 61 el remanente real de ${deducible_real:,.0f} COP."
+        )
+        pasos = [
+            f"1. Total de intereses pagados por el contribuyente: ${monto_bruto:,.0f} COP.",
+            f"2. Porcentaje no deducible según {item_encontrado.decreto_reglamentario}: {pct_aplicado:.2f}%.",
+            f"3. Intereses no deducibles por inflación (Art. 118 E.T.): ${no_deducible:,.0f} COP.",
+            f"4. Intereses reales efectivamente deducibles en Casilla 61: ${deducible_real:,.0f} COP.",
+            f"5. Ahorro fiscal por deducción real aceptada: ${ahorro_estimado:,.0f} COP (a tarifa del {tarifa_marginal:.1f}%).",
+        ]
+    else:
+        monto_incrngo = float(round(monto_bruto * (pct_aplicado / 100.0)))
+        monto_gravable_real = float(max(0.0, monto_bruto - monto_incrngo))
+        ahorro_estimado = float(round(monto_incrngo * (tarifa_marginal / 100.0)))
+        no_deducible = None
+        deducible_real = None
+        casilla_asociada = "Casilla 59 - Ingresos no constitutivos de renta (Rentas de Capital)"
+        casilla_num = 59
+        fundamento = "Artículos 38, 39, 40-1 y 41 del Estatuto Tributario Nacional (Componente Inflacionario no Gravado)"
+        explicacion = (
+            f"De los ${monto_bruto:,.0f} COP percibidos en rendimientos financieros, el {pct_aplicado:.2f}% "
+            f"(${monto_incrngo:,.0f} COP) corresponde a la compensación por inflación y constituye un Ingreso No "
+            f"Constitutivo de Renta ni Ganancia Ocasional (INCRNGO) que se resta en la Casilla 59 del Formulario 210. "
+            f"El contribuyente solo tributa sobre el rendimiento real de ${monto_gravable_real:,.0f} COP, generando un "
+            f"ahorro tributario directo de ${ahorro_estimado:,.0f} COP (a tarifa marginal del {tarifa_marginal:.1f}%)."
+        )
+        pasos = [
+            f"1. Rendimiento financiero bruto percibido (Casilla 58 F210): ${monto_bruto:,.0f} COP.",
+            f"2. Porcentaje oficial no gravado ({item_encontrado.decreto_reglamentario}): {pct_aplicado:.2f}%.",
+            f"3. Componente inflacionario no gravado (INCRNGO - Casilla 59 F210): ${monto_incrngo:,.0f} COP.",
+            f"4. Rendimiento financiero neto gravable (Casilla 60 F210): ${monto_gravable_real:,.0f} COP.",
+            f"5. Ahorro tributario estimado por no gravar la inflación: ${ahorro_estimado:,.0f} COP.",
+            "6. Beneficio no sometido al límite del 40% ni a las 1.340 UVT de rentas exentas y deducciones (INCRNGO puro).",
+        ]
+
+    combinabilidad_info: dict[str, str | bool] = {
+        "combinable_con_art73": True,
+        "acumulable_art70_con_art73_mismo_activo": False,
+        "explicacion_combinabilidad": (
+            "SÍ se puede combinar con el Reajuste Fiscal del Art. 73 E.T. porque aplican a cédulas distintas "
+            "(Rentas de Capital en Cédula General vs Ganancias Ocasionales por enajenación de activos fijos). "
+            "Sin embargo, para un mismo activo fijo, no se puede acumular el reajuste del Art. 70 sobre la tabla del Art. 73."
+        ),
+    }
+
+    return SimulacionComponenteInflacionarioResponse(
+        tax_year=req.tax_year,
+        decreto_reglamentario=item_encontrado.decreto_reglamentario,
+        tipo_instrumento=req.tipo_instrumento,
+        tipo_instrumento_label=label,
+        monto_bruto_cop=monto_bruto,
+        porcentaje_inflacionario_aplicado=pct_aplicado,
+        es_porcentaje_personalizado=es_manual,
+        monto_incrngo_no_gravado_cop=monto_incrngo,
+        monto_gravable_real_cop=monto_gravable_real,
+        monto_no_deducible_intereses_cop=no_deducible,
+        monto_deducible_intereses_reales_cop=deducible_real,
+        tarifa_marginal_estimada_pct=tarifa_marginal,
+        ahorro_estimado_impuesto_cop=ahorro_estimado,
+        casilla_f210_asociada=casilla_asociada,
+        casilla_f210_numero=casilla_num,
+        fundamento_legal=fundamento,
+        explicacion_didactica=explicacion,
+        pasos_calculo=pasos,
+        combinabilidad_art73=combinabilidad_info,
+    )
+
+
+def simular_combinabilidad_inflacion_art73(
+    req: SimulacionCombinabilidadRequest,
+) -> SimulacionCombinabilidadResponse:
+    """Simula la optimización conjunta en la declaración de renta:
+
+    1. Beneficio del Componente Inflacionario en Rentas de Capital (Cédula General - Casilla 59 F210).
+    2. Beneficio del Reajuste Fiscal Art. 73 en Ganancia Ocasional por venta de activos fijos.
+    3. Demuestra la plena compatibilidad legal de ambos mecanismos tributarios.
+    """
+    # 1. Simular componente inflacionario
+    sim_inflacion = calcular_componente_inflacionario(
+        SimulacionComponenteInflacionarioRequest(
+            tax_year=req.tax_year,
+            tipo_instrumento="nacional_financiero",
+            monto_bruto_cop=max(1.0, req.rendimientos_financieros_brutos_cop),
+            tarifa_marginal_estimada_pct=req.tarifa_marginal_renta_pct,
+        )
+    )
+
+    # 2. Simular Art. 73
+    sim_art73 = calcular_ajuste_articulo_73(
+        SimulacionAjusteArticulo73Request(
+            ano_adquisicion=req.ano_adquisicion_activo,
+            tipo_activo=req.tipo_activo,
+            costo_adquisicion_historico_cop=max(1.0, req.costo_historico_activo_cop),
+            precio_venta_estimado_cop=req.precio_venta_activo_cop,
+            ano_gravable_enajenacion=req.tax_year,
+        )
+    )
+
+    rend_bruto = float(req.rendimientos_financieros_brutos_cop)
+    incrngo = sim_inflacion.monto_incrngo_no_gravado_cop if rend_bruto > 0 else 0.0
+    rend_grav = sim_inflacion.monto_gravable_real_cop if rend_bruto > 0 else 0.0
+    ahorro_capital = sim_inflacion.ahorro_estimado_impuesto_cop if rend_bruto > 0 else 0.0
+
+    costo_hist = float(req.costo_historico_activo_cop)
+    precio_v = float(req.precio_venta_activo_cop)
+    factor_73 = sim_art73.factor_multiplicador
+    costo_73 = sim_art73.costo_fiscal_ajustado_art73_cop if costo_hist > 0 else 0.0
+    ganancia_sin_73 = sim_art73.ganancia_sin_ajuste_cop or 0.0
+    ganancia_con_73 = sim_art73.ganancia_con_ajuste_cop or 0.0
+    ahorro_go = sim_art73.ahorro_impuesto_estimado_cop or 0.0
+
+    ahorro_total = float(ahorro_capital + ahorro_go)
+
+    conclusion = (
+        "SÍ, AMBOS BENEFICIOS SE PUEDEN COMBINAR EN LA MISMA DECLARACIÓN DE RENTA. "
+        "El Componente Inflacionario (Art. 38 E.T.) depura los rendimientos financieros en la Cédula General "
+        "(Rentas de Capital - Casilla 59), mientras que el Reajuste Fiscal del Art. 73 E.T. eleva el costo fiscal de "
+        "los activos fijos en la sección de Ganancias Ocasionales o Patrimonio. Al ser hechos generadores y cédulas "
+        "completamente independientes, el contribuyente puede aplicar ambos beneficios simultáneamente sin ninguna "
+        "incompatibilidad ni riesgo de sanción por parte de la DIAN."
+    )
+
+    advertencia = (
+        "ATENCIÓN: Si bien el Componente Inflacionario (Art. 38) y el Reajuste Fiscal (Art. 73) son 100% combinables entre sí, "
+        "para un MISMO activo fijo no se puede aplicar simultáneamente el reajuste ordinario anual del Art. 70 E.T. y el factor "
+        "multiplicador del Art. 73 E.T. El inciso final del Artículo 73 prohíbe expresamente acumular ambos ajustes sobre un mismo bien."
+    )
+
+    return SimulacionCombinabilidadResponse(
+        tax_year=req.tax_year,
+        rendimientos_brutos_cop=rend_bruto,
+        porcentaje_inflacionario_aplicado=sim_inflacion.porcentaje_inflacionario_aplicado,
+        incrngo_inflacionario_cop=incrngo,
+        rendimiento_gravado_cop=rend_grav,
+        ahorro_renta_capital_cop=ahorro_capital,
+        costo_historico_activo_cop=costo_hist,
+        factor_art73_aplicado=factor_73,
+        costo_ajustado_art73_cop=costo_73,
+        precio_venta_activo_cop=precio_v,
+        ganancia_sin_art73_cop=ganancia_sin_73,
+        ganancia_con_art73_cop=ganancia_con_73,
+        ahorro_impuesto_go_cop=ahorro_go,
+        ahorro_total_combinado_cop=ahorro_total,
+        se_pueden_combinar=True,
+        conclusion_juridica=conclusion,
+        advertencia_art70_vs_art73=advertencia,
+    )
 
 
 def get_tabla_articulo_73() -> list[AjusteArticulo73Item]:
@@ -522,7 +897,115 @@ def get_catalogo_beneficios() -> list[BeneficioItem]:
             requisitos=["Certificado de ingresos y retenciones Formulario 220."],
             ejemplo_calculo="Cesantías consignadas en el fondo o pagadas directamente quedan exentas en la cédula general.",
         ),
-        # 4. BENEFICIO DE AUDITORÍA (Art. 689-3)
+        BeneficioItem(
+            id="ganancias_exentas_herencias_art307",
+            categoria="rentas_exentas",
+            nombre="Ganancias Ocasionales Exentas en Herencias, Legados y Donaciones",
+            articulo_et="Art. 307 E.T.",
+            descripcion="Exención directa en asignaciones por causa de muerte y donaciones: hasta 13.000 UVT en la casa o apartamento de habitación del causante, hasta 6.500 UVT en otros inmuebles para cada heredero, y las primeras 3.250 UVT en herencia general o porción conyugal.",
+            tope_legal_texto="Hasta 13.000 UVT ($680.550.000 COP en 2026) en vivienda del causante; 6.500 UVT ($340.275.000) en otros inmuebles; 3.250 UVT ($170.137.500) en herencia general; 20% en donaciones (máx 1.625 UVT)",
+            requisitos=[
+                "Escritura pública de sucesión notarial o sentencia judicial de partición.",
+                "Paz y salvo de predial y valorización del inmueble del causante.",
+            ],
+            ejemplo_calculo="Heredar una casa de habitación valorada en $600.000.000 genera $0 COP de impuesto de Ganancia Ocasional al estar cubierta por las 13.000 UVT exentas.",
+        ),
+        BeneficioItem(
+            id="indemnizaciones_seguros_vida_art303_1",
+            categoria="rentas_exentas",
+            nombre="Indemnizaciones por Seguros de Vida (Exención de 3.250 UVT)",
+            articulo_et="Art. 303-1 y 223 E.T.",
+            descripcion="Las indemnizaciones pagadas por compañías de seguros en virtud de pólizas de seguro de vida están exentas del impuesto de ganancia ocasional en las primeras 3.250 UVT. Las indemnizaciones por daño emergente o incapacidad permanente son 100% INCRNGO.",
+            tope_legal_texto="Hasta 3.250 UVT ($170.137.500 COP en 2026) de ganancia ocasional exenta. El exceso tributa al 15%",
+            requisitos=[
+                "Certificado de pago de indemnización expedido por la compañía aseguradora.",
+                "Calidad de beneficiario designado en la póliza.",
+            ],
+            ejemplo_calculo="Una indemnización de $250.000.000 tiene $170.137.500 exentos y solo tributa 15% sobre el remanente de $79.862.500 ($11.979.375 de impuesto en vez de $37.500.000).",
+        ),
+        BeneficioItem(
+            id="renta_exenta_seguros_pension_fpv_art126_1",
+            categoria="rentas_exentas",
+            nombre="Seguros de Vida con Pensión Voluntaria y Ahorro Previsional (FPV)",
+            articulo_et="Art. 126-1 y 126-4 E.T.",
+            descripcion="Las primas y aportes pagados a seguros de vida estructurados como planes de pensión voluntaria o capitalización previsional administrados por aseguradoras de vida gozan del tratamiento de Renta Exenta.",
+            tope_legal_texto="Hasta el 30% del ingreso laboral o tributario del año, máximo 3.800 UVT anuales ($198.930.000 COP en 2026)",
+            requisitos=[
+                "Seguro contratado con aseguradora de vida vigilada por la Superfinanciera.",
+                "Permanencia mínima de 10 años o retiro destinado a adquisición de vivienda o cumplimiento de requisitos pensionales.",
+            ],
+            ejemplo_calculo="Aportar $20.000.000 al año a un seguro de pensión voluntaria reduce directamente la base gravable y la retención en la fuente mensual.",
+        ),
+        # 4. DESCUENTOS TRIBUTARIOS
+        BeneficioItem(
+            id="descuento_donaciones_esal_art257",
+            categoria="descuentos",
+            nombre="Descuento Tributario del 25% por Donaciones a ESAL (RTE)",
+            articulo_et="Art. 257 y 258 E.T.",
+            descripcion="Las donaciones efectuadas a entidades sin ánimo de lucro calificadas en el Régimen Tributario Especial (Art. 19 E.T.) o a entidades no contribuyentes otorgan un descuento tributario directo en el impuesto a pagar del 25% del valor efectivamente donado.",
+            tope_legal_texto="Hasta el 25% del impuesto básico de renta a cargo del contribuyente (Art. 258 E.T.)",
+            requisitos=[
+                "Certificado de donación firmado por el Revisor Fiscal o Contador de la ESAL beneficiaria.",
+                "Constancia de calificación vigente en el Régimen Tributario Especial (RTE).",
+                "Pago bancarizado de la donación.",
+            ],
+            ejemplo_calculo="Una donación de $10.000.000 a una fundación del RTE descuenta directamente $2.500.000 del impuesto de renta final a pagar (Casilla 129 F-210 / F-110).",
+        ),
+        # 5. DEDUCCIONES ESPECIALES ADICIONALES
+        BeneficioItem(
+            id="deduccion_intereses_icetex_art119",
+            categoria="deducciones",
+            nombre="Deducción de Intereses en Créditos Educativos ICETEX",
+            articulo_et="Art. 119 Parágrafo 2 E.T.",
+            descripcion="Los intereses pagados durante el año gravable por préstamos educativos otorgados por el ICETEX para la educación superior del contribuyente o sus dependientes económicos son deducibles en la Cédula General.",
+            tope_legal_texto="Hasta 100 UVT anuales ($5.235.000 COP en 2026). Sujeto al límite global del 40% / 1.340 UVT",
+            requisitos=[
+                "Certificado anual de intereses pagados emitido por el ICETEX.",
+                "Crédito destinado a educación formal superior propia o de dependientes certificados.",
+            ],
+            ejemplo_calculo="Si pagó $4.500.000 en intereses al ICETEX durante el año, los deduce completos en la Cédula General.",
+        ),
+        BeneficioItem(
+            id="deduccion_primer_empleo_jovenes_art108_5",
+            categoria="deducciones",
+            nombre="Deducción del 120% de Salarios por Primer Empleo (Jóvenes < 28 años)",
+            articulo_et="Art. 108-5 E.T.",
+            descripcion="Los contribuyentes que contraten nuevos empleados menores de 28 años en su primer empleo formal pueden deducir el 120% de los pagos por concepto de salario durante el año gravable.",
+            tope_legal_texto="Hasta 115 UVT mensuales por empleado ($6.020.250 COP/mes en 2026) por un periodo máximo de 2 años",
+            requisitos=[
+                "Empleado menor de 28 años al momento de la vinculación.",
+                "Certificación de que es su primer empleo formal en el sistema de seguridad social.",
+                "Incremento neto de la nómina de la empresa o negocio.",
+            ],
+            ejemplo_calculo="Pagar $30.000.000 al año en salarios a un joven en primer empleo permite deducir fiscalmente $36.000.000 (ahorro extra de $6.000.000 en costos).",
+        ),
+        BeneficioItem(
+            id="deduccion_trabajadores_discapacidad_ley361",
+            categoria="deducciones",
+            nombre="Deducción del 200% de Salarios y Prestaciones a Personas con Discapacidad",
+            articulo_et="Ley 361 de 1997 Art. 31 (Estatuto Tributario)",
+            descripcion="Los empleadores que vinculen laboralmente trabajadores con limitación o discapacidad comprobada no inferior al 25% tienen derecho a deducir de la renta el 200% del valor total de los salarios y prestaciones sociales pagados.",
+            tope_legal_texto="200% del total de salarios y prestaciones pagados en el año gravable",
+            requisitos=[
+                "Certificado médico de discapacidad no inferior al 25% emitido por la entidad competente.",
+                "Contrato laboral formal con aportes a seguridad social al día.",
+            ],
+            ejemplo_calculo="Salarios y prestaciones de $40.000.000 pagados a trabajadores con discapacidad permiten deducir $80.000.000 en la declaración de renta.",
+        ),
+        BeneficioItem(
+            id="deduccion_energias_renovables_fnce_ley1715",
+            categoria="deducciones",
+            nombre="Deducción del 50% de Inversión en Energía Solar y Fuentes Renovables (FNCE)",
+            articulo_et="Ley 1715 de 2014 Art. 11, 12, 14 & Ley 2099 de 2021",
+            descripcion="Los contribuyentes que realicen inversiones en proyectos de generación de energía eléctrica con fuentes no convencionales (solar, eólica, biomasa) pueden deducir hasta el 50% del valor total invertido en un plazo de hasta 15 años, junto con depreciación acelerada de hasta el 33,33% anual.",
+            tope_legal_texto="Hasta el 50% de la renta líquida del contribuyente en cada año gravable",
+            requisitos=[
+                "Certificación del proyecto emitida por la Unidad de Planeación Minero Energética (UPME).",
+                "Beneficio ambiental avalado por el Ministerio de Ambiente.",
+            ],
+            ejemplo_calculo="Instalar un sistema solar de $100.000.000 genera una deducción fiscal de $50.000.000 en renta + depreciación acelerada en 3 años.",
+        ),
+        # 6. BENEFICIO DE AUDITORÍA (Art. 689-3)
         BeneficioItem(
             id="beneficio_auditoria_art689_3",
             categoria="auditoria_sanciones",
@@ -537,7 +1020,7 @@ def get_catalogo_beneficios() -> list[BeneficioItem]:
             ],
             ejemplo_calculo="Si el año pasado pagó $10.000.000, al liquidar este año $13.500.000 (+35%) la declaración queda en firme en solo 6 meses.",
         ),
-        # 5. REDUCCIÓN DE SANCIONES (Art. 640 y 644)
+        # 7. REDUCCIÓN DE SANCIONES (Art. 640 y 644)
         BeneficioItem(
             id="reduccion_sanciones_art640_644",
             categoria="auditoria_sanciones",
@@ -630,13 +1113,19 @@ class EscenarioComparativoInmueble(BaseModel):
     nombre: str
     descripcion: str
     costo_fiscal_aplicado_cop: float
+    costo_fiscal_cop: float = 0.0
     ganancia_ocasional_bruta_cop: float
     exencion_art44_cop: float
     exencion_afc_cop: float
     ganancia_ocasional_gravable_cop: float
+    ganancia_gravable_cop: float = 0.0
     impuesto_ganancia_ocasional_cop: float
+    impuesto_go_cop: float = 0.0
     retefuente_notarial_cop: float
     ahorro_frente_a_sin_planeacion_cop: float
+    ahorro_vs_base_cop: float = 0.0
+    es_optimo: bool = False
+    es_escenario_actual: bool = False
 
 
 class SimulacionInmuebleAfcRequest(BaseModel):
@@ -646,6 +1135,10 @@ class SimulacionInmuebleAfcRequest(BaseModel):
     costo_adquisicion_historico_cop: float | None = Field(
         None,
         description="Costo de compra o adquisición histórico comprobado del inmueble en pesos COP",
+    )
+    costo_historico_cop: float | None = Field(
+        None,
+        description="Costo histórico comprobado (alias directo del frontend)",
     )
     costo_fiscal_inmueble_cop: float | None = Field(
         None,
@@ -663,29 +1156,57 @@ class SimulacionInmuebleAfcRequest(BaseModel):
         "art73",
         description="Método de costo fiscal: 'art73' (multiplicador DANE), 'art70' (reajuste anual acumulado), 'art72' (autoavalúo predial), 'historico' (costo base)",
     )
+    metodo_costo: str | None = Field(
+        None,
+        description="Método de costo fiscal (alias directo del frontend)",
+    )
     costo_fiscal_personalizado_cop: float | None = Field(
         None,
         description="Valor de autoavalúo catastral (Art. 72) o costo ajustado manual Art. 70 si se selecciona dicho método",
+    )
+    costo_personalizado_cop: float | None = Field(
+        None,
+        description="Valor de costo personalizado (alias directo del frontend)",
     )
     mejoras_y_contribuciones_cop: float = Field(
         0.0,
         description="Valor de adiciones, mejoras y valorizaciones pagadas (Art. 73 E.T.)",
     )
+    mejoras_adiciones_cop: float | None = Field(
+        None,
+        description="Mejoras y adiciones (alias directo del frontend)",
+    )
     depreciacion_acumulada_deducida_cop: float = Field(
         0.0,
         description="Depreciaciones deducidas fiscalmente en periodos anteriores (Parágrafo Art. 73 y Art. 72)",
+    )
+    depreciacion_acumulada_cop: float | None = Field(
+        None,
+        description="Depreciación acumulada deducida (alias directo del frontend)",
     )
     es_vivienda_habitacion: bool = Field(
         True,
         description="¿El inmueble vendido corresponde a la casa o apartamento de habitación del contribuyente?",
     )
+    es_casa_habitacion: bool | None = Field(
+        None,
+        description="¿Es casa o apartamento de habitación? (alias directo del frontend)",
+    )
     posesion_mas_2_anos: bool = Field(
         True,
         description="¿El inmueble fue poseído por dos (2) años o más? (Califica como Ganancia Ocasional al 15% vs Cédula General)",
     )
+    posesion_mayor_a_2_anos: bool | None = Field(
+        None,
+        description="¿Poseído por más de 2 años? (alias directo del frontend)",
+    )
     monto_depositado_afc_o_vivienda_cop: float = Field(
         0.0,
         description="Monto depositado en Cuenta AFC o destinado a adquisición de nueva vivienda o amortización de crédito hipotecario (Art. 311-1 E.T.)",
+    )
+    monto_consignado_afc_cop: float | None = Field(
+        None,
+        description="Monto consignado en Cuenta AFC (alias directo del frontend)",
     )
     tax_year: int = Field(2026, description="Año gravable")
     custom_uvt: float | None = Field(None, description="UVT personalizado opcional")
@@ -719,12 +1240,14 @@ class SimulacionInmuebleAfcResponse(BaseModel):
 
     # Totales de Exención y Ganancia Gravada
     ganancia_ocasional_exenta_total_cop: float
+    total_ganancia_exenta_cop: float = 0.0  # Alias frontend
     ganancia_ocasional_exenta_cop: float  # Retrocompatibilidad
     ganancia_ocasional_gravada_final_cop: float
     tarifa_ganancia_ocasional_pct: float
 
     # Impuestos y Ahorros
     impuesto_go_sin_planeacion_cop: float
+    impuesto_go_sin_beneficios_cop: float = 0.0  # Alias frontend
     impuesto_go_con_beneficios_cop: float
     impuesto_go_sin_afc_cop: float  # Retrocompatibilidad
     impuesto_go_con_afc_cop: float  # Retrocompatibilidad
@@ -737,10 +1260,19 @@ class SimulacionInmuebleAfcResponse(BaseModel):
     porcentaje_reduccion_retefuente_art399_pct: float
     retefuente_notarial_sin_beneficio_cop: float
     retefuente_notarial_final_cop: float
+    retencion_en_fuente_notarial_cop: float = 0.0  # Alias frontend
     ahorro_retefuente_notarial_cop: float
 
+    # Casillas oficiales Formulario 210
+    casilla_80_ingresos_brutos_cop: float = 0.0
+    casilla_81_costos_cop: float = 0.0
+    casilla_82_exentas_cop: float = 0.0
+    casilla_83_gravables_cop: float = 0.0
+    casilla_87_impuesto_go_cop: float = 0.0
+
     # Escenarios comparativos
-    escenarios: list[EscenarioComparativoInmueble]
+    escenarios: list[EscenarioComparativoInmueble] = Field(default_factory=list)
+    matriz_comparativa_escenarios: list[dict[str, Any]] = Field(default_factory=list)
 
     # Didáctica y Normatividad
     estrategias_aplicadas: list[str]
@@ -1022,14 +1554,46 @@ def calcular_exencion_inmueble_afc(
     precio_venta = max(0.0, req.precio_venta_cop)
     if req.costo_adquisicion_historico_cop is not None:
         costo_historico = max(0.0, req.costo_adquisicion_historico_cop)
-        metodo = req.metodo_costo_fiscal.lower().strip()
+        metodo = (req.metodo_costo or req.metodo_costo_fiscal or "art73").lower().strip()
+    elif req.costo_historico_cop is not None:
+        costo_historico = max(0.0, req.costo_historico_cop)
+        metodo = (req.metodo_costo or req.metodo_costo_fiscal or "art73").lower().strip()
     elif req.costo_fiscal_inmueble_cop is not None:
         costo_historico = max(0.0, req.costo_fiscal_inmueble_cop)
-        # Si vino como llamada legado directa sin especificar método distinto al default, usar el costo directo
-        metodo = "historico"
+        metodo = (
+            (
+                req.metodo_costo
+                or (req.metodo_costo_fiscal if req.metodo_costo_fiscal != "art73" else "historico")
+            )
+            .lower()
+            .strip()
+        )
     else:
         costo_historico = 0.0
         metodo = "historico"
+    costo_personalizado = (
+        req.costo_personalizado_cop
+        if req.costo_personalizado_cop is not None
+        else req.costo_fiscal_personalizado_cop
+    )
+    mejoras = (
+        req.mejoras_adiciones_cop
+        if req.mejoras_adiciones_cop is not None
+        else req.mejoras_y_contribuciones_cop
+    )
+    depreciacion = (
+        req.depreciacion_acumulada_cop
+        if req.depreciacion_acumulada_cop is not None
+        else req.depreciacion_acumulada_deducida_cop
+    )
+    es_vivienda = (
+        req.es_casa_habitacion if req.es_casa_habitacion is not None else req.es_vivienda_habitacion
+    )
+    monto_afc = (
+        req.monto_consignado_afc_cop
+        if req.monto_consignado_afc_cop is not None
+        else req.monto_depositado_afc_o_vivienda_cop
+    )
 
     # Normalizar año de adquisición y calcular años de posesión
     norm_ano = " ".join(req.ano_adquisicion.strip().split())
@@ -1040,7 +1604,13 @@ def calcular_exencion_inmueble_afc(
 
     posesion_anios = max(0, req.tax_year - ano_num)
     es_go = (
-        req.posesion_mas_2_anos if req.posesion_mas_2_anos is not None else (posesion_anios >= 2)
+        req.posesion_mayor_a_2_anos
+        if req.posesion_mayor_a_2_anos is not None
+        else (
+            req.posesion_mas_2_anos
+            if req.posesion_mas_2_anos is not None
+            else (posesion_anios >= 2)
+        )
     )
     tarifa_go = 0.15 if es_go else 0.35
 
@@ -1069,10 +1639,12 @@ def calcular_exencion_inmueble_afc(
     costo_base: float = 0.0
     if metodo == "art73":
         costo_base = float(round(costo_historico * factor_art73))
-    elif metodo == "art72":
-        costo_base = float(req.costo_fiscal_personalizado_cop or costo_historico)
-    elif metodo == "art70":
-        costo_base = float(req.costo_fiscal_personalizado_cop or costo_historico)
+    elif metodo in ("art72", "art70"):
+        costo_base = float(
+            costo_personalizado
+            if costo_personalizado and costo_personalizado > 0
+            else costo_historico
+        )
     elif metodo == "historico":
         costo_base = float(costo_historico)
     else:
@@ -1081,7 +1653,7 @@ def calcular_exencion_inmueble_afc(
 
     costo_fiscal_total = max(
         0.0,
-        costo_base + req.mejoras_y_contribuciones_cop - req.depreciacion_acumulada_deducida_cop,
+        costo_base + mejoras - depreciacion,
     )
 
     # 3. Ganancia Ocasional Bruta
@@ -1099,7 +1671,7 @@ def calcular_exencion_inmueble_afc(
         1979: 0.80,
         1978: 0.90,
     }
-    aplica_art44 = req.es_vivienda_habitacion and (ano_num < 1987)
+    aplica_art44 = es_vivienda and (ano_num < 1987)
     exencion_art44: float = 0.0
     if aplica_art44:
         pct_art44 = tabla_art44_pcts.get(ano_num, 1.00 if ano_num < 1978 else 0.0)
@@ -1111,9 +1683,9 @@ def calcular_exencion_inmueble_afc(
     utilidad_post_art44 = max(0.0, ganancia_bruta - exencion_art44)
 
     # 5. Estrategia 3: Artículo 311-1 del Estatuto Tributario (Cuentas AFC / Vivienda)
-    monto_afc = max(0.0, req.monto_depositado_afc_o_vivienda_cop)
-    if req.es_vivienda_habitacion and es_go and utilidad_post_art44 > 0 and monto_afc > 0:
-        exencion_afc = min(monto_afc, utilidad_post_art44, float(tope_5000_uvt_cop))
+    monto_afc_val = max(0.0, monto_afc)
+    if es_vivienda and es_go and utilidad_post_art44 > 0 and monto_afc_val > 0:
+        exencion_afc = min(monto_afc_val, utilidad_post_art44, float(tope_5000_uvt_cop))
     else:
         exencion_afc = 0.0
 
@@ -1127,7 +1699,7 @@ def calcular_exencion_inmueble_afc(
     impuesto_sin_planeacion = round(ganancia_sin_planeacion * tarifa_go)
     ahorro_total_impuesto = max(0.0, impuesto_sin_planeacion - impuesto_final)
     pct_ahorro = (
-        (ahorro_total_impuesto / impuesto_sin_planeacion * 100.0)
+        round(ahorro_total_impuesto / impuesto_sin_planeacion * 100.0, 1)
         if impuesto_sin_planeacion > 0
         else 0.0
     )
@@ -1145,36 +1717,48 @@ def calcular_exencion_inmueble_afc(
         nombre="1. Sin Planeación Fiscal",
         descripcion="Costo de compra histórico sin reajustes, 0% exención y sin cuenta AFC.",
         costo_fiscal_aplicado_cop=costo_historico,
+        costo_fiscal_cop=costo_historico,
         ganancia_ocasional_bruta_cop=ganancia_sin_planeacion,
         exencion_art44_cop=0.0,
         exencion_afc_cop=0.0,
         ganancia_ocasional_gravable_cop=ganancia_sin_planeacion,
+        ganancia_gravable_cop=ganancia_sin_planeacion,
         impuesto_ganancia_ocasional_cop=float(impuesto_sin_planeacion),
+        impuesto_go_cop=float(impuesto_sin_planeacion),
         retefuente_notarial_cop=float(retefuente_sin),
         ahorro_frente_a_sin_planeacion_cop=0.0,
+        ahorro_vs_base_cop=0.0,
+        es_optimo=False,
     )
 
     # Escenario 2: Solo Art. 73 (DANE)
     costo_art73_esc = round(costo_historico * factor_art73)
     ganancia_art73_esc = max(0.0, precio_venta - costo_art73_esc)
     imp_art73_esc = round(ganancia_art73_esc * tarifa_go)
+    ahorro_art73 = max(0.0, impuesto_sin_planeacion - imp_art73_esc)
     esc_solo_art73 = EscenarioComparativoInmueble(
         nombre="2. Solo Reajuste Art. 73 (DANE)",
         descripcion=f"Multiplicación del costo histórico por factor {factor_art73:,.2f}x según año {norm_ano}.",
         costo_fiscal_aplicado_cop=float(costo_art73_esc),
+        costo_fiscal_cop=float(costo_art73_esc),
         ganancia_ocasional_bruta_cop=float(ganancia_art73_esc),
         exencion_art44_cop=0.0,
         exencion_afc_cop=0.0,
         ganancia_ocasional_gravable_cop=float(ganancia_art73_esc),
+        ganancia_gravable_cop=float(ganancia_art73_esc),
         impuesto_ganancia_ocasional_cop=float(imp_art73_esc),
+        impuesto_go_cop=float(imp_art73_esc),
         retefuente_notarial_cop=float(retefuente_sin),
-        ahorro_frente_a_sin_planeacion_cop=max(0.0, impuesto_sin_planeacion - imp_art73_esc),
+        ahorro_frente_a_sin_planeacion_cop=float(ahorro_art73),
+        ahorro_vs_base_cop=float(ahorro_art73),
+        es_optimo=(ahorro_art73 == ahorro_total_impuesto and ahorro_total_impuesto > 0),
     )
 
     # Escenario 3: Solo Art. 44 (si aplica pre-1987)
     ex_art44_solo = round(ganancia_sin_planeacion * pct_art44) if aplica_art44 else 0.0
     grav_art44_solo = max(0.0, ganancia_sin_planeacion - ex_art44_solo)
     imp_art44_solo = round(grav_art44_solo * tarifa_go)
+    ahorro_art44 = max(0.0, impuesto_sin_planeacion - imp_art44_solo)
     esc_solo_art44 = EscenarioComparativoInmueble(
         nombre="3. Solo Exención Art. 44 (Pre-1987)",
         descripcion=(
@@ -1183,34 +1767,45 @@ def calcular_exencion_inmueble_afc(
             else "No aplica para inmuebles adquiridos a partir de 1987."
         ),
         costo_fiscal_aplicado_cop=costo_historico,
+        costo_fiscal_cop=costo_historico,
         ganancia_ocasional_bruta_cop=ganancia_sin_planeacion,
         exencion_art44_cop=float(ex_art44_solo),
         exencion_afc_cop=0.0,
         ganancia_ocasional_gravable_cop=float(grav_art44_solo),
+        ganancia_gravable_cop=float(grav_art44_solo),
         impuesto_ganancia_ocasional_cop=float(imp_art44_solo),
+        impuesto_go_cop=float(imp_art44_solo),
         retefuente_notarial_cop=float(retefuente_con if aplica_art44 else retefuente_sin),
-        ahorro_frente_a_sin_planeacion_cop=max(0.0, impuesto_sin_planeacion - imp_art44_solo),
+        ahorro_frente_a_sin_planeacion_cop=float(ahorro_art44),
+        ahorro_vs_base_cop=float(ahorro_art44),
+        es_optimo=False,
     )
 
     # Escenario 4: Solo Cuenta AFC (Art. 311-1)
     ex_afc_solo = (
-        min(monto_afc, ganancia_sin_planeacion, float(tope_5000_uvt_cop))
-        if (req.es_vivienda_habitacion and es_go and monto_afc > 0)
+        min(monto_afc_val, ganancia_sin_planeacion, float(tope_5000_uvt_cop))
+        if (es_vivienda and es_go and monto_afc_val > 0)
         else 0.0
     )
     grav_afc_solo = max(0.0, ganancia_sin_planeacion - ex_afc_solo)
     imp_afc_solo = round(grav_afc_solo * tarifa_go)
+    ahorro_afc_solo = max(0.0, impuesto_sin_planeacion - imp_afc_solo)
     esc_solo_afc = EscenarioComparativoInmueble(
         nombre="4. Solo Cuenta AFC (Art. 311-1)",
         descripcion="Costo histórico + depósito en cuenta AFC o compra de vivienda hasta 5.000 UVT.",
         costo_fiscal_aplicado_cop=costo_historico,
+        costo_fiscal_cop=costo_historico,
         ganancia_ocasional_bruta_cop=ganancia_sin_planeacion,
         exencion_art44_cop=0.0,
         exencion_afc_cop=float(ex_afc_solo),
         ganancia_ocasional_gravable_cop=float(grav_afc_solo),
+        ganancia_gravable_cop=float(grav_afc_solo),
         impuesto_ganancia_ocasional_cop=float(imp_afc_solo),
+        impuesto_go_cop=float(imp_afc_solo),
         retefuente_notarial_cop=float(retefuente_sin),
-        ahorro_frente_a_sin_planeacion_cop=max(0.0, impuesto_sin_planeacion - imp_afc_solo),
+        ahorro_frente_a_sin_planeacion_cop=float(ahorro_afc_solo),
+        ahorro_vs_base_cop=float(ahorro_afc_solo),
+        es_optimo=False,
     )
 
     # Escenario 5: Estrategia Combinada Óptima
@@ -1218,13 +1813,18 @@ def calcular_exencion_inmueble_afc(
         nombre="5. Estrategia Combinada Óptima (Máximo Ahorro)",
         descripcion="Costo ajustado Art. 73 + Exención Art. 44 (si aplica) + Exención AFC Art. 311-1 + Retención Notarial Optimizada.",
         costo_fiscal_aplicado_cop=costo_fiscal_total,
+        costo_fiscal_cop=costo_fiscal_total,
         ganancia_ocasional_bruta_cop=ganancia_bruta,
         exencion_art44_cop=float(exencion_art44),
         exencion_afc_cop=float(exencion_afc),
         ganancia_ocasional_gravable_cop=float(ganancia_gravada_final),
+        ganancia_gravable_cop=float(ganancia_gravada_final),
         impuesto_ganancia_ocasional_cop=float(impuesto_final),
+        impuesto_go_cop=float(impuesto_final),
         retefuente_notarial_cop=float(retefuente_con),
         ahorro_frente_a_sin_planeacion_cop=float(ahorro_total_impuesto),
+        ahorro_vs_base_cop=float(ahorro_total_impuesto),
+        es_optimo=True,
     )
 
     escenarios = [esc_sin_planeacion, esc_solo_art73, esc_solo_art44, esc_solo_afc, esc_optimo]
@@ -1258,16 +1858,8 @@ def calcular_exencion_inmueble_afc(
         f"1. Identificación del activo: Inmueble adquirido en {norm_ano} con costo histórico comprobado de ${costo_historico:,.0f} COP y precio de venta en escritura de ${precio_venta:,.0f} COP.",
         f"2. Determinación del Costo Fiscal según método ({metodo.upper()}): Costo base ajustado = ${costo_base:,.0f} COP"
         + (f" (Factor Art. 73 oficial: {factor_art73:,.2f}x)" if metodo == "art73" else "")
-        + (
-            f" + Mejoras: ${req.mejoras_y_contribuciones_cop:,.0f}"
-            if req.mejoras_y_contribuciones_cop > 0
-            else ""
-        )
-        + (
-            f" - Depreciación: ${req.depreciacion_acumulada_deducida_cop:,.0f}"
-            if req.depreciacion_acumulada_deducida_cop > 0
-            else ""
-        )
+        + (f" + Mejoras: ${mejoras:,.0f}" if mejoras > 0 else "")
+        + (f" - Depreciación: ${depreciacion:,.0f}" if depreciacion > 0 else "")
         + f" => Costo fiscal definitivo: ${costo_fiscal_total:,.0f} COP.",
         f"3. Ganancia Ocasional Bruta: Precio de venta (${precio_venta:,.0f}) - Costo fiscal (${costo_fiscal_total:,.0f}) = ${ganancia_bruta:,.0f} COP.",
     ]
@@ -1283,7 +1875,7 @@ def calcular_exencion_inmueble_afc(
     if exencion_afc > 0:
         pasos.append(
             f"5. Aplicación del Artículo 311-1 del E.T. (Depósito en Cuenta AFC / Vivienda): "
-            f"De la utilidad remanente (${utilidad_post_art44:,.0f}), se exime el menor entre el depósito AFC (${monto_afc:,.0f}) "
+            f"De la utilidad remanente (${utilidad_post_art44:,.0f}), se exime el menor entre el depósito AFC (${monto_afc_val:,.0f}) "
             f"y el tope de 5.000 UVT (${tope_5000_uvt_cop:,.0f}) => Exención AFC: ${exencion_afc:,.0f} COP."
         )
 
@@ -1320,6 +1912,18 @@ def calcular_exencion_inmueble_afc(
         "El tope de 5.000 UVT opera por contribuyente y por el año gravable de la venta.",
     ]
 
+    matriz_comparativa = [
+        {
+            "estrategia_nombre": esc.nombre,
+            "costo_fiscal_cop": esc.costo_fiscal_aplicado_cop,
+            "ganancia_gravable_cop": esc.ganancia_ocasional_gravable_cop,
+            "impuesto_go_cop": esc.impuesto_ganancia_ocasional_cop,
+            "ahorro_vs_base_cop": esc.ahorro_frente_a_sin_planeacion_cop,
+            "es_optimo": "Óptima" in esc.nombre,
+        }
+        for esc in escenarios
+    ]
+
     return SimulacionInmuebleAfcResponse(
         tax_year=req.tax_year,
         uvt_value=uvt,
@@ -1332,20 +1936,22 @@ def calcular_exencion_inmueble_afc(
         costo_fiscal_determinado_cop=costo_fiscal_total,
         costo_fiscal_cop=costo_fiscal_total,
         ganancia_ocasional_bruta_cop=ganancia_bruta,
-        es_vivienda_habitacion=req.es_vivienda_habitacion,
+        es_vivienda_habitacion=es_vivienda,
         posesion_mas_2_anos=es_go,
         aplica_art44_pre1987=aplica_art44,
         porcentaje_exencion_art44_pct=pct_art44 * 100.0,
         ganancia_exenta_art44_cop=float(exencion_art44),
-        monto_depositado_afc_cop=monto_afc,
+        monto_depositado_afc_cop=monto_afc_val,
         tope_maximo_exencion_uvt=5000.0,
         tope_maximo_exencion_cop=float(tope_5000_uvt_cop),
         ganancia_exenta_afc_art311_1_cop=float(exencion_afc),
         ganancia_ocasional_exenta_total_cop=float(ganancia_exenta_total),
+        total_ganancia_exenta_cop=float(ganancia_exenta_total),
         ganancia_ocasional_exenta_cop=float(ganancia_exenta_total),
         ganancia_ocasional_gravada_final_cop=float(ganancia_gravada_final),
         tarifa_ganancia_ocasional_pct=tarifa_go * 100.0,
         impuesto_go_sin_planeacion_cop=float(impuesto_sin_planeacion),
+        impuesto_go_sin_beneficios_cop=float(impuesto_sin_planeacion),
         impuesto_go_con_beneficios_cop=float(impuesto_final),
         impuesto_go_sin_afc_cop=float(impuesto_sin_planeacion),
         impuesto_go_con_afc_cop=float(impuesto_final),
@@ -1356,8 +1962,15 @@ def calcular_exencion_inmueble_afc(
         porcentaje_reduccion_retefuente_art399_pct=pct_reduccion_retefuente,
         retefuente_notarial_sin_beneficio_cop=float(retefuente_sin),
         retefuente_notarial_final_cop=float(retefuente_con),
+        retencion_en_fuente_notarial_cop=float(retefuente_con),
         ahorro_retefuente_notarial_cop=float(ahorro_retefuente),
+        casilla_80_ingresos_brutos_cop=float(precio_venta),
+        casilla_81_costos_cop=float(costo_fiscal_total),
+        casilla_82_exentas_cop=float(ganancia_exenta_total),
+        casilla_83_gravables_cop=float(ganancia_gravada_final),
+        casilla_87_impuesto_go_cop=float(impuesto_final),
         escenarios=escenarios,
+        matriz_comparativa_escenarios=matriz_comparativa,
         estrategias_aplicadas=estrategias,
         requisitos_estatuto=requisitos,
         advertencias_legales=advertencias,

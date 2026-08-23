@@ -35,8 +35,18 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Static files directory
-STATIC_DIR = Path(__file__).parent / "static"
+# Rutas de archivos estáticos y frontend SPA
+BASE_DIR = Path(__file__).resolve().parent
+STATIC_DIR = BASE_DIR / "static"
+FRONTEND_DIST = BASE_DIR.parent.parent / "frontend" / "dist"
+if not FRONTEND_DIST.exists():
+    FRONTEND_DIST = Path("/app/frontend/dist")
+
+# Montar assets compilados de React Vite
+if (FRONTEND_DIST / "assets").exists():
+    app.mount("/assets", StaticFiles(directory=str(FRONTEND_DIST / "assets")), name="react-assets")
+
+# Montar static si existe para compatibilidad
 if STATIC_DIR.exists():
     app.mount("/static", StaticFiles(directory=str(STATIC_DIR)), name="static")
 
@@ -50,20 +60,30 @@ def startup_event():
 app.include_router(api_router, prefix="/api/v1")
 
 
-# Web UI entrypoint
+# Web UI entrypoint (React SPA como interfaz principal)
 @app.get("/", tags=["UI"])
 def serve_ui():
-    index_file = STATIC_DIR / "index.html"
-    if index_file.exists():
+    react_index = FRONTEND_DIST / "index.html"
+    if react_index.exists():
         return FileResponse(
-            str(index_file),
+            str(react_index),
             headers={
                 "Cache-Control": "no-cache, no-store, must-revalidate",
                 "Pragma": "no-cache",
                 "Expires": "0",
             },
         )
-    return {"app": "TributIA API", "status": "online", "docs": "/docs", "version": "1.0.0"}
+    static_index = STATIC_DIR / "index.html"
+    if static_index.exists():
+        return FileResponse(
+            str(static_index),
+            headers={
+                "Cache-Control": "no-cache, no-store, must-revalidate",
+                "Pragma": "no-cache",
+                "Expires": "0",
+            },
+        )
+    return {"app": "TributIA API", "status": "online", "docs": "/docs", "version": "1.2.0"}
 
 
 @app.get("/health", tags=["Health"])
@@ -81,6 +101,8 @@ def chrome_devtools_endpoint():
 @app.get("/favicon.ico", include_in_schema=False)
 def favicon():
     """Sirve el favicon oficial para evitar el error 404 del navegador."""
+    if (FRONTEND_DIST / "favicon.svg").exists():
+        return FileResponse(str(FRONTEND_DIST / "favicon.svg"), media_type="image/svg+xml")
     favicon_svg = STATIC_DIR / "favicon.svg"
     if favicon_svg.exists():
         return FileResponse(str(favicon_svg), media_type="image/svg+xml")

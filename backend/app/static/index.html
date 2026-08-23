@@ -151,6 +151,13 @@
               </button>
             </li>
             <li>
+              <button class="sidebar-item-btn" id="nav-item-inflacionario" onclick="navigateTo('inflacionario', 'main')">
+                <span class="sidebar-item-icon">📊</span>
+                <span class="sidebar-item-label">Ajuste por Inflación & Rendimientos</span>
+                <span class="sidebar-item-tag" style="background: #0284c7; color: white;">Art. 38 & 40-1</span>
+              </button>
+            </li>
+            <li>
               <button class="sidebar-item-btn" id="nav-item-art73" onclick="navigateTo('art73', 'main')">
                 <span class="sidebar-item-icon">🏢</span>
                 <span class="sidebar-item-label">Reajuste de Activos (Art. 73)</span>
@@ -236,8 +243,8 @@
           <div class="selector-group">
             <label>Año:</label>
             <select id="select-year" class="select-input" onchange="onYearChange()">
-              <option value="2026" selected>2026</option>
-              <option value="2025">2025</option>
+              <option value="2025" selected>2025</option>
+              <option value="2026">2026</option>
               <option value="2024">2024</option>
               <option value="2022">2022</option>
             </select>
@@ -250,7 +257,7 @@
               id="input-custom-uvt"
               class="text-input"
               style="width: 95px; font-family: var(--font-mono); font-weight: 700;"
-              value="52350"
+              value="49799"
               onchange="onUvtChange()"
             />
           </div>
@@ -280,6 +287,12 @@
           <a href="/docs" target="_blank" class="btn btn-outline btn-sm" style="text-decoration: none;">
             <span>📖</span> API Docs
           </a>
+
+          <!-- BOTÓN MODO OSCURO / CLARO -->
+          <button id="btn-theme-toggle" class="theme-toggle-btn" onclick="toggleTheme()" aria-label="Cambiar tema" title="Alternar Modo Oscuro / Claro">
+            <span class="theme-toggle-icon" id="theme-toggle-icon">🌙</span>
+            <span class="theme-toggle-text" id="theme-toggle-text">Modo Oscuro</span>
+          </button>
         </div>
       </header>
 
@@ -2190,6 +2203,66 @@
 
               <div style="background: #fffbeb; border-left: 4px solid #d97706; padding: 12px 16px; border-radius: 0 8px 8px 0; margin-top: 14px;">
                 <strong>📅 Declaración Mensual:</strong> Permite consolidar las retenciones practicadas y autorretenciones especiales del periodo.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- =================================================================
+             MÓDULO: AJUSTE POR VALOR INFLACIONARIO & COMPONENTE INFLACIONARIO (ART. 38, 40-1, 41 E.T.)
+             ================================================================= -->
+        <div id="pane-inflacionario" class="module-pane">
+          <div style="margin-bottom: 16px;">
+            <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
+              <h2 style="font-size: 17px; font-weight: 800; color: var(--text-primary); display: flex; align-items: center; gap: 8px;">
+                <span>📊</span> Ajuste por Valor Inflacionario &amp; Componente Inflacionario
+              </h2>
+              <span class="badge" style="background: #0284c7; color: #ffffff; font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 6px;">
+                Art. 38, 40-1, 41 y 70 E.T.
+              </span>
+            </div>
+            <p style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">
+              Beneficio para personas naturales no obligadas a llevar contabilidad: la porción que compensa la inflación del año es un <strong>INCRNGO (Casilla 59 F-210)</strong> que no consume el límite del 40% / 1.340 UVT y es 100% combinable con el Art. 73.
+            </p>
+          </div>
+
+          <!-- SIMULADOR COMPONENTE INFLACIONARIO -->
+          <div class="card" style="border: 2px solid #0284c7; margin-bottom: 20px; background: #ffffff;">
+            <div class="card-header" style="background: rgba(2, 132, 199, 0.1); display: flex; justify-content: space-between; align-items: center;">
+              <div class="card-title" style="color: #0284c7; font-size: 14px; font-weight: 800; display: flex; align-items: center; gap: 8px;">
+                <span>⚡</span> Simulador de Rendimientos Financieros &amp; Componente Inflacionario
+              </div>
+            </div>
+            <div class="card-body" style="padding: 16px;">
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px;">
+                <div>
+                  <label class="form-label" style="font-size: 12px; font-weight: 700;">Año Gravable:</label>
+                  <select id="sim-inf-year" class="select-input" style="width: 100%; font-size: 12.5px; padding: 8px;" onchange="runSimulacionInflacionario()">
+                    <option value="2026">2026 (Proyección Oficial ~52,00%)</option>
+                    <option value="2025">2025 (Estimado MinHacienda ~55,00%)</option>
+                    <option value="2024">2024 (Decreto 0572 de 2025 - 60,32%)</option>
+                    <option value="2023" selected>2023 (Decreto 1006 de 2024 - 55,43%)</option>
+                    <option value="2022">2022 (Decreto 203 de 2023 - 100,00%)</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="form-label" style="font-size: 12px; font-weight: 700;">Tipo de Instrumento:</label>
+                  <select id="sim-inf-tipo" class="select-input" style="width: 100%; font-size: 12.5px; padding: 8px;" onchange="runSimulacionInflacionario()">
+                    <option value="nacional_financiero">🏦 Cuentas de Ahorro / CDTs (Bancos vigilados SFC)</option>
+                    <option value="fics_fondos_mutuos">📈 Fondos de Inversión Colectiva (FICs) / Fondos Mutuos</option>
+                    <option value="moneda_extranjera">💵 Moneda Extranjera / Diferencia en Cambio</option>
+                    <option value="gastos_intereses_costo">💳 Intereses Pagados (Art. 118 E.T. No Deducible)</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="form-label" style="font-size: 12px; font-weight: 700;">Monto Bruto ($ COP):</label>
+                  <input type="text" id="sim-inf-monto" class="input-field currency-mask" value="20.000.000" style="width: 100%; font-size: 13px; font-weight: 700; padding: 8px;" oninput="runSimulacionInflacionario()">
+                </div>
+              </div>
+
+              <!-- RESULTADOS EN VIVO -->
+              <div id="sim-inf-result" style="margin-top: 16px; padding: 14px; background: var(--bg-secondary); border-radius: 8px; border: 1px solid var(--border-color);">
+                <!-- Inyectado dinámicamente por app.js -->
               </div>
             </div>
           </div>

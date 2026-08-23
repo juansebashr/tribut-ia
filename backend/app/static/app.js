@@ -1,8 +1,8 @@
 // Estado global
 const urlParams = new URLSearchParams(window.location.search);
 let currentSessionId = urlParams.get('session_id') || 'default';
-let currentYear = 2026;
-let currentUvt = 52350;
+let currentYear = 2025;
+let currentUvt = 49799;
 let lastPnResult = null;
 let lastPjResult = null;
 let currentRules = null;
@@ -16,6 +16,34 @@ let liveSyncEventSource = null;
 let syncDebounceTimer = null;
 let isApplyingRemoteState = false;
 let pendingConfirmCallback = null;
+
+// =========================================================================
+// MODO OSCURO / CLARO (THEME TOGGLE)
+// =========================================================================
+let currentTheme = localStorage.getItem('tributia-theme') || 
+  (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+
+function applyTheme(theme) {
+  currentTheme = theme;
+  document.documentElement.setAttribute('data-theme', theme);
+  try {
+    localStorage.setItem('tributia-theme', theme);
+  } catch (e) {}
+  
+  const icon = document.getElementById('theme-toggle-icon');
+  const text = document.getElementById('theme-toggle-text');
+  const btn = document.getElementById('btn-theme-toggle');
+  if (icon) icon.textContent = theme === 'dark' ? '☀️' : '🌙';
+  if (text) text.textContent = theme === 'dark' ? 'Modo Claro' : 'Modo Oscuro';
+  if (btn) btn.title = theme === 'dark' ? '☀️ Cambiar a Modo Claro' : '🌙 Cambiar a Modo Oscuro';
+}
+
+function toggleTheme() {
+  applyTheme(currentTheme === 'dark' ? 'light' : 'dark');
+}
+
+// Inicializar tema inmediatamente
+applyTheme(currentTheme);
 
 // =========================================================================
 // SISTEMA DE NOTIFICACIONES TOAST & MODAL DE CONFIRMACIÓN (UX RESILIENTE)
@@ -219,6 +247,11 @@ const MODULE_METADATA = {
   'retefuente': {
     breadcrumb: 'IMPUESTOS PERIÓDICOS / RETENCIONES',
     title: 'Retención en la Fuente Mensual (Formulario 350 DIAN)',
+    hasSubTabs: false
+  },
+  'inflacionario': {
+    breadcrumb: 'OPTIMIZACIÓN / AJUSTE POR INFLACIÓN',
+    title: 'Ajuste por Valor Inflacionario & Componente Inflacionario (Arts. 38, 40-1, 41 y 70 E.T.)',
     hasSubTabs: false
   },
   'art73': {
@@ -516,6 +549,8 @@ function navigateTo(moduleKey, subTab = 'main') {
     if (!reconciliationData || !reconciliationData.items || reconciliationData.items.length === 0) {
       loadReconciliationDemo();
     }
+  } else if (moduleKey === 'inflacionario') {
+    runSimulacionInflacionario();
   } else if (moduleKey === 'art73') {
     loadTablaArticulo73();
     runSimulacionArticulo73();
@@ -2392,6 +2427,58 @@ async function runSimulacionInmuebleAfc() {
     `;
   } catch (err) {
     console.error(err);
+  }
+}
+
+// AJUSTE POR INFLACIÓN & COMPONENTE INFLACIONARIO (ART. 38, 40-1, 41 E.T.)
+async function runSimulacionInflacionario() {
+  const yr = parseInt(document.getElementById('sim-inf-year')?.value) || 2023;
+  const tipo = document.getElementById('sim-inf-tipo')?.value || 'nacional_financiero';
+  const montoRaw = document.getElementById('sim-inf-monto')?.value || '20000000';
+  const monto = parseNumber(montoRaw) || 20000000;
+  const resultDiv = document.getElementById('sim-inf-result');
+
+  if (!resultDiv) return;
+
+  try {
+    const res = await fetch('/api/v1/beneficios/simular-componente-inflacionario', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        tax_year: yr,
+        tipo_instrumento: tipo,
+        monto_bruto_cop: monto,
+        tarifa_marginal_estimada_pct: 28.0
+      })
+    });
+
+    if (res.ok) {
+      const d = await res.json();
+      resultDiv.innerHTML = `
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; margin-bottom: 12px;">
+          <div style="padding: 10px; background: rgba(2, 132, 199, 0.08); border-radius: 6px; border: 1px solid #0284c7;">
+            <span style="font-size: 11px; color: #0284c7; font-weight: 700; display: block;">INCRNGO NO GRAVADO (Casilla 59)</span>
+            <strong style="font-size: 15px; color: #0284c7; display: block; margin-top: 4px;">$${formatMoney(d.monto_incrngo_no_gravado_cop)}</strong>
+            <span style="font-size: 10.5px; color: var(--text-muted);">${d.porcentaje_inflacionario_aplicado.toFixed(2)}% del valor bruto</span>
+          </div>
+          <div style="padding: 10px; background: rgba(234, 88, 12, 0.08); border-radius: 6px; border: 1px solid #ea580c;">
+            <span style="font-size: 11px; color: #ea580c; font-weight: 700; display: block;">BASE GRAVABLE REAL (Casilla 60)</span>
+            <strong style="font-size: 15px; color: #ea580c; display: block; margin-top: 4px;">$${formatMoney(d.monto_gravable_real_cop)}</strong>
+            <span style="font-size: 10.5px; color: var(--text-muted);">Rendimiento neto gravado</span>
+          </div>
+          <div style="padding: 10px; background: rgba(16, 185, 129, 0.08); border-radius: 6px; border: 1px solid #059669;">
+            <span style="font-size: 11px; color: #059669; font-weight: 700; display: block;">AHORRO ESTIMADO EN IMPUESTO</span>
+            <strong style="font-size: 15px; color: #059669; display: block; margin-top: 4px;">$${formatMoney(d.ahorro_estimado_impuesto_cop)}</strong>
+            <span style="font-size: 10.5px; color: var(--text-muted);">A tarifa marginal estimada</span>
+          </div>
+        </div>
+        <p style="font-size: 12px; color: var(--text-secondary); margin: 0; line-height: 1.5;">
+          ${d.explicacion_didactica}
+        </p>
+      `;
+    }
+  } catch (err) {
+    console.warn('Error simulando componente inflacionario:', err);
   }
 }
 

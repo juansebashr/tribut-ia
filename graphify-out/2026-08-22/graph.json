@@ -23,7 +23,7 @@
       "file_type": "concept",
       "norm_label": "dummystore",
       "source_file": "backend/tests/test_coverage_boost.py",
-      "source_location": "L220"
+      "source_location": "L225"
     },
     {
       "id": "backend_tests_test_coverage_boost_func_get_state",
@@ -34,7 +34,7 @@
       "file_type": "concept",
       "norm_label": "get_state",
       "source_file": "backend/tests/test_coverage_boost.py",
-      "source_location": "L221"
+      "source_location": "L226"
     },
     {
       "id": "backend_tests_test_coverage_boost_func_is_disc",
@@ -45,7 +45,7 @@
       "file_type": "concept",
       "norm_label": "is_disc",
       "source_file": "backend/tests/test_coverage_boost.py",
-      "source_location": "L438"
+      "source_location": "L443"
     },
     {
       "id": "backend_tests_test_coverage_boost_func_publish_event",
@@ -56,7 +56,7 @@
       "file_type": "concept",
       "norm_label": "publish_event",
       "source_file": "backend/tests/test_coverage_boost.py",
-      "source_location": "L238"
+      "source_location": "L243"
     },
     {
       "id": "backend_tests_test_coverage_boost_func_reset_state",
@@ -67,7 +67,7 @@
       "file_type": "concept",
       "norm_label": "reset_state",
       "source_file": "backend/tests/test_coverage_boost.py",
-      "source_location": "L229"
+      "source_location": "L234"
     },
     {
       "id": "backend_tests_test_coverage_boost_func_subscribe",
@@ -78,7 +78,7 @@
       "file_type": "concept",
       "norm_label": "subscribe",
       "source_file": "backend/tests/test_coverage_boost.py",
-      "source_location": "L232"
+      "source_location": "L237"
     },
     {
       "id": "backend_tests_test_coverage_boost_func_test_beneficios_http_endpoints_success",
@@ -89,7 +89,7 @@
       "file_type": "concept",
       "norm_label": "test_beneficios_http_endpoints_success",
       "source_file": "backend/tests/test_coverage_boost.py",
-      "source_location": "L301"
+      "source_location": "L306"
     },
     {
       "id": "backend_tests_test_coverage_boost_func_test_beneficios_service_edge_cases",
@@ -122,7 +122,7 @@
       "file_type": "concept",
       "norm_label": "test_create_session_store_factory",
       "source_file": "backend/tests/test_coverage_boost.py",
-      "source_location": "L278"
+      "source_location": "L283"
     },
     {
       "id": "backend_tests_test_coverage_boost_func_test_in_memory_session_store_full",
@@ -133,7 +133,7 @@
       "file_type": "concept",
       "norm_label": "test_in_memory_session_store_full",
       "source_file": "backend/tests/test_coverage_boost.py",
-      "source_location": "L249"
+      "source_location": "L254"
     },
     {
       "id": "backend_tests_test_coverage_boost_func_test_in_memory_session_store_queue_overflow_and_cleanup",
@@ -144,7 +144,7 @@
       "file_type": "concept",
       "norm_label": "test_in_memory_session_store_queue_overflow_and_cleanup",
       "source_file": "backend/tests/test_coverage_boost.py",
-      "source_location": "L385"
+      "source_location": "L390"
     },
     {
       "id": "backend_tests_test_coverage_boost_func_test_liquidacion_pj_with_ganancia_ocasional",
@@ -155,7 +155,7 @@
       "file_type": "concept",
       "norm_label": "test_liquidacion_pj_with_ganancia_ocasional",
       "source_file": "backend/tests/test_coverage_boost.py",
-      "source_location": "L416"
+      "source_location": "L421"
     },
     {
       "id": "backend_tests_test_coverage_boost_func_test_liquidacion_pn_top_bracket_over_31000_uvt",
@@ -166,7 +166,7 @@
       "file_type": "concept",
       "norm_label": "test_liquidacion_pn_top_bracket_over_31000_uvt",
       "source_file": "backend/tests/test_coverage_boost.py",
-      "source_location": "L402"
+      "source_location": "L407"
     },
     {
       "id": "backend_tests_test_coverage_boost_func_test_redis_session_store_full_methods",
@@ -177,7 +177,7 @@
       "file_type": "concept",
       "norm_label": "test_redis_session_store_full_methods",
       "source_file": "backend/tests/test_coverage_boost.py",
-      "source_location": "L262"
+      "source_location": "L267"
     },
     {
       "id": "backend_tests_test_coverage_boost_func_test_redis_session_store_merge_all_sections",
@@ -188,7 +188,7 @@
       "file_type": "concept",
       "norm_label": "test_redis_session_store_merge_all_sections",
       "source_file": "backend/tests/test_coverage_boost.py",
-      "source_location": "L340"
+      "source_location": "L345"
     },
     {
       "id": "backend_tests_test_coverage_boost_func_test_rules_endpoints_complete",
@@ -210,7 +210,7 @@
       "file_type": "concept",
       "norm_label": "test_rules_loader_coverage",
       "source_file": "backend/tests/test_coverage_boost.py",
-      "source_location": "L289"
+      "source_location": "L294"
     },
     {
       "id": "backend_tests_test_coverage_boost_func_test_rules_loader_edge_cases",
@@ -221,7 +221,7 @@
       "file_type": "concept",
       "norm_label": "test_rules_loader_edge_cases",
       "source_file": "backend/tests/test_coverage_boost.py",
-      "source_location": "L357"
+      "source_location": "L362"
     },
     {
       "id": "backend_tests_test_coverage_boost_func_test_serve_ui_fallback",
@@ -243,7 +243,7 @@
       "file_type": "concept",
       "norm_label": "test_session_current_auto_provisioning_clean_client",
       "source_file": "backend/tests/test_coverage_boost.py",
-      "source_location": "L329"
+      "source_location": "L334"
     },
     {
       "id": "backend_tests_test_coverage_boost_func_test_session_events_stream_generator_mock",
@@ -254,7 +254,7 @@
       "file_type": "concept",
       "norm_label": "test_session_events_stream_generator_mock",
       "source_file": "backend/tests/test_coverage_boost.py",
-      "source_location": "L430"
+      "source_location": "L435"
     },
     {
       "id": "backend_tests_test_coverage_boost_func_test_session_store_base_abstract_methods",
@@ -265,7 +265,7 @@
       "file_type": "concept",
       "norm_label": "test_session_store_base_abstract_methods",
       "source_file": "backend/tests/test_coverage_boost.py",
-      "source_location": "L217"
+      "source_location": "L222"
     },
     {
       "id": "backend_tests_test_coverage_boost_func_test_session_store_redis_pubsub_listener_dispatch",
@@ -276,7 +276,7 @@
       "file_type": "concept",
       "norm_label": "test_session_store_redis_pubsub_listener_dispatch",
       "source_file": "backend/tests/test_coverage_boost.py",
-      "source_location": "L371"
+      "source_location": "L376"
     },
     {
       "id": "backend_tests_test_coverage_boost_func_test_session_sync_calc_exception_branches",
@@ -331,7 +331,7 @@
       "file_type": "concept",
       "norm_label": "unsubscribe",
       "source_file": "backend/tests/test_coverage_boost.py",
-      "source_location": "L235"
+      "source_location": "L240"
     },
     {
       "id": "backend_tests_test_coverage_boost_func_update_state",
@@ -342,7 +342,7 @@
       "file_type": "concept",
       "norm_label": "update_state",
       "source_file": "backend/tests/test_coverage_boost.py",
-      "source_location": "L224"
+      "source_location": "L229"
     },
     {
       "id": "backend_app_api_v1_endpoints_beneficios",
@@ -364,7 +364,7 @@
       "file_type": "concept",
       "norm_label": "liquidar_sancion",
       "source_file": "backend/app/api/v1/endpoints/beneficios.py",
-      "source_location": "L74"
+      "source_location": "L116"
     },
     {
       "id": "backend_app_api_v1_endpoints_beneficios_func_listar_beneficios",
@@ -375,7 +375,7 @@
       "file_type": "concept",
       "norm_label": "listar_beneficios",
       "source_file": "backend/app/api/v1/endpoints/beneficios.py",
-      "source_location": "L34"
+      "source_location": "L76"
     },
     {
       "id": "backend_app_api_v1_endpoints_beneficios_func_obtener_tabla_articulo_73",
@@ -386,7 +386,18 @@
       "file_type": "concept",
       "norm_label": "obtener_tabla_articulo_73",
       "source_file": "backend/app/api/v1/endpoints/beneficios.py",
-      "source_location": "L44"
+      "source_location": "L86"
+    },
+    {
+      "id": "backend_app_api_v1_endpoints_beneficios_func_obtener_tabla_componente_inflacionario",
+      "label": "obtener_tabla_componente_inflacionario",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "reconciliation.py",
+      "file_type": "concept",
+      "norm_label": "obtener_tabla_componente_inflacionario",
+      "source_file": "backend/app/api/v1/endpoints/beneficios.py",
+      "source_location": "L42"
     },
     {
       "id": "backend_app_api_v1_endpoints_beneficios_func_simular_articulo_73",
@@ -397,7 +408,7 @@
       "file_type": "concept",
       "norm_label": "simular_articulo_73",
       "source_file": "backend/app/api/v1/endpoints/beneficios.py",
-      "source_location": "L54"
+      "source_location": "L96"
     },
     {
       "id": "backend_app_api_v1_endpoints_beneficios_func_simular_auditoria",
@@ -408,7 +419,29 @@
       "file_type": "concept",
       "norm_label": "simular_auditoria",
       "source_file": "backend/app/api/v1/endpoints/beneficios.py",
+      "source_location": "L106"
+    },
+    {
+      "id": "backend_app_api_v1_endpoints_beneficios_func_simular_combinabilidad_endpoint",
+      "label": "simular_combinabilidad_endpoint",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "reconciliation.py",
+      "file_type": "concept",
+      "norm_label": "simular_combinabilidad_endpoint",
+      "source_file": "backend/app/api/v1/endpoints/beneficios.py",
       "source_location": "L64"
+    },
+    {
+      "id": "backend_app_api_v1_endpoints_beneficios_func_simular_componente_inflacionario_endpoint",
+      "label": "simular_componente_inflacionario_endpoint",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "reconciliation.py",
+      "file_type": "concept",
+      "norm_label": "simular_componente_inflacionario_endpoint",
+      "source_file": "backend/app/api/v1/endpoints/beneficios.py",
+      "source_location": "L52"
     },
     {
       "id": "backend_app_api_v1_endpoints_beneficios_func_simular_inmueble_afc",
@@ -419,7 +452,7 @@
       "file_type": "concept",
       "norm_label": "simular_inmueble_afc",
       "source_file": "backend/app/api/v1/endpoints/beneficios.py",
-      "source_location": "L94"
+      "source_location": "L136"
     },
     {
       "id": "backend_app_api_v1_endpoints_beneficios_func_simular_sancion",
@@ -430,7 +463,7 @@
       "file_type": "concept",
       "norm_label": "simular_sancion",
       "source_file": "backend/app/api/v1/endpoints/beneficios.py",
-      "source_location": "L84"
+      "source_location": "L126"
     },
     {
       "id": "backend_app_api_v1_endpoints_persona_juridica",
@@ -1540,6 +1573,17 @@
       "source_location": "L82"
     },
     {
+      "id": "backend_tests_test_beneficios_and_go_func_test_ejemplo_venta_inmueble_reajuste_dane_y_afc_caso_real",
+      "label": "test_ejemplo_venta_inmueble_reajuste_dane_y_afc_caso_real",
+      "_origin": "ast",
+      "community": 12,
+      "community_name": "test_beneficios_and_go.py",
+      "file_type": "concept",
+      "norm_label": "test_ejemplo_venta_inmueble_reajuste_dane_y_afc_caso_real",
+      "source_file": "backend/tests/test_beneficios_and_go.py",
+      "source_location": "L305"
+    },
+    {
       "id": "backend_tests_test_beneficios_and_go_func_test_inmueble_pre_1987_art44_y_retencion_art399",
       "label": "test_inmueble_pre_1987_art44_y_retencion_art399",
       "_origin": "ast",
@@ -1571,17 +1615,6 @@
       "norm_label": "test_reduccion_sanciones",
       "source_file": "backend/tests/test_beneficios_and_go.py",
       "source_location": "L68"
-    },
-    {
-      "id": "backend_tests_test_beneficios_and_go_func_test_video_abogada_mabel_sepulveda_caso_real",
-      "label": "test_video_abogada_mabel_sepulveda_caso_real",
-      "_origin": "ast",
-      "community": 12,
-      "community_name": "test_beneficios_and_go.py",
-      "file_type": "concept",
-      "norm_label": "test_video_abogada_mabel_sepulveda_caso_real",
-      "source_file": "backend/tests/test_beneficios_and_go.py",
-      "source_location": "L305"
     },
     {
       "id": "docs_estatuto_tributario_art\u00edculo_397_retenci\u00f3n_en_la_fuente_en_t\u00edtulos_con_descuento",
@@ -2323,6 +2356,186 @@
       "source_location": "L21"
     },
     {
+      "id": "docs_decisions_0003_mascara_contable_colombiana_en_dom_adr_0003_manejo_de_m\u00e1scara_contable_colombiana_en_el_dom_y_sanitizaci\u00f3n_num\u00e9rica",
+      "label": "ADR 0003: Manejo de M\u00e1scara Contable Colombiana en el DOM y Sanitizaci\u00f3n Num\u00e9rica",
+      "_origin": "ast",
+      "community": 146,
+      "community_name": "ADR 0003: Manejo de M\u00e1scara Contable Colombiana en el DOM y Sanitizaci\u00f3n Num\u00e9rica",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "adr 0003: manejo de mascara contable colombiana en el dom y sanitizacion numerica",
+      "source_file": "docs/decisions/0003-mascara-contable-colombiana-en-dom.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "docs_decisions_0003_mascara_contable_colombiana_en_dom_consecuencias",
+      "label": "Consecuencias",
+      "_origin": "ast",
+      "community": 146,
+      "community_name": "ADR 0003: Manejo de M\u00e1scara Contable Colombiana en el DOM y Sanitizaci\u00f3n Num\u00e9rica",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "consecuencias",
+      "source_file": "docs/decisions/0003-mascara-contable-colombiana-en-dom.md",
+      "source_location": "L17"
+    },
+    {
+      "id": "docs_decisions_0003_mascara_contable_colombiana_en_dom_contexto",
+      "label": "Contexto",
+      "_origin": "ast",
+      "community": 146,
+      "community_name": "ADR 0003: Manejo de M\u00e1scara Contable Colombiana en el DOM y Sanitizaci\u00f3n Num\u00e9rica",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "contexto",
+      "source_file": "docs/decisions/0003-mascara-contable-colombiana-en-dom.md",
+      "source_location": "L7"
+    },
+    {
+      "id": "docs_decisions_0003_mascara_contable_colombiana_en_dom_decisi\u00f3n",
+      "label": "Decisi\u00f3n",
+      "_origin": "ast",
+      "community": 146,
+      "community_name": "ADR 0003: Manejo de M\u00e1scara Contable Colombiana en el DOM y Sanitizaci\u00f3n Num\u00e9rica",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "decision",
+      "source_file": "docs/decisions/0003-mascara-contable-colombiana-en-dom.md",
+      "source_location": "L11"
+    },
+    {
+      "id": "docs_decisions_0006_sistema_responsivo_y_modo_mobile_1_contexto_y_problema",
+      "label": "1. Contexto y Problema",
+      "_origin": "ast",
+      "community": 147,
+      "community_name": "ADR 0006: Sistema Responsivo, Men\u00fa Off-Canvas y Modo Mobile",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "1. contexto y problema",
+      "source_file": "docs/decisions/0006-sistema-responsivo-y-modo-mobile.md",
+      "source_location": "L9"
+    },
+    {
+      "id": "docs_decisions_0006_sistema_responsivo_y_modo_mobile_2_decisi\u00f3n_tomada",
+      "label": "2. Decisi\u00f3n Tomada",
+      "_origin": "ast",
+      "community": 147,
+      "community_name": "ADR 0006: Sistema Responsivo, Men\u00fa Off-Canvas y Modo Mobile",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "2. decision tomada",
+      "source_file": "docs/decisions/0006-sistema-responsivo-y-modo-mobile.md",
+      "source_location": "L22"
+    },
+    {
+      "id": "docs_decisions_0006_sistema_responsivo_y_modo_mobile_3_consecuencias_y_beneficios",
+      "label": "3. Consecuencias y Beneficios",
+      "_origin": "ast",
+      "community": 147,
+      "community_name": "ADR 0006: Sistema Responsivo, Men\u00fa Off-Canvas y Modo Mobile",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "3. consecuencias y beneficios",
+      "source_file": "docs/decisions/0006-sistema-responsivo-y-modo-mobile.md",
+      "source_location": "L45"
+    },
+    {
+      "id": "docs_decisions_0006_sistema_responsivo_y_modo_mobile_adr_0006_sistema_responsivo_men\u00fa_off_canvas_y_modo_mobile",
+      "label": "ADR 0006: Sistema Responsivo, Men\u00fa Off-Canvas y Modo Mobile",
+      "_origin": "ast",
+      "community": 147,
+      "community_name": "ADR 0006: Sistema Responsivo, Men\u00fa Off-Canvas y Modo Mobile",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "adr 0006: sistema responsivo, menu off-canvas y modo mobile",
+      "source_file": "docs/decisions/0006-sistema-responsivo-y-modo-mobile.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "docs_how_to_02_simular_tasa_minima_ttd_pj",
+      "label": "02-simular-tasa-minima-ttd-pj.md",
+      "_origin": "ast",
+      "community": 148,
+      "community_name": "02-simular-tasa-minima-ttd-pj.md",
+      "file_type": "document",
+      "node_kind": "page",
+      "norm_label": "02-simular-tasa-minima-ttd-pj.md",
+      "source_file": "docs/how-to/02-simular-tasa-minima-ttd-pj.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "docs_how_to_02_simular_tasa_minima_ttd_pj_1_fundamento_de_la_tasa_m\u00ednima_de_tributaci\u00f3n_ttd",
+      "label": "1. Fundamento de la Tasa M\u00ednima de Tributaci\u00f3n (TTD)",
+      "_origin": "ast",
+      "community": 148,
+      "community_name": "02-simular-tasa-minima-ttd-pj.md",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "1. fundamento de la tasa minima de tributacion (ttd)",
+      "source_file": "docs/how-to/02-simular-tasa-minima-ttd-pj.md",
+      "source_location": "L7"
+    },
+    {
+      "id": "docs_how_to_02_simular_tasa_minima_ttd_pj_2_ejecuci\u00f3n_v\u00eda_api",
+      "label": "2. Ejecuci\u00f3n v\u00eda API",
+      "_origin": "ast",
+      "community": 148,
+      "community_name": "02-simular-tasa-minima-ttd-pj.md",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "2. ejecucion via api",
+      "source_file": "docs/how-to/02-simular-tasa-minima-ttd-pj.md",
+      "source_location": "L17"
+    },
+    {
+      "id": "docs_how_to_02_simular_tasa_minima_ttd_pj_gu\u00eda_how_to_simular_tasa_m\u00ednima_de_tributaci\u00f3n_ttd_15_pj",
+      "label": "Gu\u00eda How-To: Simular Tasa M\u00ednima de Tributaci\u00f3n (TTD 15% - PJ)",
+      "_origin": "ast",
+      "community": 148,
+      "community_name": "02-simular-tasa-minima-ttd-pj.md",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "guia how-to: simular tasa minima de tributacion (ttd 15% - pj)",
+      "source_file": "docs/how-to/02-simular-tasa-minima-ttd-pj.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "docs_explanation_02_sistema_cedular_colombiano",
+      "label": "02-sistema-cedular-colombiano.md",
+      "_origin": "ast",
+      "community": 149,
+      "community_name": "02-sistema-cedular-colombiano.md",
+      "file_type": "document",
+      "node_kind": "page",
+      "norm_label": "02-sistema-cedular-colombiano.md",
+      "source_file": "docs/explanation/02-sistema-cedular-colombiano.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "docs_explanation_02_sistema_cedular_colombiano_1_c\u00e9dulas_de_tributaci\u00f3n",
+      "label": "1. C\u00e9dulas de Tributaci\u00f3n",
+      "_origin": "ast",
+      "community": 149,
+      "community_name": "02-sistema-cedular-colombiano.md",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "1. cedulas de tributacion",
+      "source_file": "docs/explanation/02-sistema-cedular-colombiano.md",
+      "source_location": "L7"
+    },
+    {
+      "id": "docs_explanation_02_sistema_cedular_colombiano_explicaci\u00f3n_el_sistema_cedular_en_colombia_ley_2277_de_2022",
+      "label": "Explicaci\u00f3n: El Sistema Cedular en Colombia (Ley 2277 de 2022)",
+      "_origin": "ast",
+      "community": 149,
+      "community_name": "02-sistema-cedular-colombiano.md",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "explicacion: el sistema cedular en colombia (ley 2277 de 2022)",
+      "source_file": "docs/explanation/02-sistema-cedular-colombiano.md",
+      "source_location": "L1"
+    },
+    {
       "id": "backend_app_core_rules_engine_loader",
       "label": "loader.py",
       "_origin": "ast",
@@ -2386,7 +2599,18 @@
       "file_type": "concept",
       "norm_label": "chrome_devtools_endpoint",
       "source_file": "backend/app/main.py",
-      "source_location": "L76"
+      "source_location": "L96"
+    },
+    {
+      "id": "backend_app_main_func_favicon",
+      "label": "favicon",
+      "_origin": "ast",
+      "community": 16,
+      "community_name": "main.py",
+      "file_type": "concept",
+      "norm_label": "favicon",
+      "source_file": "backend/app/main.py",
+      "source_location": "L102"
     },
     {
       "id": "backend_app_main_func_health_check",
@@ -2397,7 +2621,7 @@
       "file_type": "concept",
       "norm_label": "health_check",
       "source_file": "backend/app/main.py",
-      "source_location": "L71"
+      "source_location": "L91"
     },
     {
       "id": "backend_app_main_func_serve_ui",
@@ -2408,7 +2632,7 @@
       "file_type": "concept",
       "norm_label": "serve_ui",
       "source_file": "backend/app/main.py",
-      "source_location": "L55"
+      "source_location": "L65"
     },
     {
       "id": "backend_app_main_func_startup_event",
@@ -2419,7 +2643,7 @@
       "file_type": "concept",
       "norm_label": "startup_event",
       "source_file": "backend/app/main.py",
-      "source_location": "L45"
+      "source_location": "L55"
     },
     {
       "id": "backend_tests_test_skill_renta_pn",
@@ -11576,18 +11800,6 @@
       "source_location": "L43"
     },
     {
-      "id": "docs_reference_api_rest_endpoints",
-      "label": "rest-endpoints.md",
-      "_origin": "ast",
-      "community": 49,
-      "community_name": "Referencia de Endpoints REST \u2014 TributIA API (v1)",
-      "file_type": "document",
-      "node_kind": "page",
-      "norm_label": "rest-endpoints.md",
-      "source_file": "docs/reference/api/rest-endpoints.md",
-      "source_location": "L1"
-    },
-    {
       "id": "docs_reference_api_rest_endpoints_1_m\u00f3dulo_de_sesi\u00f3n_y_sincronizaci\u00f3n_en_tiempo_real_session",
       "label": "1. M\u00f3dulo de Sesi\u00f3n y Sincronizaci\u00f3n en Tiempo Real (`/session`)",
       "_origin": "ast",
@@ -16692,18 +16904,6 @@
       "source_location": "L1"
     },
     {
-      "id": "docs_tutorials_01_primeros_pasos_liquidacion_pn",
-      "label": "01-primeros-pasos-liquidacion-pn.md",
-      "_origin": "ast",
-      "community": 53,
-      "community_name": "Pasos a Seguir",
-      "file_type": "document",
-      "node_kind": "page",
-      "norm_label": "01-primeros-pasos-liquidacion-pn.md",
-      "source_file": "docs/tutorials/01-primeros-pasos-liquidacion-pn.md",
-      "source_location": "L1"
-    },
-    {
       "id": "docs_tutorials_01_primeros_pasos_liquidacion_pn_objetivo",
       "label": "Objetivo",
       "_origin": "ast",
@@ -16797,18 +16997,6 @@
       "node_kind": "heading",
       "norm_label": "tutorial: primeros pasos liquidando renta de persona natural (f210)",
       "source_file": "docs/tutorials/01-primeros-pasos-liquidacion-pn.md",
-      "source_location": "L1"
-    },
-    {
-      "id": "docs_decisions_0004_persistencia_redis_cloudrun_aislamiento_sesion",
-      "label": "0004-persistencia-redis-cloudrun-aislamiento-sesion.md",
-      "_origin": "ast",
-      "community": 54,
-      "community_name": "ADR 0004: Persistencia en Redis, Aislamiento de Sesiones por Dispositivo sin Login y Despliegue en GCP Cloud Run",
-      "file_type": "document",
-      "node_kind": "page",
-      "norm_label": "0004-persistencia-redis-cloudrun-aislamiento-sesion.md",
-      "source_file": "docs/decisions/0004-persistencia-redis-cloudrun-aislamiento-sesion.md",
       "source_location": "L1"
     },
     {
@@ -16908,18 +17096,6 @@
       "source_location": "L47"
     },
     {
-      "id": "docs_decisions_0005_visualizador_efimero_conciliacion_exogena_csv",
-      "label": "0005-visualizador-efimero-conciliacion-exogena-csv.md",
-      "_origin": "ast",
-      "community": 55,
-      "community_name": "ADR 0005: Visualizador Ef\u00edmero de Conciliaci\u00f3n Ex\u00f3gena y Transacciones CSV sin Persistencia",
-      "file_type": "document",
-      "node_kind": "page",
-      "norm_label": "0005-visualizador-efimero-conciliacion-exogena-csv.md",
-      "source_file": "docs/decisions/0005-visualizador-efimero-conciliacion-exogena-csv.md",
-      "source_location": "L1"
-    },
-    {
       "id": "docs_decisions_0005_visualizador_efimero_conciliacion_exogena_csv_1_contexto_y_problema",
       "label": "1. Contexto y Problema",
       "_origin": "ast",
@@ -17002,18 +17178,6 @@
       "norm_label": "positivas",
       "source_file": "docs/decisions/0005-visualizador-efimero-conciliacion-exogena-csv.md",
       "source_location": "L69"
-    },
-    {
-      "id": "docs_how_to_01_integracion_api_bidireccional",
-      "label": "01-integracion-api-bidireccional.md",
-      "_origin": "ast",
-      "community": 56,
-      "community_name": "Gu\u00eda How-To: Integraci\u00f3n API Bidireccional en Tiempo Real (REST, SSE & Redis)",
-      "file_type": "document",
-      "node_kind": "page",
-      "norm_label": "01-integracion-api-bidireccional.md",
-      "source_file": "docs/how-to/01-integracion-api-bidireccional.md",
-      "source_location": "L1"
     },
     {
       "id": "docs_how_to_01_integracion_api_bidireccional_1_control_de_acceso_por_sesi\u00f3n_x_session_id",
@@ -17359,7 +17523,7 @@
       "file_type": "concept",
       "norm_label": "ajustearticulo73item",
       "source_file": "backend/app/services/beneficios.py",
-      "source_location": "L73"
+      "source_location": "L211"
     },
     {
       "id": "backend_app_services_beneficios_class_beneficioauditoriarequest",
@@ -17370,7 +17534,7 @@
       "file_type": "concept",
       "norm_label": "beneficioauditoriarequest",
       "source_file": "backend/app/services/beneficios.py",
-      "source_location": "L20"
+      "source_location": "L158"
     },
     {
       "id": "backend_app_services_beneficios_class_beneficioauditoriaresponse",
@@ -17381,7 +17545,7 @@
       "file_type": "concept",
       "norm_label": "beneficioauditoriaresponse",
       "source_file": "backend/app/services/beneficios.py",
-      "source_location": "L29"
+      "source_location": "L167"
     },
     {
       "id": "backend_app_services_beneficios_class_beneficioitem",
@@ -17392,7 +17556,7 @@
       "file_type": "concept",
       "norm_label": "beneficioitem",
       "source_file": "backend/app/services/beneficios.py",
-      "source_location": "L9"
+      "source_location": "L147"
     },
     {
       "id": "backend_app_services_beneficios_class_escenariocomparativoinmueble",
@@ -17403,7 +17567,18 @@
       "file_type": "concept",
       "norm_label": "escenariocomparativoinmueble",
       "source_file": "backend/app/services/beneficios.py",
-      "source_location": "L629"
+      "source_location": "L1111"
+    },
+    {
+      "id": "backend_app_services_beneficios_class_itemtablacomponenteinflacionario",
+      "label": "ItemTablaComponenteInflacionario",
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "services/beneficios.py",
+      "file_type": "concept",
+      "norm_label": "itemtablacomponenteinflacionario",
+      "source_file": "backend/app/services/beneficios.py",
+      "source_location": "L12"
     },
     {
       "id": "backend_app_services_beneficios_class_liquidacionsancionrequest",
@@ -17414,7 +17589,7 @@
       "file_type": "concept",
       "norm_label": "liquidacionsancionrequest",
       "source_file": "backend/app/services/beneficios.py",
-      "source_location": "L556"
+      "source_location": "L1038"
     },
     {
       "id": "backend_app_services_beneficios_class_liquidacionsancionresponse",
@@ -17425,7 +17600,7 @@
       "file_type": "concept",
       "norm_label": "liquidacionsancionresponse",
       "source_file": "backend/app/services/beneficios.py",
-      "source_location": "L601"
+      "source_location": "L1083"
     },
     {
       "id": "backend_app_services_beneficios_class_reduccionsancionrequest",
@@ -17436,7 +17611,7 @@
       "file_type": "concept",
       "norm_label": "reduccionsancionrequest",
       "source_file": "backend/app/services/beneficios.py",
-      "source_location": "L49"
+      "source_location": "L187"
     },
     {
       "id": "backend_app_services_beneficios_class_reduccionsancionresponse",
@@ -17447,7 +17622,7 @@
       "file_type": "concept",
       "norm_label": "reduccionsancionresponse",
       "source_file": "backend/app/services/beneficios.py",
-      "source_location": "L64"
+      "source_location": "L202"
     },
     {
       "id": "backend_app_services_beneficios_class_simulacionajustearticulo73request",
@@ -17458,7 +17633,7 @@
       "file_type": "concept",
       "norm_label": "simulacionajustearticulo73request",
       "source_file": "backend/app/services/beneficios.py",
-      "source_location": "L90"
+      "source_location": "L228"
     },
     {
       "id": "backend_app_services_beneficios_class_simulacionajustearticulo73response",
@@ -17469,7 +17644,51 @@
       "file_type": "concept",
       "norm_label": "simulacionajustearticulo73response",
       "source_file": "backend/app/services/beneficios.py",
-      "source_location": "L114"
+      "source_location": "L252"
+    },
+    {
+      "id": "backend_app_services_beneficios_class_simulacioncombinabilidadrequest",
+      "label": "SimulacionCombinabilidadRequest",
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "services/beneficios.py",
+      "file_type": "concept",
+      "norm_label": "simulacioncombinabilidadrequest",
+      "source_file": "backend/app/services/beneficios.py",
+      "source_location": "L94"
+    },
+    {
+      "id": "backend_app_services_beneficios_class_simulacioncombinabilidadresponse",
+      "label": "SimulacionCombinabilidadResponse",
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "services/beneficios.py",
+      "file_type": "concept",
+      "norm_label": "simulacioncombinabilidadresponse",
+      "source_file": "backend/app/services/beneficios.py",
+      "source_location": "L122"
+    },
+    {
+      "id": "backend_app_services_beneficios_class_simulacioncomponenteinflacionariorequest",
+      "label": "SimulacionComponenteInflacionarioRequest",
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "services/beneficios.py",
+      "file_type": "concept",
+      "norm_label": "simulacioncomponenteinflacionariorequest",
+      "source_file": "backend/app/services/beneficios.py",
+      "source_location": "L51"
+    },
+    {
+      "id": "backend_app_services_beneficios_class_simulacioncomponenteinflacionarioresponse",
+      "label": "SimulacionComponenteInflacionarioResponse",
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "services/beneficios.py",
+      "file_type": "concept",
+      "norm_label": "simulacioncomponenteinflacionarioresponse",
+      "source_file": "backend/app/services/beneficios.py",
+      "source_location": "L72"
     },
     {
       "id": "backend_app_services_beneficios_class_simulacioninmuebleafcrequest",
@@ -17480,7 +17699,7 @@
       "file_type": "concept",
       "norm_label": "simulacioninmuebleafcrequest",
       "source_file": "backend/app/services/beneficios.py",
-      "source_location": "L642"
+      "source_location": "L1124"
     },
     {
       "id": "backend_app_services_beneficios_class_simulacioninmuebleafcresponse",
@@ -17491,7 +17710,7 @@
       "file_type": "concept",
       "norm_label": "simulacioninmuebleafcresponse",
       "source_file": "backend/app/services/beneficios.py",
-      "source_location": "L694"
+      "source_location": "L1176"
     },
     {
       "id": "backend_app_services_beneficios_func_calcular_ajuste_articulo_73",
@@ -17502,7 +17721,7 @@
       "file_type": "concept",
       "norm_label": "calcular_ajuste_articulo_73",
       "source_file": "backend/app/services/beneficios.py",
-      "source_location": "L151"
+      "source_location": "L525"
     },
     {
       "id": "backend_app_services_beneficios_func_calcular_beneficio_auditoria",
@@ -17513,7 +17732,18 @@
       "file_type": "concept",
       "norm_label": "calcular_beneficio_auditoria",
       "source_file": "backend/app/services/beneficios.py",
-      "source_location": "L1368"
+      "source_location": "L1850"
+    },
+    {
+      "id": "backend_app_services_beneficios_func_calcular_componente_inflacionario",
+      "label": "calcular_componente_inflacionario",
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "services/beneficios.py",
+      "file_type": "concept",
+      "norm_label": "calcular_componente_inflacionario",
+      "source_file": "backend/app/services/beneficios.py",
+      "source_location": "L292"
     },
     {
       "id": "backend_app_services_beneficios_func_calcular_exencion_inmueble_afc",
@@ -17524,7 +17754,7 @@
       "file_type": "concept",
       "norm_label": "calcular_exencion_inmueble_afc",
       "source_file": "backend/app/services/beneficios.py",
-      "source_location": "L1004"
+      "source_location": "L1486"
     },
     {
       "id": "backend_app_services_beneficios_func_calcular_reduccion_sancion",
@@ -17535,7 +17765,7 @@
       "file_type": "concept",
       "norm_label": "calcular_reduccion_sancion",
       "source_file": "backend/app/services/beneficios.py",
-      "source_location": "L1419"
+      "source_location": "L1901"
     },
     {
       "id": "backend_app_services_beneficios_func_calcular_sancion_tributaria",
@@ -17546,7 +17776,7 @@
       "file_type": "concept",
       "norm_label": "calcular_sancion_tributaria",
       "source_file": "backend/app/services/beneficios.py",
-      "source_location": "L752"
+      "source_location": "L1234"
     },
     {
       "id": "backend_app_services_beneficios_func_get_catalogo_beneficios",
@@ -17557,7 +17787,7 @@
       "file_type": "concept",
       "norm_label": "get_catalogo_beneficios",
       "source_file": "backend/app/services/beneficios.py",
-      "source_location": "L281"
+      "source_location": "L655"
     },
     {
       "id": "backend_app_services_beneficios_func_get_tabla_articulo_73",
@@ -17568,7 +17798,29 @@
       "file_type": "concept",
       "norm_label": "get_tabla_articulo_73",
       "source_file": "backend/app/services/beneficios.py",
-      "source_location": "L139"
+      "source_location": "L513"
+    },
+    {
+      "id": "backend_app_services_beneficios_func_get_tabla_componente_inflacionario",
+      "label": "get_tabla_componente_inflacionario",
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "services/beneficios.py",
+      "file_type": "concept",
+      "norm_label": "get_tabla_componente_inflacionario",
+      "source_file": "backend/app/services/beneficios.py",
+      "source_location": "L278"
+    },
+    {
+      "id": "backend_app_services_beneficios_func_simular_combinabilidad_inflacion_art73",
+      "label": "simular_combinabilidad_inflacion_art73",
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "services/beneficios.py",
+      "file_type": "concept",
+      "norm_label": "simular_combinabilidad_inflacion_art73",
+      "source_file": "backend/app/services/beneficios.py",
+      "source_location": "L432"
     },
     {
       "id": "backend_tests_test_articulo_73",
@@ -17944,39 +18196,123 @@
       "source_location": "L9"
     },
     {
-      "id": "docs_explanation_02_sistema_cedular_colombiano",
-      "label": "02-sistema-cedular-colombiano.md",
+      "id": "docs_readme_documentacion_tecnica_de_tributia",
+      "label": "Documentacion Tecnica de TributIA",
+      "_origin": "ast",
+      "community": 65,
+      "community_name": "Cuadrantes Diataxis",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "documentacion tecnica de tributia",
+      "source_file": "docs/README.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "docs_readme_registro_de_decisiones_arquitectonicas_adrs_decisions_readme_md",
+      "label": "[Registro de Decisiones Arquitectonicas (ADRs)](./decisions/README.md)",
+      "_origin": "ast",
+      "community": 65,
+      "community_name": "Cuadrantes Diataxis",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "[registro de decisiones arquitectonicas (adrs)](./decisions/readme.md)",
+      "source_file": "docs/README.md",
+      "source_location": "L64"
+    },
+    {
+      "id": "docs_decisions_0001_motor_de_reglas_declarativo_json",
+      "label": "0001-motor-de-reglas-declarativo-json.md",
       "_origin": "ast",
       "community": 66,
       "community_name": "README.md",
       "file_type": "document",
       "node_kind": "page",
-      "norm_label": "02-sistema-cedular-colombiano.md",
-      "source_file": "docs/explanation/02-sistema-cedular-colombiano.md",
+      "norm_label": "0001-motor-de-reglas-declarativo-json.md",
+      "source_file": "docs/decisions/0001-motor-de-reglas-declarativo-json.md",
       "source_location": "L1"
     },
     {
-      "id": "docs_explanation_02_sistema_cedular_colombiano_1_c\u00e9dulas_de_tributaci\u00f3n",
-      "label": "1. C\u00e9dulas de Tributaci\u00f3n",
+      "id": "docs_decisions_0002_sincronizacion_bidireccional_sse",
+      "label": "0002-sincronizacion-bidireccional-sse.md",
       "_origin": "ast",
       "community": 66,
       "community_name": "README.md",
       "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "1. cedulas de tributacion",
-      "source_file": "docs/explanation/02-sistema-cedular-colombiano.md",
-      "source_location": "L7"
+      "node_kind": "page",
+      "norm_label": "0002-sincronizacion-bidireccional-sse.md",
+      "source_file": "docs/decisions/0002-sincronizacion-bidireccional-sse.md",
+      "source_location": "L1"
     },
     {
-      "id": "docs_explanation_02_sistema_cedular_colombiano_explicaci\u00f3n_el_sistema_cedular_en_colombia_ley_2277_de_2022",
-      "label": "Explicaci\u00f3n: El Sistema Cedular en Colombia (Ley 2277 de 2022)",
+      "id": "docs_decisions_0003_mascara_contable_colombiana_en_dom",
+      "label": "0003-mascara-contable-colombiana-en-dom.md",
+      "_origin": "ast",
+      "community": 66,
+      "community_name": "README.md",
+      "file_type": "document",
+      "node_kind": "page",
+      "norm_label": "0003-mascara-contable-colombiana-en-dom.md",
+      "source_file": "docs/decisions/0003-mascara-contable-colombiana-en-dom.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "docs_decisions_0004_persistencia_redis_cloudrun_aislamiento_sesion",
+      "label": "0004-persistencia-redis-cloudrun-aislamiento-sesion.md",
+      "_origin": "ast",
+      "community": 66,
+      "community_name": "README.md",
+      "file_type": "document",
+      "node_kind": "page",
+      "norm_label": "0004-persistencia-redis-cloudrun-aislamiento-sesion.md",
+      "source_file": "docs/decisions/0004-persistencia-redis-cloudrun-aislamiento-sesion.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "docs_decisions_0005_visualizador_efimero_conciliacion_exogena_csv",
+      "label": "0005-visualizador-efimero-conciliacion-exogena-csv.md",
+      "_origin": "ast",
+      "community": 66,
+      "community_name": "README.md",
+      "file_type": "document",
+      "node_kind": "page",
+      "norm_label": "0005-visualizador-efimero-conciliacion-exogena-csv.md",
+      "source_file": "docs/decisions/0005-visualizador-efimero-conciliacion-exogena-csv.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "docs_decisions_0006_sistema_responsivo_y_modo_mobile",
+      "label": "0006-sistema-responsivo-y-modo-mobile.md",
+      "_origin": "ast",
+      "community": 66,
+      "community_name": "README.md",
+      "file_type": "document",
+      "node_kind": "page",
+      "norm_label": "0006-sistema-responsivo-y-modo-mobile.md",
+      "source_file": "docs/decisions/0006-sistema-responsivo-y-modo-mobile.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "docs_decisions_readme",
+      "label": "decisions/README.md",
+      "_origin": "ast",
+      "community": 66,
+      "community_name": "README.md",
+      "file_type": "document",
+      "node_kind": "page",
+      "norm_label": "decisions/readme.md",
+      "source_file": "docs/decisions/README.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "docs_decisions_readme_registro_de_decisiones_de_arquitectura_adrs",
+      "label": "Registro de Decisiones de Arquitectura (ADRs)",
       "_origin": "ast",
       "community": 66,
       "community_name": "README.md",
       "file_type": "document",
       "node_kind": "heading",
-      "norm_label": "explicacion: el sistema cedular en colombia (ley 2277 de 2022)",
-      "source_file": "docs/explanation/02-sistema-cedular-colombiano.md",
+      "norm_label": "registro de decisiones de arquitectura (adrs)",
+      "source_file": "docs/decisions/README.md",
       "source_location": "L1"
     },
     {
@@ -18016,51 +18352,15 @@
       "source_location": "L1"
     },
     {
-      "id": "docs_how_to_02_simular_tasa_minima_ttd_pj",
-      "label": "02-simular-tasa-minima-ttd-pj.md",
+      "id": "docs_how_to_01_integracion_api_bidireccional",
+      "label": "01-integracion-api-bidireccional.md",
       "_origin": "ast",
       "community": 66,
       "community_name": "README.md",
       "file_type": "document",
       "node_kind": "page",
-      "norm_label": "02-simular-tasa-minima-ttd-pj.md",
-      "source_file": "docs/how-to/02-simular-tasa-minima-ttd-pj.md",
-      "source_location": "L1"
-    },
-    {
-      "id": "docs_how_to_02_simular_tasa_minima_ttd_pj_1_fundamento_de_la_tasa_m\u00ednima_de_tributaci\u00f3n_ttd",
-      "label": "1. Fundamento de la Tasa M\u00ednima de Tributaci\u00f3n (TTD)",
-      "_origin": "ast",
-      "community": 66,
-      "community_name": "README.md",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "1. fundamento de la tasa minima de tributacion (ttd)",
-      "source_file": "docs/how-to/02-simular-tasa-minima-ttd-pj.md",
-      "source_location": "L7"
-    },
-    {
-      "id": "docs_how_to_02_simular_tasa_minima_ttd_pj_2_ejecuci\u00f3n_v\u00eda_api",
-      "label": "2. Ejecuci\u00f3n v\u00eda API",
-      "_origin": "ast",
-      "community": 66,
-      "community_name": "README.md",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "2. ejecucion via api",
-      "source_file": "docs/how-to/02-simular-tasa-minima-ttd-pj.md",
-      "source_location": "L17"
-    },
-    {
-      "id": "docs_how_to_02_simular_tasa_minima_ttd_pj_gu\u00eda_how_to_simular_tasa_m\u00ednima_de_tributaci\u00f3n_ttd_15_pj",
-      "label": "Gu\u00eda How-To: Simular Tasa M\u00ednima de Tributaci\u00f3n (TTD 15% - PJ)",
-      "_origin": "ast",
-      "community": 66,
-      "community_name": "README.md",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "guia how-to: simular tasa minima de tributacion (ttd 15% - pj)",
-      "source_file": "docs/how-to/02-simular-tasa-minima-ttd-pj.md",
+      "norm_label": "01-integracion-api-bidireccional.md",
+      "source_file": "docs/how-to/01-integracion-api-bidireccional.md",
       "source_location": "L1"
     },
     {
@@ -18076,28 +18376,16 @@
       "source_location": "L1"
     },
     {
-      "id": "docs_readme_documentacion_tecnica_de_tributia",
-      "label": "Documentacion Tecnica de TributIA",
+      "id": "docs_reference_api_rest_endpoints",
+      "label": "rest-endpoints.md",
       "_origin": "ast",
       "community": 66,
       "community_name": "README.md",
       "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "documentacion tecnica de tributia",
-      "source_file": "docs/README.md",
+      "node_kind": "page",
+      "norm_label": "rest-endpoints.md",
+      "source_file": "docs/reference/api/rest-endpoints.md",
       "source_location": "L1"
-    },
-    {
-      "id": "docs_readme_registro_de_decisiones_arquitectonicas_adrs_decisions_readme_md",
-      "label": "[Registro de Decisiones Arquitectonicas (ADRs)](./decisions/README.md)",
-      "_origin": "ast",
-      "community": 66,
-      "community_name": "README.md",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "[registro de decisiones arquitectonicas (adrs)](./decisions/readme.md)",
-      "source_file": "docs/README.md",
-      "source_location": "L64"
     },
     {
       "id": "docs_reference_architecture_erd_session_state_model",
@@ -18217,6 +18505,66 @@
       "node_kind": "heading",
       "norm_label": "mapeo oficial de casillas \u2014 formulario 110 dian & ttd",
       "source_file": "docs/reference/tax-engine/form110-casillas-mapping.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "docs_reference_tax_engine_statutory_rules_art241",
+      "label": "statutory-rules-art241.md",
+      "_origin": "ast",
+      "community": 66,
+      "community_name": "README.md",
+      "file_type": "document",
+      "node_kind": "page",
+      "norm_label": "statutory-rules-art241.md",
+      "source_file": "docs/reference/tax-engine/statutory-rules-art241.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "docs_reference_tax_engine_statutory_rules_art241_1_tabla_de_tramos_marginales",
+      "label": "1. Tabla de Tramos Marginales",
+      "_origin": "ast",
+      "community": 66,
+      "community_name": "README.md",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "1. tabla de tramos marginales",
+      "source_file": "docs/reference/tax-engine/statutory-rules-art241.md",
+      "source_location": "L7"
+    },
+    {
+      "id": "docs_reference_tax_engine_statutory_rules_art241_2_regla_de_redondeo_dian_art_868_e_t",
+      "label": "2. Regla de Redondeo DIAN (Art. 868 E.T.)",
+      "_origin": "ast",
+      "community": 66,
+      "community_name": "README.md",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "2. regla de redondeo dian (art. 868 e.t.)",
+      "source_file": "docs/reference/tax-engine/statutory-rules-art241.md",
+      "source_location": "L21"
+    },
+    {
+      "id": "docs_reference_tax_engine_statutory_rules_art241_algoritmo_matem\u00e1tico_de_la_tabla_marginal_art_241_e_t",
+      "label": "Algoritmo Matem\u00e1tico de la Tabla Marginal (Art. 241 E.T.)",
+      "_origin": "ast",
+      "community": 66,
+      "community_name": "README.md",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "algoritmo matematico de la tabla marginal (art. 241 e.t.)",
+      "source_file": "docs/reference/tax-engine/statutory-rules-art241.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "docs_tutorials_01_primeros_pasos_liquidacion_pn",
+      "label": "01-primeros-pasos-liquidacion-pn.md",
+      "_origin": "ast",
+      "community": 66,
+      "community_name": "README.md",
+      "file_type": "document",
+      "node_kind": "page",
+      "norm_label": "01-primeros-pasos-liquidacion-pn.md",
+      "source_file": "docs/tutorials/01-primeros-pasos-liquidacion-pn.md",
       "source_location": "L1"
     },
     {
@@ -18563,23 +18911,11 @@
       "source_location": "L7"
     },
     {
-      "id": "docs_decisions_0001_motor_de_reglas_declarativo_json",
-      "label": "0001-motor-de-reglas-declarativo-json.md",
-      "_origin": "ast",
-      "community": 71,
-      "community_name": "0001-motor-de-reglas-declarativo-json.md",
-      "file_type": "document",
-      "node_kind": "page",
-      "norm_label": "0001-motor-de-reglas-declarativo-json.md",
-      "source_file": "docs/decisions/0001-motor-de-reglas-declarativo-json.md",
-      "source_location": "L1"
-    },
-    {
       "id": "docs_decisions_0001_motor_de_reglas_declarativo_json_adr_0001_motor_de_reglas_tributarias_declarativo_en_archivos_json_versionados",
       "label": "ADR 0001: Motor de Reglas Tributarias Declarativo en Archivos JSON Versionados",
       "_origin": "ast",
       "community": 71,
-      "community_name": "0001-motor-de-reglas-declarativo-json.md",
+      "community_name": "ADR 0001: Motor de Reglas Tributarias Declarativo en Archivos JSON Versionados",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "adr 0001: motor de reglas tributarias declarativo en archivos json versionados",
@@ -18591,7 +18927,7 @@
       "label": "Consecuencias",
       "_origin": "ast",
       "community": 71,
-      "community_name": "0001-motor-de-reglas-declarativo-json.md",
+      "community_name": "ADR 0001: Motor de Reglas Tributarias Declarativo en Archivos JSON Versionados",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "consecuencias",
@@ -18603,7 +18939,7 @@
       "label": "Contexto",
       "_origin": "ast",
       "community": 71,
-      "community_name": "0001-motor-de-reglas-declarativo-json.md",
+      "community_name": "ADR 0001: Motor de Reglas Tributarias Declarativo en Archivos JSON Versionados",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "contexto",
@@ -18615,7 +18951,7 @@
       "label": "Decisi\u00f3n",
       "_origin": "ast",
       "community": 71,
-      "community_name": "0001-motor-de-reglas-declarativo-json.md",
+      "community_name": "ADR 0001: Motor de Reglas Tributarias Declarativo en Archivos JSON Versionados",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "decision",
@@ -18726,7 +19062,7 @@
       "file_type": "concept",
       "norm_label": "testresponsiveandmobilemode",
       "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L373"
+      "source_location": "L376"
     },
     {
       "id": "backend_tests_test_e2e_playwright_class_testtributiaendtoend",
@@ -18836,7 +19172,7 @@
       "file_type": "concept",
       "norm_label": "test_calendario_tributario_nit_search_and_filters",
       "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L345"
+      "source_location": "L348"
     },
     {
       "id": "backend_tests_test_e2e_playwright_func_test_catalogo_beneficios_filtering_and_search",
@@ -18869,7 +19205,7 @@
       "file_type": "concept",
       "norm_label": "test_mobile_casilla_popover_bottom_sheet",
       "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L554"
+      "source_location": "L557"
     },
     {
       "id": "backend_tests_test_e2e_playwright_func_test_mobile_drawer_navigation_and_backdrop",
@@ -18880,7 +19216,7 @@
       "file_type": "concept",
       "norm_label": "test_mobile_drawer_navigation_and_backdrop",
       "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L384"
+      "source_location": "L387"
     },
     {
       "id": "backend_tests_test_e2e_playwright_func_test_mobile_viewport_no_horizontal_body_overflow",
@@ -18891,7 +19227,7 @@
       "file_type": "concept",
       "norm_label": "test_mobile_viewport_no_horizontal_body_overflow",
       "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L436"
+      "source_location": "L439"
     },
     {
       "id": "backend_tests_test_e2e_playwright_func_test_navigation_across_all_modules",
@@ -18913,7 +19249,7 @@
       "file_type": "concept",
       "norm_label": "test_persona_natural_capture_and_subtabs",
       "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L307"
+      "source_location": "L310"
     },
     {
       "id": "backend_tests_test_e2e_playwright_func_test_presentacion_auditoria_and_calculadora_sanciones",
@@ -18946,7 +19282,7 @@
       "file_type": "concept",
       "norm_label": "test_reconciliation_spreadsheet_extended_sidebar_scrolling",
       "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L590"
+      "source_location": "L593"
     },
     {
       "id": "backend_tests_test_e2e_playwright_func_test_reduced_desktop_and_laptop_screen_adaptation",
@@ -18957,7 +19293,7 @@
       "file_type": "concept",
       "norm_label": "test_reduced_desktop_and_laptop_screen_adaptation",
       "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L516"
+      "source_location": "L519"
     },
     {
       "id": "backend_tests_test_e2e_playwright_func_test_table_horizontal_scroll_containers_on_mobile",
@@ -18968,26 +19304,14 @@
       "file_type": "concept",
       "norm_label": "test_table_horizontal_scroll_containers_on_mobile",
       "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L474"
-    },
-    {
-      "id": "docs_decisions_0002_sincronizacion_bidireccional_sse",
-      "label": "0002-sincronizacion-bidireccional-sse.md",
-      "_origin": "ast",
-      "community": 74,
-      "community_name": "decisions/README.md",
-      "file_type": "document",
-      "node_kind": "page",
-      "norm_label": "0002-sincronizacion-bidireccional-sse.md",
-      "source_file": "docs/decisions/0002-sincronizacion-bidireccional-sse.md",
-      "source_location": "L1"
+      "source_location": "L477"
     },
     {
       "id": "docs_decisions_0002_sincronizacion_bidireccional_sse_adr_0002_sincronizaci\u00f3n_bidireccional_en_tiempo_real_con_server_sent_events_sse",
       "label": "ADR 0002: Sincronizaci\u00f3n Bidireccional en Tiempo Real con Server-Sent Events (SSE)",
       "_origin": "ast",
       "community": 74,
-      "community_name": "decisions/README.md",
+      "community_name": "ADR 0002: Sincronizaci\u00f3n Bidireccional en Tiempo Real con Server-Sent Events (SSE)",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "adr 0002: sincronizacion bidireccional en tiempo real con server-sent events (sse)",
@@ -18999,7 +19323,7 @@
       "label": "Consecuencias",
       "_origin": "ast",
       "community": 74,
-      "community_name": "decisions/README.md",
+      "community_name": "ADR 0002: Sincronizaci\u00f3n Bidireccional en Tiempo Real con Server-Sent Events (SSE)",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "consecuencias",
@@ -19011,7 +19335,7 @@
       "label": "Contexto",
       "_origin": "ast",
       "community": 74,
-      "community_name": "decisions/README.md",
+      "community_name": "ADR 0002: Sincronizaci\u00f3n Bidireccional en Tiempo Real con Server-Sent Events (SSE)",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "contexto",
@@ -19023,156 +19347,12 @@
       "label": "Decisi\u00f3n",
       "_origin": "ast",
       "community": 74,
-      "community_name": "decisions/README.md",
+      "community_name": "ADR 0002: Sincronizaci\u00f3n Bidireccional en Tiempo Real con Server-Sent Events (SSE)",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "decision",
       "source_file": "docs/decisions/0002-sincronizacion-bidireccional-sse.md",
       "source_location": "L11"
-    },
-    {
-      "id": "docs_decisions_0003_mascara_contable_colombiana_en_dom",
-      "label": "0003-mascara-contable-colombiana-en-dom.md",
-      "_origin": "ast",
-      "community": 74,
-      "community_name": "decisions/README.md",
-      "file_type": "document",
-      "node_kind": "page",
-      "norm_label": "0003-mascara-contable-colombiana-en-dom.md",
-      "source_file": "docs/decisions/0003-mascara-contable-colombiana-en-dom.md",
-      "source_location": "L1"
-    },
-    {
-      "id": "docs_decisions_0003_mascara_contable_colombiana_en_dom_adr_0003_manejo_de_m\u00e1scara_contable_colombiana_en_el_dom_y_sanitizaci\u00f3n_num\u00e9rica",
-      "label": "ADR 0003: Manejo de M\u00e1scara Contable Colombiana en el DOM y Sanitizaci\u00f3n Num\u00e9rica",
-      "_origin": "ast",
-      "community": 74,
-      "community_name": "decisions/README.md",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "adr 0003: manejo de mascara contable colombiana en el dom y sanitizacion numerica",
-      "source_file": "docs/decisions/0003-mascara-contable-colombiana-en-dom.md",
-      "source_location": "L1"
-    },
-    {
-      "id": "docs_decisions_0003_mascara_contable_colombiana_en_dom_consecuencias",
-      "label": "Consecuencias",
-      "_origin": "ast",
-      "community": 74,
-      "community_name": "decisions/README.md",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "consecuencias",
-      "source_file": "docs/decisions/0003-mascara-contable-colombiana-en-dom.md",
-      "source_location": "L17"
-    },
-    {
-      "id": "docs_decisions_0003_mascara_contable_colombiana_en_dom_contexto",
-      "label": "Contexto",
-      "_origin": "ast",
-      "community": 74,
-      "community_name": "decisions/README.md",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "contexto",
-      "source_file": "docs/decisions/0003-mascara-contable-colombiana-en-dom.md",
-      "source_location": "L7"
-    },
-    {
-      "id": "docs_decisions_0003_mascara_contable_colombiana_en_dom_decisi\u00f3n",
-      "label": "Decisi\u00f3n",
-      "_origin": "ast",
-      "community": 74,
-      "community_name": "decisions/README.md",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "decision",
-      "source_file": "docs/decisions/0003-mascara-contable-colombiana-en-dom.md",
-      "source_location": "L11"
-    },
-    {
-      "id": "docs_decisions_0006_sistema_responsivo_y_modo_mobile",
-      "label": "0006-sistema-responsivo-y-modo-mobile.md",
-      "_origin": "ast",
-      "community": 74,
-      "community_name": "decisions/README.md",
-      "file_type": "document",
-      "node_kind": "page",
-      "norm_label": "0006-sistema-responsivo-y-modo-mobile.md",
-      "source_file": "docs/decisions/0006-sistema-responsivo-y-modo-mobile.md",
-      "source_location": "L1"
-    },
-    {
-      "id": "docs_decisions_0006_sistema_responsivo_y_modo_mobile_1_contexto_y_problema",
-      "label": "1. Contexto y Problema",
-      "_origin": "ast",
-      "community": 74,
-      "community_name": "decisions/README.md",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "1. contexto y problema",
-      "source_file": "docs/decisions/0006-sistema-responsivo-y-modo-mobile.md",
-      "source_location": "L9"
-    },
-    {
-      "id": "docs_decisions_0006_sistema_responsivo_y_modo_mobile_2_decisi\u00f3n_tomada",
-      "label": "2. Decisi\u00f3n Tomada",
-      "_origin": "ast",
-      "community": 74,
-      "community_name": "decisions/README.md",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "2. decision tomada",
-      "source_file": "docs/decisions/0006-sistema-responsivo-y-modo-mobile.md",
-      "source_location": "L22"
-    },
-    {
-      "id": "docs_decisions_0006_sistema_responsivo_y_modo_mobile_3_consecuencias_y_beneficios",
-      "label": "3. Consecuencias y Beneficios",
-      "_origin": "ast",
-      "community": 74,
-      "community_name": "decisions/README.md",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "3. consecuencias y beneficios",
-      "source_file": "docs/decisions/0006-sistema-responsivo-y-modo-mobile.md",
-      "source_location": "L45"
-    },
-    {
-      "id": "docs_decisions_0006_sistema_responsivo_y_modo_mobile_adr_0006_sistema_responsivo_men\u00fa_off_canvas_y_modo_mobile",
-      "label": "ADR 0006: Sistema Responsivo, Men\u00fa Off-Canvas y Modo Mobile",
-      "_origin": "ast",
-      "community": 74,
-      "community_name": "decisions/README.md",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "adr 0006: sistema responsivo, menu off-canvas y modo mobile",
-      "source_file": "docs/decisions/0006-sistema-responsivo-y-modo-mobile.md",
-      "source_location": "L1"
-    },
-    {
-      "id": "docs_decisions_readme",
-      "label": "decisions/README.md",
-      "_origin": "ast",
-      "community": 74,
-      "community_name": "decisions/README.md",
-      "file_type": "document",
-      "node_kind": "page",
-      "norm_label": "decisions/readme.md",
-      "source_file": "docs/decisions/README.md",
-      "source_location": "L1"
-    },
-    {
-      "id": "docs_decisions_readme_registro_de_decisiones_de_arquitectura_adrs",
-      "label": "Registro de Decisiones de Arquitectura (ADRs)",
-      "_origin": "ast",
-      "community": 74,
-      "community_name": "decisions/README.md",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "registro de decisiones de arquitectura (adrs)",
-      "source_file": "docs/decisions/README.md",
-      "source_location": "L1"
     },
     {
       "id": "docs_how_to_03_consultar_calendario_por_nit",
@@ -19364,52 +19544,92 @@
       "source_location": "L7"
     },
     {
-      "id": "docs_reference_tax_engine_statutory_rules_art241",
-      "label": "statutory-rules-art241.md",
+      "id": "backend_tests_test_componente_inflacionario",
+      "label": "test_componente_inflacionario.py",
       "_origin": "ast",
       "community": 79,
-      "community_name": "statutory-rules-art241.md",
-      "file_type": "document",
-      "node_kind": "page",
-      "norm_label": "statutory-rules-art241.md",
-      "source_file": "docs/reference/tax-engine/statutory-rules-art241.md",
+      "community_name": "test_componente_inflacionario.py",
+      "file_type": "concept",
+      "norm_label": "test_componente_inflacionario.py",
+      "source_file": "backend/tests/test_componente_inflacionario.py",
       "source_location": "L1"
     },
     {
-      "id": "docs_reference_tax_engine_statutory_rules_art241_1_tabla_de_tramos_marginales",
-      "label": "1. Tabla de Tramos Marginales",
+      "id": "backend_tests_test_componente_inflacionario_func_test_api_endpoints_componente_inflacionario",
+      "label": "test_api_endpoints_componente_inflacionario",
       "_origin": "ast",
       "community": 79,
-      "community_name": "statutory-rules-art241.md",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "1. tabla de tramos marginales",
-      "source_file": "docs/reference/tax-engine/statutory-rules-art241.md",
-      "source_location": "L7"
+      "community_name": "test_componente_inflacionario.py",
+      "file_type": "concept",
+      "norm_label": "test_api_endpoints_componente_inflacionario",
+      "source_file": "backend/tests/test_componente_inflacionario.py",
+      "source_location": "L140"
     },
     {
-      "id": "docs_reference_tax_engine_statutory_rules_art241_2_regla_de_redondeo_dian_art_868_e_t",
-      "label": "2. Regla de Redondeo DIAN (Art. 868 E.T.)",
+      "id": "backend_tests_test_componente_inflacionario_func_test_calcular_componente_inflacionario_cdt_2023",
+      "label": "test_calcular_componente_inflacionario_cdt_2023",
       "_origin": "ast",
       "community": 79,
-      "community_name": "statutory-rules-art241.md",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "2. regla de redondeo dian (art. 868 e.t.)",
-      "source_file": "docs/reference/tax-engine/statutory-rules-art241.md",
-      "source_location": "L21"
+      "community_name": "test_componente_inflacionario.py",
+      "file_type": "concept",
+      "norm_label": "test_calcular_componente_inflacionario_cdt_2023",
+      "source_file": "backend/tests/test_componente_inflacionario.py",
+      "source_location": "L31"
     },
     {
-      "id": "docs_reference_tax_engine_statutory_rules_art241_algoritmo_matem\u00e1tico_de_la_tabla_marginal_art_241_e_t",
-      "label": "Algoritmo Matem\u00e1tico de la Tabla Marginal (Art. 241 E.T.)",
+      "id": "backend_tests_test_componente_inflacionario_func_test_calcular_componente_inflacionario_fics_2024",
+      "label": "test_calcular_componente_inflacionario_fics_2024",
       "_origin": "ast",
       "community": 79,
-      "community_name": "statutory-rules-art241.md",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "algoritmo matematico de la tabla marginal (art. 241 e.t.)",
-      "source_file": "docs/reference/tax-engine/statutory-rules-art241.md",
-      "source_location": "L1"
+      "community_name": "test_componente_inflacionario.py",
+      "file_type": "concept",
+      "norm_label": "test_calcular_componente_inflacionario_fics_2024",
+      "source_file": "backend/tests/test_componente_inflacionario.py",
+      "source_location": "L53"
+    },
+    {
+      "id": "backend_tests_test_componente_inflacionario_func_test_calcular_componente_inflacionario_gastos_intereses_art118",
+      "label": "test_calcular_componente_inflacionario_gastos_intereses_art118",
+      "_origin": "ast",
+      "community": 79,
+      "community_name": "test_componente_inflacionario.py",
+      "file_type": "concept",
+      "norm_label": "test_calcular_componente_inflacionario_gastos_intereses_art118",
+      "source_file": "backend/tests/test_componente_inflacionario.py",
+      "source_location": "L70"
+    },
+    {
+      "id": "backend_tests_test_componente_inflacionario_func_test_calcular_componente_inflacionario_personalizado",
+      "label": "test_calcular_componente_inflacionario_personalizado",
+      "_origin": "ast",
+      "community": 79,
+      "community_name": "test_componente_inflacionario.py",
+      "file_type": "concept",
+      "norm_label": "test_calcular_componente_inflacionario_personalizado",
+      "source_file": "backend/tests/test_componente_inflacionario.py",
+      "source_location": "L87"
+    },
+    {
+      "id": "backend_tests_test_componente_inflacionario_func_test_simular_combinabilidad_inflacion_art73",
+      "label": "test_simular_combinabilidad_inflacion_art73",
+      "_origin": "ast",
+      "community": 79,
+      "community_name": "test_componente_inflacionario.py",
+      "file_type": "concept",
+      "norm_label": "test_simular_combinabilidad_inflacion_art73",
+      "source_file": "backend/tests/test_componente_inflacionario.py",
+      "source_location": "L105"
+    },
+    {
+      "id": "backend_tests_test_componente_inflacionario_func_test_tabla_componente_inflacionario_loading",
+      "label": "test_tabla_componente_inflacionario_loading",
+      "_origin": "ast",
+      "community": 79,
+      "community_name": "test_componente_inflacionario.py",
+      "file_type": "concept",
+      "norm_label": "test_tabla_componente_inflacionario_loading",
+      "source_file": "backend/tests/test_componente_inflacionario.py",
+      "source_location": "L15"
     },
     {
       "id": "backend_tests_test_session_sync",
@@ -20364,46 +20584,13 @@
     },
     {
       "source": "backend_app_api_v1_endpoints_beneficios",
-      "target": "backend_app_api_v1_endpoints_beneficios_func_listar_beneficios",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "backend/app/api/v1/endpoints/beneficios.py",
-      "source_location": "L34",
-      "weight": 1.0
-    },
-    {
-      "source": "backend_app_api_v1_endpoints_beneficios",
-      "target": "backend_app_api_v1_endpoints_beneficios_func_obtener_tabla_articulo_73",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "backend/app/api/v1/endpoints/beneficios.py",
-      "source_location": "L44",
-      "weight": 1.0
-    },
-    {
-      "source": "backend_app_api_v1_endpoints_beneficios",
-      "target": "backend_app_api_v1_endpoints_beneficios_func_simular_articulo_73",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "backend/app/api/v1/endpoints/beneficios.py",
-      "source_location": "L54",
-      "weight": 1.0
-    },
-    {
-      "source": "backend_app_api_v1_endpoints_beneficios",
       "target": "backend_app_api_v1_endpoints_beneficios_func_simular_auditoria",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/app/api/v1/endpoints/beneficios.py",
-      "source_location": "L64",
+      "source_location": "L106",
       "weight": 1.0
     },
     {
@@ -20414,7 +20601,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/app/api/v1/endpoints/beneficios.py",
-      "source_location": "L74",
+      "source_location": "L116",
       "weight": 1.0
     },
     {
@@ -20425,7 +20612,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/app/api/v1/endpoints/beneficios.py",
-      "source_location": "L84",
+      "source_location": "L126",
       "weight": 1.0
     },
     {
@@ -20436,7 +20623,73 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/app/api/v1/endpoints/beneficios.py",
-      "source_location": "L94",
+      "source_location": "L136",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_app_api_v1_endpoints_beneficios",
+      "target": "backend_app_api_v1_endpoints_beneficios_func_obtener_tabla_componente_inflacionario",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/api/v1/endpoints/beneficios.py",
+      "source_location": "L42",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_app_api_v1_endpoints_beneficios",
+      "target": "backend_app_api_v1_endpoints_beneficios_func_simular_componente_inflacionario_endpoint",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/api/v1/endpoints/beneficios.py",
+      "source_location": "L52",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_app_api_v1_endpoints_beneficios",
+      "target": "backend_app_api_v1_endpoints_beneficios_func_simular_combinabilidad_endpoint",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/api/v1/endpoints/beneficios.py",
+      "source_location": "L64",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_app_api_v1_endpoints_beneficios",
+      "target": "backend_app_api_v1_endpoints_beneficios_func_listar_beneficios",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/api/v1/endpoints/beneficios.py",
+      "source_location": "L76",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_app_api_v1_endpoints_beneficios",
+      "target": "backend_app_api_v1_endpoints_beneficios_func_obtener_tabla_articulo_73",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/api/v1/endpoints/beneficios.py",
+      "source_location": "L86",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_app_api_v1_endpoints_beneficios",
+      "target": "backend_app_api_v1_endpoints_beneficios_func_simular_articulo_73",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/api/v1/endpoints/beneficios.py",
+      "source_location": "L96",
       "weight": 1.0
     },
     {
@@ -20914,18 +21167,18 @@
     },
     {
       "source": "backend_app_main",
-      "target": "backend_app_main_func_startup_event",
+      "target": "backend_app_main_func_favicon",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/app/main.py",
-      "source_location": "L45",
+      "source_location": "L102",
       "weight": 1.0
     },
     {
       "source": "backend_app_main",
-      "target": "backend_app_main_func_serve_ui",
+      "target": "backend_app_main_func_startup_event",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -20936,13 +21189,24 @@
     },
     {
       "source": "backend_app_main",
+      "target": "backend_app_main_func_serve_ui",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/main.py",
+      "source_location": "L65",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_app_main",
       "target": "backend_app_main_func_health_check",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/app/main.py",
-      "source_location": "L71",
+      "source_location": "L91",
       "weight": 1.0
     },
     {
@@ -20953,7 +21217,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/app/main.py",
-      "source_location": "L76",
+      "source_location": "L96",
       "weight": 1.0
     },
     {
@@ -21057,123 +21321,13 @@
     },
     {
       "source": "backend_app_services_beneficios",
-      "target": "backend_app_services_beneficios_func_calcular_exencion_inmueble_afc",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "backend/app/services/beneficios.py",
-      "source_location": "L1004",
-      "weight": 1.0
-    },
-    {
-      "source": "backend_app_services_beneficios",
-      "target": "backend_app_services_beneficios_class_simulacionajustearticulo73response",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "backend/app/services/beneficios.py",
-      "source_location": "L114",
-      "weight": 1.0
-    },
-    {
-      "source": "backend_app_services_beneficios",
-      "target": "backend_app_services_beneficios_func_calcular_beneficio_auditoria",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "backend/app/services/beneficios.py",
-      "source_location": "L1368",
-      "weight": 1.0
-    },
-    {
-      "source": "backend_app_services_beneficios",
-      "target": "backend_app_services_beneficios_func_get_tabla_articulo_73",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "backend/app/services/beneficios.py",
-      "source_location": "L139",
-      "weight": 1.0
-    },
-    {
-      "source": "backend_app_services_beneficios",
-      "target": "backend_app_services_beneficios_func_calcular_reduccion_sancion",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "backend/app/services/beneficios.py",
-      "source_location": "L1419",
-      "weight": 1.0
-    },
-    {
-      "source": "backend_app_services_beneficios",
-      "target": "backend_app_services_beneficios_func_calcular_ajuste_articulo_73",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "backend/app/services/beneficios.py",
-      "source_location": "L151",
-      "weight": 1.0
-    },
-    {
-      "source": "backend_app_services_beneficios",
-      "target": "backend_app_services_beneficios_class_beneficioauditoriarequest",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "backend/app/services/beneficios.py",
-      "source_location": "L20",
-      "weight": 1.0
-    },
-    {
-      "source": "backend_app_services_beneficios",
-      "target": "backend_app_services_beneficios_func_get_catalogo_beneficios",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "backend/app/services/beneficios.py",
-      "source_location": "L281",
-      "weight": 1.0
-    },
-    {
-      "source": "backend_app_services_beneficios",
-      "target": "backend_app_services_beneficios_class_beneficioauditoriaresponse",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "backend/app/services/beneficios.py",
-      "source_location": "L29",
-      "weight": 1.0
-    },
-    {
-      "source": "backend_app_services_beneficios",
-      "target": "backend_app_services_beneficios_class_reduccionsancionrequest",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "backend/app/services/beneficios.py",
-      "source_location": "L49",
-      "weight": 1.0
-    },
-    {
-      "source": "backend_app_services_beneficios",
       "target": "backend_app_services_beneficios_class_liquidacionsancionrequest",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/app/services/beneficios.py",
-      "source_location": "L556",
+      "source_location": "L1038",
       "weight": 1.0
     },
     {
@@ -21184,7 +21338,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/app/services/beneficios.py",
-      "source_location": "L601",
+      "source_location": "L1083",
       "weight": 1.0
     },
     {
@@ -21195,18 +21349,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/app/services/beneficios.py",
-      "source_location": "L629",
-      "weight": 1.0
-    },
-    {
-      "source": "backend_app_services_beneficios",
-      "target": "backend_app_services_beneficios_class_reduccionsancionresponse",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "backend/app/services/beneficios.py",
-      "source_location": "L64",
+      "source_location": "L1111",
       "weight": 1.0
     },
     {
@@ -21217,7 +21360,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/app/services/beneficios.py",
-      "source_location": "L642",
+      "source_location": "L1124",
       "weight": 1.0
     },
     {
@@ -21228,18 +21371,29 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/app/services/beneficios.py",
-      "source_location": "L694",
+      "source_location": "L1176",
       "weight": 1.0
     },
     {
       "source": "backend_app_services_beneficios",
-      "target": "backend_app_services_beneficios_class_ajustearticulo73item",
+      "target": "backend_app_services_beneficios_class_itemtablacomponenteinflacionario",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/app/services/beneficios.py",
-      "source_location": "L73",
+      "source_location": "L12",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_app_services_beneficios",
+      "target": "backend_app_services_beneficios_class_simulacioncombinabilidadresponse",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/services/beneficios.py",
+      "source_location": "L122",
       "weight": 1.0
     },
     {
@@ -21250,7 +21404,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/app/services/beneficios.py",
-      "source_location": "L752",
+      "source_location": "L1234",
       "weight": 1.0
     },
     {
@@ -21261,7 +21415,95 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/app/services/beneficios.py",
-      "source_location": "L9",
+      "source_location": "L147",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_app_services_beneficios",
+      "target": "backend_app_services_beneficios_func_calcular_exencion_inmueble_afc",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/services/beneficios.py",
+      "source_location": "L1486",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_app_services_beneficios",
+      "target": "backend_app_services_beneficios_class_beneficioauditoriarequest",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/services/beneficios.py",
+      "source_location": "L158",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_app_services_beneficios",
+      "target": "backend_app_services_beneficios_class_beneficioauditoriaresponse",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/services/beneficios.py",
+      "source_location": "L167",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_app_services_beneficios",
+      "target": "backend_app_services_beneficios_func_calcular_beneficio_auditoria",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/services/beneficios.py",
+      "source_location": "L1850",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_app_services_beneficios",
+      "target": "backend_app_services_beneficios_class_reduccionsancionrequest",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/services/beneficios.py",
+      "source_location": "L187",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_app_services_beneficios",
+      "target": "backend_app_services_beneficios_func_calcular_reduccion_sancion",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/services/beneficios.py",
+      "source_location": "L1901",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_app_services_beneficios",
+      "target": "backend_app_services_beneficios_class_reduccionsancionresponse",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/services/beneficios.py",
+      "source_location": "L202",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_app_services_beneficios",
+      "target": "backend_app_services_beneficios_class_ajustearticulo73item",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/services/beneficios.py",
+      "source_location": "L211",
       "weight": 1.0
     },
     {
@@ -21272,7 +21514,117 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/app/services/beneficios.py",
-      "source_location": "L90",
+      "source_location": "L228",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_app_services_beneficios",
+      "target": "backend_app_services_beneficios_class_simulacionajustearticulo73response",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/services/beneficios.py",
+      "source_location": "L252",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_app_services_beneficios",
+      "target": "backend_app_services_beneficios_func_get_tabla_componente_inflacionario",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/services/beneficios.py",
+      "source_location": "L278",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_app_services_beneficios",
+      "target": "backend_app_services_beneficios_func_calcular_componente_inflacionario",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/services/beneficios.py",
+      "source_location": "L292",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_app_services_beneficios",
+      "target": "backend_app_services_beneficios_func_simular_combinabilidad_inflacion_art73",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/services/beneficios.py",
+      "source_location": "L432",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_app_services_beneficios",
+      "target": "backend_app_services_beneficios_class_simulacioncomponenteinflacionariorequest",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/services/beneficios.py",
+      "source_location": "L51",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_app_services_beneficios",
+      "target": "backend_app_services_beneficios_func_get_tabla_articulo_73",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/services/beneficios.py",
+      "source_location": "L513",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_app_services_beneficios",
+      "target": "backend_app_services_beneficios_func_calcular_ajuste_articulo_73",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/services/beneficios.py",
+      "source_location": "L525",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_app_services_beneficios",
+      "target": "backend_app_services_beneficios_func_get_catalogo_beneficios",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/services/beneficios.py",
+      "source_location": "L655",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_app_services_beneficios",
+      "target": "backend_app_services_beneficios_class_simulacioncomponenteinflacionarioresponse",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/services/beneficios.py",
+      "source_location": "L72",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_app_services_beneficios",
+      "target": "backend_app_services_beneficios_class_simulacioncombinabilidadrequest",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/services/beneficios.py",
+      "source_location": "L94",
       "weight": 1.0
     },
     {
@@ -21772,7 +22124,7 @@
     },
     {
       "source": "backend_tests_test_beneficios_and_go",
-      "target": "backend_tests_test_beneficios_and_go_func_test_video_abogada_mabel_sepulveda_caso_real",
+      "target": "backend_tests_test_beneficios_and_go_func_test_ejemplo_venta_inmueble_reajuste_dane_y_afc_caso_real",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -21848,6 +22200,83 @@
       "weight": 1.0
     },
     {
+      "source": "backend_tests_test_componente_inflacionario",
+      "target": "backend_tests_test_componente_inflacionario_func_test_simular_combinabilidad_inflacion_art73",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/tests/test_componente_inflacionario.py",
+      "source_location": "L105",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_tests_test_componente_inflacionario",
+      "target": "backend_tests_test_componente_inflacionario_func_test_api_endpoints_componente_inflacionario",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/tests/test_componente_inflacionario.py",
+      "source_location": "L140",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_tests_test_componente_inflacionario",
+      "target": "backend_tests_test_componente_inflacionario_func_test_tabla_componente_inflacionario_loading",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/tests/test_componente_inflacionario.py",
+      "source_location": "L15",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_tests_test_componente_inflacionario",
+      "target": "backend_tests_test_componente_inflacionario_func_test_calcular_componente_inflacionario_cdt_2023",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/tests/test_componente_inflacionario.py",
+      "source_location": "L31",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_tests_test_componente_inflacionario",
+      "target": "backend_tests_test_componente_inflacionario_func_test_calcular_componente_inflacionario_fics_2024",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/tests/test_componente_inflacionario.py",
+      "source_location": "L53",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_tests_test_componente_inflacionario",
+      "target": "backend_tests_test_componente_inflacionario_func_test_calcular_componente_inflacionario_gastos_intereses_art118",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/tests/test_componente_inflacionario.py",
+      "source_location": "L70",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_tests_test_componente_inflacionario",
+      "target": "backend_tests_test_componente_inflacionario_func_test_calcular_componente_inflacionario_personalizado",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/tests/test_componente_inflacionario.py",
+      "source_location": "L87",
+      "weight": 1.0
+    },
+    {
       "source": "backend_tests_test_coverage_boost",
       "target": "backend_tests_test_coverage_boost_func_test_session_sync_pj_mutation",
       "relation": "contains",
@@ -21910,7 +22339,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/tests/test_coverage_boost.py",
-      "source_location": "L217",
+      "source_location": "L222",
       "weight": 1.0
     },
     {
@@ -21921,7 +22350,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/tests/test_coverage_boost.py",
-      "source_location": "L220",
+      "source_location": "L225",
       "weight": 1.0
     },
     {
@@ -21932,7 +22361,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/tests/test_coverage_boost.py",
-      "source_location": "L221",
+      "source_location": "L226",
       "weight": 1.0
     },
     {
@@ -21943,7 +22372,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/tests/test_coverage_boost.py",
-      "source_location": "L224",
+      "source_location": "L229",
       "weight": 1.0
     },
     {
@@ -21954,7 +22383,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/tests/test_coverage_boost.py",
-      "source_location": "L229",
+      "source_location": "L234",
       "weight": 1.0
     },
     {
@@ -21965,7 +22394,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/tests/test_coverage_boost.py",
-      "source_location": "L232",
+      "source_location": "L237",
       "weight": 1.0
     },
     {
@@ -21976,7 +22405,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/tests/test_coverage_boost.py",
-      "source_location": "L235",
+      "source_location": "L240",
       "weight": 1.0
     },
     {
@@ -21987,18 +22416,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/tests/test_coverage_boost.py",
-      "source_location": "L238",
-      "weight": 1.0
-    },
-    {
-      "source": "backend_tests_test_coverage_boost",
-      "target": "backend_tests_test_coverage_boost_func_test_in_memory_session_store_full",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "backend/tests/test_coverage_boost.py",
-      "source_location": "L249",
+      "source_location": "L243",
       "weight": 1.0
     },
     {
@@ -22014,13 +22432,24 @@
     },
     {
       "source": "backend_tests_test_coverage_boost",
+      "target": "backend_tests_test_coverage_boost_func_test_in_memory_session_store_full",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/tests/test_coverage_boost.py",
+      "source_location": "L254",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_tests_test_coverage_boost",
       "target": "backend_tests_test_coverage_boost_func_test_redis_session_store_full_methods",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/tests/test_coverage_boost.py",
-      "source_location": "L262",
+      "source_location": "L267",
       "weight": 1.0
     },
     {
@@ -22031,7 +22460,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/tests/test_coverage_boost.py",
-      "source_location": "L278",
+      "source_location": "L283",
       "weight": 1.0
     },
     {
@@ -22042,7 +22471,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/tests/test_coverage_boost.py",
-      "source_location": "L289",
+      "source_location": "L294",
       "weight": 1.0
     },
     {
@@ -22053,7 +22482,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/tests/test_coverage_boost.py",
-      "source_location": "L301",
+      "source_location": "L306",
       "weight": 1.0
     },
     {
@@ -22064,7 +22493,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/tests/test_coverage_boost.py",
-      "source_location": "L329",
+      "source_location": "L334",
       "weight": 1.0
     },
     {
@@ -22075,7 +22504,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/tests/test_coverage_boost.py",
-      "source_location": "L340",
+      "source_location": "L345",
       "weight": 1.0
     },
     {
@@ -22086,7 +22515,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/tests/test_coverage_boost.py",
-      "source_location": "L357",
+      "source_location": "L362",
       "weight": 1.0
     },
     {
@@ -22097,7 +22526,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/tests/test_coverage_boost.py",
-      "source_location": "L371",
+      "source_location": "L376",
       "weight": 1.0
     },
     {
@@ -22108,7 +22537,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/tests/test_coverage_boost.py",
-      "source_location": "L385",
+      "source_location": "L390",
       "weight": 1.0
     },
     {
@@ -22119,7 +22548,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/tests/test_coverage_boost.py",
-      "source_location": "L402",
+      "source_location": "L407",
       "weight": 1.0
     },
     {
@@ -22130,7 +22559,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/tests/test_coverage_boost.py",
-      "source_location": "L416",
+      "source_location": "L421",
       "weight": 1.0
     },
     {
@@ -22141,7 +22570,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/tests/test_coverage_boost.py",
-      "source_location": "L430",
+      "source_location": "L435",
       "weight": 1.0
     },
     {
@@ -22152,7 +22581,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/tests/test_coverage_boost.py",
-      "source_location": "L438",
+      "source_location": "L443",
       "weight": 1.0
     },
     {
@@ -22273,7 +22702,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L307",
+      "source_location": "L310",
       "weight": 1.0
     },
     {
@@ -22284,7 +22713,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L345",
+      "source_location": "L348",
       "weight": 1.0
     },
     {
@@ -22306,7 +22735,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L373",
+      "source_location": "L376",
       "weight": 1.0
     },
     {
@@ -22317,7 +22746,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L384",
+      "source_location": "L387",
       "weight": 1.0
     },
     {
@@ -22328,7 +22757,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L436",
+      "source_location": "L439",
       "weight": 1.0
     },
     {
@@ -22339,7 +22768,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L474",
+      "source_location": "L477",
       "weight": 1.0
     },
     {
@@ -22350,7 +22779,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L516",
+      "source_location": "L519",
       "weight": 1.0
     },
     {
@@ -22361,7 +22790,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L554",
+      "source_location": "L557",
       "weight": 1.0
     },
     {
@@ -22372,7 +22801,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L590",
+      "source_location": "L593",
       "weight": 1.0
     },
     {
@@ -38338,5 +38767,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "270d35dea3507430a900026096eae8372d8e8616"
+  "built_at_commit": "e594343b7058dda88dbaa026854a0c01e205fe2a"
 }

@@ -204,10 +204,15 @@ def test_beneficios_service_edge_cases():
 
 def test_serve_ui_fallback():
     """Valida el endpoint raíz serve_ui cuando index.html no existe."""
-    with patch("app.main.STATIC_DIR") as mock_dir:
-        mock_file = MagicMock()
-        mock_file.exists.return_value = False
-        mock_dir.__truediv__.return_value = mock_file
+    with patch("app.main.FRONTEND_DIST") as mock_frontend, patch("app.main.STATIC_DIR") as mock_dir:
+        mock_file1 = MagicMock()
+        mock_file1.exists.return_value = False
+        mock_frontend.__truediv__.return_value = mock_file1
+
+        mock_file2 = MagicMock()
+        mock_file2.exists.return_value = False
+        mock_dir.__truediv__.return_value = mock_file2
+
         res = serve_ui()
         assert res["app"] == "TributIA API"
         assert res["status"] == "online"

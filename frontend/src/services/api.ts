@@ -6,7 +6,7 @@ import type {
   TaxYearRules,
 } from '../types/tax';
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000/api/v1';
+const API_BASE_URL = import.meta.env.VITE_API_URL || '/api/v1';
 
 export async function fetchAvailableYears(): Promise<number[]> {
   try {
@@ -20,11 +20,8 @@ export async function fetchAvailableYears(): Promise<number[]> {
 }
 
 export async function fetchRulesForYear(year: number, customUvt?: number): Promise<TaxYearRules> {
-  const url = new URL(`${API_BASE_URL}/rules/${year}`);
-  if (customUvt) {
-    url.searchParams.set('custom_uvt', customUvt.toString());
-  }
-  const res = await fetch(url.toString());
+  const query = customUvt ? `?custom_uvt=${customUvt}` : '';
+  const res = await fetch(`${API_BASE_URL}/rules/${year}${query}`);
   if (!res.ok) throw new Error(`Error al consultar reglas del año ${year}`);
   return await res.json();
 }
@@ -136,4 +133,105 @@ export async function simularInmuebleAfc(
   }
   return await res.json();
 }
+
+export async function fetchReconciliationDemo(): Promise<import('../types').ReconciliationResponse> {
+  const res = await fetch(`${API_BASE_URL}/reconciliation/demo`);
+  if (!res.ok) throw new Error('Error al cargar datos de demostración de conciliación');
+  return await res.json();
+}
+
+export async function uploadReconciliationCsv(file: File): Promise<import('../types').ReconciliationResponse> {
+  const formData = new FormData();
+  formData.append('file', file);
+  const res = await fetch(`${API_BASE_URL}/reconciliation/parse-csv`, {
+    method: 'POST',
+    body: formData,
+  });
+  if (!res.ok) {
+    const errorData = await res.json().catch(() => ({}));
+    throw new Error(errorData.detail || 'Error al procesar archivo CSV de conciliación');
+  }
+  return await res.json();
+}
+
+export async function parseReconciliationRaw(rawText: string): Promise<import('../types').ReconciliationResponse> {
+  const res = await fetch(`${API_BASE_URL}/reconciliation/parse-raw`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ raw_text: rawText }),
+  });
+  if (!res.ok) {
+    const errorData = await res.json().catch(() => ({}));
+    throw new Error(errorData.detail || 'Error al procesar texto CSV de conciliación');
+  }
+  return await res.json();
+}
+
+export async function fetchSessionState(sessionId: string): Promise<import('../types').SessionState> {
+  const res = await fetch(`${API_BASE_URL}/session/current`, {
+    headers: { 'X-Session-ID': sessionId },
+  });
+  if (!res.ok) throw new Error('Error al cargar estado de sesión');
+  return await res.json();
+}
+
+export async function updateSessionState(sessionId: string, state: any): Promise<import('../types').SessionState> {
+  const res = await fetch(`${API_BASE_URL}/session/current`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-Session-ID': sessionId,
+    },
+    body: JSON.stringify(state),
+  });
+  if (!res.ok) throw new Error('Error al guardar estado de sesión');
+  return await res.json();
+}
+
+export async function resetSessionState(sessionId: string): Promise<{ status: string }> {
+  const res = await fetch(`${API_BASE_URL}/session/current/reset`, {
+    method: 'POST',
+    headers: { 'X-Session-ID': sessionId },
+  });
+  if (!res.ok) throw new Error('Error al reiniciar sesión');
+  return await res.json();
+}
+
+export async function fetchTablaComponenteInflacionario(): Promise<import('../types/tax').ItemTablaComponenteInflacionario[]> {
+  const res = await fetch(`${API_BASE_URL}/beneficios/componente-inflacionario/tabla`);
+  if (!res.ok) throw new Error('Error al obtener tabla del Componente Inflacionario');
+  return await res.json();
+}
+
+export async function simularComponenteInflacionario(
+  payload: import('../types/tax').SimulacionComponenteInflacionarioRequest
+): Promise<import('../types/tax').SimulacionComponenteInflacionarioResponse> {
+  const res = await fetch(`${API_BASE_URL}/beneficios/simular-componente-inflacionario`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
+  });
+  if (!res.ok) {
+    const errorData = await res.json().catch(() => ({}));
+    throw new Error(errorData.detail || 'Error al simular Componente Inflacionario');
+  }
+  return await res.json();
+}
+
+export async function simularCombinabilidadInflacionArt73(
+  payload: import('../types/tax').SimulacionCombinabilidadRequest
+): Promise<import('../types/tax').SimulacionCombinabilidadResponse> {
+  const res = await fetch(`${API_BASE_URL}/beneficios/simular-combinabilidad-inflacion-art73`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
+  });
+  if (!res.ok) {
+    const errorData = await res.json().catch(() => ({}));
+    throw new Error(errorData.detail || 'Error al simular combinabilidad');
+  }
+  return await res.json();
+}
+
+
 
