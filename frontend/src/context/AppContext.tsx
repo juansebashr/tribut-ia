@@ -2,6 +2,8 @@ import React, { createContext, useContext, useState, useEffect, type ReactNode }
 import { fetchAvailableYears, fetchRulesForYear } from '../services/api';
 import { CASILLAS_INFO, type CasillaInfo } from '../constants/casillas_info';
 
+export type ViewType = 'landing' | 'app' | 'skill-tutorial';
+
 export type ModuleType =
   | 'calendario'
   | 'pn'
@@ -44,6 +46,8 @@ export interface PopoverState {
 
 interface AppContextType {
   // Navigation
+  currentView: ViewType;
+  navigateToView: (view: ViewType, module?: ModuleType, subTab?: string) => void;
   activeModule: ModuleType;
   activeSubTab: string;
   navigateTo: (module: ModuleType, subTab?: string) => void;
@@ -119,11 +123,51 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
   const initialSessionId = urlParams.get('session_id') || 'default';
   const [sessionId, setSessionId] = useState<string>(initialSessionId);
 
+  // Helper to parse view & module from hash URL
+  const parseInitialViewFromHash = (): { view: ViewType; module?: ModuleType; subTab?: string } => {
+    if (typeof window === 'undefined') return { view: 'landing', module: 'pn', subTab: 'calc' };
+    const hash = window.location.hash.replace(/^#\/?/, '').trim();
+    if (!hash || hash === 'landing') {
+      return { view: 'landing', module: 'pn', subTab: 'calc' };
+    }
+    if (hash === 'skill-tutorial' || hash === 'skills' || hash === 'tutorial') {
+      return { view: 'skill-tutorial', module: 'pn', subTab: 'calc' };
+    }
+    const knownModules: ModuleType[] = [
+      'calendario', 'pn', 'pj', 'simple', 'iva', 'retefuente',
+      'beneficios', 'presentacion', 'inflacionario', 'art73', 'inmuebles-afc', 'rules', 'session-sync'
+    ];
+    const parts = hash.split('/');
+    const modCandidate = parts[0] === 'app' ? (parts[1] as ModuleType) : (parts[0] as ModuleType);
+    const subCandidate = parts[0] === 'app' ? parts[2] : parts[1];
+
+    if (knownModules.includes(modCandidate)) {
+      return { view: 'app', module: modCandidate, subTab: subCandidate || 'calc' };
+    }
+    return { view: 'app', module: 'pn', subTab: 'calc' };
+  };
+
+  const initialRoute = parseInitialViewFromHash();
+
   // Navigation
-  const [activeModule, setActiveModule] = useState<ModuleType>('pn');
-  const [activeSubTab, setActiveSubTab] = useState<string>('calc');
+  const [currentView, setCurrentView] = useState<ViewType>(initialRoute.view);
+  const [activeModule, setActiveModule] = useState<ModuleType>(initialRoute.module || 'pn');
+  const [activeSubTab, setActiveSubTab] = useState<string>(initialRoute.subTab || 'calc');
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState<boolean>(false);
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState<boolean>(false);
+
+  // Sync hash changes on browser back/forward
+  useEffect(() => {
+    const handleHashChange = () => {
+      const parsed = parseInitialViewFromHash();
+      setCurrentView(parsed.view);
+      if (parsed.module) setActiveModule(parsed.module);
+      if (parsed.subTab) setActiveSubTab(parsed.subTab);
+    };
+
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
 
   // Fiscal (Por defecto 2025 - UVT oficial $49.799 COP)
   const [taxYear, setTaxYearState] = useState<number>(2025);
@@ -188,10 +232,36 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     }
   };
 
+  const navigateToView = (view: ViewType, module?: ModuleType, subTab?: string) => {
+    setCurrentView(view);
+    if (module) {
+      setActiveModule(module);
+    }
+    if (subTab) {
+      setActiveSubTab(subTab);
+    }
+    if (typeof window !== 'undefined') {
+      if (view === 'landing') {
+        window.location.hash = 'landing';
+      } else if (view === 'skill-tutorial') {
+        window.location.hash = 'skill-tutorial';
+      } else if (view === 'app') {
+        const mod = module || activeModule;
+        const sub = subTab || (mod === activeModule ? activeSubTab : 'calc');
+        window.location.hash = `app/${mod}${sub ? `/${sub}` : ''}`;
+      }
+    }
+    setIsMobileSidebarOpen(false);
+  };
+
   const navigateTo = (module: ModuleType, subTab?: string) => {
+    setCurrentView('app');
     setActiveModule(module);
     if (subTab) {
       setActiveSubTab(subTab);
+    }
+    if (typeof window !== 'undefined') {
+      window.location.hash = `app/${module}${subTab ? `/${subTab}` : ''}`;
     }
     // Close mobile drawer if open
     setIsMobileSidebarOpen(false);
@@ -337,6 +407,8 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
   return (
     <AppContext.Provider
       value={{
+        currentView,
+        navigateToView,
         activeModule,
         activeSubTab,
         navigateTo,
