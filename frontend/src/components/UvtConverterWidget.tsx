@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { ArrowRightLeft } from 'lucide-react';
-import { convertUvt } from '../services/api';
 
 interface UvtConverterWidgetProps {
   taxYear: number;
@@ -10,11 +9,9 @@ interface UvtConverterWidgetProps {
 export const UvtConverterWidget: React.FC<UvtConverterWidgetProps> = ({ taxYear, uvtValue }) => {
   const [copAmount, setCopAmount] = useState<string>('50000000');
   const [uvtAmount, setUvtAmount] = useState<string>('');
-  const [lastEdited, setLastEdited] = useState<'cop' | 'uvt'>('cop');
 
   const handleCopChange = async (val: string) => {
     setCopAmount(val);
-    setLastEdited('cop');
     const num = parseFloat(val) || 0;
     if (uvtValue > 0) {
       setUvtAmount((num / uvtValue).toFixed(2));
@@ -23,7 +20,6 @@ export const UvtConverterWidget: React.FC<UvtConverterWidgetProps> = ({ taxYear,
 
   const handleUvtChange = async (val: string) => {
     setUvtAmount(val);
-    setLastEdited('uvt');
     const num = parseFloat(val) || 0;
     if (uvtValue > 0) {
       setCopAmount(Math.round(num * uvtValue).toString());

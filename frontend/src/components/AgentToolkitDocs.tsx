@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Bot, Copy, Check, Terminal, FileCode2 } from 'lucide-react';
+import { Bot, Copy, Check, FileCode2 } from 'lucide-react';
 
 export const AgentToolkitDocs: React.FC = () => {
   const [copiedIndex, setCopiedIndex] = useState<number | null>(null);

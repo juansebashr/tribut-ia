@@ -1,4 +1,4 @@
-import {
+import type {
   PersonaNaturalInput,
   PersonaNaturalOutput,
   PersonaJuridicaInput,
@@ -121,3 +121,19 @@ export async function simularSancion(
   }
   return await res.json();
 }
+
+export async function simularInmuebleAfc(
+  payload: import('../types/tax').SimulacionInmuebleAfcRequest
+): Promise<import('../types/tax').SimulacionInmuebleAfcResponse> {
+  const res = await fetch(`${API_BASE_URL}/beneficios/simular-inmueble-afc`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
+  });
+  if (!res.ok) {
+    const errorData = await res.json().catch(() => ({}));
+    throw new Error(errorData.detail || 'Error al simular beneficios de inmuebles y cuentas AFC');
+  }
+  return await res.json();
+}
+

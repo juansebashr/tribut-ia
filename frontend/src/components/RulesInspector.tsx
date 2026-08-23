@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Sliders, Code2, ShieldCheck, FileCheck } from 'lucide-react';
-import { TaxYearRules } from '../types/tax';
+import { Code2, ShieldCheck, FileCheck } from 'lucide-react';
+import type { TaxYearRules } from '../types/tax';
 import { fetchRulesForYear } from '../services/api';
 
 interface RulesInspectorProps {

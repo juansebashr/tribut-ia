@@ -280,7 +280,7 @@ def calcular_ajuste_articulo_73(
 
 def get_catalogo_beneficios() -> list[BeneficioItem]:
     return [
-        # 0. AJUSTE FISCAL DE ACTIVOS FIJOS (Art. 73 E.T.)
+        # 0. AJUSTE FISCAL DE ACTIVOS FIJOS (Art. 73, 70, 72, 44 y 311-1 E.T.)
         BeneficioItem(
             id="reajuste_fiscal_activos_art73",
             categoria="ajustes_patrimonio",
@@ -294,6 +294,59 @@ def get_catalogo_beneficios() -> list[BeneficioItem]:
                 "Comprobante o escritura pública con la fecha y costo de adquisición histórico.",
             ],
             ejemplo_calculo="Un inmueble urbano comprado en 1995 por $20.000.000 se multiplica por 23,50x = Costo fiscal ajustado de $470.000.000. Si se vende en $500.000.000, solo tributa sobre $30.000.000 de utilidad en lugar de $480.000.000.",
+        ),
+        BeneficioItem(
+            id="reajuste_fiscal_anual_art70",
+            categoria="ajustes_patrimonio",
+            nombre="Reajuste Fiscal Ordinario Anual de Activos Fijos (Art. 70 E.T.)",
+            articulo_et="Art. 70 y 868 E.T.",
+            descripcion="Permite incrementar anualmente el costo fiscal de los bienes muebles e inmuebles poseídos como activos fijos en el porcentaje de reajuste señalado por el Gobierno Nacional.",
+            tope_legal_texto="Porcentaje anual fijado por decreto nacional (acumulativo año a año)",
+            requisitos=[
+                "Activos fijos poseídos por personas naturales o jurídicas.",
+                "Declaración consecutiva del costo fiscal ajustado en declaraciones de renta.",
+            ],
+            ejemplo_calculo="Un activo adquirido en $100.000.000 reajustado al 5,17% anual incrementa su costo a $105.170.000 sin generar renta por incremento patrimonial.",
+        ),
+        BeneficioItem(
+            id="costo_fiscal_avaluo_art72",
+            categoria="ajustes_patrimonio",
+            nombre="Autoavalúo o Avalúo Catastral como Costo Fiscal (Art. 72 E.T.)",
+            articulo_et="Art. 72 E.T.",
+            descripcion="Permite tomar el avalúo catastral o autoavalúo declarado para fines del Impuesto Predial Unificado del año anterior al de la enajenación como costo fiscal del inmueble.",
+            tope_legal_texto="Valor del autoavalúo del año anterior al de la enajenación",
+            requisitos=[
+                "Inmueble que constituya activo fijo.",
+                "Copia de la declaración del Impuesto Predial Unificado del año anterior.",
+            ],
+            ejemplo_calculo="Si el predial del año anterior fijó un autoavalúo de $380.000.000, ese monto se toma como costo fiscal restando la utilidad al vender en $400.000.000.",
+        ),
+        BeneficioItem(
+            id="exencion_utilidad_casa_habitacion_pre1987",
+            categoria="rentas_exentas",
+            nombre="Exención en Venta de Casa o Apartamento Adquirido Antes de 1987 (Art. 44 E.T.)",
+            articulo_et="Art. 44 y 399 E.T.",
+            descripcion="Si la casa o apartamento de habitación fue adquirido antes del 1 de enero de 1987, una porción de la utilidad generada en la venta (del 10% al 100%) no causa impuesto de renta ni ganancia ocasional. Asimismo, la retención en la fuente notarial del 1% se disminuye en el mismo porcentaje.",
+            tope_legal_texto="10% (1986) hasta 100% de exención (antes de 1978)",
+            requisitos=[
+                "Corresponder a la casa o apartamento de habitación del contribuyente.",
+                "Fecha de adquisición comprobada anterior al 01-ene-1987.",
+            ],
+            ejemplo_calculo="Una casa de habitación comprada en 1982 goza del 50% de exención sobre la ganancia total y paga solo el 0,5% de retención notarial.",
+        ),
+        BeneficioItem(
+            id="exencion_venta_inmuebles_afc_art311_1",
+            categoria="rentas_exentas",
+            nombre="Exención por Venta de Vivienda con Cuenta AFC o Compra de Vivienda (Art. 311-1 E.T.)",
+            articulo_et="Art. 311-1 y 126-4 E.T.",
+            descripcion="Exención de hasta 5.000 UVT de la utilidad en la venta de la casa o apartamento de habitación de personas naturales (poseída por 2+ años) si se deposita en cuentas AFC, o se destina a compra de otra vivienda o abono a créditos hipotecarios.",
+            tope_legal_texto="Hasta 5.000 UVT ($261.750.000 COP en 2026)",
+            requisitos=[
+                "Inmueble de habitación poseído por al menos 2 años.",
+                "Depositar la ganancia en cuenta AFC o destinarla directamente a compra de vivienda o crédito hipotecario vinculado.",
+                "Permanencia de 10 años en la cuenta AFC si no se usa para vivienda.",
+            ],
+            ejemplo_calculo="Utilidad de $200.000.000 en venta de casa consignada en cuenta AFC queda 100% exenta, ahorrando $30.000.000 en impuesto de ganancia ocasional (15%).",
         ),
         # 1. INCRNGO
         BeneficioItem(
@@ -573,13 +626,54 @@ class LiquidacionSancionResponse(BaseModel):
     pasos_calculo: list[str]
 
 
+class EscenarioComparativoInmueble(BaseModel):
+    nombre: str
+    descripcion: str
+    costo_fiscal_aplicado_cop: float
+    ganancia_ocasional_bruta_cop: float
+    exencion_art44_cop: float
+    exencion_afc_cop: float
+    ganancia_ocasional_gravable_cop: float
+    impuesto_ganancia_ocasional_cop: float
+    retefuente_notarial_cop: float
+    ahorro_frente_a_sin_planeacion_cop: float
+
+
 class SimulacionInmuebleAfcRequest(BaseModel):
     precio_venta_cop: float = Field(
-        ..., description="Precio pactado en la enajenación de la vivienda"
+        ..., gt=0, description="Precio pactado en la enajenación del inmueble en pesos COP"
     )
-    costo_fiscal_inmueble_cop: float = Field(
-        ...,
-        description="Costo fiscal del inmueble (adquisición + mejoras o avalúo / reajuste Art. 73)",
+    costo_adquisicion_historico_cop: float | None = Field(
+        None,
+        description="Costo de compra o adquisición histórico comprobado del inmueble en pesos COP",
+    )
+    costo_fiscal_inmueble_cop: float | None = Field(
+        None,
+        description="Costo fiscal directo (retrocompatibilidad). Si no se envía costo_adquisicion_historico_cop se usa este.",
+    )
+    ano_adquisicion: str = Field(
+        "2015",
+        description="Año de adquisición o compra del inmueble (ej. '1975', '1984', '2011', '2018', '1955 y anteriores')",
+    )
+    tipo_inmueble: str = Field(
+        "bienes_raices_urbanos",
+        description="Tipo de inmueble: 'bienes_raices_urbanos', 'bienes_raices_rurales', 'bienes_raices_rurales_agro'",
+    )
+    metodo_costo_fiscal: str = Field(
+        "art73",
+        description="Método de costo fiscal: 'art73' (multiplicador DANE), 'art70' (reajuste anual acumulado), 'art72' (autoavalúo predial), 'historico' (costo base)",
+    )
+    costo_fiscal_personalizado_cop: float | None = Field(
+        None,
+        description="Valor de autoavalúo catastral (Art. 72) o costo ajustado manual Art. 70 si se selecciona dicho método",
+    )
+    mejoras_y_contribuciones_cop: float = Field(
+        0.0,
+        description="Valor de adiciones, mejoras y valorizaciones pagadas (Art. 73 E.T.)",
+    )
+    depreciacion_acumulada_deducida_cop: float = Field(
+        0.0,
+        description="Depreciaciones deducidas fiscalmente en periodos anteriores (Parágrafo Art. 73 y Art. 72)",
     )
     es_vivienda_habitacion: bool = Field(
         True,
@@ -587,11 +681,11 @@ class SimulacionInmuebleAfcRequest(BaseModel):
     )
     posesion_mas_2_anos: bool = Field(
         True,
-        description="¿El inmueble fue poseído por dos (2) años o más? (Califica como Ganancia Ocasional)",
+        description="¿El inmueble fue poseído por dos (2) años o más? (Califica como Ganancia Ocasional al 15% vs Cédula General)",
     )
     monto_depositado_afc_o_vivienda_cop: float = Field(
-        ...,
-        description="Monto depositado en Cuenta AFC o destinado a adquisición de nueva vivienda o pago hipotecario",
+        0.0,
+        description="Monto depositado en Cuenta AFC o destinado a adquisición de nueva vivienda o amortización de crédito hipotecario (Art. 311-1 E.T.)",
     )
     tax_year: int = Field(2026, description="Año gravable")
     custom_uvt: float | None = Field(None, description="UVT personalizado opcional")
@@ -601,19 +695,55 @@ class SimulacionInmuebleAfcResponse(BaseModel):
     tax_year: int
     uvt_value: float
     precio_venta_cop: float
-    costo_fiscal_cop: float
+    costo_historico_cop: float
+    ano_adquisicion: str
+    tipo_inmueble: str
+    metodo_costo_fiscal_aplicado: str
+    factor_art73_aplicado: float | None
+    costo_fiscal_determinado_cop: float
+    costo_fiscal_cop: float  # Retrocompatibilidad
     ganancia_ocasional_bruta_cop: float
     es_vivienda_habitacion: bool
     posesion_mas_2_anos: bool
+
+    # Estrategia 4: Art. 44 E.T. (pre-1987)
+    aplica_art44_pre1987: bool
+    porcentaje_exencion_art44_pct: float
+    ganancia_exenta_art44_cop: float
+
+    # Estrategia 3: Art. 311-1 E.T. (AFC)
     monto_depositado_afc_cop: float
     tope_maximo_exencion_uvt: float
     tope_maximo_exencion_cop: float
-    ganancia_ocasional_exenta_cop: float
+    ganancia_exenta_afc_art311_1_cop: float
+
+    # Totales de Exención y Ganancia Gravada
+    ganancia_ocasional_exenta_total_cop: float
+    ganancia_ocasional_exenta_cop: float  # Retrocompatibilidad
     ganancia_ocasional_gravada_final_cop: float
     tarifa_ganancia_ocasional_pct: float
-    impuesto_go_sin_afc_cop: float
-    impuesto_go_con_afc_cop: float
-    ahorro_impuesto_afc_cop: float
+
+    # Impuestos y Ahorros
+    impuesto_go_sin_planeacion_cop: float
+    impuesto_go_con_beneficios_cop: float
+    impuesto_go_sin_afc_cop: float  # Retrocompatibilidad
+    impuesto_go_con_afc_cop: float  # Retrocompatibilidad
+    ahorro_total_impuesto_cop: float
+    ahorro_impuesto_afc_cop: float  # Retrocompatibilidad
+    porcentaje_ahorro_tributario_pct: float
+
+    # Retención en la fuente notarial
+    retefuente_notarial_tarifa_base_pct: float
+    porcentaje_reduccion_retefuente_art399_pct: float
+    retefuente_notarial_sin_beneficio_cop: float
+    retefuente_notarial_final_cop: float
+    ahorro_retefuente_notarial_cop: float
+
+    # Escenarios comparativos
+    escenarios: list[EscenarioComparativoInmueble]
+
+    # Didáctica y Normatividad
+    estrategias_aplicadas: list[str]
     requisitos_estatuto: list[str]
     advertencias_legales: list[str]
     explicacion_paso_a_paso: list[str]
@@ -874,65 +1004,319 @@ def calcular_sancion_tributaria(req: LiquidacionSancionRequest) -> LiquidacionSa
 def calcular_exencion_inmueble_afc(
     req: SimulacionInmuebleAfcRequest,
 ) -> SimulacionInmuebleAfcResponse:
-    """Calcula la exención de Ganancia Ocasional por venta de casa/apto de habitación consignada en AFC (Art. 311-1)."""
+    """Calcula la liquidación integral de la venta de inmuebles para personas naturales,
+
+    comparando y combinando las 5 estrategias legales del Estatuto Tributario:
+    1. Reajuste fiscal ordinario (Art. 70 E.T.).
+    2. Factor de ajuste oficial DANE/DIAN (Art. 73 E.T.).
+    3. Exención de hasta 5.000 UVT por destino a Cuenta AFC / Vivienda (Art. 311-1 y 126-4 E.T.).
+    4. Exención escalonada para inmuebles adquiridos antes de 1987 (Art. 44 y 399 E.T.).
+    5. Avalúo/autoavalúo predial del año anterior (Art. 72 E.T.) y control de retención notarial (Art. 398/399 E.T.).
+    """
     from app.core.rules_engine.loader import get_rules_for_year
 
     rules = get_rules_for_year(req.tax_year, req.custom_uvt)
     uvt = rules.uvt_value
-
     tope_5000_uvt_cop = round(5000.0 * uvt)
-    precio_venta = max(0.0, req.precio_venta_cop)
-    costo_fiscal = max(0.0, req.costo_fiscal_inmueble_cop)
-    ganancia_bruta = max(0.0, precio_venta - costo_fiscal)
-    monto_afc = max(0.0, req.monto_depositado_afc_o_vivienda_cop)
 
+    precio_venta = max(0.0, req.precio_venta_cop)
+    if req.costo_adquisicion_historico_cop is not None:
+        costo_historico = max(0.0, req.costo_adquisicion_historico_cop)
+        metodo = req.metodo_costo_fiscal.lower().strip()
+    elif req.costo_fiscal_inmueble_cop is not None:
+        costo_historico = max(0.0, req.costo_fiscal_inmueble_cop)
+        # Si vino como llamada legado directa sin especificar método distinto al default, usar el costo directo
+        metodo = "historico"
+    else:
+        costo_historico = 0.0
+        metodo = "historico"
+
+    # Normalizar año de adquisición y calcular años de posesión
+    norm_ano = " ".join(req.ano_adquisicion.strip().split())
+    try:
+        ano_num = int(norm_ano)
+    except ValueError:
+        ano_num = 1955 if "1955" in norm_ano else 2015
+
+    posesion_anios = max(0, req.tax_year - ano_num)
+    es_go = (
+        req.posesion_mas_2_anos if req.posesion_mas_2_anos is not None else (posesion_anios >= 2)
+    )
+    tarifa_go = 0.15 if es_go else 0.35
+
+    # 1. Obtener factor multiplicador Art. 73
+    tabla = get_tabla_articulo_73()
+    item_encontrado: AjusteArticulo73Item | None = None
+    for row in tabla:
+        if row.ano_adquisicion.lower() == norm_ano.lower():
+            item_encontrado = row
+            break
+    if not item_encontrado and tabla:
+        item_encontrado = tabla[-1]
+
+    factor_art73 = 1.0
+    if item_encontrado:
+        if req.tipo_inmueble == "bienes_raices_urbanos":
+            factor_art73 = item_encontrado.bienes_raices_urbanos
+        elif req.tipo_inmueble == "bienes_raices_rurales_agro":
+            factor_art73 = item_encontrado.bienes_raices_rurales_agro
+        elif req.tipo_inmueble == "bienes_raices_rurales":
+            factor_art73 = item_encontrado.bienes_raices_rurales
+        else:
+            factor_art73 = item_encontrado.bienes_raices_urbanos
+
+    # 2. Determinación del Costo Fiscal según método seleccionado
+    costo_base: float = 0.0
+    if metodo == "art73":
+        costo_base = float(round(costo_historico * factor_art73))
+    elif metodo == "art72":
+        costo_base = float(req.costo_fiscal_personalizado_cop or costo_historico)
+    elif metodo == "art70":
+        costo_base = float(req.costo_fiscal_personalizado_cop or costo_historico)
+    elif metodo == "historico":
+        costo_base = float(costo_historico)
+    else:
+        # Fallback retrocompatible
+        costo_base = float(req.costo_fiscal_inmueble_cop or round(costo_historico * factor_art73))
+
+    costo_fiscal_total = max(
+        0.0,
+        costo_base + req.mejoras_y_contribuciones_cop - req.depreciacion_acumulada_deducida_cop,
+    )
+
+    # 3. Ganancia Ocasional Bruta
+    ganancia_bruta = max(0.0, precio_venta - costo_fiscal_total)
+
+    # 4. Estrategia 4: Artículo 44 del Estatuto Tributario (Inmuebles Pre-1987)
+    tabla_art44_pcts: dict[int, float] = {
+        1986: 0.10,
+        1985: 0.20,
+        1984: 0.30,
+        1983: 0.40,
+        1982: 0.50,
+        1981: 0.60,
+        1980: 0.70,
+        1979: 0.80,
+        1978: 0.90,
+    }
+    aplica_art44 = req.es_vivienda_habitacion and (ano_num < 1987)
+    exencion_art44: float = 0.0
+    if aplica_art44:
+        pct_art44 = tabla_art44_pcts.get(ano_num, 1.00 if ano_num < 1978 else 0.0)
+        exencion_art44 = float(round(ganancia_bruta * pct_art44))
+    else:
+        pct_art44 = 0.0
+        exencion_art44 = 0.0
+
+    utilidad_post_art44 = max(0.0, ganancia_bruta - exencion_art44)
+
+    # 5. Estrategia 3: Artículo 311-1 del Estatuto Tributario (Cuentas AFC / Vivienda)
+    monto_afc = max(0.0, req.monto_depositado_afc_o_vivienda_cop)
+    if req.es_vivienda_habitacion and es_go and utilidad_post_art44 > 0 and monto_afc > 0:
+        exencion_afc = min(monto_afc, utilidad_post_art44, float(tope_5000_uvt_cop))
+    else:
+        exencion_afc = 0.0
+
+    # 6. Totales y Liquidación Final
+    ganancia_exenta_total = exencion_art44 + exencion_afc
+    ganancia_gravada_final = max(0.0, ganancia_bruta - ganancia_exenta_total)
+    impuesto_final = round(ganancia_gravada_final * tarifa_go)
+
+    # 7. Escenario Base Sin Planeación (Costo histórico puro, sin Art. 73, sin Art. 44, sin AFC)
+    ganancia_sin_planeacion = max(0.0, precio_venta - costo_historico)
+    impuesto_sin_planeacion = round(ganancia_sin_planeacion * tarifa_go)
+    ahorro_total_impuesto = max(0.0, impuesto_sin_planeacion - impuesto_final)
+    pct_ahorro = (
+        (ahorro_total_impuesto / impuesto_sin_planeacion * 100.0)
+        if impuesto_sin_planeacion > 0
+        else 0.0
+    )
+
+    # 8. Retención en la Fuente Notarial (Art. 398 y 399 E.T.)
+    tarifa_retefuente_base = 0.01  # 1%
+    pct_reduccion_retefuente = pct_art44 * 100.0  # Art. 399
+    retefuente_sin = round(precio_venta * 0.01)
+    retefuente_con = round(precio_venta * 0.01 * (1.0 - pct_art44))
+    ahorro_retefuente = max(0.0, retefuente_sin - retefuente_con)
+
+    # 9. Construcción de Escenarios Comparativos
+    # Escenario 1: Sin Planeación
+    esc_sin_planeacion = EscenarioComparativoInmueble(
+        nombre="1. Sin Planeación Fiscal",
+        descripcion="Costo de compra histórico sin reajustes, 0% exención y sin cuenta AFC.",
+        costo_fiscal_aplicado_cop=costo_historico,
+        ganancia_ocasional_bruta_cop=ganancia_sin_planeacion,
+        exencion_art44_cop=0.0,
+        exencion_afc_cop=0.0,
+        ganancia_ocasional_gravable_cop=ganancia_sin_planeacion,
+        impuesto_ganancia_ocasional_cop=float(impuesto_sin_planeacion),
+        retefuente_notarial_cop=float(retefuente_sin),
+        ahorro_frente_a_sin_planeacion_cop=0.0,
+    )
+
+    # Escenario 2: Solo Art. 73 (DANE)
+    costo_art73_esc = round(costo_historico * factor_art73)
+    ganancia_art73_esc = max(0.0, precio_venta - costo_art73_esc)
+    imp_art73_esc = round(ganancia_art73_esc * tarifa_go)
+    esc_solo_art73 = EscenarioComparativoInmueble(
+        nombre="2. Solo Reajuste Art. 73 (DANE)",
+        descripcion=f"Multiplicación del costo histórico por factor {factor_art73:,.2f}x según año {norm_ano}.",
+        costo_fiscal_aplicado_cop=float(costo_art73_esc),
+        ganancia_ocasional_bruta_cop=float(ganancia_art73_esc),
+        exencion_art44_cop=0.0,
+        exencion_afc_cop=0.0,
+        ganancia_ocasional_gravable_cop=float(ganancia_art73_esc),
+        impuesto_ganancia_ocasional_cop=float(imp_art73_esc),
+        retefuente_notarial_cop=float(retefuente_sin),
+        ahorro_frente_a_sin_planeacion_cop=max(0.0, impuesto_sin_planeacion - imp_art73_esc),
+    )
+
+    # Escenario 3: Solo Art. 44 (si aplica pre-1987)
+    ex_art44_solo = round(ganancia_sin_planeacion * pct_art44) if aplica_art44 else 0.0
+    grav_art44_solo = max(0.0, ganancia_sin_planeacion - ex_art44_solo)
+    imp_art44_solo = round(grav_art44_solo * tarifa_go)
+    esc_solo_art44 = EscenarioComparativoInmueble(
+        nombre="3. Solo Exención Art. 44 (Pre-1987)",
+        descripcion=(
+            f"Exención histórica del {pct_art44 * 100:.0f}% sobre utilidad en vivienda adquirida en {norm_ano}."
+            if aplica_art44
+            else "No aplica para inmuebles adquiridos a partir de 1987."
+        ),
+        costo_fiscal_aplicado_cop=costo_historico,
+        ganancia_ocasional_bruta_cop=ganancia_sin_planeacion,
+        exencion_art44_cop=float(ex_art44_solo),
+        exencion_afc_cop=0.0,
+        ganancia_ocasional_gravable_cop=float(grav_art44_solo),
+        impuesto_ganancia_ocasional_cop=float(imp_art44_solo),
+        retefuente_notarial_cop=float(retefuente_con if aplica_art44 else retefuente_sin),
+        ahorro_frente_a_sin_planeacion_cop=max(0.0, impuesto_sin_planeacion - imp_art44_solo),
+    )
+
+    # Escenario 4: Solo Cuenta AFC (Art. 311-1)
+    ex_afc_solo = (
+        min(monto_afc, ganancia_sin_planeacion, float(tope_5000_uvt_cop))
+        if (req.es_vivienda_habitacion and es_go and monto_afc > 0)
+        else 0.0
+    )
+    grav_afc_solo = max(0.0, ganancia_sin_planeacion - ex_afc_solo)
+    imp_afc_solo = round(grav_afc_solo * tarifa_go)
+    esc_solo_afc = EscenarioComparativoInmueble(
+        nombre="4. Solo Cuenta AFC (Art. 311-1)",
+        descripcion="Costo histórico + depósito en cuenta AFC o compra de vivienda hasta 5.000 UVT.",
+        costo_fiscal_aplicado_cop=costo_historico,
+        ganancia_ocasional_bruta_cop=ganancia_sin_planeacion,
+        exencion_art44_cop=0.0,
+        exencion_afc_cop=float(ex_afc_solo),
+        ganancia_ocasional_gravable_cop=float(grav_afc_solo),
+        impuesto_ganancia_ocasional_cop=float(imp_afc_solo),
+        retefuente_notarial_cop=float(retefuente_sin),
+        ahorro_frente_a_sin_planeacion_cop=max(0.0, impuesto_sin_planeacion - imp_afc_solo),
+    )
+
+    # Escenario 5: Estrategia Combinada Óptima
+    esc_optimo = EscenarioComparativoInmueble(
+        nombre="5. Estrategia Combinada Óptima (Máximo Ahorro)",
+        descripcion="Costo ajustado Art. 73 + Exención Art. 44 (si aplica) + Exención AFC Art. 311-1 + Retención Notarial Optimizada.",
+        costo_fiscal_aplicado_cop=costo_fiscal_total,
+        ganancia_ocasional_bruta_cop=ganancia_bruta,
+        exencion_art44_cop=float(exencion_art44),
+        exencion_afc_cop=float(exencion_afc),
+        ganancia_ocasional_gravable_cop=float(ganancia_gravada_final),
+        impuesto_ganancia_ocasional_cop=float(impuesto_final),
+        retefuente_notarial_cop=float(retefuente_con),
+        ahorro_frente_a_sin_planeacion_cop=float(ahorro_total_impuesto),
+    )
+
+    escenarios = [esc_sin_planeacion, esc_solo_art73, esc_solo_art44, esc_solo_afc, esc_optimo]
+
+    # Estrategias aplicadas list
+    estrategias = []
+    if metodo == "art73" and factor_art73 > 1.0:
+        estrategias.append(
+            f"Ajuste Fiscal Art. 73 E.T. (Factor {factor_art73:,.2f}x sobre costo histórico)"
+        )
+    elif metodo == "art72":
+        estrategias.append("Avalúo o Autoavalúo Catastral del año anterior (Art. 72 E.T.)")
+    elif metodo == "art70":
+        estrategias.append("Reajuste Fiscal Ordinario Acumulado (Art. 70 E.T.)")
+
+    if aplica_art44 and exencion_art44 > 0:
+        estrategias.append(
+            f"Exención Vivienda Pre-1987 Art. 44 E.T. ({pct_art44 * 100:.0f}% no gravada)"
+        )
+        estrategias.append(
+            f"Disminución de Retención en la Fuente Notarial Art. 399 E.T. ({pct_art44 * 100:.0f}% de rebaja)"
+        )
+
+    if exencion_afc > 0:
+        estrategias.append(
+            f"Exención Cuenta AFC / Vivienda Art. 311-1 E.T. (hasta 5.000 UVT = ${tope_5000_uvt_cop:,.0f} COP)"
+        )
+
+    # Pasos de cálculo didácticos
     pasos = [
-        f"1. Determinación de la Ganancia Ocasional Bruta: Precio de venta (${precio_venta:,.0f}) - Costo fiscal (${costo_fiscal:,.0f}) = ${ganancia_bruta:,.0f} COP.",
+        f"1. Identificación del activo: Inmueble adquirido en {norm_ano} con costo histórico comprobado de ${costo_historico:,.0f} COP y precio de venta en escritura de ${precio_venta:,.0f} COP.",
+        f"2. Determinación del Costo Fiscal según método ({metodo.upper()}): Costo base ajustado = ${costo_base:,.0f} COP"
+        + (f" (Factor Art. 73 oficial: {factor_art73:,.2f}x)" if metodo == "art73" else "")
+        + (
+            f" + Mejoras: ${req.mejoras_y_contribuciones_cop:,.0f}"
+            if req.mejoras_y_contribuciones_cop > 0
+            else ""
+        )
+        + (
+            f" - Depreciación: ${req.depreciacion_acumulada_deducida_cop:,.0f}"
+            if req.depreciacion_acumulada_deducida_cop > 0
+            else ""
+        )
+        + f" => Costo fiscal definitivo: ${costo_fiscal_total:,.0f} COP.",
+        f"3. Ganancia Ocasional Bruta: Precio de venta (${precio_venta:,.0f}) - Costo fiscal (${costo_fiscal_total:,.0f}) = ${ganancia_bruta:,.0f} COP.",
     ]
 
-    # Validar condiciones del Art. 311-1 E.T.
-    if req.es_vivienda_habitacion and req.posesion_mas_2_anos and ganancia_bruta > 0:
-        # Exención limitada al menor entre: monto depositado en AFC, ganancia bruta y 5.000 UVT
-        ganancia_exenta = min(monto_afc, ganancia_bruta, float(tope_5000_uvt_cop))
+    if aplica_art44 and exencion_art44 > 0:
         pasos.append(
-            f"2. Aplicación del Art. 311-1 E.T.: El contribuyente cumple los requisitos (vivienda de habitación poseída por 2+ años). "
-            f"La utilidad exenta es el menor entre el valor depositado en AFC (${monto_afc:,.0f}), la utilidad (${ganancia_bruta:,.0f}) "
-            f"y el tope legal de 5.000 UVT (${tope_5000_uvt_cop:,.0f}) => Exención calculada: ${ganancia_exenta:,.0f} COP."
+            f"4. Aplicación del Artículo 44 del E.T. (Inmueble adquirido en {norm_ano} antes de 1987): "
+            f"Porcentaje legal no sujeto a impuesto = {pct_art44 * 100:.0f}%. "
+            f"Utilidad exenta Art. 44: ${ganancia_bruta:,.0f} x {pct_art44 * 100:.0f}% = ${exencion_art44:,.0f} COP. "
+            f"Utilidad remanente: ${utilidad_post_art44:,.0f} COP."
         )
-    else:
-        ganancia_exenta = 0.0
-        if not req.posesion_mas_2_anos:
-            pasos.append(
-                "2. El activo fue poseído por menos de 2 años, por lo que tributa como renta ordinaria en cédula general y no aplica el Art. 311-1."
-            )
-        elif not req.es_vivienda_habitacion:
-            pasos.append(
-                "2. El inmueble no corresponde a la casa o apartamento de habitación del contribuyente (Art. 311-1 aplica exclusivamente a vivienda personal)."
-            )
 
-    ganancia_gravada = max(0.0, ganancia_bruta - ganancia_exenta)
-    tarifa_go = 0.15  # 15% Ley 2277 de 2022
-
-    impuesto_sin_afc = round(ganancia_bruta * tarifa_go)
-    impuesto_con_afc = round(ganancia_gravada * tarifa_go)
-    ahorro = max(0, impuesto_sin_afc - impuesto_con_afc)
+    if exencion_afc > 0:
+        pasos.append(
+            f"5. Aplicación del Artículo 311-1 del E.T. (Depósito en Cuenta AFC / Vivienda): "
+            f"De la utilidad remanente (${utilidad_post_art44:,.0f}), se exime el menor entre el depósito AFC (${monto_afc:,.0f}) "
+            f"y el tope de 5.000 UVT (${tope_5000_uvt_cop:,.0f}) => Exención AFC: ${exencion_afc:,.0f} COP."
+        )
 
     pasos.append(
-        f"3. Liquidación del Impuesto de Ganancia Ocasional (Tarifa 15%): "
-        f"Base gravable final = ${ganancia_gravada:,.0f} COP => Impuesto a pagar = ${impuesto_con_afc:,.0f} COP. "
-        f"(Sin el beneficio AFC habría pagado ${impuesto_sin_afc:,.0f} COP, logrando un ahorro directo de ${ahorro:,.0f} COP)."
+        f"6. Ganancia Ocasional Gravable Final: Base gravable = ${ganancia_gravada_final:,.0f} COP "
+        f"(Exención total acumulada: ${ganancia_exenta_total:,.0f} COP)."
+    )
+    pasos.append(
+        f"7. Liquidación del Impuesto de Ganancia Ocasional (Tarifa 15%): "
+        f"Impuesto a cargo final = ${impuesto_final:,.0f} COP. "
+        f"Frente a un impuesto sin planeación de ${impuesto_sin_planeacion:,.0f} COP, el AHORRO NETO OBTENIDO ES DE ${ahorro_total_impuesto:,.0f} COP ({pct_ahorro:.1f}% de ahorro)."
+    )
+    pasos.append(
+        "8. Retención en la fuente notarial (Art. 398 y 399 E.T.): Tarifa notarial del 1% "
+        + (
+            f"reducida en {pct_reduccion_retefuente:.0f}% por Art. 399 => Retención a pagar en notaría: ${retefuente_con:,.0f} COP (Ahorro notarial: ${ahorro_retefuente:,.0f} COP)."
+            if pct_reduccion_retefuente > 0
+            else f"=> Retención a pagar en notaría: ${retefuente_con:,.0f} COP."
+        )
     )
 
     requisitos = [
-        "El inmueble enajenado debe corresponder a la casa o apartamento de habitación del contribuyente.",
-        "Haber poseído el inmueble durante al menos dos (2) años continuos a la fecha de la escritura.",
-        "Depositar la totalidad o parte de la utilidad en una Cuenta de Ahorro para el Fomento de la Construcción (AFC), o destinarla directamente al pago de un crédito hipotecario o compra de otra vivienda de habitación.",
-        "El retiro de los fondos de la cuenta AFC debe destinarse exclusivamente a la adquisición de otra vivienda de habitación dentro de los plazos fijados por la DIAN o permanecer al menos 10 años en la cuenta.",
+        "Para Ganancia Ocasional (15%): El inmueble debe haber sido poseído por dos (2) años o más (Art. 300 E.T.).",
+        "Para Exención AFC (Art. 311-1): Debe ser la casa o apartamento de habitación del contribuyente.",
+        "Para Exención AFC (Art. 311-1): Depositar la totalidad o parte de la utilidad en una Cuenta AFC, o destinarla a compra de otra vivienda o abono a crédito hipotecario vinculado.",
+        "Para Exención Pre-1987 (Art. 44): Inmueble adquirido antes del 01-ene-1987 con certificado de tradición y libertad que acredite la fecha de compra.",
+        "Para Reajuste Art. 73: Ser persona natural y conservar la escritura pública de compra donde conste el valor histórico.",
     ]
 
     advertencias = [
-        "Si retira los recursos de la cuenta AFC para fines distintos a vivienda antes de 10 años, el banco retendrá el 15% del impuesto más sanciones e intereses.",
-        "En la notaría se practica una retención en la fuente del 1% por enajenación de activos fijos (Art. 398 E.T.), la cual podrá imputarse en la declaración de renta como anticipo.",
+        "Si retira los recursos de la cuenta AFC para un fin distinto a vivienda antes de 10 años, la entidad financiera aplicará la retención del 15% más sanciones e intereses.",
+        "La retención en la fuente practicada en notaría (1% Art. 398 / 399) debe incluirse en la Casilla 134 del Formulario 210 como anticipo acreditable.",
+        "En el Formulario 210 DIAN: Ingresos por venta van en Casilla 80, Costo fiscal en Casilla 81, Ganancias exentas (Art. 311-1 y Art. 44) en Casilla 82, Ganancia gravada en Casilla 83, e Impuesto en Casilla 87.",
         "El tope de 5.000 UVT opera por contribuyente y por el año gravable de la venta.",
     ]
 
@@ -940,19 +1324,41 @@ def calcular_exencion_inmueble_afc(
         tax_year=req.tax_year,
         uvt_value=uvt,
         precio_venta_cop=precio_venta,
-        costo_fiscal_cop=costo_fiscal,
+        costo_historico_cop=costo_historico,
+        ano_adquisicion=norm_ano,
+        tipo_inmueble=req.tipo_inmueble,
+        metodo_costo_fiscal_aplicado=metodo,
+        factor_art73_aplicado=factor_art73 if metodo == "art73" else None,
+        costo_fiscal_determinado_cop=costo_fiscal_total,
+        costo_fiscal_cop=costo_fiscal_total,
         ganancia_ocasional_bruta_cop=ganancia_bruta,
         es_vivienda_habitacion=req.es_vivienda_habitacion,
-        posesion_mas_2_anos=req.posesion_mas_2_anos,
+        posesion_mas_2_anos=es_go,
+        aplica_art44_pre1987=aplica_art44,
+        porcentaje_exencion_art44_pct=pct_art44 * 100.0,
+        ganancia_exenta_art44_cop=float(exencion_art44),
         monto_depositado_afc_cop=monto_afc,
         tope_maximo_exencion_uvt=5000.0,
         tope_maximo_exencion_cop=float(tope_5000_uvt_cop),
-        ganancia_ocasional_exenta_cop=ganancia_exenta,
-        ganancia_ocasional_gravada_final_cop=ganancia_gravada,
+        ganancia_exenta_afc_art311_1_cop=float(exencion_afc),
+        ganancia_ocasional_exenta_total_cop=float(ganancia_exenta_total),
+        ganancia_ocasional_exenta_cop=float(ganancia_exenta_total),
+        ganancia_ocasional_gravada_final_cop=float(ganancia_gravada_final),
         tarifa_ganancia_ocasional_pct=tarifa_go * 100.0,
-        impuesto_go_sin_afc_cop=float(impuesto_sin_afc),
-        impuesto_go_con_afc_cop=float(impuesto_con_afc),
-        ahorro_impuesto_afc_cop=float(ahorro),
+        impuesto_go_sin_planeacion_cop=float(impuesto_sin_planeacion),
+        impuesto_go_con_beneficios_cop=float(impuesto_final),
+        impuesto_go_sin_afc_cop=float(impuesto_sin_planeacion),
+        impuesto_go_con_afc_cop=float(impuesto_final),
+        ahorro_total_impuesto_cop=float(ahorro_total_impuesto),
+        ahorro_impuesto_afc_cop=float(ahorro_total_impuesto),
+        porcentaje_ahorro_tributario_pct=pct_ahorro,
+        retefuente_notarial_tarifa_base_pct=tarifa_retefuente_base * 100.0,
+        porcentaje_reduccion_retefuente_art399_pct=pct_reduccion_retefuente,
+        retefuente_notarial_sin_beneficio_cop=float(retefuente_sin),
+        retefuente_notarial_final_cop=float(retefuente_con),
+        ahorro_retefuente_notarial_cop=float(ahorro_retefuente),
+        escenarios=escenarios,
+        estrategias_aplicadas=estrategias,
         requisitos_estatuto=requisitos,
         advertencias_legales=advertencias,
         explicacion_paso_a_paso=pasos,

@@ -1,6 +1,6 @@
 import React from 'react';
 import { X, CheckCircle2, AlertTriangle } from 'lucide-react';
-import { AuditTraceItem } from '../types/tax';
+import type { AuditTraceItem } from '../types/tax';
 
 interface AuditTraceModalProps {
   isOpen: boolean;

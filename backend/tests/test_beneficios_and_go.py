@@ -300,3 +300,116 @@ def test_calcular_sancion_saldo_a_favor_sin_intereses():
     assert res.intereses_mora_cop == 0.0
     # Total consolidado a pagar es SOLO la sanción (no hay capital a deber)
     assert res.total_consolidado_a_pagar_cop == 2500000
+
+
+def test_video_abogada_mabel_sepulveda_caso_real():
+    """Valida exactamente el caso del video de la Abogada Mabel Sepúlveda:
+
+    Venta en 450M, compra en 150M en 2011 (factor Art. 73 = 2.86x).
+    Sin ajuste: utilidad 300M, impuesto 15% = 45M.
+    Con Art. 73: costo ajustado 429M, utilidad 21M, impuesto 15% = 3.15M.
+    Ahorro Art. 73: 41.850.000 COP.
+    Con AFC adicional de 21M: impuesto final 0 COP (100% ahorro).
+    """
+    from app.services.beneficios import SimulacionInmuebleAfcRequest, calcular_exencion_inmueble_afc
+
+    # 1. Solo Art. 73 sin AFC
+    req = SimulacionInmuebleAfcRequest(
+        precio_venta_cop=450000000,
+        costo_adquisicion_historico_cop=150000000,
+        ano_adquisicion="2011",
+        tipo_inmueble="bienes_raices_urbanos",
+        metodo_costo_fiscal="art73",
+        es_vivienda_habitacion=True,
+        posesion_mas_2_anos=True,
+        monto_depositado_afc_o_vivienda_cop=0,
+        tax_year=2026,
+        custom_uvt=52350,
+    )
+    res = calcular_exencion_inmueble_afc(req)
+
+    assert res.factor_art73_aplicado == 2.86
+    assert res.costo_fiscal_determinado_cop == 429000000  # 150M * 2.86
+    assert res.ganancia_ocasional_bruta_cop == 21000000  # 450M - 429M
+    assert res.impuesto_go_sin_planeacion_cop == 45000000  # (450M - 150M) * 15% = 300M * 15%
+    assert res.impuesto_go_con_beneficios_cop == 3150000  # 21M * 15%
+    assert res.ahorro_total_impuesto_cop == 41850000  # 45M - 3.15M
+    assert len(res.escenarios) == 5
+
+    # 2. Con AFC de 21M (Exención total del remanente)
+    req_afc = SimulacionInmuebleAfcRequest(
+        precio_venta_cop=450000000,
+        costo_adquisicion_historico_cop=150000000,
+        ano_adquisicion="2011",
+        tipo_inmueble="bienes_raices_urbanos",
+        metodo_costo_fiscal="art73",
+        es_vivienda_habitacion=True,
+        posesion_mas_2_anos=True,
+        monto_depositado_afc_o_vivienda_cop=21000000,
+        tax_year=2026,
+        custom_uvt=52350,
+    )
+    res_afc = calcular_exencion_inmueble_afc(req_afc)
+    assert res_afc.ganancia_exenta_afc_art311_1_cop == 21000000
+    assert res_afc.ganancia_ocasional_gravada_final_cop == 0
+    assert res_afc.impuesto_go_con_beneficios_cop == 0
+    assert res_afc.ahorro_total_impuesto_cop == 45000000
+    assert res_afc.porcentaje_ahorro_tributario_pct == 100.0
+
+
+def test_inmueble_pre_1987_art44_y_retencion_art399():
+    """Valida la aplicación del Art. 44 (vivienda pre-1987) y reducción de retención notarial Art. 399."""
+    from app.services.beneficios import SimulacionInmuebleAfcRequest, calcular_exencion_inmueble_afc
+
+    # Caso 1: Casa adquirida en 1982 (50% exención Art. 44)
+    # Venta: 600M, Costo histórico: 10M, Método: histórico para aislar Art. 44
+    req_1982 = SimulacionInmuebleAfcRequest(
+        precio_venta_cop=600000000,
+        costo_adquisicion_historico_cop=10000000,
+        ano_adquisicion="1982",
+        tipo_inmueble="bienes_raices_urbanos",
+        metodo_costo_fiscal="historico",
+        es_vivienda_habitacion=True,
+        posesion_mas_2_anos=True,
+        monto_depositado_afc_o_vivienda_cop=0,
+        tax_year=2026,
+        custom_uvt=52350,
+    )
+    res_1982 = calcular_exencion_inmueble_afc(req_1982)
+
+    assert res_1982.aplica_art44_pre1987 is True
+    assert res_1982.porcentaje_exencion_art44_pct == 50.0
+    # Ganancia bruta = 600M - 10M = 590M
+    assert res_1982.ganancia_ocasional_bruta_cop == 590000000
+    assert res_1982.ganancia_exenta_art44_cop == 295000000  # 50% de 590M
+    assert res_1982.ganancia_ocasional_gravada_final_cop == 295000000
+    # Retención notarial (1% base = 6M) reducida al 50% = 3M
+    assert res_1982.porcentaje_reduccion_retefuente_art399_pct == 50.0
+    assert res_1982.retefuente_notarial_sin_beneficio_cop == 6000000
+    assert res_1982.retefuente_notarial_final_cop == 3000000
+    assert res_1982.ahorro_retefuente_notarial_cop == 3000000
+
+    # Caso 2: Casa adquirida en 1975 (antes de 1978 => 100% exención Art. 44)
+    req_1975 = SimulacionInmuebleAfcRequest(
+        precio_venta_cop=500000000,
+        costo_adquisicion_historico_cop=5000000,
+        ano_adquisicion="1975",
+        tipo_inmueble="bienes_raices_urbanos",
+        metodo_costo_fiscal="historico",
+        es_vivienda_habitacion=True,
+        posesion_mas_2_anos=True,
+        monto_depositado_afc_o_vivienda_cop=0,
+        tax_year=2026,
+        custom_uvt=52350,
+    )
+    res_1975 = calcular_exencion_inmueble_afc(req_1975)
+
+    assert res_1975.aplica_art44_pre1987 is True
+    assert res_1975.porcentaje_exencion_art44_pct == 100.0
+    assert res_1975.ganancia_exenta_art44_cop == 495000000
+    assert res_1975.ganancia_ocasional_gravada_final_cop == 0
+    assert res_1975.impuesto_go_con_beneficios_cop == 0
+    # Retención notarial 100% rebajada (0 COP)
+    assert res_1975.porcentaje_reduccion_retefuente_art399_pct == 100.0
+    assert res_1975.retefuente_notarial_final_cop == 0
+    assert res_1975.ahorro_retefuente_notarial_cop == 5000000

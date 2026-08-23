@@ -20,6 +20,16 @@ const mockResponses = {
     uvt_value: 52350,
     amount_cop: 5235000,
     amount_uvt: 100
+  },
+  '/beneficios/simular-inmueble-afc': {
+    tax_year: 2026,
+    uvt_value: 52350,
+    precio_venta_cop: 450000000,
+    costo_fiscal_determinado_cop: 429000000,
+    ganancia_ocasional_gravada_final_cop: 0,
+    impuesto_go_con_beneficios_cop: 0,
+    ahorro_total_impuesto_cop: 45000000,
+    porcentaje_ahorro_tributario_pct: 100.0
   }
 };
 
@@ -77,4 +87,21 @@ test('React API Service - convertUvt', async () => {
   });
   const data = await res.json();
   assert.equal(data.amount_cop, 5235000);
+});
+
+test('React API Service - simularInmuebleAfc (Video Case)', async () => {
+  const res = await fetch('http://localhost:8000/api/v1/beneficios/simular-inmueble-afc', {
+    method: 'POST',
+    body: JSON.stringify({
+      precio_venta_cop: 450000000,
+      costo_adquisicion_historico_cop: 150000000,
+      ano_adquisicion: '2011',
+      metodo_costo_fiscal: 'art73',
+      monto_depositado_afc_o_vivienda_cop: 21000000
+    })
+  });
+  const data = await res.json();
+  assert.equal(data.costo_fiscal_determinado_cop, 429000000);
+  assert.equal(data.impuesto_go_con_beneficios_cop, 0);
+  assert.equal(data.porcentaje_ahorro_tributario_pct, 100.0);
 });

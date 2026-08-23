@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Sparkles, Eye, AlertCircle, ShieldAlert, CheckCircle2 } from 'lucide-react';
-import { PersonaJuridicaInput, PersonaJuridicaOutput } from '../types/tax';
+import type { PersonaJuridicaInput, PersonaJuridicaOutput } from '../types/tax';
 import { calculatePersonaJuridica } from '../services/api';
 import { AuditTraceModal } from './AuditTraceModal';
 
@@ -42,7 +42,6 @@ export const PersonaJuridicaCalculator: React.FC<PersonaJuridicaCalculatorProps>
   });
 
   const [result, setResult] = useState<PersonaJuridicaOutput | null>(null);
-  const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [isAuditModalOpen, setIsAuditModalOpen] = useState<boolean>(false);
 
@@ -58,15 +57,12 @@ export const PersonaJuridicaCalculator: React.FC<PersonaJuridicaCalculatorProps>
   }, [inputs]);
 
   const runCalculation = async () => {
-    setLoading(true);
     setError(null);
     try {
       const res = await calculatePersonaJuridica(inputs);
       setResult(res);
     } catch (err: any) {
       setError(err.message || 'Error al calcular persona jurídica');
-    } finally {
-      setLoading(false);
     }
   };
 

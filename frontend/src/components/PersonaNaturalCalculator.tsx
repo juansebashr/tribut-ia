@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Sparkles, Eye, AlertCircle, CheckCircle2 } from 'lucide-react';
-import { PersonaNaturalInput, PersonaNaturalOutput } from '../types/tax';
+import type { PersonaNaturalInput, PersonaNaturalOutput } from '../types/tax';
 import { calculatePersonaNatural } from '../services/api';
 import { AuditTraceModal } from './AuditTraceModal';
 
@@ -37,7 +37,6 @@ export const PersonaNaturalCalculator: React.FC<PersonaNaturalCalculatorProps> =
   });
 
   const [result, setResult] = useState<PersonaNaturalOutput | null>(null);
-  const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [isAuditModalOpen, setIsAuditModalOpen] = useState<boolean>(false);
 
@@ -55,15 +54,12 @@ export const PersonaNaturalCalculator: React.FC<PersonaNaturalCalculatorProps> =
   }, [inputs]);
 
   const runCalculation = async () => {
-    setLoading(true);
     setError(null);
     try {
       const res = await calculatePersonaNatural(inputs);
       setResult(res);
     } catch (err: any) {
       setError(err.message || 'Error al calcular');
-    } finally {
-      setLoading(false);
     }
   };
 

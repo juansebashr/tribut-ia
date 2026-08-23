@@ -31,14 +31,17 @@ curl -X POST "https://tributia-31954329640.us-central1.run.app/api/v1/beneficios
 ## 2. Liquidación de Sanciones (Arts. 641, 644, 647, 648, 640 y 639 E.T.)
 
 ### Sanción por Corrección (Art. 644)
+
 - **10%** del mayor valor a pagar si se corrige voluntariamente antes del emplazamiento.
 - **20%** tras emplazamiento para corregir de la DIAN.
 
 ### Sanción por Extemporaneidad (Art. 641)
+
 - **5% por mes o fracción de mes** del impuesto a cargo (máximo 100% voluntario / 200% emplazado).
 - **10% por mes** tras emplazamiento de la DIAN.
 
 ### Sanción por Inexactitud (Arts. 647, 648, 709 y 710)
+
 - **¿Cuándo se genera? (Art. 647):** Omisión de ingresos gravados o de bienes, inclusión de costos, deducciones, descuentos, exenciones, pasivos o retenciones inexistentes, compras a proveedores ficticios, o utilización de datos falsos o desfigurados que deriven en un menor impuesto o mayor saldo a favor.
 - **Tarifas (Art. 648):**
   - **100% (General):** Sobre el mayor valor determinado en la liquidación oficial.
@@ -49,11 +52,13 @@ curl -X POST "https://tributia-31954329640.us-central1.run.app/api/v1/beneficios
   - **70%:** Con la interposición del Recurso de Reconsideración.
 
 ### Reducciones del Principio de Favorabilidad (Art. 640)
+
 - **50% de descuento** si no se han cometido infracciones en los 2 años anteriores.
 - **25% de descuento** si no se han cometido infracciones en el último año.
 - *(Nota: No aplica a conductas dolosas, facturas falsas o abuso tributario según el Parágrafo 3 del Art. 640).*
 
 ### Control de Sanción Mínima (Art. 639)
+
 Ninguna sanción tributaria puede ser inferior a **10 UVT** ($523.500 COP para el año gravable 2026).
 
 ---

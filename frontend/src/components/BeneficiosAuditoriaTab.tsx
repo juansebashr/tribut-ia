@@ -8,19 +8,24 @@ import {
   CheckCircle2,
   AlertTriangle,
   Building,
+  Home,
+  Sparkles,
   TreePine,
-  Briefcase,
-  HelpCircle,
   Calculator,
-  ArrowRight,
   Info,
+  Layers,
+  FileCheck,
+  Bookmark,
+  PlayCircle,
+  Award,
 } from 'lucide-react';
-import {
+import type {
   AjusteArticulo73Item,
   SimulacionAjusteArticulo73Response,
   BeneficioItem,
   BeneficioAuditoriaResponse,
   ReduccionSancionResponse,
+  SimulacionInmuebleAfcResponse,
 } from '../types/tax';
 import {
   fetchTablaArticulo73,
@@ -28,6 +33,7 @@ import {
   fetchBeneficiosCatalog,
   simularAuditoria,
   simularSancion,
+  simularInmuebleAfc,
 } from '../services/api';
 
 interface BeneficiosAuditoriaTabProps {
@@ -39,7 +45,22 @@ export const BeneficiosAuditoriaTab: React.FC<BeneficiosAuditoriaTabProps> = ({
   taxYear,
   uvtValue,
 }) => {
-  const [activeSubTab, setActiveSubTab] = useState<'art73' | 'auditoria' | 'sanciones' | 'catalogo'>('art73');
+  const [activeSubTab, setActiveSubTab] = useState<'inmuebles_afc' | 'art73' | 'auditoria' | 'sanciones' | 'catalogo'>('inmuebles_afc');
+
+  // --- Estado Inmuebles & Cuentas AFC (5 Estrategias) ---
+  const [afcPrecioVenta, setAfcPrecioVenta] = useState<string>('450000000');
+  const [afcCostoHistorico, setAfcCostoHistorico] = useState<string>('150000000');
+  const [afcAnoAdquisicion, setAfcAnoAdquisicion] = useState<string>('2011');
+  const [afcTipoInmueble, setAfcTipoInmueble] = useState<string>('bienes_raices_urbanos');
+  const [afcMetodoCosto, setAfcMetodoCosto] = useState<string>('art73');
+  const [afcCostoPersonalizado, setAfcCostoPersonalizado] = useState<string>('0');
+  const [afcMejoras, setAfcMejoras] = useState<string>('0');
+  const [afcDepreciacion, setAfcDepreciacion] = useState<string>('0');
+  const [afcMontoAfc, setAfcMontoAfc] = useState<string>('21000000');
+  const [afcEsVivienda, setAfcEsVivienda] = useState<boolean>(true);
+  const [afcPosesion2Anos, setAfcPosesion2Anos] = useState<boolean>(true);
+  const [simulacionInmuebleAfc, setSimulacionInmuebleAfc] = useState<SimulacionInmuebleAfcResponse | null>(null);
+  const [selectedStrategyExplainer, setSelectedStrategyExplainer] = useState<string>('art73');
 
   // --- Estado Art. 73 ---
   const [tablaArt73, setTablaArt73] = useState<AjusteArticulo73Item[]>([]);
@@ -49,7 +70,6 @@ export const BeneficiosAuditoriaTab: React.FC<BeneficiosAuditoriaTabProps> = ({
   const [precioVentaInput, setPrecioVentaInput] = useState<string>('500000000');
   const [simulacionArt73, setSimulacionArt73] = useState<SimulacionAjusteArticulo73Response | null>(null);
   const [searchTableYear, setSearchTableYear] = useState<string>('');
-  const [loadingArt73, setLoadingArt73] = useState<boolean>(false);
 
   // --- Estado Auditoria ---
   const [impuestoAnoAntInput, setImpuestoAnoAntInput] = useState<string>('10000000');
@@ -84,6 +104,109 @@ export const BeneficiosAuditoriaTab: React.FC<BeneficiosAuditoriaTabProps> = ({
     }
   };
 
+  // Recalcular Inmuebles & AFC en vivo
+  useEffect(() => {
+    const precio = parseFloat(afcPrecioVenta) || 0;
+    const costo = parseFloat(afcCostoHistorico) || 0;
+    if (precio <= 0) return;
+
+    const timer = setTimeout(async () => {
+      try {
+        const res = await simularInmuebleAfc({
+          precio_venta_cop: precio,
+          costo_adquisicion_historico_cop: costo,
+          ano_adquisicion: afcAnoAdquisicion,
+          tipo_inmueble: afcTipoInmueble,
+          metodo_costo_fiscal: afcMetodoCosto,
+          costo_fiscal_personalizado_cop: parseFloat(afcCostoPersonalizado) || 0,
+          mejoras_y_contribuciones_cop: parseFloat(afcMejoras) || 0,
+          depreciacion_acumulada_deducida_cop: parseFloat(afcDepreciacion) || 0,
+          monto_depositado_afc_o_vivienda_cop: parseFloat(afcMontoAfc) || 0,
+          es_vivienda_habitacion: afcEsVivienda,
+          posesion_mas_2_anos: afcPosesion2Anos,
+          tax_year: taxYear,
+          custom_uvt: uvtValue,
+        });
+        setSimulacionInmuebleAfc(res);
+      } catch (err) {
+        console.error('Error calculando simulacion inmueble afc', err);
+      }
+    }, 150);
+
+    return () => clearTimeout(timer);
+  }, [
+    afcPrecioVenta,
+    afcCostoHistorico,
+    afcAnoAdquisicion,
+    afcTipoInmueble,
+    afcMetodoCosto,
+    afcCostoPersonalizado,
+    afcMejoras,
+    afcDepreciacion,
+    afcMontoAfc,
+    afcEsVivienda,
+    afcPosesion2Anos,
+    taxYear,
+    uvtValue,
+  ]);
+
+  // Presets rápidos para Inmuebles & AFC
+  const loadPresetMabelSepulveda = () => {
+    setAfcPrecioVenta('450000000');
+    setAfcCostoHistorico('150000000');
+    setAfcAnoAdquisicion('2011');
+    setAfcTipoInmueble('bienes_raices_urbanos');
+    setAfcMetodoCosto('art73');
+    setAfcCostoPersonalizado('0');
+    setAfcMejoras('0');
+    setAfcDepreciacion('0');
+    setAfcMontoAfc('21000000');
+    setAfcEsVivienda(true);
+    setAfcPosesion2Anos(true);
+  };
+
+  const loadPresetPre1987 = () => {
+    setAfcPrecioVenta('600000000');
+    setAfcCostoHistorico('25000000');
+    setAfcAnoAdquisicion('1983');
+    setAfcTipoInmueble('bienes_raices_urbanos');
+    setAfcMetodoCosto('art73');
+    setAfcCostoPersonalizado('0');
+    setAfcMejoras('0');
+    setAfcDepreciacion('0');
+    setAfcMontoAfc('0');
+    setAfcEsVivienda(true);
+    setAfcPosesion2Anos(true);
+  };
+
+  const loadPresetViviendaAfc = () => {
+    setAfcPrecioVenta('800000000');
+    setAfcCostoHistorico('350000000');
+    setAfcAnoAdquisicion('2018');
+    setAfcTipoInmueble('bienes_raices_urbanos');
+    setAfcMetodoCosto('art73');
+    setAfcCostoPersonalizado('0');
+    setAfcMejoras('0');
+    setAfcDepreciacion('0');
+    setAfcMontoAfc('261750000');
+    setAfcEsVivienda(true);
+    setAfcPosesion2Anos(true);
+  };
+
+  const loadPresetFincaRural = () => {
+    setAfcPrecioVenta('1200000000');
+    setAfcCostoHistorico('200000000');
+    setAfcAnoAdquisicion('2008');
+    setAfcTipoInmueble('bienes_raices_rurales_agro');
+    setAfcMetodoCosto('art73');
+    setAfcCostoPersonalizado('0');
+    setAfcMejoras('50000000');
+    setAfcDepreciacion('0');
+    setAfcMontoAfc('0');
+    setAfcEsVivienda(false);
+    setAfcPosesion2Anos(true);
+  };
+
   // Recalcular Art. 73 en vivo
   useEffect(() => {
     const costo = parseFloat(costoHistoricoInput);
@@ -91,7 +214,6 @@ export const BeneficiosAuditoriaTab: React.FC<BeneficiosAuditoriaTabProps> = ({
     if (!costo || costo <= 0) return;
 
     const timer = setTimeout(async () => {
-      setLoadingArt73(true);
       try {
         const res = await simularArticulo73({
           ano_adquisicion: selectedAnoAdquisicion,
@@ -103,8 +225,6 @@ export const BeneficiosAuditoriaTab: React.FC<BeneficiosAuditoriaTabProps> = ({
         setSimulacionArt73(res);
       } catch (err) {
         console.error(err);
-      } finally {
-        setLoadingArt73(false);
       }
     }, 150);
 
@@ -183,6 +303,17 @@ export const BeneficiosAuditoriaTab: React.FC<BeneficiosAuditoriaTabProps> = ({
         {/* SUBTABS */}
         <div style={{ display: 'flex', gap: '8px', marginTop: '16px', flexWrap: 'wrap' }}>
           <button
+            className={`btn-subtab ${activeSubTab === 'inmuebles_afc' ? 'active' : ''}`}
+            onClick={() => setActiveSubTab('inmuebles_afc')}
+            style={{ display: 'flex', alignItems: 'center', gap: '6px' }}
+          >
+            <Home size={16} />
+            Inmuebles & Cuentas AFC (5 Estrategias)
+            <span style={{ fontSize: '10px', background: 'var(--success)', color: '#fff', padding: '2px 6px', borderRadius: '10px', fontWeight: 700 }}>
+              Video & E.T.
+            </span>
+          </button>
+          <button
             className={`btn-subtab ${activeSubTab === 'art73' ? 'active' : ''}`}
             onClick={() => setActiveSubTab('art73')}
             style={{ display: 'flex', alignItems: 'center', gap: '6px' }}
@@ -219,6 +350,654 @@ export const BeneficiosAuditoriaTab: React.FC<BeneficiosAuditoriaTabProps> = ({
           </button>
         </div>
       </div>
+
+      {/* ========================================================================= */}
+      {/* --- SUBTAB 0: INMUEBLES & CUENTAS AFC (5 ESTRATEGIAS DEL VIDEO & E.T.) --- */}
+      {/* ========================================================================= */}
+      {activeSubTab === 'inmuebles_afc' && (
+        <div className="space-y-6">
+          {/* BANNER DIDACTICO PRINCIPAL */}
+          <div
+            style={{
+              padding: '20px',
+              borderRadius: '12px',
+              backgroundColor: 'rgba(16, 185, 129, 0.08)',
+              border: '1px solid rgba(16, 185, 129, 0.3)',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '12px',
+            }}
+          >
+            <div style={{ display: 'flex', alignItems: 'flex-start', gap: '14px' }}>
+              <div
+                style={{
+                  background: 'var(--success)',
+                  color: '#fff',
+                  padding: '10px',
+                  borderRadius: '10px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  flexShrink: 0,
+                }}
+              >
+                <Sparkles size={24} />
+              </div>
+              <div style={{ flex: 1 }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
+                  <h3 style={{ fontWeight: 800, fontSize: '17px', color: 'var(--text-main)', margin: 0 }}>
+                    5 Estrategias Legales para Pagar Menos o Cero Impuestos al Vender Inmuebles en Colombia
+                  </h3>
+                  <span className="badge-uvt" style={{ background: 'rgba(59, 130, 246, 0.15)', color: 'var(--primary)' }}>
+                    Basado en Video Guía & Estatuto Tributario
+                  </span>
+                </div>
+                <p style={{ fontSize: '13px', color: 'var(--text-muted)', lineHeight: '1.6', marginTop: '6px' }}>
+                  Al vender un inmueble poseído por 2 o más años, la tarifa general de <strong>Ganancia Ocasional es del 15% (Ley 2277 de 2022)</strong>.
+                  La ley colombiana contempla mecanismos 100% legales y oficiales para elevar el costo fiscal o exentar la ganancia, pudiendo reducir el impuesto hasta <strong>$0 COP</strong>.
+                </p>
+              </div>
+            </div>
+
+            {/* TARJETAS RESUMEN DE LAS 5 ESTRATEGIAS */}
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '10px', marginTop: '6px' }}>
+              <div
+                onClick={() => setSelectedStrategyExplainer('art70')}
+                style={{
+                  padding: '12px',
+                  borderRadius: '8px',
+                  background: selectedStrategyExplainer === 'art70' ? 'rgba(59, 130, 246, 0.15)' : 'var(--bg-main)',
+                  border: `1px solid ${selectedStrategyExplainer === 'art70' ? 'var(--primary)' : 'var(--border-color)'}`,
+                  cursor: 'pointer',
+                  transition: 'all 0.2s',
+                }}
+              >
+                <div style={{ fontSize: '12px', fontWeight: 800, color: 'var(--primary)', marginBottom: '4px' }}>
+                  1. Art. 70 E.T.
+                </div>
+                <div style={{ fontSize: '11.5px', color: 'var(--text-muted)' }}>
+                  Ajuste porcentual anual al costo histórico en cada declaración.
+                </div>
+              </div>
+
+              <div
+                onClick={() => setSelectedStrategyExplainer('art73')}
+                style={{
+                  padding: '12px',
+                  borderRadius: '8px',
+                  background: selectedStrategyExplainer === 'art73' ? 'rgba(59, 130, 246, 0.15)' : 'var(--bg-main)',
+                  border: `1px solid ${selectedStrategyExplainer === 'art73' ? 'var(--primary)' : 'var(--border-color)'}`,
+                  cursor: 'pointer',
+                  transition: 'all 0.2s',
+                }}
+              >
+                <div style={{ fontSize: '12px', fontWeight: 800, color: 'var(--primary)', marginBottom: '4px' }}>
+                  2. Art. 73 E.T. (DANE)
+                </div>
+                <div style={{ fontSize: '11.5px', color: 'var(--text-muted)' }}>
+                  Multiplicador oficial por año de compra (hasta 36x).
+                </div>
+              </div>
+
+              <div
+                onClick={() => setSelectedStrategyExplainer('art311')}
+                style={{
+                  padding: '12px',
+                  borderRadius: '8px',
+                  background: selectedStrategyExplainer === 'art311' ? 'rgba(16, 185, 129, 0.15)' : 'var(--bg-main)',
+                  border: `1px solid ${selectedStrategyExplainer === 'art311' ? 'var(--success)' : 'var(--border-color)'}`,
+                  cursor: 'pointer',
+                  transition: 'all 0.2s',
+                }}
+              >
+                <div style={{ fontSize: '12px', fontWeight: 800, color: 'var(--success)', marginBottom: '4px' }}>
+                  3. Art. 311-1 (AFC)
+                </div>
+                <div style={{ fontSize: '11.5px', color: 'var(--text-muted)' }}>
+                  Hasta 5.000 UVT ({formatCOP(5000 * uvtValue)}) 100% exentas en vivienda.
+                </div>
+              </div>
+
+              <div
+                onClick={() => setSelectedStrategyExplainer('art44')}
+                style={{
+                  padding: '12px',
+                  borderRadius: '8px',
+                  background: selectedStrategyExplainer === 'art44' ? 'rgba(245, 158, 11, 0.15)' : 'var(--bg-main)',
+                  border: `1px solid ${selectedStrategyExplainer === 'art44' ? 'var(--warning)' : 'var(--border-color)'}`,
+                  cursor: 'pointer',
+                  transition: 'all 0.2s',
+                }}
+              >
+                <div style={{ fontSize: '12px', fontWeight: 800, color: '#d97706', marginBottom: '4px' }}>
+                  4. Art. 44 (Pre-1987)
+                </div>
+                <div style={{ fontSize: '11.5px', color: 'var(--text-muted)' }}>
+                  10% al 100% de utilidad exenta si se compró antes de 1987.
+                </div>
+              </div>
+
+              <div
+                onClick={() => setSelectedStrategyExplainer('art72')}
+                style={{
+                  padding: '12px',
+                  borderRadius: '8px',
+                  background: selectedStrategyExplainer === 'art72' ? 'rgba(139, 92, 246, 0.15)' : 'var(--bg-main)',
+                  border: `1px solid ${selectedStrategyExplainer === 'art72' ? '#8b5cf6' : 'var(--border-color)'}`,
+                  cursor: 'pointer',
+                  transition: 'all 0.2s',
+                }}
+              >
+                <div style={{ fontSize: '12px', fontWeight: 800, color: '#8b5cf6', marginBottom: '4px' }}>
+                  5. Art. 72 & Retención
+                </div>
+                <div style={{ fontSize: '11.5px', color: 'var(--text-muted)' }}>
+                  Autoavalúo catastral y reducción de retención notarial (Art. 399).
+                </div>
+              </div>
+            </div>
+
+            {/* DETALLE EXPLICATIVO DE LA ESTRATEGIA SELECCIONADA */}
+            <div style={{ background: 'var(--bg-main)', padding: '14px', borderRadius: '8px', border: '1px solid var(--border-color)', fontSize: '12.5px', color: 'var(--text-main)', lineHeight: '1.55' }}>
+              {selectedStrategyExplainer === 'art70' && (
+                <div>
+                  <strong style={{ color: 'var(--primary)' }}>📜 Estrategia 1 — Artículo 70 del Estatuto Tributario:</strong> Permite a los contribuyentes incrementar año tras año el costo fiscal de sus activos fijos en el porcentaje decretado por el Gobierno Nacional (según IPC o meta de inflación). Si has declarado el inmueble y aplicado el reajuste fiscal año con año, el costo acumulado será significativamente mayor al de la escritura original, reduciendo la ganancia gravable al momento de vender.
+                </div>
+              )}
+              {selectedStrategyExplainer === 'art73' && (
+                <div>
+                  <strong style={{ color: 'var(--primary)' }}>📈 Estrategia 2 — Artículo 73 del Estatuto Tributario (Multiplicador DANE/DIAN):</strong> Es el beneficio estrella para personas naturales. No requiere haber hecho ajustes anuales previos: permite multiplicar directamente el valor histórico de compra por el factor certificado por el DANE/IGAC según el año de adquisición (ej. factor <strong>2.86x para el año 2011</strong>; hasta <strong>36.08x para 1955</strong>). Eleva el costo patrimonial legalmente a pesos de hoy, pulverizando la ganancia gravable.
+                </div>
+              )}
+              {selectedStrategyExplainer === 'art311' && (
+                <div>
+                  <strong style={{ color: 'var(--success)' }}>🏦 Estrategia 3 — Artículo 311-1 y 126-4 del Estatuto Tributario (Cuentas AFC / Vivienda):</strong> Si vendes tu casa o apartamento de habitación y depositas el producto de la venta en una Cuenta de Ahorro para el Fomento de la Construcción (AFC), o lo destinas a comprar otra vivienda o pagar el crédito hipotecario del inmueble vendido, las primeras <strong>5.000 UVT de ganancia ({formatCOP(5000 * uvtValue)} en {taxYear})</strong> quedan <strong>100% EXENTAS</strong> del impuesto de ganancia ocasional.
+                </div>
+              )}
+              {selectedStrategyExplainer === 'art44' && (
+                <div>
+                  <strong style={{ color: '#d97706' }}>🏛️ Estrategia 4 — Artículo 44 y Artículo 399 del Estatuto Tributario (Adquisiciones Pre-1987):</strong> Si la casa o apartamento de habitación fue adquirido antes del 1 de enero de 1987, una porción de la utilidad NO causa impuesto de renta ni ganancia ocasional: <strong>10% (1986), 20% (1985), 30% (1984), 40% (1983), 50% (1982), 60% (1981), 70% (1980), 80% (1979), 90% (1978) y 100% EXENTA si fue antes de 1978</strong>. Además, la retención en la notaría (Art. 399) se reduce en ese mismo porcentaje.
+                </div>
+              )}
+              {selectedStrategyExplainer === 'art72' && (
+                <div>
+                  <strong style={{ color: '#8b5cf6' }}>📑 Estrategia 5 — Artículo 72, 398 y 400 del Estatuto Tributario:</strong> Permite tomar como costo fiscal el avalúo catastral o autoavalúo declarado en el Impuesto Predial del año anterior. Además, en la notaría se practica una retención en la fuente del 1% (Art. 398 E.T.) que se descuenta en la declaración de renta (Casilla 134), quedando exentas las viviendas de interés social (VIS - Art. 400).
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* BOTONES DE PRESETS RAPIDOS */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
+            <span style={{ fontSize: '12px', fontWeight: 700, color: 'var(--text-muted)' }}>
+              ⚡ Cargar Casos Didácticos Predefinidos:
+            </span>
+            <button
+              onClick={loadPresetMabelSepulveda}
+              className="btn"
+              style={{ padding: '6px 12px', fontSize: '12px', background: 'rgba(59, 130, 246, 0.12)', color: 'var(--primary)', border: '1px solid rgba(59, 130, 246, 0.3)' }}
+            >
+              <PlayCircle size={14} /> Caso Video Abogada Mabel (450M / Compra 2011)
+            </button>
+            <button
+              onClick={loadPresetPre1987}
+              className="btn"
+              style={{ padding: '6px 12px', fontSize: '12px', background: 'rgba(245, 158, 11, 0.12)', color: '#d97706', border: '1px solid rgba(245, 158, 11, 0.3)' }}
+            >
+              <Building size={14} /> Vivienda Pre-1987 (Art. 44 - 1983)
+            </button>
+            <button
+              onClick={loadPresetViviendaAfc}
+              className="btn"
+              style={{ padding: '6px 12px', fontSize: '12px', background: 'rgba(16, 185, 129, 0.12)', color: 'var(--success)', border: '1px solid rgba(16, 185, 129, 0.3)' }}
+            >
+              <Home size={14} /> Vivienda con Cuenta AFC (Tope 5.000 UVT)
+            </button>
+            <button
+              onClick={loadPresetFincaRural}
+              className="btn"
+              style={{ padding: '6px 12px', fontSize: '12px', background: 'rgba(139, 92, 246, 0.12)', color: '#8b5cf6', border: '1px solid rgba(139, 92, 246, 0.3)' }}
+            >
+              <TreePine size={14} /> Finca Rural Agropecuaria (Art. 73)
+            </button>
+          </div>
+
+          {/* SIMULADOR INTERACTIVO A 2 COLUMNAS */}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(360px, 1fr))', gap: '24px' }}>
+            {/* COLUMNA 1: FORMULARIO DE PARAMETROS */}
+            <div className="card" style={{ padding: '20px' }}>
+              <h3 style={{ fontSize: '16px', fontWeight: 800, marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-main)' }}>
+                <Calculator size={18} color="var(--primary)" />
+                Parámetros de la Enajenación del Inmueble
+              </h3>
+
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+                {/* PRECIO DE VENTA */}
+                <div>
+                  <label style={{ fontSize: '12px', fontWeight: 600, color: 'var(--text-muted)', marginBottom: '6px', display: 'block' }}>
+                    1. Precio de Venta Pactado en Escritura Pública ($ COP):
+                  </label>
+                  <div style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
+                    <span style={{ position: 'absolute', left: '10px', fontSize: '13px', color: 'var(--text-muted)' }}>$</span>
+                    <input
+                      type="number"
+                      className="text-input"
+                      style={{ paddingLeft: '24px', width: '100%', fontFamily: 'var(--font-mono)', fontWeight: 700 }}
+                      value={afcPrecioVenta}
+                      onChange={(e) => setAfcPrecioVenta(e.target.value)}
+                      placeholder="Ej. 450000000"
+                    />
+                  </div>
+                  <span style={{ fontSize: '11px', color: 'var(--text-muted)', marginTop: '2px', display: 'block' }}>
+                    {formatCOP(parseFloat(afcPrecioVenta) || 0)}
+                  </span>
+                </div>
+
+                {/* COSTO HISTORICO */}
+                <div>
+                  <label style={{ fontSize: '12px', fontWeight: 600, color: 'var(--text-muted)', marginBottom: '6px', display: 'block' }}>
+                    2. Costo Histórico de Adquisición Original (Valor Escritura Compra):
+                  </label>
+                  <div style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
+                    <span style={{ position: 'absolute', left: '10px', fontSize: '13px', color: 'var(--text-muted)' }}>$</span>
+                    <input
+                      type="number"
+                      className="text-input"
+                      style={{ paddingLeft: '24px', width: '100%', fontFamily: 'var(--font-mono)', fontWeight: 700 }}
+                      value={afcCostoHistorico}
+                      onChange={(e) => setAfcCostoHistorico(e.target.value)}
+                      placeholder="Ej. 150000000"
+                    />
+                  </div>
+                  <span style={{ fontSize: '11px', color: 'var(--text-muted)', marginTop: '2px', display: 'block' }}>
+                    {formatCOP(parseFloat(afcCostoHistorico) || 0)}
+                  </span>
+                </div>
+
+                {/* AÑO DE ADQUISICION Y TIPO DE INMUEBLE */}
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+                  <div>
+                    <label style={{ fontSize: '12px', fontWeight: 600, color: 'var(--text-muted)', marginBottom: '6px', display: 'block' }}>
+                      3. Año de Compra:
+                    </label>
+                    <select
+                      className="select-input"
+                      style={{ width: '100%' }}
+                      value={afcAnoAdquisicion}
+                      onChange={(e) => setAfcAnoAdquisicion(e.target.value)}
+                    >
+                      {tablaArt73.map((r) => (
+                        <option key={r.ano_adquisicion} value={r.ano_adquisicion}>
+                          {r.ano_adquisicion} {parseInt(r.ano_adquisicion) < 1987 ? '🏛️ Pre-1987' : ''}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <div>
+                    <label style={{ fontSize: '12px', fontWeight: 600, color: 'var(--text-muted)', marginBottom: '6px', display: 'block' }}>
+                      4. Tipo de Inmueble:
+                    </label>
+                    <select
+                      className="select-input"
+                      style={{ width: '100%' }}
+                      value={afcTipoInmueble}
+                      onChange={(e) => setAfcTipoInmueble(e.target.value)}
+                    >
+                      <option value="bienes_raices_urbanos">🏢 Urbano (Casa/Apto)</option>
+                      <option value="bienes_raices_rurales">🌳 Rural General</option>
+                      <option value="bienes_raices_rurales_agro">🌾 Rural Agropecuario</option>
+                    </select>
+                  </div>
+                </div>
+
+                {/* METODO DE DETERMINACION DE COSTO FISCAL */}
+                <div>
+                  <label style={{ fontSize: '12px', fontWeight: 600, color: 'var(--text-muted)', marginBottom: '6px', display: 'block' }}>
+                    5. Método de Determinación del Costo Fiscal:
+                  </label>
+                  <select
+                    className="select-input"
+                    style={{ width: '100%' }}
+                    value={afcMetodoCosto}
+                    onChange={(e) => setAfcMetodoCosto(e.target.value)}
+                  >
+                    <option value="art73">⭐ Ajuste Art. 73 E.T. (Multiplicador Oficial DANE / DIAN)</option>
+                    <option value="art72">📑 Autoavalúo Catastral Predial Año Anterior (Art. 72 E.T.)</option>
+                    <option value="art70">📜 Reajuste Fiscal Anual Acumulado (Art. 70 E.T.)</option>
+                    <option value="historico">💵 Costo Histórico Simple (Sin Reajuste)</option>
+                  </select>
+                </div>
+
+                {(afcMetodoCosto === 'art72' || afcMetodoCosto === 'art70') && (
+                  <div>
+                    <label style={{ fontSize: '12px', fontWeight: 600, color: 'var(--text-muted)', marginBottom: '6px', display: 'block' }}>
+                      Valor del Autoavalúo o Costo Ajustado Acumulado ($ COP):
+                    </label>
+                    <div style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
+                      <span style={{ position: 'absolute', left: '10px', fontSize: '13px', color: 'var(--text-muted)' }}>$</span>
+                      <input
+                        type="number"
+                        className="text-input"
+                        style={{ paddingLeft: '24px', width: '100%', fontFamily: 'var(--font-mono)' }}
+                        value={afcCostoPersonalizado}
+                        onChange={(e) => setAfcCostoPersonalizado(e.target.value)}
+                      />
+                    </div>
+                  </div>
+                )}
+
+                {/* MEJORAS Y DEPRECIACIONES */}
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+                  <div>
+                    <label style={{ fontSize: '11.5px', color: 'var(--text-muted)', marginBottom: '4px', display: 'block' }}>
+                      + Mejoras y Valorizaciones ($):
+                    </label>
+                    <input
+                      type="number"
+                      className="text-input"
+                      style={{ width: '100%', fontSize: '12px' }}
+                      value={afcMejoras}
+                      onChange={(e) => setAfcMejoras(e.target.value)}
+                      placeholder="0"
+                    />
+                  </div>
+                  <div>
+                    <label style={{ fontSize: '11.5px', color: 'var(--text-muted)', marginBottom: '4px', display: 'block' }}>
+                      - Depreciación Deducida ($):
+                    </label>
+                    <input
+                      type="number"
+                      className="text-input"
+                      style={{ width: '100%', fontSize: '12px' }}
+                      value={afcDepreciacion}
+                      onChange={(e) => setAfcDepreciacion(e.target.value)}
+                      placeholder="0"
+                    />
+                  </div>
+                </div>
+
+                {/* MONTO DEPOSITADO EN AFC O DESTINADO A VIVIENDA */}
+                <div style={{ padding: '14px', background: 'rgba(16, 185, 129, 0.08)', borderRadius: '10px', border: '1px solid rgba(16, 185, 129, 0.25)' }}>
+                  <label style={{ fontSize: '12px', fontWeight: 700, color: 'var(--success)', marginBottom: '6px', display: 'block' }}>
+                    🏦 Monto Depositado en Cuenta AFC o Destinado a Compra de Vivienda ($ COP):
+                  </label>
+                  <div style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
+                    <span style={{ position: 'absolute', left: '10px', fontSize: '13px', color: 'var(--text-muted)' }}>$</span>
+                    <input
+                      type="number"
+                      className="text-input"
+                      style={{ paddingLeft: '24px', width: '100%', fontFamily: 'var(--font-mono)', fontWeight: 700 }}
+                      value={afcMontoAfc}
+                      onChange={(e) => setAfcMontoAfc(e.target.value)}
+                      placeholder="Ej. 21000000"
+                    />
+                  </div>
+                  <span style={{ fontSize: '11px', color: 'var(--text-muted)', marginTop: '4px', display: 'block' }}>
+                    Tope legal exento: 5.000 UVT = <strong>{formatCOP(5000 * uvtValue)}</strong> (Art. 311-1 E.T.)
+                  </span>
+                </div>
+
+                {/* CHECKBOXES DE CONDICIONES LEGALES */}
+                <div style={{ background: 'var(--bg-secondary)', padding: '12px', borderRadius: '8px', border: '1px solid var(--border-color)', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                  <label style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '12px', cursor: 'pointer' }}>
+                    <input
+                      type="checkbox"
+                      checked={afcEsVivienda}
+                      onChange={(e) => setAfcEsVivienda(e.target.checked)}
+                    />
+                    <span>El inmueble enajenado es la <strong>casa o apartamento de habitación</strong> del contribuyente.</span>
+                  </label>
+                  <label style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '12px', cursor: 'pointer' }}>
+                    <input
+                      type="checkbox"
+                      checked={afcPosesion2Anos}
+                      onChange={(e) => setAfcPosesion2Anos(e.target.checked)}
+                    />
+                    <span>Poseído por <strong>dos (2) años o más</strong> (tributa a tarifa del 15% como Ganancia Ocasional).</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            {/* COLUMNA 2: RESULTADOS DE LIQUIDACION & AHORRO TRIBUTARIO */}
+            {simulacionInmuebleAfc && (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                {/* TARJETA DE AHORRO Y METRICAS */}
+                <div
+                  className="card"
+                  style={{
+                    padding: '20px',
+                    background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.12) 0%, rgba(59, 130, 246, 0.08) 100%)',
+                    border: '2px solid var(--success)',
+                  }}
+                >
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
+                    <span style={{ fontSize: '12px', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.5px', color: 'var(--success)' }}>
+                      🎉 Liquidación & Ahorro Tributario
+                    </span>
+                    <span
+                      style={{
+                        fontSize: '13px',
+                        fontWeight: 800,
+                        backgroundColor: 'var(--success)',
+                        color: '#fff',
+                        padding: '4px 12px',
+                        borderRadius: '20px',
+                      }}
+                    >
+                      Ahorro: {simulacionInmuebleAfc.porcentaje_ahorro_tributario_pct.toFixed(1)}%
+                    </span>
+                  </div>
+
+                  {/* GRID PRINCIPAL DE CIFRAS */}
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px', marginBottom: '14px' }}>
+                    <div style={{ padding: '12px', background: 'var(--bg-main)', borderRadius: '8px', border: '1px solid var(--border-color)' }}>
+                      <span style={{ fontSize: '11px', color: 'var(--text-muted)', display: 'block' }}>Impuesto Sin Planeación:</span>
+                      <strong style={{ fontSize: '16px', color: 'var(--danger)', fontFamily: 'var(--font-mono)' }}>
+                        {formatCOP(simulacionInmuebleAfc.impuesto_go_sin_planeacion_cop)}
+                      </strong>
+                    </div>
+
+                    <div style={{ padding: '12px', background: 'rgba(16, 185, 129, 0.15)', borderRadius: '8px', border: '1px solid rgba(16, 185, 129, 0.4)' }}>
+                      <span style={{ fontSize: '11px', color: 'var(--success)', fontWeight: 700, display: 'block' }}>
+                        Impuesto Final con Beneficios:
+                      </span>
+                      <strong style={{ fontSize: '18px', color: 'var(--success)', fontFamily: 'var(--font-mono)' }}>
+                        {formatCOP(simulacionInmuebleAfc.impuesto_go_con_beneficios_cop)}
+                      </strong>
+                    </div>
+                  </div>
+
+                  {/* BANNER DE AHORRO NETO */}
+                  <div style={{ padding: '12px 16px', background: 'var(--bg-main)', borderRadius: '8px', border: '1px solid var(--border-color)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
+                    <div>
+                      <div style={{ fontSize: '11px', color: 'var(--text-muted)' }}>Ahorro Neto en Ganancia Ocasional:</div>
+                      <div style={{ fontSize: '18px', fontWeight: 800, color: 'var(--success)', fontFamily: 'var(--font-mono)' }}>
+                        +{formatCOP(simulacionInmuebleAfc.ahorro_total_impuesto_cop)}
+                      </div>
+                    </div>
+                    <Award size={28} color="var(--success)" />
+                  </div>
+
+                  {/* DESGLOSE DE BASES */}
+                  <div style={{ background: 'var(--bg-main)', padding: '12px', borderRadius: '8px', fontSize: '12px', display: 'flex', flexDirection: 'column', gap: '6px', border: '1px solid var(--border-color)' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                      <span style={{ color: 'var(--text-muted)' }}>Costo Fiscal Determinado:</span>
+                      <strong style={{ fontFamily: 'var(--font-mono)' }}>{formatCOP(simulacionInmuebleAfc.costo_fiscal_determinado_cop)}</strong>
+                    </div>
+                    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                      <span style={{ color: 'var(--text-muted)' }}>Ganancia Ocasional Bruta:</span>
+                      <strong style={{ fontFamily: 'var(--font-mono)' }}>{formatCOP(simulacionInmuebleAfc.ganancia_ocasional_bruta_cop)}</strong>
+                    </div>
+                    {simulacionInmuebleAfc.aplica_art44_pre1987 && (
+                      <div style={{ display: 'flex', justifyContent: 'space-between', color: '#d97706' }}>
+                        <span>Exención Art. 44 ({simulacionInmuebleAfc.porcentaje_exencion_art44_pct}%):</span>
+                        <strong style={{ fontFamily: 'var(--font-mono)' }}>-{formatCOP(simulacionInmuebleAfc.ganancia_exenta_art44_cop)}</strong>
+                      </div>
+                    )}
+                    {simulacionInmuebleAfc.ganancia_exenta_afc_art311_1_cop > 0 && (
+                      <div style={{ display: 'flex', justifyContent: 'space-between', color: 'var(--success)' }}>
+                        <span>Exención Cuenta AFC (Art. 311-1):</span>
+                        <strong style={{ fontFamily: 'var(--font-mono)' }}>-{formatCOP(simulacionInmuebleAfc.ganancia_exenta_afc_art311_1_cop)}</strong>
+                      </div>
+                    )}
+                    <div style={{ display: 'flex', justifyContent: 'space-between', borderTop: '1px dashed var(--border-color)', paddingTop: '6px', fontWeight: 700 }}>
+                      <span>Ganancia Gravable Final (15%):</span>
+                      <span style={{ color: 'var(--primary)', fontFamily: 'var(--font-mono)' }}>{formatCOP(simulacionInmuebleAfc.ganancia_ocasional_gravada_final_cop)}</span>
+                    </div>
+                  </div>
+
+                  {/* RETENCION EN LA FUENTE NOTARIAL */}
+                  <div style={{ marginTop: '12px', padding: '10px 14px', background: 'rgba(59, 130, 246, 0.08)', borderRadius: '8px', border: '1px solid rgba(59, 130, 246, 0.25)', fontSize: '11.5px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <div>
+                      <span style={{ color: 'var(--text-muted)' }}>Retención Notaría (1% Art. 398/399):</span>
+                      <strong style={{ display: 'block', color: 'var(--primary)', fontSize: '13px', fontFamily: 'var(--font-mono)' }}>
+                        {formatCOP(simulacionInmuebleAfc.retefuente_notarial_final_cop)}
+                      </strong>
+                    </div>
+                    {simulacionInmuebleAfc.ahorro_retefuente_notarial_cop > 0 && (
+                      <span style={{ background: 'rgba(16, 185, 129, 0.15)', color: 'var(--success)', padding: '3px 8px', borderRadius: '12px', fontWeight: 700 }}>
+                        Ahorro Notarial: {formatCOP(simulacionInmuebleAfc.ahorro_retefuente_notarial_cop)}
+                      </span>
+                    )}
+                  </div>
+                </div>
+
+                {/* GUIA FORMULARIO 210 DIAN */}
+                <div className="card" style={{ padding: '16px' }}>
+                  <h4 style={{ fontSize: '13px', fontWeight: 800, color: 'var(--text-main)', marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                    <FileCheck size={16} color="var(--primary)" />
+                    Casillas Exactas Formulario 210 DIAN
+                  </h4>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '8px', fontSize: '11.5px' }}>
+                    <div style={{ padding: '8px', background: 'var(--bg-secondary)', borderRadius: '6px' }}>
+                      <span style={{ color: 'var(--text-muted)', display: 'block' }}>Casilla 80 (Ingresos):</span>
+                      <strong style={{ fontFamily: 'var(--font-mono)' }}>{formatCOP(simulacionInmuebleAfc.precio_venta_cop)}</strong>
+                    </div>
+                    <div style={{ padding: '8px', background: 'var(--bg-secondary)', borderRadius: '6px' }}>
+                      <span style={{ color: 'var(--text-muted)', display: 'block' }}>Casilla 81 (Costos):</span>
+                      <strong style={{ fontFamily: 'var(--font-mono)' }}>{formatCOP(simulacionInmuebleAfc.costo_fiscal_determinado_cop)}</strong>
+                    </div>
+                    <div style={{ padding: '8px', background: 'var(--bg-secondary)', borderRadius: '6px' }}>
+                      <span style={{ color: 'var(--text-muted)', display: 'block' }}>Casilla 82 (Exentas):</span>
+                      <strong style={{ fontFamily: 'var(--font-mono)', color: 'var(--success)' }}>{formatCOP(simulacionInmuebleAfc.ganancia_ocasional_exenta_total_cop)}</strong>
+                    </div>
+                    <div style={{ padding: '8px', background: 'var(--bg-secondary)', borderRadius: '6px' }}>
+                      <span style={{ color: 'var(--text-muted)', display: 'block' }}>Casilla 83 (Gravables):</span>
+                      <strong style={{ fontFamily: 'var(--font-mono)', color: 'var(--primary)' }}>{formatCOP(simulacionInmuebleAfc.ganancia_ocasional_gravada_final_cop)}</strong>
+                    </div>
+                    <div style={{ padding: '8px', background: 'var(--bg-secondary)', borderRadius: '6px' }}>
+                      <span style={{ color: 'var(--text-muted)', display: 'block' }}>Casilla 87 (Impuesto):</span>
+                      <strong style={{ fontFamily: 'var(--font-mono)', color: 'var(--success)' }}>{formatCOP(simulacionInmuebleAfc.impuesto_go_con_beneficios_cop)}</strong>
+                    </div>
+                    <div style={{ padding: '8px', background: 'var(--bg-secondary)', borderRadius: '6px' }}>
+                      <span style={{ color: 'var(--text-muted)', display: 'block' }}>Casilla 134 (Retención):</span>
+                      <strong style={{ fontFamily: 'var(--font-mono)' }}>{formatCOP(simulacionInmuebleAfc.retefuente_notarial_final_cop)}</strong>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* MATRIZ COMPARATIVA DE LOS 5 ESCENARIOS */}
+          {simulacionInmuebleAfc && (
+            <div className="card" style={{ padding: '20px' }}>
+              <h3 style={{ fontSize: '15px', fontWeight: 800, marginBottom: '14px', display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-main)' }}>
+                <Layers size={18} color="var(--primary)" />
+                Matriz Comparativa Multi-Estrategia (Impacto y Ahorro Lado a Lado)
+              </h3>
+
+              <div style={{ overflowX: 'auto' }}>
+                <table className="breakdown-table" style={{ width: '100%', fontSize: '12px' }}>
+                  <thead>
+                    <tr style={{ background: 'var(--bg-secondary)', textAlign: 'left' }}>
+                      <th style={{ padding: '10px' }}>Escenario</th>
+                      <th style={{ padding: '10px' }}>Costo Fiscal</th>
+                      <th style={{ padding: '10px' }}>Ganancia Bruta</th>
+                      <th style={{ padding: '10px' }}>Exención Art. 44</th>
+                      <th style={{ padding: '10px' }}>Exención AFC</th>
+                      <th style={{ padding: '10px' }}>Base Gravable</th>
+                      <th style={{ padding: '10px' }}>Impuesto (15%)</th>
+                      <th style={{ padding: '10px' }}>Retención Notaría</th>
+                      <th style={{ padding: '10px', color: 'var(--success)' }}>Ahorro Neto</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {simulacionInmuebleAfc.escenarios.map((esc, idx) => {
+                      const isOptimo = idx === 4;
+                      return (
+                        <tr
+                          key={esc.nombre}
+                          style={{
+                            background: isOptimo ? 'rgba(16, 185, 129, 0.08)' : idx % 2 === 0 ? 'var(--bg-main)' : 'var(--bg-secondary)',
+                            fontWeight: isOptimo ? 700 : 400,
+                            borderLeft: isOptimo ? '4px solid var(--success)' : 'none',
+                          }}
+                        >
+                          <td style={{ padding: '10px' }}>
+                            <div style={{ fontWeight: 700, color: isOptimo ? 'var(--success)' : 'var(--text-main)' }}>{esc.nombre}</div>
+                            <div style={{ fontSize: '10.5px', color: 'var(--text-muted)' }}>{esc.descripcion}</div>
+                          </td>
+                          <td style={{ padding: '10px', fontFamily: 'var(--font-mono)' }}>{formatCOP(esc.costo_fiscal_aplicado_cop)}</td>
+                          <td style={{ padding: '10px', fontFamily: 'var(--font-mono)' }}>{formatCOP(esc.ganancia_ocasional_bruta_cop)}</td>
+                          <td style={{ padding: '10px', fontFamily: 'var(--font-mono)', color: esc.exencion_art44_cop > 0 ? '#d97706' : 'var(--text-muted)' }}>
+                            {formatCOP(esc.exencion_art44_cop)}
+                          </td>
+                          <td style={{ padding: '10px', fontFamily: 'var(--font-mono)', color: esc.exencion_afc_cop > 0 ? 'var(--success)' : 'var(--text-muted)' }}>
+                            {formatCOP(esc.exencion_afc_cop)}
+                          </td>
+                          <td style={{ padding: '10px', fontFamily: 'var(--font-mono)', color: 'var(--primary)' }}>{formatCOP(esc.ganancia_ocasional_gravable_cop)}</td>
+                          <td style={{ padding: '10px', fontFamily: 'var(--font-mono)', color: isOptimo ? 'var(--success)' : 'var(--danger)', fontWeight: 700 }}>
+                            {formatCOP(esc.impuesto_ganancia_ocasional_cop)}
+                          </td>
+                          <td style={{ padding: '10px', fontFamily: 'var(--font-mono)' }}>{formatCOP(esc.retefuente_notarial_cop)}</td>
+                          <td style={{ padding: '10px', fontFamily: 'var(--font-mono)', color: 'var(--success)', fontWeight: 800 }}>
+                            {esc.ahorro_frente_a_sin_planeacion_cop > 0 ? `+${formatCOP(esc.ahorro_frente_a_sin_planeacion_cop)}` : '$0 COP'}
+                          </td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          )}
+
+          {/* PASOS DE CALCULO Y REQUISITOS */}
+          {simulacionInmuebleAfc && (
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '16px' }}>
+              <div className="card" style={{ padding: '16px' }}>
+                <h4 style={{ fontSize: '13px', fontWeight: 800, color: 'var(--text-main)', marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                  <Bookmark size={15} color="var(--primary)" />
+                  Memoria de Cálculo Paso a Paso
+                </h4>
+                <ul style={{ paddingLeft: '16px', margin: 0, fontSize: '11.5px', color: 'var(--text-muted)', lineHeight: '1.6' }}>
+                  {simulacionInmuebleAfc.explicacion_paso_a_paso.map((p, i) => (
+                    <li key={i} style={{ marginBottom: '6px' }}>{p}</li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="card" style={{ padding: '16px' }}>
+                <h4 style={{ fontSize: '13px', fontWeight: 800, color: 'var(--text-main)', marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                  <AlertTriangle size={15} color="var(--warning)" />
+                  Requisitos Legales & Advertencias DIAN
+                </h4>
+                <ul style={{ paddingLeft: '16px', margin: 0, fontSize: '11.5px', color: 'var(--text-muted)', lineHeight: '1.6' }}>
+                  {simulacionInmuebleAfc.requisitos_estatuto.map((req, i) => (
+                    <li key={i} style={{ marginBottom: '4px' }}>✅ {req}</li>
+                  ))}
+                  {simulacionInmuebleAfc.advertencias_legales.map((adv, i) => (
+                    <li key={i} style={{ marginBottom: '4px', color: 'var(--danger)' }}>⚠️ {adv}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          )}
+        </div>
+      )}
 
       {/* --- SUBTAB 1: REAJUSTE DE ACTIVOS (ART. 73 E.T.) --- */}
       {activeSubTab === 'art73' && (

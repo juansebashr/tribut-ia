@@ -238,3 +238,91 @@ export interface SimulacionAjusteArticulo73Response {
   explicacion_didactica: string;
   pasos_calculo: string[];
 }
+
+export interface EscenarioComparativoInmueble {
+  nombre: string;
+  descripcion: string;
+  costo_fiscal_aplicado_cop: number;
+  ganancia_ocasional_bruta_cop: number;
+  exencion_art44_cop: number;
+  exencion_afc_cop: number;
+  ganancia_ocasional_gravable_cop: number;
+  impuesto_ganancia_ocasional_cop: number;
+  retefuente_notarial_cop: number;
+  ahorro_frente_a_sin_planeacion_cop: number;
+}
+
+export interface SimulacionInmuebleAfcRequest {
+  precio_venta_cop: number;
+  costo_adquisicion_historico_cop?: number;
+  costo_fiscal_inmueble_cop?: number;
+  ano_adquisicion?: string;
+  tipo_inmueble?: string;
+  metodo_costo_fiscal?: string;
+  costo_fiscal_personalizado_cop?: number;
+  mejoras_y_contribuciones_cop?: number;
+  depreciacion_acumulada_deducida_cop?: number;
+  es_vivienda_habitacion?: boolean;
+  posesion_mas_2_anos?: boolean;
+  monto_depositado_afc_o_vivienda_cop?: number;
+  tax_year?: number;
+  custom_uvt?: number;
+}
+
+export interface SimulacionInmuebleAfcResponse {
+  tax_year: number;
+  uvt_value: number;
+  precio_venta_cop: number;
+  costo_historico_cop: number;
+  ano_adquisicion: string;
+  tipo_inmueble: string;
+  metodo_costo_fiscal_aplicado: string;
+  factor_art73_aplicado?: number | null;
+  costo_fiscal_determinado_cop: number;
+  costo_fiscal_cop: number;
+  ganancia_ocasional_bruta_cop: number;
+  es_vivienda_habitacion: boolean;
+  posesion_mas_2_anos: boolean;
+
+  // Estrategia 4: Art. 44 (pre-1987)
+  aplica_art44_pre1987: boolean;
+  porcentaje_exencion_art44_pct: number;
+  ganancia_exenta_art44_cop: number;
+
+  // Estrategia 3: Art. 311-1 (AFC)
+  monto_depositado_afc_cop: number;
+  tope_maximo_exencion_uvt: number;
+  tope_maximo_exencion_cop: number;
+  ganancia_exenta_afc_art311_1_cop: number;
+
+  // Totales
+  ganancia_ocasional_exenta_total_cop: number;
+  ganancia_ocasional_exenta_cop: number;
+  ganancia_ocasional_gravada_final_cop: number;
+  tarifa_ganancia_ocasional_pct: number;
+
+  // Impuestos y ahorros
+  impuesto_go_sin_planeacion_cop: number;
+  impuesto_go_con_beneficios_cop: number;
+  impuesto_go_sin_afc_cop: number;
+  impuesto_go_con_afc_cop: number;
+  ahorro_total_impuesto_cop: number;
+  ahorro_impuesto_afc_cop: number;
+  porcentaje_ahorro_tributario_pct: number;
+
+  // Retención notarial
+  retefuente_notarial_tarifa_base_pct: number;
+  porcentaje_reduccion_retefuente_art399_pct: number;
+  retefuente_notarial_sin_beneficio_cop: number;
+  retefuente_notarial_final_cop: number;
+  ahorro_retefuente_notarial_cop: number;
+
+  // Escenarios
+  escenarios: EscenarioComparativoInmueble[];
+
+  // Didáctica
+  estrategias_aplicadas: string[];
+  requisitos_estatuto: string[];
+  advertencias_legales: string[];
+  explicacion_paso_a_paso: string[];
+}
