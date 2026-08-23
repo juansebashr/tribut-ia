@@ -37,7 +37,13 @@ def main():
         "--host", default="0.0.0.0", help="Dirección host de escucha (por defecto 0.0.0.0)"
     )
     parser.add_argument(
-        "--port", type=int, default=8000, help="Puerto de escucha (por defecto 8000)"
+        "--port", type=int, default=8000, help="Puerto del backend FastAPI (por defecto 8000)"
+    )
+    parser.add_argument(
+        "--frontend-port",
+        type=int,
+        default=5173,
+        help="Puerto del frontend React/Vite (por defecto 5173)",
     )
     parser.add_argument(
         "--reload", action="store_true", help="Habilitar recarga automática en caliente"
@@ -47,10 +53,16 @@ def main():
         action="store_true",
         help="No matar automáticamente procesos en el puerto si está ocupado",
     )
+    parser.add_argument(
+        "--no-frontend",
+        action="store_true",
+        help="Ejecutar únicamente el backend FastAPI sin iniciar el frontend React",
+    )
     args = parser.parse_args()
 
     project_root = os.path.dirname(os.path.abspath(__file__))
     backend_dir = os.path.join(project_root, "backend")
+    frontend_dir = os.path.join(project_root, "frontend")
 
     root_venv_python = os.path.join(project_root, ".venv", "bin", "python")
     backend_venv_python = os.path.join(backend_dir, "venv", "bin", "python")
@@ -62,22 +74,44 @@ def main():
     else:
         venv_python = sys.executable
 
-    if is_port_in_use(args.port):
-        if not args.no_kill:
+    # Liberar puertos
+    if not args.no_kill:
+        if is_port_in_use(args.port):
             kill_process_on_port(args.port)
-        else:
-            print(
-                f"❌ Error: El puerto {args.port} ya está en uso. Usa un puerto diferente con --port <numero>."
+        if not args.no_frontend and is_port_in_use(args.frontend_port):
+            kill_process_on_port(args.frontend_port)
+
+    frontend_proc: subprocess.Popen | None = None
+
+    # Iniciar frontend React si existe
+    if (
+        not args.no_frontend
+        and os.path.exists(frontend_dir)
+        and os.path.exists(os.path.join(frontend_dir, "package.json"))
+    ):
+        try:
+            print("🚀 Iniciando servidor de desarrollo Frontend (React 18 + Vite)...")
+            frontend_proc = subprocess.Popen(
+                ["npm", "run", "dev", "--", "--port", str(args.frontend_port)],
+                cwd=frontend_dir,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.STDOUT,
+                text=True,
             )
-            sys.exit(1)
+        except Exception as e:
+            print(
+                f"⚠️  No se pudo iniciar frontend con npm ({e}). Se servirá interfaz desde backend."
+            )
 
     print("=" * 65)
     print("🇨🇴 TributIA - Motor Tributario Colombiano Actualizado 2026")
-    print(f"🌐 Interfaz Web: http://localhost:{args.port}")
-    print(f"📖 Swagger API:  http://localhost:{args.port}/docs")
+    if frontend_proc:
+        print(f"⚛️  Frontend React SPA:  http://localhost:{args.frontend_port}")
+    print(f"🌐 Backend Web / API:    http://localhost:{args.port}")
+    print(f"📖 Swagger API Docs:     http://localhost:{args.port}/docs")
     print("=" * 65)
 
-    cmd = [
+    backend_cmd = [
         venv_python,
         "-m",
         "uvicorn",
@@ -88,15 +122,31 @@ def main():
         str(args.port),
     ]
     if args.reload:
-        cmd.append("--reload")
+        backend_cmd.append("--reload")
 
     env = os.environ.copy()
     env["PYTHONPATH"] = backend_dir
 
+    backend_proc: subprocess.Popen | None = None
     try:
-        subprocess.run(cmd, cwd=backend_dir, env=env)
+        backend_proc = subprocess.Popen(backend_cmd, cwd=backend_dir, env=env)
+        backend_proc.wait()
     except KeyboardInterrupt:
-        print("\n🛑 Servidor TributIA detenido correctamente.")
+        print("\n🛑 Deteniendo servidores de TributIA...")
+    finally:
+        if backend_proc and backend_proc.poll() is None:
+            backend_proc.terminate()
+            try:
+                backend_proc.wait(timeout=2)
+            except subprocess.TimeoutExpired:
+                backend_proc.kill()
+        if frontend_proc and frontend_proc.poll() is None:
+            frontend_proc.terminate()
+            try:
+                frontend_proc.wait(timeout=2)
+            except subprocess.TimeoutExpired:
+                frontend_proc.kill()
+        print("✅ Servidores detenidos correctamente.")
 
 
 if __name__ == "__main__":

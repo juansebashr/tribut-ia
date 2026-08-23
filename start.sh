@@ -8,11 +8,11 @@ echo "================================================================="
 echo "🇨🇴 Iniciando TributIA - Motor Tributario Colombiano (2026)"
 echo "================================================================="
 
-# Liberar puerto si está ocupado
+# Liberar puertos si están ocupados
 if command -v lsof >/dev/null 2>&1; then
-    PIDS=$(lsof -ti:${PORT} 2>/dev/null || true)
+    PIDS=$(lsof -ti:${PORT},5173 2>/dev/null || true)
     if [ -n "$PIDS" ]; then
-        echo "⚠️  Liberando puerto ${PORT} ocupado por proceso(s): $PIDS..."
+        echo "⚠️  Liberando puertos ocupados por proceso(s): $PIDS..."
         echo "$PIDS" | xargs kill -9 2>/dev/null || true
         sleep 0.5
     fi
@@ -25,4 +25,8 @@ elif [ -d "$DIR/backend/venv" ]; then
     source "$DIR/backend/venv/bin/activate"
 fi
 
-python "$DIR/run.py" --port "$PORT"
+if command -v poetry >/dev/null 2>&1 && [ -f "$DIR/pyproject.toml" ]; then
+    poetry run python "$DIR/run.py" --port "$PORT" "$@"
+else
+    python "$DIR/run.py" --port "$PORT" "$@"
+fi
