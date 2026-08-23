@@ -1148,6 +1148,295 @@ export const BeneficiosAuditoriaTab: React.FC<BeneficiosAuditoriaTabProps> = ({
               </div>
             </div>
           )}
+
+          {/* GUIA INTEGRAL DIDACTICA Y TABLAS OFICIALES DE LA LEY */}
+          <div className="card" style={{ padding: '24px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>
+              <BookOpen size={22} color="var(--primary)" />
+              <div>
+                <h3 style={{ fontSize: '16px', fontWeight: 800, margin: 0, color: 'var(--text-main)' }}>
+                  📖 Guía Integral de Beneficios, Normativa y Tablas Oficiales (Estatuto Tributario)
+                </h3>
+                <p style={{ fontSize: '12px', color: 'var(--text-muted)', margin: '2px 0 0 0' }}>
+                  Explicación detallada paso a paso de cada beneficio legal contemplado en el Estatuto Tributario colombiano para la enajenación de inmuebles.
+                </p>
+              </div>
+            </div>
+
+            {/* 5 ESTRATEGIAS EXPANDIDAS CON DETALLES DE USO */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+              {/* ESTRATEGIA 1 */}
+              <div style={{ padding: '16px', background: 'var(--bg-main)', borderRadius: '8px', border: '1px solid var(--border-color)' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
+                  <span style={{ background: 'rgba(59, 130, 246, 0.15)', color: 'var(--primary)', fontWeight: 800, fontSize: '11px', padding: '3px 8px', borderRadius: '6px' }}>ESTRATEGIA 1</span>
+                  <h4 style={{ margin: 0, fontSize: '14px', fontWeight: 800, color: 'var(--primary)' }}>Artículo 70 del Estatuto Tributario — Reajuste Fiscal Anual Porcentual</h4>
+                </div>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '12px', fontSize: '12px', color: 'var(--text-muted)', lineHeight: '1.6' }}>
+                  <div>
+                    <strong style={{ color: 'var(--text-main)', display: 'block', marginBottom: '2px' }}>📜 Fundamento Normativo:</strong>
+                    Artículo 70 del E.T. y decretos anuales de reajuste tributario (regulado por el Ministerio de Hacienda).
+                  </div>
+                  <div>
+                    <strong style={{ color: 'var(--text-main)', display: 'block', marginBottom: '2px' }}>⚙️ Mecánica de Cálculo:</strong>
+                    Se toma el costo fiscal declarado en el año inmediatamente anterior y se le aplica el porcentaje decretado por el Gobierno (ej. meta de inflación o IPC).
+                  </div>
+                  <div>
+                    <strong style={{ color: 'var(--text-main)', display: 'block', marginBottom: '2px' }}>📋 ¿Cómo se declara?:</strong>
+                    Se declara cada año en la sección de Patrimonio Bruto (Activos Fijos). El nuevo valor acumulado se convierte en el costo base para el siguiente año gravable.
+                  </div>
+                  <div>
+                    <strong style={{ color: 'var(--text-main)', display: 'block', marginBottom: '2px' }}>💡 Ventaja al Vender:</strong>
+                    Al enajenar el inmueble tras varios años de posesión, la brecha entre el precio de venta y el costo fiscal acumulado es pequeña, resultando en una ganancia ocasional mínima.
+                  </div>
+                </div>
+              </div>
+
+              {/* ESTRATEGIA 2 */}
+              <div style={{ padding: '16px', background: 'var(--bg-main)', borderRadius: '8px', border: '1px solid var(--border-color)' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
+                  <span style={{ background: 'rgba(59, 130, 246, 0.15)', color: 'var(--primary)', fontWeight: 800, fontSize: '11px', padding: '3px 8px', borderRadius: '6px' }}>ESTRATEGIA 2 (ESTRELLA)</span>
+                  <h4 style={{ margin: 0, fontSize: '14px', fontWeight: 800, color: 'var(--primary)' }}>Artículo 73 del Estatuto Tributario — Multiplicador Histórico DANE / IGAC</h4>
+                </div>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '12px', fontSize: '12px', color: 'var(--text-muted)', lineHeight: '1.6' }}>
+                  <div>
+                    <strong style={{ color: 'var(--text-main)', display: 'block', marginBottom: '2px' }}>📜 Fundamento Normativo:</strong>
+                    Artículo 73 del E.T., Decretos anuales DANE/DIAN. Exclusivo para personas naturales.
+                  </div>
+                  <div>
+                    <strong style={{ color: 'var(--text-main)', display: 'block', marginBottom: '2px' }}>⚙️ Mecánica de Cálculo:</strong>
+                    <code>Costo Ajustado = (Costo Histórico Adquisición × Factor DANE de Año de Compra) + Mejoras - Depreciación</code>.
+                  </div>
+                  <div>
+                    <strong style={{ color: 'var(--text-main)', display: 'block', marginBottom: '2px' }}>🚀 ¿Por qué es la más potente?:</strong>
+                    No requiere haber hecho ajustes en declaraciones anteriores. En el año de venta, se aplica el factor de la tabla histórica oficial (hasta 36x para compras antiguas).
+                  </div>
+                  <div>
+                    <strong style={{ color: 'var(--text-main)', display: 'block', marginBottom: '2px' }}>📋 Casilla Formulario 210:</strong>
+                    Se imputa en la <strong>Casilla 81 (Costos por ganancias ocasionales)</strong>.
+                  </div>
+                </div>
+
+                {/* MINI TABLA ILUSTRATIVA DE FACTORES */}
+                <div style={{ marginTop: '12px', background: 'var(--bg-secondary)', padding: '12px', borderRadius: '6px' }}>
+                  <strong style={{ fontSize: '12px', color: 'var(--text-main)', display: 'block', marginBottom: '6px' }}>
+                    📊 Muestreo de Factores de Reajuste Histórico DANE / DIAN (Art. 73 E.T.):
+                  </strong>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(110px, 1fr))', gap: '8px', fontSize: '11.5px', fontFamily: 'var(--font-mono)' }}>
+                    <div style={{ background: 'var(--bg-main)', padding: '6px', borderRadius: '4px', textAlign: 'center' }}><strong>1955:</strong> 36.08x</div>
+                    <div style={{ background: 'var(--bg-main)', padding: '6px', borderRadius: '4px', textAlign: 'center' }}><strong>1970:</strong> 35.89x</div>
+                    <div style={{ background: 'var(--bg-main)', padding: '6px', borderRadius: '4px', textAlign: 'center' }}><strong>1980:</strong> 35.40x</div>
+                    <div style={{ background: 'var(--bg-main)', padding: '6px', borderRadius: '4px', textAlign: 'center' }}><strong>1990:</strong> 14.20x</div>
+                    <div style={{ background: 'var(--bg-main)', padding: '6px', borderRadius: '4px', textAlign: 'center' }}><strong>2000:</strong> 5.61x</div>
+                    <div style={{ background: 'var(--bg-main)', padding: '6px', borderRadius: '4px', textAlign: 'center' }}><strong>2011:</strong> 2.86x</div>
+                    <div style={{ background: 'var(--bg-main)', padding: '6px', borderRadius: '4px', textAlign: 'center' }}><strong>2018:</strong> 1.54x</div>
+                    <div style={{ background: 'var(--bg-main)', padding: '6px', borderRadius: '4px', textAlign: 'center' }}><strong>2024:</strong> 1.05x</div>
+                  </div>
+                </div>
+              </div>
+
+              {/* ESTRATEGIA 3 */}
+              <div style={{ padding: '16px', background: 'rgba(16, 185, 129, 0.05)', borderRadius: '8px', border: '1px solid rgba(16, 185, 129, 0.3)' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
+                  <span style={{ background: 'var(--success)', color: '#fff', fontWeight: 800, fontSize: '11px', padding: '3px 8px', borderRadius: '6px' }}>ESTRATEGIA 3 (EXENCIÓN 5.000 UVT)</span>
+                  <h4 style={{ margin: 0, fontSize: '14px', fontWeight: 800, color: 'var(--success)' }}>Artículos 311-1 y 126-4 del E.T. — Cuentas AFC y Reinversión en Vivienda</h4>
+                </div>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '12px', fontSize: '12px', color: 'var(--text-muted)', lineHeight: '1.6' }}>
+                  <div>
+                    <strong style={{ color: 'var(--text-main)', display: 'block', marginBottom: '2px' }}>📜 Fundamento Normativo:</strong>
+                    Art. 311-1 E.T. (adicionado por Ley 1607/2012 y modificado por Leyes 1819/2016 y 2277/2022) y Art. 126-4 E.T.
+                  </div>
+                  <div>
+                    <strong style={{ color: 'var(--text-main)', display: 'block', marginBottom: '2px' }}>🏡 Requisito 1 (Casa de Habitación):</strong>
+                    El inmueble vendido debe ser la casa o apartamento donde habita el contribuyente (no aplica para locales, bodegas ni oficinas comerciales).
+                  </div>
+                  <div>
+                    <strong style={{ color: 'var(--text-main)', display: 'block', marginBottom: '2px' }}>🏷️ Requisito 2 (Tope del Inmueble):</strong>
+                    El valor de la vivienda vendida (avalúo o precio) no debe exceder de <strong>23.000 UVT ({formatCOP(23000 * uvtValue)} en {taxYear})</strong>.
+                  </div>
+                  <div>
+                    <strong style={{ color: 'var(--text-main)', display: 'block', marginBottom: '2px' }}>🏦 Requisito 3 (Destinación de Fondos):</strong>
+                    El dinero de la venta debe consignarse en una Cuenta de Ahorro para el Fomento de la Construcción (AFC) o destinarse a comprar otra vivienda o amortizar el crédito hipotecario del inmueble enajenado.
+                  </div>
+                </div>
+                <div style={{ marginTop: '10px', padding: '10px', background: 'rgba(16, 185, 129, 0.12)', borderRadius: '6px', fontSize: '12px', color: 'var(--text-main)' }}>
+                  <strong>🎉 Resultado:</strong> Las primeras <strong>5.000 UVT ({formatCOP(5000 * uvtValue)} en {taxYear})</strong> de utilidad quedan <strong>100% EXENTAS</strong>. Se declaran en la <strong>Casilla 82 (Ganancias ocasionales exentas)</strong>. Si la ganancia neta es menor o igual a este tope, el impuesto de ganancia ocasional es <strong>$0 COP</strong>.
+                </div>
+              </div>
+
+              {/* ESTRATEGIA 4 */}
+              <div style={{ padding: '16px', background: 'rgba(245, 158, 11, 0.05)', borderRadius: '8px', border: '1px solid rgba(245, 158, 11, 0.3)' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
+                  <span style={{ background: '#d97706', color: '#fff', fontWeight: 800, fontSize: '11px', padding: '3px 8px', borderRadius: '6px' }}>ESTRATEGIA 4 (PRE-1987)</span>
+                  <h4 style={{ margin: 0, fontSize: '14px', fontWeight: 800, color: '#d97706' }}>Artículo 44 y Artículo 399 del E.T. — Inmuebles de Habitación Adquiridos Antes de 1987</h4>
+                </div>
+                <p style={{ fontSize: '12px', color: 'var(--text-muted)', lineHeight: '1.6', margin: '0 0 10px 0' }}>
+                  Para casas y apartamentos de habitación adquiridos antes del 1 de enero de 1987, la ley consagra una exención porcentual directa sobre la utilidad obtenida en la venta, sin necesidad de consignar en cuenta AFC.
+                </p>
+
+                {/* TABLA COMPLETA ART. 44 */}
+                <div style={{ overflowX: 'auto' }}>
+                  <table style={{ width: '100%', fontSize: '11.5px', borderCollapse: 'collapse', textAlign: 'center' }}>
+                    <thead>
+                      <tr style={{ background: 'rgba(245, 158, 11, 0.15)', color: 'var(--text-main)' }}>
+                        <th style={{ padding: '6px 8px', border: '1px solid var(--border-color)' }}>Año de Compra</th>
+                        <th style={{ padding: '6px 8px', border: '1px solid var(--border-color)' }}>% Ganancia Exenta (Art. 44)</th>
+                        <th style={{ padding: '6px 8px', border: '1px solid var(--border-color)' }}>% Retención Notaría (Art. 399)</th>
+                        <th style={{ padding: '6px 8px', border: '1px solid var(--border-color)' }}>Efecto Tributario</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr style={{ background: 'rgba(16, 185, 129, 0.1)', fontWeight: 700 }}>
+                        <td style={{ padding: '6px 8px', border: '1px solid var(--border-color)' }}>Antes de 1978</td>
+                        <td style={{ padding: '6px 8px', border: '1px solid var(--border-color)', color: 'var(--success)' }}>100% EXENTO</td>
+                        <td style={{ padding: '6px 8px', border: '1px solid var(--border-color)' }}>0.0% (Sin retención)</td>
+                        <td style={{ padding: '6px 8px', border: '1px solid var(--border-color)' }}>Cero impuesto y Cero retención</td>
+                      </tr>
+                      <tr>
+                        <td style={{ padding: '6px 8px', border: '1px solid var(--border-color)' }}>1978</td>
+                        <td style={{ padding: '6px 8px', border: '1px solid var(--border-color)', color: '#d97706' }}>90% Exento</td>
+                        <td style={{ padding: '6px 8px', border: '1px solid var(--border-color)' }}>0.1% Retención</td>
+                        <td style={{ padding: '6px 8px', border: '1px solid var(--border-color)' }}>Solo tributa sobre el 10%</td>
+                      </tr>
+                      <tr>
+                        <td style={{ padding: '6px 8px', border: '1px solid var(--border-color)' }}>1979</td>
+                        <td style={{ padding: '6px 8px', border: '1px solid var(--border-color)', color: '#d97706' }}>80% Exento</td>
+                        <td style={{ padding: '6px 8px', border: '1px solid var(--border-color)' }}>0.2% Retención</td>
+                        <td style={{ padding: '6px 8px', border: '1px solid var(--border-color)' }}>Solo tributa sobre el 20%</td>
+                      </tr>
+                      <tr>
+                        <td style={{ padding: '6px 8px', border: '1px solid var(--border-color)' }}>1980</td>
+                        <td style={{ padding: '6px 8px', border: '1px solid var(--border-color)', color: '#d97706' }}>70% Exento</td>
+                        <td style={{ padding: '6px 8px', border: '1px solid var(--border-color)' }}>0.3% Retención</td>
+                        <td style={{ padding: '6px 8px', border: '1px solid var(--border-color)' }}>Solo tributa sobre el 30%</td>
+                      </tr>
+                      <tr>
+                        <td style={{ padding: '6px 8px', border: '1px solid var(--border-color)' }}>1981</td>
+                        <td style={{ padding: '6px 8px', border: '1px solid var(--border-color)', color: '#d97706' }}>60% Exento</td>
+                        <td style={{ padding: '6px 8px', border: '1px solid var(--border-color)' }}>0.4% Retención</td>
+                        <td style={{ padding: '6px 8px', border: '1px solid var(--border-color)' }}>Solo tributa sobre el 40%</td>
+                      </tr>
+                      <tr>
+                        <td style={{ padding: '6px 8px', border: '1px solid var(--border-color)' }}>1982</td>
+                        <td style={{ padding: '6px 8px', border: '1px solid var(--border-color)', color: '#d97706' }}>50% Exento</td>
+                        <td style={{ padding: '6px 8px', border: '1px solid var(--border-color)' }}>0.5% Retención</td>
+                        <td style={{ padding: '6px 8px', border: '1px solid var(--border-color)' }}>Mitad de utilidad exenta</td>
+                      </tr>
+                      <tr>
+                        <td style={{ padding: '6px 8px', border: '1px solid var(--border-color)' }}>1983</td>
+                        <td style={{ padding: '6px 8px', border: '1px solid var(--border-color)', color: '#d97706' }}>40% Exento</td>
+                        <td style={{ padding: '6px 8px', border: '1px solid var(--border-color)' }}>0.6% Retención</td>
+                        <td style={{ padding: '6px 8px', border: '1px solid var(--border-color)' }}>40% de ganancia exenta</td>
+                      </tr>
+                      <tr>
+                        <td style={{ padding: '6px 8px', border: '1px solid var(--border-color)' }}>1984</td>
+                        <td style={{ padding: '6px 8px', border: '1px solid var(--border-color)', color: '#d97706' }}>30% Exento</td>
+                        <td style={{ padding: '6px 8px', border: '1px solid var(--border-color)' }}>0.7% Retención</td>
+                        <td style={{ padding: '6px 8px', border: '1px solid var(--border-color)' }}>30% de ganancia exenta</td>
+                      </tr>
+                      <tr>
+                        <td style={{ padding: '6px 8px', border: '1px solid var(--border-color)' }}>1985</td>
+                        <td style={{ padding: '6px 8px', border: '1px solid var(--border-color)', color: '#d97706' }}>20% Exento</td>
+                        <td style={{ padding: '6px 8px', border: '1px solid var(--border-color)' }}>0.8% Retención</td>
+                        <td style={{ padding: '6px 8px', border: '1px solid var(--border-color)' }}>20% de ganancia exenta</td>
+                      </tr>
+                      <tr>
+                        <td style={{ padding: '6px 8px', border: '1px solid var(--border-color)' }}>1986</td>
+                        <td style={{ padding: '6px 8px', border: '1px solid var(--border-color)', color: '#d97706' }}>10% Exento</td>
+                        <td style={{ padding: '6px 8px', border: '1px solid var(--border-color)' }}>0.9% Retención</td>
+                        <td style={{ padding: '6px 8px', border: '1px solid var(--border-color)' }}>10% de ganancia exenta</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              {/* ESTRATEGIA 5 */}
+              <div style={{ padding: '16px', background: 'rgba(139, 92, 246, 0.05)', borderRadius: '8px', border: '1px solid rgba(139, 92, 246, 0.3)' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
+                  <span style={{ background: '#8b5cf6', color: '#fff', fontWeight: 800, fontSize: '11px', padding: '3px 8px', borderRadius: '6px' }}>ESTRATEGIA 5</span>
+                  <h4 style={{ margin: 0, fontSize: '14px', fontWeight: 800, color: '#8b5cf6' }}>Artículos 72, 398 y 400 del E.T. — Avalúo Catastral y Retenciones Notariales</h4>
+                </div>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '12px', fontSize: '12px', color: 'var(--text-muted)', lineHeight: '1.6' }}>
+                  <div>
+                    <strong style={{ color: 'var(--text-main)', display: 'block', marginBottom: '2px' }}>📑 Avalúo Catastral (Art. 72 E.T.):</strong>
+                    El contribuyente puede fijar como costo fiscal el avalúo catastral o autoavalúo fijado en el recibo de Impuesto Predial del año anterior a la venta.
+                  </div>
+                  <div>
+                    <strong style={{ color: 'var(--text-main)', display: 'block', marginBottom: '2px' }}>✒️ Retención Notarial del 1% (Art. 398 E.T.):</strong>
+                    Al firmar la escritura de compraventa, el Notario retiene el 1% del valor total de la venta. Este valor NO se pierde: se descuenta en la <strong>Casilla 134</strong> de la declaración de renta como anticipo pagado.
+                  </div>
+                  <div>
+                    <strong style={{ color: 'var(--text-main)', display: 'block', marginBottom: '2px' }}>🏘️ Vivienda VIS / VIP (Art. 400 E.T.):</strong>
+                    Si el inmueble califica como Vivienda de Interés Social o Prioritario, la retención en la notaría no aplica o está exonerada.
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* TABLA COMPARATIVA DIDACTICA DE CASO REAL INTEGRADO */}
+            <div style={{ marginTop: '20px', background: 'var(--bg-main)', padding: '16px', borderRadius: '8px', border: '1px solid var(--border-color)' }}>
+              <h4 style={{ fontSize: '13.5px', fontWeight: 800, color: 'var(--text-main)', margin: '0 0 10px 0', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <Calculator size={16} color="var(--primary)" />
+                Tabla Comparativa de Ejemplo Integral: Venta de Vivienda por $450M (Comprada en 2011 por $150M)
+              </h4>
+              <div style={{ overflowX: 'auto' }}>
+                <table style={{ width: '100%', fontSize: '12px', borderCollapse: 'collapse' }}>
+                  <thead>
+                    <tr style={{ background: 'var(--bg-secondary)', textAlign: 'left' }}>
+                      <th style={{ padding: '8px', border: '1px solid var(--border-color)' }}>Concepto</th>
+                      <th style={{ padding: '8px', border: '1px solid var(--border-color)', color: 'var(--danger)' }}>1. Sin Planeación</th>
+                      <th style={{ padding: '8px', border: '1px solid var(--border-color)', color: 'var(--primary)' }}>2. Con Reajuste Art. 73</th>
+                      <th style={{ padding: '8px', border: '1px solid var(--border-color)', color: 'var(--success)' }}>3. Con Art. 73 + Cuenta AFC (Art. 311-1)</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td style={{ padding: '8px', border: '1px solid var(--border-color)' }}>Precio de Venta (Escritura)</td>
+                      <td style={{ padding: '8px', border: '1px solid var(--border-color)', fontFamily: 'var(--font-mono)' }}>$450.000.000</td>
+                      <td style={{ padding: '8px', border: '1px solid var(--border-color)', fontFamily: 'var(--font-mono)' }}>$450.000.000</td>
+                      <td style={{ padding: '8px', border: '1px solid var(--border-color)', fontFamily: 'var(--font-mono)' }}>$450.000.000</td>
+                    </tr>
+                    <tr>
+                      <td style={{ padding: '8px', border: '1px solid var(--border-color)' }}>Costo Fiscal Aplicado</td>
+                      <td style={{ padding: '8px', border: '1px solid var(--border-color)', fontFamily: 'var(--font-mono)' }}>$150.000.000 (Histórico)</td>
+                      <td style={{ padding: '8px', border: '1px solid var(--border-color)', fontFamily: 'var(--font-mono)' }}>$429.000.000 (Factor 2.86x)</td>
+                      <td style={{ padding: '8px', border: '1px solid var(--border-color)', fontFamily: 'var(--font-mono)' }}>$429.000.000 (Factor 2.86x)</td>
+                    </tr>
+                    <tr>
+                      <td style={{ padding: '8px', border: '1px solid var(--border-color)' }}>Ganancia Ocasional Bruta</td>
+                      <td style={{ padding: '8px', border: '1px solid var(--border-color)', fontFamily: 'var(--font-mono)' }}>$300.000.000</td>
+                      <td style={{ padding: '8px', border: '1px solid var(--border-color)', fontFamily: 'var(--font-mono)' }}>$21.000.000</td>
+                      <td style={{ padding: '8px', border: '1px solid var(--border-color)', fontFamily: 'var(--font-mono)' }}>$21.000.000</td>
+                    </tr>
+                    <tr>
+                      <td style={{ padding: '8px', border: '1px solid var(--border-color)' }}>Exención Cuenta AFC (Art. 311-1)</td>
+                      <td style={{ padding: '8px', border: '1px solid var(--border-color)', fontFamily: 'var(--font-mono)' }}>$0</td>
+                      <td style={{ padding: '8px', border: '1px solid var(--border-color)', fontFamily: 'var(--font-mono)' }}>$0</td>
+                      <td style={{ padding: '8px', border: '1px solid var(--border-color)', fontFamily: 'var(--font-mono)', color: 'var(--success)' }}>-$21.000.000 (Exento)</td>
+                    </tr>
+                    <tr>
+                      <td style={{ padding: '8px', border: '1px solid var(--border-color)' }}>Ganancia Ocasional Gravada Final</td>
+                      <td style={{ padding: '8px', border: '1px solid var(--border-color)', fontFamily: 'var(--font-mono)', fontWeight: 700 }}>$300.000.000</td>
+                      <td style={{ padding: '8px', border: '1px solid var(--border-color)', fontFamily: 'var(--font-mono)', fontWeight: 700 }}>$21.000.000</td>
+                      <td style={{ padding: '8px', border: '1px solid var(--border-color)', fontFamily: 'var(--font-mono)', fontWeight: 700, color: 'var(--success)' }}>$0 COP</td>
+                    </tr>
+                    <tr style={{ background: 'var(--bg-secondary)', fontWeight: 800 }}>
+                      <td style={{ padding: '8px', border: '1px solid var(--border-color)' }}>Impuesto a Pagar (Tarifa 15%)</td>
+                      <td style={{ padding: '8px', border: '1px solid var(--border-color)', fontFamily: 'var(--font-mono)', color: 'var(--danger)' }}>$45.000.000</td>
+                      <td style={{ padding: '8px', border: '1px solid var(--border-color)', fontFamily: 'var(--font-mono)', color: 'var(--primary)' }}>$3.150.000</td>
+                      <td style={{ padding: '8px', border: '1px solid var(--border-color)', fontFamily: 'var(--font-mono)', color: 'var(--success)', fontSize: '13px' }}>$0 COP</td>
+                    </tr>
+                    <tr style={{ background: 'rgba(16, 185, 129, 0.1)', fontWeight: 800 }}>
+                      <td style={{ padding: '8px', border: '1px solid var(--border-color)' }}>Ahorro Tributario Neto</td>
+                      <td style={{ padding: '8px', border: '1px solid var(--border-color)', fontFamily: 'var(--font-mono)' }}>$0 COP</td>
+                      <td style={{ padding: '8px', border: '1px solid var(--border-color)', fontFamily: 'var(--font-mono)', color: 'var(--success)' }}>+$41.850.000</td>
+                      <td style={{ padding: '8px', border: '1px solid var(--border-color)', fontFamily: 'var(--font-mono)', color: 'var(--success)' }}>+$45.000.000 (100% Ahorro)</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
         </div>
       )}
 
