@@ -10,7 +10,7 @@ echo "================================================================="
 
 # Liberar puertos si están ocupados
 if command -v lsof >/dev/null 2>&1; then
-    PIDS=$(lsof -ti:${PORT},5173 2>/dev/null || true)
+    PIDS=$(lsof -ti:${PORT} 2>/dev/null || true)
     if [ -n "$PIDS" ]; then
         echo "⚠️  Liberando puertos ocupados por proceso(s): $PIDS..."
         echo "$PIDS" | xargs kill -9 2>/dev/null || true
