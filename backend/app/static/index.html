@@ -2943,48 +2943,101 @@
              ================================================================= -->
         <div id="pane-inmuebles-afc" class="module-pane">
           <div style="margin-bottom: 20px;">
-            <h2 style="font-size: 18px; font-weight: 800; color: var(--text-primary); margin-bottom: 4px;">
-              🏡 Beneficios sobre Bienes Inmuebles & Cuentas AFC (Art. 311-1 y 126-4 E.T.)
-            </h2>
-            <p style="font-size: 12.5px; color: var(--text-muted);">
-              Estrategia legal de optimización tributaria: exención de hasta 5.000 UVT en Ganancia Ocasional al vender tu casa o apartamento de habitación y destinar los recursos a cuentas AFC o vivienda.
-            </p>
+            <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
+              <div>
+                <h2 style="font-size: 18px; font-weight: 800; color: var(--text-primary); margin-bottom: 4px;">
+                  🏡 Inmuebles & Cuentas AFC: 5 Estrategias Legales de Ahorro Tributario
+                </h2>
+                <p style="font-size: 12.5px; color: var(--text-muted); margin: 0;">
+                  Planificación tributaria y optimización fiscal integral según el Estatuto Tributario (Arts. 70, 72, 73, 44, 311-1, 126-4, 398 y 399).
+                </p>
+              </div>
+              <span class="badge-uvt" style="background: #ecfdf5; color: #065f46; border: 1px solid #a7f3d0;">
+                ✓ 100% Conforme a Estatuto Tributario
+              </span>
+            </div>
           </div>
 
-          <!-- GUÍA DIDÁCTICA INMUEBLES Y AFC -->
-          <div class="responsive-grid-3-wide" style="margin-bottom: 24px;">
-            <!-- CARD 1 -->
+          <!-- BOTONES DE PRESETS RÁPIDOS -->
+          <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px 16px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span style="font-size: 12px; font-weight: 700; color: var(--text-primary);">⚡ Casos Prácticos & Presets:</span>
+              <span style="font-size: 11px; color: var(--text-muted);">(Carga parámetros reales con 1 clic)</span>
+            </div>
+            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+              <button type="button" class="btn btn-outline" style="font-size: 11.5px; padding: 5px 10px; background: white;" onclick="loadPresetAfcMabel()">
+                🎬 Caso Video Abogada Mabel ($450M / 2011)
+              </button>
+              <button type="button" class="btn btn-outline" style="font-size: 11.5px; padding: 5px 10px; background: white;" onclick="loadPresetAfcPre1987()">
+                🏛️ Vivienda Pre-1987 (Art. 44 - 1983)
+              </button>
+              <button type="button" class="btn btn-outline" style="font-size: 11.5px; padding: 5px 10px; background: white;" onclick="loadPresetAfcVivienda()">
+                🏡 Vivienda + Cuenta AFC (Tope 5.000 UVT)
+              </button>
+              <button type="button" class="btn btn-outline" style="font-size: 11.5px; padding: 5px 10px; background: white;" onclick="loadPresetAfcRural()">
+                🌾 Finca Rural Agropecuaria
+              </button>
+            </div>
+          </div>
+
+          <!-- GUÍA DIDÁCTICA DE LAS 5 ESTRATEGIAS -->
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-bottom: 24px;">
+            <!-- STRATEGY 1 -->
             <div class="card" style="border-top: 3px solid #3b82f6;">
-              <div class="card-body" style="padding: 14px;">
-                <div style="font-size: 13px; font-weight: 800; color: #1e40af; margin-bottom: 6px;">
-                  🏦 ¿Qué es una Cuenta AFC?
+              <div class="card-body" style="padding: 12px;">
+                <div style="font-size: 12px; font-weight: 800; color: #1e40af; margin-bottom: 4px;">
+                  1. Reajuste Anual (Art. 70)
                 </div>
-                <p style="font-size: 11.5px; color: #475569; line-height: 1.45; margin: 0;">
-                  Es una cuenta de <strong>Ahorro para el Fomento de la Construcción</strong> (Art. 126-4 E.T.) regulada por la Superintendencia Financiera. Los depósitos allí realizados tienen tratamiento de <strong>Renta Exenta</strong> o <strong>Ganancia Ocasional Exenta</strong> siempre que se destinen a vivienda.
+                <p style="font-size: 11px; color: #475569; line-height: 1.4; margin: 0;">
+                  Incremento porcentual anual acumulativo del costo fiscal declarado año tras año.
                 </p>
               </div>
             </div>
 
-            <!-- CARD 2 -->
-            <div class="card" style="border-top: 3px solid #10b981; background: #f0fdf4;">
-              <div class="card-body" style="padding: 14px;">
-                <div style="font-size: 13px; font-weight: 800; color: #065f46; margin-bottom: 6px;">
-                  ✨ Exención Especial por Venta (Art. 311-1 E.T.)
+            <!-- STRATEGY 2 -->
+            <div class="card" style="border-top: 3px solid #059669; background: #f0fdf4;">
+              <div class="card-body" style="padding: 12px;">
+                <div style="font-size: 12px; font-weight: 800; color: #065f46; margin-bottom: 4px;">
+                  2. Multiplicador DANE (Art. 73)
                 </div>
-                <p style="font-size: 11.5px; color: #166534; line-height: 1.45; margin: 0;">
-                  Al vender tu <strong>casa o apartamento de habitación</strong> (poseído por 2+ años), las primeras <strong>5.000 UVT de utilidad ($261.750.000 COP en 2026)</strong> están <strong>100% EXENTAS del impuesto de Ganancia Ocasional (0% en vez del 15%)</strong> si depositas el dinero en una cuenta AFC o lo destinas a la compra de otra vivienda.
+                <p style="font-size: 11px; color: #166534; line-height: 1.4; margin: 0;">
+                  Multiplicador oficial IGAC/DANE por año de adquisición para personas naturales.
                 </p>
               </div>
             </div>
 
-            <!-- CARD 3 -->
+            <!-- STRATEGY 3 -->
+            <div class="card" style="border-top: 3px solid #8b5cf6;">
+              <div class="card-body" style="padding: 12px;">
+                <div style="font-size: 12px; font-weight: 800; color: #5b21b6; margin-bottom: 4px;">
+                  3. Cuentas AFC (Art. 311-1)
+                </div>
+                <p style="font-size: 11px; color: #4c1d95; line-height: 1.4; margin: 0;">
+                  Primeras 5.000 UVT de ganancia en casa de habitación 100% exentas en AFC o nueva vivienda.
+                </p>
+              </div>
+            </div>
+
+            <!-- STRATEGY 4 -->
             <div class="card" style="border-top: 3px solid #f59e0b;">
-              <div class="card-body" style="padding: 14px;">
-                <div style="font-size: 13px; font-weight: 800; color: #92400e; margin-bottom: 6px;">
-                  ⚠️ Requisitos de Permanencia
+              <div class="card-body" style="padding: 12px;">
+                <div style="font-size: 12px; font-weight: 800; color: #92400e; margin-bottom: 4px;">
+                  4. Viviendas Pre-1987 (Art. 44)
                 </div>
-                <p style="font-size: 11.5px; color: #78350f; line-height: 1.45; margin: 0;">
-                  Los recursos deben permanecer en la cuenta AFC al menos <strong>10 años</strong> o retirarse anticipadamente <strong>exclusivamente para compra de otra vivienda o pago de crédito hipotecario</strong>. Si se retiran para otro fin, se pierde la exención.
+                <p style="font-size: 11px; color: #78350f; line-height: 1.4; margin: 0;">
+                  Exención escalonada (10% a 100%) y descuento directo en la retención notarial (Art. 399).
+                </p>
+              </div>
+            </div>
+
+            <!-- STRATEGY 5 -->
+            <div class="card" style="border-top: 3px solid #0284c7;">
+              <div class="card-body" style="padding: 12px;">
+                <div style="font-size: 12px; font-weight: 800; color: #075985; margin-bottom: 4px;">
+                  5. Autoavalúo Predial (Art. 72)
+                </div>
+                <p style="font-size: 11px; color: #0c4a6e; line-height: 1.4; margin: 0;">
+                  Autoavalúo catastral del año anterior como costo fiscal alternativo frente a la DIAN.
                 </p>
               </div>
             </div>
@@ -3010,25 +3063,102 @@
                       inputmode="numeric"
                       id="afc-sim-precio-venta"
                       class="currency-input"
-                      value="600'000.000"
+                      value="450'000.000"
                       oninput="runSimulacionInmuebleAfc()"
                     />
                   </div>
                 </div>
 
-                <!-- COSTO FISCAL -->
+                <!-- COSTO HISTÓRICO -->
                 <div class="input-field" style="margin-bottom: 10px;">
-                  <label class="input-label">Costo Fiscal del Inmueble (Adquisición / Reajuste Art. 73)</label>
+                  <label class="input-label">Costo Histórico de Adquisición en Escritura ($ COP)</label>
                   <div class="input-wrapper">
                     <span class="input-prefix">$</span>
                     <input
                       type="text"
                       inputmode="numeric"
-                      id="afc-sim-costo-fiscal"
+                      id="afc-sim-costo-historico"
                       class="currency-input"
-                      value="350'000.000"
+                      value="150'000.000"
                       oninput="runSimulacionInmuebleAfc()"
                     />
+                  </div>
+                </div>
+
+                <!-- AÑO ADQUISICIÓN Y TIPO ACTIVO -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px;">
+                  <div class="input-field">
+                    <label class="input-label">Año de Adquisición</label>
+                    <select id="afc-sim-ano-adquisicion" class="select-input" onchange="runSimulacionInmuebleAfc()">
+                      <!-- Populated via JS -->
+                    </select>
+                  </div>
+                  <div class="input-field">
+                    <label class="input-label">Tipo de Activo Fijo</label>
+                    <select id="afc-sim-tipo-inmueble" class="select-input" onchange="runSimulacionInmuebleAfc()">
+                      <option value="bienes_raices_urbanos">Bienes Raíces Urbanos (Casa/Apto)</option>
+                      <option value="bienes_raices_rurales_agro">Bienes Raíces Rurales (Finca/Agro)</option>
+                      <option value="acciones_o_aportes">Acciones o Aportes Sociales</option>
+                    </select>
+                  </div>
+                </div>
+
+                <!-- MÉTODO DE COSTO FISCAL -->
+                <div class="input-field" style="margin-bottom: 10px;">
+                  <label class="input-label">Método de Determinación de Costo Fiscal</label>
+                  <select id="afc-sim-metodo-costo" class="select-input" onchange="toggleMetodoCostoAfc(); runSimulacionInmuebleAfc();">
+                    <option value="art73" selected>⭐ Art. 73 E.T. - Tabla Multiplicadores DANE / IGAC (Recomendado)</option>
+                    <option value="art72">🏛️ Art. 72 E.T. - Autoavalúo Predial / Catastral</option>
+                    <option value="art70">📈 Art. 70 E.T. - Reajuste Fiscal Anual Acumulado</option>
+                    <option value="historico">📄 Costo Histórico de Adquisición sin Ajustes</option>
+                  </select>
+                </div>
+
+                <!-- COSTO PERSONALIZADO (SI ART 72 O ART 70) -->
+                <div id="afc-sim-costo-personalizado-container" class="input-field" style="display: none; margin-bottom: 10px;">
+                  <label class="input-label" id="afc-sim-costo-personalizado-label">Valor del Autoavalúo Predial Año Anterior ($ COP)</label>
+                  <div class="input-wrapper">
+                    <span class="input-prefix">$</span>
+                    <input
+                      type="text"
+                      inputmode="numeric"
+                      id="afc-sim-costo-personalizado"
+                      class="currency-input"
+                      value="0"
+                      oninput="runSimulacionInmuebleAfc()"
+                    />
+                  </div>
+                </div>
+
+                <!-- MEJORAS Y ADICIONES -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px;">
+                  <div class="input-field">
+                    <label class="input-label">Mejoras / Contribuciones ($ COP)</label>
+                    <div class="input-wrapper">
+                      <span class="input-prefix">$</span>
+                      <input
+                        type="text"
+                        inputmode="numeric"
+                        id="afc-sim-mejoras"
+                        class="currency-input"
+                        value="0"
+                        oninput="runSimulacionInmuebleAfc()"
+                      />
+                    </div>
+                  </div>
+                  <div class="input-field">
+                    <label class="input-label">Depreciación Deducida ($ COP)</label>
+                    <div class="input-wrapper">
+                      <span class="input-prefix">$</span>
+                      <input
+                        type="text"
+                        inputmode="numeric"
+                        id="afc-sim-depreciacion"
+                        class="currency-input"
+                        value="0"
+                        oninput="runSimulacionInmuebleAfc()"
+                      />
+                    </div>
                   </div>
                 </div>
 
@@ -3042,12 +3172,12 @@
                       inputmode="numeric"
                       id="afc-sim-monto-afc"
                       class="currency-input"
-                      value="250'000.000"
+                      value="21'000.000"
                       oninput="runSimulacionInmuebleAfc()"
                     />
                   </div>
                   <div style="font-size: 10.5px; color: #64748b; margin-top: 2px;">
-                    Tope legal máximo de exención: 5.000 UVT ($261.750.000 COP para 2026).
+                    Tope legal máximo de exención Art. 311-1: 5.000 UVT ($261.750.000 COP para 2026).
                   </div>
                 </div>
 
@@ -3059,7 +3189,7 @@
                   </label>
                   <label class="checkbox-group">
                     <input type="checkbox" id="afc-sim-check-posesion" checked onchange="runSimulacionInmuebleAfc()">
-                    <span style="font-size: 11.5px;">Poseído por <strong>dos (2) años o más</strong> (clasifica como Ganancia Ocasional).</span>
+                    <span style="font-size: 11.5px;">Poseído por <strong>dos (2) años o más</strong> (clasifica como Ganancia Ocasional al 15%).</span>
                   </label>
                 </div>
               </div>
@@ -3069,7 +3199,7 @@
             <div class="card" style="border: 2px solid var(--emerald-border);">
               <div class="card-header" style="background: var(--emerald-light);">
                 <div class="card-title" style="color: var(--emerald); font-size: 14px;">
-                  2. Liquidación de Utilidad Exenta & Ahorro Tributario (15%)
+                  2. Liquidación de Beneficios, Ahorro Tributario & Formulario 210
                 </div>
               </div>
               <div class="card-body">

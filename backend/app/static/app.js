@@ -2142,10 +2142,123 @@ function runSimulacionSanciones() {
   return runCalculadoraSanciones();
 }
 
-// SIMULADOR INMUEBLES & CUENTAS AFC (Art. 311-1 y 126-4 E.T.)
+// SIMULADOR INMUEBLES & CUENTAS AFC (5 Estrategias Legales: Arts. 70, 72, 73, 44, 311-1, 126-4, 398, 399)
+function toggleMetodoCostoAfc() {
+  const metodo = document.getElementById('afc-sim-metodo-costo')?.value || 'art73';
+  const customContainer = document.getElementById('afc-sim-costo-personalizado-container');
+  const customLabel = document.getElementById('afc-sim-costo-personalizado-label');
+  if (!customContainer || !customLabel) return;
+
+  if (metodo === 'art72') {
+    customContainer.style.display = 'block';
+    customLabel.innerText = 'Valor del Autoavalúo Predial / Catastral Año Anterior ($ COP)';
+  } else if (metodo === 'art70') {
+    customContainer.style.display = 'block';
+    customLabel.innerText = 'Costo Fiscal Ajustado Acumulado por Art. 70 ($ COP)';
+  } else {
+    customContainer.style.display = 'none';
+  }
+}
+
+function loadPresetAfcMabel() {
+  setCurrencyVal('afc-sim-precio-venta', 450000000);
+  setCurrencyVal('afc-sim-costo-historico', 150000000);
+  const anoSel = document.getElementById('afc-sim-ano-adquisicion');
+  if (anoSel) anoSel.value = '2011';
+  const tipoSel = document.getElementById('afc-sim-tipo-inmueble');
+  if (tipoSel) tipoSel.value = 'bienes_raices_urbanos';
+  const metodoSel = document.getElementById('afc-sim-metodo-costo');
+  if (metodoSel) metodoSel.value = 'art73';
+  setCurrencyVal('afc-sim-costo-personalizado', 0);
+  setCurrencyVal('afc-sim-mejoras', 0);
+  setCurrencyVal('afc-sim-depreciacion', 0);
+  setCurrencyVal('afc-sim-monto-afc', 21000000);
+  const chkVivienda = document.getElementById('afc-sim-check-vivienda');
+  if (chkVivienda) chkVivienda.checked = true;
+  const chkPos = document.getElementById('afc-sim-check-posesion');
+  if (chkPos) chkPos.checked = true;
+  toggleMetodoCostoAfc();
+  runSimulacionInmuebleAfc();
+}
+
+function loadPresetAfcPre1987() {
+  setCurrencyVal('afc-sim-precio-venta', 600000000);
+  setCurrencyVal('afc-sim-costo-historico', 25000000);
+  const anoSel = document.getElementById('afc-sim-ano-adquisicion');
+  if (anoSel) anoSel.value = '1983';
+  const tipoSel = document.getElementById('afc-sim-tipo-inmueble');
+  if (tipoSel) tipoSel.value = 'bienes_raices_urbanos';
+  const metodoSel = document.getElementById('afc-sim-metodo-costo');
+  if (metodoSel) metodoSel.value = 'art73';
+  setCurrencyVal('afc-sim-costo-personalizado', 0);
+  setCurrencyVal('afc-sim-mejoras', 0);
+  setCurrencyVal('afc-sim-depreciacion', 0);
+  setCurrencyVal('afc-sim-monto-afc', 0);
+  const chkVivienda = document.getElementById('afc-sim-check-vivienda');
+  if (chkVivienda) chkVivienda.checked = true;
+  const chkPos = document.getElementById('afc-sim-check-posesion');
+  if (chkPos) chkPos.checked = true;
+  toggleMetodoCostoAfc();
+  runSimulacionInmuebleAfc();
+}
+
+function loadPresetAfcVivienda() {
+  setCurrencyVal('afc-sim-precio-venta', 800000000);
+  setCurrencyVal('afc-sim-costo-historico', 350000000);
+  const anoSel = document.getElementById('afc-sim-ano-adquisicion');
+  if (anoSel) anoSel.value = '2018';
+  const tipoSel = document.getElementById('afc-sim-tipo-inmueble');
+  if (tipoSel) tipoSel.value = 'bienes_raices_urbanos';
+  const metodoSel = document.getElementById('afc-sim-metodo-costo');
+  if (metodoSel) metodoSel.value = 'art73';
+  setCurrencyVal('afc-sim-costo-personalizado', 0);
+  setCurrencyVal('afc-sim-mejoras', 0);
+  setCurrencyVal('afc-sim-depreciacion', 0);
+  setCurrencyVal('afc-sim-monto-afc', 261750000);
+  const chkVivienda = document.getElementById('afc-sim-check-vivienda');
+  if (chkVivienda) chkVivienda.checked = true;
+  const chkPos = document.getElementById('afc-sim-check-posesion');
+  if (chkPos) chkPos.checked = true;
+  toggleMetodoCostoAfc();
+  runSimulacionInmuebleAfc();
+}
+
+function loadPresetAfcRural() {
+  setCurrencyVal('afc-sim-precio-venta', 1200000000);
+  setCurrencyVal('afc-sim-costo-historico', 200000000);
+  const anoSel = document.getElementById('afc-sim-ano-adquisicion');
+  if (anoSel) anoSel.value = '2008';
+  const tipoSel = document.getElementById('afc-sim-tipo-inmueble');
+  if (tipoSel) tipoSel.value = 'bienes_raices_rurales_agro';
+  const metodoSel = document.getElementById('afc-sim-metodo-costo');
+  if (metodoSel) metodoSel.value = 'art73';
+  setCurrencyVal('afc-sim-costo-personalizado', 0);
+  setCurrencyVal('afc-sim-mejoras', 50000000);
+  setCurrencyVal('afc-sim-depreciacion', 0);
+  setCurrencyVal('afc-sim-monto-afc', 0);
+  const chkVivienda = document.getElementById('afc-sim-check-vivienda');
+  if (chkVivienda) chkVivienda.checked = false;
+  const chkPos = document.getElementById('afc-sim-check-posesion');
+  if (chkPos) chkPos.checked = true;
+  toggleMetodoCostoAfc();
+  runSimulacionInmuebleAfc();
+}
+
+function setCurrencyVal(elemId, num) {
+  const el = document.getElementById(elemId);
+  if (!el) return;
+  el.value = formatCOP(num);
+}
+
 async function runSimulacionInmuebleAfc() {
   const precioVenta = getNum('afc-sim-precio-venta');
-  const costoFiscal = getNum('afc-sim-costo-fiscal');
+  const costoHistorico = getNum('afc-sim-costo-historico');
+  const anoAdquisicion = document.getElementById('afc-sim-ano-adquisicion')?.value || '2011';
+  const tipoInmueble = document.getElementById('afc-sim-tipo-inmueble')?.value || 'bienes_raices_urbanos';
+  const metodoCosto = document.getElementById('afc-sim-metodo-costo')?.value || 'art73';
+  const costoPersonalizado = getNum('afc-sim-costo-personalizado');
+  const mejoras = getNum('afc-sim-mejoras');
+  const depreciacion = getNum('afc-sim-depreciacion');
   const montoAfc = getNum('afc-sim-monto-afc');
   const esVivienda = document.getElementById('afc-sim-check-vivienda')?.checked ?? true;
   const esPosesion = document.getElementById('afc-sim-check-posesion')?.checked ?? true;
@@ -2158,52 +2271,118 @@ async function runSimulacionInmuebleAfc() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         precio_venta_cop: precioVenta,
-        costo_fiscal_inmueble_cop: costoFiscal,
+        costo_adquisicion_historico_cop: costoHistorico,
+        ano_adquisicion: anoAdquisicion,
+        tipo_inmueble: tipoInmueble,
+        metodo_costo_fiscal: metodoCosto,
+        costo_fiscal_personalizado_cop: costoPersonalizado,
+        mejoras_y_contribuciones_cop: mejoras,
+        depreciacion_acumulada_deducida_cop: depreciacion,
+        monto_depositado_afc_o_vivienda_cop: montoAfc,
         es_vivienda_habitacion: esVivienda,
         posesion_mas_2_anos: esPosesion,
-        monto_depositado_afc_o_vivienda_cop: montoAfc,
         tax_year: currentYear,
         custom_uvt: currentUvt
       })
     });
     const data = await res.json();
 
-    let pasosHtml = data.explicacion_paso_a_paso.map(p => `<li>${p}</li>`).join('');
+    let pasosHtml = (data.explicacion_paso_a_paso || []).map(p => `<li>${p}</li>`).join('');
+
+    let escenariosRows = (data.escenarios || []).map(e => `
+      <tr style="${e.es_escenario_actual ? 'background: #f0fdf4; font-weight: 700;' : ''}">
+        <td style="padding: 6px 8px; border-bottom: 1px solid #e2e8f0;">
+          ${e.es_escenario_actual ? '👉 <strong>' + e.nombre + '</strong>' : e.nombre}
+        </td>
+        <td style="padding: 6px 8px; border-bottom: 1px solid #e2e8f0; font-family: var(--font-mono); text-align: right;">${formatCOP(e.costo_fiscal_cop)}</td>
+        <td style="padding: 6px 8px; border-bottom: 1px solid #e2e8f0; font-family: var(--font-mono); text-align: right;">${formatCOP(e.ganancia_gravable_cop)}</td>
+        <td style="padding: 6px 8px; border-bottom: 1px solid #e2e8f0; font-family: var(--font-mono); text-align: right; color: ${e.impuesto_go_cop > 0 ? '#991b1b' : '#059669'};">${formatCOP(e.impuesto_go_cop)}</td>
+        <td style="padding: 6px 8px; border-bottom: 1px solid #e2e8f0; font-family: var(--font-mono); text-align: right; color: #059669; font-weight: 800;">${formatCOP(e.ahorro_vs_base_cop)}</td>
+      </tr>
+    `).join('');
 
     resDiv.innerHTML = `
       <div style="background: white; border: 1px solid #bbf7d0; border-radius: 8px; padding: 12px; margin-bottom: 12px; border-left: 4px solid #10b981;">
-        <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px;">
-          <span style="font-weight: 700; color: #065f46;">AHORRO TRIBUTARIO ESTIMADO:</span>
-          <span style="font-size: 20px; font-weight: 900; font-family: var(--font-mono); color: #059669;">
-            ${formatCOP(data.ahorro_impuesto_afc_cop)} COP
+        <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px; flex-wrap: wrap;">
+          <span style="font-weight: 700; color: #065f46;">AHORRO TRIBUTARIO NETO:</span>
+          <span style="font-size: 22px; font-weight: 900; font-family: var(--font-mono); color: #059669;">
+            ${formatCOP(data.ahorro_total_impuesto_cop)} COP (${data.porcentaje_ahorro_tributario_pct}%)
           </span>
         </div>
         <div style="font-size: 11px; color: #047857; font-weight: 600;">
-          Ahorro directo del 15% por concepto de Ganancia Ocasional Exenta (Art. 311-1 E.T.)
+          Impuesto Sin Planeación: ${formatCOP(data.impuesto_go_sin_beneficios_cop)} ➔ Impuesto Final con Beneficios: ${formatCOP(data.impuesto_go_con_beneficios_cop)} COP
         </div>
       </div>
 
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px; font-size: 11.5px;">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 8px; margin-bottom: 12px; font-size: 11.5px;">
         <div style="background: #f8fafc; padding: 8px; border-radius: 6px; border: 1px solid #e2e8f0;">
-          <div style="color: #64748b; font-size: 10px; text-transform: uppercase;">Utilidad Bruta Inmueble:</div>
-          <div style="font-weight: 800; font-size: 13px; color: #0f172a; font-family: var(--font-mono);">${formatCOP(data.ganancia_ocasional_bruta_cop)}</div>
+          <div style="color: #64748b; font-size: 9.5px; text-transform: uppercase;">Costo Fiscal Determinado:</div>
+          <div style="font-weight: 800; font-size: 12.5px; color: #0f172a; font-family: var(--font-mono);">${formatCOP(data.costo_fiscal_determinado_cop)}</div>
         </div>
         <div style="background: #eff6ff; padding: 8px; border-radius: 6px; border: 1px solid #bfdbfe;">
-          <div style="color: #1e40af; font-size: 10px; text-transform: uppercase;">Utilidad Exenta AFC:</div>
-          <div style="font-weight: 800; font-size: 13px; color: #1e3a8a; font-family: var(--font-mono);">${formatCOP(data.ganancia_ocasional_exenta_cop)}</div>
-        </div>
-        <div style="background: #fffbeb; padding: 8px; border-radius: 6px; border: 1px solid #fde68a;">
-          <div style="color: #b45309; font-size: 10px; text-transform: uppercase;">Utilidad Gravada Final:</div>
-          <div style="font-weight: 800; font-size: 13px; color: #92400e; font-family: var(--font-mono);">${formatCOP(data.ganancia_ocasional_gravada_final_cop)}</div>
+          <div style="color: #1e40af; font-size: 9.5px; text-transform: uppercase;">Utilidad Bruta:</div>
+          <div style="font-weight: 800; font-size: 12.5px; color: #1e3a8a; font-family: var(--font-mono);">${formatCOP(data.ganancia_ocasional_bruta_cop)}</div>
         </div>
         <div style="background: #f0fdf4; padding: 8px; border-radius: 6px; border: 1px solid #bbf7d0;">
-          <div style="color: #15803d; font-size: 10px; text-transform: uppercase;">Impuesto Final a Pagar:</div>
-          <div style="font-weight: 800; font-size: 13px; color: #166534; font-family: var(--font-mono);">${formatCOP(data.impuesto_go_con_afc_cop)}</div>
+          <div style="color: #15803d; font-size: 9.5px; text-transform: uppercase;">Total Ganancia Exenta:</div>
+          <div style="font-weight: 800; font-size: 12.5px; color: #166534; font-family: var(--font-mono);">${formatCOP(data.total_ganancia_exenta_cop)}</div>
         </div>
+        <div style="background: #fffbeb; padding: 8px; border-radius: 6px; border: 1px solid #fde68a;">
+          <div style="color: #b45309; font-size: 9.5px; text-transform: uppercase;">Ganancia Gravada Final:</div>
+          <div style="font-weight: 800; font-size: 12.5px; color: #92400e; font-family: var(--font-mono);">${formatCOP(data.ganancia_ocasional_gravada_final_cop)}</div>
+        </div>
+      </div>
+
+      <!-- CASILLAS FORMULARIO 210 -->
+      <div style="background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 6px; padding: 10px; margin-bottom: 12px;">
+        <div style="font-size: 11.5px; font-weight: 800; color: #1e3a8a; margin-bottom: 6px;">
+          📋 Casillas del Formulario 210 DIAN (Cédula de Ganancias Ocasionales):
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 6px; font-size: 11px;">
+          <div style="background: white; padding: 4px 6px; border-radius: 4px; border: 1px solid #e2e8f0;">
+            <span style="color: #64748b;">Casilla 80 (Ingresos):</span> <strong>${formatCOP(data.casilla_80_ingresos_brutos_cop)}</strong>
+          </div>
+          <div style="background: white; padding: 4px 6px; border-radius: 4px; border: 1px solid #e2e8f0;">
+            <span style="color: #64748b;">Casilla 81 (Costos):</span> <strong>${formatCOP(data.casilla_81_costos_cop)}</strong>
+          </div>
+          <div style="background: white; padding: 4px 6px; border-radius: 4px; border: 1px solid #e2e8f0;">
+            <span style="color: #64748b;">Casilla 82 (Exentas):</span> <strong>${formatCOP(data.casilla_82_exentas_cop)}</strong>
+          </div>
+          <div style="background: white; padding: 4px 6px; border-radius: 4px; border: 1px solid #e2e8f0;">
+            <span style="color: #64748b;">Casilla 83 (Gravable):</span> <strong>${formatCOP(data.casilla_83_gravables_cop)}</strong>
+          </div>
+          <div style="background: white; padding: 4px 6px; border-radius: 4px; border: 1px solid #e2e8f0;">
+            <span style="color: #64748b;">Casilla 87 (Impuesto):</span> <strong style="color: #059669;">${formatCOP(data.casilla_87_impuesto_go_cop)}</strong>
+          </div>
+          <div style="background: white; padding: 4px 6px; border-radius: 4px; border: 1px solid #e2e8f0;">
+            <span style="color: #64748b;">Casilla 134 (Retención):</span> <strong>${formatCOP(data.retencion_en_fuente_notarial_cop)}</strong>
+          </div>
+        </div>
+      </div>
+
+      <!-- MATRIZ COMPARATIVA DE 5 ESCENARIOS -->
+      <div style="margin-bottom: 12px; overflow-x: auto;">
+        <div style="font-size: 11.5px; font-weight: 800; color: #334155; margin-bottom: 6px;">
+          📊 Comparación Lado a Lado de Escenarios de Planeación Fiscal:
+        </div>
+        <table style="width: 100%; border-collapse: collapse; font-size: 10.5px; background: white; border: 1px solid #e2e8f0; border-radius: 6px;">
+          <thead>
+            <tr style="background: #f1f5f9; text-align: left;">
+              <th style="padding: 6px 8px; border-bottom: 2px solid #cbd5e1;">Estrategia / Escenario</th>
+              <th style="padding: 6px 8px; border-bottom: 2px solid #cbd5e1; text-align: right;">Costo Fiscal</th>
+              <th style="padding: 6px 8px; border-bottom: 2px solid #cbd5e1; text-align: right;">Base Gravable</th>
+              <th style="padding: 6px 8px; border-bottom: 2px solid #cbd5e1; text-align: right;">Impuesto (15%)</th>
+              <th style="padding: 6px 8px; border-bottom: 2px solid #cbd5e1; text-align: right;">Ahorro Neto</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${escenariosRows}
+          </tbody>
+        </table>
       </div>
 
       <details style="font-size: 11px; color: #475569; cursor: pointer;">
-        <summary style="font-weight: 700; color: var(--primary);">Desglose Matemático & Requisitos Legales ▾</summary>
+        <summary style="font-weight: 700; color: var(--primary);">Desglose Matemático & Citas Normativas ▾</summary>
         <ul style="margin: 6px 0 0 16px; padding: 0; line-height: 1.5;">
           ${pasosHtml}
         </ul>
@@ -2225,8 +2404,10 @@ async function loadTablaArticulo73() {
       tablaArticulo73Data = await res.json();
     }
 
-    // Poblar select de años
+    // Poblar selects de años (Art. 73 y Simulador Inmuebles AFC)
     const anoSelect = document.getElementById('sim-art73-ano');
+    const anoAfcSelect = document.getElementById('afc-sim-ano-adquisicion');
+
     if (anoSelect) {
       anoSelect.innerHTML = '';
       tablaArticulo73Data.forEach(item => {
@@ -2238,8 +2419,22 @@ async function loadTablaArticulo73() {
       });
     }
 
+    if (anoAfcSelect) {
+      anoAfcSelect.innerHTML = '';
+      tablaArticulo73Data.forEach(item => {
+        const opt = document.createElement('option');
+        opt.value = item.ano_adquisicion;
+        const yrNum = parseInt(item.ano_adquisicion);
+        const pre87 = yrNum && yrNum < 1987 ? ' (Pre-1987 Art. 44)' : '';
+        opt.innerText = `${item.ano_adquisicion}${pre87}`;
+        if (item.ano_adquisicion === '2011') opt.selected = true;
+        anoAfcSelect.appendChild(opt);
+      });
+    }
+
     renderTablaArticulo73(tablaArticulo73Data);
     await runSimulacionArticulo73();
+    await runSimulacionInmuebleAfc();
   } catch (err) {
     console.error('Error cargando tabla Art 73:', err);
   }
