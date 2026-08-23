@@ -110,6 +110,7 @@ const sandbox = {
     innerWidth: 1200
   },
   document: {
+    documentElement: createMockElement('html'),
     getElementById(id) {
       if (!elementsMap[id]) {
         elementsMap[id] = createMockElement('div', id);

@@ -107,3 +107,62 @@ def favicon():
     if favicon_svg.exists():
         return FileResponse(str(favicon_svg), media_type="image/svg+xml")
     return Response(status_code=204)
+
+
+@app.get("/robots.txt", include_in_schema=False)
+def serve_robots_txt():
+    """Sirve el archivo robots.txt para indexación y crawlers de búsqueda/IA."""
+    for path in [
+        FRONTEND_DIST / "robots.txt",
+        STATIC_DIR / "robots.txt",
+        BASE_DIR.parent.parent / "frontend" / "public" / "robots.txt",
+    ]:
+        if path.exists():
+            return FileResponse(str(path), media_type="text/plain; charset=utf-8")
+    return Response(content="User-agent: *\nAllow: /\n", media_type="text/plain; charset=utf-8")
+
+
+@app.get("/sitemap.xml", include_in_schema=False)
+def serve_sitemap_xml():
+    """Sirve el archivo sitemap.xml para motores de búsqueda."""
+    for path in [
+        FRONTEND_DIST / "sitemap.xml",
+        STATIC_DIR / "sitemap.xml",
+        BASE_DIR.parent.parent / "frontend" / "public" / "sitemap.xml",
+    ]:
+        if path.exists():
+            return FileResponse(str(path), media_type="application/xml; charset=utf-8")
+    return Response(
+        content='<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"></urlset>',
+        media_type="application/xml; charset=utf-8",
+    )
+
+
+@app.get("/llms.txt", include_in_schema=False)
+def serve_llms_txt():
+    """Sirve el archivo llms.txt para consumo estructurado de modelos de lenguaje e IA."""
+    for path in [
+        FRONTEND_DIST / "llms.txt",
+        STATIC_DIR / "llms.txt",
+        BASE_DIR.parent.parent / "frontend" / "public" / "llms.txt",
+    ]:
+        if path.exists():
+            return FileResponse(str(path), media_type="text/plain; charset=utf-8")
+    return Response(
+        content="# TributIA\n> Suite Tributaria DIAN\n", media_type="text/plain; charset=utf-8"
+    )
+
+
+@app.get("/llms-full.txt", include_in_schema=False)
+def serve_llms_full_txt():
+    """Sirve la documentación extendida de TributIA para LLMs."""
+    for path in [
+        FRONTEND_DIST / "llms-full.txt",
+        STATIC_DIR / "llms-full.txt",
+        BASE_DIR.parent.parent / "frontend" / "public" / "llms-full.txt",
+    ]:
+        if path.exists():
+            return FileResponse(str(path), media_type="text/plain; charset=utf-8")
+    return Response(
+        content="# TributIA Full Documentation\n", media_type="text/plain; charset=utf-8"
+    )

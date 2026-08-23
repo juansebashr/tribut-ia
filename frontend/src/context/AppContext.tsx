@@ -125,9 +125,9 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
 
   // Helper to parse view & module from hash URL
   const parseInitialViewFromHash = (): { view: ViewType; module?: ModuleType; subTab?: string } => {
-    if (typeof window === 'undefined') return { view: 'landing', module: 'pn', subTab: 'calc' };
+    if (typeof window === 'undefined') return { view: 'app', module: 'pn', subTab: 'calc' };
     const hash = window.location.hash.replace(/^#\/?/, '').trim();
-    if (!hash || hash === 'landing') {
+    if (hash === 'landing') {
       return { view: 'landing', module: 'pn', subTab: 'calc' };
     }
     if (hash === 'skill-tutorial' || hash === 'skills' || hash === 'tutorial') {

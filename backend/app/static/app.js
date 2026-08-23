@@ -211,7 +211,7 @@ const MODULE_METADATA = {
   },
   'pn-calc': {
     breadcrumb: 'IMPUESTO DE RENTA / PERSONA NATURAL',
-    title: 'Depuración Cédula General (Rentas de Trabajo, Capital y No Laborales)',
+    title: 'Depuración Cédula General',
     hasSubTabs: true
   },
   'pn-f210': {

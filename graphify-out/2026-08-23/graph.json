@@ -2508,7 +2508,7 @@
       "node_kind": "heading",
       "norm_label": "2.2 sincronizacion de hash url (`window.location.hash`)",
       "source_file": "docs/superpowers/specs/2026-08-23-landing-page-and-skill-hub-design.md",
-      "source_location": "L26"
+      "source_location": "L25"
     },
     {
       "id": "docs_superpowers_specs_2026_08_23_landing_page_and_skill_hub_design_2_3_navegaci\u00f3n_bidireccional",
@@ -2520,7 +2520,7 @@
       "node_kind": "heading",
       "norm_label": "2.3 navegacion bidireccional",
       "source_file": "docs/superpowers/specs/2026-08-23-landing-page-and-skill-hub-design.md",
-      "source_location": "L33"
+      "source_location": "L31"
     },
     {
       "id": "docs_superpowers_specs_2026_08_23_landing_page_and_skill_hub_design_2_arquitectura_de_navegaci\u00f3n_y_estado",
@@ -2544,7 +2544,7 @@
       "node_kind": "heading",
       "norm_label": "3.1 `landingpage.tsx`",
       "source_file": "docs/superpowers/specs/2026-08-23-landing-page-and-skill-hub-design.md",
-      "source_location": "L50"
+      "source_location": "L47"
     },
     {
       "id": "docs_superpowers_specs_2026_08_23_landing_page_and_skill_hub_design_3_2_skilltutorialpage_tsx",
@@ -2556,7 +2556,7 @@
       "node_kind": "heading",
       "norm_label": "3.2 `skilltutorialpage.tsx`",
       "source_file": "docs/superpowers/specs/2026-08-23-landing-page-and-skill-hub-design.md",
-      "source_location": "L76"
+      "source_location": "L72"
     },
     {
       "id": "docs_superpowers_specs_2026_08_23_landing_page_and_skill_hub_design_3_componentes_y_contenido_visual",
@@ -2568,7 +2568,7 @@
       "node_kind": "heading",
       "norm_label": "3. componentes y contenido visual",
       "source_file": "docs/superpowers/specs/2026-08-23-landing-page-and-skill-hub-design.md",
-      "source_location": "L48"
+      "source_location": "L45"
     },
     {
       "id": "docs_superpowers_specs_2026_08_23_landing_page_and_skill_hub_design_4_estructura_de_archivos_y_componentes",
@@ -2580,7 +2580,7 @@
       "node_kind": "heading",
       "norm_label": "4. estructura de archivos y componentes",
       "source_file": "docs/superpowers/specs/2026-08-23-landing-page-and-skill-hub-design.md",
-      "source_location": "L108"
+      "source_location": "L103"
     },
     {
       "id": "docs_superpowers_specs_2026_08_23_landing_page_and_skill_hub_design_5_criterios_de_aceptaci\u00f3n_y_verificaci\u00f3n",
@@ -2592,7 +2592,7 @@
       "node_kind": "heading",
       "norm_label": "5. criterios de aceptacion y verificacion",
       "source_file": "docs/superpowers/specs/2026-08-23-landing-page-and-skill-hub-design.md",
-      "source_location": "L132"
+      "source_location": "L127"
     },
     {
       "id": "docs_superpowers_specs_2026_08_23_landing_page_and_skill_hub_design_especificaci\u00f3n_de_dise\u00f1o_landing_page_y_hub_de_instalaci\u00f3n_de_skills_de_ia_en_tributia",
@@ -2745,102 +2745,6 @@
       "norm_label": "guia how-to: simular tasa minima de tributacion (ttd 15% - pj)",
       "source_file": "docs/how-to/02-simular-tasa-minima-ttd-pj.md",
       "source_location": "L1"
-    },
-    {
-      "id": "docs_superpowers_plans_2026_08_23_landing_page_and_skill_hub_plan",
-      "label": "2026-08-23-landing-page-and-skill-hub-plan.md",
-      "_origin": "ast",
-      "community": 151,
-      "community_name": "Global Constraints",
-      "file_type": "document",
-      "node_kind": "page",
-      "norm_label": "2026-08-23-landing-page-and-skill-hub-plan.md",
-      "source_file": "docs/superpowers/plans/2026-08-23-landing-page-and-skill-hub-plan.md",
-      "source_location": "L1"
-    },
-    {
-      "id": "docs_superpowers_plans_2026_08_23_landing_page_and_skill_hub_plan_global_constraints",
-      "label": "Global Constraints",
-      "_origin": "ast",
-      "community": 151,
-      "community_name": "Global Constraints",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "global constraints",
-      "source_file": "docs/superpowers/plans/2026-08-23-landing-page-and-skill-hub-plan.md",
-      "source_location": "L11"
-    },
-    {
-      "id": "docs_superpowers_plans_2026_08_23_landing_page_and_skill_hub_plan_plan_de_implementaci\u00f3n_landing_page_de_entrada_y_hub_de_instalaci\u00f3n_de_skills_de_ia",
-      "label": "Plan de Implementaci\u00f3n: Landing Page de Entrada y Hub de Instalaci\u00f3n de Skills de IA",
-      "_origin": "ast",
-      "community": 151,
-      "community_name": "Global Constraints",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "plan de implementacion: landing page de entrada y hub de instalacion de skills de ia",
-      "source_file": "docs/superpowers/plans/2026-08-23-landing-page-and-skill-hub-plan.md",
-      "source_location": "L1"
-    },
-    {
-      "id": "docs_superpowers_plans_2026_08_23_landing_page_and_skill_hub_plan_task_1_estado_global_de_vistas_y_enrutamiento_spa_appcontext_tsx_app_tsx",
-      "label": "Task 1: Estado Global de Vistas y Enrutamiento SPA (`AppContext.tsx` & `App.tsx`)",
-      "_origin": "ast",
-      "community": 151,
-      "community_name": "Global Constraints",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "task 1: estado global de vistas y enrutamiento spa (`appcontext.tsx` & `app.tsx`)",
-      "source_file": "docs/superpowers/plans/2026-08-23-landing-page-and-skill-hub-plan.md",
-      "source_location": "L21"
-    },
-    {
-      "id": "docs_superpowers_plans_2026_08_23_landing_page_and_skill_hub_plan_task_2_componentes_de_la_landing_page_landingnavbar_landingheropreview_landingpage",
-      "label": "Task 2: Componentes de la Landing Page (`LandingNavbar`, `LandingHeroPreview`, `LandingPage`)",
-      "_origin": "ast",
-      "community": 151,
-      "community_name": "Global Constraints",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "task 2: componentes de la landing page (`landingnavbar`, `landingheropreview`, `landingpage`)",
-      "source_file": "docs/superpowers/plans/2026-08-23-landing-page-and-skill-hub-plan.md",
-      "source_location": "L67"
-    },
-    {
-      "id": "docs_superpowers_plans_2026_08_23_landing_page_and_skill_hub_plan_task_3_centro_de_descarga_y_tutoriales_de_skills_skilltutorialpage_y_pesta\u00f1as",
-      "label": "Task 3: Centro de Descarga y Tutoriales de Skills (`SkillTutorialPage` y Pesta\u00f1as)",
-      "_origin": "ast",
-      "community": 151,
-      "community_name": "Global Constraints",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "task 3: centro de descarga y tutoriales de skills (`skilltutorialpage` y pestanas)",
-      "source_file": "docs/superpowers/plans/2026-08-23-landing-page-and-skill-hub-plan.md",
-      "source_location": "L125"
-    },
-    {
-      "id": "docs_superpowers_plans_2026_08_23_landing_page_and_skill_hub_plan_task_4_integraci\u00f3n_bidireccional_en_el_workspace_app_tsx_sidebar_tsx_headerbar_tsx",
-      "label": "Task 4: Integraci\u00f3n Bidireccional en el Workspace (`App.tsx`, `Sidebar.tsx`, `HeaderBar.tsx`)",
-      "_origin": "ast",
-      "community": 151,
-      "community_name": "Global Constraints",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "task 4: integracion bidireccional en el workspace (`app.tsx`, `sidebar.tsx`, `headerbar.tsx`)",
-      "source_file": "docs/superpowers/plans/2026-08-23-landing-page-and-skill-hub-plan.md",
-      "source_location": "L179"
-    },
-    {
-      "id": "docs_superpowers_plans_2026_08_23_landing_page_and_skill_hub_plan_task_5_verificaci\u00f3n_integral_de_calidad_linteo_y_grafo_arquitect\u00f3nico",
-      "label": "Task 5: Verificaci\u00f3n Integral de Calidad, Linteo y Grafo Arquitect\u00f3nico",
-      "_origin": "ast",
-      "community": 151,
-      "community_name": "Global Constraints",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "task 5: verificacion integral de calidad, linteo y grafo arquitectonico",
-      "source_file": "docs/superpowers/plans/2026-08-23-landing-page-and-skill-hub-plan.md",
-      "source_location": "L229"
     },
     {
       "id": "backend_app_main",
@@ -37862,83 +37766,6 @@
       "weight": 1.0
     },
     {
-      "source": "docs_superpowers_plans_2026_08_23_landing_page_and_skill_hub_plan",
-      "target": "docs_superpowers_plans_2026_08_23_landing_page_and_skill_hub_plan_plan_de_implementaci\u00f3n_landing_page_de_entrada_y_hub_de_instalaci\u00f3n_de_skills_de_ia",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/plans/2026-08-23-landing-page-and-skill-hub-plan.md",
-      "source_location": "L1",
-      "weight": 1.0
-    },
-    {
-      "source": "docs_superpowers_plans_2026_08_23_landing_page_and_skill_hub_plan_global_constraints",
-      "target": "docs_superpowers_plans_2026_08_23_landing_page_and_skill_hub_plan_task_3_centro_de_descarga_y_tutoriales_de_skills_skilltutorialpage_y_pesta\u00f1as",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/plans/2026-08-23-landing-page-and-skill-hub-plan.md",
-      "source_location": "L125",
-      "weight": 1.0
-    },
-    {
-      "source": "docs_superpowers_plans_2026_08_23_landing_page_and_skill_hub_plan_global_constraints",
-      "target": "docs_superpowers_plans_2026_08_23_landing_page_and_skill_hub_plan_task_4_integraci\u00f3n_bidireccional_en_el_workspace_app_tsx_sidebar_tsx_headerbar_tsx",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/plans/2026-08-23-landing-page-and-skill-hub-plan.md",
-      "source_location": "L179",
-      "weight": 1.0
-    },
-    {
-      "source": "docs_superpowers_plans_2026_08_23_landing_page_and_skill_hub_plan_global_constraints",
-      "target": "docs_superpowers_plans_2026_08_23_landing_page_and_skill_hub_plan_task_1_estado_global_de_vistas_y_enrutamiento_spa_appcontext_tsx_app_tsx",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/plans/2026-08-23-landing-page-and-skill-hub-plan.md",
-      "source_location": "L21",
-      "weight": 1.0
-    },
-    {
-      "source": "docs_superpowers_plans_2026_08_23_landing_page_and_skill_hub_plan_global_constraints",
-      "target": "docs_superpowers_plans_2026_08_23_landing_page_and_skill_hub_plan_task_5_verificaci\u00f3n_integral_de_calidad_linteo_y_grafo_arquitect\u00f3nico",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/plans/2026-08-23-landing-page-and-skill-hub-plan.md",
-      "source_location": "L229",
-      "weight": 1.0
-    },
-    {
-      "source": "docs_superpowers_plans_2026_08_23_landing_page_and_skill_hub_plan_global_constraints",
-      "target": "docs_superpowers_plans_2026_08_23_landing_page_and_skill_hub_plan_task_2_componentes_de_la_landing_page_landingnavbar_landingheropreview_landingpage",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/plans/2026-08-23-landing-page-and-skill-hub-plan.md",
-      "source_location": "L67",
-      "weight": 1.0
-    },
-    {
-      "source": "docs_superpowers_plans_2026_08_23_landing_page_and_skill_hub_plan_plan_de_implementaci\u00f3n_landing_page_de_entrada_y_hub_de_instalaci\u00f3n_de_skills_de_ia",
-      "target": "docs_superpowers_plans_2026_08_23_landing_page_and_skill_hub_plan_global_constraints",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/plans/2026-08-23-landing-page-and-skill-hub-plan.md",
-      "source_location": "L11",
-      "weight": 1.0
-    },
-    {
       "source": "docs_superpowers_specs_2026_08_23_landing_page_and_skill_hub_design",
       "target": "docs_superpowers_specs_2026_08_23_landing_page_and_skill_hub_design_especificaci\u00f3n_de_dise\u00f1o_landing_page_y_hub_de_instalaci\u00f3n_de_skills_de_ia_en_tributia",
       "relation": "contains",
@@ -37968,7 +37795,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/superpowers/specs/2026-08-23-landing-page-and-skill-hub-design.md",
-      "source_location": "L26",
+      "source_location": "L25",
       "weight": 1.0
     },
     {
@@ -37979,7 +37806,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/superpowers/specs/2026-08-23-landing-page-and-skill-hub-design.md",
-      "source_location": "L33",
+      "source_location": "L31",
       "weight": 1.0
     },
     {
@@ -37990,7 +37817,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/superpowers/specs/2026-08-23-landing-page-and-skill-hub-design.md",
-      "source_location": "L50",
+      "source_location": "L47",
       "weight": 1.0
     },
     {
@@ -38001,7 +37828,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/superpowers/specs/2026-08-23-landing-page-and-skill-hub-design.md",
-      "source_location": "L76",
+      "source_location": "L72",
       "weight": 1.0
     },
     {
@@ -38012,7 +37839,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/superpowers/specs/2026-08-23-landing-page-and-skill-hub-design.md",
-      "source_location": "L108",
+      "source_location": "L103",
       "weight": 1.0
     },
     {
@@ -38023,7 +37850,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/superpowers/specs/2026-08-23-landing-page-and-skill-hub-design.md",
-      "source_location": "L132",
+      "source_location": "L127",
       "weight": 1.0
     },
     {
@@ -38045,7 +37872,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/superpowers/specs/2026-08-23-landing-page-and-skill-hub-design.md",
-      "source_location": "L48",
+      "source_location": "L45",
       "weight": 1.0
     },
     {

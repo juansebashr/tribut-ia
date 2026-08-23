@@ -122,9 +122,9 @@ export const LandingPage: React.FC = () => {
       {/* SUITE MODULES GRID */}
       <section className="landing-modules-section">
         <div className="landing-container">
-          <div className="section-header text-center">
-            <h2 className="section-title">Módulos Especializados de la Suite</h2>
-            <p className="section-subtitle">
+          <div className="landing-section-header text-center">
+            <h2 className="landing-section-title">Módulos Especializados de la Suite</h2>
+            <p className="landing-section-subtitle">
               Accede directamente al liquidador o simulador que necesitas con un solo clic:
             </p>
           </div>

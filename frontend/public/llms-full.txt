@@ -1,0 +1,54 @@
+# TributIA - Documentación Exhaustiva para Modelos de Lenguaje (LLMs / Agents)
+
+## Propósito y Arquitectura
+TributIA es una suite tributaria y asistente contable inteligente especializada en la legislación fiscal de Colombia (Estatuto Tributario Nacional - E.T.). Ofrece un motor de reglas puras, determinísticas y sin efectos secundarios para la liquidación del impuesto sobre la renta de Personas Naturales (Formulario 210) y Personas Jurídicas (Formulario 110), así como herramientas complementarias de planeación tributaria.
+
+## 1. Liquidación Persona Natural (Formulario 210)
+- **Cédula General:**
+  - **Rentas de Trabajo:** Ingresos laborales brutos, cesantías, primas. Menos: Ingresos No Constitutivos de Renta (Aportes obligatorios a Salud y Pensión Art. 55 y 56 E.T.). Menos: Rentas Exentas (25% numeral 10 Art. 206 E.T. topado a 790 UVT anuales) y Deducciones Imputables (Intereses de vivienda Art. 119 E.T. hasta 1.200 UVT, Dependientes económicos Art. 387 E.T. hasta 384 UVT más dependientes adicionales Ley 2277/2022 hasta 4 dependientes de 72 UVT cada uno, Medicina prepagada hasta 192 UVT, 50% GMF Art. 115 E.T., compras con factura electrónica 1% hasta 240 UVT).
+  - **Límite Conjunto Cédula General:** La suma de deducciones y rentas exentas no puede superar el 40% del ingreso neto ni 1.340 UVT anuales (Art. 336 E.T.).
+  - **Rentas de Capital y Rentas No Laborales:** Ingresos brutos menos costos procedentes y deducciones atribuibles.
+- **Cédula de Pensiones:** Exención de hasta 1.000 UVT mensuales (Art. 206 numeral 1 E.T.).
+- **Cédula de Dividendos:** Gravados a las tarifas del Art. 242 E.T.
+- **Ganancias Ocasionales:** Art. 300, 313, 314, 316 E.T. Tarifa general del 15% para personas naturales residentes (o 20% para loterías y rifas). Exención de hasta 5.000 UVT para casa o apartamento de habitación cumpliendo requisitos de los Arts. 311-1 y 126-4 E.T.
+- **Tabla Marginal Art. 241 E.T.:**
+  - 0 a 1.090 UVT: 0%
+  - > 1.090 a 1.700 UVT: 19% (Impuesto: (Base UVT - 1.090) * 19%)
+  - > 1.700 a 4.100 UVT: 28% (Impuesto: (Base UVT - 1.700) * 28% + 116 UVT)
+  - > 4.100 a 8.670 UVT: 33% (Impuesto: (Base UVT - 4.100) * 33% + 788 UVT)
+  - > 8.670 a 18.970 UVT: 35% (Impuesto: (Base UVT - 8.670) * 35% + 2.296 UVT)
+  - > 18.970 a 31.000 UVT: 37% (Impuesto: (Base UVT - 18.970) * 37% + 5.901 UVT)
+  - > 31.000 UVT: 39% (Impuesto: (Base UVT - 31.000) * 39% + 10.352 UVT)
+
+## 2. Liquidación Persona Jurídica (Formulario 110)
+- **Renta Ordinaria:** Tarifa general del 35% (Art. 240 E.T.).
+- **Sobretasas:** Sobretasa a instituciones financieras y sobretasa al sector energético según niveles de renta gravable.
+- **Tasa de Tributación Depurada (TTD):** Regulada por el Parágrafo 6 del Artículo 240 del Estatuto Tributario.
+  $$\text{TTD} = \frac{\text{Impuesto Depurado (ID)}}{\text{Utilidad Depurada (UD)}}$$
+  Si $\text{TTD} < 15\%$, se calcula el Impuesto Adicional:
+  $$\text{IA} = (\text{UD} \times 15\%) - \text{ID}$$
+- **Descuentos Tributarios:** Limitados conforme a los Arts. 254 a 258 E.T. (Impuestos pagados en el exterior, donaciones, inversiones en investigación y desarrollo).
+
+## 3. Reajuste Fiscal de Activos Fijos (Art. 73 E.T.)
+- Multiplicador oficial según año de adquisición y tabla de 70 años del DANE (1955-2025).
+- Aplicable a bienes raíces urbanos, rurales y acciones o aportes en sociedades nacionales.
+- Permite determinar el costo fiscal ajustado para aminorar de forma 100% legal la Ganancia Ocasional gravable.
+
+## 4. Beneficio de Auditoría y Régimen Sancionatorio
+- **Beneficio de Auditoría (Art. 689-3 E.T.):**
+  - Firmeza en 6 meses: incremento del impuesto neto de renta $\ge 35\%$ respecto al año gravable anterior.
+  - Firmeza en 12 meses: incremento $\ge 25\%$.
+  - Requisito de impuesto neto mínimo: $\ge 71\text{ UVT}$.
+- **Sanciones (Arts. 640, 641, 644 E.T.):**
+  - Extemporaneidad antes de emplazamiento: 5% por mes o fracción de mes sobre el impuesto a cargo o ingresos brutos.
+  - Corrección voluntaria: 10% del mayor valor a pagar.
+  - Principio de lesividad y gradualidad (Art. 640): Reducción al 50% o 75% si no hay reincidencia.
+  - Sanción mínima (Art. 639 E.T.): Equivalente a 10 UVT vigentes al momento de la liquidación.
+
+## 5. Endpoints REST Principales
+- `POST /api/v1/persona-natural/calculate`: Liquidación completa Formulario 210.
+- `POST /api/v1/persona-juridica/calculate`: Liquidación Formulario 110 con TTD.
+- `POST /api/v1/simulacion/inmuebles-afc`: Simulación de exención en venta de casa habitación.
+- `POST /api/v1/reconciliation/parse-csv`: Procesamiento efímero y validación de transacciones contra exógena DIAN.
+- `GET /api/v1/rules/years`: Años gravables y parámetros UVT soportados.
+- `GET /api/v1/session/events`: Transmisión SSE de eventos bidireccionales en tiempo real.

@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 // Helper de simulación de hash y navegación SPA
 function parseHashView(hash) {
   const cleanHash = (hash || '').replace(/^#\/?/, '').trim();
-  if (!cleanHash || cleanHash === 'landing') {
+  if (cleanHash === 'landing') {
     return { view: 'landing', module: 'pn', subTab: 'calc' };
   }
   if (cleanHash === 'skill-tutorial' || cleanHash === 'skills' || cleanHash === 'tutorial') {
@@ -27,7 +27,7 @@ function parseHashView(hash) {
 }
 
 test('Enrutamiento Hash SPA - Parseo de Vistas', () => {
-  assert.deepEqual(parseHashView(''), { view: 'landing', module: 'pn', subTab: 'calc' });
+  assert.deepEqual(parseHashView(''), { view: 'app', module: 'pn', subTab: 'calc' });
   assert.deepEqual(parseHashView('#landing'), { view: 'landing', module: 'pn', subTab: 'calc' });
   assert.deepEqual(parseHashView('#/landing'), { view: 'landing', module: 'pn', subTab: 'calc' });
   assert.deepEqual(parseHashView('#skill-tutorial'), { view: 'skill-tutorial', module: 'pn', subTab: 'calc' });

@@ -1,0 +1,56 @@
+# robots.txt for TributIA - Suite Tributaria DIAN
+# Optimized for Web Search Engines and AI / Generative / Answer Engines (GEO/AEO)
+
+User-agent: *
+Allow: /
+
+# Directives for Standard Search Engine Crawlers
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+User-agent: YandexBot
+Allow: /
+
+# Directives for AI Search & Retrieval Crawlers (GEO / AEO Citations)
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Google-CloudVertexBot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+# Block heavy training scraping that does not drive search citations (optional)
+User-agent: CCBot
+Disallow: /
+
+# XML Sitemap reference
+Sitemap: https://tributia.co/sitemap.xml

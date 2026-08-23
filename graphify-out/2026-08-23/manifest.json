@@ -390,9 +390,9 @@
     "semantic_hash": ""
   },
   "backend/app/static/index.html": {
-    "mtime": 1787503849.793619,
-    "seen": 1787503923.805894,
-    "ast_hash": "42dda476020282ff1b3ad01fb1512ebe",
+    "mtime": 1787501072.932762,
+    "seen": 1787501135.8906639,
+    "ast_hash": "0abdb9153ab0aa42a934a5cbd04e9394",
     "semantic_hash": ""
   },
   "docs/README.md": {
@@ -690,9 +690,9 @@
     "semantic_hash": ""
   },
   "docs/superpowers/specs/2026-08-23-landing-page-and-skill-hub-design.md": {
-    "mtime": 1787501152.816244,
-    "seen": 1787501254.229511,
-    "ast_hash": "9343426dc43e86fbda8eddcc990e999d",
+    "mtime": 1787500928.4417858,
+    "seen": 1787501135.891329,
+    "ast_hash": "90f906af45a457b29823e54e03c29938",
     "semantic_hash": ""
   },
   "frontend/public/llms-full.txt": {
@@ -723,12 +723,6 @@
     "mtime": 1787501024.24571,
     "seen": 1787501135.891488,
     "ast_hash": "aead493361b27e7510691c5d7072dfc1",
-    "semantic_hash": ""
-  },
-  "docs/superpowers/plans/2026-08-23-landing-page-and-skill-hub-plan.md": {
-    "mtime": 1787501179.0631418,
-    "seen": 1787501254.2295098,
-    "ast_hash": "ab7ae03bfe8aa6769aa826cf35f90512",
     "semantic_hash": ""
   }
 }

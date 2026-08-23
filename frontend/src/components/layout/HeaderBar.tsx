@@ -34,12 +34,12 @@ export const HeaderBar: React.FC = () => {
           breadcrumb: 'IMPUESTO DE RENTA / PERSONA NATURAL',
           title:
             activeSubTab === 'f210'
-              ? 'Formulario 210 DIAN - Facsímil Oficial en Vivo'
+              ? 'Formulario 210 DIAN - Facsímil Oficial'
               : activeSubTab === 'marginal'
-              ? 'Tarifa Marginal Progresiva & Termómetro de Brackets (Art. 241 E.T.)'
+              ? 'Tarifa Marginal Progresiva & Termómetro (Art. 241 E.T.)'
               : activeSubTab === 'conciliacion'
-              ? 'Hoja de Cálculo Fiscal & Conciliación con Información Exógena DIAN (F210)'
-              : 'Depuración Cédula General (Rentas de Trabajo, Capital y No Laborales)',
+              ? 'Hoja de Cálculo Fiscal & Conciliación Exógena DIAN'
+              : 'Depuración Cédula General',
           hasSubTabs: true,
         };
       case 'pj':

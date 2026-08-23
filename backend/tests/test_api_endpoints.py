@@ -74,3 +74,29 @@ def test_api_calculate_pj():
     assert data["renta_bruta"] == 300000000
     assert data["impuesto_basico_renta"] > 0
     assert len(data["audit_trace"]) > 0
+
+
+def test_seo_robots_txt():
+    response = client.get("/robots.txt")
+    assert response.status_code == 200
+    assert "User-agent" in response.text
+    assert "GPTBot" in response.text or "Googlebot" in response.text
+
+
+def test_seo_sitemap_xml():
+    response = client.get("/sitemap.xml")
+    assert response.status_code == 200
+    assert "urlset" in response.text
+    assert "https://tributia.co" in response.text
+
+
+def test_llms_txt():
+    response = client.get("/llms.txt")
+    assert response.status_code == 200
+    assert "TributIA" in response.text
+
+
+def test_llms_full_txt():
+    response = client.get("/llms-full.txt")
+    assert response.status_code == 200
+    assert "Estatuto Tributario" in response.text
