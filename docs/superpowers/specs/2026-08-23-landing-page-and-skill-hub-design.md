@@ -17,18 +17,21 @@ TributIA evoluciona su interfaz de usuario incorporando una **Página de Entrada
 ## 2. Arquitectura de Navegación y Estado
 
 ### 2.1 Modelo de Vistas en `AppContext`
+
 Se introduce un estado principal `currentView` en el contexto global de React:
 - `'landing'`: Vista de bienvenida y presentación gráfica.
 - `'app'`: Espacio de trabajo de la suite tributaria (`AppShell` con sidebar, cabecera y módulos).
 - `'skill-tutorial'`: Centro interactivo de tutoriales y descarga de la skill.
 
 ### 2.2 Sincronización de Hash URL (`window.location.hash`)
+
 - `#landing`: Carga directa de la Landing Page.
 - `#app` (o `#pn`, `#pj`, `#calendario`, etc.): Carga directa del workspace de la suite.
 - `#skill-tutorial`: Carga directa del Hub de Instalación.
 - Soporta navegación nativa del historial del navegador (atrás/adelante) y persistencia en sesión.
 
 ### 2.3 Navegación Bidireccional
+
 - Desde la **Landing Page**:
   - Botón CTA 1 ("Empecemos") $\to$ `#app` / Módulo PN.
   - Botón CTA 2 ("Descargar Skill") $\to$ `#skill-tutorial`.
@@ -45,6 +48,7 @@ Se introduce un estado principal `currentView` en el contexto global de React:
 ## 3. Componentes y Contenido Visual
 
 ### 3.1 `LandingPage.tsx`
+
 - **Navbar Global:**
   - Logo estilizado con badge dinámico.
   - Links directos a Módulos, Tutorial, Swagger API y Conmutador de Tema claro/oscuro.
@@ -70,6 +74,7 @@ Se introduce un estado principal `currentView` en el contexto global de React:
 ---
 
 ### 3.2 `SkillTutorialPage.tsx`
+
 - **Cabecera de Acción Inmediata:**
   - Botón **"Descargar Paquete de la Skill (.zip / bundle)"** que empaqueta o genera la descarga de los archivos de la skill (`SKILL.md`, `scripts/`, `templates/`).
   - Botón para inspeccionar la especificación OpenAPI de la API REST local (`http://localhost:8000/docs`).
