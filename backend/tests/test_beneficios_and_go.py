@@ -302,8 +302,8 @@ def test_calcular_sancion_saldo_a_favor_sin_intereses():
     assert res.total_consolidado_a_pagar_cop == 2500000
 
 
-def test_video_abogada_mabel_sepulveda_caso_real():
-    """Valida exactamente el caso del video de la Abogada Mabel Sepúlveda:
+def test_ejemplo_venta_inmueble_reajuste_dane_y_afc_caso_real():
+    """Valida el ejemplo práctico de enajenación de inmueble con Art. 73 y AFC:
 
     Venta en 450M, compra en 150M en 2011 (factor Art. 73 = 2.86x).
     Sin ajuste: utilidad 300M, impuesto 15% = 45M.

@@ -2160,94 +2160,96 @@ function toggleMetodoCostoAfc() {
   }
 }
 
-function loadPresetAfcMabel() {
-  setCurrencyVal('afc-sim-precio-venta', 450000000);
-  setCurrencyVal('afc-sim-costo-historico', 150000000);
+function loadPresetAfcEjemplo1() {
+  setNum('afc-sim-precio-venta', 450000000);
+  setNum('afc-sim-costo-historico', 150000000);
   const anoSel = document.getElementById('afc-sim-ano-adquisicion');
   if (anoSel) anoSel.value = '2011';
   const tipoSel = document.getElementById('afc-sim-tipo-inmueble');
   if (tipoSel) tipoSel.value = 'bienes_raices_urbanos';
   const metodoSel = document.getElementById('afc-sim-metodo-costo');
   if (metodoSel) metodoSel.value = 'art73';
-  setCurrencyVal('afc-sim-costo-personalizado', 0);
-  setCurrencyVal('afc-sim-mejoras', 0);
-  setCurrencyVal('afc-sim-depreciacion', 0);
-  setCurrencyVal('afc-sim-monto-afc', 21000000);
+  setNum('afc-sim-costo-personalizado', 0);
+  setNum('afc-sim-mejoras', 0);
+  setNum('afc-sim-depreciacion', 0);
+  setNum('afc-sim-monto-afc', 21000000);
   const chkVivienda = document.getElementById('afc-sim-check-vivienda');
   if (chkVivienda) chkVivienda.checked = true;
   const chkPos = document.getElementById('afc-sim-check-posesion');
   if (chkPos) chkPos.checked = true;
   toggleMetodoCostoAfc();
   runSimulacionInmuebleAfc();
+  showToast('✓ Ejemplo 1 cargado: Venta $450M, Compra 2011 por $150M y Cuenta AFC', 'success', 3000);
 }
 
 function loadPresetAfcPre1987() {
-  setCurrencyVal('afc-sim-precio-venta', 600000000);
-  setCurrencyVal('afc-sim-costo-historico', 25000000);
+  setNum('afc-sim-precio-venta', 600000000);
+  setNum('afc-sim-costo-historico', 25000000);
   const anoSel = document.getElementById('afc-sim-ano-adquisicion');
   if (anoSel) anoSel.value = '1983';
   const tipoSel = document.getElementById('afc-sim-tipo-inmueble');
   if (tipoSel) tipoSel.value = 'bienes_raices_urbanos';
   const metodoSel = document.getElementById('afc-sim-metodo-costo');
   if (metodoSel) metodoSel.value = 'art73';
-  setCurrencyVal('afc-sim-costo-personalizado', 0);
-  setCurrencyVal('afc-sim-mejoras', 0);
-  setCurrencyVal('afc-sim-depreciacion', 0);
-  setCurrencyVal('afc-sim-monto-afc', 0);
+  setNum('afc-sim-costo-personalizado', 0);
+  setNum('afc-sim-mejoras', 0);
+  setNum('afc-sim-depreciacion', 0);
+  setNum('afc-sim-monto-afc', 0);
   const chkVivienda = document.getElementById('afc-sim-check-vivienda');
   if (chkVivienda) chkVivienda.checked = true;
   const chkPos = document.getElementById('afc-sim-check-posesion');
   if (chkPos) chkPos.checked = true;
   toggleMetodoCostoAfc();
   runSimulacionInmuebleAfc();
+  showToast('✓ Ejemplo Pre-1987 cargado: Vivienda 1983 con 40% exención Art. 44', 'success', 3000);
 }
 
 function loadPresetAfcVivienda() {
-  setCurrencyVal('afc-sim-precio-venta', 800000000);
-  setCurrencyVal('afc-sim-costo-historico', 350000000);
+  setNum('afc-sim-precio-venta', 800000000);
+  setNum('afc-sim-costo-historico', 350000000);
   const anoSel = document.getElementById('afc-sim-ano-adquisicion');
   if (anoSel) anoSel.value = '2018';
   const tipoSel = document.getElementById('afc-sim-tipo-inmueble');
   if (tipoSel) tipoSel.value = 'bienes_raices_urbanos';
   const metodoSel = document.getElementById('afc-sim-metodo-costo');
   if (metodoSel) metodoSel.value = 'art73';
-  setCurrencyVal('afc-sim-costo-personalizado', 0);
-  setCurrencyVal('afc-sim-mejoras', 0);
-  setCurrencyVal('afc-sim-depreciacion', 0);
-  setCurrencyVal('afc-sim-monto-afc', 261750000);
+  setNum('afc-sim-costo-personalizado', 0);
+  setNum('afc-sim-mejoras', 0);
+  setNum('afc-sim-depreciacion', 0);
+  setNum('afc-sim-monto-afc', 261750000);
   const chkVivienda = document.getElementById('afc-sim-check-vivienda');
   if (chkVivienda) chkVivienda.checked = true;
   const chkPos = document.getElementById('afc-sim-check-posesion');
   if (chkPos) chkPos.checked = true;
   toggleMetodoCostoAfc();
   runSimulacionInmuebleAfc();
+  showToast('✓ Ejemplo Vivienda + AFC cargado: Exención 5.000 UVT Art. 311-1', 'success', 3000);
 }
 
 function loadPresetAfcRural() {
-  setCurrencyVal('afc-sim-precio-venta', 1200000000);
-  setCurrencyVal('afc-sim-costo-historico', 200000000);
+  setNum('afc-sim-precio-venta', 1200000000);
+  setNum('afc-sim-costo-historico', 200000000);
   const anoSel = document.getElementById('afc-sim-ano-adquisicion');
   if (anoSel) anoSel.value = '2008';
   const tipoSel = document.getElementById('afc-sim-tipo-inmueble');
   if (tipoSel) tipoSel.value = 'bienes_raices_rurales_agro';
   const metodoSel = document.getElementById('afc-sim-metodo-costo');
   if (metodoSel) metodoSel.value = 'art73';
-  setCurrencyVal('afc-sim-costo-personalizado', 0);
-  setCurrencyVal('afc-sim-mejoras', 50000000);
-  setCurrencyVal('afc-sim-depreciacion', 0);
-  setCurrencyVal('afc-sim-monto-afc', 0);
+  setNum('afc-sim-costo-personalizado', 0);
+  setNum('afc-sim-mejoras', 50000000);
+  setNum('afc-sim-depreciacion', 0);
+  setNum('afc-sim-monto-afc', 0);
   const chkVivienda = document.getElementById('afc-sim-check-vivienda');
   if (chkVivienda) chkVivienda.checked = false;
   const chkPos = document.getElementById('afc-sim-check-posesion');
   if (chkPos) chkPos.checked = true;
   toggleMetodoCostoAfc();
   runSimulacionInmuebleAfc();
+  showToast('✓ Ejemplo Finca Rural cargado: Reajuste Art. 73 Rural + Mejoras', 'success', 3000);
 }
 
 function setCurrencyVal(elemId, num) {
-  const el = document.getElementById(elemId);
-  if (!el) return;
-  el.value = formatCOP(num);
+  setNum(elemId, num);
 }
 
 async function runSimulacionInmuebleAfc() {

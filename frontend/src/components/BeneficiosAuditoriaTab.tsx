@@ -41,11 +41,16 @@ interface BeneficiosAuditoriaTabProps {
   uvtValue: number;
 }
 
+const ALL_HISTORIC_YEARS = Array.from({ length: 2026 - 1955 + 1 }, (_, i) => (2026 - i).toString());
+
 export const BeneficiosAuditoriaTab: React.FC<BeneficiosAuditoriaTabProps> = ({
   taxYear,
   uvtValue,
 }) => {
-  const [activeSubTab, setActiveSubTab] = useState<'inmuebles_afc' | 'art73' | 'auditoria' | 'sanciones' | 'catalogo'>('inmuebles_afc');
+  // Subpestañas
+  const [activeSubTab, setActiveSubTab] = useState<
+    'inmuebles_afc' | 'art73' | 'auditoria' | 'sanciones' | 'catalogo'
+  >('inmuebles_afc');
 
   // --- Estado Inmuebles & Cuentas AFC (5 Estrategias) ---
   const [afcPrecioVenta, setAfcPrecioVenta] = useState<string>('450000000');
@@ -104,33 +109,56 @@ export const BeneficiosAuditoriaTab: React.FC<BeneficiosAuditoriaTabProps> = ({
     }
   };
 
+  const [toastFeedback, setToastFeedback] = useState<string | null>(null);
+
+  const triggerToast = (msg: string) => {
+    setToastFeedback(msg);
+    setTimeout(() => setToastFeedback(null), 3500);
+  };
+
   // Recalcular Inmuebles & AFC en vivo
-  useEffect(() => {
-    const precio = parseFloat(afcPrecioVenta) || 0;
-    const costo = parseFloat(afcCostoHistorico) || 0;
+  const calcularInmuebleAfcNow = async (customParams?: Partial<{
+    precio: number;
+    costo: number;
+    ano: string;
+    tipo: string;
+    metodo: string;
+    costoPersonalizado: number;
+    mejoras: number;
+    depreciacion: number;
+    montoAfc: number;
+    esVivienda: boolean;
+    posesion2Anos: boolean;
+  }>) => {
+    const precio = customParams?.precio !== undefined ? customParams.precio : (parseFloat(afcPrecioVenta) || 0);
+    const costo = customParams?.costo !== undefined ? customParams.costo : (parseFloat(afcCostoHistorico) || 0);
     if (precio <= 0) return;
 
-    const timer = setTimeout(async () => {
-      try {
-        const res = await simularInmuebleAfc({
-          precio_venta_cop: precio,
-          costo_adquisicion_historico_cop: costo,
-          ano_adquisicion: afcAnoAdquisicion,
-          tipo_inmueble: afcTipoInmueble,
-          metodo_costo_fiscal: afcMetodoCosto,
-          costo_fiscal_personalizado_cop: parseFloat(afcCostoPersonalizado) || 0,
-          mejoras_y_contribuciones_cop: parseFloat(afcMejoras) || 0,
-          depreciacion_acumulada_deducida_cop: parseFloat(afcDepreciacion) || 0,
-          monto_depositado_afc_o_vivienda_cop: parseFloat(afcMontoAfc) || 0,
-          es_vivienda_habitacion: afcEsVivienda,
-          posesion_mas_2_anos: afcPosesion2Anos,
-          tax_year: taxYear,
-          custom_uvt: uvtValue,
-        });
-        setSimulacionInmuebleAfc(res);
-      } catch (err) {
-        console.error('Error calculando simulacion inmueble afc', err);
-      }
+    try {
+      const res = await simularInmuebleAfc({
+        precio_venta_cop: precio,
+        costo_adquisicion_historico_cop: costo,
+        ano_adquisicion: customParams?.ano || afcAnoAdquisicion,
+        tipo_inmueble: customParams?.tipo || afcTipoInmueble,
+        metodo_costo_fiscal: customParams?.metodo || afcMetodoCosto,
+        costo_fiscal_personalizado_cop: customParams?.costoPersonalizado !== undefined ? customParams.costoPersonalizado : (parseFloat(afcCostoPersonalizado) || 0),
+        mejoras_y_contribuciones_cop: customParams?.mejoras !== undefined ? customParams.mejoras : (parseFloat(afcMejoras) || 0),
+        depreciacion_acumulada_deducida_cop: customParams?.depreciacion !== undefined ? customParams.depreciacion : (parseFloat(afcDepreciacion) || 0),
+        monto_depositado_afc_o_vivienda_cop: customParams?.montoAfc !== undefined ? customParams.montoAfc : (parseFloat(afcMontoAfc) || 0),
+        es_vivienda_habitacion: customParams?.esVivienda !== undefined ? customParams.esVivienda : afcEsVivienda,
+        posesion_mas_2_anos: customParams?.posesion2Anos !== undefined ? customParams.posesion2Anos : afcPosesion2Anos,
+        tax_year: taxYear,
+        custom_uvt: uvtValue,
+      });
+      setSimulacionInmuebleAfc(res);
+    } catch (err) {
+      console.error('Error calculando simulacion inmueble afc', err);
+    }
+  };
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      calcularInmuebleAfcNow();
     }, 150);
 
     return () => clearTimeout(timer);
@@ -151,7 +179,7 @@ export const BeneficiosAuditoriaTab: React.FC<BeneficiosAuditoriaTabProps> = ({
   ]);
 
   // Presets rápidos para Inmuebles & AFC
-  const loadPresetMabelSepulveda = () => {
+  const loadPresetEjemplo1 = () => {
     setAfcPrecioVenta('450000000');
     setAfcCostoHistorico('150000000');
     setAfcAnoAdquisicion('2011');
@@ -163,6 +191,20 @@ export const BeneficiosAuditoriaTab: React.FC<BeneficiosAuditoriaTabProps> = ({
     setAfcMontoAfc('21000000');
     setAfcEsVivienda(true);
     setAfcPosesion2Anos(true);
+    calcularInmuebleAfcNow({
+      precio: 450000000,
+      costo: 150000000,
+      ano: '2011',
+      tipo: 'bienes_raices_urbanos',
+      metodo: 'art73',
+      costoPersonalizado: 0,
+      mejoras: 0,
+      depreciacion: 0,
+      montoAfc: 21000000,
+      esVivienda: true,
+      posesion2Anos: true,
+    });
+    triggerToast('✓ Ejemplo 1 cargado: Venta $450M, Compra 2011 por $150M y Cuenta AFC');
   };
 
   const loadPresetPre1987 = () => {
@@ -177,6 +219,20 @@ export const BeneficiosAuditoriaTab: React.FC<BeneficiosAuditoriaTabProps> = ({
     setAfcMontoAfc('0');
     setAfcEsVivienda(true);
     setAfcPosesion2Anos(true);
+    calcularInmuebleAfcNow({
+      precio: 600000000,
+      costo: 25000000,
+      ano: '1983',
+      tipo: 'bienes_raices_urbanos',
+      metodo: 'art73',
+      costoPersonalizado: 0,
+      mejoras: 0,
+      depreciacion: 0,
+      montoAfc: 0,
+      esVivienda: true,
+      posesion2Anos: true,
+    });
+    triggerToast('✓ Ejemplo Pre-1987 cargado: Vivienda 1983 con 40% exención Art. 44');
   };
 
   const loadPresetViviendaAfc = () => {
@@ -191,6 +247,20 @@ export const BeneficiosAuditoriaTab: React.FC<BeneficiosAuditoriaTabProps> = ({
     setAfcMontoAfc('261750000');
     setAfcEsVivienda(true);
     setAfcPosesion2Anos(true);
+    calcularInmuebleAfcNow({
+      precio: 800000000,
+      costo: 350000000,
+      ano: '2018',
+      tipo: 'bienes_raices_urbanos',
+      metodo: 'art73',
+      costoPersonalizado: 0,
+      mejoras: 0,
+      depreciacion: 0,
+      montoAfc: 261750000,
+      esVivienda: true,
+      posesion2Anos: true,
+    });
+    triggerToast('✓ Ejemplo Vivienda + AFC cargado: Exención 5.000 UVT Art. 311-1');
   };
 
   const loadPresetFincaRural = () => {
@@ -205,6 +275,20 @@ export const BeneficiosAuditoriaTab: React.FC<BeneficiosAuditoriaTabProps> = ({
     setAfcMontoAfc('0');
     setAfcEsVivienda(false);
     setAfcPosesion2Anos(true);
+    calcularInmuebleAfcNow({
+      precio: 1200000000,
+      costo: 200000000,
+      ano: '2008',
+      tipo: 'bienes_raices_rurales_agro',
+      metodo: 'art73',
+      costoPersonalizado: 0,
+      mejoras: 50000000,
+      depreciacion: 0,
+      montoAfc: 0,
+      esVivienda: false,
+      posesion2Anos: true,
+    });
+    triggerToast('✓ Ejemplo Finca Rural cargado: Reajuste Art. 73 Rural + Mejoras');
   };
 
   // Recalcular Art. 73 en vivo
@@ -310,7 +394,7 @@ export const BeneficiosAuditoriaTab: React.FC<BeneficiosAuditoriaTabProps> = ({
             <Home size={16} />
             Inmuebles & Cuentas AFC (5 Estrategias)
             <span style={{ fontSize: '10px', background: 'var(--success)', color: '#fff', padding: '2px 6px', borderRadius: '10px', fontWeight: 700 }}>
-              Video & E.T.
+              E.T. 5.000 UVT
             </span>
           </button>
           <button
@@ -352,7 +436,7 @@ export const BeneficiosAuditoriaTab: React.FC<BeneficiosAuditoriaTabProps> = ({
       </div>
 
       {/* ========================================================================= */}
-      {/* --- SUBTAB 0: INMUEBLES & CUENTAS AFC (5 ESTRATEGIAS DEL VIDEO & E.T.) --- */}
+      {/* --- SUBTAB 0: INMUEBLES & CUENTAS AFC (5 ESTRATEGIAS LEGALES E.T.) --- */}
       {/* ========================================================================= */}
       {activeSubTab === 'inmuebles_afc' && (
         <div className="space-y-6">
@@ -389,7 +473,7 @@ export const BeneficiosAuditoriaTab: React.FC<BeneficiosAuditoriaTabProps> = ({
                     5 Estrategias Legales para Pagar Menos o Cero Impuestos al Vender Inmuebles en Colombia
                   </h3>
                   <span className="badge-uvt" style={{ background: 'rgba(59, 130, 246, 0.15)', color: 'var(--primary)' }}>
-                    Basado en Video Guía & Estatuto Tributario
+                    Planeación Tributaria & Estatuto Tributario
                   </span>
                 </div>
                 <p style={{ fontSize: '13px', color: 'var(--text-muted)', lineHeight: '1.6', marginTop: '6px' }}>
@@ -498,34 +582,92 @@ export const BeneficiosAuditoriaTab: React.FC<BeneficiosAuditoriaTabProps> = ({
             </div>
 
             {/* DETALLE EXPLICATIVO DE LA ESTRATEGIA SELECCIONADA */}
-            <div style={{ background: 'var(--bg-main)', padding: '14px', borderRadius: '8px', border: '1px solid var(--border-color)', fontSize: '12.5px', color: 'var(--text-main)', lineHeight: '1.55' }}>
+            <div style={{ background: 'var(--bg-main)', padding: '16px', borderRadius: '10px', border: '1px solid var(--border-color)', fontSize: '13px', color: 'var(--text-main)', lineHeight: '1.6' }}>
               {selectedStrategyExplainer === 'art70' && (
                 <div>
-                  <strong style={{ color: 'var(--primary)' }}>📜 Estrategia 1 — Artículo 70 del Estatuto Tributario:</strong> Permite a los contribuyentes incrementar año tras año el costo fiscal de sus activos fijos en el porcentaje decretado por el Gobierno Nacional (según IPC o meta de inflación). Si has declarado el inmueble y aplicado el reajuste fiscal año con año, el costo acumulado será significativamente mayor al de la escritura original, reduciendo la ganancia gravable al momento de vender.
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px' }}>
+                    <span style={{ fontSize: '16px' }}>📜</span>
+                    <strong style={{ color: 'var(--primary)', fontSize: '14px' }}>Estrategia 1 — Artículo 70 del Estatuto Tributario (Ajuste Fiscal Anual Porcentual)</strong>
+                  </div>
+                  <p style={{ margin: '0 0 8px 0', color: 'var(--text-muted)' }}>
+                    <strong>¿Qué es?</strong> Es el mecanismo ordinario mediante el cual el contribuyente puede incrementar anualmente el costo fiscal de sus activos fijos (inmuebles, acciones, maquinaria) en el porcentaje que fije anualmente el Gobierno Nacional mediante decreto (habitualmente basado en la meta de inflación o IPC).
+                  </p>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '10px', background: 'var(--bg-secondary)', padding: '10px', borderRadius: '6px', fontSize: '12px' }}>
+                    <div><strong>📌 ¿Cómo se usa?</strong> Al presentar la declaración de renta de cada año gravable, se multiplica el costo fiscal del año anterior por (1 + % de reajuste decretado) y se declara en el renglón de patrimonio.</div>
+                    <div><strong>💡 Beneficio al vender:</strong> Al acumular reajustes por varios años, el costo fiscal se eleva paulatinamente. La ganancia ocasional (Precio de venta - Costo acumulado) se reduce drásticamente.</div>
+                  </div>
                 </div>
               )}
               {selectedStrategyExplainer === 'art73' && (
                 <div>
-                  <strong style={{ color: 'var(--primary)' }}>📈 Estrategia 2 — Artículo 73 del Estatuto Tributario (Multiplicador DANE/DIAN):</strong> Es el beneficio estrella para personas naturales. No requiere haber hecho ajustes anuales previos: permite multiplicar directamente el valor histórico de compra por el factor certificado por el DANE/IGAC según el año de adquisición (ej. factor <strong>2.86x para el año 2011</strong>; hasta <strong>36.08x para 1955</strong>). Eleva el costo patrimonial legalmente a pesos de hoy, pulverizando la ganancia gravable.
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px' }}>
+                    <span style={{ fontSize: '16px' }}>📈</span>
+                    <strong style={{ color: 'var(--primary)', fontSize: '14px' }}>Estrategia 2 — Artículo 73 del Estatuto Tributario (Multiplicador Histórico DANE/DIAN)</strong>
+                  </div>
+                  <p style={{ margin: '0 0 8px 0', color: 'var(--text-muted)' }}>
+                    <strong>¿Qué es?</strong> Es el beneficio tributario más potente para personas naturales. No requiere haber realizado reajustes anuales previos en declaraciones anteriores.
+                  </p>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '10px', background: 'rgba(59, 130, 246, 0.08)', padding: '10px', borderRadius: '6px', fontSize: '12px', border: '1px solid rgba(59, 130, 246, 0.2)' }}>
+                    <div><strong>📌 ¿Cómo se usa?</strong> Se ubica el año de compra del inmueble en la tabla oficial del DANE/DIAN (70 años: 1955-2025). Se toma el valor que costó en la escritura original y se multiplica por el factor de ese año (ej. <strong>2.86x para el año 2011</strong>; <strong>36.08x para 1955</strong>).</div>
+                    <div><strong>💡 Fórmula oficial:</strong> <code>Costo Ajustado = Costo Adquisición × Factor DANE + Mejoras - Depreciaciones</code>. Se declara directamente en la Casilla 81 (Costos por Ganancias Ocasionales) del Formulario 210.</div>
+                  </div>
                 </div>
               )}
               {selectedStrategyExplainer === 'art311' && (
                 <div>
-                  <strong style={{ color: 'var(--success)' }}>🏦 Estrategia 3 — Artículo 311-1 y 126-4 del Estatuto Tributario (Cuentas AFC / Vivienda):</strong> Si vendes tu casa o apartamento de habitación y depositas el producto de la venta en una Cuenta de Ahorro para el Fomento de la Construcción (AFC), o lo destinas a comprar otra vivienda o pagar el crédito hipotecario del inmueble vendido, las primeras <strong>5.000 UVT de ganancia ({formatCOP(5000 * uvtValue)} en {taxYear})</strong> quedan <strong>100% EXENTAS</strong> del impuesto de ganancia ocasional.
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px' }}>
+                    <span style={{ fontSize: '16px' }}>🏦</span>
+                    <strong style={{ color: 'var(--success)', fontSize: '14px' }}>Estrategia 3 — Artículos 311-1 y 126-4 del E.T. (Cuentas AFC y Destino a Nueva Vivienda)</strong>
+                  </div>
+                  <p style={{ margin: '0 0 8px 0', color: 'var(--text-muted)' }}>
+                    <strong>¿Qué es?</strong> Exención directa de hasta <strong>5.000 UVT ({formatCOP(5000 * uvtValue)} en {taxYear})</strong> sobre la utilidad o ganancia ocasional obtenida en la venta de la casa o apartamento de habitación del contribuyente.
+                  </p>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '10px', background: 'rgba(16, 185, 129, 0.08)', padding: '10px', borderRadius: '6px', fontSize: '12px', border: '1px solid rgba(16, 185, 129, 0.2)' }}>
+                    <div><strong>📌 Requisitos legales (Art. 311-1 E.T.):</strong> (1) Que el bien enajenado sea la casa de habitación del declarante. (2) Que el dinero se deposite en una Cuenta de Ahorro para el Fomento de la Construcción (AFC) o se destine a comprar otra vivienda o pagar crédito hipotecario del inmueble vendido. (3) Que el valor de la vivienda vendida no supere 23.000 UVT ({formatCOP(23000 * uvtValue)}).</div>
+                    <div><strong>💡 Efecto en el impuesto:</strong> Si la ganancia neta depurada tras el reajuste del Art. 73 es menor o igual a 5.000 UVT y se destina a AFC, la ganancia ocasional gravable final es <strong>$0 COP</strong> (100% de ahorro).</div>
+                  </div>
                 </div>
               )}
               {selectedStrategyExplainer === 'art44' && (
                 <div>
-                  <strong style={{ color: '#d97706' }}>🏛️ Estrategia 4 — Artículo 44 y Artículo 399 del Estatuto Tributario (Adquisiciones Pre-1987):</strong> Si la casa o apartamento de habitación fue adquirido antes del 1 de enero de 1987, una porción de la utilidad NO causa impuesto de renta ni ganancia ocasional: <strong>10% (1986), 20% (1985), 30% (1984), 40% (1983), 50% (1982), 60% (1981), 70% (1980), 80% (1979), 90% (1978) y 100% EXENTA si fue antes de 1978</strong>. Además, la retención en la notaría (Art. 399) se reduce en ese mismo porcentaje.
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px' }}>
+                    <span style={{ fontSize: '16px' }}>🏛️</span>
+                    <strong style={{ color: '#d97706', fontSize: '14px' }}>Estrategia 4 — Artículo 44 y Artículo 399 del E.T. (Inmuebles Adquiridos Antes de 1987)</strong>
+                  </div>
+                  <p style={{ margin: '0 0 8px 0', color: 'var(--text-muted)' }}>
+                    <strong>¿Qué es?</strong> Régimen de transición legal para casas o apartamentos de habitación adquiridos antes del 1 de enero de 1987. Otorga una exención porcentual directa sobre la utilidad en la venta.
+                  </p>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '10px', background: 'rgba(245, 158, 11, 0.08)', padding: '10px', borderRadius: '6px', fontSize: '12px', border: '1px solid rgba(245, 158, 11, 0.2)' }}>
+                    <div><strong>📌 Tabla oficial de exención (Art. 44 E.T.):</strong> 1986: 10% | 1985: 20% | 1984: 30% | 1983: 40% | 1982: 50% | 1981: 60% | 1980: 70% | 1979: 80% | 1978: 90% | <strong>Antes de 1978: 100% EXENTO</strong>.</div>
+                    <div><strong>💡 Retención Notarial (Art. 399 E.T.):</strong> En la notaría, el Notario debe disminuir la retención en la fuente del 1% en la misma proporción de la exención que acredite el vendedor.</div>
+                  </div>
                 </div>
               )}
               {selectedStrategyExplainer === 'art72' && (
                 <div>
-                  <strong style={{ color: '#8b5cf6' }}>📑 Estrategia 5 — Artículo 72, 398 y 400 del Estatuto Tributario:</strong> Permite tomar como costo fiscal el avalúo catastral o autoavalúo declarado en el Impuesto Predial del año anterior. Además, en la notaría se practica una retención en la fuente del 1% (Art. 398 E.T.) que se descuenta en la declaración de renta (Casilla 134), quedando exentas las viviendas de interés social (VIS - Art. 400).
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px' }}>
+                    <span style={{ fontSize: '16px' }}>📑</span>
+                    <strong style={{ color: '#8b5cf6', fontSize: '14px' }}>Estrategia 5 — Artículos 72, 398 y 400 del E.T. (Avalúo Catastral y Retención Notarial)</strong>
+                  </div>
+                  <p style={{ margin: '0 0 8px 0', color: 'var(--text-muted)' }}>
+                    <strong>¿Qué es?</strong> El Artículo 72 faculta al contribuyente a adoptar como costo fiscal el avalúo catastral o autoavalúo fijado en la declaración del Impuesto Predial Unificado del año anterior.
+                  </p>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '10px', background: 'rgba(139, 92, 246, 0.08)', padding: '10px', borderRadius: '6px', fontSize: '12px', border: '1px solid rgba(139, 92, 246, 0.2)' }}>
+                    <div><strong>📌 Retención Notarial (Art. 398 E.T.):</strong> En el momento de la firma de la escritura de venta, el Notario practica una retención del 1% sobre el precio de venta. Este valor se imputa como anticipo en la <strong>Casilla 134</strong> del Formulario 210.</div>
+                    <div><strong>💡 Vivienda de Interés Social (Art. 400 E.T.):</strong> Si la vivienda vendida califica como VIS o VIP, la retención en la notaría no se practica o está exenta según los topes legales.</div>
+                  </div>
                 </div>
               )}
             </div>
           </div>
+
+          {/* NOTIFICACION / FEEDBACK VISUAL DE PRESETS */}
+          {toastFeedback && (
+            <div style={{ padding: '10px 16px', background: 'rgba(16, 185, 129, 0.15)', color: 'var(--success)', border: '1px solid rgba(16, 185, 129, 0.4)', borderRadius: '8px', fontWeight: 700, fontSize: '13px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <Sparkles size={16} />
+              {toastFeedback}
+            </div>
+          )}
 
           {/* BOTONES DE PRESETS RAPIDOS */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
@@ -533,11 +675,11 @@ export const BeneficiosAuditoriaTab: React.FC<BeneficiosAuditoriaTabProps> = ({
               ⚡ Cargar Casos Didácticos Predefinidos:
             </span>
             <button
-              onClick={loadPresetMabelSepulveda}
+              onClick={loadPresetEjemplo1}
               className="btn"
               style={{ padding: '6px 12px', fontSize: '12px', background: 'rgba(59, 130, 246, 0.12)', color: 'var(--primary)', border: '1px solid rgba(59, 130, 246, 0.3)' }}
             >
-              <PlayCircle size={14} /> Caso Video Abogada Mabel (450M / Compra 2011)
+              <PlayCircle size={14} /> Ejemplo 1: Venta Vivienda con Art. 73 y AFC ($450M / Compra 2011)
             </button>
             <button
               onClick={loadPresetPre1987}
@@ -559,6 +701,13 @@ export const BeneficiosAuditoriaTab: React.FC<BeneficiosAuditoriaTabProps> = ({
               style={{ padding: '6px 12px', fontSize: '12px', background: 'rgba(139, 92, 246, 0.12)', color: '#8b5cf6', border: '1px solid rgba(139, 92, 246, 0.3)' }}
             >
               <TreePine size={14} /> Finca Rural Agropecuaria (Art. 73)
+            </button>
+            <button
+              onClick={() => { calcularInmuebleAfcNow(); triggerToast('✓ Simulación actualizada con éxito'); }}
+              className="btn btn-primary"
+              style={{ padding: '6px 14px', fontSize: '12px', marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: '6px' }}
+            >
+              <Sparkles size={14} /> Recalcular Simulación
             </button>
           </div>
 
@@ -626,9 +775,12 @@ export const BeneficiosAuditoriaTab: React.FC<BeneficiosAuditoriaTabProps> = ({
                       value={afcAnoAdquisicion}
                       onChange={(e) => setAfcAnoAdquisicion(e.target.value)}
                     >
-                      {tablaArt73.map((r) => (
-                        <option key={r.ano_adquisicion} value={r.ano_adquisicion}>
-                          {r.ano_adquisicion} {parseInt(r.ano_adquisicion) < 1987 ? '🏛️ Pre-1987' : ''}
+                      {(tablaArt73 && tablaArt73.length > 0
+                        ? tablaArt73.map((r) => r.ano_adquisicion)
+                        : ALL_HISTORIC_YEARS
+                      ).map((yr) => (
+                        <option key={yr} value={yr}>
+                          {yr} {parseInt(yr) < 1987 ? '🏛️ Pre-1987 (Art. 44)' : ''}
                         </option>
                       ))}
                     </select>

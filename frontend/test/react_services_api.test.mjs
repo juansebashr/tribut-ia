@@ -89,7 +89,7 @@ test('React API Service - convertUvt', async () => {
   assert.equal(data.amount_cop, 5235000);
 });
 
-test('React API Service - simularInmuebleAfc (Video Case)', async () => {
+test('React API Service - simularInmuebleAfc (Ejemplo Venta Vivienda)', async () => {
   const res = await fetch('http://localhost:8000/api/v1/beneficios/simular-inmueble-afc', {
     method: 'POST',
     body: JSON.stringify({

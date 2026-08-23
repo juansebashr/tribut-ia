@@ -2,7 +2,7 @@ from pathlib import Path
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import FileResponse
+from fastapi.responses import FileResponse, Response
 from fastapi.staticfiles import StaticFiles
 
 from app.api.v1.router import api_router
@@ -76,3 +76,12 @@ def health_check():
 def chrome_devtools_endpoint():
     """Silencia la solicitud interna automática de Google Chrome DevTools."""
     return {}
+
+
+@app.get("/favicon.ico", include_in_schema=False)
+def favicon():
+    """Sirve el favicon oficial para evitar el error 404 del navegador."""
+    favicon_svg = STATIC_DIR / "favicon.svg"
+    if favicon_svg.exists():
+        return FileResponse(str(favicon_svg), media_type="image/svg+xml")
+    return Response(status_code=204)

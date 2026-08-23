@@ -108,9 +108,9 @@
     "semantic_hash": "667cee6d8bc44b8bd3d3f15e317b1776"
   },
   "backend/app/main.py": {
-    "mtime": 1787189798.4906836,
-    "seen": 1787189810.1238651,
-    "ast_hash": "db991f3525cec77bf10943240f9d5ce1",
+    "mtime": 1787443803.5000236,
+    "seen": 1787443934.143253,
+    "ast_hash": "a285b3e1d7ad7ff58f35dc7fdb5c5938",
     "semantic_hash": ""
   },
   "backend/app/models/__init__.py": {
@@ -192,9 +192,9 @@
     "semantic_hash": "893fa7465543d9824ea44cdbcab4e8b7"
   },
   "backend/tests/test_beneficios_and_go.py": {
-    "mtime": 1787442749.615039,
-    "seen": 1787443364.048887,
-    "ast_hash": "10012db1bb2776ad5eb475702870504d",
+    "mtime": 1787443895.8252695,
+    "seen": 1787443934.143625,
+    "ast_hash": "b3a27d2d4ec2e9abc5a4fa12afd268be",
     "semantic_hash": ""
   },
   "backend/tests/test_calendario.py": {
@@ -390,9 +390,9 @@
     "semantic_hash": ""
   },
   "backend/app/static/index.html": {
-    "mtime": 1787443713.1578417,
-    "seen": 1787443742.675565,
-    "ast_hash": "b8c9b050dd1d63d3adf4e02e7eaf2ad6",
+    "mtime": 1787443867.611562,
+    "seen": 1787443934.144421,
+    "ast_hash": "85cb17a24a1c9595e8fb6aba6a8db854",
     "semantic_hash": ""
   },
   "docs/README.md": {
@@ -657,6 +657,12 @@
     "mtime": 1787443353.7616558,
     "seen": 1787443364.05005,
     "ast_hash": "fcf56d726db2e0769b428ec6d671b98a",
+    "semantic_hash": ""
+  },
+  "backend/app/static/favicon.svg": {
+    "mtime": 1787443771.7631161,
+    "seen": 1787443934.1452749,
+    "ast_hash": "7e840862161341271697daa99a40d76b",
     "semantic_hash": ""
   }
 }
