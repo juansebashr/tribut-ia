@@ -51,10 +51,10 @@ graph TD
    - **TTL de 1 Día (`86.400 segundos`) con Rolling Renewal**: Cada lectura o escritura renueva el tiempo de vida por otras 24 horas. Sesiones inactivas expiran automáticamente.
    - **Redis Pub/Sub**: Las mutaciones se publican en `session:{session_id}:events`. Cada réplica de Cloud Run con un stream SSE abierto escucha el canal de su cliente y retransmite los eventos en vivo.
 2. **Aislamiento de Sesión Dual-Mode (Header HTTP + Cookie Criptográfica)**:
-   - **Para Navegadores**: Auto-emisión de cookie segura `tributia_sid` con UUIDv4 (`ses_...`) de 128 bits de entropía. Imposible de adivinar por fuerza bruta.
+   - **Para Navegadores**: Auto-emisión de cookie segura `fiscol_sid` con UUIDv4 (`ses_...`) de 128 bits de entropía. Imposible de adivinar por fuerza bruta.
    - **Para APIs / Scripts / Agentes IA**: Cabecera estándar `X-Session-ID: <session_id>` para dirigir mutaciones a la sesión deseada.
 3. **Resiliencia de UX (Client-Side)**:
-   - Respaldo continuo en `localStorage['tributia_draft_' + sessionId]`.
+   - Respaldo continuo en `localStorage['fiscol_draft_' + sessionId]`.
    - Modal de confirmación para acciones destructivas (Importar JSON / Limpiar formulario) cuando existen datos activos.
 4. **Fallback Transparente en Memoria**:
    - Si no se configura `REDIS_URL`, la aplicación conmuta automáticamente a `InMemorySessionStore` para desarrollo local y ejecución ultra-rápida de pruebas unitarias (`pytest`).

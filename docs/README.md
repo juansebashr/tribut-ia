@@ -1,6 +1,6 @@
-# Documentacion Tecnica de TributIA
+# Documentacion Tecnica de Fiscol
 
-Bienvenido a la documentacion tecnica de **TributIA**, la plataforma colombiana de liquidacion tributaria (Formulario 210, Formulario 110, TTD Art. 240, Calendario DIAN y Sincronizacion Bidireccional API <-> UI en tiempo real).
+Bienvenido a la documentacion tecnica de **Fiscol**, la plataforma colombiana de liquidacion tributaria (Formulario 210, Formulario 110, TTD Art. 240, Calendario DIAN y Sincronizacion Bidireccional API <-> UI en tiempo real).
 
 Esta documentacion sigue el estandar internacional **Diataxis** (adoptado por GitHub, Stripe, AWS y Kubernetes), complementado con **ADRs (Architecture Decision Records)** y diagramas arquitectonicos **C4 + Mermaid**.
 
@@ -55,7 +55,7 @@ Esta documentacion sigue el estandar internacional **Diataxis** (adoptado por Gi
 
 ### 4. [Explicaciones](./explanation/) - *Orientado a la Comprension*
 
-- [01. Arquitectura del Sistema TributIA](./explanation/01-arquitectura-sistema-tributia.md): Filosofia de diseno, arquitectura modular y motor desacoplado.
+- [01. Arquitectura del Sistema Fiscol](./explanation/01-arquitectura-sistema-fiscol.md): Filosofia de diseno, arquitectura modular y motor desacoplado.
 - [02. El Sistema Cedular en Colombia (Ley 2277 de 2022)](./explanation/02-sistema-cedular-colombiano.md): Como funciona la cedula general, pensiones, dividendos y ganancias ocasionales.
 - [03. Desmitificando las Tarifas Progresivas en Renta](./explanation/03-mito-tributario-tarifas-marginales.md): Por que ganar mas dinero nunca reduce tu ingreso neto.
 

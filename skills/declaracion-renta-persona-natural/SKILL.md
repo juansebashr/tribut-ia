@@ -7,7 +7,7 @@ description: Use when analyzing bank statements, tax certificates (Formulario 22
 
 ## Overview
 
-Este skill automatiza el analisis de documentos bancarios, certificados de retencion y soportes contables para personas naturales residentes fiscales en Colombia, generando un libro de transacciones en CSV, clasificando por cedulas segun el Estatuto Tributario y la Ley 2277 de 2022, aplicando todos los beneficios tributarios legales y transmitiendo la liquidacion a la plataforma TributIA.
+Este skill automatiza el analisis de documentos bancarios, certificados de retencion y soportes contables para personas naturales residentes fiscales en Colombia, generando un libro de transacciones en CSV, clasificando por cedulas segun el Estatuto Tributario y la Ley 2277 de 2022, aplicando todos los beneficios tributarios legales y transmitiendo la liquidacion a la plataforma Fiscol.
 
 ---
 
@@ -17,7 +17,7 @@ Use este skill cuando:
 - El usuario tenga un directorio con extractos bancarios (PDF/Excel), certificados de ingresos y retenciones (Formulario 220), certificados de vivienda, medicina prepagada o facturas electronicas.
 - Se requiera desglosar y clasificar entradas y salidas de dinero por concepto tributario.
 - Se deba liquidar el impuesto sobre la renta de personas naturales (Cedula General, Pensiones, Dividendos y Ganancias Ocasionales).
-- Se necesite inyectar la liquidacion en la API de TributIA para visualizar el Formulario 210 y el Termometro Progresivo.
+- Se necesite inyectar la liquidacion en la API de Fiscol para visualizar el Formulario 210 y el Termometro Progresivo.
 
 **NO usar para:**
 - Declaraciones de Personas Juridicas (Sociedades comerciales - Formulario 110).
@@ -86,16 +86,16 @@ Si el reporte de conciliacion contiene partidas `SOLO_EN_EXOGENA` o `DIFERENCIA_
 
 ---
 
-### Fase 3: Consolidacion e Inyeccion a la API de TributIA
+### Fase 3: Consolidacion e Inyeccion a la API de Fiscol
 
 1. Consolidar el CSV validado con el estado de conciliacion:
    ```bash
    python skills/declaracion-renta-persona-natural/scripts/consolidar_transacciones.py transacciones_depuradas.csv --year 2025 --uvt 49799 --nombre "NOMBRE" --nit "NIT" --reconciliation estado_conciliacion.json --out payload_declaracion.json
    ```
-2. Enviar los valores a la aplicacion web de TributIA con el ID de sesion correspondiente (usando el header `X-Session-ID` o argumento `--session-id`):
+2. Enviar los valores a la aplicacion web de Fiscol con el ID de sesion correspondiente (usando el header `X-Session-ID` o argumento `--session-id`):
    ```bash
    # Inyectar en la sesion activa del usuario (ej. ses_9b8f2c3d o default):
-   python skills/declaracion-renta-persona-natural/scripts/inyectar_tributia.py payload_declaracion.json --api-url http://localhost:8000 --session-id ses_9b8f2c3d
+   python skills/declaracion-renta-persona-natural/scripts/inyectar_session.py payload_declaracion.json --api-url http://localhost:8000 --session-id ses_9b8f2c3d
    ```
    > **Nota de Control de Acceso**: La API utiliza la cabecera HTTP `X-Session-ID: <session_id>` para dirigir los datos a la sesion exacta en Redis. Si no se especifica, se utiliza `default`.
 

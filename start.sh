@@ -5,7 +5,7 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 PORT="${PORT:-8000}"
 
 echo "================================================================="
-echo "🇨🇴 Iniciando TributIA - Motor Tributario Colombiano (2026)"
+echo "🇨🇴 Iniciando Fiscol - Motor Tributario Colombiano (2026)"
 echo "   Plataforma Fullstack: FastAPI + React + TypeScript"
 echo "================================================================="
 

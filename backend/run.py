@@ -10,7 +10,7 @@ if current_dir not in sys.path:
 
 if __name__ == "__main__":
     print("=" * 60)
-    print("  🚀 Iniciando TributIA Colombia (Motor Tributario & UI)")
+    print("  🚀 Iniciando Fiscol Colombia (Motor Tributario & UI)")
     print("  🌐 Interfaz Web:  http://localhost:8000")
     print("  📖 Swagger Docs:   http://localhost:8000/docs")
     print("=" * 60)

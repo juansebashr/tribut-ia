@@ -1,0 +1,33 @@
+{
+  "contribuyente": {
+    "nombre": "CARLOS ANDRES MENDOZA ROJAS",
+    "nit": "80123456-7",
+    "tax_year": 2026,
+    "es_declarante_ano_anterior": true
+  },
+  "casillas_formulario_210": {
+    "casilla_29_patrimonio_bruto": 650000000,
+    "casilla_30_deudas": 120000000,
+    "casilla_31_patrimonio_liquido_actual": 530000000,
+    "casilla_32_patrimonio_liquido_ano_anterior": 200000000,
+    "casilla_33_rentas_trabajo_brutas": 130000000,
+    "casilla_34_incrngo_trabajo": 10400000,
+    "casilla_43_renta_liquida_trabajo": 119600000,
+    "casilla_64_renta_liquida_ordinaria_cedula_general": 85000000,
+    "casilla_92_total_rentas_exentas_imputables": 25000000,
+    "casilla_93_total_deducciones_imputables": 9600000,
+    "casilla_94_renta_liquida_ordinaria_cedula_general_final": 85000000,
+    "casilla_104_ganancia_ocasional_gravable": 0,
+    "casilla_133_total_impuesto_a_cargo": 11500000,
+    "casilla_135_total_retenciones_fuente": 4500000
+  },
+  "movimientos_patrimoniales_reportados": [
+    {
+      "tipo": "ADQUISICION_INMUEBLE",
+      "descripcion": "Compra de apartamento 502 Edificio Panorama",
+      "valor_compra_cop": 400000000,
+      "fecha": "2026-06-15"
+    }
+  ],
+  "estimacion_gastos_personales_anuales": 45000000
+}

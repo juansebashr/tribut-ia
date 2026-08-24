@@ -8,7 +8,7 @@ client = TestClient(app)
 def test_ui_root_serving():
     response = client.get("/")
     assert response.status_code == 200
-    assert "TributIA" in response.text
+    assert "Fiscol" in response.text
 
 
 def test_health_check():
@@ -126,13 +126,13 @@ def test_seo_sitemap_xml():
     response = client.get("/sitemap.xml")
     assert response.status_code == 200
     assert "urlset" in response.text
-    assert "https://tributia.co" in response.text
+    assert "https://fiscol.co" in response.text
 
 
 def test_llms_txt():
     response = client.get("/llms.txt")
     assert response.status_code == 200
-    assert "TributIA" in response.text
+    assert "Fiscol" in response.text
 
 
 def test_llms_full_txt():
@@ -152,9 +152,13 @@ def test_favicon_endpoints():
     assert "image/svg+xml" in r_svg.headers["content-type"]
     assert b"<svg" in r_svg.content
 
-    for path in ["/favicon.png", "/favicon-32x32.png", "/favicon-16x16.png", "/apple-touch-icon.png"]:
+    for path in [
+        "/favicon.png",
+        "/favicon-32x32.png",
+        "/favicon-16x16.png",
+        "/apple-touch-icon.png",
+    ]:
         r_png = client.get(path)
         assert r_png.status_code == 200
         assert "image/png" in r_png.headers["content-type"]
         assert len(r_png.content) > 500
-

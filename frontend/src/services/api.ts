@@ -263,5 +263,33 @@ export async function simularCombinabilidadInflacionArt73(
   return await res.json();
 }
 
+export async function calcularComparacionPatrimonial(
+  payload: import('../types/tax').ComparacionPatrimonialRequest
+): Promise<import('../types/tax').ComparacionPatrimonialResponse> {
+  const res = await fetch(`${API_BASE_URL}/persona-natural/comparacion-patrimonial`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
+  });
+  if (!res.ok) {
+    const errorData = await res.json().catch(() => ({}));
+    throw new Error(errorData.detail || 'Error al calcular Comparación Patrimonial');
+  }
+  return await res.json();
+}
 
+export async function simularTributacionPareja(
+  payload: import('../types/tax').TributacionParejaRequest
+): Promise<import('../types/tax').TributacionParejaResponse> {
+  const res = await fetch(`${API_BASE_URL}/beneficios/simular-tributacion-pareja`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
+  });
+  if (!res.ok) {
+    const errorData = await res.json().catch(() => ({}));
+    throw new Error(errorData.detail || 'Error al simular Tributación en Pareja');
+  }
+  return await res.json();
+}
 

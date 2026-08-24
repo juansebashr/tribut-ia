@@ -1,0 +1,125 @@
+{
+  "categorias_diagnosticas": [
+    {
+      "id": "CAT_01_ADQUISICIONES",
+      "titulo": "1. Adquisición de Nuevos Activos Fijos o Inversiones",
+      "descripcion": "Identificar si durante el año se adquirieron bienes raíces, vehículos, acciones o derechos fiduciarios.",
+      "preguntas": [
+        {
+          "id": "PREG_01_INMUEBLES",
+          "texto": "¿Adquirió o escrituró inmuebles (apartamento, casa, lote, oficina) en este año gravable?",
+          "documentos_requeridos": [
+            "Escritura pública de compraventa registrada en Notaría e Instrumentos Públicos",
+            "Certificado de Tradición y Libertad con fecha posterior al registro",
+            "Soportes de medios de pago bancarios (transferencias, cheques de gerencia)"
+          ],
+          "impacto_justificacion": "Verificar costo fiscal real y si el valor en escritura incluye hipoteca o copropiedad."
+        },
+        {
+          "id": "PREG_02_VEHICULOS",
+          "texto": "¿Compró vehículos, motos u otros bienes muebles registrables?",
+          "documentos_requeridos": [
+            "Tarjeta de propiedad o certificado de matrícula oficial",
+            "Contrato de compraventa y factura del concesionario / tercero",
+            "Crédito vehicular o leasing si existió financiación"
+          ],
+          "impacto_justificacion": "Verificar avalúo del Ministerio de Transporte vs. costo de compra."
+        }
+      ]
+    },
+    {
+      "id": "CAT_02_DEUDAS_Y_PASIVOS",
+      "titulo": "2. Financiación, Nuevas Deudas y Pasivos (Art. 283 E.T.)",
+      "descripcion": "Verificar si la compra de los activos fue financiada con créditos bancarios o préstamos personales que no se hayan incluido en la Casilla 30.",
+      "preguntas": [
+        {
+          "id": "PREG_03_CREDITOS_BANCARIOS",
+          "texto": "¿Adquirió créditos hipotecarios, créditos de libre inversión o leasing habitacional durante el año?",
+          "documentos_requeridos": [
+            "Certificado tributario del banco o entidad financiera a 31 de diciembre",
+            "Extracto bancario del desembolso del préstamo",
+            "Tabla de amortización del crédito"
+          ],
+          "impacto_justificacion": "El saldo de la deuda a 31 de diciembre se incorpora en la Casilla 30 (Deudas), reduciendo el incremento de patrimonio líquido."
+        },
+        {
+          "id": "PREG_04_PRESTAMOS_FAMILIARES",
+          "texto": "¿Recibió préstamos de su cónyuge, familiares, socios o terceros no financieros?",
+          "documentos_requeridos": [
+            "Contrato de mutuo / pagaré con reconocimiento de firmas y FECHA CIERTA ante notario (Art. 283 E.T.)",
+            "Extracto bancario donde se evidencie el ingreso del dinero a la cuenta del contribuyente",
+            "Identificación completa y NIT del acreedor"
+          ],
+          "impacto_justificacion": "Permite registrar un pasivo válido con terceros que justifica el origen de los recursos."
+        }
+      ]
+    },
+    {
+      "id": "CAT_03_DESAHORRO_Y_RECURSOS_PREVIOS",
+      "titulo": "3. Desahorro y Liquidación de Activos Declarados Anteriormente",
+      "descripcion": "Comprobar si los fondos provinieron de ahorros en cuentas bancarias, cesantías acumuladas o venta de activos que ya formaban parte del patrimonio en años anteriores.",
+      "preguntas": [
+        {
+          "id": "PREG_05_DESAHORRO_BANCARIO",
+          "texto": "¿Utilizó saldos de cuentas de ahorro o corrientes que ya venían declarados a 31 de diciembre del año anterior?",
+          "documentos_requeridos": [
+            "Extractos bancarios a 31 de diciembre del año anterior y durante el año gravable",
+            "Declaración de renta del año anterior (Formulario 210) donde conste el saldo en Casilla 29"
+          ],
+          "impacto_justificacion": "El desahorro de recursos declarados previamente es una fuente 100% justificada que no requiere renta del año actual."
+        },
+        {
+          "id": "PREG_06_CESANTIAS_Y_CDT",
+          "texto": "¿Liquidó CDTs, fondos de inversión (FICs) o retiró cesantías acumuladas de años previos para la compra?",
+          "documentos_requeridos": [
+            "Certificado de retiro de cesantías del Fondo (Protección, Porvenir, FNA, etc.) con destino a vivienda",
+            "Constancia de cancelación o redención del CDT / FIC emitida por la entidad fiduciaria"
+          ],
+          "impacto_justificacion": "Justifica recursos líquidos de periodos anteriores aplicados a la nueva adquisición."
+        }
+      ]
+    },
+    {
+      "id": "CAT_04_CONYUGE_Y_COPROPIEDAD",
+      "titulo": "4. Estructuración Familiar & Copropiedad Conyugal (Art. 8 E.T.)",
+      "descripcion": "Verificar si el activo fue adquirido en pareja o si existió aporte económico del cónyuge.",
+      "preguntas": [
+        {
+          "id": "PREG_07_COPROPIEDAD",
+          "texto": "¿El activo fue adquirido conjuntamente con su cónyuge o compañero permanente en copropiedad / proindiviso?",
+          "documentos_requeridos": [
+            "Escritura pública donde conste el porcentaje de titularidad de cada cónyuge (ej. 50/50)",
+            "Declaración de renta del cónyuge donde incorpore su cuota parte correspondiente"
+          ],
+          "impacto_justificacion": "Divide el costo fiscal y el valor patrimonial a justificar entre ambos cónyuges."
+        },
+        {
+          "id": "PREG_08_MUTUO_CONYUGAL",
+          "texto": "¿Su cónyuge aportó los fondos pero el activo quedó 100% a nombre suyo?",
+          "documentos_requeridos": [
+            "Contrato de mutuo entre cónyuges con fecha cierta ante notaría",
+            "Registro de pasivo a favor del cónyuge en la Casilla 30 y cuenta por cobrar en la declaración de la pareja"
+          ],
+          "impacto_justificacion": "Evita la presunción de renta por comparación patrimonial y el riesgo de donación involuntaria (Art. 302 E.T.)."
+        }
+      ]
+    },
+    {
+      "id": "CAT_05_REAJUSTES_Y_VALORIZACIONES",
+      "titulo": "5. Reajustes Fiscales DANE y Variaciones sin Efectivo (Arts. 70 y 73 E.T.)",
+      "descripcion": "Comprobar si el incremento del patrimonio bruto en la Casilla 29 se debió a reajustes fiscales oficiales o valorizaciones catastrales.",
+      "preguntas": [
+        {
+          "id": "PREG_09_REAJUSTE_ART73",
+          "texto": "¿Aplicó el reajuste fiscal oficial del Art. 73 E.T. (Tabla DANE) o Art. 70 E.T. sobre inmuebles o acciones poseídos de años anteriores?",
+          "documentos_requeridos": [
+            "Cédula de cálculo del costo ajustado por Art. 73 E.T.",
+            "Escritura de adquisición del bien con el año original de compra",
+            "Certificado de avalúo catastral oficial emitido por Catastro o Agustín Codazzi"
+          ],
+          "impacto_justificacion": "El reajuste fiscal aumenta el patrimonio bruto pero se descuenta como 'Ajuste patrimonial por valorización/reajuste sin flujo de caja', no requiriendo ingresos del año."
+        }
+      ]
+    }
+  ]
+}

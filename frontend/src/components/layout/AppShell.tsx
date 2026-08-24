@@ -18,6 +18,7 @@ import { PresentacionSancionesModule } from '../modules/PresentacionSancionesMod
 import { ComponenteInflacionarioModule } from '../modules/ComponenteInflacionarioModule';
 import { ReajusteArt73Module } from '../modules/ReajusteArt73Module';
 import { InmueblesAfcModule } from '../modules/InmueblesAfcModule';
+import { TributacionParejaModule } from '../modules/TributacionParejaModule';
 import { RulesInspectorModule } from '../modules/RulesInspectorModule';
 
 export const AppShell: React.FC = () => {
@@ -47,6 +48,8 @@ export const AppShell: React.FC = () => {
         return <ReajusteArt73Module />;
       case 'inmuebles-afc':
         return <InmueblesAfcModule />;
+      case 'tributacion-pareja':
+        return <TributacionParejaModule />;
       case 'rules':
         return <RulesInspectorModule />;
       default:

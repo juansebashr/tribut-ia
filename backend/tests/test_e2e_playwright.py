@@ -1,4 +1,4 @@
-"""Suite de pruebas End-to-End (E2E) con Playwright para la interfaz web de TributIA.
+"""Suite de pruebas End-to-End (E2E) con Playwright para la interfaz web de Fiscol.
 
 Verifica de forma automatizada todos los flujos interactivos de la UI:
 - Navegación entre los 4 submódulos de Optimización:
@@ -101,7 +101,7 @@ def page_with_error_tracking(
     page.close()
 
 
-class TestTributIAEndToEnd:
+class TestFiscolEndToEnd:
     """Suite de pruebas E2E que validan la estabilidad e interactividad de la UI."""
 
     def test_app_title_and_main_structure(
@@ -112,7 +112,7 @@ class TestTributIAEndToEnd:
         page.goto(live_server_url, wait_until="domcontentloaded")
         page.wait_for_timeout(500)
 
-        assert "TributIA" in page.title()
+        assert "Fiscol" in page.title()
         # La raíz debe abrir la Landing Page
         assert page.locator(".landing-navbar").is_visible()
         assert page.locator(".landing-hero-section").is_visible()
@@ -636,13 +636,13 @@ class TestResponsiveAndMobileMode:
 
         # 1. Validar que ambos elementos estén dentro del ancho del viewport
         assert badge_box["x"] >= 0, f"Sesión sobresale a la izquierda en {device_name}"
-        assert (
-            badge_box["x"] + badge_box["width"] <= width + 5
-        ), f"Sesión sobresale a la derecha en {device_name}"
+        assert badge_box["x"] + badge_box["width"] <= width + 5, (
+            f"Sesión sobresale a la derecha en {device_name}"
+        )
         assert skill_box["x"] >= 0, f"Skill IA sobresale a la izquierda en {device_name}"
-        assert (
-            skill_box["x"] + skill_box["width"] <= width + 5
-        ), f"Skill IA sobresale a la derecha en {device_name}"
+        assert skill_box["x"] + skill_box["width"] <= width + 5, (
+            f"Skill IA sobresale a la derecha en {device_name}"
+        )
 
         # 2. Comprobar que NO haya colisión/superposición física
         # Dos cajas se solapan horizontal y verticalmente si y solo si:
@@ -653,9 +653,9 @@ class TestResponsiveAndMobileMode:
             badge_box["y"] + badge_box["height"] > skill_box["y"]
         )
 
-        assert not (
-            h_overlap and v_overlap
-        ), f"Superposición detectada en {device_name}: Badge={badge_box}, Skill={skill_box}"
+        assert not (h_overlap and v_overlap), (
+            f"Superposición detectada en {device_name}: Badge={badge_box}, Skill={skill_box}"
+        )
 
         assert len(errors) == 0, f"Errores en prueba de header móvil {device_name}: {errors}"
 

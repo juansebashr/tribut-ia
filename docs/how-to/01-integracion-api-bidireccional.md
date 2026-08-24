@@ -1,6 +1,6 @@
 # Guía How-To: Integración API Bidireccional en Tiempo Real (REST, SSE & Redis)
 
-Esta guía explica cómo integrar scripts externos, terminales o agentes de Inteligencia Artificial con **TributIA** para inyectar datos en vivo a una sesión de usuario aislada en Redis y leer el estado actual de los formularios.
+Esta guía explica cómo integrar scripts externos, terminales o agentes de Inteligencia Artificial con **Fiscol** para inyectar datos en vivo a una sesión de usuario aislada en Redis y leer el estado actual de los formularios.
 
 ---
 
@@ -78,11 +78,11 @@ print(f"Impuesto calculado en vivo: {state['calculation_results']['persona_natur
 
 ## 3. Inyección Automatizada con el Script del Skill
 
-Puedes usar el script oficial del Skill `declaracion-renta-persona-natural` (incluido en el plugin `colombian-tax-assistant`):
+Puedes usar el script oficial del Skill `declaracion-renta-persona-natural` (incluido en el plugin `fiscol-tax-assistant`):
 
 ```bash
 # Inyectar payload consolidado directamente a la sesión activa:
-python skills/declaracion-renta-persona-natural/scripts/inyectar_tributia.py payload_declaracion.json \
+python skills/declaracion-renta-persona-natural/scripts/inyectar_session.py payload_declaracion.json \
   --api-url http://localhost:8000 \
   --session-id $SESSION_ID
 ```

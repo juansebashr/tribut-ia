@@ -23,7 +23,7 @@ curl -o skills/declaracion-renta-persona-natural/SKILL.md \\
   https://raw.githubusercontent.com/juansebashr/tribut-ia/main/skills/declaracion-renta-persona-natural/SKILL.md
 
 # 3. Invocar al agente en Claude Code
-claude "Analiza los extractos bancarios en la carpeta /documentos y liquida la renta de persona natural con la skill de TributIA"`;
+claude "Analiza los extractos bancarios en la carpeta /documentos y liquida la renta de persona natural con la skill de Fiscol"`;
 
   return (
     <div className="tutorial-tab-content">
@@ -60,7 +60,7 @@ claude "Analiza los extractos bancarios en la carpeta /documentos y liquida la r
                   <span className="step-tag-pill">claude_desktop_config.json</span>
                 </div>
                 <p className="step-subtitle">
-                  Permite a la aplicación de escritorio comunicarse con el motor local de TributIA para validaciones en vivo.
+                  Permite a la aplicación de escritorio comunicarse con el motor local de Fiscol para validaciones en vivo.
                 </p>
               </div>
             </div>
@@ -134,7 +134,7 @@ claude "Analiza los extractos bancarios en la carpeta /documentos y liquida la r
                 </div>
                 <div className="checklist-item">
                   <div className="checklist-bullet">2</div>
-                  <span>Nombra el proyecto: <em>"TributIA - Contador DIAN Experto"</em>.</span>
+                  <span>Nombra el proyecto: <em>"Fiscol - Contador DIAN Experto"</em>.</span>
                 </div>
                 <div className="checklist-item">
                   <div className="checklist-bullet">3</div>
@@ -227,7 +227,7 @@ claude "Analiza los extractos bancarios en la carpeta /documentos y liquida la r
               <div className="info-badge-callout">
                 <CheckCircle2 size={18} className="text-emerald shrink-0" />
                 <span>
-                  Claude Code ejecutará automáticamente los scripts locales (<code className="font-mono">conciliar_exogena.py</code> e <code className="font-mono">inyectar_tributia.py</code>) sin enviar información confidencial a servidores externos.
+                  Claude Code ejecutará automáticamente los scripts locales (<code className="font-mono">conciliar_exogena.py</code> e <code className="font-mono">inyectar_session.py</code>) sin enviar información confidencial a servidores externos.
                 </span>
               </div>
             </div>

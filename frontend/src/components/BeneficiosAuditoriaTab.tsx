@@ -1759,7 +1759,7 @@ export const BeneficiosAuditoriaTab: React.FC<BeneficiosAuditoriaTabProps> = ({
             <ShieldCheck color="var(--success)" size={26} style={{ flexShrink: 0 }} />
             <div>
               <h4 style={{ fontWeight: 700, fontSize: '15px', color: 'var(--success)', marginBottom: '4px' }}>
-                Firmeza Acelerada en 6 o 12 Meses (Art. 689-3 E.T.)
+                Firmeza Acelerada en 6 o 12 Meses (Art. 689-3 E.T.) vs. Firmeza General (Art. 714 E.T.)
               </h4>
               <p style={{ fontSize: '13px', color: 'var(--text-muted)', lineHeight: '1.5' }}>
                 La DIAN concede firmeza definitiva (la declaración no puede ser auditada ni modificada) en solo 6 meses si se
@@ -1767,6 +1767,25 @@ export const BeneficiosAuditoriaTab: React.FC<BeneficiosAuditoriaTabProps> = ({
                 del año anterior (siempre que este último sea mayor o igual a 71 UVT).
               </p>
             </div>
+          </div>
+
+          {/* TARJETA INFORMATIVA FIRMEZA ART. 714 E.T. */}
+          <div
+            style={{
+              padding: '16px 20px',
+              borderRadius: '12px',
+              backgroundColor: 'rgba(59, 130, 246, 0.08)',
+              border: '1px solid rgba(59, 130, 246, 0.25)',
+              fontSize: '12.5px',
+              lineHeight: '1.6',
+            }}
+          >
+            <div style={{ fontWeight: 800, color: 'var(--primary)', marginBottom: '6px', fontSize: '13.5px' }}>
+              🛡️ Término General de Firmeza de la DIAN (Art. 714 E.T.)
+            </div>
+            <p style={{ color: 'var(--text-secondary)', margin: 0 }}>
+              Por regla general, la declaración de renta queda en <strong>firme a los 3 años</strong> contados a partir del vencimiento del plazo para declarar (o de la fecha de presentación si fue extemporánea). Si dentro de ese lapso la DIAN profiere y notifica un <strong>Emplazamiento para Corregir (Art. 685 E.T.)</strong> o un <strong>Requerimiento Especial (Art. 703 E.T.)</strong>, el término de firmeza se suspende o interrumpe, permitiéndole a la administración revisar a fondo y liquidar oficialmente el tributo.
+            </p>
           </div>
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '20px' }}>

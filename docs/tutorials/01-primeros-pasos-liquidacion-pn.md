@@ -1,6 +1,6 @@
 # Tutorial: Primeros Pasos Liquidando Renta de Persona Natural (F210)
 
-En este tutorial aprenderás a realizar una liquidación completa de impuesto de renta para una Persona Natural en Colombia (Año Gravable 2026 / UVT $52.350) usando TributIA.
+En este tutorial aprenderás a realizar una liquidación completa de impuesto de renta para una Persona Natural en Colombia (Año Gravable 2026 / UVT $52.350) usando Fiscol.
 
 ---
 

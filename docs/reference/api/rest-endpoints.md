@@ -1,4 +1,4 @@
-# Referencia de Endpoints REST — TributIA API (v1)
+# Referencia de Endpoints REST — Fiscol API (v1)
 
 Base URL: `http://localhost:8000/api/v1`
 
@@ -16,7 +16,7 @@ X-Session-ID: ses_9b8f2c3d4e5f6a7b
 | :--- | :--- | :--- |
 | **`X-Session-ID` (Header)** | Scripts CLI, Python, cURL, Agentes IA | Máxima prioridad. Direcciona lectura/escritura a esa sesión exacta en Redis. |
 | **`?session_id=` (Query)** | Enlaces compartidos, Navegador | Segunda prioridad. Sincroniza la URL con la sesión de Redis. |
-| **`tributia_sid` (Cookie)** | Navegador Web / Stream SSE | Tercera prioridad. Se envía automáticamente en conexiones `EventSource`. |
+| **`fiscol_sid` (Cookie)** | Navegador Web / Stream SSE | Tercera prioridad. Se envía automáticamente en conexiones `EventSource`. |
 | **Auto-Generación** | Usuario nuevo sin sesión | Genera un UUIDv4 seguro (`ses_...`) y setea la cookie con TTL de 24 horas. |
 
 ---
@@ -117,7 +117,7 @@ Canal de streaming Server-Sent Events (SSE) al que se conecta el navegador para 
 
 **Headers**:
 - `Accept: text/event-stream`
-- Cookie `tributia_sid` automática o query param `?session_id=...`.
+- Cookie `fiscol_sid` automática o query param `?session_id=...`.
 
 **Formato de Eventos SSE**:
 
@@ -163,6 +163,32 @@ Calcula la depuración de Renta para Personas Naturales (Cédula General, Gananc
 
 ---
 
+### `POST /persona-natural/comparacion-patrimonial`
+
+Evalúa la justificación patrimonial (Arts. 236 y 237 E.T.) y calcula si existe presunción de Renta Líquida Gravable por Comparación Patrimonial e impuesto estimado (Art. 241 E.T.).
+
+**Payload Request**:
+
+```json
+{
+  "tax_year": 2026,
+  "patrimonio_liquido_ano_anterior": 180000000.0,
+  "patrimonio_bruto_ano_actual": 520000000.0,
+  "deudas_ano_actual": 220000000.0,
+  "reajustes_fiscales_activos_fijos": 20000000.0,
+  "renta_liquida_ordinaria_cedula_general": 90000000.0,
+  "rentas_exentas_totales": 22000000.0,
+  "ingresos_no_constitutivos_renta": 9000000.0,
+  "nuevas_deudas_adquiridas_en_el_ano": 120000000.0,
+  "desahorro_o_liquidacion_activos_anteriores": 30000000.0,
+  "impuesto_renta_y_ganancia_ocasional_pagado": 10000000.0,
+  "retenciones_fuente_asumidas_en_el_ano": 4000000.0,
+  "gastos_personales_y_consumo_estimado": 48000000.0
+}
+```
+
+---
+
 ## 3. Módulo de Reglas y Parámetros (`/rules`)
 
 - `GET /rules/years`: Lista de años gravables disponibles (`[2022, 2024, 2025, 2026]`).
@@ -180,6 +206,7 @@ Calcula la depuración de Renta para Personas Naturales (Cédula General, Gananc
 - `POST /beneficios/simular-auditoria`: Simulación del beneficio de auditoría (Art. 689-3 E.T.) para firmeza en 6 meses ($\ge 35\%$) o 12 meses ($\ge 25\%$) y verificación del piso de 71 UVT.
 - `POST /beneficios/calcular-sancion`: Liquidación integral de sanciones por corrección (Art. 644) o extemporaneidad (Art. 641), aplicando rebajas por favorabilidad (Art. 640) y control de sanción mínima de 10 UVT (Art. 639).
 - `POST /beneficios/simular-reduccion-sancion`: Reducción de sanciones tributarias por corrección voluntaria y principio de favorabilidad/gradualidad (Art. 640 E.T.).
+- `POST /beneficios/simular-tributacion-pareja`: Simulación de planeación conyugal, distribución de rentas en copropiedad 50/50, optimización de dependientes/vivienda y control de riesgos patrimoniales (Arts. 8, 119, 236, 241 y 387 E.T.).
 
 ---
 
@@ -206,4 +233,4 @@ Retorna el dataset de demostración precargado de 8 transacciones certificadas p
 
 ### `GET /reconciliation/template`
 
-Descarga la plantilla CSV oficial (`plantilla_transacciones_tributia.csv`) con los encabezados requeridos para diligenciar transacciones.
+Descarga la plantilla CSV oficial (`plantilla_transacciones_fiscol.csv`) con los encabezados requeridos para diligenciar transacciones.

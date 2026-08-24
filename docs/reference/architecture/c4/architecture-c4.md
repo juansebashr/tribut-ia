@@ -1,27 +1,27 @@
-# Arquitectura C4 — TributIA
+# Arquitectura C4 — Fiscol
 
-Este documento define la estructura y diseño arquitectónico de **TributIA** usando el modelo C4 de Simon Brown (Nivel 1: Contexto, Nivel 2: Contenedores, Nivel 3: Componentes).
+Este documento define la estructura y diseño arquitectónico de **Fiscol** usando el modelo C4 de Simon Brown (Nivel 1: Contexto, Nivel 2: Contenedores, Nivel 3: Componentes).
 
 ---
 
 ## 1. Nivel 1: Diagrama de Contexto del Sistema (C1)
 
-El diagrama de contexto muestra la interacción de TributIA con los diferentes usuarios, agentes externos y normatividad legal de la DIAN.
+El diagrama de contexto muestra la interacción de Fiscol con los diferentes usuarios, agentes externos y normatividad legal de la DIAN.
 
 ```mermaid
 C4Context
-title Diagrama de Contexto del Sistema (C1) - TributIA
+title Diagrama de Contexto del Sistema (C1) - Fiscol
 
 Person(user, "Contribuyente / Contador", "Usuario humano que liquida sus impuestos, simula escenarios y consulta el calendario.")
 Person(agent, "Agente Autónomo / Script IA", "Cliente automatizado que inyecta datos y consulta el estado de la UI en tiempo real vía Header X-Session-ID.")
 
-System(tributia, "TributIA Platform", "Suite tributaria colombiana de liquidación automatizada (F210, F110, TTD 15%), persistencia en Redis y sincronización SSE.")
+System(fiscol, "Fiscol Platform", "Suite tributaria colombiana de liquidación automatizada (F210, F110, TTD 15%), persistencia en Redis y sincronización SSE.")
 
 System_Ext(dian, "DIAN (Normatividad Legal)", "Estatuto Tributario, Resoluciones UVT y Calendarios de Vencimientos.")
 
-Rel(user, tributia, "Usa la interfaz web, diligencia valores y recibe updates en vivo", "HTTPS (Cookie tributia_sid)")
-Rel(agent, tributia, "Inyecta estado vía API REST y escucha SSE", "HTTP / X-Session-ID")
-Rel(tributia, dian, "Aplica fórmulas exactas de Ley 2277/2022 y Art. 241 E.T.", "Reglas")
+Rel(user, fiscol, "Usa la interfaz web, diligencia valores y recibe updates en vivo", "HTTPS (Cookie fiscol_sid)")
+Rel(agent, fiscol, "Inyecta estado vía API REST y escucha SSE", "HTTP / X-Session-ID")
+Rel(fiscol, dian, "Aplica fórmulas exactas de Ley 2277/2022 y Art. 241 E.T.", "Reglas")
 ```
 
 ---
@@ -32,12 +32,12 @@ Muestra los bloques ejecutables y tecnologías que conforman la solución en **G
 
 ```mermaid
 C4Container
-title Diagrama de Contenedores (C2) - TributIA
+title Diagrama de Contenedores (C2) - Fiscol
 
 Person(user, "Usuario / Contador", "Navegador Web")
 Person(agent, "Agente / API Client", "cURL / Python (X-Session-ID)")
 
-Container_Boundary(c1, "TributIA en GCP Cloud Run") {
+Container_Boundary(c1, "Fiscol en GCP Cloud Run") {
     Container(spa, "Single Page Application (SPA)", "HTML5, Vanilla CSS, Modern JavaScript", "Interfaz reactiva con Formulario 210, termómetro marginal 7 tramos y badge de sesión.")
     Container(api, "Backend API & Tax Engine", "Python 3.11+, FastAPI, Pydantic v2, Uvicorn", "Servicios REST, motor de reglas, sesión distribuida y streaming SSE.")
     ContainerDb(rules, "Tax Rules Store", "JSON Files (versionados 2022-2026)", "Parámetros de UVT, topes de rentas exentas, tablas marginales y tarifas.")
@@ -64,7 +64,7 @@ C4Component
 title Diagrama de Componentes (C3) - Backend FastAPI
 
 Container_Boundary(backend, "FastAPI Backend Application") {
-    Component(session_dep, "Session Resolver Dependency", "FastAPI Depends", "Resuelve session_id por Header X-Session-ID, Query o Cookie tributia_sid.")
+    Component(session_dep, "Session Resolver Dependency", "FastAPI Depends", "Resuelve session_id por Header X-Session-ID, Query o Cookie fiscol_sid.")
     Component(router, "API Router (v1)", "FastAPI APIRouter", "Expone rutas de cálculo, reglas, beneficios, calendario y sesión.")
     Component(session_store, "RedisSessionStore / InMemorySessionStore", "Python Service (SessionStoreBase)", "Persistencia con TTL de 1 día, rolling refresh y Pub/Sub broadcaster.")
     Component(engine_pn, "Motor Persona Natural", "Python Service (Liquidación PN)", "Calcula Cédula General, 25% exenta, topes 1.340 UVT, F210 y Art. 241.")

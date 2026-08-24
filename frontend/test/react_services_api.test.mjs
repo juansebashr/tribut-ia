@@ -140,10 +140,75 @@ test('React API Service - simularComparativaSimple', async () => {
 
   const res = await fetch('http://localhost:8000/api/v1/calculate/regimen-simple/comparativa', {
     method: 'POST',
-    body: JSON.stringify({ tax_year: 2026, ingresos_brutos_anuales: 600000000 })
+    body: JSON.stringify({ tax_year: 2026, ingresos_brutos_anuales: 600000000 }),
   });
   const data = await res.json();
   assert.equal(data.regimen_recomendado, 'Recomendado: Régimen SIMPLE (F-260)');
   assert.equal(data.ahorro_tributario_neto_cop, 45000000);
 });
+
+test('React API Service - calcularComparacionPatrimonial', async () => {
+  const mockComparacion = {
+    tax_year: 2026,
+    patrimonio_liquido_ano_anterior: 180000000,
+    patrimonio_liquido_ano_actual: 300000000,
+    variacion_patrimonial_bruta: 120000000,
+    incremento_patrimonial_a_justificar: 100000000,
+    total_rentas_justificativas: 271000000,
+    capacidad_justificacion_neta: 209000000,
+    diferencia_no_justificada: 0,
+    existe_renta_por_comparacion_patrimonial: false,
+    estado_patrimonial: 'JUSTIFICADO_CORRECTAMENTE',
+    porcentaje_justificacion: 100.0,
+  };
+  globalThis.fetch = async (url) => ({
+    ok: true,
+    json: async () => mockComparacion,
+  });
+
+  const res = await fetch('http://localhost:8000/api/v1/persona-natural/comparacion-patrimonial', {
+    method: 'POST',
+    body: JSON.stringify({
+      tax_year: 2026,
+      patrimonio_liquido_ano_anterior: 180000000,
+      patrimonio_bruto_ano_actual: 520000000,
+      deudas_ano_actual: 220000000,
+    }),
+  });
+  const data = await res.json();
+  assert.equal(data.estado_patrimonial, 'JUSTIFICADO_CORRECTAMENTE');
+  assert.equal(data.diferencia_no_justificada, 0);
+  assert.equal(data.porcentaje_justificacion, 100.0);
+});
+
+test('React API Service - simularTributacionPareja', async () => {
+  const mockPareja = {
+    tax_year: 2026,
+    uvt_value: 52350,
+    ahorro_tributario_familiar_neto_cop: 18500000,
+    porcentaje_ahorro_familiar_pct: 35.5,
+    analisis_riesgo_patrimonial: {
+      riesgo_comparacion_patrimonial_conyuge_titular: false,
+      monto_desajuste_potencial_cop: 0,
+      diagnostico_legal: 'ESTRUCTURA BLINDADA',
+    },
+  };
+  globalThis.fetch = async (url) => ({
+    ok: true,
+    json: async () => mockPareja,
+  });
+
+  const res = await fetch('http://localhost:8000/api/v1/beneficios/simular-tributacion-pareja', {
+    method: 'POST',
+    body: JSON.stringify({
+      tax_year: 2026,
+      rentas_capital_conjuntas_arriendos_intereses: 60000000,
+    }),
+  });
+  const data = await res.json();
+  assert.equal(data.ahorro_tributario_familiar_neto_cop, 18500000);
+  assert.equal(data.porcentaje_ahorro_familiar_pct, 35.5);
+  assert.equal(data.analisis_riesgo_patrimonial.diagnostico_legal, 'ESTRUCTURA BLINDADA');
+});
+
 

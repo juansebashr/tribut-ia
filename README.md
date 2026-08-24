@@ -1,15 +1,15 @@
-# TributIA Colombia — Suite Tributaria & Motor de Liquidación DIAN 2026
+# Fiscol Colombia — Suite Tributaria & Motor de Liquidación DIAN 2026
 
 [![Python](https://img.shields.io/badge/Python-3.11%20%7C%203.12%20%7C%203.14-blue?logo=python&logoColor=white)](https://python.org)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.115+-009688?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com)
 [![Redis](https://img.shields.io/badge/Redis-Session%20Store%20%7C%20PubSub-red?logo=redis&logoColor=white)](https://redis.io)
 [![GCP Cloud Run](https://img.shields.io/badge/GCP-Cloud%20Run%20Ready-4285F4?logo=googlecloud&logoColor=white)](https://cloud.google.com/run)
-[![Tests](https://img.shields.io/badge/Pytest-35%20Passed-brightgreen?logo=pytest&logoColor=white)](https://pytest.org)
+[![Tests](https://img.shields.io/badge/Pytest-100%20Passed-brightgreen?logo=pytest&logoColor=white)](https://pytest.org)
 [![Documentation](https://img.shields.io/badge/Docs-Diátaxis%20N3%20%7C%20C4%20Architecture-purple)](./docs/)
 [![Architecture Decisions](https://img.shields.io/badge/ADRs-Nygard%20Format-orange)](./docs/decisions/)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-**TributIA** es una plataforma profesional y API de liquidación, depuración y auditoría tributaria para Colombia. Integra un motor de reglas desacoplado por año gravable (Ley 2277 de 2022 / UVT 2026), sincronización bidireccional reactiva en tiempo real (API ↔ UI vía SSE y Redis Pub/Sub), persistencia en memoria RAM con TTL de 1 día, simulación de la Tasa Mínima de Tributación (TTD 15%), Termómetro Progresivo (Art. 241 E.T.) y Calendario Tributario con algoritmo Módulo 11 para NITs.
+**Fiscol** es una plataforma profesional y API de liquidación, depuración y auditoría tributaria para Colombia. Integra un motor de reglas desacoplado por año gravable (Ley 2277 de 2022 / UVT 2026), sincronización bidireccional reactiva en tiempo real (API ↔ UI vía SSE y Redis Pub/Sub), persistencia en memoria RAM con TTL de 1 día, simulación de la Tasa Mínima de Tributación (TTD 15%), Termómetro Progresivo (Art. 241 E.T.) y Calendario Tributario con algoritmo Módulo 11 para NITs.
 
 Diseñada tanto para contadores y contribuyentes como para **Agentes de Inteligencia Artificial Autónomos (AI Skills / MCP)** con aislamiento de sesión de alta seguridad sin requerir login (`X-Session-ID`).
 
@@ -38,7 +38,7 @@ La documentación completa del proyecto se encuentra en el directorio [`docs/`](
   - [Flowchart: Límites Conjuntos Art. 336 (40% / 1.340 UVT)](./docs/reference/architecture/flow/flow-cedula-general-deductions.md)
   - [Modelo ERD de Sesión](./docs/reference/architecture/erd/session-state-model.md)
 - **[Explicaciones Conceptuales](./docs/explanation/)**:
-  - [Arquitectura del Sistema TributIA](./docs/explanation/01-arquitectura-sistema-tributia.md)
+  - [Arquitectura del Sistema Fiscol](./docs/explanation/01-arquitectura-sistema-fiscol.md)
   - [El Sistema Cedular en Colombia](./docs/explanation/02-sistema-cedular-colombiano.md)
   - [Desmitificando el Salto de Tramo Marginal](./docs/explanation/03-mito-tributario-tarifas-marginales.md)
 - **[Decisiones de Arquitectura (ADRs)](./docs/decisions/README.md)**:

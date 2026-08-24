@@ -98,7 +98,7 @@ export const HeaderBar: React.FC = () => {
         };
       default:
         return {
-          breadcrumb: 'TRIBUTIA / COLOMBIA',
+          breadcrumb: 'FISCOL / COLOMBIA',
           title: 'Suite Tributaria Profesional DIAN',
           hasSubTabs: false,
         };
@@ -159,6 +159,13 @@ export const HeaderBar: React.FC = () => {
             onClick={() => navigateTo('pn', 'conciliacion')}
           >
             <span>📑</span> Conciliación Exógena & CSV
+          </button>
+          <button
+            className={`sub-tab-btn ${activeSubTab === 'comparacion_patrimonial' ? 'active' : ''}`}
+            id="sub-tab-btn-pn-comparacion"
+            onClick={() => navigateTo('pn', 'comparacion_patrimonial')}
+          >
+            <span>⚖️</span> Comparación Patrimonial (Art. 236)
           </button>
         </div>
       )}

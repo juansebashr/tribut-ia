@@ -1,5 +1,9 @@
 from fastapi import APIRouter
 
+from app.models.tributacion_pareja import (
+    TributacionParejaRequest,
+    TributacionParejaResponse,
+)
 from app.services.beneficios import (
     AjusteArticulo73Item,
     BeneficioAuditoriaRequest,
@@ -29,6 +33,7 @@ from app.services.beneficios import (
     get_tabla_componente_inflacionario,
     simular_combinabilidad_inflacion_art73,
 )
+from app.services.tributacion_pareja import simular_tributacion_pareja
 
 router = APIRouter()
 
@@ -135,3 +140,13 @@ async def simular_sancion(payload: ReduccionSancionRequest):
 )
 async def simular_inmueble_afc(payload: SimulacionInmuebleAfcRequest):
     return calcular_exencion_inmueble_afc(payload)
+
+
+@router.post(
+    "/simular-tributacion-pareja",
+    response_model=TributacionParejaResponse,
+    summary="Simular Planeación Conyugal y Tributación en Pareja (Arts. 8, 119, 236, 241, 302 y 387 E.T.)",
+    description="Calcula el ahorro tributario familiar mediante la distribución estratégica de rentas de capital (copropiedad proindiviso 50/50), deducciones de vivienda y dependientes, y evalúa riesgos de inconsistencia patrimonial o donaciones involuntarias.",
+)
+async def simular_tributacion_pareja_endpoint(payload: TributacionParejaRequest):
+    return simular_tributacion_pareja(payload)

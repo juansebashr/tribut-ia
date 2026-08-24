@@ -1,6 +1,6 @@
 # Cómo Simular el Reajuste Fiscal de Activos Fijos (Art. 73 E.T.)
 
-Esta guía práctica explica cómo utilizar el simulador y la API de TributIA para determinar el **costo fiscal ajustado** y optimizar legalmente el impuesto de Ganancia Ocasional o Renta al enajenar bienes raíces, acciones o aportes en sociedades adquiridos desde 1955.
+Esta guía práctica explica cómo utilizar el simulador y la API de Fiscol para determinar el **costo fiscal ajustado** y optimizar legalmente el impuesto de Ganancia Ocasional o Renta al enajenar bienes raíces, acciones o aportes en sociedades adquiridos desde 1955.
 
 ---
 
@@ -29,7 +29,7 @@ La tabla oficial cubre 4 tipologías de activos desde el año 1955 hasta 2024:
 ### Petición HTTP (`POST /api/v1/beneficios/simular-articulo-73`)
 
 ```bash
-curl -X POST "https://tributia-31954329640.us-central1.run.app/api/v1/beneficios/simular-articulo-73" \
+curl -X POST "https://fiscol-31954329640.us-central1.run.app/api/v1/beneficios/simular-articulo-73" \
      -H "Content-Type: application/json" \
      -d '{
        "ano_adquisicion": "2015",

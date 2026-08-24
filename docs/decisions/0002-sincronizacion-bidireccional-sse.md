@@ -6,7 +6,7 @@
 
 ## Contexto
 
-Se requería que la plataforma TributIA pudiera ser controlada de forma remota por agentes de inteligencia artificial y scripts de prueba, permitiendo inyectar datos en vivo que se reflejaran instantáneamente en el navegador del usuario y, a la inversa, permitir a los scripts consultar el estado exacto de lo que el usuario está viendo en pantalla.
+Se requería que la plataforma Fiscol pudiera ser controlada de forma remota por agentes de inteligencia artificial y scripts de prueba, permitiendo inyectar datos en vivo que se reflejaran instantáneamente en el navegador del usuario y, a la inversa, permitir a los scripts consultar el estado exacto de lo que el usuario está viendo en pantalla.
 
 ## Decisión
 

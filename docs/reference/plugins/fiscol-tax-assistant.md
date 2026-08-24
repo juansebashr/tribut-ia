@@ -1,13 +1,13 @@
-# Plugin: `colombian-tax-assistant`
+# Plugin: `fiscol-tax-assistant`
 
-El plugin **`colombian-tax-assistant`** es el paquete principal de extensiones, herramientas y agentes autónomos especializados en la normativa fiscal de la República de Colombia para el ecosistema **TributIA**.
+El plugin **`fiscol-tax-assistant`** es el paquete principal de extensiones, herramientas y agentes autónomos especializados en la normativa fiscal de la República de Colombia para el ecosistema **Fiscol**.
 
 ---
 
 ## 1. Estructura del Plugin
 
 ```text
-colombian-tax-assistant/
+fiscol-tax-assistant/
 ├── .claude-plugin/
 │   └── plugin.json                    # Manifiesto y registro de habilidades
 └── skills/
@@ -17,7 +17,8 @@ colombian-tax-assistant/
         ├── scripts/
         │   ├── conciliar_exogena.py   # Motor CLI de cruce con Exógena DIAN
         │   ├── consolidar_transacciones.py # Validador y generador de payload API
-        │   └── inyectar_tributia.py   # Cliente de sincronización bidireccional
+        │   ├── inyectar_session.py    # Cliente de sincronización bidireccional
+        │   └── inyectar_tributia.py   # Alias de compatibilidad
         └── templates/
             └── transacciones_template.csv # Plantilla estándar de transacciones
 ```
@@ -38,5 +39,5 @@ Para agentes autónomos o entornos de desarrollo asistido:
 
 ```bash
 # Invocación en CLI o prompt
-"Usa el skill declaracion-renta-persona-natural del plugin colombian-tax-assistant para analizar mi carpeta de certificados 2025"
+"Usa el skill declaracion-renta-persona-natural del plugin fiscol-tax-assistant para analizar mi carpeta de certificados 2025"
 ```

@@ -21,10 +21,11 @@ export type ModuleType =
   | 'inflacionario'
   | 'art73'
   | 'inmuebles-afc'
+  | 'tributacion-pareja'
   | 'rules'
   | 'session-sync';
 
-export type PnSubTab = 'calc' | 'f210' | 'marginal' | 'conciliacion';
+export type PnSubTab = 'calc' | 'f210' | 'marginal' | 'conciliacion' | 'comparacion_patrimonial';
 
 export interface ToastMessage {
   id: string;
@@ -102,7 +103,10 @@ const AppContext = createContext<AppContextType | undefined>(undefined);
 export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   // Theme state with localStorage and media query fallback
   const [theme, setThemeState] = useState<'light' | 'dark'>(() => {
-    const saved = typeof window !== 'undefined' ? localStorage.getItem('tributia-theme') : null;
+    const saved =
+      typeof window !== 'undefined'
+        ? localStorage.getItem('fiscol-theme') || localStorage.getItem('tributia-theme')
+        : null;
     if (saved === 'dark' || saved === 'light') return saved;
     if (typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
       return 'dark';
@@ -113,7 +117,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
     try {
-      localStorage.setItem('tributia-theme', theme);
+      localStorage.setItem('fiscol-theme', theme);
     } catch {
       // ignore storage errors
     }

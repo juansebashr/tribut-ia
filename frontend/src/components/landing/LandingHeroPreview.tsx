@@ -15,7 +15,7 @@ export const LandingHeroPreview: React.FC = () => {
           </div>
           <div className="hero-preview-title">
             <ShieldCheck size={15} className="hero-preview-icon" />
-            <span>TributIA Core Engine — Liquidación Auditada en Vivo (2025/2026)</span>
+            <span>Fiscol Core Engine — Liquidación Auditada en Vivo (2025/2026)</span>
           </div>
           <div className="hero-preview-badge">
             <span className="live-indicator" />
@@ -94,7 +94,7 @@ export const LandingHeroPreview: React.FC = () => {
               <div className="terminal-body">
                 <div className="terminal-line prompt">
                   <span className="terminal-prompt">$</span>
-                  <span className="terminal-cmd">tributia conciliar --docs ./renta2025</span>
+                  <span className="terminal-cmd">fiscol conciliar --docs ./renta2025</span>
                 </div>
                 <div className="terminal-line info">
                   <CheckCircle2 size={13} className="text-emerald shrink-0" />

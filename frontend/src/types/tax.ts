@@ -796,3 +796,124 @@ export interface SimulacionCombinabilidadResponse {
   conclusion_juridica: string;
   advertencia_art70_vs_art73: string;
 }
+
+export interface ComparacionPatrimonialRequest {
+  tax_year: number;
+  custom_uvt?: number;
+  patrimonio_liquido_ano_anterior: number;
+  patrimonio_bruto_ano_actual: number;
+  deudas_ano_actual: number;
+  reajustes_fiscales_activos_fijos: number;
+  valorizaciones_nominales_o_revalorizaciones: number;
+  desvalorizaciones_o_castigos_nominales: number;
+  renta_liquida_ordinaria_cedula_general: number;
+  rentas_liquidas_pensiones_y_dividendos: number;
+  rentas_exentas_totales: number;
+  ingresos_no_constitutivos_renta: number;
+  ganancia_ocasional_neta: number;
+  ingresos_no_gravados_o_recibidos_exterior: number;
+  nuevas_deudas_adquiridas_en_el_ano: number;
+  desahorro_o_liquidacion_activos_anteriores: number;
+  impuesto_renta_y_ganancia_ocasional_pagado: number;
+  retenciones_fuente_asumidas_en_el_ano: number;
+  gastos_personales_y_consumo_estimado: number;
+  perdidas_extraordinarias_no_deducibles: number;
+}
+
+export interface ComparacionPatrimonialResponse {
+  tax_year: number;
+  uvt_value: number;
+  patrimonio_liquido_ano_anterior: number;
+  patrimonio_bruto_ano_actual: number;
+  deudas_ano_actual: number;
+  patrimonio_liquido_ano_actual: number;
+  variacion_patrimonial_bruta: number;
+  ajustes_patrimoniales_netos: number;
+  incremento_patrimonial_a_justificar: number;
+  total_rentas_justificativas: number;
+  total_detracciones_consumos: number;
+  capacidad_justificacion_neta: number;
+  diferencia_no_justificada: number;
+  existe_renta_por_comparacion_patrimonial: boolean;
+  renta_liquida_gravable_adicional_cop: number;
+  renta_liquida_gravable_adicional_uvt: number;
+  impuesto_estimado_comparacion_patrimonial_cop: number;
+  estado_patrimonial: 'JUSTIFICADO_CORRECTAMENTE' | 'ALERTA_DESAJUSTE_PATRIMONIAL';
+  porcentaje_justificacion: number;
+  explicacion_didactica: string;
+  recomendaciones_defensa_dian: string[];
+  audit_trace: AuditTraceItem[];
+}
+
+export interface ConyugeFinanzasInput {
+  nombre: string;
+  ingresos_laborales_anuales: number;
+  aportes_seguridad_social_salud_pension: number;
+  tiene_dependiente_general_387: boolean;
+  numero_dependientes_adicionales_72uvt: number;
+  otras_deducciones_y_exentas_cedula_general: number;
+}
+
+export interface TributacionParejaRequest {
+  tax_year: number;
+  custom_uvt?: number;
+  conyuge_a: ConyugeFinanzasInput;
+  conyuge_b: ConyugeFinanzasInput;
+  rentas_capital_conjuntas_arriendos_intereses: number;
+  costos_procedentes_rentas_capital: number;
+  intereses_credito_vivienda_conjunto_anual: number;
+  valor_activo_adquirido_en_el_ano: number;
+  esquema_adquisicion_activo:
+    | 'TITULARIDAD_EXCLUSIVA_SIN_FONDOS'
+    | 'COPROPIEDAD_PROINDIVISO_50_50'
+    | 'MUTUO_PRESTAMO_CON_FECHA_CIERTA';
+  distribucion_intereses_vivienda: '50_50' | '100_CONYUGE_A' | '100_CONYUGE_B';
+}
+
+export interface LiquidacionIndividualConyuge {
+  nombre: string;
+  ingresos_laborales_netos: number;
+  rentas_capital_asignadas: number;
+  costos_capital_asignados: number;
+  renta_bruta_cedula_general: number;
+  total_deducciones_y_exentas_aplicadas: number;
+  renta_liquida_gravable_cop: number;
+  renta_liquida_gravable_uvt: number;
+  impuesto_renta_determinado_cop: number;
+  tarifa_marginal_maxima_aplicada_pct: number;
+  tarifa_efectiva_tributacion_pct: number;
+  tramo_cero_uvt_aprovechado: number;
+}
+
+export interface EscenarioTributarioPareja {
+  nombre_escenario: string;
+  descripcion: string;
+  conyuge_a: LiquidacionIndividualConyuge;
+  conyuge_b: LiquidacionIndividualConyuge;
+  total_impuesto_familiar_cop: number;
+  total_renta_gravable_familiar_cop: number;
+  tarifa_efectiva_familiar_pct: number;
+}
+
+export interface AnalisisRiesgoPatrimonialConyugal {
+  riesgo_comparacion_patrimonial_conyuge_titular: boolean;
+  monto_desajuste_potencial_cop: number;
+  riesgo_donacion_involuntaria_art302: boolean;
+  impuesto_ganancia_ocasional_donacion_cop: number;
+  diagnostico_legal: string;
+  solucion_recomendada: string;
+}
+
+export interface TributacionParejaResponse {
+  tax_year: number;
+  uvt_value: number;
+  escenario_no_optimizado: EscenarioTributarioPareja;
+  escenario_optimizado: EscenarioTributarioPareja;
+  ahorro_tributario_familiar_neto_cop: number;
+  porcentaje_ahorro_familiar_pct: number;
+  analisis_riesgo_patrimonial: AnalisisRiesgoPatrimonialConyugal;
+  estrategias_aplicadas: string[];
+  recomendaciones_legales_y_formales: string[];
+  audit_trace: AuditTraceItem[];
+}
+

@@ -1,14 +1,14 @@
 # ADR 0006: Sistema Responsivo, Menú Off-Canvas y Modo Mobile
 
 **Fecha:** 2026-08-20  
-**Estado:** Aceptado  
-**Contexto:** TributIA Suite Tributaria DIAN  
+**Estado:** Aprobado / Implementado  
+**Contexto:** Fiscol Suite Tributaria DIAN  
 
 ---
 
-## 1. Contexto y Problema
+## 1. Contexto y Problemática
 
-TributIA nació como una plataforma contable y pedagógica de alta densidad de información (formularios de múltiples casillas, tablas de depuración cedular, simuladores en vivo y calendarios tributarios). Originalmente, la interfaz estaba optimizada principalmente para monitores de escritorio de alta resolución (`>= 1440px`).
+Fiscol nació como una plataforma contable y pedagógica de alta densidad de información (formularios de múltiples casillas, tablas de depuración cedular, simuladores en vivo y calendarios tributarios). Originalmente, la interfaz estaba optimizada principalmente para monitores de escritorio de alta resolución (`>= 1440px`).
 
 Al ser utilizada en **laptops (1024px – 1366px)** con el menú lateral extendido o en **dispositivos móviles (smartphones y tablets de 375px a 768px)**, se evidenciaron los siguientes retos de experiencia de usuario:
 1. Desbordamiento horizontal del documento global (`scrollWidth > innerWidth`), generando barras de desplazamiento dobles indeseadas.

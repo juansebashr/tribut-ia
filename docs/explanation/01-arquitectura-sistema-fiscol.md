@@ -1,6 +1,6 @@
-# Explicación: Arquitectura del Sistema TributIA
+# Explicación: Arquitectura del Sistema Fiscol
 
-Este documento expone la filosofía de diseño, principios de ingeniería y decisiones técnicas fundamentales detrás de la plataforma **TributIA**.
+Este documento expone la filosofía de diseño, principios de ingeniería y decisiones técnicas fundamentales detrás de la plataforma **Fiscol**.
 
 ---
 
@@ -13,7 +13,7 @@ Este documento expone la filosofía de diseño, principios de ingeniería y deci
    Las sesiones activas se persisten en Redis (`session:{session_id}`) con un TTL de 86.400 segundos (24 horas) y renovación continua (*sliding expiration*). Esto garantiza compatibilidad nativa con contenedores *stateless* y escalamiento horizontal de 0 a N instancias en **GCP Cloud Run**.
 
 3. **Aislamiento de Sesión por Dispositivo sin Login (Zero-Login Pattern)**:
-   El usuario no requiere autenticación ni registro. Al ingresar a la web, el sistema auto-asigna una cookie de sesión criptográfica de alta entropía (`tributia_sid=ses_...`). Los scripts externos y agentes IA pueden interactuar con la misma sesión mediante la cabecera estándar `X-Session-ID: ses_...`.
+   El usuario no requiere autenticación ni registro. Al ingresar a la web, el sistema auto-asigna una cookie de sesión criptográfica de alta entropía (`fiscol_sid=ses_...`). Los scripts externos y agentes IA pueden interactuar con la misma sesión mediante la cabecera estándar `X-Session-ID: ses_...`.
 
 4. **Sincronización Bidireccional Reactiva (API ↔ UI vía SSE & Redis Pub/Sub)**:
    Cualquier mutación generada desde la API o un Agente IA se publica en el canal Redis `session:{id}:events` y se retransmite instantáneamente a la pantalla del usuario vía Server-Sent Events (SSE).
@@ -33,12 +33,12 @@ graph TB
     subgraph Clientes["Clientes & Fuentes de Entrada"]
         USER["👤 Contribuyente / Contador (Navegador)"]
         AGENT["🤖 Agente IA Autónomo (Skill / MCP)"]
-        CLI["💻 Script CLI (inyectar_tributia.py)"]
+        CLI["💻 Script CLI (inyectar_session.py)"]
     end
 
     subgraph Edge["GCP Cloud Run - Capa Web & API"]
         INGRESS["Cloud Run Ingress (Port 8080)"]
-        MIDDLEWARE["FastAPI Session Resolver<br/>(Header X-Session-ID / Cookie tributia_sid)"]
+        MIDDLEWARE["FastAPI Session Resolver<br/>(Header X-Session-ID / Cookie fiscol_sid)"]
         ROUTER["FastAPI REST Router (/api/v1)"]
         SSE_EP["SSE Stream (/api/v1/session/events)"]
     end
@@ -56,7 +56,7 @@ graph TB
         REDIS_PUBSUB["session:{id}:events (Pub/Sub Channel)"]
     end
 
-    USER -- "Navega con Cookie tributia_sid" --> INGRESS
+    USER -- "Navega con Cookie fiscol_sid" --> INGRESS
     AGENT -- "POST con Header X-Session-ID" --> INGRESS
     CLI -- "POST con Header X-Session-ID" --> INGRESS
 
@@ -85,6 +85,6 @@ graph TB
 - **Prevención de Condiciones de Carrera**:
   Al sincronizar desde la UI hacia el backend, se utiliza un *debounce* de 400ms y un flag `isApplyingRemoteState` que previene bucles infinitos de eco entre SSE y REST.
 - **Respaldo Local (`localStorage`)**:
-  Cada modificación se respalda instantáneamente en el almacenamiento del navegador (`tributia_draft_ses_...`). Si el usuario recarga la página o sufre un corte de red, el borrador se restaura al instante.
+  Cada modificación se respalda instantáneamente en el almacenamiento del navegador (`fiscol_draft_ses_...`). Si el usuario recarga la página o sufre un corte de red, el borrador se restaura al instante.
 - **Guardarraíles ante Acciones Destructivas**:
   Acciones como *"Importar JSON"* o *"Limpiar Formulario"* ejecutan validaciones previas para desplegar un modal de confirmación antes de sobreescribir datos reales.

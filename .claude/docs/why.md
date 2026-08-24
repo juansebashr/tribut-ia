@@ -1,8 +1,8 @@
-# Propósito y Fundamento del Proyecto (Why TributIA Exists)
+# Propósito y Fundamento del Proyecto (Why Fiscol Exists)
 
 ## 1. Propósito del Proyecto
 
-TributIA dota a la inteligencia artificial de capacidades para actuar como un contador público y pedagógico bajo la normativa fiscal colombiana (Estatuto Tributario Nacional y Ley 2277 de 2022). El sistema se articula en dos componentes principales:
+Fiscol dota a la inteligencia artificial de capacidades para actuar como un contador público y pedagógico bajo la normativa fiscal colombiana (Estatuto Tributario Nacional y Ley 2277 de 2022). El sistema se articula en dos componentes principales:
 
 1. Una aplicación web interactiva que sirve como calculadora fiscal, visualizador y herramienta didáctica para simular, ajustar y entender cada renglón de la liquidación.
 2. Un plugin de agentes y habilidades (skills) autónomas para procesar soportes contables, conciliar información exógena de la DIAN y clasificar movimientos financieros en las cédulas correspondientes.

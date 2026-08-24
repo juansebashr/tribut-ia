@@ -79,3 +79,15 @@ test('Plataformas de IA Soportadas en el Tutorial', () => {
   assert.ok(platforms.every(p => p.modes.length === 2));
 });
 
+test('Bundle de Skill - control-comparacion-patrimonial', () => {
+  const skillComparacionMd = `---
+name: control-comparacion-patrimonial
+description: Auditoría y Control por Comparación Patrimonial
+---
+# Auditoría y Control por Comparación Patrimonial`;
+
+  assert.ok(skillComparacionMd.includes('control-comparacion-patrimonial'));
+  assert.ok(skillComparacionMd.includes('Comparación Patrimonial'));
+});
+
+

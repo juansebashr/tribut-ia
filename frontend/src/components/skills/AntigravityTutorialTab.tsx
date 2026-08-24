@@ -20,10 +20,10 @@ curl -o ~/.gemini/skills/declaracion-renta-persona-natural/SKILL.md \\
   https://raw.githubusercontent.com/juansebashr/tribut-ia/main/skills/declaracion-renta-persona-natural/SKILL.md
 
 # 3. Invocar al agente en Antigravity CLI
-antigravity "Analiza los soportes contables en ./documentos_renta y liquida la declaración de renta con TributIA"`;
+antigravity "Analiza los soportes contables en ./documentos_renta y liquida la declaración de renta con Fiscol"`;
 
   const agySubagentPrompt = `Eres un Contador Tributario especializado en la legislación colombiana (Estatuto Tributario y Ley 2277 de 2022).
-Tu rol es analizar documentos contables, conciliar transacciones bancarias contra la información exógena de la DIAN y generar la liquidación en TributIA.
+Tu rol es analizar documentos contables, conciliar transacciones bancarias contra la información exógena de la DIAN y generar la liquidación en Fiscol.
 
 Reglas:
 - Utiliza la UVT oficial según el año fiscal ($49.799 para 2025).

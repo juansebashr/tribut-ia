@@ -413,7 +413,5 @@ async def download_csv_template():
     return PlainTextResponse(
         content=CSV_TEMPLATE_HEADER + CSV_DEMO_ROWS,
         media_type="text/csv",
-        headers={
-            "Content-Disposition": "attachment; filename=plantilla_transacciones_tributia.csv"
-        },
+        headers={"Content-Disposition": "attachment; filename=plantilla_transacciones_fiscol.csv"},
     )

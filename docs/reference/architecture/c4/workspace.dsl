@@ -1,11 +1,11 @@
-workspace "TributIA Colombia" "Arquitectura de la plataforma tributaria colombiana con sincronización bidireccional" {
+workspace "Fiscol Colombia" "Arquitectura de la plataforma tributaria colombiana con sincronización bidireccional" {
 
     model {
         usuario = person "Contribuyente / Contador" "Persona que liquida sus impuestos (F210, F110) y consulta plazos DIAN."
         agente = person "Agente Autónomo / Script IA" "Agente que interactúa con la plataforma vía API REST y SSE."
         dian = softwareSystem "DIAN (Dirección de Impuestos y Aduanas Nacionales)" "Entidad recaudadora oficial y publicadora de calendarios y formularios." "External"
 
-        tributia = softwareSystem "TributIA Platform" "Sistema integral de liquidación de impuestos, simulación y sincronización visual en tiempo real." {
+        fiscol = softwareSystem "Fiscol Platform" "Sistema integral de liquidación de impuestos, simulación y sincronización visual en tiempo real." {
             
             spa = container "Single Page Application (SPA)" "Interfaz web interactiva con formulario 210, termómetro marginal, calendario y sincronización en vivo." "HTML5, Vanilla CSS, Modern JavaScript" "WebBrowser"
             
@@ -23,9 +23,9 @@ workspace "TributIA Colombia" "Arquitectura de la plataforma tributaria colombia
         }
 
         # Relaciones Contexto
-        usuario -> tributia "Diligencia formularios, simula escenarios y consulta vencimientos"
-        agente -> tributia "Inyecta y consulta estados de sesión vía API REST / SSE"
-        tributia -> dian "Alinea cálculos con Estatuto Tributario y resoluciones oficiales"
+        usuario -> fiscol "Diligencia formularios, simula escenarios y consulta vencimientos"
+        agente -> fiscol "Inyecta y consulta estados de sesión vía API REST / SSE"
+        fiscol -> dian "Alinea cálculos con Estatuto Tributario y resoluciones oficiales"
 
         # Relaciones Contenedores
         usuario -> spa "Interactúa mediante el navegador" "HTTPS"
@@ -47,12 +47,12 @@ workspace "TributIA Colombia" "Arquitectura de la plataforma tributaria colombia
     }
 
     views {
-        systemContext tributia "SystemContext" {
+        systemContext fiscol "SystemContext" {
             include *
             autoLayout lr
         }
 
-        container tributia "Containers" {
+        container fiscol "Containers" {
             include *
             autoLayout lr
         }

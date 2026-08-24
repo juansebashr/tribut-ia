@@ -14,8 +14,8 @@ sequenceDiagram
     Note over Browser, Redis: 1. Conexión Inicial y Auto-Aprovisionamiento de Sesión
     Browser->>API: GET / (sin sesión previa)
     API->>API: Genera UUID seguro (ses_9b8f2c...)
-    API-->>Browser: HTML + Set-Cookie: tributia_sid=ses_9b8f2c...
-    Browser->>API: GET /api/v1/session/events (Cookie tributia_sid)
+    API-->>Browser: HTML + Set-Cookie: fiscol_sid=ses_9b8f2c...
+    Browser->>API: GET /api/v1/session/events (Cookie fiscol_sid)
     API->>Redis: Suscribir worker a canal session:ses_9b8f2c...:events
     API-->>Browser: HTTP 200 SSE stream abierto ("connected")
 

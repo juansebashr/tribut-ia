@@ -11,9 +11,9 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab }) => {
     <header className="navbar">
       <div className="navbar-inner">
         <div className="logo-group">
-          <div className="logo-badge">TributIA</div>
+          <div className="logo-badge">Fiscol</div>
           <div>
-            <h1 className="logo-title">TributIA Colombia</h1>
+            <h1 className="logo-title">Fiscol Colombia</h1>
             <p className="logo-subtitle">Motor Tributario & Liquidación de Renta 2026</p>
           </div>
         </div>

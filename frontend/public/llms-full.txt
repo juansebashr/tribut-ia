@@ -1,7 +1,7 @@
-# TributIA - Documentación Exhaustiva para Modelos de Lenguaje (LLMs / Agents)
+# Fiscol - Documentación Exhaustiva para Modelos de Lenguaje (LLMs / Agents)
 
 ## Propósito y Arquitectura
-TributIA es una suite tributaria y asistente contable inteligente especializada en la legislación fiscal de Colombia (Estatuto Tributario Nacional - E.T.). Ofrece un motor de reglas puras, determinísticas y sin efectos secundarios para la liquidación del impuesto sobre la renta de Personas Naturales (Formulario 210) y Personas Jurídicas (Formulario 110), así como herramientas complementarias de planeación tributaria.
+Fiscol es una suite tributaria y asistente contable inteligente especializada en la legislación fiscal de Colombia (Estatuto Tributario Nacional - E.T.). Ofrece un motor de reglas puras, determinísticas y sin efectos secundarios para la liquidación del impuesto sobre la renta de Personas Naturales (Formulario 210) y Personas Jurídicas (Formulario 110), así como herramientas complementarias de planeación tributaria.
 
 ## 1. Liquidación Persona Natural (Formulario 210)
 - **Cédula General:**

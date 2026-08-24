@@ -294,9 +294,9 @@ export const LandingPage: React.FC = () => {
             <div className="footer-col-main">
               <div className="landing-brand">
                 <div className="landing-brand-badge">
-                  <span>TributIA</span>
+                  <span>Fiscol</span>
                 </div>
-                <span className="landing-brand-name">TributIA</span>
+                <span className="landing-brand-name">Fiscol</span>
               </div>
               <p className="footer-desc">
                 Plataforma de liquidación de impuestos en Colombia, diseñada bajo estricto determinismo fiscal conforme al Estatuto Tributario y la Ley 2277 de 2022.
@@ -324,7 +324,7 @@ export const LandingPage: React.FC = () => {
           </div>
 
           <div className="landing-footer-bottom">
-            <span>© 2025-2026 TributIA · Colombia. Liquidación fiscal determinista y auditable.</span>
+            <span>© 2025-2026 Fiscol · Colombia. Liquidación fiscal determinista y auditable.</span>
             <div className="flex items-center gap-4">
               <span className="footer-norma-tag">Estatuto Tributario Nacional</span>
             </div>

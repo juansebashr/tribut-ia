@@ -1,20 +1,20 @@
-# TributIA - Suite Tributaria DIAN & Motor de Liquidación en Tiempo Real
+# Fiscol - Suite Tributaria DIAN & Motor de Liquidación en Tiempo Real
 
-> TributIA es una plataforma didáctica y asistente contable determinístico de código abierto para la liquidación del impuesto sobre la renta en Colombia (Personas Naturales y Personas Jurídicas) según el Estatuto Tributario Nacional.
+> Fiscol es una plataforma didáctica y asistente contable determinístico de código abierto para la liquidación del impuesto sobre la renta en Colombia (Personas Naturales y Personas Jurídicas) según el Estatuto Tributario Nacional.
 
 ## Módulos Principales
-- [Persona Natural Formulario 210](https://tributia.co/#persona-natural): Liquidación de Cédula General (Rentas de Trabajo, Rentas de Capital, Rentas No Laborales), Cédula de Pensiones, Cédula de Dividendos, Ganancias Ocasionales y aplicación de la Tabla de Tarifas Marginales del Art. 241 E.T. (0% a 39%).
-- [Persona Jurídica Formulario 110](https://tributia.co/#persona-juridica): Renta Ordinaria (Art. 240 E.T.), Sobretasas Financiera y Energética, Descuentos Tributarios (Arts. 254-258 E.T.) y Tasa de Tributación Depurada (TTD mínima del 15% según Art. 240 Parágrafo 6).
-- [Reajuste Fiscal de Activos Fijos](https://tributia.co/#reajuste-art73): Tabla histórica oficial DANE de 70 años (1955-2025) para bienes raíces urbanos, rurales y acciones/aportes según el Artículo 73 del E.T.
-- [Bienes Inmuebles y Cuentas AFC](https://tributia.co/#inmuebles-afc): Exención de hasta 5.000 UVT en Ganancia Ocasional por venta de casa de habitación (Art. 311-1 E.T.) y beneficios en cuentas AFC (Art. 126-4 E.T.).
-- [Beneficio de Auditoría y Sanciones](https://tributia.co/#beneficios-sanciones): Firmeza en 6 meses (incremento >= 35%) y 12 meses (incremento >= 25%) con control de 71 UVT (Art. 689-3 E.T.), calculadora de sanciones (Arts. 640, 641, 644) con sanción mínima de 10 UVT (Art. 639 E.T.).
-- [Conciliación Exógena CSV](https://tributia.co/#conciliacion): Procesamiento efímero en memoria de transacciones bancarias contra Información Exógena DIAN.
-- [Calendario Tributario DIAN](https://tributia.co/#calendario): Vencimientos oficiales por último dígito de NIT para Renta, IVA, Retención en la Fuente y Régimen SIMPLE.
+- [Persona Natural Formulario 210](https://fiscol.co/#persona-natural): Liquidación de Cédula General (Rentas de Trabajo, Rentas de Capital, Rentas No Laborales), Cédula de Pensiones, Cédula de Dividendos, Ganancias Ocasionales y aplicación de la Tabla de Tarifas Marginales del Art. 241 E.T. (0% a 39%).
+- [Persona Jurídica Formulario 110](https://fiscol.co/#persona-juridica): Renta Ordinaria (Art. 240 E.T.), Sobretasas Financiera y Energética, Descuentos Tributarios (Arts. 254-258 E.T.) y Tasa de Tributación Depurada (TTD mínima del 15% según Art. 240 Parágrafo 6).
+- [Reajuste Fiscal de Activos Fijos](https://fiscol.co/#reajuste-art73): Tabla histórica oficial DANE de 70 años (1955-2025) para bienes raíces urbanos, rurales y acciones/aportes según el Artículo 73 del E.T.
+- [Bienes Inmuebles y Cuentas AFC](https://fiscol.co/#inmuebles-afc): Exención de hasta 5.000 UVT en Ganancia Ocasional por venta de casa de habitación (Art. 311-1 E.T.) y beneficios en cuentas AFC (Art. 126-4 E.T.).
+- [Beneficio de Auditoría y Sanciones](https://fiscol.co/#beneficios-sanciones): Firmeza en 6 meses (incremento >= 35%) y 12 meses (incremento >= 25%) con control de 71 UVT (Art. 689-3 E.T.), calculadora de sanciones (Arts. 640, 641, 644) con sanción mínima de 10 UVT (Art. 639 E.T.).
+- [Conciliación Exógena CSV](https://fiscol.co/#conciliacion): Procesamiento efímero en memoria de transacciones bancarias contra Información Exógena DIAN.
+- [Calendario Tributario DIAN](https://fiscol.co/#calendario): Vencimientos oficiales por último dígito de NIT para Renta, IVA, Retención en la Fuente y Régimen SIMPLE.
 
 ## API y Especificaciones Técnicas
-- [Documentación OpenAPI / Swagger](https://tributia.co/docs): Endpoints REST para liquidación matemática pura y determinística.
-- [Sincronización Bidireccional](https://tributia.co/api/v1/session/events): Server-Sent Events (SSE) y Redis Pub/Sub para actualización en vivo entre CLI y UI.
-- [Esquema Completo LLM](https://tributia.co/llms-full.txt): Documentación técnica extendida para modelos de lenguaje.
+- [Documentación OpenAPI / Swagger](https://fiscol.co/docs): Endpoints REST para liquidación matemática pura y determinística.
+- [Sincronización Bidireccional](https://fiscol.co/api/v1/session/events): Server-Sent Events (SSE) y Redis Pub/Sub para actualización en vivo entre CLI y UI.
+- [Esquema Completo LLM](https://fiscol.co/llms-full.txt): Documentación técnica extendida para modelos de lenguaje.
 
 ## Fundamentos Normativos (Estatuto Tributario Nacional)
 - Art. 241 E.T.: Tarifas del impuesto sobre la renta para personas naturales residentes y asignaciones modales.

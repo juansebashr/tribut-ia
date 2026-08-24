@@ -15,8 +15,8 @@ export const ChatGptTutorialTab: React.FC = () => {
   const openApiActionSchema = `{
   "openapi": "3.1.0",
   "info": {
-    "title": "TributIA API",
-    "version": "1.0.0"
+    "title": "Fiscol API",
+    "version": "2.5.0"
   },
   "servers": [
     {
@@ -86,7 +86,7 @@ export const ChatGptTutorialTab: React.FC = () => {
                   <span className="step-tag-pill">GPT Builder</span>
                 </div>
                 <p className="step-subtitle">
-                  Entra al editor en <a href="https://chatgpt.com/gpts/editor" target="_blank" rel="noreferrer" className="text-sky underline font-semibold">chatgpt.com/gpts/editor <ExternalLink size={11} className="inline" /></a> y crea tu agente <strong>TributIA Contador DIAN</strong>.
+                  Entra al editor en <a href="https://chatgpt.com/gpts/editor" target="_blank" rel="noreferrer" className="text-sky underline font-semibold">chatgpt.com/gpts/editor <ExternalLink size={11} className="inline" /></a> y crea tu agente <strong>Fiscol Contador DIAN</strong>.
                 </p>
               </div>
             </div>
@@ -200,7 +200,7 @@ export const ChatGptTutorialTab: React.FC = () => {
               <div className="instructions-checklist">
                 <div className="checklist-item">
                   <div className="checklist-bullet">1</div>
-                  <span>Clona o abre el repositorio de TributIA en tu entorno local.</span>
+                  <span>Clona o abre el repositorio de Fiscol en tu entorno local.</span>
                 </div>
                 <div className="checklist-item">
                   <div className="checklist-bullet">2</div>

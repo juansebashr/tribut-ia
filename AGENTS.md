@@ -1,10 +1,10 @@
-# AGENTS.md — Protocolo y Directivas para Agentes Autónomos en TributIA
+# AGENTS.md — Protocolo y Directivas para Agentes Autónomos en Fiscol
 
-Bienvenido agente. Este archivo es el **manual central y punto de entrada unificado** para agentes de codificación e IA (Codex, Google Jules / Antigravity, Claude Code, Cursor, Aider, Windsurf, Devin, etc.) que trabajen en **TributIA**.
+Bienvenido agente. Este archivo es el **manual central y punto de entrada unificado** para agentes de codificación e IA (Codex, Google Jules / Antigravity, Claude Code, Cursor, Aider, Windsurf, Devin, etc.) que trabajen en **Fiscol**.
 
 ---
 
-## 🎯 1. Resumen del Proyecto y Propósito (Why TributIA Exists)
+## 🎯 1. Resumen del Proyecto y Propósito (Why Fiscol Exists)
 
 Plataforma didáctica y asistente contable para la liquidación de impuestos en Colombia (PN y PJ), utilizada por contribuyentes, estudiantes y contadores.
 Priorizar la calidad de código, exactitud matemática, estricto cumplimiento normativo y una experiencia de usuario clara e intuitiva.

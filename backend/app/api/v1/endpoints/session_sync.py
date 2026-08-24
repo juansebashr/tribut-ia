@@ -25,14 +25,14 @@ async def resolve_session_id(
     Resolución unificada de ID de Sesión (Dual-Mode):
     1. Header HTTP 'X-Session-ID' (Scripts CLI, Python, cURL, Agentes IA)
     2. Query Param '?session_id=...' (Enlaces directos o tests)
-    3. Cookie 'tributia_sid' del navegador (Navegación transparente y SSE)
+    3. Cookie 'fiscol_sid' del navegador (con fallback a 'tributia_sid')
     4. Auto-generación de UUID criptográfico si es un usuario nuevo
     """
     # 1. Header HTTP
     if x_session_id and x_session_id.strip():
         sid = x_session_id.strip()
         response.set_cookie(
-            key="tributia_sid", value=sid, max_age=86400, samesite="lax", httponly=False
+            key="fiscol_sid", value=sid, max_age=86400, samesite="lax", httponly=False
         )
         return sid
 
@@ -40,19 +40,19 @@ async def resolve_session_id(
     if session_id and session_id.strip():
         sid = session_id.strip()
         response.set_cookie(
-            key="tributia_sid", value=sid, max_age=86400, samesite="lax", httponly=False
+            key="fiscol_sid", value=sid, max_age=86400, samesite="lax", httponly=False
         )
         return sid
 
     # 3. Cookie de navegador
-    cookie_sid = request.cookies.get("tributia_sid")
+    cookie_sid = request.cookies.get("fiscol_sid") or request.cookies.get("tributia_sid")
     if cookie_sid and cookie_sid.strip():
         return cookie_sid.strip()
 
     # 4. Auto-generación de UUIDv4 seguro
     new_sid = f"ses_{uuid.uuid4().hex[:16]}"
     response.set_cookie(
-        key="tributia_sid",
+        key="fiscol_sid",
         value=new_sid,
         max_age=86400,  # 1 día de TTL
         samesite="lax",

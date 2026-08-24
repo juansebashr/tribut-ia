@@ -214,7 +214,7 @@ def test_serve_ui_fallback():
         mock_dir.__truediv__.return_value = mock_file2
 
         res = serve_ui()
-        assert res["app"] == "TributIA API"
+        assert res["app"] == "Fiscol API"
         assert res["status"] == "online"
 
 
@@ -338,7 +338,7 @@ def test_session_current_auto_provisioning_clean_client():
     assert res.status_code == 200
     data = res.json()
     assert data["session_id"].startswith("ses_")
-    assert "tributia_sid" in res.cookies
+    assert "fiscol_sid" in res.cookies
 
 
 @pytest.mark.asyncio

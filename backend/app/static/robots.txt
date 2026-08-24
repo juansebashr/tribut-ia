@@ -1,4 +1,4 @@
-# robots.txt for TributIA - Suite Tributaria DIAN
+# robots.txt for Fiscol - Suite Tributaria DIAN
 # Optimized for Web Search Engines and AI / Generative / Answer Engines (GEO/AEO)
 
 User-agent: *
@@ -23,20 +23,23 @@ Allow: /
 User-agent: YandexBot
 Allow: /
 
-# Directives for AI Search & Retrieval Crawlers (GEO / AEO Citations)
+# AI Crawlers & LLM Indexers for Generative Engine Optimization (GEO)
 User-agent: GPTBot
 Allow: /
 
-User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
 Allow: /
 
 User-agent: ClaudeBot
 Allow: /
 
+User-agent: Claude-Web
+Allow: /
+
 User-agent: PerplexityBot
 Allow: /
 
-User-agent: Google-Extended
+User-agent: Bytespider
 Allow: /
 
 User-agent: Google-CloudVertexBot
@@ -53,4 +56,4 @@ User-agent: CCBot
 Disallow: /
 
 # XML Sitemap reference
-Sitemap: https://tributia.co/sitemap.xml
+Sitemap: https://fiscol.co/sitemap.xml

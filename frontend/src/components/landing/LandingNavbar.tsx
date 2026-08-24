@@ -10,11 +10,11 @@ export const LandingNavbar: React.FC = () => {
       <div className="landing-navbar-container">
         <div className="landing-brand" onClick={() => navigateToView('landing')} style={{ cursor: 'pointer' }}>
           <div className="landing-brand-badge">
-            <span className="landing-brand-logo-text">TributIA</span>
+            <span className="landing-brand-logo-text">Fiscol</span>
           </div>
           <div className="landing-brand-info">
-            <span className="landing-brand-name">TributIA</span>
-            <span className="landing-brand-tag">Suite DIAN & AI Skills</span>
+            <span className="landing-brand-name">Fiscol</span>
+            <span className="landing-brand-tag">Suite Fiscal & AI Skills</span>
           </div>
         </div>
 

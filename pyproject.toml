@@ -1,7 +1,7 @@
 [tool.poetry]
-name = "tribut-ia"
+name = "fiscol"
 version = "0.1.0"
-description = "Motor Tributario Colombiano Inteligente"
+description = "Fiscol - Suite Tributaria y Motor Fiscal Inteligente de Colombia"
 authors = ["Juan Sebastian Hernandez <juansebasher@users.noreply.github.com>"]
 readme = "README.md"
 packages = [{include = "app", from = "backend"}]

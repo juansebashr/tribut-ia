@@ -49,11 +49,11 @@ export const Sidebar: React.FC = () => {
             title="Ir a la página principal de bienvenida"
           >
             <div className="sidebar-logo-badge">
-              <span className="logo-full">TributIA</span>
-              <span className="logo-short">T</span>
+              <span className="logo-full">Fiscol</span>
+              <span className="logo-short">F</span>
             </div>
             <div className="sidebar-logo-text">
-              <span className="sidebar-logo-title">TributIA</span>
+              <span className="sidebar-logo-title">Fiscol</span>
               <span className="sidebar-logo-subtitle">Suite Tributaria DIAN</span>
             </div>
           </a>
@@ -175,6 +175,17 @@ export const Sidebar: React.FC = () => {
                   <span className="sidebar-item-icon">📑</span>
                   <span className="sidebar-item-label">Conciliación Exógena & CSV</span>
                   <span className="sidebar-item-tag">Spreadsheet</span>
+                </button>
+              </li>
+              <li>
+                <button
+                  className={`sidebar-item-btn ${isNavActive('pn', 'comparacion_patrimonial') ? 'active' : ''}`}
+                  id="nav-item-pn-comparacion"
+                  onClick={() => navigateTo('pn', 'comparacion_patrimonial')}
+                >
+                  <span className="sidebar-item-icon">⚖️</span>
+                  <span className="sidebar-item-label">Comparación Patrimonial</span>
+                  <span className="sidebar-item-tag">Art. 236</span>
                 </button>
               </li>
             </ul>
@@ -398,6 +409,19 @@ export const Sidebar: React.FC = () => {
                   </span>
                 </button>
               </li>
+              <li>
+                <button
+                  className={`sidebar-item-btn ${isNavActive('tributacion-pareja') ? 'active' : ''}`}
+                  id="nav-item-tributacion-pareja"
+                  onClick={() => navigateTo('tributacion-pareja', 'main')}
+                >
+                  <span className="sidebar-item-icon">👫</span>
+                  <span className="sidebar-item-label">Tributación en Pareja</span>
+                  <span className="sidebar-item-tag" style={{ background: '#8b5cf6', color: 'white' }}>
+                    Art. 8 & 236
+                  </span>
+                </button>
+              </li>
             </ul>
           </div>
 
@@ -433,7 +457,7 @@ export const Sidebar: React.FC = () => {
               <span>{theme === 'dark' ? 'Modo Claro' : 'Modo Oscuro'}</span>
             </button>
             <div style={{ fontSize: '9.5px', color: '#64748b', textAlign: 'center', marginTop: '4px' }}>
-              TributIA v2.4 • Colombia
+              Fiscol v2.5 • Colombia
             </div>
           </div>
         </div>

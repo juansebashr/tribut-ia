@@ -4,61 +4,61 @@
         xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
   <url>
-    <loc>https://tributia.co/</loc>
+    <loc>https://fiscol.co/</loc>
     <lastmod>2026-08-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://tributia.co/#persona-natural</loc>
+    <loc>https://fiscol.co/#persona-natural</loc>
     <lastmod>2026-08-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://tributia.co/#persona-juridica</loc>
+    <loc>https://fiscol.co/#persona-juridica</loc>
     <lastmod>2026-08-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://tributia.co/#reajuste-art73</loc>
+    <loc>https://fiscol.co/#reajuste-art73</loc>
     <lastmod>2026-08-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://tributia.co/#inmuebles-afc</loc>
+    <loc>https://fiscol.co/#inmuebles-afc</loc>
     <lastmod>2026-08-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://tributia.co/#beneficios-sanciones</loc>
+    <loc>https://fiscol.co/#beneficios-sanciones</loc>
     <lastmod>2026-08-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://tributia.co/#conciliacion</loc>
+    <loc>https://fiscol.co/#conciliacion</loc>
     <lastmod>2026-08-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://tributia.co/#calendario</loc>
+    <loc>https://fiscol.co/#calendario</loc>
     <lastmod>2026-08-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://tributia.co/#rules</loc>
+    <loc>https://fiscol.co/#rules</loc>
     <lastmod>2026-08-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://tributia.co/llms.txt</loc>
+    <loc>https://fiscol.co/llms.txt</loc>
     <lastmod>2026-08-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>

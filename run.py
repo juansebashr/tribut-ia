@@ -33,7 +33,7 @@ def kill_process_on_port(port: int):
 
 def main():
     parser = argparse.ArgumentParser(
-        description="TributIA - Motor Tributario Colombiano (FastAPI + React + TypeScript)"
+        description="Fiscol - Motor Tributario Colombiano (FastAPI + React + TypeScript)"
     )
     parser.add_argument(
         "--host", default="0.0.0.0", help="Dirección host de escucha (por defecto 0.0.0.0)"

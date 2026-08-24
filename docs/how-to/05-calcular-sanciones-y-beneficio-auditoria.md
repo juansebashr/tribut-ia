@@ -4,21 +4,37 @@ Esta guía explica cómo calcular las sanciones por corrección y extemporaneida
 
 ---
 
-## 1. Beneficio de Auditoría (Art. 689-3 E.T.)
+## 1. Firmeza de las Declaraciones Tributarias & Beneficio de Auditoría
 
-El Beneficio de Auditoría reduce el término de firmeza de la declaración de renta a **6 o 12 meses** en lugar de los 3 años ordinarios (Art. 714 E.T.).
+### Término General de Firmeza de la DIAN (Art. 714 E.T.)
 
-### Reglas de Aplicación
+Por regla general, la declaración de renta queda en **firme a los 3 años** contados a partir del vencimiento del plazo para declarar (o de la fecha de presentación si fue extemporánea). Si la declaración arroja saldo a favor, el término de firmeza será de 3 años contados a partir de la fecha de presentación de la solicitud de devolución o compensación.
 
-| Firmeza Anticipada | Incremento Mínimo Requerido | Impuesto Mínimo Año Anterior |
-| :--- | :--- | :--- |
-| **6 Meses** | $\ge 35\%$ sobre el impuesto neto anterior | $\ge 71\text{ UVT}$ ($3.716.850 COP en 2026) |
-| **12 Meses** | $\ge 25\%$ sobre el impuesto neto anterior | $\ge 71\text{ UVT}$ ($3.716.850 COP en 2026) |
+> **Suspensión e Interrupción de la Firmeza**: Si dentro de ese lapso la DIAN profiere y notifica un **Emplazamiento para Corregir (Art. 685 E.T.)** o un **Requerimiento Especial (Art. 703 E.T.)**, el término de firmeza se suspende o interrumpe, permitiéndole a la administración tributaria revisar a fondo, practicar pruebas y proferir una Liquidación Oficial de Revisión.
+
+---
+
+### Beneficio de Auditoría (Art. 689-3 E.T.)
+
+El Beneficio de Auditoría es una prerrogativa legal que reduce sustancialmente el término general de firmeza de 3 años a solo **6 o 12 meses**, blindando definitivamente la declaración contra revisiones posteriores de la DIAN, siempre que se cumplan las siguientes condiciones copulativas:
+
+1. **Oportunidad en la Presentación y Pago:** Presentar la declaración y realizar el pago total del impuesto liquidado dentro de los plazos fijados por el Gobierno Nacional.
+2. **Impuesto Mínimo del Año Anterior:** El impuesto neto de renta del año gravable anterior debe ser igual o superior a **71 UVT** ($3.716.850 COP en 2026).
+3. **Incremento Porcentual Mínimo:**
+   - **Firmeza en 6 Meses:** Incrementar el impuesto neto de renta en al menos un **35%** respecto al año anterior.
+   - **Firmeza en 12 Meses:** Incrementar el impuesto neto de renta en al menos un **25%** respecto al año anterior.
+
+| Mecanismo de Firmeza | Término Legal | Requisitos Principales | Base Legal |
+| :--- | :--- | :--- | :--- |
+| **Firmeza Ordinaria** | **3 Años** (36 meses) | Regla general para declaraciones presentadas en debida forma. | Art. 714 E.T. |
+| **Pérdidas Fiscales** | **5 Años** (60 meses) | Declaraciones donde se liquiden o compensen pérdidas fiscales. | Art. 714 Inc. 5 E.T. |
+| **Beneficio de Auditoría (Meta 1)** | **12 Meses** | Incremento $\ge 25\%$ + Impuesto anterior $\ge 71\text{ UVT}$ + Pago oportuno. | Art. 689-3 E.T. |
+| **Beneficio de Auditoría (Meta 2)** | **6 Meses** | Incremento $\ge 35\%$ + Impuesto anterior $\ge 71\text{ UVT}$ + Pago oportuno. | Art. 689-3 E.T. |
 
 ### Ejemplo vía API REST (`POST /api/v1/beneficios/simular-auditoria`)
 
 ```bash
-curl -X POST "https://tributia-31954329640.us-central1.run.app/api/v1/beneficios/simular-auditoria" \
+curl -X POST "https://fiscol-31954329640.us-central1.run.app/api/v1/beneficios/simular-auditoria" \
      -H "Content-Type: application/json" \
      -d '{
        "tax_year": 2026,
@@ -78,7 +94,7 @@ $$I = K \times \left( \left(1 + \frac{\text{Tasa E.A.}}{100}\right)^{\frac{D}{36
 ## 4. Ejemplo de Cálculo vía API (`POST /api/v1/beneficios/calcular-sancion`)
 
 ```bash
-curl -X POST "https://tributia-31954329640.us-central1.run.app/api/v1/beneficios/calcular-sancion" \
+curl -X POST "https://fiscol-31954329640.us-central1.run.app/api/v1/beneficios/calcular-sancion" \
      -H "Content-Type: application/json" \
      -d '{
        "tipo_sancion": "inexactitud_general",

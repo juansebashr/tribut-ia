@@ -41,7 +41,7 @@ export const SkillTutorialPage: React.FC = () => {
       title: 'Caso 1: Liquidar Renta F-210 desde Soportes',
       badge: 'F-210 Cédula General',
       badgeColor: 'sky',
-      prompt: `Actúa como Contador Tributario de TributIA. He adjuntado mi Formulario 220 de ingresos y retenciones laborales y mis extractos bancarios de 2025.
+      prompt: `Actúa como Contador Tributario de Fiscol. He adjuntado mi Formulario 220 de ingresos y retenciones laborales y mis extractos bancarios de 2025.
 Por favor:
 1. Extrae los ingresos brutos, aportes a salud/pensión, pagos de medicina prepagada y retenciones practicadas.
 2. Aplica el límite conjunto de Rentas Exentas y Deducciones del 40% (Tope 1.340 UVT) y la renta exenta laboral del 25% (Tope 790 UVT).
@@ -106,7 +106,7 @@ Calcula la Ganancia Ocasional bruta, la exención de hasta 5.000 UVT según el A
               <span>Centro Oficial de Asistentes & AI Skills</span>
             </div>
             <h1 className="tutorial-main-title">
-              Instala la Skill de TributIA en tu <span className="gradient-text">IA Favorita</span>
+              Instala la Skill de Fiscol en tu <span className="gradient-text">IA Favorita</span>
             </h1>
             <p className="tutorial-main-subtitle">
               Configura tu modelo inteligente para automatizar la extracción de extractos bancarios, cruzar información exógena DIAN y liquidar impuestos con 100% de determinismo.
@@ -121,8 +121,8 @@ Calcula la Ganancia Ocasional bruta, la exención de hasta 5.000 UVT según el A
               </div>
               <div className="download-hub-text">
                 <div className="flex items-center gap-2">
-                  <h3 className="download-hub-title">Paquete de Integración Oficial TributIA</h3>
-                  <span className="hub-version-tag">v2.4 Ready</span>
+                  <h3 className="download-hub-title">Paquete de Integración Oficial Fiscol</h3>
+                  <span className="hub-version-tag">v2.5 Ready</span>
                 </div>
                 <p className="download-hub-desc">
                   Contiene directivas <code className="font-mono">SKILL.md</code>, plantilla estructurada <code className="font-mono">transacciones_template.csv</code> y archivo de conexión <code className="font-mono">claude_desktop_config.json</code>.
@@ -256,7 +256,7 @@ Calcula la Ganancia Ocasional bruta, la exención de hasta 5.000 UVT según el A
       <footer className="landing-footer mt-auto">
         <div className="landing-container">
           <div className="tutorial-footer-bottom">
-            <span>TributIA AI Skills Portal · Compatible con Claude Desktop/Code, Google Antigravity y ChatGPT</span>
+            <span>Fiscol AI Skills Portal · Compatible con Claude Desktop/Code, Google Antigravity y ChatGPT</span>
             <div className="flex items-center gap-4">
               <a
                 href="http://localhost:8000/docs"

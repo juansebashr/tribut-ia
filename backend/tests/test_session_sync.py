@@ -151,10 +151,11 @@ def test_session_sync_header_resolution():
 
 
 def test_session_sync_cookie_auto_provisioning():
-    """Verifica que clientes sin header o query reciban automáticamente un UUID seguro en la cookie tributia_sid."""
-    res = client.get("/api/v1/session/current")
+    """Verifica que clientes sin header o query reciban automáticamente un UUID seguro en la cookie fiscol_sid."""
+    clean_client = TestClient(app, cookies=None)
+    res = clean_client.get("/api/v1/session/current")
     assert res.status_code == 200
     data = res.json()
     assert data["session_id"].startswith("ses_")
     assert data["auth_mode"] == "header_or_cookie"
-    assert "tributia_sid" in res.cookies
+    assert "fiscol_sid" in res.cookies

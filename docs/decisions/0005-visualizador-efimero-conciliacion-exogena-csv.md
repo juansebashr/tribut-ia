@@ -2,7 +2,7 @@
 
 - **Estado**: **Aceptado**
 - **Fecha**: 2026-08-18
-- **Autores**: Equipo de Arquitectura e Ingeniería TributIA
+- **Autores**: Equipo de Arquitectura e Ingeniería Fiscol
 
 ---
 

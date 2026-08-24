@@ -4,7 +4,7 @@ from pydantic import BaseModel, Field
 
 
 class Settings(BaseModel):
-    PROJECT_NAME: str = "TributIA Colombia - Engine Fiscal"
+    PROJECT_NAME: str = "Fiscol Colombia - Engine Fiscal"
     VERSION: str = "2.5.0"
     API_V1_STR: str = "/api/v1"
 

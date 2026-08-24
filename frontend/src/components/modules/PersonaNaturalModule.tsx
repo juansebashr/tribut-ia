@@ -6,6 +6,7 @@ import { PnCalcSubtab } from './PersonaNatural/PnCalcSubtab';
 import { PnF210Subtab } from './PersonaNatural/PnF210Subtab';
 import { PnMarginalSubtab } from './PersonaNatural/PnMarginalSubtab';
 import { PnConciliacionSubtab } from './PersonaNatural/PnConciliacionSubtab';
+import { PnComparacionPatrimonialSubtab } from './PersonaNatural/PnComparacionPatrimonialSubtab';
 
 export const PersonaNaturalModule: React.FC = () => {
   const { activeSubTab, navigateTo, taxYear, uvtValue, showToast } = useApp();
@@ -196,6 +197,12 @@ export const PersonaNaturalModule: React.FC = () => {
         />
       ) : activeSubTab === 'conciliacion' ? (
         <PnConciliacionSubtab />
+      ) : activeSubTab === 'comparacion_patrimonial' ? (
+        <PnComparacionPatrimonialSubtab
+          currentPnInputs={inputs}
+          currentPnResult={result}
+          onNavigateToCalc={() => navigateTo('pn', 'calc')}
+        />
       ) : (
         <PnCalcSubtab
           inputs={inputs}

@@ -1,6 +1,6 @@
 # Modelo de Entidades y Estado de Sesión
 
-Este diagrama ERD describe la estructura lógica de los datos manipulados por la plataforma TributIA y sincronizados bidireccionalmente entre el servidor y el cliente.
+Este diagrama ERD describe la estructura lógica de los datos manipulados por la plataforma Fiscol y sincronizados bidireccionalmente entre el servidor y el cliente.
 
 ```mermaid
 erDiagram

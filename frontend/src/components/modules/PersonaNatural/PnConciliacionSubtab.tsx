@@ -164,7 +164,7 @@ export const PnConciliacionSubtab: React.FC = () => {
 
             <a
               href="/api/v1/reconciliation/template"
-              download="plantilla_transacciones_tributia.csv"
+              download="plantilla_transacciones_fiscol.csv"
               className="btn btn-outline btn-sm"
               style={{ textDecoration: 'none' }}
               title="Descargar estructura oficial CSV para diligenciar"

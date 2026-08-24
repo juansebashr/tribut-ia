@@ -1,6 +1,6 @@
 # Registro de Decisiones de Arquitectura (ADRs)
 
-Este directorio contiene el registro cronológico y canónico de Decisiones de Arquitectura de Software (ADR) tomadas en el desarrollo de **TributIA**, estructuradas según el formato propuesto por Michael Nygard.
+Este directorio contiene el registro cronológico y canónico de Decisiones de Arquitectura de Software (ADR) tomadas en el desarrollo de **Fiscol**, estructuradas según el formato propuesto por Michael Nygard.
 
 | Número | Título | Fecha | Estado |
 | :---: | :--- | :---: | :---: |

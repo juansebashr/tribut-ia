@@ -1,8 +1,8 @@
 {
-  "name": "colombian-tax-assistant",
-  "version": "1.0.0",
-  "description": "Suite de automatización y análisis tributario profesional para Colombia (TributIA)",
-  "author": "TributIA Team",
+  "name": "fiscol-tax-assistant",
+  "version": "2.5.0",
+  "description": "Suite de automatización y análisis tributario profesional para Colombia (Fiscol)",
+  "author": "Fiscol Team",
   "skills": [
     {
       "name": "declaracion-renta-persona-natural",

@@ -9,19 +9,19 @@ from app.api.v1.router import api_router
 from app.core.rules_engine.loader import load_all_rules
 
 app = FastAPI(
-    title="TributIA API - Suite Tributaria Colombiana & Agentes IA",
+    title="Fiscol API - Suite Tributaria Colombiana & Agentes IA",
     description=(
-        "## TributIA - Suite Tributaria DIAN & Motor de Liquidación en Tiempo Real\n\n"
+        "## Fiscol - Suite Tributaria DIAN & Motor de Liquidación en Tiempo Real\n\n"
         "API y plataforma para cálculo, planeación y liquidación automatizada del impuesto sobre la renta "
         "en Colombia para Personas Naturales (Cédula General, Ganancias Ocasionales, Formulario 210) "
         "y Personas Jurídicas (Formulario 110 & Tasa Mínima TTD).\n\n"
         "### 🔒 Control de Acceso & Aislamiento de Sesiones en Redis:\n"
         "- Para sincronizar datos con una sesión específica o la pantalla en vivo de un usuario, "
         "incluye la cabecera HTTP **`X-Session-ID: <session_id>`** (o el parámetro de consulta `?session_id=...`).\n"
-        "- Si el cliente es un navegador web, se auto-emite de forma transparente una cookie `tributia_sid` con un UUID seguro.\n"
+        "- Si el cliente es un navegador web, se auto-emite de forma transparente una cookie `fiscol_sid` con un UUID seguro.\n"
         "- Todas las mutaciones emitidas por la API se transmiten en vivo a la interfaz gráfica vía Redis Pub/Sub y Server-Sent Events (`/api/v1/session/events`)."
     ),
-    version="1.2.0",
+    version="2.5.0",
     docs_url="/docs",
     redoc_url="/redoc",
 )
@@ -83,13 +83,13 @@ def serve_ui():
                 "Expires": "0",
             },
         )
-    return {"app": "TributIA API", "status": "online", "docs": "/docs", "version": "1.2.0"}
+    return {"app": "Fiscol API", "status": "online", "docs": "/docs", "version": "2.5.0"}
 
 
 @app.get("/health", tags=["Health"])
 @app.get("/api/v1/health", tags=["Health"])
 def health_check():
-    return {"status": "ok", "app": "TributIA"}
+    return {"status": "ok", "app": "Fiscol"}
 
 
 @app.get("/.well-known/appspecific/com.chrome.devtools.json", include_in_schema=False)
@@ -188,13 +188,13 @@ def serve_llms_txt():
         if path.exists():
             return FileResponse(str(path), media_type="text/plain; charset=utf-8")
     return Response(
-        content="# TributIA\n> Suite Tributaria DIAN\n", media_type="text/plain; charset=utf-8"
+        content="# Fiscol\n> Suite Tributaria DIAN\n", media_type="text/plain; charset=utf-8"
     )
 
 
 @app.get("/llms-full.txt", include_in_schema=False)
 def serve_llms_full_txt():
-    """Sirve la documentación extendida de TributIA para LLMs."""
+    """Sirve la documentación extendida de Fiscol para LLMs."""
     for path in [
         FRONTEND_DIST / "llms-full.txt",
         STATIC_DIR / "llms-full.txt",
@@ -202,6 +202,4 @@ def serve_llms_full_txt():
     ]:
         if path.exists():
             return FileResponse(str(path), media_type="text/plain; charset=utf-8")
-    return Response(
-        content="# TributIA Full Documentation\n", media_type="text/plain; charset=utf-8"
-    )
+    return Response(content="# Fiscol Full Documentation\n", media_type="text/plain; charset=utf-8")

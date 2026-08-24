@@ -30,7 +30,7 @@ Tu misión es procesar documentos contables (Certificado de Ingresos y Retencion
 
 Instrucciones:
 1. Extrae los montos de ingresos brutos, aportes a seguridad social, pagos de prepagada, intereses de vivienda y retenciones practicadas.
-2. Invoca la herramienta \`calcular_renta_persona_natural\` o \`calcular_renta_persona_juridica\` de la API TributIA.
+2. Invoca la herramienta \`calcular_renta_persona_natural\` o \`calcular_renta_persona_juridica\` de la API Fiscol.
 3. Presenta al usuario el informe de liquidación con el desglose paso a paso y las recomendaciones de optimización fiscal.`;
 
   return (
@@ -44,7 +44,7 @@ Instrucciones:
         </div>
         <div className="card-body">
           <p style={{ fontSize: '14px', color: 'var(--text-secondary)', marginBottom: '16px', lineHeight: 1.6 }}>
-            TributIA expone una API REST moderna y esquemas estándar de <strong>Function Calling</strong> para que agentes inteligentes puedan analizar automáticamente documentos fiscales (certificados de ingresos y retenciones Formulario 220, extractos bancarios, balances de comprobación, facturas) y ejecutar cálculos auditables.
+            Fiscol expone una API REST moderna y esquemas estándar de <strong>Function Calling</strong> para que agentes inteligentes puedan analizar automáticamente documentos fiscales (certificados de ingresos y retenciones Formulario 220, extractos bancarios, balances de comprobación, facturas) y ejecutar cálculos auditables.
           </p>
 
           <h4 style={{ fontSize: '14px', fontWeight: 700, margin: '16px 0 8px' }}>1. Prompt del Agente / Skill Definition</h4>

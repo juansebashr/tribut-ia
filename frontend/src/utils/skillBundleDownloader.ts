@@ -16,7 +16,7 @@ Eres un Agente Contador Experto en Tributación Colombiana. Tu objetivo es proce
 1. **Fase 1 - Extracción y Depuración:** Leer documentos y clasificar movimientos en CSV según el esquema estándar.
 2. **Fase 2 - Conciliación Exógena:** Cruzar partidas con el reporte DIAN identificando matches, diferencias y omisiones.
 3. **Fase 3 - Liquidación Cedular:** Depurar Cédula General, Pensiones, Dividendos y Ganancias Ocasionales con topes (40% o 1.340 UVT).
-4. **Fase 4 - Transmisión y Auditoría:** Enviar la liquidación a la API de TributIA (http://localhost:8000) o exportar el Formulario 210.
+4. **Fase 4 - Transmisión y Auditoría:** Enviar la liquidación a la API de Fiscol (http://localhost:8000) o exportar el Formulario 210.
 `;
 
 export const CSV_TEMPLATE_CONTENT = `fecha,archivo_origen,tercero_nombre,tercero_nit,descripcion,tipo_movimiento,valor_cop,cedula_destino,concepto_tributario,beneficio_asociado
@@ -31,7 +31,7 @@ export const CSV_TEMPLATE_CONTENT = `fecha,archivo_origen,tercero_nombre,tercero
 export const CLAUDE_DESKTOP_CONFIG_JSON = JSON.stringify(
   {
     mcpServers: {
-      tributia: {
+      fiscol: {
         command: "uvicorn",
         args: [
           "backend.app.main:app",
@@ -39,7 +39,7 @@ export const CLAUDE_DESKTOP_CONFIG_JSON = JSON.stringify(
           "8000"
         ],
         env: {
-          TRIBUTIA_ENV: "production"
+          FISCOL_ENV: "production"
         }
       }
     }
@@ -48,7 +48,7 @@ export const CLAUDE_DESKTOP_CONFIG_JSON = JSON.stringify(
   2
 );
 
-export const CUSTOM_GPT_INSTRUCTIONS = `Eres el Asistente Tributario Oficial de TributIA para Colombia.
+export const CUSTOM_GPT_INSTRUCTIONS = `Eres el Asistente Tributario Oficial de Fiscol para Colombia.
 Tu propósito es ayudar a contribuyentes y contadores a liquidar el Impuesto sobre la Renta de Personas Naturales (Formulario 210) y Personas Jurídicas (Formulario 110) conforme al Estatuto Tributario y la Ley 2277 de 2022.
 
 Reglas Fundamentales:
@@ -60,6 +60,23 @@ Reglas Fundamentales:
    - 25% de Renta Exenta Laboral sobre el saldo neto, topado a 790 UVT anuales (Art. 206 Num. 10).
 4. Aplica la tabla progresiva marginal del Artículo 241 E.T. (rangos 0%, 19%, 28%, 35%, 37%, 39%).
 5. Realiza cálculos exactos en pesos colombianos ($ COP) redondeando al múltiplo de $1.000 más cercano según el estándar DIAN.`;
+
+export const SKILL_COMPARACION_PATRIMONIAL_MD_CONTENT = `---
+name: control-comparacion-patrimonial
+description: Auditoría y Control por Comparación Patrimonial (Arts. 236 y 237 E.T.) para Formulario 210 con diagnóstico interactivo y plan de regularización.
+---
+
+# Auditoría y Control por Comparación Patrimonial (Arts. 236 y 237 E.T.)
+
+## Misión del Agente
+Eres un Agente Auditor Tributario Experto en Colombia. Tu misión es analizar borradores del Formulario 210, detectar inconsistencias patrimoniales, realizar el interrogatorio diagnóstico al contribuyente solicitando los soportes documentales correspondientes (créditos Art. 283, desahorros, reajustes Art. 73 o mutuos conyugales) y generar un Plan de Optimización y Regularización Tributaria.
+
+## Workflow en 4 Fases
+1. **Fase 1 - Extracción y Diagnóstico Matemático:** Extraer casillas 29, 30, 31, 32, 64, 92, 104 y 133 del F210 y calcular la variación frente a la capacidad neta.
+2. **Fase 2 - Cuestionario Diagnóstico:** Presentar las 5 líneas de preguntas al usuario (Inmuebles, Nuevas Deudas, Desahorros, Estructuración Conyugal y Reajuste Art. 73).
+3. **Fase 3 - Elaboración del Plan de Regularización:** Generar 'plan_optimizacion_patrimonial.md' con las rutas de acción y soportes probatorios.
+4. **Fase 4 - Sincronización:** Inyectar los datos en la sesión activa de Fiscol.
+`;
 
 /**
  * Dispara la descarga de un archivo de texto en el navegador
@@ -77,7 +94,7 @@ export const downloadFile = (filename: string, content: string, mimeType: string
 };
 
 /**
- * Descarga los archivos individuales esenciales de la Skill
+ * Descarga los archivos individuales esenciales de la Skill de Liquidación F210
  */
 export const downloadSkillPack = () => {
   downloadFile('SKILL.md', SKILL_MD_CONTENT, 'text/markdown;charset=utf-8');
@@ -88,3 +105,11 @@ export const downloadSkillPack = () => {
     downloadFile('claude_desktop_config.json', CLAUDE_DESKTOP_CONFIG_JSON, 'application/json;charset=utf-8');
   }, 600);
 };
+
+/**
+ * Descarga la Skill de Control por Comparación Patrimonial
+ */
+export const downloadSkillComparacionPatrimonialPack = () => {
+  downloadFile('SKILL_comparacion_patrimonial.md', SKILL_COMPARACION_PATRIMONIAL_MD_CONTENT, 'text/markdown;charset=utf-8');
+};
+

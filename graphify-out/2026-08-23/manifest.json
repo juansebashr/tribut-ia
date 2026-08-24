@@ -108,9 +108,9 @@
     "semantic_hash": ""
   },
   "backend/app/main.py": {
-    "mtime": 1787542558.7804973,
-    "seen": 1787542661.240458,
-    "ast_hash": "58d64998b5407470ec3396afbf0b7eeb",
+    "mtime": 1787545175.4015024,
+    "seen": 1787545235.564888,
+    "ast_hash": "65a7a17f3606cd2687940b3b00d8490e",
     "semantic_hash": ""
   },
   "backend/app/models/__init__.py": {
@@ -186,9 +186,9 @@
     "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
   },
   "backend/tests/test_api_endpoints.py": {
-    "mtime": 1787516373.5584435,
-    "seen": 1787516900.1127412,
-    "ast_hash": "9f9c285e27a25a7d161167d331eeba75",
+    "mtime": 1787545213.241547,
+    "seen": 1787545235.565224,
+    "ast_hash": "bc212189887304f34b8e176600f0bf2d",
     "semantic_hash": ""
   },
   "backend/tests/test_beneficios_and_go.py": {
@@ -564,9 +564,9 @@
     "semantic_hash": ""
   },
   "frontend/index.html": {
-    "mtime": 1787544847.8534594,
-    "seen": 1787544881.0104399,
-    "ast_hash": "0465e34bfe7fcda5f826e9f40e094928",
+    "mtime": 1787545131.5745785,
+    "seen": 1787545235.566884,
+    "ast_hash": "b5f2a51728af7a524ad1595839f2c4be",
     "semantic_hash": ""
   },
   "skills/declaracion-renta-persona-natural/README.md": {
@@ -660,8 +660,8 @@
     "semantic_hash": ""
   },
   "backend/app/static/favicon.svg": {
-    "mtime": 1787544836.585559,
-    "seen": 1787544881.0105941,
+    "mtime": 1787545122.915219,
+    "seen": 1787545235.567017,
     "ast_hash": "2b5e2cae920e9e13326830efede6cae9",
     "semantic_hash": ""
   },
@@ -759,6 +759,114 @@
     "mtime": 1787517830.5838695,
     "seen": 1787517855.9031281,
     "ast_hash": "9fa05186ee00420c58aae0cb2a3f411e",
+    "semantic_hash": ""
+  },
+  "backend/app/static/apple-touch-icon.png": {
+    "mtime": 1787545122.9243786,
+    "seen": 1787545235.567011,
+    "ast_hash": "f25abebb6be7d74c15c153d34a7bd09e",
+    "semantic_hash": ""
+  },
+  "backend/app/static/favicon-16x16.png": {
+    "mtime": 1787545122.8976953,
+    "seen": 1787545235.567011,
+    "ast_hash": "415a079fd1d9d876f0e4c32ddb94dc06",
+    "semantic_hash": ""
+  },
+  "backend/app/static/favicon-180x180.png": {
+    "mtime": 1787545122.8988638,
+    "seen": 1787545235.567012,
+    "ast_hash": "645fbd8ff4d13918430dda73d6418974",
+    "semantic_hash": ""
+  },
+  "backend/app/static/favicon-192x192.png": {
+    "mtime": 1787545122.8998582,
+    "seen": 1787545235.567013,
+    "ast_hash": "9410e75435c3cf6d5dfaa0dda478a6d4",
+    "semantic_hash": ""
+  },
+  "backend/app/static/favicon-32x32.png": {
+    "mtime": 1787545122.9014747,
+    "seen": 1787545235.567014,
+    "ast_hash": "cb6c7c89230baafdc22461feceba7166",
+    "semantic_hash": ""
+  },
+  "backend/app/static/favicon-48x48.png": {
+    "mtime": 1787545122.9024231,
+    "seen": 1787545235.567014,
+    "ast_hash": "d73908932cf27e585a29933bc76be4e1",
+    "semantic_hash": ""
+  },
+  "backend/app/static/favicon-512x512.png": {
+    "mtime": 1787545122.903818,
+    "seen": 1787545235.567015,
+    "ast_hash": "f25abebb6be7d74c15c153d34a7bd09e",
+    "semantic_hash": ""
+  },
+  "backend/app/static/favicon-64x64.png": {
+    "mtime": 1787545122.9050698,
+    "seen": 1787545235.567015,
+    "ast_hash": "29345c28499bc9405a5454c1b9844c5e",
+    "semantic_hash": ""
+  },
+  "backend/app/static/favicon.png": {
+    "mtime": 1787545122.9143312,
+    "seen": 1787545235.567016,
+    "ast_hash": "f25abebb6be7d74c15c153d34a7bd09e",
+    "semantic_hash": ""
+  },
+  "frontend/public/apple-touch-icon.png": {
+    "mtime": 1787545111.3734236,
+    "seen": 1787545235.567041,
+    "ast_hash": "f25abebb6be7d74c15c153d34a7bd09e",
+    "semantic_hash": ""
+  },
+  "frontend/public/favicon-16x16.png": {
+    "mtime": 1787545111.1310835,
+    "seen": 1787545235.567042,
+    "ast_hash": "415a079fd1d9d876f0e4c32ddb94dc06",
+    "semantic_hash": ""
+  },
+  "frontend/public/favicon-180x180.png": {
+    "mtime": 1787545111.199918,
+    "seen": 1787545235.567043,
+    "ast_hash": "645fbd8ff4d13918430dda73d6418974",
+    "semantic_hash": ""
+  },
+  "frontend/public/favicon-192x192.png": {
+    "mtime": 1787545111.216267,
+    "seen": 1787545235.567043,
+    "ast_hash": "9410e75435c3cf6d5dfaa0dda478a6d4",
+    "semantic_hash": ""
+  },
+  "frontend/public/favicon-32x32.png": {
+    "mtime": 1787545111.1434991,
+    "seen": 1787545235.567044,
+    "ast_hash": "cb6c7c89230baafdc22461feceba7166",
+    "semantic_hash": ""
+  },
+  "frontend/public/favicon-48x48.png": {
+    "mtime": 1787545111.1611636,
+    "seen": 1787545235.567044,
+    "ast_hash": "d73908932cf27e585a29933bc76be4e1",
+    "semantic_hash": ""
+  },
+  "frontend/public/favicon-512x512.png": {
+    "mtime": 1787545111.2710876,
+    "seen": 1787545235.5670452,
+    "ast_hash": "f25abebb6be7d74c15c153d34a7bd09e",
+    "semantic_hash": ""
+  },
+  "frontend/public/favicon-64x64.png": {
+    "mtime": 1787545111.1782868,
+    "seen": 1787545235.567046,
+    "ast_hash": "29345c28499bc9405a5454c1b9844c5e",
+    "semantic_hash": ""
+  },
+  "frontend/public/favicon.png": {
+    "mtime": 1787545111.3221688,
+    "seen": 1787545235.567046,
+    "ast_hash": "f25abebb6be7d74c15c153d34a7bd09e",
     "semantic_hash": ""
   }
 }

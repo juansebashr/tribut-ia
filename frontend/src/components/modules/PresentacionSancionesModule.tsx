@@ -189,25 +189,33 @@ export const PresentacionSancionesModule: React.FC = () => {
           </div>
         </div>
 
-        {/* GUÍA AUDITORIA */}
+        {/* GUÍA AUDITORIA Y FIRMEZA */}
         <div className="card">
           <div className="card-header">
-            <div className="card-title" style={{ fontSize: '13px' }}>📋 Plazos Legales de Presentación 2026</div>
+            <div className="card-title" style={{ fontSize: '13px' }}>📋 Firmeza Legal &amp; Plazos de Presentación 2026</div>
           </div>
           <div className="card-body" style={{ fontSize: '11.5px', lineHeight: 1.55, color: 'var(--text-secondary)' }}>
-            <div style={{ background: 'var(--bg-card)', border: '1px solid var(--border-subtle)', borderRadius: '6px', padding: '10px', marginBottom: '10px' }}>
-              <div style={{ fontWeight: 700, color: 'var(--text-primary)', marginBottom: '6px' }}>📆 Calendario de Vencimientos para Personas Naturales</div>
-              <div style={{ fontSize: '11px', color: 'var(--text-secondary)', lineHeight: 1.6 }}>
-                • Dos últimos dígitos del NIT determinan tu fecha exacta.<br />
-                • Generalmente entre <strong>agosto y octubre</strong> del año siguiente al gravable.<br />
-                • Presentar extemporáneamente genera <strong>Sanción por Extemporaneidad</strong>.
+            <div style={{ background: 'rgba(59, 130, 246, 0.08)', border: '1px solid rgba(59, 130, 246, 0.25)', borderRadius: '6px', padding: '10px', marginBottom: '10px' }}>
+              <div style={{ fontWeight: 700, color: 'var(--primary)', marginBottom: '4px' }}>
+                🛡️ Término General de Firmeza de la DIAN (Art. 714 E.T.)
+              </div>
+              <div style={{ fontSize: '11px', color: 'var(--text-secondary)', lineHeight: 1.55 }}>
+                Por regla general, la declaración de renta queda en <strong>firme a los 3 años</strong> contados a partir del vencimiento del plazo para declarar (o de la fecha de presentación si fue extemporánea). Si dentro de ese lapso la DIAN profiere y notifica un <strong>Emplazamiento para Corregir (Art. 685 E.T.)</strong> o un <strong>Requerimiento Especial (Art. 703 E.T.)</strong>, el término de firmeza se suspende o interrumpe, permitiéndole a la administración revisar a fondo y liquidar oficialmente el tributo.
               </div>
             </div>
+
+            <div style={{ background: 'var(--bg-card)', border: '1px solid var(--border-subtle)', borderRadius: '6px', padding: '10px', marginBottom: '10px' }}>
+              <div style={{ fontWeight: 700, color: 'var(--text-primary)', marginBottom: '4px' }}>📆 Calendario de Vencimientos para Personas Naturales</div>
+              <div style={{ fontSize: '11px', color: 'var(--text-secondary)', lineHeight: 1.55 }}>
+                • Dos últimos dígitos del NIT determinan tu fecha exacta (agosto a octubre).<br />
+                • Presentar extemporáneamente genera sanción del Art. 641 y extiende el conteo de los 3 años de firmeza.
+              </div>
+            </div>
+
             <div style={{ background: 'var(--amber-light)', border: '1px solid var(--amber-border)', borderRadius: '6px', padding: '10px' }}>
-              <div style={{ fontWeight: 700, color: 'var(--amber)', marginBottom: '4px' }}>💡 Estrategia Óptima con Beneficio de Auditoría</div>
-              <div style={{ fontSize: '11px', color: 'var(--text-secondary)', lineHeight: 1.6 }}>
-                1. Presentar y pagar completo en el plazo legal.<br />
-                2. La firmeza opera de pleno derecho: <strong>no necesitas solicitarla</strong>.
+              <div style={{ fontWeight: 700, color: 'var(--amber)', marginBottom: '4px' }}>💡 Beneficio de Auditoría (Art. 689-3 E.T.)</div>
+              <div style={{ fontSize: '11px', color: 'var(--text-secondary)', lineHeight: 1.55 }}>
+                Reduce el término general de 3 años a <strong>6 meses (+35%)</strong> o <strong>12 meses (+25%)</strong>. Requiere presentar y pagar completo en el plazo legal y que el impuesto anterior sea &ge; 71 UVT. Opera de pleno derecho.
               </div>
             </div>
           </div>
@@ -231,6 +239,37 @@ export const PresentacionSancionesModule: React.FC = () => {
           ⚖️ SECCIÓN 2 — RÉGIMEN SANCIONATORIO TRIBUTARIO
         </div>
         <div style={{ flex: 1, height: '2px', background: 'linear-gradient(to left, #dc2626, transparent)' }} />
+      </div>
+
+      {/* BANNER INFORMATIVO DEL RÉGIMEN SANCIONATORIO */}
+      <div
+        style={{
+          background: 'var(--bg-card)',
+          border: '1px solid var(--border-subtle)',
+          borderRadius: '8px',
+          padding: '14px 16px',
+          marginBottom: '20px',
+          fontSize: '11.5px',
+          lineHeight: '1.6',
+        }}
+      >
+        <div style={{ fontWeight: 800, color: 'var(--text-primary)', marginBottom: '6px', fontSize: '12.5px' }}>
+          📖 Fundamentos del Régimen Sancionatorio Colombiano
+        </div>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '12px', color: 'var(--text-secondary)' }}>
+          <div>
+            <strong style={{ color: 'var(--text-primary)' }}>• Corrección (Art. 644 E.T.):</strong> 10% del mayor valor a pagar si se corrige voluntariamente antes del emplazamiento; se incrementa al 20% si media Emplazamiento para Corregir (Art. 685 E.T.).
+          </div>
+          <div>
+            <strong style={{ color: 'var(--text-primary)' }}>• Extemporaneidad (Arts. 641 y 642 E.T.):</strong> 5% por mes o fracción sobre el impuesto a cargo (hasta 100%); se eleva al 10% mensual (hasta 200%) tras emplazamiento de la DIAN.
+          </div>
+          <div>
+            <strong style={{ color: 'var(--text-primary)' }}>• Principio de Favorabilidad (Art. 640 E.T.):</strong> Rebaja al 50% si no se han cometido infracciones en los últimos 2 años, o al 75% si es en el último año.
+          </div>
+          <div>
+            <strong style={{ color: 'var(--text-primary)' }}>• Sanción Mínima Legal (Art. 639 E.T.):</strong> Ninguna sanción puede ser inferior a 10 UVT ({formatCOP(minSancionLegalCop)} en 2026), excepto en intereses de mora.
+          </div>
+        </div>
       </div>
 
       {/* CALCULADORA DE SANCIONES */}
