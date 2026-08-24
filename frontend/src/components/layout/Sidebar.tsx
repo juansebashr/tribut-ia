@@ -425,6 +425,26 @@ export const Sidebar: React.FC = () => {
             </ul>
           </div>
 
+          {/* GRUPO: APRENDE & FUNDAMENTOS */}
+          <div>
+            <div className="sidebar-group-title">Aprende &amp; Fundamentos</div>
+            <ul className="sidebar-menu">
+              <li>
+                <button
+                  className={`sidebar-item-btn ${isNavActive('glosario') ? 'active' : ''}`}
+                  id="nav-item-glosario"
+                  onClick={() => navigateTo('glosario', 'main')}
+                >
+                  <span className="sidebar-item-icon">📚</span>
+                  <span className="sidebar-item-label">Glosario &amp; Guía Básica</span>
+                  <span className="sidebar-item-tag" style={{ background: '#0284c7', color: 'white' }}>
+                    Aprende
+                  </span>
+                </button>
+              </li>
+            </ul>
+          </div>
+
           {/* GRUPO: CONFIGURACIÓN & SISTEMA */}
           <div>
             <div className="sidebar-group-title">Configuración & Motor</div>

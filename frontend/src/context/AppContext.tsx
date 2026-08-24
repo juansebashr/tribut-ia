@@ -22,6 +22,7 @@ export type ModuleType =
   | 'art73'
   | 'inmuebles-afc'
   | 'tributacion-pareja'
+  | 'glosario'
   | 'rules'
   | 'session-sync';
 

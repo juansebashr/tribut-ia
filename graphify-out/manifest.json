@@ -976,5 +976,11 @@
     "seen": 1787588161.45538,
     "ast_hash": "cbfb0f8c053c40d6f4f50742ba0329cd",
     "semantic_hash": ""
+  },
+  "docs/explanation/02-glosario-conceptos-basicos-tributarios.md": {
+    "mtime": 1787604516.419231,
+    "seen": 1787604575.417613,
+    "ast_hash": "0ac8e690ac0fca3119b7c2dee5941d11",
+    "semantic_hash": ""
   }
 }
