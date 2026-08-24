@@ -1,24 +1,49 @@
 import React, { useState, useEffect } from 'react';
+import { useApp } from '../../context/AppContext';
 import type { PersonaJuridicaInput, PersonaJuridicaOutput } from '../../types/tax';
 import { calculatePersonaJuridica } from '../../services/api';
-import { formatCOP, parseCOP } from '../../utils/formatters';
-import { useApp } from '../../context/AppContext';
+import { PjCalcSubtab } from './PersonaJuridica/PjCalcSubtab';
+import { PjF110Subtab } from './PersonaJuridica/PjF110Subtab';
+import { PjTtdSubtab } from './PersonaJuridica/PjTtdSubtab';
+import { PjSobretasasSubtab } from './PersonaJuridica/PjSobretasasSubtab';
+import { PjConciliacionSubtab } from './PersonaJuridica/PjConciliacionSubtab';
 
 export const PersonaJuridicaModule: React.FC = () => {
-  const { taxYear, uvtValue } = useApp();
+  const { activeSubTab, navigateTo, taxYear, uvtValue, showToast } = useApp();
 
-  const [formData, setFormData] = useState<PersonaJuridicaInput>({
+  const [inputs, setInputs] = useState<PersonaJuridicaInput>({
     tax_year: taxYear,
     custom_uvt: uvtValue,
     tarifa_personalizada: undefined,
+    tipo_regimen: 'general',
+    aplica_sobretasa_financiera: false,
+    aplica_sobretasa_hidroelectrica: false,
+    sobretasa_minero_petroleo_pct: 0,
+    total_costos_gastos_nomina: 250000000,
+    aportes_seguridad_social: 55000000,
+    aportes_sena_icbf_cajas: 15000000,
+    efectivo_y_equivalentes: 120000000,
+    inversiones_derivados: 50000000,
+    cuentas_por_cobrar: 280000000,
+    inventarios: 350000000,
+    activos_intangibles: 0,
+    activos_biologicos: 0,
+    propiedades_planta_equipo: 650000000,
+    otros_activos: 25000000,
+    pasivos: 450000000,
     ingresos_brutos_operacionales: 1250000000,
     ingresos_brutos_no_operacionales: 45000000,
+    ingresos_financieros: 0,
+    dividendos_no_constitutivos: 0,
+    dividendos_gravados_tarifa_general: 0,
+    otros_ingresos: 0,
     devoluciones_rebajas_descuentos: 15000000,
     ingresos_no_constitutivos_renta: 30000000,
     costos_procedentes: 620000000,
     gastos_administracion: 180000000,
     gastos_ventas: 95000000,
     gastos_financieros: 25000000,
+    otros_gastos_deducciones: 0,
     gastos_no_deducibles: 18000000,
     deducciones_especiales: 12000000,
     rentas_exentas: 0,
@@ -26,414 +51,427 @@ export const PersonaJuridicaModule: React.FC = () => {
     compensacion_exceso_renta_presuntiva: 0,
     utilidad_contable_antes_impuestos: 350000000,
     diferencias_permanentes_ttd: 15000000,
+    ganancias_ocasionales_brutas: 0,
+    costos_ganancia_ocasional: 0,
+    ganancias_ocasionales_exentas: 0,
     ganancia_ocasional_gravable: 0,
     descuento_tributario_ica: 8500000,
     otros_descuentos_tributarios: 0,
+    obras_por_impuestos_mod1: 0,
+    descuento_obras_mod2: 0,
+    credito_fiscal_256_1: 0,
     retenciones_en_la_fuente: 42000000,
     autorretenciones_practicadas: 18500000,
     anticipo_ano_anterior: 28000000,
     saldo_a_favor_ano_anterior: 0,
+    anticipo_sobretasa_ano_anterior: 0,
+    porcentaje_anticipo_siguiente: 0.75,
+    sanciones: 0,
+    aporte_voluntario_art244_1: 0,
   });
 
   const [result, setResult] = useState<PersonaJuridicaOutput | null>(null);
-  const [activeSection, setActiveSection] = useState<'ingresos' | 'costos' | 'ttd' | 'descuentos' | 'retenciones'>('ingresos');
+  const [isAuditModalOpen, setIsAuditModalOpen] = useState<boolean>(false);
 
+  // Sync year and uvt changes
   useEffect(() => {
-    runCalculation();
-  }, [formData, taxYear, uvtValue]);
+    setInputs((prev) => ({ ...prev, tax_year: taxYear, custom_uvt: uvtValue }));
+  }, [taxYear, uvtValue]);
+
+  // Recalculate on inputs change
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      runCalculation();
+    }, 100);
+    return () => clearTimeout(timer);
+  }, [inputs]);
 
   const runCalculation = async () => {
     try {
-      const payload: PersonaJuridicaInput = {
-        ...formData,
-        tax_year: taxYear,
-        custom_uvt: uvtValue,
-      };
-      const res = await calculatePersonaJuridica(payload);
+      const res = await calculatePersonaJuridica(inputs);
       setResult(res);
-    } catch (err) {
-      console.warn('Error calculating PJ:', err);
+    } catch (err: any) {
+      console.error('Error calculando Persona Jurídica:', err);
     }
   };
 
-  const handleInputChange = (field: keyof PersonaJuridicaInput, value: number) => {
-    setFormData((prev) => ({ ...prev, [field]: value }));
+  // PRESETS
+  const loadPresetComercial = () => {
+    setInputs({
+      tax_year: taxYear,
+      custom_uvt: uvtValue,
+      tipo_regimen: 'general',
+      aplica_sobretasa_financiera: false,
+      aplica_sobretasa_hidroelectrica: false,
+      sobretasa_minero_petroleo_pct: 0,
+      total_costos_gastos_nomina: 250000000,
+      aportes_seguridad_social: 55000000,
+      aportes_sena_icbf_cajas: 15000000,
+      efectivo_y_equivalentes: 120000000,
+      inversiones_derivados: 50000000,
+      cuentas_por_cobrar: 280000000,
+      inventarios: 350000000,
+      activos_intangibles: 0,
+      activos_biologicos: 0,
+      propiedades_planta_equipo: 650000000,
+      otros_activos: 25000000,
+      pasivos: 450000000,
+      ingresos_brutos_operacionales: 1250000000,
+      ingresos_brutos_no_operacionales: 45000000,
+      devoluciones_rebajas_descuentos: 15000000,
+      ingresos_no_constitutivos_renta: 30000000,
+      costos_procedentes: 620000000,
+      gastos_administracion: 180000000,
+      gastos_ventas: 95000000,
+      gastos_financieros: 25000000,
+      otros_gastos_deducciones: 0,
+      gastos_no_deducibles: 18000000,
+      deducciones_especiales: 12000000,
+      rentas_exentas: 0,
+      compensacion_perdidas_fiscales: 0,
+      compensacion_exceso_renta_presuntiva: 0,
+      utilidad_contable_antes_impuestos: 350000000,
+      diferencias_permanentes_ttd: 15000000,
+      ganancia_ocasional_gravable: 0,
+      descuento_tributario_ica: 8500000,
+      otros_descuentos_tributarios: 0,
+      retenciones_en_la_fuente: 42000000,
+      autorretenciones_practicadas: 18500000,
+      anticipo_ano_anterior: 28000000,
+      saldo_a_favor_ano_anterior: 0,
+      porcentaje_anticipo_siguiente: 0.75,
+      sanciones: 0,
+    });
+    showToast('✓ Preset Empresa Comercial Estándar cargado', 'info', 2000);
   };
 
-  const renderCurrencyField = (
-    label: string,
-    field: keyof PersonaJuridicaInput,
-    helpText?: string
-  ) => {
-    const val = (formData[field] as number) || 0;
-    return (
-      <div className="input-field" style={{ marginBottom: '12px' }}>
-        <label className="input-label">{label}</label>
-        <div className="input-wrapper">
-          <span className="input-prefix">$</span>
-          <input
-            type="text"
-            inputMode="numeric"
-            className="currency-input"
-            value={formatCOP(val, false)}
-            onChange={(e) => handleInputChange(field, parseCOP(e.target.value))}
-          />
-        </div>
-        {helpText && <span className="input-help">{helpText}</span>}
-      </div>
-    );
+  const loadPresetTech = () => {
+    setInputs({
+      tax_year: taxYear,
+      custom_uvt: uvtValue,
+      tipo_regimen: 'general',
+      aplica_sobretasa_financiera: false,
+      aplica_sobretasa_hidroelectrica: false,
+      sobretasa_minero_petroleo_pct: 0,
+      total_costos_gastos_nomina: 400000000,
+      aportes_seguridad_social: 88000000,
+      aportes_sena_icbf_cajas: 0,
+      efectivo_y_equivalentes: 300000000,
+      inversiones_derivados: 100000000,
+      cuentas_por_cobrar: 180000000,
+      inventarios: 0,
+      activos_intangibles: 80000000,
+      activos_biologicos: 0,
+      propiedades_planta_equipo: 120000000,
+      otros_activos: 20000000,
+      pasivos: 150000000,
+      ingresos_brutos_operacionales: 1800000000,
+      ingresos_brutos_no_operacionales: 60000000,
+      devoluciones_rebajas_descuentos: 0,
+      ingresos_no_constitutivos_renta: 0,
+      costos_procedentes: 500000000,
+      gastos_administracion: 220000000,
+      gastos_ventas: 140000000,
+      gastos_financieros: 15000000,
+      otros_gastos_deducciones: 0,
+      gastos_no_deducibles: 10000000,
+      deducciones_especiales: 45000000, // I+D y 1er empleo
+      rentas_exentas: 0,
+      compensacion_perdidas_fiscales: 0,
+      compensacion_exceso_renta_presuntiva: 0,
+      utilidad_contable_antes_impuestos: 850000000,
+      diferencias_permanentes_ttd: 20000000,
+      ganancia_ocasional_gravable: 0,
+      descuento_tributario_ica: 12000000,
+      otros_descuentos_tributarios: 0,
+      retenciones_en_la_fuente: 65000000,
+      autorretenciones_practicadas: 28000000,
+      anticipo_ano_anterior: 45000000,
+      saldo_a_favor_ano_anterior: 0,
+      porcentaje_anticipo_siguiente: 0.75,
+      sanciones: 0,
+    });
+    showToast('✓ Preset Empresa de Servicios Tech & I+D cargado', 'info', 2000);
   };
+
+  const loadPresetZonaFranca = () => {
+    setInputs({
+      tax_year: taxYear,
+      custom_uvt: uvtValue,
+      tipo_regimen: 'zona_franca',
+      aplica_sobretasa_financiera: false,
+      aplica_sobretasa_hidroelectrica: false,
+      sobretasa_minero_petroleo_pct: 0,
+      total_costos_gastos_nomina: 500000000,
+      aportes_seguridad_social: 110000000,
+      aportes_sena_icbf_cajas: 25000000,
+      efectivo_y_equivalentes: 450000000,
+      inversiones_derivados: 200000000,
+      cuentas_por_cobrar: 600000000,
+      inventarios: 800000000,
+      activos_intangibles: 0,
+      activos_biologicos: 0,
+      propiedades_planta_equipo: 1500000000,
+      otros_activos: 50000000,
+      pasivos: 900000000,
+      ingresos_brutos_operacionales: 3500000000,
+      ingresos_brutos_no_operacionales: 80000000,
+      devoluciones_rebajas_descuentos: 40000000,
+      ingresos_no_constitutivos_renta: 0,
+      costos_procedentes: 1800000000,
+      gastos_administracion: 400000000,
+      gastos_ventas: 250000000,
+      gastos_financieros: 60000000,
+      otros_gastos_deducciones: 0,
+      gastos_no_deducibles: 20000000,
+      deducciones_especiales: 0,
+      rentas_exentas: 0,
+      compensacion_perdidas_fiscales: 0,
+      compensacion_exceso_renta_presuntiva: 0,
+      utilidad_contable_antes_impuestos: 1050000000,
+      diferencias_permanentes_ttd: 30000000,
+      ganancia_ocasional_gravable: 0,
+      descuento_tributario_ica: 15000000,
+      otros_descuentos_tributarios: 0,
+      retenciones_en_la_fuente: 80000000,
+      autorretenciones_practicadas: 40000000,
+      anticipo_ano_anterior: 60000000,
+      saldo_a_favor_ano_anterior: 0,
+      porcentaje_anticipo_siguiente: 0.75,
+      sanciones: 0,
+    });
+    showToast('✓ Preset Usuario Industrial Zona Franca (20%) cargado', 'info', 2000);
+  };
+
+  const loadPresetFinanciera = () => {
+    const uvt = uvtValue || 49799;
+    const rlg = 140000 * uvt; // > 120.000 UVT
+    setInputs({
+      tax_year: taxYear,
+      custom_uvt: uvtValue,
+      tipo_regimen: 'general',
+      aplica_sobretasa_financiera: true,
+      aplica_sobretasa_hidroelectrica: false,
+      sobretasa_minero_petroleo_pct: 0,
+      total_costos_gastos_nomina: 1200000000,
+      aportes_seguridad_social: 260000000,
+      aportes_sena_icbf_cajas: 60000000,
+      efectivo_y_equivalentes: 2500000000,
+      inversiones_derivados: 8000000000,
+      cuentas_por_cobrar: 12000000000,
+      inventarios: 0,
+      activos_intangibles: 300000000,
+      activos_biologicos: 0,
+      propiedades_planta_equipo: 1800000000,
+      otros_activos: 400000000,
+      pasivos: 18000000000,
+      ingresos_brutos_operacionales: rlg + 1500000000,
+      ingresos_brutos_no_operacionales: 250000000,
+      devoluciones_rebajas_descuentos: 0,
+      ingresos_no_constitutivos_renta: 50000000,
+      costos_procedentes: 1200000000,
+      gastos_administracion: 400000000,
+      gastos_ventas: 150000000,
+      gastos_financieros: 0,
+      otros_gastos_deducciones: 0,
+      gastos_no_deducibles: 30000000,
+      deducciones_especiales: 0,
+      rentas_exentas: 0,
+      compensacion_perdidas_fiscales: 0,
+      compensacion_exceso_renta_presuntiva: 0,
+      utilidad_contable_antes_impuestos: rlg,
+      diferencias_permanentes_ttd: 40000000,
+      ganancia_ocasional_gravable: 0,
+      descuento_tributario_ica: 25000000,
+      otros_descuentos_tributarios: 0,
+      retenciones_en_la_fuente: 150000000,
+      autorretenciones_practicadas: 90000000,
+      anticipo_ano_anterior: 200000000,
+      saldo_a_favor_ano_anterior: 0,
+      porcentaje_anticipo_siguiente: 0.75,
+      sanciones: 0,
+    });
+    showToast('✓ Preset Entidad Financiera (Sobretasa +5%) cargado', 'info', 2000);
+  };
+
+  const currentSubTab = activeSubTab || 'calc';
 
   return (
-    <div id="pane-pj" className="module-pane active">
-      {/* HEADER EXPLICATIVO */}
-      <div style={{ marginBottom: '16px' }}>
-        <h2 style={{ fontSize: '18px', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '4px' }}>
-          🏢 Liquidación Persona Jurídica (Formulario 110 - DIAN)
-        </h2>
-        <p style={{ fontSize: '12.5px', color: 'var(--text-muted)' }}>
-          Depuración de Renta Ordinaria a tarifa general (35%), verificación obligatoria de Tasa de Tributación Depurada
-          (TTD mínima del 15% - Art. 240 Parágrafo 6) y descuentos tributarios.
-        </p>
+    <div id="module-persona-juridica">
+      {/* NAVEGADOR DE SUBPESTAÑAS DE PERSONA JURÍDICA */}
+      <div className="subtabs-bar" style={{ marginBottom: '16px' }}>
+        <button
+          className={`subtab-btn ${currentSubTab === 'calc' ? 'active' : ''}`}
+          onClick={() => navigateTo('pj', 'calc')}
+        >
+          🧮 1. Calculadora & Depuración F-110
+        </button>
+
+        <button
+          className={`subtab-btn ${currentSubTab === 'f110' ? 'active' : ''}`}
+          onClick={() => navigateTo('pj', 'f110')}
+        >
+          📋 2. Formulario 110 Facsímil DIAN
+        </button>
+
+        <button
+          className={`subtab-btn ${currentSubTab === 'ttd' ? 'active' : ''}`}
+          onClick={() => navigateTo('pj', 'ttd')}
+        >
+          ⚖️ 3. Laboratorio Tasa Mínima TTD (15%)
+        </button>
+
+        <button
+          className={`subtab-btn ${currentSubTab === 'sobretasas' ? 'active' : ''}`}
+          onClick={() => navigateTo('pj', 'sobretasas')}
+        >
+          ⚡ 4. Sobretasas & Regímenes Especiales
+        </button>
+
+        <button
+          className={`subtab-btn ${currentSubTab === 'conciliacion' ? 'active' : ''}`}
+          onClick={() => navigateTo('pj', 'conciliacion')}
+        >
+          📑 5. Conciliación NIIF F-2516
+        </button>
       </div>
 
-      <div className="responsive-grid-split" style={{ alignItems: 'start' }}>
-        {/* COLUMNA IZQUIERDA: FORMULARIO */}
-        <div className="card" style={{ border: '2px solid var(--primary-border)' }}>
-          <div className="card-header" style={{ background: 'var(--primary-light)' }}>
-            <div className="card-title" style={{ color: 'var(--primary)', fontSize: '14px' }}>
-              Parámetros de Depuración Fiscal F-110
+      {/* CONTENIDO DE CADA SUBPESTAÑA */}
+      {currentSubTab === 'calc' && (
+        <PjCalcSubtab
+          inputs={inputs}
+          setInputs={setInputs}
+          result={result}
+          onOpenAudit={() => setIsAuditModalOpen(true)}
+          onNavigateToF110={() => navigateTo('pj', 'f110')}
+          onNavigateToTtd={() => navigateTo('pj', 'ttd')}
+          onNavigateToSobretasas={() => navigateTo('pj', 'sobretasas')}
+          loadPresetComercial={loadPresetComercial}
+          loadPresetTech={loadPresetTech}
+          loadPresetZonaFranca={loadPresetZonaFranca}
+          loadPresetFinanciera={loadPresetFinanciera}
+        />
+      )}
+
+      {currentSubTab === 'f110' && (
+        <PjF110Subtab result={result} onNavigateToCalc={() => navigateTo('pj', 'calc')} />
+      )}
+
+      {currentSubTab === 'ttd' && <PjTtdSubtab />}
+
+      {currentSubTab === 'sobretasas' && <PjSobretasasSubtab />}
+
+      {currentSubTab === 'conciliacion' && <PjConciliacionSubtab />}
+
+      {/* MODAL DE TRAZABILIDAD Y AUDITORÍA */}
+      {isAuditModalOpen && result && (
+        <div
+          className="modal-backdrop"
+          onClick={() => setIsAuditModalOpen(false)}
+          style={{
+            position: 'fixed',
+            inset: 0,
+            background: 'rgba(0,0,0,0.6)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            zIndex: 1000,
+            padding: '20px',
+          }}
+        >
+          <div
+            className="modal-content"
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              background: 'var(--bg-primary)',
+              borderRadius: '12px',
+              maxWidth: '850px',
+              width: '100%',
+              maxHeight: '90vh',
+              overflowY: 'auto',
+              padding: '24px',
+              boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.3)',
+            }}
+          >
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                marginBottom: '16px',
+                borderBottom: '1px solid var(--border-color)',
+                paddingBottom: '12px',
+              }}
+            >
+              <div>
+                <h3 style={{ fontSize: '18px', fontWeight: 800, margin: 0 }}>
+                  🔍 Trazabilidad y Memoria de Cálculo Fiscal (Formulario 110)
+                </h3>
+                <span style={{ fontSize: '12px', color: 'var(--text-muted)' }}>
+                  Audit Trail determinista paso a paso con fundamentos del Estatuto Tributario
+                </span>
+              </div>
+              <button
+                className="btn btn-outline btn-xs"
+                onClick={() => setIsAuditModalOpen(false)}
+                style={{ fontSize: '16px', padding: '4px 8px' }}
+              >
+                ✕
+              </button>
             </div>
-          </div>
 
-          <div className="card-body">
-            {/* SUB-PESTAÑAS DE SECCIÓN */}
-            <div style={{ display: 'flex', gap: '4px', marginBottom: '16px', flexWrap: 'wrap' }}>
-              <button
-                className={`btn btn-xs ${activeSection === 'ingresos' ? 'btn-primary' : 'btn-outline'}`}
-                onClick={() => setActiveSection('ingresos')}
-              >
-                1. Ingresos
-              </button>
-              <button
-                className={`btn btn-xs ${activeSection === 'costos' ? 'btn-primary' : 'btn-outline'}`}
-                onClick={() => setActiveSection('costos')}
-              >
-                2. Costos &amp; Gastos
-              </button>
-              <button
-                className={`btn btn-xs ${activeSection === 'ttd' ? 'btn-primary' : 'btn-outline'}`}
-                onClick={() => setActiveSection('ttd')}
-              >
-                3. TTD (15%) &amp; Conciliación
-              </button>
-              <button
-                className={`btn btn-xs ${activeSection === 'descuentos' ? 'btn-primary' : 'btn-outline'}`}
-                onClick={() => setActiveSection('descuentos')}
-              >
-                4. Descuentos
-              </button>
-              <button
-                className={`btn btn-xs ${activeSection === 'retenciones' ? 'btn-primary' : 'btn-outline'}`}
-                onClick={() => setActiveSection('retenciones')}
-              >
-                5. Retenciones &amp; Anticipos
-              </button>
-            </div>
-
-            {/* SECCIÓN 1: INGRESOS */}
-            {activeSection === 'ingresos' && (
-              <div>
-                {renderCurrencyField(
-                  'Ingresos Brutos Operacionales ($ COP)',
-                  'ingresos_brutos_operacionales',
-                  'Ventas netas de bienes o prestación de servicios de la actividad principal'
-                )}
-                {renderCurrencyField(
-                  'Ingresos Brutos No Operacionales ($ COP)',
-                  'ingresos_brutos_no_operacionales',
-                  'Rendimientos financieros, dividendos u otros ingresos extraordinarios'
-                )}
-                {renderCurrencyField(
-                  'Devoluciones, Rebajas y Descuentos ($ COP)',
-                  'devoluciones_rebajas_descuentos',
-                  'Devoluciones en ventas documentadas con notas crédito'
-                )}
-                {renderCurrencyField(
-                  'Ingresos No Constitutivos de Renta ($ COP)',
-                  'ingresos_no_constitutivos_renta',
-                  'INCRNGO: dividendos no gravados (Art. 48/49), capitalizaciones, etc.'
-                )}
-              </div>
-            )}
-
-            {/* SECCIÓN 2: COSTOS Y GASTOS */}
-            {activeSection === 'costos' && (
-              <div>
-                {renderCurrencyField(
-                  'Costos Procedentes de Ventas / Servicios ($ COP)',
-                  'costos_procedentes',
-                  'Costos directamente asociados a la producción o adquisición de bienes'
-                )}
-                {renderCurrencyField(
-                  'Gastos de Administración ($ COP)',
-                  'gastos_administracion',
-                  'Nómina administrativa, arriendos, servicios públicos y honorarios'
-                )}
-                {renderCurrencyField(
-                  'Gastos de Ventas y Distribución ($ COP)',
-                  'gastos_ventas',
-                  'Publicidad, comisiones comerciales, logística y transporte'
-                )}
-                {renderCurrencyField(
-                  'Gastos Financieros ($ COP)',
-                  'gastos_financieros',
-                  'Intereses sobre créditos bancarios, comisiones bancarias'
-                )}
-              </div>
-            )}
-
-            {/* SECCIÓN 3: TTD Y CONCILIACIÓN */}
-            {activeSection === 'ttd' && (
-              <div>
-                {renderCurrencyField(
-                  'Utilidad Contable Antes de Impuestos (UC) ($ COP)',
-                  'utilidad_contable_antes_impuestos',
-                  'Utilidad según Estado de Resultados bajo NIIF (necesaria para TTD)'
-                )}
-                {renderCurrencyField(
-                  'Diferencias Permanentes que Aumentan la Renta ($ COP)',
-                  'diferencias_permanentes_ttd',
-                  'Gastos no deducibles por falta de soportes electrónicos o retenciones'
-                )}
-                {renderCurrencyField(
-                  'Deducciones Especiales con Beneficio ($ COP)',
-                  'deducciones_especiales',
-                  'Primer empleo, deducción ambiental, becas de estudio (Art. 107-2)'
-                )}
-                {renderCurrencyField(
-                  'Compensación Pérdidas Fiscales Años Anteriores ($ COP)',
-                  'compensacion_perdidas_fiscales',
-                  'Pérdidas compensables según Art. 147 E.T.'
-                )}
-              </div>
-            )}
-
-            {/* SECCIÓN 4: DESCUENTOS TRIBUTARIOS */}
-            {activeSection === 'descuentos' && (
-              <div>
-                {renderCurrencyField(
-                  'Descuento Tributario ICA Pagado (50%) ($ COP)',
-                  'descuento_tributario_ica',
-                  'Art. 115 E.T.: 50% del ICA efectivamente pagado durante el año gravable'
-                )}
-                {renderCurrencyField(
-                  'Otros Descuentos Tributarios ($ COP)',
-                  'otros_descuentos_tributarios',
-                  'Donaciones a ESAL (Art. 257) e impuestos pagados en el exterior (Art. 254)'
-                )}
-                {renderCurrencyField(
-                  'Ganancia Ocasional Gravable ($ COP)',
-                  'ganancia_ocasional_gravable',
-                  'Utilidad en venta de activos fijos poseídos más de 2 años (Tarifa 15%)'
-                )}
-              </div>
-            )}
-
-            {/* SECCIÓN 5: RETENCIONES Y ANTICIPOS */}
-            {activeSection === 'retenciones' && (
-              <div>
-                {renderCurrencyField(
-                  'Retenciones en la Fuente que le Practicaron ($ COP)',
-                  'retenciones_en_la_fuente',
-                  'Retenciones practicadas por clientes soportadas con certificados'
-                )}
-                {renderCurrencyField(
-                  'Autorretenciones Especiales de Renta Practicadas ($ COP)',
-                  'autorretenciones_practicadas',
-                  'Decreto 2201 de 2016 pagadas en Formulario 350'
-                )}
-                {renderCurrencyField(
-                  'Anticipo de Renta Liquidado Año Anterior ($ COP)',
-                  'anticipo_ano_anterior',
-                  'Casilla de anticipo de la declaración del año inmediatamente anterior'
-                )}
-                {renderCurrencyField(
-                  'Saldo a Favor del Año Anterior ($ COP)',
-                  'saldo_a_favor_ano_anterior',
-                  'Saldo a favor de la declaración previa no solicitado en devolución'
-                )}
-              </div>
-            )}
-          </div>
-        </div>
-
-        {/* COLUMNA DERECHA: RESULTADO EN VIVO & TTD */}
-        <div className="card" style={{ border: '2px solid var(--emerald-border)' }}>
-          <div className="card-header" style={{ background: 'var(--emerald-light)' }}>
-            <div className="card-title" style={{ color: 'var(--emerald)', fontSize: '14px' }}>
-              Liquidación Formulario 110 &amp; Auditoría TTD (15%)
-            </div>
-          </div>
-
-          <div className="card-body">
-            {result ? (
-              <div>
-                {/* SALDO A PAGAR / FAVOR PRINCIPAL */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+              {result.audit_trace.map((item, idx) => (
                 <div
+                  key={idx}
                   style={{
-                    background: '#f0fdf4',
-                    border: '1px solid #bbf7d0',
-                    borderRadius: '8px',
                     padding: '14px',
-                    marginBottom: '14px',
-                    textAlign: 'center',
-                  }}
-                >
-                  <div style={{ fontSize: '11px', fontWeight: 800, color: '#166534', textTransform: 'uppercase' }}>
-                    {result.saldo_a_pagar > 0 ? 'SALDO A PAGAR (CASILLA 98 / F-110)' : 'SALDO A FAVOR'}
-                  </div>
-                  <div
-                    id="pj-kpi-value"
-                    style={{
-                      fontSize: '24px',
-                      fontWeight: 900,
-                      fontFamily: 'var(--font-mono)',
-                      color: result.saldo_a_pagar > 0 ? '#15803d' : '#0284c7',
-                      margin: '4px 0',
-                    }}
-                  >
-                    {formatCOP(result.saldo_a_pagar > 0 ? result.saldo_a_pagar : result.saldo_a_favor)} COP
-                  </div>
-                  <div style={{ fontSize: '11px', color: '#166534' }}>
-                    Tarifa Nominal Aplicada: <strong>{(result.tarifa_renta_aplicada * 100).toFixed(0)}%</strong>
-                  </div>
-                </div>
-
-                {/* ALERT BOX TTD 15% */}
-                <div
-                  id="pj-ttd-alert"
-                  style={{
-                    background: result.aplica_impuesto_adicional_ttd ? '#fef2f2' : '#f0fdf4',
-                    border: `1.5px solid ${result.aplica_impuesto_adicional_ttd ? '#fca5a5' : '#86efac'}`,
                     borderRadius: '8px',
-                    padding: '12px',
-                    marginBottom: '14px',
+                    background: 'var(--bg-secondary)',
+                    border: '1px solid var(--border-color)',
                   }}
                 >
-                  <div
-                    style={{
-                      display: 'flex',
-                      justifyContent: 'space-between',
-                      alignItems: 'center',
-                      marginBottom: '4px',
-                    }}
-                  >
-                    <span
-                      style={{
-                        fontWeight: 800,
-                        fontSize: '12px',
-                        color: result.aplica_impuesto_adicional_ttd ? '#991b1b' : '#166534',
-                      }}
-                    >
-                      {result.aplica_impuesto_adicional_ttd ? '⚠️ AJUSTE REQUERIDO: TTD < 15%' : '✓ TTD CONFORME (≥ 15%)'}
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
+                    <span style={{ fontSize: '13px', fontWeight: 800 }}>
+                      {idx + 1}. {item.title}
                     </span>
-                    <span
-                      style={{
-                        fontFamily: 'var(--font-mono)',
-                        fontWeight: 800,
-                        fontSize: '13px',
-                        color: result.aplica_impuesto_adicional_ttd ? '#b91c1c' : '#15803d',
-                      }}
-                    >
-                      TTD: {result.ttd_calculada_pct.toFixed(2)}%
-                    </span>
-                  </div>
-                  <p
-                    style={{
-                      fontSize: '11.5px',
-                      color: result.aplica_impuesto_adicional_ttd ? '#7f1d1d' : '#14532d',
-                      margin: 0,
-                    }}
-                  >
-                    {result.aplica_impuesto_adicional_ttd
-                      ? `Se adiciona un impuesto de ${formatCOP(result.impuesto_adicional_ttd)} COP para cumplir con la Tasa de Tributación Depurada mínima legal del 15% (Art. 240 Par. 6).`
-                      : 'La tasa de tributación depurada de la sociedad supera el mínimo legal del 15%. No requiere impuesto adicional.'}
-                  </p>
-                </div>
-
-                {/* TABLA DE DEPURACIÓN FISCAL */}
-                <table className="breakdown-table" style={{ fontSize: '11.5px', width: '100%' }}>
-                  <tbody>
-                    <tr>
-                      <td style={{ padding: '5px 0', color: '#64748b' }}>Ingresos Netos Ordinarios:</td>
-                      <td style={{ padding: '5px 0', textAlign: 'right', fontFamily: 'var(--font-mono)' }}>
-                        {formatCOP(result.ingresos_netos)}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td style={{ padding: '5px 0', color: '#64748b' }}>Renta Bruta:</td>
-                      <td style={{ padding: '5px 0', textAlign: 'right', fontFamily: 'var(--font-mono)' }}>
-                        {formatCOP(result.renta_bruta)}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td style={{ padding: '5px 0', color: '#64748b' }}>Total Gastos Deducibles:</td>
-                      <td style={{ padding: '5px 0', textAlign: 'right', fontFamily: 'var(--font-mono)' }}>
-                        -{formatCOP(result.total_gastos_deducibles)}
-                      </td>
-                    </tr>
-                    <tr style={{ borderTop: '1px solid #cbd5e1', fontWeight: 700 }}>
-                      <td style={{ padding: '5px 0', color: '#0b3b60' }}>Renta Líquida Gravable:</td>
-                      <td style={{ padding: '5px 0', textAlign: 'right', fontFamily: 'var(--font-mono)', color: '#0b3b60' }}>
-                        {formatCOP(result.renta_liquida_gravable)}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td style={{ padding: '5px 0', color: '#64748b' }}>Impuesto Básico de Renta (35%):</td>
-                      <td style={{ padding: '5px 0', textAlign: 'right', fontFamily: 'var(--font-mono)' }}>
-                        {formatCOP(result.impuesto_basico_renta)}
-                      </td>
-                    </tr>
-                    {result.impuesto_adicional_ttd > 0 && (
-                      <tr>
-                        <td style={{ padding: '5px 0', color: '#b91c1c', fontWeight: 600 }}>
-                          (+) Impuesto Adicional TTD (15%):
-                        </td>
-                        <td style={{ padding: '5px 0', textAlign: 'right', fontFamily: 'var(--font-mono)', color: '#b91c1c' }}>
-                          +{formatCOP(result.impuesto_adicional_ttd)}
-                        </td>
-                      </tr>
+                    {item.statutory_reference && (
+                      <span
+                        style={{
+                          fontSize: '11px',
+                          fontWeight: 700,
+                          padding: '2px 8px',
+                          background: 'var(--primary-light, #e0e7ff)',
+                          color: 'var(--primary, #4338ca)',
+                          borderRadius: '4px',
+                        }}
+                      >
+                        {item.statutory_reference}
+                      </span>
                     )}
-                    <tr>
-                      <td style={{ padding: '5px 0', color: '#64748b' }}>(-) Descuentos Tributarios:</td>
-                      <td style={{ padding: '5px 0', textAlign: 'right', fontFamily: 'var(--font-mono)', color: '#059669' }}>
-                        -{formatCOP(result.total_descuentos_tributarios_aplicados)}
-                      </td>
-                    </tr>
-                    <tr style={{ borderTop: '1px solid #cbd5e1', fontWeight: 800 }}>
-                      <td style={{ padding: '5px 0', color: '#0b3b60' }}>Impuesto Neto Total:</td>
-                      <td style={{ padding: '5px 0', textAlign: 'right', fontFamily: 'var(--font-mono)', color: '#0b3b60' }}>
-                        {formatCOP(result.impuesto_neto_total)}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td style={{ padding: '5px 0', color: '#64748b' }}>(-) Retenciones y Anticipos:</td>
-                      <td style={{ padding: '5px 0', textAlign: 'right', fontFamily: 'var(--font-mono)', color: '#059669' }}>
-                        -{formatCOP(result.total_retenciones_y_anticipos)}
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            ) : (
-              <div style={{ textAlign: 'center', color: '#64748b', padding: '20px' }}>
-                Calculando liquidación Persona Jurídica...
-              </div>
-            )}
+                  </div>
+                  <p style={{ fontSize: '12px', color: 'var(--text-secondary)', margin: '0 0 8px 0', lineHeight: '1.5' }}>
+                    {item.notes}
+                  </p>
+                  <div style={{ display: 'flex', gap: '16px', fontSize: '11.5px', color: 'var(--text-muted)' }}>
+                    {item.raw_input_cop !== undefined && (
+                      <div>Valor Base: <strong>${item.raw_input_cop.toLocaleString('es-CO')}</strong></div>
+                    )}
+                    <div>Valor Determinado: <strong>${item.calculated_cop.toLocaleString('es-CO')}</strong></div>
+                    <div>Resultado Final: <strong style={{ color: 'var(--primary)' }}>${item.final_allowed_cop.toLocaleString('es-CO')}</strong></div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div style={{ marginTop: '20px', textAlign: 'right' }}>
+              <button className="btn btn-primary btn-sm" onClick={() => setIsAuditModalOpen(false)}>
+                Entendido y Cerrar
+              </button>
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };

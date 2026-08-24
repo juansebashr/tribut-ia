@@ -99,13 +99,16 @@ def chrome_devtools_endpoint():
 
 
 @app.get("/favicon.ico", include_in_schema=False)
+@app.get("/favicon.svg", include_in_schema=False)
 def favicon():
     """Sirve el favicon oficial para evitar el error 404 del navegador."""
-    if (FRONTEND_DIST / "favicon.svg").exists():
-        return FileResponse(str(FRONTEND_DIST / "favicon.svg"), media_type="image/svg+xml")
-    favicon_svg = STATIC_DIR / "favicon.svg"
-    if favicon_svg.exists():
-        return FileResponse(str(favicon_svg), media_type="image/svg+xml")
+    for path in [
+        FRONTEND_DIST / "favicon.svg",
+        STATIC_DIR / "favicon.svg",
+        BASE_DIR.parent.parent / "frontend" / "public" / "favicon.svg",
+    ]:
+        if path.exists():
+            return FileResponse(str(path), media_type="image/svg+xml")
     return Response(status_code=204)
 
 

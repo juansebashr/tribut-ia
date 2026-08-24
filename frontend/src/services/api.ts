@@ -52,6 +52,36 @@ export async function calculatePersonaJuridica(payload: PersonaJuridicaInput): P
   return await res.json();
 }
 
+export async function calculateRegimenSimple(
+  payload: import('../types/tax').RegimenSimpleInput
+): Promise<import('../types/tax').RegimenSimpleOutput> {
+  const res = await fetch(`${API_BASE_URL}/calculate/regimen-simple/calculate`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
+  });
+  if (!res.ok) {
+    const errorData = await res.json().catch(() => ({}));
+    throw new Error(errorData.detail || 'Error en el cálculo de Régimen Simple');
+  }
+  return await res.json();
+}
+
+export async function simularComparativaSimple(
+  payload: import('../types/tax').ComparativaSimpleInput
+): Promise<import('../types/tax').ComparativaSimpleOutput> {
+  const res = await fetch(`${API_BASE_URL}/calculate/regimen-simple/comparativa`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
+  });
+  if (!res.ok) {
+    const errorData = await res.json().catch(() => ({}));
+    throw new Error(errorData.detail || 'Error al calcular comparativa SIMPLE vs Ordinario');
+  }
+  return await res.json();
+}
+
 export async function convertUvt(taxYear: number, amountCop?: number, amountUvt?: number, customUvt?: number) {
   const res = await fetch(`${API_BASE_URL}/rules/convert-uvt`, {
     method: 'POST',

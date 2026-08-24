@@ -16,8 +16,8 @@ export const Sidebar: React.FC = () => {
   } = useApp();
 
   const isNavActive = (mod: string, sub?: string) => {
-    if (mod === 'pn') {
-      if (activeModule !== 'pn') return false;
+    if (mod === 'pn' || mod === 'pj' || mod === 'simple') {
+      if (activeModule !== mod) return false;
       if (sub && activeSubTab !== sub) return false;
       return true;
     }
@@ -186,24 +186,119 @@ export const Sidebar: React.FC = () => {
             <ul className="sidebar-menu">
               <li>
                 <button
-                  className={`sidebar-item-btn ${isNavActive('pj') ? 'active' : ''}`}
-                  id="nav-item-pj"
-                  onClick={() => navigateTo('pj', 'f110')}
+                  className={`sidebar-item-btn ${isNavActive('pj', 'calc') ? 'active' : ''}`}
+                  id="nav-item-pj-calc"
+                  onClick={() => navigateTo('pj', 'calc')}
                 >
                   <span className="sidebar-item-icon">🏢</span>
-                  <span className="sidebar-item-label">Renta Jurídicas & TTD (15%)</span>
-                  <span className="sidebar-item-tag">F-110</span>
+                  <span className="sidebar-item-label">Depuración Persona Jurídica</span>
+                  <span className="sidebar-item-tag">35%</span>
                 </button>
               </li>
               <li>
                 <button
-                  className={`sidebar-item-btn ${isNavActive('simple') ? 'active' : ''}`}
-                  id="nav-item-simple"
-                  onClick={() => navigateTo('simple', 'main')}
+                  className={`sidebar-item-btn ${isNavActive('pj', 'f110') ? 'active' : ''}`}
+                  id="nav-item-pj-f110"
+                  onClick={() => navigateTo('pj', 'f110')}
+                >
+                  <span className="sidebar-item-icon">📋</span>
+                  <span className="sidebar-item-label">Formulario 110 (Copia Real)</span>
+                  <span className="sidebar-item-tag">Facsímil</span>
+                </button>
+              </li>
+              <li>
+                <button
+                  className={`sidebar-item-btn ${isNavActive('pj', 'ttd') ? 'active' : ''}`}
+                  id="nav-item-pj-ttd"
+                  onClick={() => navigateTo('pj', 'ttd')}
+                >
+                  <span className="sidebar-item-icon">⚖️</span>
+                  <span className="sidebar-item-label">Laboratorio Tasa Mínima TTD</span>
+                  <span className="sidebar-item-tag">15%</span>
+                </button>
+              </li>
+              <li>
+                <button
+                  className={`sidebar-item-btn ${isNavActive('pj', 'sobretasas') ? 'active' : ''}`}
+                  id="nav-item-pj-sobretasas"
+                  onClick={() => navigateTo('pj', 'sobretasas')}
+                >
+                  <span className="sidebar-item-icon">⚡</span>
+                  <span className="sidebar-item-label">Sobretasas & Regímenes</span>
+                  <span className="sidebar-item-tag">Art. 240</span>
+                </button>
+              </li>
+              <li>
+                <button
+                  className={`sidebar-item-btn ${isNavActive('pj', 'conciliacion') ? 'active' : ''}`}
+                  id="nav-item-pj-conciliacion"
+                  onClick={() => navigateTo('pj', 'conciliacion')}
                 >
                   <span className="sidebar-item-icon">📑</span>
-                  <span className="sidebar-item-label">Régimen SIMPLE de Tributación</span>
+                  <span className="sidebar-item-label">Conciliación NIIF vs Fiscal</span>
+                  <span className="sidebar-item-tag">F-2516</span>
+                </button>
+              </li>
+            </ul>
+          </div>
+
+          {/* GRUPO: RÉGIMEN SIMPLE DE TRIBUTACIÓN */}
+          <div>
+            <div className="sidebar-group-title">Régimen SIMPLE (RST)</div>
+            <ul className="sidebar-menu">
+              <li>
+                <button
+                  className={`sidebar-item-btn ${isNavActive('simple', 'calc') ? 'active' : ''}`}
+                  id="nav-item-simple-calc"
+                  onClick={() => navigateTo('simple', 'calc')}
+                >
+                  <span className="sidebar-item-icon">⚡</span>
+                  <span className="sidebar-item-label">Liquidación Anual SIMPLE</span>
                   <span className="sidebar-item-tag">F-260</span>
+                </button>
+              </li>
+              <li>
+                <button
+                  className={`sidebar-item-btn ${isNavActive('simple', 'f260') ? 'active' : ''}`}
+                  id="nav-item-simple-f260"
+                  onClick={() => navigateTo('simple', 'f260')}
+                >
+                  <span className="sidebar-item-icon">📋</span>
+                  <span className="sidebar-item-label">Formulario 260 (Copia Real)</span>
+                  <span className="sidebar-item-tag">Facsímil</span>
+                </button>
+              </li>
+              <li>
+                <button
+                  className={`sidebar-item-btn ${isNavActive('simple', 'comparador') ? 'active' : ''}`}
+                  id="nav-item-simple-comparador"
+                  onClick={() => navigateTo('simple', 'comparador')}
+                >
+                  <span className="sidebar-item-icon">⚖️</span>
+                  <span className="sidebar-item-label">Comparador Ordinario vs SIMPLE</span>
+                  <span className="sidebar-item-tag">Decisión</span>
+                </button>
+              </li>
+              <li>
+                <button
+                  className={`sidebar-item-btn ${isNavActive('simple', 'f2593') ? 'active' : ''}`}
+                  id="nav-item-simple-f2593"
+                  onClick={() => navigateTo('simple', 'f2593')}
+                >
+                  <span className="sidebar-item-icon">📅</span>
+                  <span className="sidebar-item-label">Anticipos Bimestrales F-2593</span>
+                  <span className="sidebar-item-tag">Bimestres</span>
+                </button>
+              </li>
+              <li>
+                <button
+                  className={`sidebar-item-btn ${isNavActive('simple', 'requisitos') ? 'active' : ''}`}
+                  id="nav-item-simple-requisitos"
+                  onClick={() => navigateTo('simple', 'requisitos')}
+                >
+                  <span className="sidebar-item-icon">✅</span>
+                  <span className="sidebar-item-label">Checklist Requisitos & Exclusiones</span>
+                  <span className="sidebar-item-tag">Art. 905</span>
                 </button>
               </li>
             </ul>

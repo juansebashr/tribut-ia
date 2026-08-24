@@ -197,62 +197,26 @@ export const HeaderBar: React.FC = () => {
         {/* SESSION BADGE & CONTROLS */}
         <div
           id="session-badge-container"
-          className="selector-group"
-          style={{
-            background: '#f1f5f9',
-            padding: '4px 8px',
-            borderRadius: '6px',
-            border: '1px solid #cbd5e1',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '6px',
-          }}
+          className="header-session-badge"
           title="ID de sesión activa"
         >
-          <span style={{ fontSize: '11px', fontWeight: 700, color: '#475569' }}>Sesión:</span>
+          <span className="header-session-label">Sesión:</span>
           <span
             id="session-active-id-display"
-            style={{
-              fontFamily: 'var(--font-mono)',
-              fontSize: '11px',
-              fontWeight: 800,
-              color: '#0369a1',
-              maxWidth: '120px',
-              overflow: 'hidden',
-              textOverflow: 'ellipsis',
-              whiteSpace: 'nowrap',
-            }}
+            className="header-session-id"
           >
             {sessionId}
           </span>
           <button
             onClick={copySessionId}
-            style={{
-              border: 'none',
-              background: '#e0f2fe',
-              color: '#0369a1',
-              cursor: 'pointer',
-              fontSize: '10px',
-              padding: '2px 5px',
-              borderRadius: '4px',
-              fontWeight: 700,
-            }}
+            className="header-session-btn"
             title="Copiar ID de sesión"
           >
             📋
           </button>
           <button
             onClick={createNewSession}
-            style={{
-              border: 'none',
-              background: '#ecfdf5',
-              color: '#059669',
-              cursor: 'pointer',
-              fontSize: '10px',
-              padding: '2px 5px',
-              borderRadius: '4px',
-              fontWeight: 700,
-            }}
+            className="header-session-btn btn-new-session"
             title="Iniciar nueva sesión limpia"
           >
             ✨ Nueva
@@ -262,13 +226,12 @@ export const HeaderBar: React.FC = () => {
         {/* ACCESO RÁPIDO A SKILL DE IA */}
         <button
           id="header-btn-skill-tutorial"
-          className="btn btn-outline btn-sm"
+          className="btn btn-outline btn-sm header-skill-btn"
           onClick={() => navigateToView('skill-tutorial')}
-          style={{ display: 'flex', alignItems: 'center', gap: '5px', padding: '5px 10px', fontSize: '11.5px', fontWeight: 600 }}
           title="Ver tutorial e instalar Skill de IA"
         >
           <span>🤖</span>
-          <span className="hidden sm:inline">Skill IA</span>
+          <span className="header-skill-text">Skill IA</span>
         </button>
 
         {/* BOTÓN MODO OSCURO / CLARO */}

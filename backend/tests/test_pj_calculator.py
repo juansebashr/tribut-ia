@@ -5,7 +5,7 @@ from app.services.liquidacion_pj import liquidar_persona_juridica
 def test_persona_juridica_formulario_110_estandar():
     """Valida la liquidación de Formulario 110 para una sociedad con tarifa general del 35%."""
     input_data = PersonaJuridicaInput(
-        tax_year=2026,
+        tax_year=2025,
         ingresos_brutos_operacionales=1000000000,
         ingresos_brutos_no_operacionales=50000000,
         devoluciones_rebajas_descuentos=20000000,
@@ -19,6 +19,7 @@ def test_persona_juridica_formulario_110_estandar():
         descuento_tributario_ica=10000000,
         retenciones_en_la_fuente=30000000,
         autorretenciones_practicadas=15000000,
+        porcentaje_anticipo_siguiente=0.75,
     )
 
     result = liquidar_persona_juridica(input_data)
@@ -46,16 +47,30 @@ def test_persona_juridica_formulario_110_estandar():
     assert not result.aplica_impuesto_adicional_ttd
     assert result.impuesto_adicional_ttd == 0
 
-    # 8. Retenciones = 30M + 15M = 45.000.000
+    # 8. Anticipo año siguiente = (53M * 75%) - 45M = 39.750.000 - 45.000.000 = 0 (negativo)
+    assert result.anticipo_ano_siguiente == 0
+
+    # 9. Retenciones = 30M + 15M = 45.000.000
     # Saldo a pagar = 53.000.000 - 45.000.000 = 8.000.000
     assert result.saldo_a_pagar == 8000000
     assert result.saldo_a_favor == 0
+
+    # 10. Mapeo de casillas F110
+    f110 = result.form_110_casillas
+    assert f110.c58_total_ingresos_brutos == 1050000000
+    assert f110.c61_total_ingresos_netos == 1020000000
+    assert f110.c62_costos == 600000000
+    assert f110.c79_renta_liquida_gravable == 180000000
+    assert f110.c84_impuesto_renta_liquida_gravable == 63000000
+    assert f110.c93_descuentos_tributarios == 10000000
+    assert f110.c96_impuesto_neto_renta_con_adicion == 53000000
+    assert f110.c113_total_saldo_a_pagar == 8000000
 
 
 def test_persona_juridica_tasa_minima_ttd_gatillada():
     """Valida que si la TTD es inferior al 15%, se genere el Impuesto Adicional (IA) según Art. 240 Parágrafo 6."""
     input_data = PersonaJuridicaInput(
-        tax_year=2026,
+        tax_year=2025,
         ingresos_brutos_operacionales=500000000,
         costos_procedentes=300000000,
         gastos_administracion=150000000,
@@ -76,3 +91,25 @@ def test_persona_juridica_tasa_minima_ttd_gatillada():
     assert result.aplica_impuesto_adicional_ttd
     assert result.impuesto_adicional_ttd == 41500000
     assert result.impuesto_neto_total == 45000000
+    assert result.form_110_casillas.c95_impuesto_a_adicionar_ttd == 41500000
+
+
+def test_persona_juridica_sobretasa_financiera():
+    """Valida la liquidación de sobretasa del 5% para entidades financieras con renta >= 120k UVT."""
+    uvt = 49799  # 2025
+    rlg = 150000 * uvt  # 150.000 UVT (> 120.000 UVT)
+    input_data = PersonaJuridicaInput(
+        tax_year=2025,
+        aplica_sobretasa_financiera=True,
+        ingresos_brutos_operacionales=rlg + 500000000,
+        costos_procedentes=500000000,
+        utilidad_contable_antes_impuestos=rlg,
+        retenciones_en_la_fuente=0,
+    )
+
+    result = liquidar_persona_juridica(input_data)
+
+    assert result.puntos_adicionales_sobretasa == 0.05
+    assert result.impuesto_sobretasa > 0
+    assert result.form_110_casillas.c85_puntos_adicionales_sobretasa > 0
+    assert result.form_110_casillas.c110_anticipo_sobretasa_ano_siguiente > 0

@@ -105,3 +105,45 @@ test('React API Service - simularInmuebleAfc (Ejemplo Venta Vivienda)', async ()
   assert.equal(data.impuesto_go_con_beneficios_cop, 0);
   assert.equal(data.porcentaje_ahorro_tributario_pct, 100.0);
 });
+
+test('React API Service - calculateRegimenSimple', async () => {
+  const mockSimple = {
+    tax_year: 2026,
+    grupo_actividad: 2,
+    gran_total_saldo_a_pagar: 15000000,
+    tarifa_simple_consolidada_pct: 3.4
+  };
+  globalThis.fetch = async (url) => ({
+    ok: true,
+    json: async () => mockSimple
+  });
+
+  const res = await fetch('http://localhost:8000/api/v1/calculate/regimen-simple/calculate', {
+    method: 'POST',
+    body: JSON.stringify({ tax_year: 2026, grupo_actividad: 2, ingresos_brutos_nacionales: 500000000 })
+  });
+  const data = await res.json();
+  assert.equal(data.grupo_actividad, 2);
+  assert.equal(data.gran_total_saldo_a_pagar, 15000000);
+});
+
+test('React API Service - simularComparativaSimple', async () => {
+  const mockComparativa = {
+    tax_year: 2026,
+    regimen_recomendado: 'Recomendado: Régimen SIMPLE (F-260)',
+    ahorro_tributario_neto_cop: 45000000
+  };
+  globalThis.fetch = async (url) => ({
+    ok: true,
+    json: async () => mockComparativa
+  });
+
+  const res = await fetch('http://localhost:8000/api/v1/calculate/regimen-simple/comparativa', {
+    method: 'POST',
+    body: JSON.stringify({ tax_year: 2026, ingresos_brutos_anuales: 600000000 })
+  });
+  const data = await res.json();
+  assert.equal(data.regimen_recomendado, 'Recomendado: Régimen SIMPLE (F-260)');
+  assert.equal(data.ahorro_tributario_neto_cop, 45000000);
+});
+

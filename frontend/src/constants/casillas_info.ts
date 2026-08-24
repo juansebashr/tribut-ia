@@ -810,3 +810,720 @@ export const CASILLAS_INFO: Record<string, CasillaInfo> = /* ===================
     tope: "Monto que se traslada al Recibo Oficial de Pago (Formulario 490)."
   }
 };
+
+/* =========================================================================
+   BASE DE CONOCIMIENTO EXHAUSTIVA - FORMULARIO 110 DIAN (PERSONA JURÍDICA)
+   Declaración de Renta y Complementarios para Personas Jurídicas y Asimiladas
+   ========================================================================= */
+
+export const CASILLAS_INFO_F110: Record<string, CasillaInfo> = {
+  "1": {
+    titulo: "Año Gravable",
+    art: "Art. 1 E.T. y Calendario DIAN",
+    concepto: "Año gravable objeto de declaración por parte de la persona jurídica o asimilada.",
+    como_llenar: "Año de 4 dígitos correspondiente al periodo fiscal (ej. 2025 o 2026).",
+    tope: "Año fiscal de 4 dígitos."
+  },
+  "4": {
+    titulo: "Número de Formulario",
+    art: "Art. 578 E.T.",
+    concepto: "Número consecutivo único asignado por la DIAN en los servicios informáticos Muisca.",
+    como_llenar: "Generado automáticamente por el Muisca.",
+    tope: "13 dígitos numéricos."
+  },
+  "5": {
+    titulo: "Número de Identificación Tributaria (NIT)",
+    art: "Art. 555-1 y 555-2 E.T.",
+    concepto: "NIT de la sociedad comercial, entidad sin ánimo de lucro o sucursal extranjera.",
+    como_llenar: "Diligencie el NIT sin dígito de verificación ni separadores.",
+    tope: "Máximo 10 dígitos."
+  },
+  "6": {
+    titulo: "Dígito de Verificación (DV)",
+    art: "Art. 555-2 E.T.",
+    concepto: "Dígito de verificación calculado mediante módulo 11.",
+    como_llenar: "Calculado automáticamente por el sistema.",
+    tope: "1 dígito del 0 al 9."
+  },
+  "11": {
+    titulo: "Razón Social",
+    art: "Art. 555-2 E.T.",
+    concepto: "Nombre o denominación social registrado en el RUT y Cámara de Comercio.",
+    como_llenar: "Nombre completo de la empresa en mayúsculas.",
+    tope: "Texto alfanumérico."
+  },
+  "24": {
+    titulo: "Actividad Económica Principal (CIIU)",
+    art: "Art. 555-2 E.T.",
+    concepto: "Código CIIU de 4 dígitos que generó el mayor volumen de ingresos operacionales.",
+    como_llenar: "Código de actividad económica principal registrada en el RUT.",
+    tope: "Código numérico de 4 dígitos."
+  },
+  "33": {
+    titulo: "Total costos y gastos de nómina",
+    art: "Art. 108 E.T.",
+    concepto: "Total devengado por sueldos, salarios, prestaciones sociales, vacaciones y demás pagos laborales del año.",
+    como_llenar: "Sume todos los salarios, horas extras, primas y cesantías causados a favor de los empleados.",
+    tope: "Dato informativo. Condiciona la deducibilidad al pago de seguridad social y parafiscales."
+  },
+  "34": {
+    titulo: "Aportes al sistema de seguridad social",
+    art: "Art. 108 y 115-1 E.T.",
+    concepto: "Total aportes efectivamente pagados en el año por concepto de Salud, Pensión y Riesgos Laborales (ARL).",
+    como_llenar: "Sume los aportes a seguridad social a cargo del empleador pagados mediante planilla PILA.",
+    tope: "Dato informativo de control para la deducibilidad de la nómina."
+  },
+  "35": {
+    titulo: "Aportes al SENA, ICBF, Cajas de Compensación",
+    art: "Art. 108 y 114-1 E.T.",
+    concepto: "Aportes parafiscales pagados durante el año gravable.",
+    como_llenar: "Sume los pagos de parafiscales (SENA, ICBF, CCF). Si aplica la exoneración del Art. 114-1 E.T., solo incluirá Caja de Compensación para trabajadores de < 10 SMMLV.",
+    tope: "Dato informativo."
+  },
+  "36": {
+    titulo: "Efectivo y equivalentes de efectivo",
+    art: "Art. 261, 267 y 268 E.T.",
+    concepto: "Saldos a 31 de diciembre en caja general, cajas menores, depósitos bancarios, cuentas de ahorros y fiducias.",
+    como_llenar: "Registre el saldo fiscal conciliado de efectivo y bancos al cierre del año gravable.",
+    tope: "Valor patrimonial fiscal a 31 de diciembre."
+  },
+  "37": {
+    titulo: "Inversiones e instrumentos derivados",
+    art: "Art. 271, 272 y 273 E.T.",
+    concepto: "Acciones, cuotas o partes de interés social, títulos de deuda, CDTs y fondos de inversión a costo fiscal.",
+    como_llenar: "Registre el costo fiscal de las inversiones financieras determinado según los Arts. 271 y 272 E.T.",
+    tope: "Costo fiscal de adquisición o valor intrínseco según corresponda."
+  },
+  "38": {
+    titulo: "Cuentas, documentos y arrendamientos financieros por cobrar",
+    art: "Art. 270 E.T.",
+    concepto: "Cartera de clientes, anticipos a proveedores, préstamos a socios y cuentas por cobrar fiscales netas de provisión deducible.",
+    como_llenar: "Sume los créditos fiscales a favor de la empresa menos el deterioro fiscal permitido (Art. 145 E.T.).",
+    tope: "Valor nominal o saldo insoluto a 31 de diciembre."
+  },
+  "39": {
+    titulo: "Inventarios",
+    art: "Art. 62 a 66 E.T.",
+    concepto: "Mercancías para la venta, materias primas, productos en proceso y productos terminados valorados por costo fiscal.",
+    como_llenar: "Registre el saldo fiscal de inventarios determinado por sistema de juego de inventarios o inventario permanente.",
+    tope: "Costo de adquisición o transformación según Art. 66 E.T."
+  },
+  "40": {
+    titulo: "Activos intangibles",
+    art: "Art. 74, 74-1 y 279 E.T.",
+    concepto: "Patentes, marcas, licencias, software, derechos de autor y plusvalía adquirida a costo fiscal neto de amortización.",
+    como_llenar: "Registre el costo fiscal de adquisición menos las amortizaciones fiscales acumuladas procedentes.",
+    tope: "Costo fiscal neto acumulado."
+  },
+  "41": {
+    titulo: "Activos biológicos",
+    art: "Art. 92 a 95 y 276-1 E.T.",
+    concepto: "Plantas y animales vivos clasificados como productores o consumibles al costo de adquisición o transformación.",
+    como_llenar: "Valore los activos biológicos al costo histórico acumulado según las reglas especiales de los Arts. 92-95 E.T.",
+    tope: "Costo fiscal."
+  },
+  "42": {
+    titulo: "Propiedades, planta y equipo, propiedades de inversión y ANCMV",
+    art: "Art. 67 a 73 y 277 E.T.",
+    concepto: "Terrenos, edificaciones, maquinaria, equipo de oficina, flota y equipo de transporte al costo fiscal ajustado neto de depreciación.",
+    como_llenar: "Registre el costo fiscal determinado por Art. 69 o reajuste fiscal (Art. 70/73 E.T.) menos depreciación acumulada fiscal.",
+    tope: "Costo fiscal neto de depreciación acumulada."
+  },
+  "43": {
+    titulo: "Otros activos",
+    art: "Art. 261 E.T.",
+    concepto: "Gastos pagados por anticipado, depósitos en garantía, activos por impuestos corrientes y demás partidas del activo.",
+    como_llenar: "Registre el saldo fiscal a 31 de diciembre de todos los demás bienes y derechos apreciables en dinero.",
+    tope: "Valor nominal o costo fiscal."
+  },
+  "44": {
+    titulo: "Total patrimonio bruto",
+    art: "Art. 261 E.T.",
+    concepto: "Suma total de todos los bienes y derechos apreciables en dinero poseídos dentro del país y en el exterior.",
+    como_llenar: "Suma de las casillas 36 a 43.",
+    tope: "Casilla 44 = c36 + c37 + c38 + c39 + c40 + c41 + c42 + c43."
+  },
+  "45": {
+    titulo: "Pasivos",
+    art: "Art. 283 a 287 E.T.",
+    concepto: "Total de deudas fiscales respaldadas por documentos idóneos con fecha cierta al 31 de diciembre.",
+    como_llenar: "Registre las obligaciones financieras, cuentas por pagar comerciales, laborales y fiscales ciertas y vigentes.",
+    tope: "Deudas debidamente soportadas según Art. 283 E.T."
+  },
+  "46": {
+    titulo: "Total patrimonio líquido",
+    art: "Art. 282 E.T.",
+    concepto: "Diferencia entre el patrimonio bruto y el total de deudas fiscales a cargo de la sociedad a 31 de diciembre.",
+    como_llenar: "Casilla 44 menos Casilla 45. Si los pasivos superan los activos, se registra cero ($0).",
+    tope: "Casilla 46 = max(0, c44 - c45)."
+  },
+  "47": {
+    titulo: "Ingresos brutos de actividades ordinarias",
+    art: "Art. 28 E.T.",
+    concepto: "Ingresos procedentes de la venta de bienes y prestación de servicios del objeto social devengados en el año.",
+    como_llenar: "Registre el total de facturación e ingresos ordinarios devengados comercial y fiscalmente.",
+    tope: "Ingresos brutos devengados en el año."
+  },
+  "48": {
+    titulo: "Ingresos financieros",
+    art: "Art. 28 E.T.",
+    concepto: "Intereses, rendimientos financieros, descuentos concedidos y fluctuación de divisas devengados en el ejercicio.",
+    como_llenar: "Registre los rendimientos financieros certificados por entidades financieras o vinculados económicos.",
+    tope: "Valor fiscal devengado."
+  },
+  "49": {
+    titulo: "Dividendos y/o participaciones no constitutivos de renta ni ganancia ocasional",
+    art: "Art. 48 y 49 E.T.",
+    concepto: "Dividendos recibidos de sociedades nacionales distribuidos como no gravados según el cálculo del Art. 49 E.T.",
+    como_llenar: "Registre los dividendos no gravados recibidos y certificados por las sociedades distribuidoras.",
+    tope: "Certificado de dividendos Art. 49 E.T."
+  },
+  "51": {
+    titulo: "Dividendos gravados a la tarifa general",
+    art: "Art. 240 E.T.",
+    concepto: "Dividendos recibidos provenientes de utilidades gravadas en cabeza de la sociedad que los distribuye.",
+    como_llenar: "Registre los dividendos gravados a la tarifa general del 35% certificados por la sociedad emisora.",
+    tope: "Certificado de dividendos gravados."
+  },
+  "58": {
+    titulo: "Total ingresos brutos",
+    art: "Art. 26 E.T.",
+    concepto: "Suma consolidada de todos los ingresos brutos operacionales, financieros, dividendos y extraordinarios.",
+    como_llenar: "Suma de las casillas 47 a 57.",
+    tope: "Casilla 58 = Suma(c47..c57)."
+  },
+  "59": {
+    titulo: "Devoluciones, rebajas y descuentos",
+    art: "Art. 26 E.T.",
+    concepto: "Devoluciones efectivas de mercancías, rescisiones contractuales, rebajas y descuentos comerciales a clientes.",
+    como_llenar: "Registre las notas crédito y devoluciones en ventas soportadas con factura electrónica.",
+    tope: "Monto soportado en notas crédito electrónicas."
+  },
+  "60": {
+    titulo: "Ingresos no constitutivos de renta ni ganancia ocasional",
+    art: "Art. 36 a 57 E.T.",
+    concepto: "Partidas de ingreso expresamente calificadas por la ley tributaria como no constitutivas de renta.",
+    como_llenar: "Sume dividendos no gravados (c49), indemnizaciones por daño emergente (Art. 45), incentivo a la capitalización rural (Art. 52), etc.",
+    tope: "Limitado a los conceptos taxativos de la ley."
+  },
+  "61": {
+    titulo: "Total ingresos netos",
+    art: "Art. 26 E.T.",
+    concepto: "Ingresos brutos depurados de devoluciones y partidas no constitutivas de renta.",
+    como_llenar: "Casilla 58 menos Casilla 59 menos Casilla 60.",
+    tope: "Casilla 61 = max(0, c58 - c59 - c60)."
+  },
+  "62": {
+    titulo: "Costos",
+    art: "Art. 58 a 88 y 107 E.T.",
+    concepto: "Costo fiscal de los bienes vendidos o servicios prestados debidamente soportados con nómina y factura electrónica.",
+    como_llenar: "Registre el costo fiscal procedente determinado según el sistema de costeo legalmente aplicable.",
+    tope: "Costos con soporte electrónico y bancarización (Art. 771-2 y 771-5 E.T.)."
+  },
+  "63": {
+    titulo: "Gastos de administración",
+    art: "Art. 107 E.T.",
+    concepto: "Gastos operacionales de administración con relación de causalidad, necesidad y proporcionalidad comercial.",
+    como_llenar: "Registre sueldos administrativos, arriendos, servicios, asesorías, seguros y depreciación de bienes administrativos.",
+    tope: "Cumplimiento de causalidad, necesidad y proporcionalidad."
+  },
+  "64": {
+    titulo: "Gastos de distribución y ventas",
+    art: "Art. 107 E.T.",
+    concepto: "Gastos incurridos para la comercialización, mercadeo, fletes, comisiones de ventas y distribución de productos.",
+    como_llenar: "Registre sueldos de ventas, publicidad, fletes, comisiones y empaques con relación de causalidad.",
+    tope: "Gastos procedentes con soporte electrónico."
+  },
+  "65": {
+    titulo: "Gastos financieros",
+    art: "Art. 107 y 118-1 E.T.",
+    concepto: "Intereses, comisiones bancarias y gastos de financiación, controlando el límite de subcapitalización (endeudamiento con vinculados).",
+    como_llenar: "Registre intereses comerciales y bancarios. Si tiene deudas con vinculados, valide el límite de 2 veces el patrimonio líquido (Art. 118-1 E.T.).",
+    tope: "Límite de subcapitalización Art. 118-1 E.T."
+  },
+  "66": {
+    titulo: "Otros gastos y deducciones",
+    art: "Art. 107, 108 y siguientes E.T.",
+    concepto: "Impuestos deducibles (50% GMF Art. 115, 100% predial y vehicular vinculados al negocio), deducción primer empleo (Art. 108-5), etc.",
+    como_llenar: "Registre otras deducciones especiales permitidas por el Estatuto Tributario.",
+    tope: "Partidas deducibles con soporte."
+  },
+  "67": {
+    titulo: "Total costos y gastos deducibles",
+    art: "Art. 107 E.T.",
+    concepto: "Consolidación de todos los costos procedentes y gastos deducibles del ejercicio fiscal.",
+    como_llenar: "Suma de las casillas 62, 63, 64, 65 y 66.",
+    tope: "Casilla 67 = c62 + c63 + c64 + c65 + c66."
+  },
+  "72": {
+    titulo: "Renta líquida ordinaria del ejercicio",
+    art: "Art. 26 y 178 E.T.",
+    concepto: "Utilidad fiscal neta del ejercicio antes de compensación de pérdidas fiscales.",
+    como_llenar: "Ingresos netos (c61) más recuperaciones (c70) menos total costos y gastos (c67). Si el resultado es negativo se coloca $0 y se lleva a Casilla 73.",
+    tope: "Casilla 72 = max(0, c61 + c70 - c67)."
+  },
+  "73": {
+    titulo: "Pérdida líquida del ejercicio",
+    art: "Art. 147 E.T.",
+    concepto: "Exceso de costos y deducciones sobre los ingresos netos del año gravable.",
+    como_llenar: "Si los costos y gastos (c67) superan los ingresos netos, registre la diferencia positiva aquí.",
+    tope: "Compensable en los 12 periodos gravables siguientes (Art. 147 E.T.)."
+  },
+  "74": {
+    titulo: "Compensaciones",
+    art: "Art. 147 y 189 E.T.",
+    concepto: "Pérdidas fiscales acumuladas de años anteriores y excesos de renta presuntiva compensables.",
+    como_llenar: "Registre el monto de pérdidas fiscales a compensar sin superar la Renta Líquida Ordinaria de la casilla 72.",
+    tope: "Límite: no puede generar pérdida fiscal en el ejercicio."
+  },
+  "75": {
+    titulo: "Renta líquida",
+    art: "Art. 178 E.T.",
+    concepto: "Renta líquida ordinaria depurada de pérdidas fiscales compensadas.",
+    como_llenar: "Casilla 72 menos Casilla 74.",
+    tope: "Casilla 75 = max(0, c72 - c74)."
+  },
+  "77": {
+    titulo: "Rentas exentas",
+    art: "Art. 235-2 E.T.",
+    concepto: "Rentas legalmente exentas (ej. venta de energía renovable, transporte fluvial sostenible, plantaciones forestales).",
+    como_llenar: "Registre el valor de las rentas con exención legal vigente aplicable a personas jurídicas.",
+    tope: "Limitado a la renta líquida de la casilla 75."
+  },
+  "79": {
+    titulo: "Renta líquida gravable",
+    art: "Art. 240 y 241 E.T.",
+    concepto: "Base impositiva final sobre la cual se aplica la tarifa del impuesto sobre la renta.",
+    como_llenar: "Renta líquida (c75) menos rentas exentas (c77) más rentas gravables (c78).",
+    tope: "Casilla 79 = max(0, c75 - c77 + c78)."
+  },
+  "80": {
+    titulo: "Ingresos por ganancias ocasionales",
+    art: "Art. 300 a 316 E.T.",
+    concepto: "Ingresos por venta de activos fijos poseídos por 2 o más años, herencias o utilidades en liquidación de sociedades.",
+    como_llenar: "Registre el precio de enajenación de bienes raíces, maquinaria o vehículos poseídos más de 2 años.",
+    tope: "Valor comercial de la enajenación."
+  },
+  "81": {
+    titulo: "Costos por ganancias ocasionales",
+    art: "Art. 307 a 312 E.T.",
+    concepto: "Costo fiscal del activo fijo enajenado determinado según reajuste fiscal (Art. 70/73) o costo de adquisición.",
+    como_llenar: "Registre el costo fiscal a la fecha de venta sin que pueda superar el precio de venta.",
+    tope: "Costo fiscal del activo vendido."
+  },
+  "82": {
+    titulo: "Ganancias ocasionales no gravadas y exentas",
+    art: "Art. 307 a 311-1 E.T.",
+    concepto: "Partidas exentas de ganancia ocasional reconocidas por la ley tributaria.",
+    como_llenar: "Registre las ganancias exentas procedentes.",
+    tope: "Topes en UVT según el concepto normativo."
+  },
+  "83": {
+    titulo: "Ganancias ocasionales gravables",
+    art: "Art. 300 E.T.",
+    concepto: "Base gravable para la liquidación del impuesto de ganancias ocasionales.",
+    como_llenar: "Casilla 80 menos Casilla 81 menos Casilla 82.",
+    tope: "Casilla 83 = max(0, c80 - c81 - c82)."
+  },
+  "84": {
+    titulo: "Sobre la renta líquida gravable (Impuesto Básico)",
+    art: "Art. 240 E.T.",
+    concepto: "Impuesto sobre la renta calculado aplicando la tarifa general (35%) o tarifa preferencial (ej. 20% Zonas Francas, 15% Hoteles).",
+    como_llenar: "Multiplique la Renta Líquida Gravable (c79) por la tarifa general (35%) o preferencial aplicable.",
+    tope: "Casilla 84 = round(c79 * Tarifa / 1000) * 1000."
+  },
+  "85": {
+    titulo: "Puntos adicionales (Sobretasas)",
+    art: "Art. 240 Parágrafos 2, 3 y 4 E.T.",
+    concepto: "Sobretasa financiera (+5% si RLG >= 120.000 UVT), hidroeléctricas (+3% si RLG >= 30.000 UVT) o minero-petrolera (+5% a +15%).",
+    como_llenar: "Calcule los puntos porcentuales adicionales aplicados sobre la Renta Líquida Gravable (c79).",
+    tope: "Aplica según actividad económica y umbrales de UVT."
+  },
+  "91": {
+    titulo: "Total impuesto sobre las rentas líquidas gravables",
+    art: "Art. 240 E.T.",
+    concepto: "Consolidación del impuesto básico sobre la renta líquida más sobretasas e impuesto sobre dividendos.",
+    como_llenar: "Suma de las casillas 84 a 90.",
+    tope: "Casilla 91 = c84 + c85 + c86 + c87 + c88 + c89 + c90."
+  },
+  "93": {
+    titulo: "Descuentos tributarios",
+    art: "Art. 254 a 258 E.T.",
+    concepto: "Descuento por impuestos pagados en el exterior (Art. 254), donaciones a ESAL (25% Art. 257) y descuento del 50% del ICA pagado (Art. 115 E.T.).",
+    como_llenar: "Registre los descuentos procedentes sin que superen el límite legal (Art. 259 E.T.).",
+    tope: "Límite: no puede exceder el impuesto básico de renta (Casilla 91)."
+  },
+  "94": {
+    titulo: "Impuesto neto de renta sin adición",
+    art: "Art. 240 y 259 E.T.",
+    concepto: "Impuesto sobre las rentas líquidas depurado de descuentos tributarios.",
+    como_llenar: "Casilla 91 más Casilla 92 menos Casilla 93.",
+    tope: "Casilla 94 = max(0, c91 + c92 - c93)."
+  },
+  "95": {
+    titulo: "Impuesto a adicionar (IA - TTD Tasa Mínima 15%)",
+    art: "Art. 240 Parágrafo 6 E.T.",
+    concepto: "Impuesto a Adicionar (IA) exigido por la ley cuando la Tasa de Tributación Depurada (TTD = ID / UD) es inferior al 15%.",
+    como_llenar: "Si TTD < 15%, calcule IA = (UD * 15%) - ID y regístrelo en esta casilla. Si TTD >= 15%, el valor es cero ($0).",
+    tope: "Impuesto requerido para alcanzar la tasa efectiva mínima del 15% sobre la Utilidad Depurada."
+  },
+  "96": {
+    titulo: "Impuesto neto de renta con adición",
+    art: "Art. 240 Par. 6 E.T.",
+    concepto: "Impuesto neto definitivo sobre la renta incorporando el ajuste de la tasa mínima de tributación.",
+    como_llenar: "Casilla 94 más Casilla 95.",
+    tope: "Casilla 96 = c94 + c95."
+  },
+  "97": {
+    titulo: "Impuesto de ganancias ocasionales",
+    art: "Art. 313 y 314 E.T.",
+    concepto: "Impuesto del 15% sobre las ganancias ocasionales gravables generadas en el año.",
+    como_llenar: "Casilla 83 multiplicada por el 15% (tarifa general de ganancias ocasionales).",
+    tope: "Casilla 97 = round(c83 * 0.15 / 1000) * 1000."
+  },
+  "99": {
+    titulo: "Total impuesto a cargo",
+    art: "Art. 240 y 313 E.T.",
+    concepto: "Impuesto total a cargo de la sociedad por el año gravable (Renta + Ganancias Ocasionales).",
+    como_llenar: "Casilla 96 más Casilla 97 menos Casilla 98.",
+    tope: "Casilla 99 = c96 + c97 - c98."
+  },
+  "105": {
+    titulo: "Autorretenciones",
+    art: "Decreto 2201 de 2016 y Art. 365 E.T.",
+    concepto: "Autorretenciones especiales del impuesto sobre la renta practicadas y pagadas en los Formularios 350 del año.",
+    como_llenar: "Sume las autorretenciones a título de renta efectivamente declaradas y pagadas mensualmente en el año.",
+    tope: "Certificado o formularios 350 pagados."
+  },
+  "106": {
+    titulo: "Otras retenciones",
+    art: "Art. 373 y 374 E.T.",
+    concepto: "Retenciones en la fuente a título de renta practicadas por clientes a la empresa durante el año.",
+    como_llenar: "Sume los certificados de retención en la fuente expedidos por agentes retenedores.",
+    tope: "Certificados de retención en la fuente válidos."
+  },
+  "107": {
+    titulo: "Total retenciones año gravable a declarar",
+    art: "Art. 373 E.T.",
+    concepto: "Suma de todas las autorretenciones y retenciones en la fuente aplicables como crédito contra el impuesto.",
+    como_llenar: "Casilla 105 más Casilla 106.",
+    tope: "Casilla 107 = c105 + c106."
+  },
+  "108": {
+    titulo: "Anticipo renta año gravable siguiente",
+    art: "Art. 807 E.T.",
+    concepto: "Anticipo obligatorio del impuesto sobre la renta para el año siguiente (25% primer año, 50% segundo, 75% siguientes).",
+    como_llenar: "Calcule según el sistema 1 (impuesto neto) o sistema 2 (promedio 2 años), multiplique por el porcentaje de anticipo y reste las retenciones de la casilla 107.",
+    tope: "Cálculo según Art. 807 E.T."
+  },
+  "110": {
+    titulo: "Anticipo puntos adicionales año gravable siguiente",
+    art: "Art. 240 Parágrafo 2 E.T.",
+    concepto: "Anticipo del 100% de los puntos adicionales de la sobretasa financiera exigido a entidades financieras para el año siguiente.",
+    como_llenar: "Si aplica sobretasa financiera (c85), traslade el 100% del valor a esta casilla.",
+    tope: "100% de la sobretasa del ejercicio."
+  },
+  "112": {
+    titulo: "Sanciones",
+    art: "Art. 639, 640, 641 y 644 E.T.",
+    concepto: "Sanciones por extemporaneidad en la presentación o por corrección voluntaria de la declaración.",
+    como_llenar: "Calcule la sanción aplicando las reducciones del Art. 640 E.T. si cumple requisitos (sin ser inferior a 10 UVT).",
+    tope: "Sanción mínima legal de 10 UVT (Art. 639 E.T.)."
+  },
+  "113": {
+    titulo: "Total saldo a pagar",
+    art: "Art. 801 E.T.",
+    concepto: "Valor neto a pagar a favor de la DIAN derivado de la liquidación privada del Formulario 110.",
+    como_llenar: "Total Impuesto a cargo (c99) + Anticipos (c108+c110) + Sanciones (c112) - Retenciones (c107) - Anticipo anterior (c103+c109) - Saldo a favor (c104).",
+    tope: "Monto positivo a pagar a la DIAN."
+  },
+  "114": {
+    titulo: "Total saldo a favor",
+    art: "Art. 815 y 850 E.T.",
+    concepto: "Excedente a favor de la empresa generado cuando los anticipos y retenciones superan el impuesto a cargo y sanciones.",
+    como_llenar: "Si los créditos fiscales superan los débitos, registre la diferencia positiva aquí.",
+    tope: "Susceptible de imputación al año siguiente o solicitud de devolución."
+  },
+  "980": {
+    titulo: "PAGO TOTAL $",
+    art: "Art. 801 E.T.",
+    concepto: "Valor monetario que se cancela en bancos o PSE simultáneamente con la presentación del formulario.",
+    como_llenar: "Coincide con la Casilla 113. Se traslada al recibo oficial de pago Formulario 490.",
+    tope: "Monto a pagar."
+  }
+};
+
+/* =========================================================================
+   BASE DE CONOCIMIENTO EXHAUSTIVA - FORMULARIO 260 DIAN (RÉGIMEN SIMPLE)
+   Declaración Anual Consolidada Régimen Simple de Tributación (SIMPLE)
+   ========================================================================= */
+
+export const CASILLAS_INFO_F260: Record<string, CasillaInfo> = {
+  "1": {
+    titulo: "Año Gravable",
+    art: "Art. 903 a 916 E.T.",
+    concepto: "Año gravable objeto de consolidación anual del Régimen Simple de Tributación.",
+    como_llenar: "Año de 4 dígitos correspondiente al periodo consolidado.",
+    tope: "Año fiscal de 4 dígitos."
+  },
+  "4": {
+    titulo: "Número de Formulario",
+    art: "Art. 578 E.T.",
+    concepto: "Consecutivo único asignado por los servicios digitales de la DIAN.",
+    como_llenar: "Generado automáticamente por el Muisca.",
+    tope: "13 dígitos numéricos."
+  },
+  "5": {
+    titulo: "Número de Identificación Tributaria (NIT / Cédula)",
+    art: "Art. 555-1 E.T.",
+    concepto: "Identificación tributaria del contribuyente inscrito en el Régimen Simple.",
+    como_llenar: "Número del NIT o cédula de ciudadanía sin dígito de verificación.",
+    tope: "Máximo 10 dígitos."
+  },
+  "6": {
+    titulo: "Dígito de Verificación (DV)",
+    art: "Art. 555-2 E.T.",
+    concepto: "Dígito de seguridad módulo 11.",
+    como_llenar: "Generado automáticamente.",
+    tope: "1 dígito del 0 al 9."
+  },
+  "11": {
+    titulo: "Razón Social o Nombres y Apellidos",
+    art: "Art. 555-2 E.T.",
+    concepto: "Identificación legal de la persona natural o jurídica adscrita al SIMPLE.",
+    como_llenar: "Razón social o nombres y apellidos completos tal como figuran en el RUT.",
+    tope: "Texto alfanumérico."
+  },
+  "28": {
+    titulo: "Patrimonio bruto",
+    art: "Art. 261 E.T.",
+    concepto: "Total de bienes y derechos apreciables en dinero poseídos dentro y fuera de Colombia a 31 de diciembre.",
+    como_llenar: "Sume el valor fiscal de cuentas bancarias, inmuebles, vehículos, inventarios e inversiones.",
+    tope: "Valor patrimonial bruto a 31 de diciembre."
+  },
+  "29": {
+    titulo: "Pasivos",
+    art: "Art. 283 E.T.",
+    concepto: "Total de obligaciones financieras y deudas debidamente soportadas al cierre del ejercicio.",
+    como_llenar: "Registre el saldo insoluto de las deudas a 31 de diciembre.",
+    tope: "Pasivos reales y exigibles."
+  },
+  "30": {
+    titulo: "Patrimonio líquido",
+    art: "Art. 282 E.T.",
+    concepto: "Patrimonio bruto menos el total de pasivos a 31 de diciembre.",
+    como_llenar: "Casilla 28 menos Casilla 29.",
+    tope: "Casilla 30 = max(0, c28 - c29)."
+  },
+  "31": {
+    titulo: "Ingresos brutos Grupo 1 (País)",
+    art: "Art. 908 Numeral 1 E.T.",
+    concepto: "Ingresos de tiendas pequeñas, minimercados, micromercados y peluquerías obtenidos en Colombia.",
+    como_llenar: "Registre las ventas brutas devengadas en el país para este grupo (Tarifas 1.2% a 5.6%).",
+    tope: "Hasta 100.000 UVT."
+  },
+  "33": {
+    titulo: "Ingresos brutos Grupo 2 (País)",
+    art: "Art. 908 Numeral 2 E.T.",
+    concepto: "Ingresos por comercio al por mayor y menor, industria, servicios técnicos y mecánicos en Colombia.",
+    como_llenar: "Registre las ventas del sector comercial e industrial nacional (Tarifas 1.6% a 4.5%).",
+    tope: "Hasta 100.000 UVT."
+  },
+  "35": {
+    titulo: "Ingresos brutos Grupo 3 (País)",
+    art: "Art. 908 Numeral 3 E.T.",
+    concepto: "Ingresos por expendio de comidas y bebidas (restaurantes, bares, cafeterías) y actividades de transporte en Colombia.",
+    como_llenar: "Registre los ingresos brutos del sector restaurantes y transporte (Tarifas 1.6% a 4.5% + INC 8%).",
+    tope: "Hasta 100.000 UVT."
+  },
+  "37": {
+    titulo: "Ingresos brutos Grupo 4 (País)",
+    art: "Art. 908 Numeral 4 E.T.",
+    concepto: "Ingresos por servicios de educación y actividades de atención de la salud humana y de asistencia social.",
+    como_llenar: "Registre los ingresos brutos por servicios educativos y médicos (Tarifas 3.7% a 5.9%).",
+    tope: "Hasta 100.000 UVT."
+  },
+  "39": {
+    titulo: "Ingresos brutos Grupo 5 (País)",
+    art: "Art. 908 Numeral 5 E.T.",
+    concepto: "Ingresos por servicios profesionales, científicos, asesorías, consultorías y profesiones liberales.",
+    como_llenar: "Registre los ingresos de servicios profesionales (Tarifas 7.3% a 12.0%).",
+    tope: "Límite especial de 12.000 UVT anuales."
+  },
+  "41": {
+    titulo: "Ingresos brutos Grupo 6 (País)",
+    art: "Art. 908 Numeral 6 E.T.",
+    concepto: "Ingresos por reciclaje, recuperación de materiales y recolección de residuos (CIIU 4665, 3830, 3811).",
+    como_llenar: "Registre las ventas de materiales reciclables (Tarifa fija reducida del 1.62%).",
+    tope: "Hasta 100.000 UVT."
+  },
+  "43": {
+    titulo: "Total ingresos brutos sin ganancias ocasionales",
+    art: "Art. 904 E.T.",
+    concepto: "Suma consolidada de todos los ingresos brutos del año obtenidos en Colombia y en el exterior.",
+    como_llenar: "Suma de las casillas 31 a 42.",
+    tope: "Casilla 43 = Suma(c31..c42)."
+  },
+  "44": {
+    titulo: "Ingresos no constitutivos de renta ni ganancia ocasional",
+    art: "Art. 36 a 57 y 904 E.T.",
+    concepto: "Ingresos no constitutivos de renta válidamente detraíbles de la base gravable del SIMPLE.",
+    como_llenar: "Registre los ingresos que por ley no son constitutivos de renta ni ganancia ocasional.",
+    tope: "Casilla 44."
+  },
+  "45": {
+    titulo: "Total ingresos gravables",
+    art: "Art. 904 y 908 E.T.",
+    concepto: "Base gravable definitiva sobre la cual se calcula el Impuesto SIMPLE consolidado.",
+    como_llenar: "Casilla 43 menos Casilla 44.",
+    tope: "Casilla 45 = max(0, c43 - c44)."
+  },
+  "46": {
+    titulo: "Impuesto SIMPLE",
+    art: "Art. 908 E.T.",
+    concepto: "Impuesto SIMPLE consolidado determinado aplicando la tabla progresiva según grupo de actividad e ingresos en UVT.",
+    como_llenar: "Multiplique los ingresos gravables (c45) por la tarifa porcentual que corresponda al rango en UVT.",
+    tope: "Casilla 46 = round(c45 * Tarifa / 1000) * 1000."
+  },
+  "47": {
+    titulo: "Componente ICA territorial consolidado",
+    art: "Art. 907 y 908 E.T.",
+    concepto: "Parte del Impuesto SIMPLE que corresponde al Impuesto de Industria y Comercio (ICA) transferido a los municipios.",
+    como_llenar: "Valor del ICA liquidado con las tarifas municipales consolidadas en el SIMPLE.",
+    tope: "Parte territorial que se descuenta del componente nacional."
+  },
+  "48": {
+    titulo: "Valor componente SIMPLE nacional",
+    art: "Art. 907 E.T.",
+    concepto: "Porción del impuesto que ingresa a las arcas de la Nación (recaudo DIAN).",
+    como_llenar: "Casilla 46 menos Casilla 47.",
+    tope: "Casilla 48 = max(0, c46 - c47)."
+  },
+  "49": {
+    titulo: "Descuento por aportes a pensión a cargo del empleador",
+    art: "Art. 903 E.T.",
+    concepto: "Descuento tributario directo del 100% de los aportes obligatorios al fondo de pensiones a cargo del empleador (12%).",
+    como_llenar: "Sume los aportes a pensión de la nómina pagados oportunamente en el año.",
+    tope: "Limitado al valor de la Casilla 48 (Componente Nacional)."
+  },
+  "50": {
+    titulo: "Descuento por ventas con medios de pago electrónicos",
+    art: "Art. 912 E.T.",
+    concepto: "Descuento tributario equivalente al 0.5% de todas las ventas cobradas mediante tarjetas de débito, crédito o canales electrónicos.",
+    como_llenar: "Multiplique el total de ventas cobradas con datafonos, pasarelas de pago o transferencias por 0.5%.",
+    tope: "0.5% de las ventas electrónicas certificadas por entidades financieras."
+  },
+  "52": {
+    titulo: "Total descuentos",
+    art: "Art. 903 y 912 E.T.",
+    concepto: "Suma de los descuentos de pensión de empleador, 0.5% de medios electrónicos y GMF.",
+    como_llenar: "Suma de las casillas 49, 50 y 51. No puede superar el Componente SIMPLE Nacional (Casilla 48).",
+    tope: "Casilla 52 = min(c48, c49 + c50 + c51)."
+  },
+  "53": {
+    titulo: "Impuesto neto SIMPLE",
+    art: "Art. 908 E.T.",
+    concepto: "Componente SIMPLE nacional depurado de descuentos tributarios.",
+    como_llenar: "Casilla 48 menos Casilla 52.",
+    tope: "Casilla 53 = max(0, c48 - c52)."
+  },
+  "54": {
+    titulo: "Retenciones en la fuente antes de pertenecer al SIMPLE",
+    art: "Art. 911 E.T.",
+    concepto: "Retenciones practicadas antes de optar por el SIMPLE en el mismo año gravable.",
+    como_llenar: "Registre el saldo de retenciones certificadas sufridas antes de ingresar al régimen.",
+    tope: "Certificados de retención."
+  },
+  "56": {
+    titulo: "Anticipos SIMPLE efectivamente pagados en el año",
+    art: "Art. 910 E.T.",
+    concepto: "Suma de los anticipos bimestrales del componente SIMPLE pagados en los 6 Formularios 2593 del año.",
+    como_llenar: "Sume los valores efectivamente pagados en los recibos electrónicos bimestrales F-2593.",
+    tope: "Suma de las casillas 96 a 101."
+  },
+  "58": {
+    titulo: "Saldo a pagar por impuesto SIMPLE",
+    art: "Art. 910 E.T.",
+    concepto: "Diferencia a pagar del impuesto nacional SIMPLE tras descontar retenciones y anticipos bimestrales.",
+    como_llenar: "Casilla 53 menos (c54 + c55 + c56 + c57).",
+    tope: "Casilla 58 = max(0, c53 - (c54+c55+c56+c57))."
+  },
+  "63": {
+    titulo: "Total saldo a pagar SIMPLE",
+    art: "Art. 910 E.T.",
+    concepto: "Saldo final a pagar del impuesto SIMPLE incluyendo sanciones.",
+    como_llenar: "Casilla 58 más Casilla 62 (Total sanciones).",
+    tope: "Casilla 63 = c58 + c62."
+  },
+  "64": {
+    titulo: "Total saldo a favor SIMPLE",
+    art: "Art. 910 E.T.",
+    concepto: "Saldo a favor generado cuando los anticipos bimestrales y retenciones superan el impuesto SIMPLE anual.",
+    como_llenar: "Diferencia positiva de los créditos frente al impuesto y sanciones.",
+    tope: "Imputable a los anticipos del año siguiente o devolución."
+  },
+  "69": {
+    titulo: "Ingresos gravados por servicio de comidas y bebidas (INC)",
+    art: "Art. 512-1 y Art. 908 Parágrafo 1 E.T.",
+    concepto: "Ingresos brutos por venta de alimentos y bebidas preparados en restaurantes, cafeterías, panaderías y bares.",
+    como_llenar: "Registre el total de ventas por comidas y bebidas preparadas.",
+    tope: "Ventas brutas del servicio de comidas y bebidas."
+  },
+  "70": {
+    titulo: "Impuesto nacional al consumo (INC 8%)",
+    art: "Art. 512-1 E.T.",
+    concepto: "Impuesto del 8% sobre los ingresos del servicio de comidas y bebidas.",
+    como_llenar: "Multiplique la Casilla 69 por el 8% (0.08).",
+    tope: "Casilla 70 = round(c69 * 0.08 / 1000) * 1000."
+  },
+  "71": {
+    titulo: "INC efectivamente pagado en anticipos bimestrales",
+    art: "Art. 910 E.T.",
+    concepto: "Suma de los valores de INC pagados en los 6 anticipos bimestrales Formulario 2593.",
+    como_llenar: "Suma de los anticipos pagados de INC en el año (Casillas 102 a 107).",
+    tope: "Suma de recibos 2593 pagados de INC."
+  },
+  "78": {
+    titulo: "Total saldo a pagar INC",
+    art: "Art. 512-1 y 910 E.T.",
+    concepto: "Saldo final a pagar del Impuesto Nacional al Consumo anual más sanciones.",
+    como_llenar: "Casilla 73 más Casilla 77.",
+    tope: "Monto a pagar de INC."
+  },
+  "79": {
+    titulo: "Total saldo a favor INC",
+    art: "Art. 910 E.T.",
+    concepto: "Saldo a favor de INC cuando los anticipos superan el impuesto consolidado anual.",
+    como_llenar: "Exceso de anticipos de INC frente al impuesto liquidado.",
+    tope: "Imputable al año siguiente."
+  },
+  "80": {
+    titulo: "Ingresos por ganancias ocasionales",
+    art: "Art. 300 a 316 y 908 E.T.",
+    concepto: "Ingresos por venta de activos fijos poseídos por 2 o más años, herencias o loterías.",
+    como_llenar: "Registre el precio de venta o enajenación del activo fijo.",
+    tope: "Ingresos brutos de ganancia ocasional."
+  },
+  "84": {
+    titulo: "Impuesto de ganancias ocasionales (15%)",
+    art: "Art. 313 y 314 E.T.",
+    concepto: "Impuesto sobre las ganancias ocasionales gravables liquidado a la tarifa general del 15%.",
+    como_llenar: "Casilla 83 multiplicada por el 15%.",
+    tope: "Casilla 84 = round(c83 * 0.15 / 1000) * 1000."
+  },
+  "94": {
+    titulo: "Total saldo a pagar Ganancias Ocasionales",
+    art: "Art. 908 E.T.",
+    concepto: "Saldo final a pagar por concepto de Ganancias Ocasionales más sanciones.",
+    como_llenar: "Casilla 89 más Casilla 93.",
+    tope: "Monto a pagar por GO."
+  },
+  "980": {
+    titulo: "PAGO TOTAL $",
+    art: "Art. 801 y 910 E.T.",
+    concepto: "Consolidado total a pagar en la declaración anual del SIMPLE (Suma de saldos a pagar SIMPLE + ICA + INC + Ganancias Ocasionales).",
+    como_llenar: "Casilla 63 (SIMPLE) + Casilla 68 (ICA) + Casilla 78 (INC) + Casilla 94 (GO).",
+    tope: "Casilla 980 = c63 + c68 + c78 + c94."
+  }
+};
+

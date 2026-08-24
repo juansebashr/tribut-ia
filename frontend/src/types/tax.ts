@@ -86,37 +86,188 @@ export interface PersonaNaturalOutput {
   resumen_ejecutivo: string;
 }
 
+export interface Formulario110Casillas {
+  ano: number;
+  numero_formulario: string;
+  nit: string;
+  dv: string;
+  razon_social: string;
+  cod_direccion_seccional: number;
+  actividad_economica: string;
+  c33_total_costos_gastos_nomina: number;
+  c34_aportes_seguridad_social: number;
+  c35_aportes_sena_icbf_cajas: number;
+  c36_efectivo_y_equivalentes: number;
+  c37_inversiones_derivados: number;
+  c38_cuentas_por_cobrar: number;
+  c39_inventarios: number;
+  c40_activos_intangibles: number;
+  c41_activos_biologicos: number;
+  c42_propiedades_planta_equipo: number;
+  c43_otros_activos: number;
+  c44_total_patrimonio_bruto: number;
+  c45_pasivos: number;
+  c46_total_patrimonio_liquido: number;
+  c47_ingresos_brutos_ordinarios: number;
+  c48_ingresos_financieros: number;
+  c49_dividendos_no_constitutivos: number;
+  c50_dividendos_chc: number;
+  c51_dividendos_gravados_tarifa_general: number;
+  c52_dividendos_no_residentes_2016: number;
+  c53_dividendos_no_residentes_2017: number;
+  c54_dividendos_art245_246: number;
+  c55_dividendos_ep_extranjeras_2017: number;
+  c56_dividendos_megainversion_27: number;
+  c57_otros_ingresos: number;
+  c58_total_ingresos_brutos: number;
+  c59_devoluciones_rebajas_descuentos: number;
+  c60_ingresos_no_constitutivos_renta: number;
+  c61_total_ingresos_netos: number;
+  c62_costos: number;
+  c63_gastos_administracion: number;
+  c64_gastos_distribucion_ventas: number;
+  c65_gastos_financieros: number;
+  c66_otros_gastos_deducciones: number;
+  c67_total_costos_gastos_deducibles: number;
+  c68_inversiones_efectuadas_ano: number;
+  c69_inversiones_liquidadas_periodos_anteriores: number;
+  c70_renta_recuperacion_deducciones: number;
+  c71_renta_pasiva_ece: number;
+  c72_renta_liquida_ordinaria: number;
+  c73_perdida_liquida_ejercicio: number;
+  c74_compensaciones: number;
+  c75_renta_liquida: number;
+  c76_renta_presuntiva: number;
+  c77_renta_exenta: number;
+  c78_rentas_gravables: number;
+  c79_renta_liquida_gravable: number;
+  c80_ingresos_ganancias_ocasionales: number;
+  c81_costos_ganancias_ocasionales: number;
+  c82_ganancias_ocasionales_exentas: number;
+  c83_ganancias_ocasionales_gravables: number;
+  c84_impuesto_renta_liquida_gravable: number;
+  c85_puntos_adicionales_sobretasa: number;
+  c86_impuesto_dividendos_art245_246: number;
+  c87_impuesto_dividendos_art240: number;
+  c88_impuesto_dividendos_megainversion: number;
+  c89_impuesto_dividendos_no_residentes_2017: number;
+  c90_impuesto_dividendos_no_residentes_2016: number;
+  c91_total_impuesto_rentas_liquidas: number;
+  c92_valor_a_adicionar_vaa: number;
+  c93_descuentos_tributarios: number;
+  c94_impuesto_neto_renta_sin_adicion: number;
+  c95_impuesto_a_adicionar_ttd: number;
+  c96_impuesto_neto_renta_con_adicion: number;
+  c97_impuesto_ganancias_ocasionales: number;
+  c98_descuento_impuestos_exterior_go: number;
+  c99_total_impuesto_a_cargo: number;
+  c100_obras_por_impuestos_mod1: number;
+  c101_descuento_obras_por_impuestos_mod2: number;
+  c102_credito_fiscal_256_1: number;
+  c103_anticipo_renta_ano_anterior: number;
+  c104_saldo_a_favor_ano_anterior: number;
+  c105_autorretenciones: number;
+  c106_otras_retenciones: number;
+  c107_total_retenciones_ano_declarar: number;
+  c108_anticipo_renta_ano_siguiente: number;
+  c109_anticipo_sobretasa_ano_anterior: number;
+  c110_anticipo_sobretasa_ano_siguiente: number;
+  c111_saldo_a_pagar_por_impuesto: number;
+  c112_sanciones: number;
+  c113_total_saldo_a_pagar: number;
+  c114_total_saldo_a_favor: number;
+  c115_obras_impuestos_exigible_mod1: number;
+  c116_total_proyecto_obras_mod2: number;
+  c117_aporte_voluntario_art244_1: number;
+  c980_pago_total: number;
+  c981_cod_representacion: string;
+  c982_cod_contador_o_revisor: string;
+  c983_tarjeta_profesional: string;
+}
+
 export interface PersonaJuridicaInput {
   tax_year: number;
   custom_uvt?: number;
   tarifa_personalizada?: number;
+  tipo_regimen?: string;
+  aplica_sobretasa_financiera?: boolean;
+  aplica_sobretasa_hidroelectrica?: boolean;
+  sobretasa_minero_petroleo_pct?: number;
+
+  // 1. Datos Informativos
+  total_costos_gastos_nomina?: number;
+  aportes_seguridad_social?: number;
+  aportes_sena_icbf_cajas?: number;
+
+  // 2. Patrimonio
+  efectivo_y_equivalentes?: number;
+  inversiones_derivados?: number;
+  cuentas_por_cobrar?: number;
+  inventarios?: number;
+  activos_intangibles?: number;
+  activos_biologicos?: number;
+  propiedades_planta_equipo?: number;
+  otros_activos?: number;
+  pasivos?: number;
+
+  // 3. Ingresos
   ingresos_brutos_operacionales: number;
   ingresos_brutos_no_operacionales: number;
+  ingresos_financieros?: number;
+  dividendos_no_constitutivos?: number;
+  dividendos_gravados_tarifa_general?: number;
+  otros_ingresos?: number;
   devoluciones_rebajas_descuentos: number;
   ingresos_no_constitutivos_renta: number;
+
+  // 4. Costos y Gastos
   costos_procedentes: number;
   gastos_administracion: number;
   gastos_ventas: number;
   gastos_financieros: number;
+  otros_gastos_deducciones?: number;
+
+  // 5. Conciliación
   gastos_no_deducibles: number;
   deducciones_especiales: number;
   rentas_exentas: number;
   compensacion_perdidas_fiscales: number;
   compensacion_exceso_renta_presuntiva: number;
+
+  // 6. TTD
   utilidad_contable_antes_impuestos: number;
   diferencias_permanentes_ttd: number;
+
+  // 7. Ganancia Ocasional y Descuentos
+  ganancias_ocasionales_brutas?: number;
+  costos_ganancia_ocasional?: number;
+  ganancias_ocasionales_exentas?: number;
   ganancia_ocasional_gravable: number;
   descuento_tributario_ica: number;
   otros_descuentos_tributarios: number;
+
+  // 8. Obras y Créditos
+  obras_por_impuestos_mod1?: number;
+  descuento_obras_mod2?: number;
+  credito_fiscal_256_1?: number;
+
+  // 9. Retenciones y Anticipos
   retenciones_en_la_fuente: number;
   autorretenciones_practicadas: number;
   anticipo_ano_anterior: number;
   saldo_a_favor_ano_anterior: number;
+  anticipo_sobretasa_ano_anterior?: number;
+  porcentaje_anticipo_siguiente?: number;
+  sanciones?: number;
+  aporte_voluntario_art244_1?: number;
 }
 
 export interface PersonaJuridicaOutput {
   tax_year: number;
   uvt_value: number;
+  patrimonio_bruto: number;
+  pasivos: number;
+  patrimonio_liquido: number;
   ingresos_brutos_totales: number;
   ingresos_netos: number;
   renta_bruta: number;
@@ -125,17 +276,230 @@ export interface PersonaJuridicaOutput {
   renta_liquida_gravable: number;
   tarifa_renta_aplicada: number;
   impuesto_basico_renta: number;
+  puntos_adicionales_sobretasa: number;
+  impuesto_sobretasa: number;
   ttd_calculada_pct: number;
+  utilidad_depurada_ttd: number;
+  impuesto_depurado_ttd: number;
   aplica_impuesto_adicional_ttd: boolean;
   impuesto_adicional_ttd: number;
   impuesto_ganancias_ocasionales: number;
   total_descuentos_tributarios_aplicados: number;
+  total_impuesto_a_cargo: number;
   impuesto_neto_total: number;
+  total_retenciones_declarar: number;
+  anticipo_ano_siguiente: number;
+  anticipo_sobretasa_ano_siguiente: number;
   total_retenciones_y_anticipos: number;
   saldo_a_pagar: number;
   saldo_a_favor: number;
+  form_110_casillas: Formulario110Casillas;
   audit_trace: AuditTraceItem[];
   resumen_ejecutivo: string;
+}
+
+export interface Formulario260Casillas {
+  ano: number;
+  fraccion_ano_siguiente: boolean;
+  numero_formulario: string;
+  nit: string;
+  dv: string;
+  primer_apellido: string;
+  segundo_apellido: string;
+  primer_nombre: string;
+  otros_nombres: string;
+  razon_social: string;
+  cod_direccion_seccional: number;
+  actividad_economica: string;
+  tarifa_simple_consolidada: number;
+  c28_patrimonio_bruto: number;
+  c29_pasivos: number;
+  c30_patrimonio_liquido: number;
+  c31_ingresos_grupo1_pais: number;
+  c32_ingresos_grupo1_exterior: number;
+  c33_ingresos_grupo2_pais: number;
+  c34_ingresos_grupo2_exterior: number;
+  c35_ingresos_grupo3_pais: number;
+  c36_ingresos_grupo3_exterior: number;
+  c37_ingresos_grupo4_pais: number;
+  c38_ingresos_grupo4_exterior: number;
+  c39_ingresos_grupo5_pais: number;
+  c40_ingresos_grupo5_exterior: number;
+  c41_ingresos_grupo6_pais: number;
+  c42_ingresos_grupo6_exterior: number;
+  c43_total_ingresos_brutos_sin_go: number;
+  c44_ingresos_no_constitutivos_renta: number;
+  c45_total_ingresos_gravables: number;
+  c46_impuesto_simple: number;
+  c47_componente_ica_territorial: number;
+  c48_valor_componente_simple_nacional: number;
+  c49_descuento_aportes_pension_empleador: number;
+  c50_descuento_ventas_medios_electronicos: number;
+  c51_descuento_gmf: number;
+  c52_total_descuentos: number;
+  c53_impuesto_neto_simple: number;
+  c54_retenciones_antes_pertenecer_simple: number;
+  c55_anticipo_renta_ano_anterior: number;
+  c56_anticipos_simple_efectivamente_pagados: number;
+  c57_saldo_favor_simple_ano_anterior: number;
+  c58_saldo_a_pagar_impuesto_simple: number;
+  c59_sancion_extemporaneidad_simple: number;
+  c60_sancion_correccion_simple: number;
+  c61_otras_sanciones_simple: number;
+  c62_total_sanciones_simple: number;
+  c63_total_saldo_a_pagar_simple: number;
+  c64_total_saldo_a_favor_simple: number;
+  c65_sancion_extemporaneidad_ica: number;
+  c66_sancion_correccion_ica: number;
+  c67_otras_sanciones_ica: number;
+  c68_total_sanciones_ica: number;
+  c69_ingresos_gravados_inc: number;
+  c70_impuesto_nacional_consumo: number;
+  c71_inc_efectivamente_pagado_anticipos: number;
+  c72_saldo_favor_inc_ano_anterior: number;
+  c73_saldo_a_pagar_inc: number;
+  c74_sancion_extemporaneidad_inc: number;
+  c75_sancion_correccion_inc: number;
+  c76_otras_sanciones_inc: number;
+  c77_total_sanciones_inc: number;
+  c78_total_saldo_a_pagar_inc: number;
+  c79_total_saldo_a_favor_inc: number;
+  c80_ingresos_ganancias_ocasionales: number;
+  c81_costos_ganancias_ocasionales: number;
+  c82_ganancias_ocasionales_exentas: number;
+  c83_ganancias_ocasionales_gravables: number;
+  c84_impuesto_ganancias_ocasionales: number;
+  c85_descuento_impuestos_exterior_go: number;
+  c86_impuesto_neto_ganancias_ocasionales: number;
+  c87_saldo_favor_go_ano_anterior: number;
+  c88_retenciones_ganancias_ocasionales: number;
+  c89_saldo_a_pagar_go: number;
+  c90_sancion_extemporaneidad_go: number;
+  c91_sancion_correccion_go: number;
+  c92_otras_sanciones_go: number;
+  c93_total_sanciones_go: number;
+  c94_total_saldo_a_pagar_go: number;
+  c95_total_saldo_a_favor_go: number;
+  c96_anticipo_simple_bim1: number;
+  c97_anticipo_simple_bim2: number;
+  c98_anticipo_simple_bim3: number;
+  c99_anticipo_simple_bim4: number;
+  c100_anticipo_simple_bim5: number;
+  c101_anticipo_simple_bim6: number;
+  c102_anticipo_inc_bim1: number;
+  c103_anticipo_inc_bim2: number;
+  c104_anticipo_inc_bim3: number;
+  c105_anticipo_inc_bim4: number;
+  c106_anticipo_inc_bim5: number;
+  c107_anticipo_inc_bim6: number;
+  c980_pago_total: number;
+  c981_cod_representacion?: string;
+  c982_cod_contador_o_revisor?: string;
+  c983_tarjeta_profesional?: string;
+}
+
+export interface RegimenSimpleInput {
+  tax_year: number;
+  custom_uvt?: number;
+  grupo_actividad: number;
+  razon_social_o_nombre: string;
+  nit: string;
+  dv: string;
+  patrimonio_bruto: number;
+  pasivos: number;
+  ingresos_brutos_nacionales: number;
+  ingresos_brutos_exterior: number;
+  ingresos_no_constitutivos_renta: number;
+  tarifa_ica_consolidada_x_mil: number;
+  componente_ica_territorial_fijo?: number | null;
+  aportes_pension_empleador_ano: number;
+  ventas_por_medios_electronicos: number;
+  gmf_pagado?: number;
+  ingresos_servicio_comidas_bebidas: number;
+  ganancias_ocasionales_brutas?: number;
+  costos_ganancia_ocasional?: number;
+  ganancias_ocasionales_exentas?: number;
+  anticipos_simple_pagados?: number[];
+  anticipos_inc_pagados?: number[];
+  retenciones_antes_pertenecer_simple?: number;
+  anticipo_renta_ano_anterior?: number;
+  saldo_a_favor_simple_ano_anterior?: number;
+  saldo_a_favor_inc_ano_anterior?: number;
+  saldo_a_favor_go_ano_anterior?: number;
+  sanciones_simple?: number;
+  sanciones_ica?: number;
+  sanciones_inc?: number;
+  sanciones_go?: number;
+}
+
+export interface RegimenSimpleOutput {
+  tax_year: number;
+  uvt_value: number;
+  grupo_actividad: number;
+  nombre_grupo: string;
+  ingresos_brutos_totales: number;
+  ingresos_gravables_simple: number;
+  ingresos_en_uvt: number;
+  tarifa_simple_consolidada_pct: number;
+  impuesto_simple_consolidado: number;
+  componente_ica_territorial: number;
+  componente_simple_nacional: number;
+  descuento_pension_empleador: number;
+  descuento_medios_electronicos_0_5pct: number;
+  total_descuentos_aplicados: number;
+  impuesto_neto_simple: number;
+  total_anticipos_simple_pagados: number;
+  saldo_a_pagar_simple: number;
+  saldo_a_favor_simple: number;
+  impuesto_inc_comidas_bebidas: number;
+  total_anticipos_inc_pagados: number;
+  saldo_a_pagar_inc: number;
+  saldo_a_favor_inc: number;
+  impuesto_ganancias_ocasionales: number;
+  saldo_a_pagar_go: number;
+  saldo_a_favor_go: number;
+  gran_total_saldo_a_pagar: number;
+  gran_total_saldo_a_favor: number;
+  form_260_casillas: Formulario260Casillas;
+  audit_trace: AuditTraceItem[];
+  resumen_ejecutivo: string;
+}
+
+export interface ComparativaSimpleInput {
+  tax_year: number;
+  custom_uvt?: number;
+  tipo_persona: 'natural' | 'juridica' | string;
+  grupo_actividad: number;
+  ingresos_brutos_anuales: number;
+  costos_y_gastos_deducibles: number;
+  aportes_pension_empleador: number;
+  porcentaje_ventas_medios_electronicos: number;
+  tarifa_ica_x_mil: number;
+  numero_empleados_menos_10_smlmv: number;
+}
+
+export interface ComparativaSimpleOutput {
+  tax_year: number;
+  uvt_value: number;
+  renta_liquida_ordinaria: number;
+  impuesto_renta_ordinario: number;
+  ica_ordinario: number;
+  total_carga_tributaria_ordinario: number;
+  tasa_efectiva_ordinario_pct: number;
+  tarifa_simple_pct: number;
+  impuesto_simple_bruto: number;
+  descuento_pension_simple: number;
+  descuento_electronico_simple: number;
+  impuesto_simple_neto: number;
+  ica_integrado_en_simple: number;
+  total_carga_tributaria_simple: number;
+  tasa_efectiva_simple_pct: number;
+  ahorro_tributario_neto_cop: number;
+  ahorro_tributario_pct: number;
+  ahorro_parafiscales_salud_sena_icbf_cop: number;
+  beneficio_flujo_caja_sin_retefuente_cop: number;
+  regimen_recomendado: string;
+  conclusion_didactica: string;
 }
 
 export interface TaxYearRules {
@@ -171,9 +535,13 @@ export interface TaxYearRules {
   persona_juridica: {
     tarifa_general: number;
     ganancia_ocasional: number;
+    tarifa_zona_franca?: number;
+    tarifa_hoteles_ecoturismo?: number;
+    tarifa_cooperativas?: number;
     tasa_minima_ttd: { aplica: boolean; tarifa_minima: number };
     descuentos: { ica_descuento_porcentaje: number; donaciones_porcentaje: number };
   };
+  regimen_simple?: any;
 }
 
 export interface BeneficioItem {
@@ -313,25 +681,17 @@ export interface SimulacionInmuebleAfcResponse {
   ganancia_ocasional_bruta_cop: number;
   es_vivienda_habitacion: boolean;
   posesion_mas_2_anos: boolean;
-
-  // Estrategia 4: Art. 44 (pre-1987)
   aplica_art44_pre1987: boolean;
   porcentaje_exencion_art44_pct: number;
   ganancia_exenta_art44_cop: number;
-
-  // Estrategia 3: Art. 311-1 (AFC)
   monto_depositado_afc_cop: number;
   tope_maximo_exencion_uvt: number;
   tope_maximo_exencion_cop: number;
   ganancia_exenta_afc_art311_1_cop: number;
-
-  // Totales
   ganancia_ocasional_exenta_total_cop: number;
   ganancia_ocasional_exenta_cop: number;
   ganancia_ocasional_gravada_final_cop: number;
   tarifa_ganancia_ocasional_pct: number;
-
-  // Impuestos y ahorros
   impuesto_go_sin_planeacion_cop: number;
   impuesto_go_sin_beneficios_cop?: number;
   impuesto_go_con_beneficios_cop: number;
@@ -340,28 +700,20 @@ export interface SimulacionInmuebleAfcResponse {
   ahorro_total_impuesto_cop: number;
   ahorro_impuesto_afc_cop: number;
   porcentaje_ahorro_tributario_pct: number;
-
-  // Retención notarial
   retefuente_notarial_tarifa_base_pct: number;
   porcentaje_reduccion_retefuente_art399_pct: number;
   retefuente_notarial_sin_beneficio_cop: number;
   retefuente_notarial_final_cop: number;
   retencion_en_fuente_notarial_cop?: number;
   ahorro_retefuente_notarial_cop: number;
-
-  // Casillas oficiales Formulario 210
   total_ganancia_exenta_cop?: number;
   casilla_80_ingresos_brutos_cop?: number;
   casilla_81_costos_cop?: number;
   casilla_82_exentas_cop?: number;
   casilla_83_gravables_cop?: number;
   casilla_87_impuesto_go_cop?: number;
-
-  // Escenarios
   escenarios: EscenarioComparativoInmueble[];
   matriz_comparativa_escenarios?: any[];
-
-  // Didáctica
   estrategias_aplicadas: string[];
   requisitos_estatuto: string[];
   advertencias_legales: string[];

@@ -653,6 +653,39 @@
       "source_location": "L172"
     },
     {
+      "id": "backend_app_api_v1_endpoints_regimen_simple",
+      "label": "endpoints/regimen_simple.py",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "reconciliation.py",
+      "file_type": "concept",
+      "norm_label": "endpoints/regimen_simple.py",
+      "source_file": "backend/app/api/v1/endpoints/regimen_simple.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "backend_app_api_v1_endpoints_regimen_simple_func_calcular_regimen_simple",
+      "label": "calcular_regimen_simple",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "reconciliation.py",
+      "file_type": "concept",
+      "norm_label": "calcular_regimen_simple",
+      "source_file": "backend/app/api/v1/endpoints/regimen_simple.py",
+      "source_location": "L23"
+    },
+    {
+      "id": "backend_app_api_v1_endpoints_regimen_simple_func_simular_comparativa_regimen",
+      "label": "simular_comparativa_regimen",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "reconciliation.py",
+      "file_type": "concept",
+      "norm_label": "simular_comparativa_regimen",
+      "source_file": "backend/app/api/v1/endpoints/regimen_simple.py",
+      "source_location": "L36"
+    },
+    {
       "id": "backend_app_api_v1_endpoints_rules",
       "label": "rules.py",
       "_origin": "ast",
@@ -1890,6 +1923,17 @@
       "source_location": "L5"
     },
     {
+      "id": "backend_tests_test_pj_calculator_func_test_persona_juridica_sobretasa_financiera",
+      "label": "test_persona_juridica_sobretasa_financiera",
+      "_origin": "ast",
+      "community": 13,
+      "community_name": "test_pj_calculator.py",
+      "file_type": "concept",
+      "norm_label": "test_persona_juridica_sobretasa_financiera",
+      "source_file": "backend/tests/test_pj_calculator.py",
+      "source_location": "L97"
+    },
+    {
       "id": "backend_tests_test_pj_calculator_func_test_persona_juridica_tasa_minima_ttd_gatillada",
       "label": "test_persona_juridica_tasa_minima_ttd_gatillada",
       "_origin": "ast",
@@ -1898,7 +1942,7 @@
       "file_type": "concept",
       "norm_label": "test_persona_juridica_tasa_minima_ttd_gatillada",
       "source_file": "backend/tests/test_pj_calculator.py",
-      "source_location": "L55"
+      "source_location": "L70"
     },
     {
       "id": "docs_estatuto_tributario_art\u00edculo_573_responsabilidad_subsidiaria_de_los_representantes_por_incumplimiento_de_deberes_formales",
@@ -2367,11 +2411,23 @@
       "source_location": "L21"
     },
     {
+      "id": "docs_decisions_0003_mascara_contable_colombiana_en_dom",
+      "label": "0003-mascara-contable-colombiana-en-dom.md",
+      "_origin": "ast",
+      "community": 146,
+      "community_name": "0003-mascara-contable-colombiana-en-dom.md",
+      "file_type": "document",
+      "node_kind": "page",
+      "norm_label": "0003-mascara-contable-colombiana-en-dom.md",
+      "source_file": "docs/decisions/0003-mascara-contable-colombiana-en-dom.md",
+      "source_location": "L1"
+    },
+    {
       "id": "docs_decisions_0003_mascara_contable_colombiana_en_dom_adr_0003_manejo_de_m\u00e1scara_contable_colombiana_en_el_dom_y_sanitizaci\u00f3n_num\u00e9rica",
       "label": "ADR 0003: Manejo de M\u00e1scara Contable Colombiana en el DOM y Sanitizaci\u00f3n Num\u00e9rica",
       "_origin": "ast",
       "community": 146,
-      "community_name": "ADR 0003: Manejo de M\u00e1scara Contable Colombiana en el DOM y Sanitizaci\u00f3n Num\u00e9rica",
+      "community_name": "0003-mascara-contable-colombiana-en-dom.md",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "adr 0003: manejo de mascara contable colombiana en el dom y sanitizacion numerica",
@@ -2383,7 +2439,7 @@
       "label": "Consecuencias",
       "_origin": "ast",
       "community": 146,
-      "community_name": "ADR 0003: Manejo de M\u00e1scara Contable Colombiana en el DOM y Sanitizaci\u00f3n Num\u00e9rica",
+      "community_name": "0003-mascara-contable-colombiana-en-dom.md",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "consecuencias",
@@ -2395,7 +2451,7 @@
       "label": "Contexto",
       "_origin": "ast",
       "community": 146,
-      "community_name": "ADR 0003: Manejo de M\u00e1scara Contable Colombiana en el DOM y Sanitizaci\u00f3n Num\u00e9rica",
+      "community_name": "0003-mascara-contable-colombiana-en-dom.md",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "contexto",
@@ -2407,7 +2463,7 @@
       "label": "Decisi\u00f3n",
       "_origin": "ast",
       "community": 146,
-      "community_name": "ADR 0003: Manejo de M\u00e1scara Contable Colombiana en el DOM y Sanitizaci\u00f3n Num\u00e9rica",
+      "community_name": "0003-mascara-contable-colombiana-en-dom.md",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "decision",
@@ -2508,7 +2564,7 @@
       "node_kind": "heading",
       "norm_label": "2.2 sincronizacion de hash url (`window.location.hash`)",
       "source_file": "docs/superpowers/specs/2026-08-23-landing-page-and-skill-hub-design.md",
-      "source_location": "L25"
+      "source_location": "L26"
     },
     {
       "id": "docs_superpowers_specs_2026_08_23_landing_page_and_skill_hub_design_2_3_navegaci\u00f3n_bidireccional",
@@ -2520,7 +2576,7 @@
       "node_kind": "heading",
       "norm_label": "2.3 navegacion bidireccional",
       "source_file": "docs/superpowers/specs/2026-08-23-landing-page-and-skill-hub-design.md",
-      "source_location": "L31"
+      "source_location": "L33"
     },
     {
       "id": "docs_superpowers_specs_2026_08_23_landing_page_and_skill_hub_design_2_arquitectura_de_navegaci\u00f3n_y_estado",
@@ -2544,7 +2600,7 @@
       "node_kind": "heading",
       "norm_label": "3.1 `landingpage.tsx`",
       "source_file": "docs/superpowers/specs/2026-08-23-landing-page-and-skill-hub-design.md",
-      "source_location": "L47"
+      "source_location": "L50"
     },
     {
       "id": "docs_superpowers_specs_2026_08_23_landing_page_and_skill_hub_design_3_2_skilltutorialpage_tsx",
@@ -2556,7 +2612,7 @@
       "node_kind": "heading",
       "norm_label": "3.2 `skilltutorialpage.tsx`",
       "source_file": "docs/superpowers/specs/2026-08-23-landing-page-and-skill-hub-design.md",
-      "source_location": "L72"
+      "source_location": "L76"
     },
     {
       "id": "docs_superpowers_specs_2026_08_23_landing_page_and_skill_hub_design_3_componentes_y_contenido_visual",
@@ -2568,7 +2624,7 @@
       "node_kind": "heading",
       "norm_label": "3. componentes y contenido visual",
       "source_file": "docs/superpowers/specs/2026-08-23-landing-page-and-skill-hub-design.md",
-      "source_location": "L45"
+      "source_location": "L48"
     },
     {
       "id": "docs_superpowers_specs_2026_08_23_landing_page_and_skill_hub_design_4_estructura_de_archivos_y_componentes",
@@ -2580,7 +2636,7 @@
       "node_kind": "heading",
       "norm_label": "4. estructura de archivos y componentes",
       "source_file": "docs/superpowers/specs/2026-08-23-landing-page-and-skill-hub-design.md",
-      "source_location": "L103"
+      "source_location": "L108"
     },
     {
       "id": "docs_superpowers_specs_2026_08_23_landing_page_and_skill_hub_design_5_criterios_de_aceptaci\u00f3n_y_verificaci\u00f3n",
@@ -2592,7 +2648,7 @@
       "node_kind": "heading",
       "norm_label": "5. criterios de aceptacion y verificacion",
       "source_file": "docs/superpowers/specs/2026-08-23-landing-page-and-skill-hub-design.md",
-      "source_location": "L127"
+      "source_location": "L132"
     },
     {
       "id": "docs_superpowers_specs_2026_08_23_landing_page_and_skill_hub_design_especificaci\u00f3n_de_dise\u00f1o_landing_page_y_hub_de_instalaci\u00f3n_de_skills_de_ia_en_tributia",
@@ -2607,52 +2663,70 @@
       "source_location": "L1"
     },
     {
-      "id": "docs_decisions_0006_sistema_responsivo_y_modo_mobile_1_contexto_y_problema",
-      "label": "1. Contexto y Problema",
+      "id": "backend_app_models_regimen_simple",
+      "label": "models/regimen_simple.py",
       "_origin": "ast",
       "community": 149,
-      "community_name": "ADR 0006: Sistema Responsivo, Men\u00fa Off-Canvas y Modo Mobile",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "1. contexto y problema",
-      "source_file": "docs/decisions/0006-sistema-responsivo-y-modo-mobile.md",
-      "source_location": "L9"
-    },
-    {
-      "id": "docs_decisions_0006_sistema_responsivo_y_modo_mobile_2_decisi\u00f3n_tomada",
-      "label": "2. Decisi\u00f3n Tomada",
-      "_origin": "ast",
-      "community": 149,
-      "community_name": "ADR 0006: Sistema Responsivo, Men\u00fa Off-Canvas y Modo Mobile",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "2. decision tomada",
-      "source_file": "docs/decisions/0006-sistema-responsivo-y-modo-mobile.md",
-      "source_location": "L22"
-    },
-    {
-      "id": "docs_decisions_0006_sistema_responsivo_y_modo_mobile_3_consecuencias_y_beneficios",
-      "label": "3. Consecuencias y Beneficios",
-      "_origin": "ast",
-      "community": 149,
-      "community_name": "ADR 0006: Sistema Responsivo, Men\u00fa Off-Canvas y Modo Mobile",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "3. consecuencias y beneficios",
-      "source_file": "docs/decisions/0006-sistema-responsivo-y-modo-mobile.md",
-      "source_location": "L45"
-    },
-    {
-      "id": "docs_decisions_0006_sistema_responsivo_y_modo_mobile_adr_0006_sistema_responsivo_men\u00fa_off_canvas_y_modo_mobile",
-      "label": "ADR 0006: Sistema Responsivo, Men\u00fa Off-Canvas y Modo Mobile",
-      "_origin": "ast",
-      "community": 149,
-      "community_name": "ADR 0006: Sistema Responsivo, Men\u00fa Off-Canvas y Modo Mobile",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "adr 0006: sistema responsivo, menu off-canvas y modo mobile",
-      "source_file": "docs/decisions/0006-sistema-responsivo-y-modo-mobile.md",
+      "community_name": "models/regimen_simple.py",
+      "file_type": "concept",
+      "norm_label": "models/regimen_simple.py",
+      "source_file": "backend/app/models/regimen_simple.py",
       "source_location": "L1"
+    },
+    {
+      "id": "backend_app_models_regimen_simple_class_comparativasimpleinput",
+      "label": "ComparativaSimpleInput",
+      "_origin": "ast",
+      "community": 149,
+      "community_name": "models/regimen_simple.py",
+      "file_type": "concept",
+      "norm_label": "comparativasimpleinput",
+      "source_file": "backend/app/models/regimen_simple.py",
+      "source_location": "L350"
+    },
+    {
+      "id": "backend_app_models_regimen_simple_class_comparativasimpleoutput",
+      "label": "ComparativaSimpleOutput",
+      "_origin": "ast",
+      "community": 149,
+      "community_name": "models/regimen_simple.py",
+      "file_type": "concept",
+      "norm_label": "comparativasimpleoutput",
+      "source_file": "backend/app/models/regimen_simple.py",
+      "source_location": "L371"
+    },
+    {
+      "id": "backend_app_models_regimen_simple_class_formulario260casillas",
+      "label": "Formulario260Casillas",
+      "_origin": "ast",
+      "community": 149,
+      "community_name": "models/regimen_simple.py",
+      "file_type": "concept",
+      "norm_label": "formulario260casillas",
+      "source_file": "backend/app/models/regimen_simple.py",
+      "source_location": "L6"
+    },
+    {
+      "id": "backend_app_models_regimen_simple_class_regimensimpleinput",
+      "label": "RegimenSimpleInput",
+      "_origin": "ast",
+      "community": 149,
+      "community_name": "models/regimen_simple.py",
+      "file_type": "concept",
+      "norm_label": "regimensimpleinput",
+      "source_file": "backend/app/models/regimen_simple.py",
+      "source_location": "L199"
+    },
+    {
+      "id": "backend_app_models_regimen_simple_class_regimensimpleoutput",
+      "label": "RegimenSimpleOutput",
+      "_origin": "ast",
+      "community": 149,
+      "community_name": "models/regimen_simple.py",
+      "file_type": "concept",
+      "norm_label": "regimensimpleoutput",
+      "source_file": "backend/app/models/regimen_simple.py",
+      "source_location": "L299"
     },
     {
       "id": "backend_app_core_rules_engine_loader",
@@ -2699,52 +2773,276 @@
       "source_location": "L12"
     },
     {
-      "id": "docs_how_to_02_simular_tasa_minima_ttd_pj",
-      "label": "02-simular-tasa-minima-ttd-pj.md",
+      "id": "docs_superpowers_plans_2026_08_23_landing_page_and_skill_hub_plan",
+      "label": "2026-08-23-landing-page-and-skill-hub-plan.md",
       "_origin": "ast",
-      "community": 150,
-      "community_name": "02-simular-tasa-minima-ttd-pj.md",
+      "community": 151,
+      "community_name": "Global Constraints",
       "file_type": "document",
       "node_kind": "page",
-      "norm_label": "02-simular-tasa-minima-ttd-pj.md",
-      "source_file": "docs/how-to/02-simular-tasa-minima-ttd-pj.md",
+      "norm_label": "2026-08-23-landing-page-and-skill-hub-plan.md",
+      "source_file": "docs/superpowers/plans/2026-08-23-landing-page-and-skill-hub-plan.md",
       "source_location": "L1"
     },
     {
-      "id": "docs_how_to_02_simular_tasa_minima_ttd_pj_1_fundamento_de_la_tasa_m\u00ednima_de_tributaci\u00f3n_ttd",
-      "label": "1. Fundamento de la Tasa M\u00ednima de Tributaci\u00f3n (TTD)",
+      "id": "docs_superpowers_plans_2026_08_23_landing_page_and_skill_hub_plan_global_constraints",
+      "label": "Global Constraints",
       "_origin": "ast",
-      "community": 150,
-      "community_name": "02-simular-tasa-minima-ttd-pj.md",
+      "community": 151,
+      "community_name": "Global Constraints",
       "file_type": "document",
       "node_kind": "heading",
-      "norm_label": "1. fundamento de la tasa minima de tributacion (ttd)",
-      "source_file": "docs/how-to/02-simular-tasa-minima-ttd-pj.md",
-      "source_location": "L7"
+      "norm_label": "global constraints",
+      "source_file": "docs/superpowers/plans/2026-08-23-landing-page-and-skill-hub-plan.md",
+      "source_location": "L11"
     },
     {
-      "id": "docs_how_to_02_simular_tasa_minima_ttd_pj_2_ejecuci\u00f3n_v\u00eda_api",
-      "label": "2. Ejecuci\u00f3n v\u00eda API",
+      "id": "docs_superpowers_plans_2026_08_23_landing_page_and_skill_hub_plan_plan_de_implementaci\u00f3n_landing_page_de_entrada_y_hub_de_instalaci\u00f3n_de_skills_de_ia",
+      "label": "Plan de Implementaci\u00f3n: Landing Page de Entrada y Hub de Instalaci\u00f3n de Skills de IA",
       "_origin": "ast",
-      "community": 150,
-      "community_name": "02-simular-tasa-minima-ttd-pj.md",
+      "community": 151,
+      "community_name": "Global Constraints",
       "file_type": "document",
       "node_kind": "heading",
-      "norm_label": "2. ejecucion via api",
-      "source_file": "docs/how-to/02-simular-tasa-minima-ttd-pj.md",
-      "source_location": "L17"
-    },
-    {
-      "id": "docs_how_to_02_simular_tasa_minima_ttd_pj_gu\u00eda_how_to_simular_tasa_m\u00ednima_de_tributaci\u00f3n_ttd_15_pj",
-      "label": "Gu\u00eda How-To: Simular Tasa M\u00ednima de Tributaci\u00f3n (TTD 15% - PJ)",
-      "_origin": "ast",
-      "community": 150,
-      "community_name": "02-simular-tasa-minima-ttd-pj.md",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "guia how-to: simular tasa minima de tributacion (ttd 15% - pj)",
-      "source_file": "docs/how-to/02-simular-tasa-minima-ttd-pj.md",
+      "norm_label": "plan de implementacion: landing page de entrada y hub de instalacion de skills de ia",
+      "source_file": "docs/superpowers/plans/2026-08-23-landing-page-and-skill-hub-plan.md",
       "source_location": "L1"
+    },
+    {
+      "id": "docs_superpowers_plans_2026_08_23_landing_page_and_skill_hub_plan_task_1_estado_global_de_vistas_y_enrutamiento_spa_appcontext_tsx_app_tsx",
+      "label": "Task 1: Estado Global de Vistas y Enrutamiento SPA (`AppContext.tsx` & `App.tsx`)",
+      "_origin": "ast",
+      "community": 151,
+      "community_name": "Global Constraints",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "task 1: estado global de vistas y enrutamiento spa (`appcontext.tsx` & `app.tsx`)",
+      "source_file": "docs/superpowers/plans/2026-08-23-landing-page-and-skill-hub-plan.md",
+      "source_location": "L21"
+    },
+    {
+      "id": "docs_superpowers_plans_2026_08_23_landing_page_and_skill_hub_plan_task_2_componentes_de_la_landing_page_landingnavbar_landingheropreview_landingpage",
+      "label": "Task 2: Componentes de la Landing Page (`LandingNavbar`, `LandingHeroPreview`, `LandingPage`)",
+      "_origin": "ast",
+      "community": 151,
+      "community_name": "Global Constraints",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "task 2: componentes de la landing page (`landingnavbar`, `landingheropreview`, `landingpage`)",
+      "source_file": "docs/superpowers/plans/2026-08-23-landing-page-and-skill-hub-plan.md",
+      "source_location": "L67"
+    },
+    {
+      "id": "docs_superpowers_plans_2026_08_23_landing_page_and_skill_hub_plan_task_3_centro_de_descarga_y_tutoriales_de_skills_skilltutorialpage_y_pesta\u00f1as",
+      "label": "Task 3: Centro de Descarga y Tutoriales de Skills (`SkillTutorialPage` y Pesta\u00f1as)",
+      "_origin": "ast",
+      "community": 151,
+      "community_name": "Global Constraints",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "task 3: centro de descarga y tutoriales de skills (`skilltutorialpage` y pestanas)",
+      "source_file": "docs/superpowers/plans/2026-08-23-landing-page-and-skill-hub-plan.md",
+      "source_location": "L125"
+    },
+    {
+      "id": "docs_superpowers_plans_2026_08_23_landing_page_and_skill_hub_plan_task_4_integraci\u00f3n_bidireccional_en_el_workspace_app_tsx_sidebar_tsx_headerbar_tsx",
+      "label": "Task 4: Integraci\u00f3n Bidireccional en el Workspace (`App.tsx`, `Sidebar.tsx`, `HeaderBar.tsx`)",
+      "_origin": "ast",
+      "community": 151,
+      "community_name": "Global Constraints",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "task 4: integracion bidireccional en el workspace (`app.tsx`, `sidebar.tsx`, `headerbar.tsx`)",
+      "source_file": "docs/superpowers/plans/2026-08-23-landing-page-and-skill-hub-plan.md",
+      "source_location": "L179"
+    },
+    {
+      "id": "docs_superpowers_plans_2026_08_23_landing_page_and_skill_hub_plan_task_5_verificaci\u00f3n_integral_de_calidad_linteo_y_grafo_arquitect\u00f3nico",
+      "label": "Task 5: Verificaci\u00f3n Integral de Calidad, Linteo y Grafo Arquitect\u00f3nico",
+      "_origin": "ast",
+      "community": 151,
+      "community_name": "Global Constraints",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "task 5: verificacion integral de calidad, linteo y grafo arquitectonico",
+      "source_file": "docs/superpowers/plans/2026-08-23-landing-page-and-skill-hub-plan.md",
+      "source_location": "L229"
+    },
+    {
+      "id": "backend_app_services_liquidacion_simple",
+      "label": "liquidacion_simple.py",
+      "_origin": "ast",
+      "community": 152,
+      "community_name": "liquidacion_simple.py",
+      "file_type": "concept",
+      "norm_label": "liquidacion_simple.py",
+      "source_file": "backend/app/services/liquidacion_simple.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "backend_app_services_liquidacion_simple_func_comparar_ordinario_vs_simple",
+      "label": "comparar_ordinario_vs_simple",
+      "_origin": "ast",
+      "community": 152,
+      "community_name": "liquidacion_simple.py",
+      "file_type": "concept",
+      "norm_label": "comparar_ordinario_vs_simple",
+      "source_file": "backend/app/services/liquidacion_simple.py",
+      "source_location": "L374"
+    },
+    {
+      "id": "backend_app_services_liquidacion_simple_func_get_nombre_grupo",
+      "label": "_get_nombre_grupo",
+      "_origin": "ast",
+      "community": 152,
+      "community_name": "liquidacion_simple.py",
+      "file_type": "concept",
+      "norm_label": "_get_nombre_grupo",
+      "source_file": "backend/app/services/liquidacion_simple.py",
+      "source_location": "L36"
+    },
+    {
+      "id": "backend_app_services_liquidacion_simple_func_get_tarifa_simple",
+      "label": "_get_tarifa_simple",
+      "_origin": "ast",
+      "community": 152,
+      "community_name": "liquidacion_simple.py",
+      "file_type": "concept",
+      "norm_label": "_get_tarifa_simple",
+      "source_file": "backend/app/services/liquidacion_simple.py",
+      "source_location": "L12"
+    },
+    {
+      "id": "backend_app_services_liquidacion_simple_func_liquidar_regimen_simple",
+      "label": "liquidar_regimen_simple",
+      "_origin": "ast",
+      "community": 152,
+      "community_name": "liquidacion_simple.py",
+      "file_type": "concept",
+      "norm_label": "liquidar_regimen_simple",
+      "source_file": "backend/app/services/liquidacion_simple.py",
+      "source_location": "L48"
+    },
+    {
+      "id": "backend_tests_test_simple_calculator",
+      "label": "test_simple_calculator.py",
+      "_origin": "ast",
+      "community": 153,
+      "community_name": "test_simple_calculator.py",
+      "file_type": "concept",
+      "norm_label": "test_simple_calculator.py",
+      "source_file": "backend/tests/test_simple_calculator.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "backend_tests_test_simple_calculator_func_test_comparativa_ordinario_vs_simple",
+      "label": "test_comparativa_ordinario_vs_simple",
+      "_origin": "ast",
+      "community": 153,
+      "community_name": "test_simple_calculator.py",
+      "file_type": "concept",
+      "norm_label": "test_comparativa_ordinario_vs_simple",
+      "source_file": "backend/tests/test_simple_calculator.py",
+      "source_location": "L73"
+    },
+    {
+      "id": "backend_tests_test_simple_calculator_func_test_regimen_simple_grupo1_tiendas",
+      "label": "test_regimen_simple_grupo1_tiendas",
+      "_origin": "ast",
+      "community": 153,
+      "community_name": "test_simple_calculator.py",
+      "file_type": "concept",
+      "norm_label": "test_regimen_simple_grupo1_tiendas",
+      "source_file": "backend/tests/test_simple_calculator.py",
+      "source_location": "L8"
+    },
+    {
+      "id": "backend_tests_test_simple_calculator_func_test_regimen_simple_grupo3_restaurante_con_inc",
+      "label": "test_regimen_simple_grupo3_restaurante_con_inc",
+      "_origin": "ast",
+      "community": 153,
+      "community_name": "test_simple_calculator.py",
+      "file_type": "concept",
+      "norm_label": "test_regimen_simple_grupo3_restaurante_con_inc",
+      "source_file": "backend/tests/test_simple_calculator.py",
+      "source_location": "L46"
+    },
+    {
+      "id": "backend_tests_test_coverage_pj_simple_boost",
+      "label": "test_coverage_pj_simple_boost.py",
+      "_origin": "ast",
+      "community": 154,
+      "community_name": "test_coverage_pj_simple_boost.py",
+      "file_type": "concept",
+      "norm_label": "test_coverage_pj_simple_boost.py",
+      "source_file": "backend/tests/test_coverage_pj_simple_boost.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "backend_tests_test_coverage_pj_simple_boost_func_test_beneficios_catalogo_and_helpers_coverage",
+      "label": "test_beneficios_catalogo_and_helpers_coverage",
+      "_origin": "ast",
+      "community": 154,
+      "community_name": "test_coverage_pj_simple_boost.py",
+      "file_type": "concept",
+      "norm_label": "test_beneficios_catalogo_and_helpers_coverage",
+      "source_file": "backend/tests/test_coverage_pj_simple_boost.py",
+      "source_location": "L204"
+    },
+    {
+      "id": "backend_tests_test_coverage_pj_simple_boost_func_test_comparativa_simple_options",
+      "label": "test_comparativa_simple_options",
+      "_origin": "ast",
+      "community": 154,
+      "community_name": "test_coverage_pj_simple_boost.py",
+      "file_type": "concept",
+      "norm_label": "test_comparativa_simple_options",
+      "source_file": "backend/tests/test_coverage_pj_simple_boost.py",
+      "source_location": "L139"
+    },
+    {
+      "id": "backend_tests_test_coverage_pj_simple_boost_func_test_pj_all_regimes_and_surcharges_coverage",
+      "label": "test_pj_all_regimes_and_surcharges_coverage",
+      "_origin": "ast",
+      "community": 154,
+      "community_name": "test_coverage_pj_simple_boost.py",
+      "file_type": "concept",
+      "norm_label": "test_pj_all_regimes_and_surcharges_coverage",
+      "source_file": "backend/tests/test_coverage_pj_simple_boost.py",
+      "source_location": "L25"
+    },
+    {
+      "id": "backend_tests_test_coverage_pj_simple_boost_func_test_regimen_simple_api_endpoints_exceptions",
+      "label": "test_regimen_simple_api_endpoints_exceptions",
+      "_origin": "ast",
+      "community": 154,
+      "community_name": "test_coverage_pj_simple_boost.py",
+      "file_type": "concept",
+      "norm_label": "test_regimen_simple_api_endpoints_exceptions",
+      "source_file": "backend/tests/test_coverage_pj_simple_boost.py",
+      "source_location": "L162"
+    },
+    {
+      "id": "backend_tests_test_coverage_pj_simple_boost_func_test_sanciones_all_variations_coverage",
+      "label": "test_sanciones_all_variations_coverage",
+      "_origin": "ast",
+      "community": 154,
+      "community_name": "test_coverage_pj_simple_boost.py",
+      "file_type": "concept",
+      "norm_label": "test_sanciones_all_variations_coverage",
+      "source_file": "backend/tests/test_coverage_pj_simple_boost.py",
+      "source_location": "L240"
+    },
+    {
+      "id": "backend_tests_test_coverage_pj_simple_boost_func_test_simple_all_groups_and_coverage_branches",
+      "label": "test_simple_all_groups_and_coverage_branches",
+      "_origin": "ast",
+      "community": 154,
+      "community_name": "test_coverage_pj_simple_boost.py",
+      "file_type": "concept",
+      "norm_label": "test_simple_all_groups_and_coverage_branches",
+      "source_file": "backend/tests/test_coverage_pj_simple_boost.py",
+      "source_location": "L95"
     },
     {
       "id": "backend_app_main",
@@ -2777,7 +3075,7 @@
       "file_type": "concept",
       "norm_label": "favicon",
       "source_file": "backend/app/main.py",
-      "source_location": "L102"
+      "source_location": "L103"
     },
     {
       "id": "backend_app_main_func_health_check",
@@ -2799,7 +3097,7 @@
       "file_type": "concept",
       "norm_label": "serve_llms_full_txt",
       "source_file": "backend/app/main.py",
-      "source_location": "L157"
+      "source_location": "L160"
     },
     {
       "id": "backend_app_main_func_serve_llms_txt",
@@ -2810,7 +3108,7 @@
       "file_type": "concept",
       "norm_label": "serve_llms_txt",
       "source_file": "backend/app/main.py",
-      "source_location": "L142"
+      "source_location": "L145"
     },
     {
       "id": "backend_app_main_func_serve_robots_txt",
@@ -2821,7 +3119,7 @@
       "file_type": "concept",
       "norm_label": "serve_robots_txt",
       "source_file": "backend/app/main.py",
-      "source_location": "L113"
+      "source_location": "L116"
     },
     {
       "id": "backend_app_main_func_serve_sitemap_xml",
@@ -2832,7 +3130,7 @@
       "file_type": "concept",
       "norm_label": "serve_sitemap_xml",
       "source_file": "backend/app/main.py",
-      "source_location": "L126"
+      "source_location": "L129"
     },
     {
       "id": "backend_app_main_func_serve_ui",
@@ -3297,6 +3595,17 @@
       "source_location": "L1"
     },
     {
+      "id": "backend_app_models_persona_juridica_class_formulario110casillas",
+      "label": "Formulario110Casillas",
+      "_origin": "ast",
+      "community": 24,
+      "community_name": "models/persona_juridica.py",
+      "file_type": "concept",
+      "norm_label": "formulario110casillas",
+      "source_file": "backend/app/models/persona_juridica.py",
+      "source_location": "L6"
+    },
+    {
       "id": "backend_app_models_persona_juridica_class_personajuridicainput",
       "label": "PersonaJuridicaInput",
       "_origin": "ast",
@@ -3305,7 +3614,7 @@
       "file_type": "concept",
       "norm_label": "personajuridicainput",
       "source_file": "backend/app/models/persona_juridica.py",
-      "source_location": "L6"
+      "source_location": "L234"
     },
     {
       "id": "backend_app_models_persona_juridica_class_personajuridicaoutput",
@@ -3316,7 +3625,7 @@
       "file_type": "concept",
       "norm_label": "personajuridicaoutput",
       "source_file": "backend/app/models/persona_juridica.py",
-      "source_location": "L87"
+      "source_location": "L386"
     },
     {
       "id": "backend_app_services_liquidacion_pj",
@@ -3338,7 +3647,7 @@
       "file_type": "concept",
       "norm_label": "liquidar_persona_juridica",
       "source_file": "backend/app/services/liquidacion_pj.py",
-      "source_location": "L6"
+      "source_location": "L10"
     },
     {
       "id": "backend_app_services_liquidacion_pn",
@@ -3701,7 +4010,7 @@
       "file_type": "concept",
       "norm_label": "beneficioauditoriarules",
       "source_file": "backend/app/core/rules_engine/schema.py",
-      "source_location": "L76"
+      "source_location": "L149"
     },
     {
       "id": "backend_app_core_rules_engine_schema_class_cedulageneralrules",
@@ -3767,7 +4076,7 @@
       "file_type": "concept",
       "norm_label": "personajuridicarules",
       "source_file": "backend/app/core/rules_engine/schema.py",
-      "source_location": "L69"
+      "source_location": "L81"
     },
     {
       "id": "backend_app_core_rules_engine_schema_class_personanaturalrules",
@@ -3781,6 +4090,28 @@
       "source_location": "L54"
     },
     {
+      "id": "backend_app_core_rules_engine_schema_class_regimensimplebracket",
+      "label": "RegimenSimpleBracket",
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "schema.py",
+      "file_type": "concept",
+      "norm_label": "regimensimplebracket",
+      "source_file": "backend/app/core/rules_engine/schema.py",
+      "source_location": "L95"
+    },
+    {
+      "id": "backend_app_core_rules_engine_schema_class_regimensimplerules",
+      "label": "RegimenSimpleRules",
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "schema.py",
+      "file_type": "concept",
+      "norm_label": "regimensimplerules",
+      "source_file": "backend/app/core/rules_engine/schema.py",
+      "source_location": "L101"
+    },
+    {
       "id": "backend_app_core_rules_engine_schema_class_rentasexentasrules",
       "label": "RentasExentasRules",
       "_origin": "ast",
@@ -3790,6 +4121,28 @@
       "norm_label": "rentasexentasrules",
       "source_file": "backend/app/core/rules_engine/schema.py",
       "source_location": "L26"
+    },
+    {
+      "id": "backend_app_core_rules_engine_schema_class_sobretasafinancierarules",
+      "label": "SobretasaFinancieraRules",
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "schema.py",
+      "file_type": "concept",
+      "norm_label": "sobretasafinancierarules",
+      "source_file": "backend/app/core/rules_engine/schema.py",
+      "source_location": "L69"
+    },
+    {
+      "id": "backend_app_core_rules_engine_schema_class_sobretasahidroelectricarules",
+      "label": "SobretasaHidroelectricaRules",
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "schema.py",
+      "file_type": "concept",
+      "norm_label": "sobretasahidroelectricarules",
+      "source_file": "backend/app/core/rules_engine/schema.py",
+      "source_location": "L75"
     },
     {
       "id": "backend_app_core_rules_engine_schema_class_tablamarginalbracket",
@@ -3822,7 +4175,7 @@
       "file_type": "concept",
       "norm_label": "taxyearrules",
       "source_file": "backend/app/core/rules_engine/schema.py",
-      "source_location": "L83"
+      "source_location": "L156"
     },
     {
       "id": "pkg_tribut_ia",
@@ -12011,6 +12364,18 @@
       "source_location": "L43"
     },
     {
+      "id": "docs_reference_api_rest_endpoints",
+      "label": "rest-endpoints.md",
+      "_origin": "ast",
+      "community": 49,
+      "community_name": "Referencia de Endpoints REST \u2014 TributIA API (v1)",
+      "file_type": "document",
+      "node_kind": "page",
+      "norm_label": "rest-endpoints.md",
+      "source_file": "docs/reference/api/rest-endpoints.md",
+      "source_location": "L1"
+    },
+    {
       "id": "docs_reference_api_rest_endpoints_1_m\u00f3dulo_de_sesi\u00f3n_y_sincronizaci\u00f3n_en_tiempo_real_session",
       "label": "1. M\u00f3dulo de Sesi\u00f3n y Sincronizaci\u00f3n en Tiempo Real (`/session`)",
       "_origin": "ast",
@@ -17115,6 +17480,18 @@
       "source_location": "L1"
     },
     {
+      "id": "docs_tutorials_01_primeros_pasos_liquidacion_pn",
+      "label": "01-primeros-pasos-liquidacion-pn.md",
+      "_origin": "ast",
+      "community": 53,
+      "community_name": "Pasos a Seguir",
+      "file_type": "document",
+      "node_kind": "page",
+      "norm_label": "01-primeros-pasos-liquidacion-pn.md",
+      "source_file": "docs/tutorials/01-primeros-pasos-liquidacion-pn.md",
+      "source_location": "L1"
+    },
+    {
       "id": "docs_tutorials_01_primeros_pasos_liquidacion_pn_objetivo",
       "label": "Objetivo",
       "_origin": "ast",
@@ -17208,6 +17585,18 @@
       "node_kind": "heading",
       "norm_label": "tutorial: primeros pasos liquidando renta de persona natural (f210)",
       "source_file": "docs/tutorials/01-primeros-pasos-liquidacion-pn.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "docs_decisions_0004_persistencia_redis_cloudrun_aislamiento_sesion",
+      "label": "0004-persistencia-redis-cloudrun-aislamiento-sesion.md",
+      "_origin": "ast",
+      "community": 54,
+      "community_name": "ADR 0004: Persistencia en Redis, Aislamiento de Sesiones por Dispositivo sin Login y Despliegue en GCP Cloud Run",
+      "file_type": "document",
+      "node_kind": "page",
+      "norm_label": "0004-persistencia-redis-cloudrun-aislamiento-sesion.md",
+      "source_file": "docs/decisions/0004-persistencia-redis-cloudrun-aislamiento-sesion.md",
       "source_location": "L1"
     },
     {
@@ -17305,6 +17694,18 @@
       "norm_label": "principios de la decision",
       "source_file": "docs/decisions/0004-persistencia-redis-cloudrun-aislamiento-sesion.md",
       "source_location": "L47"
+    },
+    {
+      "id": "docs_decisions_0005_visualizador_efimero_conciliacion_exogena_csv",
+      "label": "0005-visualizador-efimero-conciliacion-exogena-csv.md",
+      "_origin": "ast",
+      "community": 55,
+      "community_name": "ADR 0005: Visualizador Ef\u00edmero de Conciliaci\u00f3n Ex\u00f3gena y Transacciones CSV sin Persistencia",
+      "file_type": "document",
+      "node_kind": "page",
+      "norm_label": "0005-visualizador-efimero-conciliacion-exogena-csv.md",
+      "source_file": "docs/decisions/0005-visualizador-efimero-conciliacion-exogena-csv.md",
+      "source_location": "L1"
     },
     {
       "id": "docs_decisions_0005_visualizador_efimero_conciliacion_exogena_csv_1_contexto_y_problema",
@@ -18419,126 +18820,6 @@
       "source_location": "L9"
     },
     {
-      "id": "docs_readme_documentacion_tecnica_de_tributia",
-      "label": "Documentacion Tecnica de TributIA",
-      "_origin": "ast",
-      "community": 65,
-      "community_name": "Cuadrantes Diataxis",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "documentacion tecnica de tributia",
-      "source_file": "docs/README.md",
-      "source_location": "L1"
-    },
-    {
-      "id": "docs_readme_registro_de_decisiones_arquitectonicas_adrs_decisions_readme_md",
-      "label": "[Registro de Decisiones Arquitectonicas (ADRs)](./decisions/README.md)",
-      "_origin": "ast",
-      "community": 65,
-      "community_name": "Cuadrantes Diataxis",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "[registro de decisiones arquitectonicas (adrs)](./decisions/readme.md)",
-      "source_file": "docs/README.md",
-      "source_location": "L64"
-    },
-    {
-      "id": "docs_decisions_0001_motor_de_reglas_declarativo_json",
-      "label": "0001-motor-de-reglas-declarativo-json.md",
-      "_origin": "ast",
-      "community": 66,
-      "community_name": "README.md",
-      "file_type": "document",
-      "node_kind": "page",
-      "norm_label": "0001-motor-de-reglas-declarativo-json.md",
-      "source_file": "docs/decisions/0001-motor-de-reglas-declarativo-json.md",
-      "source_location": "L1"
-    },
-    {
-      "id": "docs_decisions_0002_sincronizacion_bidireccional_sse",
-      "label": "0002-sincronizacion-bidireccional-sse.md",
-      "_origin": "ast",
-      "community": 66,
-      "community_name": "README.md",
-      "file_type": "document",
-      "node_kind": "page",
-      "norm_label": "0002-sincronizacion-bidireccional-sse.md",
-      "source_file": "docs/decisions/0002-sincronizacion-bidireccional-sse.md",
-      "source_location": "L1"
-    },
-    {
-      "id": "docs_decisions_0003_mascara_contable_colombiana_en_dom",
-      "label": "0003-mascara-contable-colombiana-en-dom.md",
-      "_origin": "ast",
-      "community": 66,
-      "community_name": "README.md",
-      "file_type": "document",
-      "node_kind": "page",
-      "norm_label": "0003-mascara-contable-colombiana-en-dom.md",
-      "source_file": "docs/decisions/0003-mascara-contable-colombiana-en-dom.md",
-      "source_location": "L1"
-    },
-    {
-      "id": "docs_decisions_0004_persistencia_redis_cloudrun_aislamiento_sesion",
-      "label": "0004-persistencia-redis-cloudrun-aislamiento-sesion.md",
-      "_origin": "ast",
-      "community": 66,
-      "community_name": "README.md",
-      "file_type": "document",
-      "node_kind": "page",
-      "norm_label": "0004-persistencia-redis-cloudrun-aislamiento-sesion.md",
-      "source_file": "docs/decisions/0004-persistencia-redis-cloudrun-aislamiento-sesion.md",
-      "source_location": "L1"
-    },
-    {
-      "id": "docs_decisions_0005_visualizador_efimero_conciliacion_exogena_csv",
-      "label": "0005-visualizador-efimero-conciliacion-exogena-csv.md",
-      "_origin": "ast",
-      "community": 66,
-      "community_name": "README.md",
-      "file_type": "document",
-      "node_kind": "page",
-      "norm_label": "0005-visualizador-efimero-conciliacion-exogena-csv.md",
-      "source_file": "docs/decisions/0005-visualizador-efimero-conciliacion-exogena-csv.md",
-      "source_location": "L1"
-    },
-    {
-      "id": "docs_decisions_0006_sistema_responsivo_y_modo_mobile",
-      "label": "0006-sistema-responsivo-y-modo-mobile.md",
-      "_origin": "ast",
-      "community": 66,
-      "community_name": "README.md",
-      "file_type": "document",
-      "node_kind": "page",
-      "norm_label": "0006-sistema-responsivo-y-modo-mobile.md",
-      "source_file": "docs/decisions/0006-sistema-responsivo-y-modo-mobile.md",
-      "source_location": "L1"
-    },
-    {
-      "id": "docs_decisions_readme",
-      "label": "decisions/README.md",
-      "_origin": "ast",
-      "community": 66,
-      "community_name": "README.md",
-      "file_type": "document",
-      "node_kind": "page",
-      "norm_label": "decisions/readme.md",
-      "source_file": "docs/decisions/README.md",
-      "source_location": "L1"
-    },
-    {
-      "id": "docs_decisions_readme_registro_de_decisiones_de_arquitectura_adrs",
-      "label": "Registro de Decisiones de Arquitectura (ADRs)",
-      "_origin": "ast",
-      "community": 66,
-      "community_name": "README.md",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "registro de decisiones de arquitectura (adrs)",
-      "source_file": "docs/decisions/README.md",
-      "source_location": "L1"
-    },
-    {
       "id": "docs_explanation_02_sistema_cedular_colombiano",
       "label": "02-sistema-cedular-colombiano.md",
       "_origin": "ast",
@@ -18611,6 +18892,54 @@
       "source_location": "L1"
     },
     {
+      "id": "docs_how_to_02_simular_tasa_minima_ttd_pj",
+      "label": "02-simular-tasa-minima-ttd-pj.md",
+      "_origin": "ast",
+      "community": 66,
+      "community_name": "README.md",
+      "file_type": "document",
+      "node_kind": "page",
+      "norm_label": "02-simular-tasa-minima-ttd-pj.md",
+      "source_file": "docs/how-to/02-simular-tasa-minima-ttd-pj.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "docs_how_to_02_simular_tasa_minima_ttd_pj_1_fundamento_de_la_tasa_m\u00ednima_de_tributaci\u00f3n_ttd",
+      "label": "1. Fundamento de la Tasa M\u00ednima de Tributaci\u00f3n (TTD)",
+      "_origin": "ast",
+      "community": 66,
+      "community_name": "README.md",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "1. fundamento de la tasa minima de tributacion (ttd)",
+      "source_file": "docs/how-to/02-simular-tasa-minima-ttd-pj.md",
+      "source_location": "L7"
+    },
+    {
+      "id": "docs_how_to_02_simular_tasa_minima_ttd_pj_2_ejecuci\u00f3n_v\u00eda_api",
+      "label": "2. Ejecuci\u00f3n v\u00eda API",
+      "_origin": "ast",
+      "community": 66,
+      "community_name": "README.md",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "2. ejecucion via api",
+      "source_file": "docs/how-to/02-simular-tasa-minima-ttd-pj.md",
+      "source_location": "L17"
+    },
+    {
+      "id": "docs_how_to_02_simular_tasa_minima_ttd_pj_gu\u00eda_how_to_simular_tasa_m\u00ednima_de_tributaci\u00f3n_ttd_15_pj",
+      "label": "Gu\u00eda How-To: Simular Tasa M\u00ednima de Tributaci\u00f3n (TTD 15% - PJ)",
+      "_origin": "ast",
+      "community": 66,
+      "community_name": "README.md",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "guia how-to: simular tasa minima de tributacion (ttd 15% - pj)",
+      "source_file": "docs/how-to/02-simular-tasa-minima-ttd-pj.md",
+      "source_location": "L1"
+    },
+    {
       "id": "docs_readme",
       "label": "docs/README.md",
       "_origin": "ast",
@@ -18623,16 +18952,28 @@
       "source_location": "L1"
     },
     {
-      "id": "docs_reference_api_rest_endpoints",
-      "label": "rest-endpoints.md",
+      "id": "docs_readme_documentacion_tecnica_de_tributia",
+      "label": "Documentacion Tecnica de TributIA",
       "_origin": "ast",
       "community": 66,
       "community_name": "README.md",
       "file_type": "document",
-      "node_kind": "page",
-      "norm_label": "rest-endpoints.md",
-      "source_file": "docs/reference/api/rest-endpoints.md",
+      "node_kind": "heading",
+      "norm_label": "documentacion tecnica de tributia",
+      "source_file": "docs/README.md",
       "source_location": "L1"
+    },
+    {
+      "id": "docs_readme_registro_de_decisiones_arquitectonicas_adrs_decisions_readme_md",
+      "label": "[Registro de Decisiones Arquitectonicas (ADRs)](./decisions/README.md)",
+      "_origin": "ast",
+      "community": 66,
+      "community_name": "README.md",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "[registro de decisiones arquitectonicas (adrs)](./decisions/readme.md)",
+      "source_file": "docs/README.md",
+      "source_location": "L64"
     },
     {
       "id": "docs_reference_architecture_erd_session_state_model",
@@ -18752,18 +19093,6 @@
       "node_kind": "heading",
       "norm_label": "mapeo oficial de casillas \u2014 formulario 110 dian & ttd",
       "source_file": "docs/reference/tax-engine/form110-casillas-mapping.md",
-      "source_location": "L1"
-    },
-    {
-      "id": "docs_tutorials_01_primeros_pasos_liquidacion_pn",
-      "label": "01-primeros-pasos-liquidacion-pn.md",
-      "_origin": "ast",
-      "community": 66,
-      "community_name": "README.md",
-      "file_type": "document",
-      "node_kind": "page",
-      "norm_label": "01-primeros-pasos-liquidacion-pn.md",
-      "source_file": "docs/tutorials/01-primeros-pasos-liquidacion-pn.md",
       "source_location": "L1"
     },
     {
@@ -19110,11 +19439,23 @@
       "source_location": "L7"
     },
     {
+      "id": "docs_decisions_0001_motor_de_reglas_declarativo_json",
+      "label": "0001-motor-de-reglas-declarativo-json.md",
+      "_origin": "ast",
+      "community": 71,
+      "community_name": "decisions/README.md",
+      "file_type": "document",
+      "node_kind": "page",
+      "norm_label": "0001-motor-de-reglas-declarativo-json.md",
+      "source_file": "docs/decisions/0001-motor-de-reglas-declarativo-json.md",
+      "source_location": "L1"
+    },
+    {
       "id": "docs_decisions_0001_motor_de_reglas_declarativo_json_adr_0001_motor_de_reglas_tributarias_declarativo_en_archivos_json_versionados",
       "label": "ADR 0001: Motor de Reglas Tributarias Declarativo en Archivos JSON Versionados",
       "_origin": "ast",
       "community": 71,
-      "community_name": "ADR 0001: Motor de Reglas Tributarias Declarativo en Archivos JSON Versionados",
+      "community_name": "decisions/README.md",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "adr 0001: motor de reglas tributarias declarativo en archivos json versionados",
@@ -19126,7 +19467,7 @@
       "label": "Consecuencias",
       "_origin": "ast",
       "community": 71,
-      "community_name": "ADR 0001: Motor de Reglas Tributarias Declarativo en Archivos JSON Versionados",
+      "community_name": "decisions/README.md",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "consecuencias",
@@ -19138,7 +19479,7 @@
       "label": "Contexto",
       "_origin": "ast",
       "community": 71,
-      "community_name": "ADR 0001: Motor de Reglas Tributarias Declarativo en Archivos JSON Versionados",
+      "community_name": "decisions/README.md",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "contexto",
@@ -19150,12 +19491,96 @@
       "label": "Decisi\u00f3n",
       "_origin": "ast",
       "community": 71,
-      "community_name": "ADR 0001: Motor de Reglas Tributarias Declarativo en Archivos JSON Versionados",
+      "community_name": "decisions/README.md",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "decision",
       "source_file": "docs/decisions/0001-motor-de-reglas-declarativo-json.md",
       "source_location": "L11"
+    },
+    {
+      "id": "docs_decisions_0006_sistema_responsivo_y_modo_mobile",
+      "label": "0006-sistema-responsivo-y-modo-mobile.md",
+      "_origin": "ast",
+      "community": 71,
+      "community_name": "decisions/README.md",
+      "file_type": "document",
+      "node_kind": "page",
+      "norm_label": "0006-sistema-responsivo-y-modo-mobile.md",
+      "source_file": "docs/decisions/0006-sistema-responsivo-y-modo-mobile.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "docs_decisions_0006_sistema_responsivo_y_modo_mobile_1_contexto_y_problema",
+      "label": "1. Contexto y Problema",
+      "_origin": "ast",
+      "community": 71,
+      "community_name": "decisions/README.md",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "1. contexto y problema",
+      "source_file": "docs/decisions/0006-sistema-responsivo-y-modo-mobile.md",
+      "source_location": "L9"
+    },
+    {
+      "id": "docs_decisions_0006_sistema_responsivo_y_modo_mobile_2_decisi\u00f3n_tomada",
+      "label": "2. Decisi\u00f3n Tomada",
+      "_origin": "ast",
+      "community": 71,
+      "community_name": "decisions/README.md",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "2. decision tomada",
+      "source_file": "docs/decisions/0006-sistema-responsivo-y-modo-mobile.md",
+      "source_location": "L22"
+    },
+    {
+      "id": "docs_decisions_0006_sistema_responsivo_y_modo_mobile_3_consecuencias_y_beneficios",
+      "label": "3. Consecuencias y Beneficios",
+      "_origin": "ast",
+      "community": 71,
+      "community_name": "decisions/README.md",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "3. consecuencias y beneficios",
+      "source_file": "docs/decisions/0006-sistema-responsivo-y-modo-mobile.md",
+      "source_location": "L45"
+    },
+    {
+      "id": "docs_decisions_0006_sistema_responsivo_y_modo_mobile_adr_0006_sistema_responsivo_men\u00fa_off_canvas_y_modo_mobile",
+      "label": "ADR 0006: Sistema Responsivo, Men\u00fa Off-Canvas y Modo Mobile",
+      "_origin": "ast",
+      "community": 71,
+      "community_name": "decisions/README.md",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "adr 0006: sistema responsivo, menu off-canvas y modo mobile",
+      "source_file": "docs/decisions/0006-sistema-responsivo-y-modo-mobile.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "docs_decisions_readme",
+      "label": "decisions/README.md",
+      "_origin": "ast",
+      "community": 71,
+      "community_name": "decisions/README.md",
+      "file_type": "document",
+      "node_kind": "page",
+      "norm_label": "decisions/readme.md",
+      "source_file": "docs/decisions/README.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "docs_decisions_readme_registro_de_decisiones_de_arquitectura_adrs",
+      "label": "Registro de Decisiones de Arquitectura (ADRs)",
+      "_origin": "ast",
+      "community": 71,
+      "community_name": "decisions/README.md",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "registro de decisiones de arquitectura (adrs)",
+      "source_file": "docs/decisions/README.md",
+      "source_location": "L1"
     },
     {
       "id": "docs_how_to_04_simular_reajuste_fiscal_art73",
@@ -19261,7 +19686,7 @@
       "file_type": "concept",
       "norm_label": "testresponsiveandmobilemode",
       "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L376"
+      "source_location": "L493"
     },
     {
       "id": "backend_tests_test_e2e_playwright_class_testtributiaendtoend",
@@ -19371,7 +19796,7 @@
       "file_type": "concept",
       "norm_label": "test_calendario_tributario_nit_search_and_filters",
       "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L348"
+      "source_location": "L356"
     },
     {
       "id": "backend_tests_test_e2e_playwright_func_test_catalogo_beneficios_filtering_and_search",
@@ -19382,7 +19807,7 @@
       "file_type": "concept",
       "norm_label": "test_catalogo_beneficios_filtering_and_search",
       "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L158"
+      "source_location": "L166"
     },
     {
       "id": "backend_tests_test_e2e_playwright_func_test_inmuebles_afc_simulator",
@@ -19393,7 +19818,7 @@
       "file_type": "concept",
       "norm_label": "test_inmuebles_afc_simulator",
       "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L282"
+      "source_location": "L290"
     },
     {
       "id": "backend_tests_test_e2e_playwright_func_test_mobile_casilla_popover_bottom_sheet",
@@ -19404,7 +19829,7 @@
       "file_type": "concept",
       "norm_label": "test_mobile_casilla_popover_bottom_sheet",
       "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L557"
+      "source_location": "L674"
     },
     {
       "id": "backend_tests_test_e2e_playwright_func_test_mobile_drawer_navigation_and_backdrop",
@@ -19415,7 +19840,7 @@
       "file_type": "concept",
       "norm_label": "test_mobile_drawer_navigation_and_backdrop",
       "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L387"
+      "source_location": "L504"
     },
     {
       "id": "backend_tests_test_e2e_playwright_func_test_mobile_viewport_no_horizontal_body_overflow",
@@ -19426,7 +19851,7 @@
       "file_type": "concept",
       "norm_label": "test_mobile_viewport_no_horizontal_body_overflow",
       "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L439"
+      "source_location": "L556"
     },
     {
       "id": "backend_tests_test_e2e_playwright_func_test_navigation_across_all_modules",
@@ -19440,6 +19865,17 @@
       "source_location": "L120"
     },
     {
+      "id": "backend_tests_test_e2e_playwright_func_test_persona_juridica_flow_and_subtabs",
+      "label": "test_persona_juridica_flow_and_subtabs",
+      "_origin": "ast",
+      "community": 73,
+      "community_name": "test_e2e_playwright.py",
+      "file_type": "concept",
+      "norm_label": "test_persona_juridica_flow_and_subtabs",
+      "source_file": "backend/tests/test_e2e_playwright.py",
+      "source_location": "L382"
+    },
+    {
       "id": "backend_tests_test_e2e_playwright_func_test_persona_natural_capture_and_subtabs",
       "label": "test_persona_natural_capture_and_subtabs",
       "_origin": "ast",
@@ -19448,7 +19884,7 @@
       "file_type": "concept",
       "norm_label": "test_persona_natural_capture_and_subtabs",
       "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L310"
+      "source_location": "L318"
     },
     {
       "id": "backend_tests_test_e2e_playwright_func_test_presentacion_auditoria_and_calculadora_sanciones",
@@ -19459,7 +19895,7 @@
       "file_type": "concept",
       "norm_label": "test_presentacion_auditoria_and_calculadora_sanciones",
       "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L186"
+      "source_location": "L194"
     },
     {
       "id": "backend_tests_test_e2e_playwright_func_test_reajuste_fiscal_articulo_73_complete_flow",
@@ -19470,7 +19906,7 @@
       "file_type": "concept",
       "norm_label": "test_reajuste_fiscal_articulo_73_complete_flow",
       "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L230"
+      "source_location": "L238"
     },
     {
       "id": "backend_tests_test_e2e_playwright_func_test_reconciliation_spreadsheet_extended_sidebar_scrolling",
@@ -19481,7 +19917,7 @@
       "file_type": "concept",
       "norm_label": "test_reconciliation_spreadsheet_extended_sidebar_scrolling",
       "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L593"
+      "source_location": "L710"
     },
     {
       "id": "backend_tests_test_e2e_playwright_func_test_reduced_desktop_and_laptop_screen_adaptation",
@@ -19492,7 +19928,18 @@
       "file_type": "concept",
       "norm_label": "test_reduced_desktop_and_laptop_screen_adaptation",
       "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L519"
+      "source_location": "L636"
+    },
+    {
+      "id": "backend_tests_test_e2e_playwright_func_test_regimen_simple_flow_and_subtabs",
+      "label": "test_regimen_simple_flow_and_subtabs",
+      "_origin": "ast",
+      "community": 73,
+      "community_name": "test_e2e_playwright.py",
+      "file_type": "concept",
+      "norm_label": "test_regimen_simple_flow_and_subtabs",
+      "source_file": "backend/tests/test_e2e_playwright.py",
+      "source_location": "L439"
     },
     {
       "id": "backend_tests_test_e2e_playwright_func_test_table_horizontal_scroll_containers_on_mobile",
@@ -19503,14 +19950,26 @@
       "file_type": "concept",
       "norm_label": "test_table_horizontal_scroll_containers_on_mobile",
       "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L477"
+      "source_location": "L594"
+    },
+    {
+      "id": "docs_decisions_0002_sincronizacion_bidireccional_sse",
+      "label": "0002-sincronizacion-bidireccional-sse.md",
+      "_origin": "ast",
+      "community": 74,
+      "community_name": "0002-sincronizacion-bidireccional-sse.md",
+      "file_type": "document",
+      "node_kind": "page",
+      "norm_label": "0002-sincronizacion-bidireccional-sse.md",
+      "source_file": "docs/decisions/0002-sincronizacion-bidireccional-sse.md",
+      "source_location": "L1"
     },
     {
       "id": "docs_decisions_0002_sincronizacion_bidireccional_sse_adr_0002_sincronizaci\u00f3n_bidireccional_en_tiempo_real_con_server_sent_events_sse",
       "label": "ADR 0002: Sincronizaci\u00f3n Bidireccional en Tiempo Real con Server-Sent Events (SSE)",
       "_origin": "ast",
       "community": 74,
-      "community_name": "ADR 0002: Sincronizaci\u00f3n Bidireccional en Tiempo Real con Server-Sent Events (SSE)",
+      "community_name": "0002-sincronizacion-bidireccional-sse.md",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "adr 0002: sincronizacion bidireccional en tiempo real con server-sent events (sse)",
@@ -19522,7 +19981,7 @@
       "label": "Consecuencias",
       "_origin": "ast",
       "community": 74,
-      "community_name": "ADR 0002: Sincronizaci\u00f3n Bidireccional en Tiempo Real con Server-Sent Events (SSE)",
+      "community_name": "0002-sincronizacion-bidireccional-sse.md",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "consecuencias",
@@ -19534,7 +19993,7 @@
       "label": "Contexto",
       "_origin": "ast",
       "community": 74,
-      "community_name": "ADR 0002: Sincronizaci\u00f3n Bidireccional en Tiempo Real con Server-Sent Events (SSE)",
+      "community_name": "0002-sincronizacion-bidireccional-sse.md",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "contexto",
@@ -19546,7 +20005,7 @@
       "label": "Decisi\u00f3n",
       "_origin": "ast",
       "community": 74,
-      "community_name": "ADR 0002: Sincronizaci\u00f3n Bidireccional en Tiempo Real con Server-Sent Events (SSE)",
+      "community_name": "0002-sincronizacion-bidireccional-sse.md",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "decision",
@@ -20232,6 +20691,28 @@
       "source_location": "L47"
     },
     {
+      "id": "backend_tests_test_api_endpoints_func_test_api_calculate_simple",
+      "label": "test_api_calculate_simple",
+      "_origin": "ast",
+      "community": 9,
+      "community_name": "test_api_endpoints.py",
+      "file_type": "concept",
+      "norm_label": "test_api_calculate_simple",
+      "source_file": "backend/tests/test_api_endpoints.py",
+      "source_location": "L80"
+    },
+    {
+      "id": "backend_tests_test_api_endpoints_func_test_api_comparativa_simple",
+      "label": "test_api_comparativa_simple",
+      "_origin": "ast",
+      "community": 9,
+      "community_name": "test_api_endpoints.py",
+      "file_type": "concept",
+      "norm_label": "test_api_comparativa_simple",
+      "source_file": "backend/tests/test_api_endpoints.py",
+      "source_location": "L98"
+    },
+    {
       "id": "backend_tests_test_api_endpoints_func_test_convert_uvt",
       "label": "test_convert_uvt",
       "_origin": "ast",
@@ -20284,7 +20765,7 @@
       "file_type": "concept",
       "norm_label": "test_llms_full_txt",
       "source_file": "backend/tests/test_api_endpoints.py",
-      "source_location": "L99"
+      "source_location": "L138"
     },
     {
       "id": "backend_tests_test_api_endpoints_func_test_llms_txt",
@@ -20295,7 +20776,7 @@
       "file_type": "concept",
       "norm_label": "test_llms_txt",
       "source_file": "backend/tests/test_api_endpoints.py",
-      "source_location": "L93"
+      "source_location": "L132"
     },
     {
       "id": "backend_tests_test_api_endpoints_func_test_seo_robots_txt",
@@ -20306,7 +20787,7 @@
       "file_type": "concept",
       "norm_label": "test_seo_robots_txt",
       "source_file": "backend/tests/test_api_endpoints.py",
-      "source_location": "L79"
+      "source_location": "L118"
     },
     {
       "id": "backend_tests_test_api_endpoints_func_test_seo_sitemap_xml",
@@ -20317,7 +20798,7 @@
       "file_type": "concept",
       "norm_label": "test_seo_sitemap_xml",
       "source_file": "backend/tests/test_api_endpoints.py",
-      "source_location": "L86"
+      "source_location": "L125"
     },
     {
       "id": "backend_tests_test_api_endpoints_func_test_ui_root_serving",
@@ -21090,6 +21571,28 @@
       "weight": 1.0
     },
     {
+      "source": "backend_app_api_v1_endpoints_regimen_simple",
+      "target": "backend_app_api_v1_endpoints_regimen_simple_func_calcular_regimen_simple",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/api/v1/endpoints/regimen_simple.py",
+      "source_location": "L23",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_app_api_v1_endpoints_regimen_simple",
+      "target": "backend_app_api_v1_endpoints_regimen_simple_func_simular_comparativa_regimen",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/api/v1/endpoints/regimen_simple.py",
+      "source_location": "L36",
+      "weight": 1.0
+    },
+    {
       "source": "backend_app_api_v1_endpoints_rules",
       "target": "backend_app_api_v1_endpoints_rules_func_listar_anos",
       "relation": "contains",
@@ -21278,6 +21781,17 @@
     },
     {
       "source": "backend_app_core_rules_engine_schema",
+      "target": "backend_app_core_rules_engine_schema_class_regimensimplerules",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/core/rules_engine/schema.py",
+      "source_location": "L101",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_app_core_rules_engine_schema",
       "target": "backend_app_core_rules_engine_schema_class_deduccionesrules",
       "relation": "contains",
       "_origin": "ast",
@@ -21285,6 +21799,28 @@
       "confidence_score": 1.0,
       "source_file": "backend/app/core/rules_engine/schema.py",
       "source_location": "L11",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_app_core_rules_engine_schema",
+      "target": "backend_app_core_rules_engine_schema_class_beneficioauditoriarules",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/core/rules_engine/schema.py",
+      "source_location": "L149",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_app_core_rules_engine_schema",
+      "target": "backend_app_core_rules_engine_schema_class_taxyearrules",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/core/rules_engine/schema.py",
+      "source_location": "L156",
       "weight": 1.0
     },
     {
@@ -21377,7 +21913,7 @@
     },
     {
       "source": "backend_app_core_rules_engine_schema",
-      "target": "backend_app_core_rules_engine_schema_class_personajuridicarules",
+      "target": "backend_app_core_rules_engine_schema_class_sobretasafinancierarules",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -21388,24 +21924,35 @@
     },
     {
       "source": "backend_app_core_rules_engine_schema",
-      "target": "backend_app_core_rules_engine_schema_class_beneficioauditoriarules",
+      "target": "backend_app_core_rules_engine_schema_class_sobretasahidroelectricarules",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/app/core/rules_engine/schema.py",
-      "source_location": "L76",
+      "source_location": "L75",
       "weight": 1.0
     },
     {
       "source": "backend_app_core_rules_engine_schema",
-      "target": "backend_app_core_rules_engine_schema_class_taxyearrules",
+      "target": "backend_app_core_rules_engine_schema_class_personajuridicarules",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/app/core/rules_engine/schema.py",
-      "source_location": "L83",
+      "source_location": "L81",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_app_core_rules_engine_schema",
+      "target": "backend_app_core_rules_engine_schema_class_regimensimplebracket",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/core/rules_engine/schema.py",
+      "source_location": "L95",
       "weight": 1.0
     },
     {
@@ -21416,7 +21963,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/app/main.py",
-      "source_location": "L102",
+      "source_location": "L103",
       "weight": 1.0
     },
     {
@@ -21427,7 +21974,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/app/main.py",
-      "source_location": "L113",
+      "source_location": "L116",
       "weight": 1.0
     },
     {
@@ -21438,7 +21985,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/app/main.py",
-      "source_location": "L126",
+      "source_location": "L129",
       "weight": 1.0
     },
     {
@@ -21449,7 +21996,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/app/main.py",
-      "source_location": "L142",
+      "source_location": "L145",
       "weight": 1.0
     },
     {
@@ -21460,7 +22007,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/app/main.py",
-      "source_location": "L157",
+      "source_location": "L160",
       "weight": 1.0
     },
     {
@@ -21570,7 +22117,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/app/models/persona_juridica.py",
-      "source_location": "L6",
+      "source_location": "L234",
       "weight": 1.0
     },
     {
@@ -21581,7 +22128,18 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/app/models/persona_juridica.py",
-      "source_location": "L87",
+      "source_location": "L386",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_app_models_persona_juridica",
+      "target": "backend_app_models_persona_juridica_class_formulario110casillas",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/models/persona_juridica.py",
+      "source_location": "L6",
       "weight": 1.0
     },
     {
@@ -21603,6 +22161,61 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/app/models/persona_natural.py",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_app_models_regimen_simple",
+      "target": "backend_app_models_regimen_simple_class_regimensimpleinput",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/models/regimen_simple.py",
+      "source_location": "L199",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_app_models_regimen_simple",
+      "target": "backend_app_models_regimen_simple_class_regimensimpleoutput",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/models/regimen_simple.py",
+      "source_location": "L299",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_app_models_regimen_simple",
+      "target": "backend_app_models_regimen_simple_class_comparativasimpleinput",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/models/regimen_simple.py",
+      "source_location": "L350",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_app_models_regimen_simple",
+      "target": "backend_app_models_regimen_simple_class_comparativasimpleoutput",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/models/regimen_simple.py",
+      "source_location": "L371",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_app_models_regimen_simple",
+      "target": "backend_app_models_regimen_simple_class_formulario260casillas",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/models/regimen_simple.py",
       "source_location": "L6",
       "weight": 1.0
     },
@@ -21922,7 +22535,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/app/services/liquidacion_pj.py",
-      "source_location": "L6",
+      "source_location": "L10",
       "weight": 1.0
     },
     {
@@ -21934,6 +22547,50 @@
       "confidence_score": 1.0,
       "source_file": "backend/app/services/liquidacion_pn.py",
       "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_app_services_liquidacion_simple",
+      "target": "backend_app_services_liquidacion_simple_func_get_tarifa_simple",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/services/liquidacion_simple.py",
+      "source_location": "L12",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_app_services_liquidacion_simple",
+      "target": "backend_app_services_liquidacion_simple_func_get_nombre_grupo",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/services/liquidacion_simple.py",
+      "source_location": "L36",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_app_services_liquidacion_simple",
+      "target": "backend_app_services_liquidacion_simple_func_comparar_ordinario_vs_simple",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/services/liquidacion_simple.py",
+      "source_location": "L374",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_app_services_liquidacion_simple",
+      "target": "backend_app_services_liquidacion_simple_func_liquidar_regimen_simple",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/services/liquidacion_simple.py",
+      "source_location": "L48",
       "weight": 1.0
     },
     {
@@ -22213,6 +22870,50 @@
     },
     {
       "source": "backend_tests_test_api_endpoints",
+      "target": "backend_tests_test_api_endpoints_func_test_seo_robots_txt",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/tests/test_api_endpoints.py",
+      "source_location": "L118",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_tests_test_api_endpoints",
+      "target": "backend_tests_test_api_endpoints_func_test_seo_sitemap_xml",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/tests/test_api_endpoints.py",
+      "source_location": "L125",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_tests_test_api_endpoints",
+      "target": "backend_tests_test_api_endpoints_func_test_llms_txt",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/tests/test_api_endpoints.py",
+      "source_location": "L132",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_tests_test_api_endpoints",
+      "target": "backend_tests_test_api_endpoints_func_test_llms_full_txt",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/tests/test_api_endpoints.py",
+      "source_location": "L138",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_tests_test_api_endpoints",
       "target": "backend_tests_test_api_endpoints_func_test_health_check",
       "relation": "contains",
       "_origin": "ast",
@@ -22279,17 +22980,6 @@
     },
     {
       "source": "backend_tests_test_api_endpoints",
-      "target": "backend_tests_test_api_endpoints_func_test_seo_robots_txt",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "backend/tests/test_api_endpoints.py",
-      "source_location": "L79",
-      "weight": 1.0
-    },
-    {
-      "source": "backend_tests_test_api_endpoints",
       "target": "backend_tests_test_api_endpoints_func_test_ui_root_serving",
       "relation": "contains",
       "_origin": "ast",
@@ -22301,35 +22991,24 @@
     },
     {
       "source": "backend_tests_test_api_endpoints",
-      "target": "backend_tests_test_api_endpoints_func_test_seo_sitemap_xml",
+      "target": "backend_tests_test_api_endpoints_func_test_api_calculate_simple",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/tests/test_api_endpoints.py",
-      "source_location": "L86",
+      "source_location": "L80",
       "weight": 1.0
     },
     {
       "source": "backend_tests_test_api_endpoints",
-      "target": "backend_tests_test_api_endpoints_func_test_llms_txt",
+      "target": "backend_tests_test_api_endpoints_func_test_api_comparativa_simple",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/tests/test_api_endpoints.py",
-      "source_location": "L93",
-      "weight": 1.0
-    },
-    {
-      "source": "backend_tests_test_api_endpoints",
-      "target": "backend_tests_test_api_endpoints_func_test_llms_full_txt",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "backend/tests/test_api_endpoints.py",
-      "source_location": "L99",
+      "source_location": "L98",
       "weight": 1.0
     },
     {
@@ -22949,6 +23628,72 @@
       "weight": 1.0
     },
     {
+      "source": "backend_tests_test_coverage_pj_simple_boost",
+      "target": "backend_tests_test_coverage_pj_simple_boost_func_test_comparativa_simple_options",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/tests/test_coverage_pj_simple_boost.py",
+      "source_location": "L139",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_tests_test_coverage_pj_simple_boost",
+      "target": "backend_tests_test_coverage_pj_simple_boost_func_test_regimen_simple_api_endpoints_exceptions",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/tests/test_coverage_pj_simple_boost.py",
+      "source_location": "L162",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_tests_test_coverage_pj_simple_boost",
+      "target": "backend_tests_test_coverage_pj_simple_boost_func_test_beneficios_catalogo_and_helpers_coverage",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/tests/test_coverage_pj_simple_boost.py",
+      "source_location": "L204",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_tests_test_coverage_pj_simple_boost",
+      "target": "backend_tests_test_coverage_pj_simple_boost_func_test_sanciones_all_variations_coverage",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/tests/test_coverage_pj_simple_boost.py",
+      "source_location": "L240",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_tests_test_coverage_pj_simple_boost",
+      "target": "backend_tests_test_coverage_pj_simple_boost_func_test_pj_all_regimes_and_surcharges_coverage",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/tests/test_coverage_pj_simple_boost.py",
+      "source_location": "L25",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_tests_test_coverage_pj_simple_boost",
+      "target": "backend_tests_test_coverage_pj_simple_boost_func_test_simple_all_groups_and_coverage_branches",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/tests/test_coverage_pj_simple_boost.py",
+      "source_location": "L95",
+      "weight": 1.0
+    },
+    {
       "source": "backend_tests_test_e2e_playwright",
       "target": "backend_tests_test_e2e_playwright_class_testtributiaendtoend",
       "relation": "contains",
@@ -22989,7 +23734,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L158",
+      "source_location": "L166",
       "weight": 1.0
     },
     {
@@ -23000,7 +23745,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L186",
+      "source_location": "L194",
       "weight": 1.0
     },
     {
@@ -23011,7 +23756,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L230",
+      "source_location": "L238",
       "weight": 1.0
     },
     {
@@ -23033,7 +23778,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L282",
+      "source_location": "L290",
       "weight": 1.0
     },
     {
@@ -23044,18 +23789,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L310",
-      "weight": 1.0
-    },
-    {
-      "source": "backend_tests_test_e2e_playwright",
-      "target": "backend_tests_test_e2e_playwright_func_test_calendario_tributario_nit_search_and_filters",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L348",
+      "source_location": "L318",
       "weight": 1.0
     },
     {
@@ -23071,29 +23805,29 @@
     },
     {
       "source": "backend_tests_test_e2e_playwright",
-      "target": "backend_tests_test_e2e_playwright_class_testresponsiveandmobilemode",
+      "target": "backend_tests_test_e2e_playwright_func_test_calendario_tributario_nit_search_and_filters",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L376",
+      "source_location": "L356",
       "weight": 1.0
     },
     {
       "source": "backend_tests_test_e2e_playwright",
-      "target": "backend_tests_test_e2e_playwright_func_test_mobile_drawer_navigation_and_backdrop",
+      "target": "backend_tests_test_e2e_playwright_func_test_persona_juridica_flow_and_subtabs",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L387",
+      "source_location": "L382",
       "weight": 1.0
     },
     {
       "source": "backend_tests_test_e2e_playwright",
-      "target": "backend_tests_test_e2e_playwright_func_test_mobile_viewport_no_horizontal_body_overflow",
+      "target": "backend_tests_test_e2e_playwright_func_test_regimen_simple_flow_and_subtabs",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -23104,13 +23838,46 @@
     },
     {
       "source": "backend_tests_test_e2e_playwright",
+      "target": "backend_tests_test_e2e_playwright_class_testresponsiveandmobilemode",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/tests/test_e2e_playwright.py",
+      "source_location": "L493",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_tests_test_e2e_playwright",
+      "target": "backend_tests_test_e2e_playwright_func_test_mobile_drawer_navigation_and_backdrop",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/tests/test_e2e_playwright.py",
+      "source_location": "L504",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_tests_test_e2e_playwright",
+      "target": "backend_tests_test_e2e_playwright_func_test_mobile_viewport_no_horizontal_body_overflow",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/tests/test_e2e_playwright.py",
+      "source_location": "L556",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_tests_test_e2e_playwright",
       "target": "backend_tests_test_e2e_playwright_func_test_table_horizontal_scroll_containers_on_mobile",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L477",
+      "source_location": "L594",
       "weight": 1.0
     },
     {
@@ -23121,29 +23888,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L519",
-      "weight": 1.0
-    },
-    {
-      "source": "backend_tests_test_e2e_playwright",
-      "target": "backend_tests_test_e2e_playwright_func_test_mobile_casilla_popover_bottom_sheet",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L557",
-      "weight": 1.0
-    },
-    {
-      "source": "backend_tests_test_e2e_playwright",
-      "target": "backend_tests_test_e2e_playwright_func_test_reconciliation_spreadsheet_extended_sidebar_scrolling",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "backend/tests/test_e2e_playwright.py",
-      "source_location": "L593",
+      "source_location": "L636",
       "weight": 1.0
     },
     {
@@ -23155,6 +23900,28 @@
       "confidence_score": 1.0,
       "source_file": "backend/tests/test_e2e_playwright.py",
       "source_location": "L64",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_tests_test_e2e_playwright",
+      "target": "backend_tests_test_e2e_playwright_func_test_mobile_casilla_popover_bottom_sheet",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/tests/test_e2e_playwright.py",
+      "source_location": "L674",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_tests_test_e2e_playwright",
+      "target": "backend_tests_test_e2e_playwright_func_test_reconciliation_spreadsheet_extended_sidebar_scrolling",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/tests/test_e2e_playwright.py",
+      "source_location": "L710",
       "weight": 1.0
     },
     {
@@ -23220,7 +23987,18 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/tests/test_pj_calculator.py",
-      "source_location": "L55",
+      "source_location": "L70",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_tests_test_pj_calculator",
+      "target": "backend_tests_test_pj_calculator_func_test_persona_juridica_sobretasa_financiera",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/tests/test_pj_calculator.py",
+      "source_location": "L97",
       "weight": 1.0
     },
     {
@@ -23540,6 +24318,39 @@
       "confidence_score": 1.0,
       "source_file": "backend/tests/test_session_sync.py",
       "source_location": "L81",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_tests_test_simple_calculator",
+      "target": "backend_tests_test_simple_calculator_func_test_regimen_simple_grupo3_restaurante_con_inc",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/tests/test_simple_calculator.py",
+      "source_location": "L46",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_tests_test_simple_calculator",
+      "target": "backend_tests_test_simple_calculator_func_test_comparativa_ordinario_vs_simple",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/tests/test_simple_calculator.py",
+      "source_location": "L73",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_tests_test_simple_calculator",
+      "target": "backend_tests_test_simple_calculator_func_test_regimen_simple_grupo1_tiendas",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/tests/test_simple_calculator.py",
+      "source_location": "L8",
       "weight": 1.0
     },
     {
@@ -37766,6 +38577,83 @@
       "weight": 1.0
     },
     {
+      "source": "docs_superpowers_plans_2026_08_23_landing_page_and_skill_hub_plan",
+      "target": "docs_superpowers_plans_2026_08_23_landing_page_and_skill_hub_plan_plan_de_implementaci\u00f3n_landing_page_de_entrada_y_hub_de_instalaci\u00f3n_de_skills_de_ia",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/plans/2026-08-23-landing-page-and-skill-hub-plan.md",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_plans_2026_08_23_landing_page_and_skill_hub_plan_global_constraints",
+      "target": "docs_superpowers_plans_2026_08_23_landing_page_and_skill_hub_plan_task_3_centro_de_descarga_y_tutoriales_de_skills_skilltutorialpage_y_pesta\u00f1as",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/plans/2026-08-23-landing-page-and-skill-hub-plan.md",
+      "source_location": "L125",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_plans_2026_08_23_landing_page_and_skill_hub_plan_global_constraints",
+      "target": "docs_superpowers_plans_2026_08_23_landing_page_and_skill_hub_plan_task_4_integraci\u00f3n_bidireccional_en_el_workspace_app_tsx_sidebar_tsx_headerbar_tsx",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/plans/2026-08-23-landing-page-and-skill-hub-plan.md",
+      "source_location": "L179",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_plans_2026_08_23_landing_page_and_skill_hub_plan_global_constraints",
+      "target": "docs_superpowers_plans_2026_08_23_landing_page_and_skill_hub_plan_task_1_estado_global_de_vistas_y_enrutamiento_spa_appcontext_tsx_app_tsx",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/plans/2026-08-23-landing-page-and-skill-hub-plan.md",
+      "source_location": "L21",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_plans_2026_08_23_landing_page_and_skill_hub_plan_global_constraints",
+      "target": "docs_superpowers_plans_2026_08_23_landing_page_and_skill_hub_plan_task_5_verificaci\u00f3n_integral_de_calidad_linteo_y_grafo_arquitect\u00f3nico",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/plans/2026-08-23-landing-page-and-skill-hub-plan.md",
+      "source_location": "L229",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_plans_2026_08_23_landing_page_and_skill_hub_plan_global_constraints",
+      "target": "docs_superpowers_plans_2026_08_23_landing_page_and_skill_hub_plan_task_2_componentes_de_la_landing_page_landingnavbar_landingheropreview_landingpage",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/plans/2026-08-23-landing-page-and-skill-hub-plan.md",
+      "source_location": "L67",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_plans_2026_08_23_landing_page_and_skill_hub_plan_plan_de_implementaci\u00f3n_landing_page_de_entrada_y_hub_de_instalaci\u00f3n_de_skills_de_ia",
+      "target": "docs_superpowers_plans_2026_08_23_landing_page_and_skill_hub_plan_global_constraints",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/plans/2026-08-23-landing-page-and-skill-hub-plan.md",
+      "source_location": "L11",
+      "weight": 1.0
+    },
+    {
       "source": "docs_superpowers_specs_2026_08_23_landing_page_and_skill_hub_design",
       "target": "docs_superpowers_specs_2026_08_23_landing_page_and_skill_hub_design_especificaci\u00f3n_de_dise\u00f1o_landing_page_y_hub_de_instalaci\u00f3n_de_skills_de_ia_en_tributia",
       "relation": "contains",
@@ -37795,7 +38683,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/superpowers/specs/2026-08-23-landing-page-and-skill-hub-design.md",
-      "source_location": "L25",
+      "source_location": "L26",
       "weight": 1.0
     },
     {
@@ -37806,7 +38694,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/superpowers/specs/2026-08-23-landing-page-and-skill-hub-design.md",
-      "source_location": "L31",
+      "source_location": "L33",
       "weight": 1.0
     },
     {
@@ -37817,7 +38705,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/superpowers/specs/2026-08-23-landing-page-and-skill-hub-design.md",
-      "source_location": "L47",
+      "source_location": "L50",
       "weight": 1.0
     },
     {
@@ -37828,7 +38716,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/superpowers/specs/2026-08-23-landing-page-and-skill-hub-design.md",
-      "source_location": "L72",
+      "source_location": "L76",
       "weight": 1.0
     },
     {
@@ -37839,7 +38727,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/superpowers/specs/2026-08-23-landing-page-and-skill-hub-design.md",
-      "source_location": "L103",
+      "source_location": "L108",
       "weight": 1.0
     },
     {
@@ -37850,7 +38738,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/superpowers/specs/2026-08-23-landing-page-and-skill-hub-design.md",
-      "source_location": "L127",
+      "source_location": "L132",
       "weight": 1.0
     },
     {
@@ -37872,7 +38760,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/superpowers/specs/2026-08-23-landing-page-and-skill-hub-design.md",
-      "source_location": "L45",
+      "source_location": "L48",
       "weight": 1.0
     },
     {
@@ -38614,6 +39502,17 @@
     },
     {
       "source": "backend_app_api_v1_router",
+      "target": "backend_app_api_v1_endpoints_regimen_simple",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/api/v1/router.py",
+      "source_location": "L3",
+      "weight": 0.9
+    },
+    {
+      "source": "backend_app_api_v1_router",
       "target": "backend_app_api_v1_endpoints_rules",
       "relation": "imports",
       "_origin": "ast",
@@ -39230,5 +40129,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "d65514a9b9b76e20e9e238d712ae45793340af46"
+  "built_at_commit": "553ac08751eff0a63be618721ed34e92833a0cf2"
 }

@@ -74,6 +74,45 @@ def test_api_calculate_pj():
     assert data["renta_bruta"] == 300000000
     assert data["impuesto_basico_renta"] > 0
     assert len(data["audit_trace"]) > 0
+    assert "form_110_casillas" in data
+
+
+def test_api_calculate_simple():
+    payload = {
+        "tax_year": 2025,
+        "grupo_actividad": 2,
+        "ingresos_brutos_nacionales": 250000000,
+        "tarifa_ica_consolidada_x_mil": 7.0,
+        "aportes_pension_empleador_ano": 5000000,
+        "ventas_por_medios_electronicos": 100000000,
+    }
+    response = client.post("/api/v1/calculate/regimen-simple/calculate", json=payload)
+    assert response.status_code == 200
+    data = response.json()
+    assert data["grupo_actividad"] == 2
+    assert data["impuesto_simple_consolidado"] > 0
+    assert "form_260_casillas" in data
+    assert len(data["audit_trace"]) > 0
+
+
+def test_api_comparativa_simple():
+    payload = {
+        "tax_year": 2025,
+        "tipo_persona": "juridica",
+        "grupo_actividad": 2,
+        "ingresos_brutos_anuales": 300000000,
+        "costos_y_gastos_deducibles": 180000000,
+        "aportes_pension_empleador": 6000000,
+        "porcentaje_ventas_medios_electronicos": 50.0,
+        "tarifa_ica_x_mil": 7.0,
+        "numero_empleados_menos_10_smlmv": 2,
+    }
+    response = client.post("/api/v1/calculate/regimen-simple/comparativa", json=payload)
+    assert response.status_code == 200
+    data = response.json()
+    assert "regimen_recomendado" in data
+    assert data["total_carga_tributaria_ordinario"] > 0
+    assert data["total_carga_tributaria_simple"] > 0
 
 
 def test_seo_robots_txt():

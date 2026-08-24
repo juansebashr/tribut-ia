@@ -72,10 +72,10 @@
     "semantic_hash": "1a84c7cae63f42446ee7eab679acacab"
   },
   "backend/app/api/v1/router.py": {
-    "mtime": 1787182915.0568316,
-    "seen": 1787184713.910166,
-    "ast_hash": "3a5298d6e2caf364f59629877ddea6a5",
-    "semantic_hash": "3a5298d6e2caf364f59629877ddea6a5"
+    "mtime": 1787542589.1281672,
+    "seen": 1787542661.240321,
+    "ast_hash": "e5b7100b14d65fb8e2563d40f4c98925",
+    "semantic_hash": ""
   },
   "backend/app/core/__init__.py": {
     "mtime": 1786750458.723098,
@@ -102,15 +102,15 @@
     "semantic_hash": "6ea3defc361bb242d31277137bc72410"
   },
   "backend/app/core/rules_engine/schema.py": {
-    "mtime": 1787182915.0556943,
-    "seen": 1787184713.9101682,
-    "ast_hash": "667cee6d8bc44b8bd3d3f15e317b1776",
-    "semantic_hash": "667cee6d8bc44b8bd3d3f15e317b1776"
+    "mtime": 1787515969.86317,
+    "seen": 1787516900.112399,
+    "ast_hash": "f18d897c739d94742ad9a6ebd00447e7",
+    "semantic_hash": ""
   },
   "backend/app/main.py": {
-    "mtime": 1787501115.4507647,
-    "seen": 1787501135.8894951,
-    "ast_hash": "8d0ecad97b49aa2e9de29e0d0bd90477",
+    "mtime": 1787542558.7804973,
+    "seen": 1787542661.240458,
+    "ast_hash": "58d64998b5407470ec3396afbf0b7eeb",
     "semantic_hash": ""
   },
   "backend/app/models/__init__.py": {
@@ -126,10 +126,10 @@
     "semantic_hash": "36042492c05b27f941a9934949532a5d"
   },
   "backend/app/models/persona_juridica.py": {
-    "mtime": 1787182915.0558894,
-    "seen": 1787184713.9101708,
-    "ast_hash": "be3163c6395fc98cb88b6292e61f2354",
-    "semantic_hash": "be3163c6395fc98cb88b6292e61f2354"
+    "mtime": 1787516883.042033,
+    "seen": 1787516900.1124852,
+    "ast_hash": "ff000dfca9f75c8efb008a11fefcce94",
+    "semantic_hash": ""
   },
   "backend/app/models/persona_natural.py": {
     "mtime": 1787182915.0557022,
@@ -150,10 +150,10 @@
     "semantic_hash": ""
   },
   "backend/app/services/liquidacion_pj.py": {
-    "mtime": 1787182915.058081,
-    "seen": 1787184713.910173,
-    "ast_hash": "55443dd72385707c6b09b65f3644f50c",
-    "semantic_hash": "55443dd72385707c6b09b65f3644f50c"
+    "mtime": 1787516883.0420282,
+    "seen": 1787516900.1125739,
+    "ast_hash": "1d5ad6e52eb9d5e3a81fa79081a0ffd6",
+    "semantic_hash": ""
   },
   "backend/app/services/liquidacion_pn.py": {
     "mtime": 1787182915.0575447,
@@ -186,9 +186,9 @@
     "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
   },
   "backend/tests/test_api_endpoints.py": {
-    "mtime": 1787501115.4507535,
-    "seen": 1787501135.889809,
-    "ast_hash": "f2763222be5a0d64f6d965f06d395979",
+    "mtime": 1787516373.5584435,
+    "seen": 1787516900.1127412,
+    "ast_hash": "9f9c285e27a25a7d161167d331eeba75",
     "semantic_hash": ""
   },
   "backend/tests/test_beneficios_and_go.py": {
@@ -210,10 +210,10 @@
     "semantic_hash": ""
   },
   "backend/tests/test_pj_calculator.py": {
-    "mtime": 1787182915.055907,
-    "seen": 1787184713.910178,
-    "ast_hash": "7ae41ff85908eb4929bccae663742512",
-    "semantic_hash": "7ae41ff85908eb4929bccae663742512"
+    "mtime": 1787516151.470931,
+    "seen": 1787516900.112878,
+    "ast_hash": "4b54edbd124d61c37f6bc56bf60946e0",
+    "semantic_hash": ""
   },
   "backend/tests/test_pn_calculator.py": {
     "mtime": 1787182915.0568144,
@@ -390,9 +390,9 @@
     "semantic_hash": ""
   },
   "backend/app/static/index.html": {
-    "mtime": 1787501072.932762,
-    "seen": 1787501135.8906639,
-    "ast_hash": "0abdb9153ab0aa42a934a5cbd04e9394",
+    "mtime": 1787503849.793619,
+    "seen": 1787503923.805894,
+    "ast_hash": "42dda476020282ff1b3ad01fb1512ebe",
     "semantic_hash": ""
   },
   "docs/README.md": {
@@ -618,9 +618,9 @@
     "semantic_hash": ""
   },
   "backend/tests/test_e2e_playwright.py": {
-    "mtime": 1787446284.0646307,
-    "seen": 1787446388.134976,
-    "ast_hash": "5c514f4e0858aae03cb9ed588b8e2637",
+    "mtime": 1787517672.9237072,
+    "seen": 1787517855.903129,
+    "ast_hash": "f83e8284c801c0818db287ae9260a601",
     "semantic_hash": ""
   },
   "skills/declaracion-renta-persona-natural/scripts/simular_inmuebles_afc.py": {
@@ -690,9 +690,9 @@
     "semantic_hash": ""
   },
   "docs/superpowers/specs/2026-08-23-landing-page-and-skill-hub-design.md": {
-    "mtime": 1787500928.4417858,
-    "seen": 1787501135.891329,
-    "ast_hash": "90f906af45a457b29823e54e03c29938",
+    "mtime": 1787501152.816244,
+    "seen": 1787501254.229511,
+    "ast_hash": "9343426dc43e86fbda8eddcc990e999d",
     "semantic_hash": ""
   },
   "frontend/public/llms-full.txt": {
@@ -723,6 +723,42 @@
     "mtime": 1787501024.24571,
     "seen": 1787501135.891488,
     "ast_hash": "aead493361b27e7510691c5d7072dfc1",
+    "semantic_hash": ""
+  },
+  "docs/superpowers/plans/2026-08-23-landing-page-and-skill-hub-plan.md": {
+    "mtime": 1787501179.0631418,
+    "seen": 1787501254.2295098,
+    "ast_hash": "ab7ae03bfe8aa6769aa826cf35f90512",
+    "semantic_hash": ""
+  },
+  "backend/app/api/v1/endpoints/regimen_simple.py": {
+    "mtime": 1787516115.3666513,
+    "seen": 1787516900.1121762,
+    "ast_hash": "e773fdb019f5dab3461de836d6b221d7",
+    "semantic_hash": ""
+  },
+  "backend/app/models/regimen_simple.py": {
+    "mtime": 1787516883.0420115,
+    "seen": 1787516900.112514,
+    "ast_hash": "7bcbf7a3f75208b864c46d8421dcf504",
+    "semantic_hash": ""
+  },
+  "backend/app/services/liquidacion_simple.py": {
+    "mtime": 1787516883.0420501,
+    "seen": 1787516900.112604,
+    "ast_hash": "ae020768f8f76724ea9ef5a3c4b95725",
+    "semantic_hash": ""
+  },
+  "backend/tests/test_simple_calculator.py": {
+    "mtime": 1787516258.2186801,
+    "seen": 1787516900.113012,
+    "ast_hash": "fc553c42df678846ff0ce7e877a18521",
+    "semantic_hash": ""
+  },
+  "backend/tests/test_coverage_pj_simple_boost.py": {
+    "mtime": 1787517830.5838695,
+    "seen": 1787517855.9031281,
+    "ast_hash": "9fa05186ee00420c58aae0cb2a3f411e",
     "semantic_hash": ""
   }
 }

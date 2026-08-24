@@ -107,12 +107,19 @@ class TestTributIAEndToEnd:
     def test_app_title_and_main_structure(
         self, page_with_error_tracking: tuple[Page, list[str]], live_server_url: str
     ):
-        """Verifica que la página principal cargue con su título y estructura base."""
+        """Verifica que la URL raíz cargue la Landing Page y al pulsar Empezar entre a la Suite."""
         page, errors = page_with_error_tracking
         page.goto(live_server_url, wait_until="domcontentloaded")
         page.wait_for_timeout(500)
 
         assert "TributIA" in page.title()
+        # La raíz debe abrir la Landing Page
+        assert page.locator(".landing-navbar").is_visible()
+        assert page.locator(".landing-hero-section").is_visible()
+
+        # Pulsar Empezar debe llevar a la Suite Tributaria
+        page.click("#btn-navbar-start")
+        page.wait_for_timeout(400)
         assert page.locator("#app-workspace").is_visible()
         assert page.locator(".sidebar").is_visible()
         assert len(errors) == 0, f"Errores de consola encontrados: {errors}"
@@ -122,7 +129,7 @@ class TestTributIAEndToEnd:
     ):
         """Verifica que hacer clic en cada módulo de la barra lateral active su respectivo panel."""
         page, errors = page_with_error_tracking
-        page.goto(live_server_url, wait_until="domcontentloaded")
+        page.goto(f"{live_server_url}/#app/pn", wait_until="domcontentloaded")
         page.wait_for_timeout(500)
 
         modules = [
@@ -131,12 +138,20 @@ class TestTributIAEndToEnd:
             ("nav-item-pn-f210", "#pane-pn-f210"),
             ("nav-item-pn-marginal", "#pane-pn-marginal"),
             ("nav-item-pn-conciliacion", "#pane-pn-conciliacion"),
-            ("nav-item-pj", "#pane-pj"),
+            ("nav-item-pj-calc", "#pane-pj-calc"),
+            ("nav-item-pj-f110", "#pane-pj-f110"),
+            ("nav-item-pj-ttd", "#pane-pj-ttd"),
+            ("nav-item-pj-sobretasas", "#pane-pj-sobretasas"),
+            ("nav-item-pj-conciliacion", "#pane-pj-conciliacion"),
+            ("nav-item-simple-calc", "#pane-simple-calc"),
+            ("nav-item-simple-f260", "#pane-simple-f260"),
+            ("nav-item-simple-comparador", "#pane-simple-comparador"),
+            ("nav-item-simple-f2593", "#pane-simple-f2593"),
+            ("nav-item-simple-requisitos", "#pane-simple-requisitos"),
             ("nav-item-beneficios", "#pane-beneficios"),
             ("nav-item-presentacion", "#pane-presentacion"),
             ("nav-item-art73", "#pane-art73"),
             ("nav-item-inmuebles-afc", "#pane-inmuebles-afc"),
-            ("nav-item-simple", "#pane-simple"),
             ("nav-item-iva", "#pane-iva"),
             ("nav-item-retefuente", "#pane-retefuente"),
         ]
@@ -160,7 +175,7 @@ class TestTributIAEndToEnd:
     ):
         """Valida el catálogo de beneficios, el buscador reactivo y los filtros por categoría."""
         page, errors = page_with_error_tracking
-        page.goto(live_server_url, wait_until="domcontentloaded")
+        page.goto(f"{live_server_url}/#app/pn", wait_until="domcontentloaded")
         page.wait_for_timeout(500)
 
         page.click("#nav-item-beneficios")
@@ -188,7 +203,7 @@ class TestTributIAEndToEnd:
     ):
         """Valida el simulador de auditoría y la calculadora integral de sanciones."""
         page, errors = page_with_error_tracking
-        page.goto(live_server_url, wait_until="domcontentloaded")
+        page.goto(f"{live_server_url}/#app/pn", wait_until="domcontentloaded")
         page.wait_for_timeout(500)
 
         page.click("#nav-item-presentacion")
@@ -232,7 +247,7 @@ class TestTributIAEndToEnd:
     ):
         """Valida el módulo del Artículo 73 E.T.: tabla DANE 70 años, selector, búsqueda y cálculo."""
         page, errors = page_with_error_tracking
-        page.goto(live_server_url, wait_until="domcontentloaded")
+        page.goto(f"{live_server_url}/#app/pn", wait_until="domcontentloaded")
         page.wait_for_timeout(500)
 
         # 1. Navegar a Art. 73
@@ -284,7 +299,7 @@ class TestTributIAEndToEnd:
     ):
         """Valida el simulador interactivo de beneficios inmobiliarios y Cuentas AFC (Art. 311-1)."""
         page, errors = page_with_error_tracking
-        page.goto(live_server_url, wait_until="domcontentloaded")
+        page.goto(f"{live_server_url}/#app/pn", wait_until="domcontentloaded")
         page.wait_for_timeout(500)
 
         page.click("#nav-item-inmuebles-afc")
@@ -312,7 +327,7 @@ class TestTributIAEndToEnd:
     ):
         """Verifica la interacción en Persona Natural: subpestañas F210, termómetro marginal y cálculo."""
         page, errors = page_with_error_tracking
-        page.goto(live_server_url, wait_until="domcontentloaded")
+        page.goto(f"{live_server_url}/#app/pn", wait_until="domcontentloaded")
         page.wait_for_timeout(500)
 
         page.click("#nav-item-pn-calc")
@@ -350,7 +365,7 @@ class TestTributIAEndToEnd:
     ):
         """Valida la consulta de vencimientos tributarios por NIT y cambio de filtros."""
         page, errors = page_with_error_tracking
-        page.goto(live_server_url, wait_until="domcontentloaded")
+        page.goto(f"{live_server_url}/#app/pn", wait_until="domcontentloaded")
         page.wait_for_timeout(500)
 
         page.click("#nav-item-calendario")
@@ -369,8 +384,118 @@ class TestTributIAEndToEnd:
         page.click("#cal-filter-btn-renta_pn")
         page.wait_for_timeout(300)
         page.click("#cal-filter-btn-iva")
-        page.wait_for_timeout(300)
         assert len(errors) == 0, f"Errores en Calendario Tributario: {errors}"
+
+    def test_persona_juridica_flow_and_subtabs(
+        self, page_with_error_tracking: tuple[Page, list[str]], live_server_url: str
+    ):
+        """Verifica la interacción completa en Persona Jurídica: presets, F110, TTD, Sobretasas y Conciliación."""
+        page, errors = page_with_error_tracking
+        page.goto(f"{live_server_url}/#app/pn", wait_until="domcontentloaded")
+        page.wait_for_timeout(500)
+
+        # 1. Navegar a Persona Jurídica Calculadora
+        page.click("#nav-item-pj-calc")
+        page.wait_for_timeout(400)
+        assert page.locator("#pane-pj-calc").is_visible()
+
+        # Probar cambio de presets corporativos
+        page.click("button:has-text('Comercial Estándar')")
+        page.wait_for_timeout(300)
+        page.click("button:has-text('Financiera')")
+        page.wait_for_timeout(300)
+
+        # 2. Navegar a Formulario 110 Facsímil
+        page.click("#nav-item-pj-f110")
+        page.wait_for_timeout(300)
+        assert page.locator("#pane-pj-f110").is_visible()
+
+        # Probar popover interactivo en una casilla clave del F-110
+        casilla_btn = page.locator(".casilla-badge-btn:has-text('79')").first
+        if casilla_btn.is_visible():
+            casilla_btn.click()
+            page.wait_for_timeout(300)
+            popover = page.locator("#casilla-popover-card")
+            if popover.is_visible():
+                pop_text = popover.inner_text()
+                assert "79" in pop_text or "Renta" in pop_text
+
+        # 3. Navegar a Laboratorio TTD
+        page.click("#nav-item-pj-ttd")
+        page.wait_for_timeout(300)
+        assert page.locator("#pane-pj-ttd").is_visible()
+        ttd_text = page.locator("#pane-pj-ttd").inner_text()
+        assert "TASA DE TRIBUTACIÓN DEPURADA" in ttd_text
+
+        # 4. Navegar a Sobretasas
+        page.click("#nav-item-pj-sobretasas")
+        page.wait_for_timeout(300)
+        assert page.locator("#pane-pj-sobretasas").is_visible()
+        sobretasa_text = page.locator("#pane-pj-sobretasas").inner_text()
+        assert "TARIFA EFECTIVA TOTAL" in sobretasa_text
+
+        # 5. Navegar a Conciliación NIIF
+        page.click("#nav-item-pj-conciliacion")
+        page.wait_for_timeout(300)
+        assert page.locator("#pane-pj-conciliacion").is_visible()
+        conciliacion_text = page.locator("#pane-pj-conciliacion").inner_text()
+        assert "Puente de Conciliación NIIF" in conciliacion_text
+
+        assert len(errors) == 0, f"Errores en submódulos de Persona Jurídica: {errors}"
+
+    def test_regimen_simple_flow_and_subtabs(
+        self, page_with_error_tracking: tuple[Page, list[str]], live_server_url: str
+    ):
+        """Verifica la interacción completa en Régimen Simple: presets, F260, Comparador, F-2593 y Requisitos."""
+        page, errors = page_with_error_tracking
+        page.goto(f"{live_server_url}/#app/pn", wait_until="domcontentloaded")
+        page.wait_for_timeout(500)
+        page.wait_for_timeout(500)
+
+        # 1. Navegar a Régimen Simple Calculadora
+        page.click("#nav-item-simple-calc")
+        page.wait_for_timeout(400)
+        assert page.locator("#pane-simple-calc").is_visible()
+
+        # Probar presets de grupos de actividad
+        page.click("button:has-text('G1: Tienda')")
+        page.wait_for_timeout(300)
+        page.click("button:has-text('G3: Restaurante')")
+        page.wait_for_timeout(300)
+        # Verificar sección INC visible
+        assert "Comidas y Bebidas" in page.locator("#pane-simple-calc").inner_text()
+
+        # 2. Navegar a Formulario 260 Facsímil
+        page.click("#nav-item-simple-f260")
+        page.wait_for_timeout(300)
+        assert page.locator("#pane-simple-f260").is_visible()
+
+        # Probar popover en casilla 980 (Pago Total)
+        c980_btn = page.locator(".casilla-badge-btn:has-text('980')").first
+        if c980_btn.is_visible():
+            c980_btn.click()
+            page.wait_for_timeout(300)
+
+        # 3. Navegar a Comparador SIMPLE vs Ordinario
+        page.click("#nav-item-simple-comparador")
+        page.wait_for_timeout(300)
+        assert page.locator("#pane-simple-comparador").is_visible()
+        comp_text = page.locator("#pane-simple-comparador").inner_text()
+        assert "DIAGNÓSTICO TRIBUTARIO" in comp_text
+
+        # 4. Navegar a Anticipos F-2593
+        page.click("#nav-item-simple-f2593")
+        page.wait_for_timeout(300)
+        assert page.locator("#pane-simple-f2593").is_visible()
+        assert "Bim 1" in page.locator("#pane-simple-f2593").inner_text()
+
+        # 5. Navegar a Checklist Requisitos
+        page.click("#nav-item-simple-requisitos")
+        page.wait_for_timeout(300)
+        assert page.locator("#pane-simple-requisitos").is_visible()
+        assert "DICTAMEN DE ELEGIBILIDAD" in page.locator("#pane-simple-requisitos").inner_text()
+
+        assert len(errors) == 0, f"Errores en submódulos de Régimen Simple: {errors}"
 
 
 class TestResponsiveAndMobileMode:
@@ -395,7 +520,7 @@ class TestResponsiveAndMobileMode:
         """Verifica que el drawer móvil (off-canvas), botón hamburguesa y backdrop funcionen."""
         page, errors = page_with_error_tracking
         page.set_viewport_size({"width": width, "height": height})
-        page.goto(live_server_url, wait_until="domcontentloaded")
+        page.goto(f"{live_server_url}/#app/pn", wait_until="domcontentloaded")
         page.wait_for_timeout(600)
 
         # 1. El botón de menú hamburguesa debe ser visible en pantallas móviles
@@ -447,7 +572,7 @@ class TestResponsiveAndMobileMode:
         """Verifica que el body/viewport no sufra desbordamiento horizontal en móviles."""
         page, errors = page_with_error_tracking
         page.set_viewport_size({"width": width, "height": height})
-        page.goto(live_server_url, wait_until="domcontentloaded")
+        page.goto(f"{live_server_url}/#app/pn", wait_until="domcontentloaded")
         page.wait_for_timeout(600)
 
         modulos = [
@@ -474,13 +599,73 @@ class TestResponsiveAndMobileMode:
 
         assert len(errors) == 0, f"Errores en verificación de overflow en {device_name}: {errors}"
 
+    @pytest.mark.parametrize(
+        ("width", "height", "device_name"),
+        [
+            (360, 740, "Galaxy A51 (360px)"),
+            (375, 667, "iPhone SE (375px)"),
+            (390, 844, "iPhone 14 (390px)"),
+            (412, 915, "Pixel 7 (412px)"),
+        ],
+    )
+    def test_mobile_header_session_badge_and_skill_button_no_overlap(
+        self,
+        page_with_error_tracking: tuple[Page, list[str]],
+        live_server_url: str,
+        width: int,
+        height: int,
+        device_name: str,
+    ):
+        """Verifica que en celulares el badge de sesión y el botón Skill IA se rendericen sin superposición."""
+        page, errors = page_with_error_tracking
+        page.set_viewport_size({"width": width, "height": height})
+        page.goto(f"{live_server_url}/#app/pn", wait_until="domcontentloaded")
+        page.wait_for_timeout(600)
+
+        session_badge = page.locator("#session-badge-container")
+        skill_btn = page.locator("#header-btn-skill-tutorial")
+
+        assert session_badge.is_visible(), f"Badge de sesión no visible en {device_name}"
+        assert skill_btn.is_visible(), f"Botón Skill IA no visible en {device_name}"
+
+        badge_box = session_badge.bounding_box()
+        skill_box = skill_btn.bounding_box()
+
+        assert badge_box is not None, f"Bounding box de sesión no obtenido en {device_name}"
+        assert skill_box is not None, f"Bounding box de Skill IA no obtenido en {device_name}"
+
+        # 1. Validar que ambos elementos estén dentro del ancho del viewport
+        assert badge_box["x"] >= 0, f"Sesión sobresale a la izquierda en {device_name}"
+        assert (
+            badge_box["x"] + badge_box["width"] <= width + 5
+        ), f"Sesión sobresale a la derecha en {device_name}"
+        assert skill_box["x"] >= 0, f"Skill IA sobresale a la izquierda en {device_name}"
+        assert (
+            skill_box["x"] + skill_box["width"] <= width + 5
+        ), f"Skill IA sobresale a la derecha en {device_name}"
+
+        # 2. Comprobar que NO haya colisión/superposición física
+        # Dos cajas se solapan horizontal y verticalmente si y solo si:
+        h_overlap = (badge_box["x"] < skill_box["x"] + skill_box["width"]) and (
+            badge_box["x"] + badge_box["width"] > skill_box["x"]
+        )
+        v_overlap = (badge_box["y"] < skill_box["y"] + skill_box["height"]) and (
+            badge_box["y"] + badge_box["height"] > skill_box["y"]
+        )
+
+        assert not (
+            h_overlap and v_overlap
+        ), f"Superposición detectada en {device_name}: Badge={badge_box}, Skill={skill_box}"
+
+        assert len(errors) == 0, f"Errores en prueba de header móvil {device_name}: {errors}"
+
     def test_table_horizontal_scroll_containers_on_mobile(
         self, page_with_error_tracking: tuple[Page, list[str]], live_server_url: str
     ):
         """Verifica que las tablas complejas tengan contenedor con scroll horizontal interno."""
         page, errors = page_with_error_tracking
         page.set_viewport_size({"width": 375, "height": 667})
-        page.goto(live_server_url, wait_until="domcontentloaded")
+        page.goto(f"{live_server_url}/#app/pn", wait_until="domcontentloaded")
         page.wait_for_timeout(600)
 
         # 1. Verificar Formulario 210
@@ -527,7 +712,7 @@ class TestResponsiveAndMobileMode:
         """Verifica la adaptación de layout en pantallas reducidas de escritorio y laptops."""
         page, errors = page_with_error_tracking
         page.set_viewport_size({"width": width, "height": height})
-        page.goto(live_server_url, wait_until="domcontentloaded")
+        page.goto(f"{live_server_url}/#app/pn", wait_until="domcontentloaded")
         page.wait_for_timeout(500)
 
         # 1. En escritorio/laptop el botón hamburguesa está oculto y el sidebar visible
@@ -560,7 +745,7 @@ class TestResponsiveAndMobileMode:
         """Verifica que los modales y popovers se adapten como bottom-sheets en mobile sin desbordar."""
         page, errors = page_with_error_tracking
         page.set_viewport_size({"width": 375, "height": 667})
-        page.goto(live_server_url, wait_until="domcontentloaded")
+        page.goto(f"{live_server_url}/#app/pn", wait_until="domcontentloaded")
         page.wait_for_timeout(600)
 
         # Navegar al F210 y abrir un popover de casilla
@@ -599,7 +784,7 @@ class TestResponsiveAndMobileMode:
         """Verifica que el spreadsheet de conciliación tenga scroll horizontal interno y no se corte con el menú extendido."""
         page, errors = page_with_error_tracking
         page.set_viewport_size({"width": screen_width, "height": 768})
-        page.goto(live_server_url, wait_until="domcontentloaded")
+        page.goto(f"{live_server_url}/#app/pn", wait_until="domcontentloaded")
         page.wait_for_timeout(500)
 
         # 1. Asegurar que el sidebar está extendido (no colapsado)

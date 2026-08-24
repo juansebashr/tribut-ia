@@ -66,11 +66,84 @@ class DescuentosPJRules(BaseModel):
     donaciones_porcentaje: float = 0.25
 
 
+class SobretasaFinancieraRules(BaseModel):
+    umbral_uvt: float = 120000.0
+    puntos_adicionales: float = 0.05
+    anticipo_pct: float = 1.0
+
+
+class SobretasaHidroelectricaRules(BaseModel):
+    umbral_uvt: float = 30000.0
+    puntos_adicionales: float = 0.03
+    anticipo_pct: float = 1.0
+
+
 class PersonaJuridicaRules(BaseModel):
     tarifa_general: float = 0.35
     ganancia_ocasional: float = 0.15
+    tarifa_zona_franca: float = 0.20
+    tarifa_hoteles_ecoturismo: float = 0.15
+    tarifa_cooperativas: float = 0.20
     tasa_minima_ttd: TasaMinimaRules = Field(default_factory=TasaMinimaRules)
     descuentos: DescuentosPJRules = Field(default_factory=DescuentosPJRules)
+    sobretasa_financiera: SobretasaFinancieraRules = Field(default_factory=SobretasaFinancieraRules)
+    sobretasa_hidroelectricas: SobretasaHidroelectricaRules = Field(
+        default_factory=SobretasaHidroelectricaRules
+    )
+
+
+class RegimenSimpleBracket(BaseModel):
+    desde_uvt: float
+    hasta_uvt: float
+    tarifa: float
+
+
+class RegimenSimpleRules(BaseModel):
+    grupo1_tiendas: list[RegimenSimpleBracket] = Field(
+        default_factory=lambda: [
+            RegimenSimpleBracket(desde_uvt=0, hasta_uvt=6000, tarifa=0.012),
+            RegimenSimpleBracket(desde_uvt=6000, hasta_uvt=15000, tarifa=0.028),
+            RegimenSimpleBracket(desde_uvt=15000, hasta_uvt=30000, tarifa=0.044),
+            RegimenSimpleBracket(desde_uvt=30000, hasta_uvt=100000, tarifa=0.056),
+        ]
+    )
+    grupo2_comercio: list[RegimenSimpleBracket] = Field(
+        default_factory=lambda: [
+            RegimenSimpleBracket(desde_uvt=0, hasta_uvt=6000, tarifa=0.016),
+            RegimenSimpleBracket(desde_uvt=6000, hasta_uvt=15000, tarifa=0.020),
+            RegimenSimpleBracket(desde_uvt=15000, hasta_uvt=30000, tarifa=0.035),
+            RegimenSimpleBracket(desde_uvt=30000, hasta_uvt=100000, tarifa=0.045),
+        ]
+    )
+    grupo3_restaurantes: list[RegimenSimpleBracket] = Field(
+        default_factory=lambda: [
+            RegimenSimpleBracket(desde_uvt=0, hasta_uvt=6000, tarifa=0.016),
+            RegimenSimpleBracket(desde_uvt=6000, hasta_uvt=15000, tarifa=0.020),
+            RegimenSimpleBracket(desde_uvt=15000, hasta_uvt=30000, tarifa=0.035),
+            RegimenSimpleBracket(desde_uvt=30000, hasta_uvt=100000, tarifa=0.045),
+        ]
+    )
+    grupo4_educacion_salud: list[RegimenSimpleBracket] = Field(
+        default_factory=lambda: [
+            RegimenSimpleBracket(desde_uvt=0, hasta_uvt=6000, tarifa=0.037),
+            RegimenSimpleBracket(desde_uvt=6000, hasta_uvt=15000, tarifa=0.050),
+            RegimenSimpleBracket(desde_uvt=15000, hasta_uvt=30000, tarifa=0.054),
+            RegimenSimpleBracket(desde_uvt=30000, hasta_uvt=100000, tarifa=0.059),
+        ]
+    )
+    grupo5_profesionales: list[RegimenSimpleBracket] = Field(
+        default_factory=lambda: [
+            RegimenSimpleBracket(desde_uvt=0, hasta_uvt=6000, tarifa=0.073),
+            RegimenSimpleBracket(desde_uvt=6000, hasta_uvt=12000, tarifa=0.120),
+        ]
+    )
+    grupo6_reciclaje_tarifa: float = 0.0162
+    inc_comidas_bebidas_tarifa: float = 0.08
+    descuento_medios_electronicos_pct: float = 0.005
+    descuento_pension_empleador_aplica: bool = True
+    ganancia_ocasional_tarifa: float = 0.15
+    limite_ingresos_general_uvt: float = 100000.0
+    limite_ingresos_profesionales_uvt: float = 12000.0
 
 
 class BeneficioAuditoriaRules(BaseModel):
@@ -86,4 +159,5 @@ class TaxYearRules(BaseModel):
     description: str | None = None
     persona_natural: PersonaNaturalRules
     persona_juridica: PersonaJuridicaRules
+    regimen_simple: RegimenSimpleRules = Field(default_factory=RegimenSimpleRules)
     beneficio_auditoria: BeneficioAuditoriaRules = Field(default_factory=BeneficioAuditoriaRules)

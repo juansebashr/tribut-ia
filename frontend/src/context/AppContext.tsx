@@ -1,6 +1,11 @@
 import React, { createContext, useContext, useState, useEffect, type ReactNode } from 'react';
 import { fetchAvailableYears, fetchRulesForYear } from '../services/api';
-import { CASILLAS_INFO, type CasillaInfo } from '../constants/casillas_info';
+import {
+  CASILLAS_INFO,
+  CASILLAS_INFO_F110,
+  CASILLAS_INFO_F260,
+  type CasillaInfo,
+} from '../constants/casillas_info';
 
 export type ViewType = 'landing' | 'app' | 'skill-tutorial';
 
@@ -83,7 +88,11 @@ interface AppContextType {
   closeConfirmModal: () => void;
 
   popoverState: PopoverState;
-  showCasillaPopover: (casillaNum: string | number, targetEl?: HTMLElement | null) => void;
+  showCasillaPopover: (
+    casillaNum: string | number,
+    targetEl?: HTMLElement | null,
+    formType?: '210' | '110' | '260'
+  ) => void;
   hideCasillaPopover: () => void;
   togglePinPopover: () => void;
 }
@@ -125,9 +134,9 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
 
   // Helper to parse view & module from hash URL
   const parseInitialViewFromHash = (): { view: ViewType; module?: ModuleType; subTab?: string } => {
-    if (typeof window === 'undefined') return { view: 'app', module: 'pn', subTab: 'calc' };
+    if (typeof window === 'undefined') return { view: 'landing', module: 'pn', subTab: 'calc' };
     const hash = window.location.hash.replace(/^#\/?/, '').trim();
-    if (hash === 'landing') {
+    if (!hash || hash === 'landing' || hash === '/') {
       return { view: 'landing', module: 'pn', subTab: 'calc' };
     }
     if (hash === 'skill-tutorial' || hash === 'skills' || hash === 'tutorial') {
@@ -144,7 +153,10 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     if (knownModules.includes(modCandidate)) {
       return { view: 'app', module: modCandidate, subTab: subCandidate || 'calc' };
     }
-    return { view: 'app', module: 'pn', subTab: 'calc' };
+    if (parts[0] === 'app') {
+      return { view: 'app', module: 'pn', subTab: 'calc' };
+    }
+    return { view: 'landing', module: 'pn', subTab: 'calc' };
   };
 
   const initialRoute = parseInitialViewFromHash();
@@ -321,9 +333,17 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     });
   };
 
-  const showCasillaPopover = (casillaNum: string | number, targetEl?: HTMLElement | null) => {
+  const showCasillaPopover = (
+    casillaNum: string | number,
+    targetEl?: HTMLElement | null,
+    formType?: '210' | '110' | '260'
+  ) => {
     const numStr = String(casillaNum);
-    const info = CASILLAS_INFO[numStr] || {
+    let dict = CASILLAS_INFO;
+    if (formType === '110') dict = CASILLAS_INFO_F110;
+    else if (formType === '260') dict = CASILLAS_INFO_F260;
+
+    const info = dict[numStr] || CASILLAS_INFO[numStr] || {
       titulo: `Casilla ${numStr}`,
       art: 'Estatuto Tributario Nacional',
       concepto: 'Información y depuración tributaria oficial.',
