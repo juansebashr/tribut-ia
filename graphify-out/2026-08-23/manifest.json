@@ -564,9 +564,9 @@
     "semantic_hash": ""
   },
   "frontend/index.html": {
-    "mtime": 1787501066.3861513,
-    "seen": 1787501135.891372,
-    "ast_hash": "85381bae02989072b5ca8fb5ddee1603",
+    "mtime": 1787544847.8534594,
+    "seen": 1787544881.0104399,
+    "ast_hash": "0465e34bfe7fcda5f826e9f40e094928",
     "semantic_hash": ""
   },
   "skills/declaracion-renta-persona-natural/README.md": {
@@ -588,9 +588,9 @@
     "semantic_hash": ""
   },
   "frontend/public/favicon.svg": {
-    "mtime": 1786750481.4850476,
-    "seen": 1787187794.5286632,
-    "ast_hash": "7e840862161341271697daa99a40d76b",
+    "mtime": 1787544832.3626015,
+    "seen": 1787544881.010623,
+    "ast_hash": "2b5e2cae920e9e13326830efede6cae9",
     "semantic_hash": ""
   },
   "frontend/public/icons.svg": {
@@ -618,9 +618,9 @@
     "semantic_hash": ""
   },
   "backend/tests/test_e2e_playwright.py": {
-    "mtime": 1787517672.9237072,
-    "seen": 1787517855.903129,
-    "ast_hash": "f83e8284c801c0818db287ae9260a601",
+    "mtime": 1787544176.9830837,
+    "seen": 1787544293.222856,
+    "ast_hash": "04d72bbb0d890d9db3d3fe7daf0e7294",
     "semantic_hash": ""
   },
   "skills/declaracion-renta-persona-natural/scripts/simular_inmuebles_afc.py": {
@@ -660,9 +660,9 @@
     "semantic_hash": ""
   },
   "backend/app/static/favicon.svg": {
-    "mtime": 1787443771.7631161,
-    "seen": 1787443934.1452749,
-    "ast_hash": "7e840862161341271697daa99a40d76b",
+    "mtime": 1787544836.585559,
+    "seen": 1787544881.0105941,
+    "ast_hash": "2b5e2cae920e9e13326830efede6cae9",
     "semantic_hash": ""
   },
   "backend/tests/test_componente_inflacionario.py": {

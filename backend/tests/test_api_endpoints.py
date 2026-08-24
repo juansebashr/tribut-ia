@@ -139,3 +139,22 @@ def test_llms_full_txt():
     response = client.get("/llms-full.txt")
     assert response.status_code == 200
     assert "Estatuto Tributario" in response.text
+
+
+def test_favicon_endpoints():
+    r_ico = client.get("/favicon.ico")
+    assert r_ico.status_code == 200
+    assert "image/x-icon" in r_ico.headers["content-type"]
+    assert len(r_ico.content) > 1000
+
+    r_svg = client.get("/favicon.svg")
+    assert r_svg.status_code == 200
+    assert "image/svg+xml" in r_svg.headers["content-type"]
+    assert b"<svg" in r_svg.content
+
+    for path in ["/favicon.png", "/favicon-32x32.png", "/favicon-16x16.png", "/apple-touch-icon.png"]:
+        r_png = client.get(path)
+        assert r_png.status_code == 200
+        assert "image/png" in r_png.headers["content-type"]
+        assert len(r_png.content) > 500
+

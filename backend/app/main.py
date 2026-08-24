@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, Response
 from fastapi.staticfiles import StaticFiles
@@ -99,9 +99,21 @@ def chrome_devtools_endpoint():
 
 
 @app.get("/favicon.ico", include_in_schema=False)
+def favicon_ico():
+    """Sirve el favicon.ico oficial en formato binario estándar."""
+    for path in [
+        FRONTEND_DIST / "favicon.ico",
+        STATIC_DIR / "favicon.ico",
+        BASE_DIR.parent.parent / "frontend" / "public" / "favicon.ico",
+    ]:
+        if path.exists():
+            return FileResponse(str(path), media_type="image/x-icon")
+    return Response(status_code=204)
+
+
 @app.get("/favicon.svg", include_in_schema=False)
-def favicon():
-    """Sirve el favicon oficial para evitar el error 404 del navegador."""
+def favicon_svg():
+    """Sirve el favicon en formato vectorial SVG."""
     for path in [
         FRONTEND_DIST / "favicon.svg",
         STATIC_DIR / "favicon.svg",
@@ -109,6 +121,30 @@ def favicon():
     ]:
         if path.exists():
             return FileResponse(str(path), media_type="image/svg+xml")
+    return Response(status_code=204)
+
+
+@app.get("/favicon.png", include_in_schema=False)
+@app.get("/favicon-16x16.png", include_in_schema=False)
+@app.get("/favicon-32x32.png", include_in_schema=False)
+@app.get("/favicon-48x48.png", include_in_schema=False)
+@app.get("/favicon-180x180.png", include_in_schema=False)
+@app.get("/favicon-192x192.png", include_in_schema=False)
+@app.get("/favicon-512x512.png", include_in_schema=False)
+@app.get("/apple-touch-icon.png", include_in_schema=False)
+@app.get("/apple-touch-icon-precomposed.png", include_in_schema=False)
+def favicon_png(request: Request):
+    """Sirve los íconos rasterizados PNG para navegadores de escritorio y móviles."""
+    filename = request.url.path.lstrip("/")
+    if "apple-touch-icon" in filename:
+        filename = "apple-touch-icon.png"
+    for path in [
+        FRONTEND_DIST / filename,
+        STATIC_DIR / filename,
+        BASE_DIR.parent.parent / "frontend" / "public" / filename,
+    ]:
+        if path.exists():
+            return FileResponse(str(path), media_type="image/png")
     return Response(status_code=204)
 
 

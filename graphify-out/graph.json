@@ -2773,198 +2773,6 @@
       "source_location": "L12"
     },
     {
-      "id": "docs_estatuto_tributario_art\u00edculo_45",
-      "label": "ART\u00cdCULO 45",
-      "_origin": "ast",
-      "community": 150,
-      "community_name": "LIBRO SEXTO - \"",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "articulo 45",
-      "source_file": "docs/estatuto_tributario.md",
-      "source_location": "L21077"
-    },
-    {
-      "id": "docs_estatuto_tributario_art\u00edculo_870_gravamen_a_los_movimientos_financieros_gmf",
-      "label": "ART\u00cdCULO 870. GRAVAMEN A LOS MOVIMIENTOS FINANCIEROS, GMF",
-      "_origin": "ast",
-      "community": 150,
-      "community_name": "LIBRO SEXTO - \"",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "articulo 870. gravamen a los movimientos financieros, gmf",
-      "source_file": "docs/estatuto_tributario.md",
-      "source_location": "L20689"
-    },
-    {
-      "id": "docs_estatuto_tributario_art\u00edculo_871_hecho_generador_del_gmf",
-      "label": "ART\u00cdCULO 871. HECHO GENERADOR DEL GMF",
-      "_origin": "ast",
-      "community": 150,
-      "community_name": "LIBRO SEXTO - \"",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "articulo 871. hecho generador del gmf",
-      "source_file": "docs/estatuto_tributario.md",
-      "source_location": "L20696"
-    },
-    {
-      "id": "docs_estatuto_tributario_art\u00edculo_872_tarifa_del_gravamen_a_los_movimientos_financieros",
-      "label": "ART\u00cdCULO 872. TARIFA DEL GRAVAMEN A LOS MOVIMIENTOS FINANCIEROS",
-      "_origin": "ast",
-      "community": 150,
-      "community_name": "LIBRO SEXTO - \"",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "articulo 872. tarifa del gravamen a los movimientos financieros",
-      "source_file": "docs/estatuto_tributario.md",
-      "source_location": "L20795"
-    },
-    {
-      "id": "docs_estatuto_tributario_art\u00edculo_873_causaci\u00f3n_del_gmf",
-      "label": "ART\u00cdCULO 873. CAUSACI\u00d3N DEL GMF",
-      "_origin": "ast",
-      "community": 150,
-      "community_name": "LIBRO SEXTO - \"",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "articulo 873. causacion del gmf",
-      "source_file": "docs/estatuto_tributario.md",
-      "source_location": "L20802"
-    },
-    {
-      "id": "docs_estatuto_tributario_art\u00edculo_874_base_gravable_del_gmf",
-      "label": "ART\u00cdCULO 874. BASE GRAVABLE DEL GMF",
-      "_origin": "ast",
-      "community": 150,
-      "community_name": "LIBRO SEXTO - \"",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "articulo 874. base gravable del gmf",
-      "source_file": "docs/estatuto_tributario.md",
-      "source_location": "L20809"
-    },
-    {
-      "id": "docs_estatuto_tributario_art\u00edculo_875_sujetos_pasivos_del_gmf",
-      "label": "ART\u00cdCULO 875. SUJETOS PASIVOS DEL GMF",
-      "_origin": "ast",
-      "community": 150,
-      "community_name": "LIBRO SEXTO - \"",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "articulo 875. sujetos pasivos del gmf",
-      "source_file": "docs/estatuto_tributario.md",
-      "source_location": "L20816"
-    },
-    {
-      "id": "docs_estatuto_tributario_art\u00edculo_876_agentes_de_retenci\u00f3n_del_gmf",
-      "label": "ART\u00cdCULO 876. AGENTES DE RETENCI\u00d3N DEL GMF",
-      "_origin": "ast",
-      "community": 150,
-      "community_name": "LIBRO SEXTO - \"",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "articulo 876. agentes de retencion del gmf",
-      "source_file": "docs/estatuto_tributario.md",
-      "source_location": "L20828"
-    },
-    {
-      "id": "docs_estatuto_tributario_art\u00edculo_877_declaraci\u00f3n_y_pago_del_gmf",
-      "label": "ART\u00cdCULO 877. DECLARACI\u00d3N Y PAGO DEL GMF",
-      "_origin": "ast",
-      "community": 150,
-      "community_name": "LIBRO SEXTO - \"",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "articulo 877. declaracion y pago del gmf",
-      "source_file": "docs/estatuto_tributario.md",
-      "source_location": "L20839"
-    },
-    {
-      "id": "docs_estatuto_tributario_art\u00edculo_878_administraci\u00f3n_del_gmf",
-      "label": "ART\u00cdCULO 878. ADMINISTRACI\u00d3N DEL GMF",
-      "_origin": "ast",
-      "community": 150,
-      "community_name": "LIBRO SEXTO - \"",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "articulo 878. administracion del gmf",
-      "source_file": "docs/estatuto_tributario.md",
-      "source_location": "L20850"
-    },
-    {
-      "id": "docs_estatuto_tributario_art\u00edculo_879",
-      "label": "ART\u00cdCULO 879",
-      "_origin": "ast",
-      "community": 150,
-      "community_name": "LIBRO SEXTO - \"",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "articulo 879",
-      "source_file": "docs/estatuto_tributario.md",
-      "source_location": "L21086"
-    },
-    {
-      "id": "docs_estatuto_tributario_art\u00edculo_879_exenciones_del_gmf",
-      "label": "ART\u00cdCULO 879. EXENCIONES DEL GMF",
-      "_origin": "ast",
-      "community": 150,
-      "community_name": "LIBRO SEXTO - \"",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "articulo 879. exenciones del gmf",
-      "source_file": "docs/estatuto_tributario.md",
-      "source_location": "L20864"
-    },
-    {
-      "id": "docs_estatuto_tributario_art\u00edculo_880_agentes_de_retenci\u00f3n_del_gmf_en_operaciones_de_cuenta_de_dep\u00f3sito",
-      "label": "ART\u00cdCULO 880. AGENTES DE RETENCI\u00d3N DEL GMF EN OPERACIONES DE CUENTA DE DEP\u00d3SITO",
-      "_origin": "ast",
-      "community": 150,
-      "community_name": "LIBRO SEXTO - \"",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "articulo 880. agentes de retencion del gmf en operaciones de cuenta de deposito",
-      "source_file": "docs/estatuto_tributario.md",
-      "source_location": "L21081"
-    },
-    {
-      "id": "docs_estatuto_tributario_art\u00edculo_881_1_control_sobre_operaciones_y_montos_exentos_del_gravamen_a_los_movimientos_financieros",
-      "label": "ART\u00cdCULO 881-1. CONTROL SOBRE OPERACIONES Y MONTOS EXENTOS DEL GRAVAMEN A LOS MOVIMIENTOS FINANCIEROS",
-      "_origin": "ast",
-      "community": 150,
-      "community_name": "LIBRO SEXTO - \"",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "articulo 881-1. control sobre operaciones y montos exentos del gravamen a los movimientos financieros",
-      "source_file": "docs/estatuto_tributario.md",
-      "source_location": "L21114"
-    },
-    {
-      "id": "docs_estatuto_tributario_art\u00edculo_881_devoluci\u00f3n_del_gmf",
-      "label": "ART\u00cdCULO 881. DEVOLUCI\u00d3N DEL GMF",
-      "_origin": "ast",
-      "community": 150,
-      "community_name": "LIBRO SEXTO - \"",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "articulo 881. devolucion del gmf",
-      "source_file": "docs/estatuto_tributario.md",
-      "source_location": "L21094"
-    },
-    {
-      "id": "docs_estatuto_tributario_libro_sexto",
-      "label": "LIBRO SEXTO - \"",
-      "_origin": "ast",
-      "community": 150,
-      "community_name": "LIBRO SEXTO - \"",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "libro sexto - \"",
-      "source_file": "docs/estatuto_tributario.md",
-      "source_location": "L20684"
-    },
-    {
       "id": "docs_superpowers_plans_2026_08_23_landing_page_and_skill_hub_plan",
       "label": "2026-08-23-landing-page-and-skill-hub-plan.md",
       "_origin": "ast",
@@ -3237,90 +3045,6 @@
       "source_location": "L95"
     },
     {
-      "id": "docs_estatuto_tributario",
-      "label": "estatuto_tributario.md",
-      "_origin": "ast",
-      "community": 155,
-      "community_name": "Estatuto Tributario Nacional de Colombia",
-      "file_type": "document",
-      "node_kind": "page",
-      "norm_label": "estatuto_tributario.md",
-      "source_file": "docs/estatuto_tributario.md",
-      "source_location": "L1"
-    },
-    {
-      "id": "docs_estatuto_tributario_art\u00edculo_1_origen_de_la_obligaci\u00f3n_sustancial",
-      "label": "ART\u00cdCULO 1. ORIGEN DE LA OBLIGACI\u00d3N SUSTANCIAL",
-      "_origin": "ast",
-      "community": 155,
-      "community_name": "Estatuto Tributario Nacional de Colombia",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "articulo 1. origen de la obligacion sustancial",
-      "source_file": "docs/estatuto_tributario.md",
-      "source_location": "L10"
-    },
-    {
-      "id": "docs_estatuto_tributario_art\u00edculo_2_contribuyentes",
-      "label": "ART\u00cdCULO 2. CONTRIBUYENTES",
-      "_origin": "ast",
-      "community": 155,
-      "community_name": "Estatuto Tributario Nacional de Colombia",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "articulo 2. contribuyentes",
-      "source_file": "docs/estatuto_tributario.md",
-      "source_location": "L16"
-    },
-    {
-      "id": "docs_estatuto_tributario_art\u00edculo_3_responsables",
-      "label": "ART\u00cdCULO 3. RESPONSABLES",
-      "_origin": "ast",
-      "community": 155,
-      "community_name": "Estatuto Tributario Nacional de Colombia",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "articulo 3. responsables",
-      "source_file": "docs/estatuto_tributario.md",
-      "source_location": "L21"
-    },
-    {
-      "id": "docs_estatuto_tributario_art\u00edculo_4_sin\u00f3nimos",
-      "label": "ART\u00cdCULO 4. SIN\u00d3NIMOS",
-      "_origin": "ast",
-      "community": 155,
-      "community_name": "Estatuto Tributario Nacional de Colombia",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "articulo 4. sinonimos",
-      "source_file": "docs/estatuto_tributario.md",
-      "source_location": "L26"
-    },
-    {
-      "id": "docs_estatuto_tributario_estatuto_tributario_nacional_de_colombia",
-      "label": "Estatuto Tributario Nacional de Colombia",
-      "_origin": "ast",
-      "community": 155,
-      "community_name": "Estatuto Tributario Nacional de Colombia",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "estatuto tributario nacional de colombia",
-      "source_file": "docs/estatuto_tributario.md",
-      "source_location": "L1"
-    },
-    {
-      "id": "docs_estatuto_tributario_t\u00edtulo_preliminar_obligaci\u00f3n_tributaria",
-      "label": "T\u00cdTULO PRELIMINAR: Obligaci\u00f3n Tributaria",
-      "_origin": "ast",
-      "community": 155,
-      "community_name": "Estatuto Tributario Nacional de Colombia",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "titulo preliminar: obligacion tributaria",
-      "source_file": "docs/estatuto_tributario.md",
-      "source_location": "L8"
-    },
-    {
       "id": "backend_app_main",
       "label": "main.py",
       "_origin": "ast",
@@ -3343,15 +3067,37 @@
       "source_location": "L96"
     },
     {
-      "id": "backend_app_main_func_favicon",
-      "label": "favicon",
+      "id": "backend_app_main_func_favicon_ico",
+      "label": "favicon_ico",
       "_origin": "ast",
       "community": 16,
       "community_name": "main.py",
       "file_type": "concept",
-      "norm_label": "favicon",
+      "norm_label": "favicon_ico",
       "source_file": "backend/app/main.py",
-      "source_location": "L103"
+      "source_location": "L102"
+    },
+    {
+      "id": "backend_app_main_func_favicon_png",
+      "label": "favicon_png",
+      "_origin": "ast",
+      "community": 16,
+      "community_name": "main.py",
+      "file_type": "concept",
+      "norm_label": "favicon_png",
+      "source_file": "backend/app/main.py",
+      "source_location": "L136"
+    },
+    {
+      "id": "backend_app_main_func_favicon_svg",
+      "label": "favicon_svg",
+      "_origin": "ast",
+      "community": 16,
+      "community_name": "main.py",
+      "file_type": "concept",
+      "norm_label": "favicon_svg",
+      "source_file": "backend/app/main.py",
+      "source_location": "L115"
     },
     {
       "id": "backend_app_main_func_health_check",
@@ -3373,7 +3119,7 @@
       "file_type": "concept",
       "norm_label": "serve_llms_full_txt",
       "source_file": "backend/app/main.py",
-      "source_location": "L160"
+      "source_location": "L196"
     },
     {
       "id": "backend_app_main_func_serve_llms_txt",
@@ -3384,7 +3130,7 @@
       "file_type": "concept",
       "norm_label": "serve_llms_txt",
       "source_file": "backend/app/main.py",
-      "source_location": "L145"
+      "source_location": "L181"
     },
     {
       "id": "backend_app_main_func_serve_robots_txt",
@@ -3395,7 +3141,7 @@
       "file_type": "concept",
       "norm_label": "serve_robots_txt",
       "source_file": "backend/app/main.py",
-      "source_location": "L116"
+      "source_location": "L152"
     },
     {
       "id": "backend_app_main_func_serve_sitemap_xml",
@@ -3406,7 +3152,7 @@
       "file_type": "concept",
       "norm_label": "serve_sitemap_xml",
       "source_file": "backend/app/main.py",
-      "source_location": "L129"
+      "source_location": "L165"
     },
     {
       "id": "backend_app_main_func_serve_ui",
@@ -10636,6 +10382,30 @@
       "source_location": "L32"
     },
     {
+      "id": "docs_estatuto_tributario",
+      "label": "estatuto_tributario.md",
+      "_origin": "ast",
+      "community": 44,
+      "community_name": "LIBRO S\u00c9PTIMO - (Libro, Adicionado por el Art. 139 de la Ley 1819 de 2016)",
+      "file_type": "document",
+      "node_kind": "page",
+      "norm_label": "estatuto_tributario.md",
+      "source_file": "docs/estatuto_tributario.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "docs_estatuto_tributario_art\u00edculo_1_origen_de_la_obligaci\u00f3n_sustancial",
+      "label": "ART\u00cdCULO 1. ORIGEN DE LA OBLIGACI\u00d3N SUSTANCIAL",
+      "_origin": "ast",
+      "community": 44,
+      "community_name": "LIBRO S\u00c9PTIMO - (Libro, Adicionado por el Art. 139 de la Ley 1819 de 2016)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "articulo 1. origen de la obligacion sustancial",
+      "source_file": "docs/estatuto_tributario.md",
+      "source_location": "L10"
+    },
+    {
       "id": "docs_estatuto_tributario_art\u00edculo_260_7",
       "label": "ART\u00cdCULO 260-7",
       "_origin": "ast",
@@ -10658,6 +10428,222 @@
       "norm_label": "articulo 260-7",
       "source_file": "docs/estatuto_tributario.md",
       "source_location": "L21314"
+    },
+    {
+      "id": "docs_estatuto_tributario_art\u00edculo_2_contribuyentes",
+      "label": "ART\u00cdCULO 2. CONTRIBUYENTES",
+      "_origin": "ast",
+      "community": 44,
+      "community_name": "LIBRO S\u00c9PTIMO - (Libro, Adicionado por el Art. 139 de la Ley 1819 de 2016)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "articulo 2. contribuyentes",
+      "source_file": "docs/estatuto_tributario.md",
+      "source_location": "L16"
+    },
+    {
+      "id": "docs_estatuto_tributario_art\u00edculo_3_responsables",
+      "label": "ART\u00cdCULO 3. RESPONSABLES",
+      "_origin": "ast",
+      "community": 44,
+      "community_name": "LIBRO S\u00c9PTIMO - (Libro, Adicionado por el Art. 139 de la Ley 1819 de 2016)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "articulo 3. responsables",
+      "source_file": "docs/estatuto_tributario.md",
+      "source_location": "L21"
+    },
+    {
+      "id": "docs_estatuto_tributario_art\u00edculo_45",
+      "label": "ART\u00cdCULO 45",
+      "_origin": "ast",
+      "community": 44,
+      "community_name": "LIBRO S\u00c9PTIMO - (Libro, Adicionado por el Art. 139 de la Ley 1819 de 2016)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "articulo 45",
+      "source_file": "docs/estatuto_tributario.md",
+      "source_location": "L21077"
+    },
+    {
+      "id": "docs_estatuto_tributario_art\u00edculo_4_sin\u00f3nimos",
+      "label": "ART\u00cdCULO 4. SIN\u00d3NIMOS",
+      "_origin": "ast",
+      "community": 44,
+      "community_name": "LIBRO S\u00c9PTIMO - (Libro, Adicionado por el Art. 139 de la Ley 1819 de 2016)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "articulo 4. sinonimos",
+      "source_file": "docs/estatuto_tributario.md",
+      "source_location": "L26"
+    },
+    {
+      "id": "docs_estatuto_tributario_art\u00edculo_870_gravamen_a_los_movimientos_financieros_gmf",
+      "label": "ART\u00cdCULO 870. GRAVAMEN A LOS MOVIMIENTOS FINANCIEROS, GMF",
+      "_origin": "ast",
+      "community": 44,
+      "community_name": "LIBRO S\u00c9PTIMO - (Libro, Adicionado por el Art. 139 de la Ley 1819 de 2016)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "articulo 870. gravamen a los movimientos financieros, gmf",
+      "source_file": "docs/estatuto_tributario.md",
+      "source_location": "L20689"
+    },
+    {
+      "id": "docs_estatuto_tributario_art\u00edculo_871_hecho_generador_del_gmf",
+      "label": "ART\u00cdCULO 871. HECHO GENERADOR DEL GMF",
+      "_origin": "ast",
+      "community": 44,
+      "community_name": "LIBRO S\u00c9PTIMO - (Libro, Adicionado por el Art. 139 de la Ley 1819 de 2016)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "articulo 871. hecho generador del gmf",
+      "source_file": "docs/estatuto_tributario.md",
+      "source_location": "L20696"
+    },
+    {
+      "id": "docs_estatuto_tributario_art\u00edculo_872_tarifa_del_gravamen_a_los_movimientos_financieros",
+      "label": "ART\u00cdCULO 872. TARIFA DEL GRAVAMEN A LOS MOVIMIENTOS FINANCIEROS",
+      "_origin": "ast",
+      "community": 44,
+      "community_name": "LIBRO S\u00c9PTIMO - (Libro, Adicionado por el Art. 139 de la Ley 1819 de 2016)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "articulo 872. tarifa del gravamen a los movimientos financieros",
+      "source_file": "docs/estatuto_tributario.md",
+      "source_location": "L20795"
+    },
+    {
+      "id": "docs_estatuto_tributario_art\u00edculo_873_causaci\u00f3n_del_gmf",
+      "label": "ART\u00cdCULO 873. CAUSACI\u00d3N DEL GMF",
+      "_origin": "ast",
+      "community": 44,
+      "community_name": "LIBRO S\u00c9PTIMO - (Libro, Adicionado por el Art. 139 de la Ley 1819 de 2016)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "articulo 873. causacion del gmf",
+      "source_file": "docs/estatuto_tributario.md",
+      "source_location": "L20802"
+    },
+    {
+      "id": "docs_estatuto_tributario_art\u00edculo_874_base_gravable_del_gmf",
+      "label": "ART\u00cdCULO 874. BASE GRAVABLE DEL GMF",
+      "_origin": "ast",
+      "community": 44,
+      "community_name": "LIBRO S\u00c9PTIMO - (Libro, Adicionado por el Art. 139 de la Ley 1819 de 2016)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "articulo 874. base gravable del gmf",
+      "source_file": "docs/estatuto_tributario.md",
+      "source_location": "L20809"
+    },
+    {
+      "id": "docs_estatuto_tributario_art\u00edculo_875_sujetos_pasivos_del_gmf",
+      "label": "ART\u00cdCULO 875. SUJETOS PASIVOS DEL GMF",
+      "_origin": "ast",
+      "community": 44,
+      "community_name": "LIBRO S\u00c9PTIMO - (Libro, Adicionado por el Art. 139 de la Ley 1819 de 2016)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "articulo 875. sujetos pasivos del gmf",
+      "source_file": "docs/estatuto_tributario.md",
+      "source_location": "L20816"
+    },
+    {
+      "id": "docs_estatuto_tributario_art\u00edculo_876_agentes_de_retenci\u00f3n_del_gmf",
+      "label": "ART\u00cdCULO 876. AGENTES DE RETENCI\u00d3N DEL GMF",
+      "_origin": "ast",
+      "community": 44,
+      "community_name": "LIBRO S\u00c9PTIMO - (Libro, Adicionado por el Art. 139 de la Ley 1819 de 2016)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "articulo 876. agentes de retencion del gmf",
+      "source_file": "docs/estatuto_tributario.md",
+      "source_location": "L20828"
+    },
+    {
+      "id": "docs_estatuto_tributario_art\u00edculo_877_declaraci\u00f3n_y_pago_del_gmf",
+      "label": "ART\u00cdCULO 877. DECLARACI\u00d3N Y PAGO DEL GMF",
+      "_origin": "ast",
+      "community": 44,
+      "community_name": "LIBRO S\u00c9PTIMO - (Libro, Adicionado por el Art. 139 de la Ley 1819 de 2016)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "articulo 877. declaracion y pago del gmf",
+      "source_file": "docs/estatuto_tributario.md",
+      "source_location": "L20839"
+    },
+    {
+      "id": "docs_estatuto_tributario_art\u00edculo_878_administraci\u00f3n_del_gmf",
+      "label": "ART\u00cdCULO 878. ADMINISTRACI\u00d3N DEL GMF",
+      "_origin": "ast",
+      "community": 44,
+      "community_name": "LIBRO S\u00c9PTIMO - (Libro, Adicionado por el Art. 139 de la Ley 1819 de 2016)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "articulo 878. administracion del gmf",
+      "source_file": "docs/estatuto_tributario.md",
+      "source_location": "L20850"
+    },
+    {
+      "id": "docs_estatuto_tributario_art\u00edculo_879",
+      "label": "ART\u00cdCULO 879",
+      "_origin": "ast",
+      "community": 44,
+      "community_name": "LIBRO S\u00c9PTIMO - (Libro, Adicionado por el Art. 139 de la Ley 1819 de 2016)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "articulo 879",
+      "source_file": "docs/estatuto_tributario.md",
+      "source_location": "L21086"
+    },
+    {
+      "id": "docs_estatuto_tributario_art\u00edculo_879_exenciones_del_gmf",
+      "label": "ART\u00cdCULO 879. EXENCIONES DEL GMF",
+      "_origin": "ast",
+      "community": 44,
+      "community_name": "LIBRO S\u00c9PTIMO - (Libro, Adicionado por el Art. 139 de la Ley 1819 de 2016)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "articulo 879. exenciones del gmf",
+      "source_file": "docs/estatuto_tributario.md",
+      "source_location": "L20864"
+    },
+    {
+      "id": "docs_estatuto_tributario_art\u00edculo_880_agentes_de_retenci\u00f3n_del_gmf_en_operaciones_de_cuenta_de_dep\u00f3sito",
+      "label": "ART\u00cdCULO 880. AGENTES DE RETENCI\u00d3N DEL GMF EN OPERACIONES DE CUENTA DE DEP\u00d3SITO",
+      "_origin": "ast",
+      "community": 44,
+      "community_name": "LIBRO S\u00c9PTIMO - (Libro, Adicionado por el Art. 139 de la Ley 1819 de 2016)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "articulo 880. agentes de retencion del gmf en operaciones de cuenta de deposito",
+      "source_file": "docs/estatuto_tributario.md",
+      "source_location": "L21081"
+    },
+    {
+      "id": "docs_estatuto_tributario_art\u00edculo_881_1_control_sobre_operaciones_y_montos_exentos_del_gravamen_a_los_movimientos_financieros",
+      "label": "ART\u00cdCULO 881-1. CONTROL SOBRE OPERACIONES Y MONTOS EXENTOS DEL GRAVAMEN A LOS MOVIMIENTOS FINANCIEROS",
+      "_origin": "ast",
+      "community": 44,
+      "community_name": "LIBRO S\u00c9PTIMO - (Libro, Adicionado por el Art. 139 de la Ley 1819 de 2016)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "articulo 881-1. control sobre operaciones y montos exentos del gravamen a los movimientos financieros",
+      "source_file": "docs/estatuto_tributario.md",
+      "source_location": "L21114"
+    },
+    {
+      "id": "docs_estatuto_tributario_art\u00edculo_881_devoluci\u00f3n_del_gmf",
+      "label": "ART\u00cdCULO 881. DEVOLUCI\u00d3N DEL GMF",
+      "_origin": "ast",
+      "community": 44,
+      "community_name": "LIBRO S\u00c9PTIMO - (Libro, Adicionado por el Art. 139 de la Ley 1819 de 2016)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "articulo 881. devolucion del gmf",
+      "source_file": "docs/estatuto_tributario.md",
+      "source_location": "L21094"
     },
     {
       "id": "docs_estatuto_tributario_art\u00edculo_882_entidades_controladas_del_exterior_sin_residencia_fiscal_en_colombia_ece",
@@ -10936,6 +10922,30 @@
       "source_location": "L21399"
     },
     {
+      "id": "docs_estatuto_tributario_estatuto_tributario_nacional_de_colombia",
+      "label": "Estatuto Tributario Nacional de Colombia",
+      "_origin": "ast",
+      "community": 44,
+      "community_name": "LIBRO S\u00c9PTIMO - (Libro, Adicionado por el Art. 139 de la Ley 1819 de 2016)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "estatuto tributario nacional de colombia",
+      "source_file": "docs/estatuto_tributario.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "docs_estatuto_tributario_libro_sexto",
+      "label": "LIBRO SEXTO - \"",
+      "_origin": "ast",
+      "community": 44,
+      "community_name": "LIBRO S\u00c9PTIMO - (Libro, Adicionado por el Art. 139 de la Ley 1819 de 2016)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "libro sexto - \"",
+      "source_file": "docs/estatuto_tributario.md",
+      "source_location": "L20684"
+    },
+    {
       "id": "docs_estatuto_tributario_libro_s\u00e9ptimo_libro_adicionado_por_el_art_139_de_la_ley_1819_de_2016",
       "label": "LIBRO S\u00c9PTIMO - (Libro, Adicionado por el Art. 139 de la Ley 1819 de 2016)",
       "_origin": "ast",
@@ -10946,6 +10956,18 @@
       "norm_label": "libro septimo - (libro, adicionado por el art. 139 de la ley 1819 de 2016)",
       "source_file": "docs/estatuto_tributario.md",
       "source_location": "L21131"
+    },
+    {
+      "id": "docs_estatuto_tributario_t\u00edtulo_preliminar_obligaci\u00f3n_tributaria",
+      "label": "T\u00cdTULO PRELIMINAR: Obligaci\u00f3n Tributaria",
+      "_origin": "ast",
+      "community": 44,
+      "community_name": "LIBRO S\u00c9PTIMO - (Libro, Adicionado por el Art. 139 de la Ley 1819 de 2016)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "titulo preliminar: obligacion tributaria",
+      "source_file": "docs/estatuto_tributario.md",
+      "source_location": "L8"
     },
     {
       "id": "docs_estatuto_tributario_art\u00edculo_514_contribuyentes_o_responsables_son_sujetos_pasivos",
@@ -20735,6 +20757,17 @@
       "source_location": "L38"
     },
     {
+      "id": "backend_tests_test_api_endpoints_func_test_favicon_endpoints",
+      "label": "test_favicon_endpoints",
+      "_origin": "ast",
+      "community": 9,
+      "community_name": "test_api_endpoints.py",
+      "file_type": "concept",
+      "norm_label": "test_favicon_endpoints",
+      "source_file": "backend/tests/test_api_endpoints.py",
+      "source_location": "L144"
+    },
+    {
       "id": "backend_tests_test_api_endpoints_func_test_get_rules_2026",
       "label": "test_get_rules_2026",
       "_origin": "ast",
@@ -21968,13 +22001,35 @@
     },
     {
       "source": "backend_app_main",
-      "target": "backend_app_main_func_favicon",
+      "target": "backend_app_main_func_favicon_ico",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/app/main.py",
-      "source_location": "L103",
+      "source_location": "L102",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_app_main",
+      "target": "backend_app_main_func_favicon_svg",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/main.py",
+      "source_location": "L115",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_app_main",
+      "target": "backend_app_main_func_favicon_png",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/app/main.py",
+      "source_location": "L136",
       "weight": 1.0
     },
     {
@@ -21985,7 +22040,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/app/main.py",
-      "source_location": "L116",
+      "source_location": "L152",
       "weight": 1.0
     },
     {
@@ -21996,7 +22051,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/app/main.py",
-      "source_location": "L129",
+      "source_location": "L165",
       "weight": 1.0
     },
     {
@@ -22007,7 +22062,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/app/main.py",
-      "source_location": "L145",
+      "source_location": "L181",
       "weight": 1.0
     },
     {
@@ -22018,7 +22073,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/app/main.py",
-      "source_location": "L160",
+      "source_location": "L196",
       "weight": 1.0
     },
     {
@@ -22932,6 +22987,17 @@
       "confidence_score": 1.0,
       "source_file": "backend/tests/test_api_endpoints.py",
       "source_location": "L14",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_tests_test_api_endpoints",
+      "target": "backend_tests_test_api_endpoints_func_test_favicon_endpoints",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/tests/test_api_endpoints.py",
+      "source_location": "L144",
       "weight": 1.0
     },
     {
@@ -40151,5 +40217,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "553ac08751eff0a63be618721ed34e92833a0cf2"
+  "built_at_commit": "737eaa23aab16b3f94a93306c61405c0bf566494"
 }
