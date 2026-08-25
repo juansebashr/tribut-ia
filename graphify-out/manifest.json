@@ -924,21 +924,21 @@
     "semantic_hash": ""
   },
   "backend/tests/test_skill_comparacion_patrimonial.py": {
-    "mtime": 1787587995.354537,
-    "seen": 1787588161.453606,
-    "ast_hash": "afdaafcf7178c6fcf0c706551ae533ba",
+    "mtime": 1787622395.0894477,
+    "seen": 1787622441.963294,
+    "ast_hash": "3c0000ddbc041d535324d8b0441f3315",
     "semantic_hash": ""
   },
   "skills/control-comparacion-patrimonial/scripts/analizar_comparacion.py": {
-    "mtime": 1787588078.422447,
-    "seen": 1787588161.45372,
-    "ast_hash": "34ff334f642674ae95ff2ddccab46ae5",
+    "mtime": 1787622336.2695425,
+    "seen": 1787622441.963404,
+    "ast_hash": "d10e912b87a3d5f3baa98e67b8b67406",
     "semantic_hash": ""
   },
   "skills/control-comparacion-patrimonial/scripts/extraer_f210_borrador.py": {
-    "mtime": 1787587762.3788981,
-    "seen": 1787588161.453721,
-    "ast_hash": "5801c9e2f9ff628d66fde5f84ab20558",
+    "mtime": 1787622413.3333466,
+    "seen": 1787622441.9634051,
+    "ast_hash": "ea4fab4824e9e55dec98b04a29bcbf46",
     "semantic_hash": ""
   },
   "skills/control-comparacion-patrimonial/scripts/generar_plan_optimizacion.py": {
@@ -966,15 +966,15 @@
     "semantic_hash": ""
   },
   "skills/control-comparacion-patrimonial/SKILL.md": {
-    "mtime": 1787588019.910688,
-    "seen": 1787588161.45538,
-    "ast_hash": "c8ef5e1de94206182bcb959783d25f26",
+    "mtime": 1787622344.3045666,
+    "seen": 1787622441.965145,
+    "ast_hash": "2d4ce62cea8a67f70a95e4889da58158",
     "semantic_hash": ""
   },
   "skills/control-comparacion-patrimonial/beneficios_justificacion_patrimonial.md": {
-    "mtime": 1787587756.6895542,
-    "seen": 1787588161.45538,
-    "ast_hash": "cbfb0f8c053c40d6f4f50742ba0329cd",
+    "mtime": 1787622356.461463,
+    "seen": 1787622441.965146,
+    "ast_hash": "cafe2e3aea70daf84f0dc67c8b49e60b",
     "semantic_hash": ""
   },
   "docs/explanation/02-glosario-conceptos-basicos-tributarios.md": {

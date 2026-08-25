@@ -68,9 +68,17 @@ def analizar_borrador_f210(
         renta_liquida_ordinaria_cedula_general=float(
             extracted_data.get("renta_liquida_ordinaria_cedula_general", 0.0)
         ),
-        rentas_exentas_totales=float(extracted_data.get("rentas_exentas_totales", 0.0)),
+        rentas_exentas_totales=float(
+            extracted_data.get(
+                "total_rentas_exentas_deducciones_c90",
+                extracted_data.get("rentas_exentas_totales", 0.0),
+            )
+        ),
         ingresos_no_constitutivos_renta=float(
-            extracted_data.get("ingresos_no_constitutivos_renta", 0.0)
+            extracted_data.get(
+                "ingresos_no_constitutivos_renta_c34",
+                extracted_data.get("ingresos_no_constitutivos_renta", 0.0),
+            )
         ),
         ganancia_ocasional_neta=float(
             extracted_data.get(
@@ -79,16 +87,25 @@ def analizar_borrador_f210(
             )
         ),
         nuevas_deudas_adquiridas_en_el_ano=float(
-            extracted_data.get("nuevas_deudas_adquiridas_en_el_ano", 0.0)
+            extracted_data.get(
+                "nuevas_deudas_adquiridas_en_el_ano",
+                extracted_data.get("nuevas_deudas", 0.0),
+            )
         ),
         desahorro_o_liquidacion_activos_anteriores=float(
             extracted_data.get("desahorro_o_liquidacion_activos_anteriores", 0.0)
         ),
         impuesto_renta_y_ganancia_ocasional_pagado=float(
-            extracted_data.get("impuesto_renta_y_ganancia_ocasional_pagado", 0.0)
+            extracted_data.get(
+                "impuesto_renta_y_ganancia_ocasional_pagado",
+                extracted_data.get("casilla_125_total_impuesto_a_cargo", 0.0),
+            )
         ),
         retenciones_fuente_asumidas_en_el_ano=float(
-            extracted_data.get("retenciones_fuente_asumidas_en_el_ano", 0.0)
+            extracted_data.get(
+                "retenciones_fuente_asumidas_en_el_ano",
+                extracted_data.get("casilla_133_total_retenciones_fuente", 0.0),
+            )
         ),
         gastos_personales_y_consumo_estimado=float(
             extracted_data.get("gastos_personales_y_consumo_estimado", 0.0)

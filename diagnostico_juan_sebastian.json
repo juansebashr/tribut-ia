@@ -1,0 +1,93 @@
+{
+  "tax_year": 2024,
+  "uvt_value": 47065.0,
+  "patrimonio_liquido_ano_anterior": 0.0,
+  "patrimonio_bruto_ano_actual": 0.0,
+  "deudas_ano_actual": 0.0,
+  "patrimonio_liquido_ano_actual": 0.0,
+  "variacion_patrimonial_bruta": 0.0,
+  "ajustes_patrimoniales_netos": 0.0,
+  "incremento_patrimonial_a_justificar": 0.0,
+  "total_rentas_justificativas": 0.0,
+  "total_detracciones_consumos": 0.0,
+  "capacidad_justificacion_neta": 0.0,
+  "diferencia_no_justificada": 0.0,
+  "existe_renta_por_comparacion_patrimonial": false,
+  "renta_liquida_gravable_adicional_cop": 0.0,
+  "renta_liquida_gravable_adicional_uvt": 0.0,
+  "impuesto_estimado_comparacion_patrimonial_cop": 0.0,
+  "estado_patrimonial": "JUSTIFICADO_CORRECTAMENTE",
+  "porcentaje_justificacion": 100.0,
+  "explicacion_didactica": "El patrimonio líquido se encuentra plenamente justificado. La capacidad neta de justificación ($0 COP) es suficiente para respaldar el incremento patrimonial fiscal ($0 COP) con un margen de holgura de $0 COP.",
+  "recomendaciones_defensa_dian": [
+    "Conservar los extractos bancarios de saldo al 31 de diciembre de los dos últimos años.",
+    "Mantener copias de las escrituras públicas de compraventa y los certificados de tradición de los bienes raíces adquiridos.",
+    "Tener a disposición los certificados de ingresos y retenciones (Formulario 220) y extractos de cesantías que respaldan los flujos del año."
+  ],
+  "audit_trace": [
+    {
+      "step_id": "variacion_patrimonial_bruta",
+      "title": "1. Variación Patrimonial Bruta",
+      "statutory_reference": "Art. 236, 261, 282 E.T.",
+      "raw_input_cop": 0.0,
+      "calculated_cop": 0.0,
+      "limit_cop": null,
+      "limit_uvt": null,
+      "excess_rejected_cop": 0.0,
+      "final_allowed_cop": 0.0,
+      "notes": "Patrimonio Líquido Actual ($0) menos Patrimonio Líquido Anterior ($0) = Variación de $0."
+    },
+    {
+      "step_id": "incremento_patrimonial_a_justificar",
+      "title": "2. Incremento Patrimonial Fiscal a Justificar",
+      "statutory_reference": "Art. 70, 73, 236 E.T.",
+      "raw_input_cop": 0.0,
+      "calculated_cop": 0.0,
+      "limit_cop": null,
+      "limit_uvt": null,
+      "excess_rejected_cop": 0.0,
+      "final_allowed_cop": 0.0,
+      "notes": "Variación ($0) menos Reajustes Fiscales y Valorizaciones ($0) = $0."
+    },
+    {
+      "step_id": "total_fuentes_justificativas",
+      "title": "3. Total Fuentes y Flujos Justificativos",
+      "statutory_reference": "Art. 236, 237 E.T.",
+      "raw_input_cop": 0.0,
+      "calculated_cop": 0.0,
+      "limit_cop": null,
+      "limit_uvt": null,
+      "excess_rejected_cop": 0.0,
+      "final_allowed_cop": 0.0,
+      "notes": "Rentas Ordinarias ($0) + Pensiones/Div ($0) + Exentas/INCRNGO ($0) + GO Neta ($0) + Deudas Nuevas ($0) + Desahorro ($0) + Otros ($0)."
+    },
+    {
+      "step_id": "total_detracciones_consumos",
+      "title": "4. Detracciones, Impuestos Pagados y Gastos Personales",
+      "statutory_reference": "Art. 236 E.T.",
+      "raw_input_cop": 0.0,
+      "calculated_cop": 0.0,
+      "limit_cop": null,
+      "limit_uvt": null,
+      "excess_rejected_cop": 0.0,
+      "final_allowed_cop": 0.0,
+      "notes": "Impuestos pagados ($0) + Retenciones ($0) + Gastos/Consumos estimados ($0) + Pérdidas ($0)."
+    },
+    {
+      "step_id": "comparacion_patrimonial_resultado",
+      "title": "5. Resultado del Control por Comparación Patrimonial",
+      "statutory_reference": "Art. 236, 237 E.T.",
+      "raw_input_cop": 0.0,
+      "calculated_cop": 0.0,
+      "limit_cop": null,
+      "limit_uvt": null,
+      "excess_rejected_cop": 0.0,
+      "final_allowed_cop": 0.0,
+      "notes": "Capacidad Neta Justificativa ($0) vs Incremento a Justificar ($0). ✅ El incremento patrimonial se encuentra 100% justificado y soportado."
+    }
+  ],
+  "contribuyente": "HERNANDEZ REYES JUAN SEBASTIAN",
+  "nit": "10224402069",
+  "cuestionario_diagnostico": [],
+  "instruccion_agente": "✅ CONSISTENCIA PATRIMONIAL BLINDADA: El patrimonio líquido actual se encuentra 100% justificado con las rentas y recursos del periodo (Capacidad neta: $0 COP vs Incremento: $0 COP). No se requiere ajuste por Art. 236 E.T."
+}

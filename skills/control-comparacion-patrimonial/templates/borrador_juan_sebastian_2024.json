@@ -1,0 +1,28 @@
+{
+  "tax_year": 2024,
+  "contribuyente": {
+    "nit": "10224402069",
+    "nombre": "HERNANDEZ REYES JUAN SEBASTIAN"
+  },
+  "casillas": {
+    "29_patrimonio_bruto": 227450000.0,
+    "30_deudas": 50552000.0,
+    "31_patrimonio_liquido_actual": 176898000.0,
+    "32_patrimonio_liquido_anterior_declarado": 118000.0,
+    "32_patrimonio_liquido_anterior_real_2023": 15604000.0,
+    "33_ingresos_brutos_trabajo": 126949000.0,
+    "34_incrngo_trabajo": 9135000.0,
+    "35_renta_liquida_trabajo": 117814000.0,
+    "36_rentas_exentas_trabajo": 5000000.0,
+    "37_deducciones_imputables_trabajo": 29396000.0,
+    "40_deducciones_no_sujetas_limite": 3100000.0,
+    "43_renta_liquida_ordinaria_trabajo": 80318000.0,
+    "64_rentas_capital": 31000.0,
+    "72_rentas_no_laborales_dividendos": 300000.0,
+    "94_renta_liquida_ordinaria_total": 80531000.0,
+    "104_ganancias_ocasionales_netas": 0.0,
+    "125_total_impuesto_a_cargo": 5605000.0,
+    "133_retenciones_fuente": 6138000.0,
+    "137_saldo_a_favor": 533000.0
+  }
+}

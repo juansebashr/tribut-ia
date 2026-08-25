@@ -186,3 +186,30 @@ def test_cli_subprocess_analizar_comparacion(tmp_path):
         data = json.load(f)
     assert "diferencia_no_justificada" in data
     assert data["contribuyente"] == "CARLOS ANDRES MENDOZA ROJAS"
+
+
+def test_analizar_caso_real_juan_sebastian_2024_vs_2023():
+    # Datos oficiales de Juan Sebastian Hernandez Reyes (F210 2024 vs 2023)
+    datos_juan_sebastian = {
+        "contribuyente": "HERNANDEZ REYES JUAN SEBASTIAN",
+        "nit": "1022440206-9",
+        "tax_year": 2024,
+        "patrimonio_liquido_ano_anterior": 15604000.0,  # Casilla 31 de la declaración 2023
+        "patrimonio_bruto_ano_actual": 227450000.0,
+        "deudas_ano_actual": 50552000.0,
+        "patrimonio_liquido_ano_actual": 176898000.0,  # Incremento de 161.294.000 COP
+        "renta_liquida_ordinaria_cedula_general": 80531000.0,  # Casilla 94
+        "total_rentas_exentas_deducciones_c90": 37614000.0,  # Casilla 90 (C42 37.496.000 + C28 118.000)
+        "ingresos_no_constitutivos_renta_c34": 9135000.0,  # Casilla 34 (Salud/Pensión)
+        "nuevas_deudas_adquiridas_en_el_ano": 49864000.0,  # Deudas 2024 (50.552.000) - Deudas 2023 (688.000)
+        "impuesto_renta_y_ganancia_ocasional_pagado": 5605000.0,  # Casilla 125
+        "retenciones_fuente_asumidas_en_el_ano": 6138000.0,  # Casilla 133
+        "gastos_personales_y_consumo_estimado": 0.0,
+    }
+
+    res = analizar_borrador_f210(datos_juan_sebastian, custom_uvt=47065.0)
+    assert res["existe_renta_por_comparacion_patrimonial"] is False
+    assert res["diferencia_no_justificada"] == 0.0
+    assert res["porcentaje_justificacion"] >= 100.0
+    assert res["estado_patrimonial"] == "JUSTIFICADO_CORRECTAMENTE"
+    assert "✅ CONSISTENCIA PATRIMONIAL BLINDADA" in res["instruccion_agente"]
