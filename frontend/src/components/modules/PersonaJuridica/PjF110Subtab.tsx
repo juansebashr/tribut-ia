@@ -163,25 +163,16 @@ export const PjF110Subtab: React.FC<PjF110SubtabProps> = ({ result, onNavigateTo
   return (
     <div id="pane-pj-f110" className="module-pane active">
       {/* BARRA DE ACCIÓN Y HERRAMIENTAS */}
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          marginBottom: '14px',
-          flexWrap: 'wrap',
-          gap: '10px',
-        }}
-      >
+      <div className="facsimile-action-bar">
         <div>
-          <h2 style={{ fontSize: '16px', fontWeight: 800, color: '#00594c', margin: 0, display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <h2 className="facsimile-title">
             <span>🏛️</span> Formulario 110 Oficial DIAN (Facsímil Idéntico)
           </h2>
-          <p style={{ fontSize: '12px', color: 'var(--text-muted)', margin: '2px 0 0 0' }}>
-            💡 <em>Copia exacta del formulario oficial de Renta para Personas Jurídicas. Haz clic en cualquier casilla <strong>[ i ]</strong> para ver la cartilla y fundamentos del Estatuto Tributario.</em>
+          <p className="facsimile-subtitle">
+            💡 <em>Facsímil oficial de la Declaración de Renta Personas Jurídicas. Haz clic en cualquier casilla <strong>[ i ]</strong> para consultar la cartilla y fundamentos del Estatuto Tributario.</em>
           </p>
         </div>
-        <div style={{ display: 'flex', gap: '8px' }}>
+        <div className="facsimile-btn-group">
           <button className="btn btn-outline btn-sm" onClick={() => window.print()}>
             🖨️ Imprimir Formulario 110
           </button>

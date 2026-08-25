@@ -4,6 +4,8 @@ import {
   CASILLAS_INFO,
   CASILLAS_INFO_F110,
   CASILLAS_INFO_F260,
+  CASILLAS_INFO_F350,
+  CASILLAS_INFO_F300,
   type CasillaInfo,
 } from '../constants/casillas_info';
 
@@ -93,7 +95,7 @@ interface AppContextType {
   showCasillaPopover: (
     casillaNum: string | number,
     targetEl?: HTMLElement | null,
-    formType?: '210' | '110' | '260'
+    formType?: '210' | '110' | '260' | '350' | '300'
   ) => void;
   hideCasillaPopover: () => void;
   togglePinPopover: () => void;
@@ -148,8 +150,21 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
       return { view: 'skill-tutorial', module: 'pn', subTab: 'calc' };
     }
     const knownModules: ModuleType[] = [
-      'calendario', 'pn', 'pj', 'simple', 'iva', 'retefuente',
-      'beneficios', 'presentacion', 'inflacionario', 'art73', 'inmuebles-afc', 'rules', 'session-sync'
+      'calendario',
+      'pn',
+      'pj',
+      'simple',
+      'iva',
+      'retefuente',
+      'beneficios',
+      'presentacion',
+      'inflacionario',
+      'art73',
+      'inmuebles-afc',
+      'tributacion-pareja',
+      'glosario',
+      'rules',
+      'session-sync',
     ];
     const parts = hash.split('/');
     const modCandidate = parts[0] === 'app' ? (parts[1] as ModuleType) : (parts[0] as ModuleType);
@@ -205,6 +220,17 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     isPinned: false,
   });
 
+  // Cerrar automáticamente información de casilla / popover al cambiar de módulo, subpestaña o vista
+  useEffect(() => {
+    setPopoverState({
+      visible: false,
+      casillaNum: '',
+      info: null,
+      position: { top: 0, left: 0 },
+      isPinned: false,
+    });
+  }, [activeModule, activeSubTab, currentView]);
+
   useEffect(() => {
     loadInitialFiscalRules();
   }, []);
@@ -250,6 +276,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
   };
 
   const navigateToView = (view: ViewType, module?: ModuleType, subTab?: string) => {
+    setPopoverState((prev) => ({ ...prev, visible: false, isPinned: false }));
     setCurrentView(view);
     if (module) {
       setActiveModule(module);
@@ -272,6 +299,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
   };
 
   const navigateTo = (module: ModuleType, subTab?: string) => {
+    setPopoverState((prev) => ({ ...prev, visible: false, isPinned: false }));
     setCurrentView('app');
     setActiveModule(module);
     if (subTab) {
@@ -341,12 +369,14 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
   const showCasillaPopover = (
     casillaNum: string | number,
     targetEl?: HTMLElement | null,
-    formType?: '210' | '110' | '260'
+    formType?: '210' | '110' | '260' | '350' | '300'
   ) => {
     const numStr = String(casillaNum);
     let dict = CASILLAS_INFO;
     if (formType === '110') dict = CASILLAS_INFO_F110;
     else if (formType === '260') dict = CASILLAS_INFO_F260;
+    else if (formType === '350') dict = CASILLAS_INFO_F350;
+    else if (formType === '300') dict = CASILLAS_INFO_F300;
 
     const info = dict[numStr] || CASILLAS_INFO[numStr] || {
       titulo: `Casilla ${numStr}`,

@@ -364,30 +364,21 @@ export const PnF210Subtab: React.FC<PnF210SubtabProps> = ({ result, onNavigateTo
   return (
     <div id="pane-pn-f210" className="module-pane active">
       {/* ACTION BAR */}
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          marginBottom: '14px',
-          flexWrap: 'wrap',
-          gap: '10px',
-        }}
-      >
+      <div className="facsimile-action-bar">
         <div>
-          <h2 style={{ fontSize: '16px', fontWeight: 800, color: '#002e5b', margin: 0 }}>
-            Simulación Oficial Formulario 210 DIAN (Copia Exacta)
+          <h2 className="facsimile-title">
+            <span>🏛️</span> Formulario 210 Oficial DIAN (Facsímil Idéntico)
           </h2>
-          <p style={{ fontSize: '12px', color: 'var(--text-muted)', margin: '2px 0 0 0' }}>
-            💡 <em>Pasa el cursor o haz clic en el ícono <strong>[ i ]</strong> de cualquier casilla para consultar la cartilla legal y cómo se llena.</em>
+          <p className="facsimile-subtitle">
+            💡 <em>Facsímil oficial de la Declaración de Renta Personas Naturales. Haz clic en cualquier casilla <strong>[ i ]</strong> para consultar su instructivo legal y bases normativas del Estatuto Tributario.</em>
           </p>
         </div>
-        <div style={{ display: 'flex', gap: '8px' }}>
+        <div className="facsimile-btn-group">
           <button className="btn btn-outline btn-sm" onClick={() => window.print()}>
             🖨️ Imprimir Formulario Oficial
           </button>
           <button className="btn btn-primary btn-sm" onClick={onNavigateToCalc}>
-            ✏️ Modificar Valores
+            ✏️ Modificar Parámetros
           </button>
         </div>
       </div>

@@ -40,29 +40,34 @@ export const PjCalcSubtab: React.FC<PjCalcSubtabProps> = ({
 
   return (
     <div id="pane-pj-calc" className="module-pane active">
-      {/* BARRA DE PRESETS Y ACCESOS RÁPIDOS */}
-      <div style={{ display: 'flex', gap: '8px', marginBottom: '16px', flexWrap: 'wrap' }}>
-        <button className="btn btn-outline btn-sm" onClick={loadPresetComercial}>
-          🏢 Comercial Estándar (35%)
-        </button>
-        <button className="btn btn-outline btn-sm" onClick={loadPresetTech}>
-          💻 Servicios Tech & I+D
-        </button>
-        <button className="btn btn-outline btn-sm" onClick={loadPresetZonaFranca}>
-          🚢 Zona Franca (20%)
-        </button>
-        <button className="btn btn-outline btn-sm" onClick={loadPresetFinanciera}>
-          🏦 Financiera (Sobretasa +5%)
-        </button>
-        <button className="btn btn-secondary btn-sm" onClick={onNavigateToTtd}>
-          ⚖️ Laboratorio TTD (15%)
-        </button>
-        <button className="btn btn-secondary btn-sm" onClick={onNavigateToSobretasas}>
-          ⚡ Sobretasas & Regímenes
-        </button>
-        <button className="btn btn-primary btn-sm" onClick={onNavigateToF110}>
-          📋 Ver Formulario 110 DIAN
-        </button>
+      {/* BARRA DE PRESETS ESTANDARIZADA */}
+      <div className="presets-toolbar">
+        <div className="presets-toolbar-group">
+          <span className="presets-toolbar-label">⚡ Presets de 1 Clic:</span>
+          <button className="btn btn-outline btn-sm" onClick={loadPresetComercial}>
+            🏢 Comercial Estándar (35%)
+          </button>
+          <button className="btn btn-outline btn-sm" onClick={loadPresetTech}>
+            💻 Servicios Tech &amp; I+D
+          </button>
+          <button className="btn btn-outline btn-sm" onClick={loadPresetZonaFranca}>
+            🚢 Zona Franca (20%)
+          </button>
+          <button className="btn btn-outline btn-sm" onClick={loadPresetFinanciera}>
+            🏦 Financiera (+5%)
+          </button>
+        </div>
+        <div className="presets-toolbar-actions">
+          <button className="btn btn-secondary btn-sm" onClick={onNavigateToTtd}>
+            ⚖️ Laboratorio TTD (15%)
+          </button>
+          <button className="btn btn-secondary btn-sm" onClick={onNavigateToSobretasas}>
+            ⚡ Sobretasas
+          </button>
+          <button className="btn btn-primary btn-sm" onClick={onNavigateToF110}>
+            📋 Ver Formulario 110 DIAN
+          </button>
+        </div>
       </div>
 
       <div className="calc-grid">
@@ -463,8 +468,8 @@ export const PjCalcSubtab: React.FC<PjCalcSubtabProps> = ({
         </div>
 
         {/* COLUMNA DERECHA: RESULTADOS EN TIEMPO REAL */}
-        <div className="card" style={{ position: 'sticky', top: '16px' }}>
-          <div className="card-header">
+        <div className="card results-card sticky-card">
+          <div className="card-header results-card-header">
             <h2 className="card-title">Resumen Liquidación F-110</h2>
             <button className="btn btn-outline btn-xs" onClick={onOpenAudit}>
               🔍 Trazabilidad Fiscal

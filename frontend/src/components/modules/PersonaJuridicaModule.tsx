@@ -298,44 +298,6 @@ export const PersonaJuridicaModule: React.FC = () => {
 
   return (
     <div id="module-persona-juridica">
-      {/* NAVEGADOR DE SUBPESTAÑAS DE PERSONA JURÍDICA */}
-      <div className="subtabs-bar" style={{ marginBottom: '16px' }}>
-        <button
-          className={`subtab-btn ${currentSubTab === 'calc' ? 'active' : ''}`}
-          onClick={() => navigateTo('pj', 'calc')}
-        >
-          🧮 1. Calculadora & Depuración F-110
-        </button>
-
-        <button
-          className={`subtab-btn ${currentSubTab === 'f110' ? 'active' : ''}`}
-          onClick={() => navigateTo('pj', 'f110')}
-        >
-          📋 2. Formulario 110 Facsímil DIAN
-        </button>
-
-        <button
-          className={`subtab-btn ${currentSubTab === 'ttd' ? 'active' : ''}`}
-          onClick={() => navigateTo('pj', 'ttd')}
-        >
-          ⚖️ 3. Laboratorio Tasa Mínima TTD (15%)
-        </button>
-
-        <button
-          className={`subtab-btn ${currentSubTab === 'sobretasas' ? 'active' : ''}`}
-          onClick={() => navigateTo('pj', 'sobretasas')}
-        >
-          ⚡ 4. Sobretasas & Regímenes Especiales
-        </button>
-
-        <button
-          className={`subtab-btn ${currentSubTab === 'conciliacion' ? 'active' : ''}`}
-          onClick={() => navigateTo('pj', 'conciliacion')}
-        >
-          📑 5. Conciliación NIIF F-2516
-        </button>
-      </div>
-
       {/* CONTENIDO DE CADA SUBPESTAÑA */}
       {currentSubTab === 'calc' && (
         <PjCalcSubtab

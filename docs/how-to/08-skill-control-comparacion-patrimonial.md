@@ -7,6 +7,7 @@ Esta guía práctica explica cómo utilizar el agente autónomo de IA y los scri
 ## 1. Instalación del Skill en Asistentes de IA
 
 ### Google Antigravity / Jules
+
 ```bash
 mkdir -p ~/.gemini/skills/control-comparacion-patrimonial
 curl -o ~/.gemini/skills/control-comparacion-patrimonial/SKILL.md \
@@ -14,6 +15,7 @@ curl -o ~/.gemini/skills/control-comparacion-patrimonial/SKILL.md \
 ```
 
 ### Claude Code
+
 ```bash
 mkdir -p skills/control-comparacion-patrimonial
 curl -o skills/control-comparacion-patrimonial/SKILL.md \
@@ -21,6 +23,7 @@ curl -o skills/control-comparacion-patrimonial/SKILL.md \
 ```
 
 ### Cursor / Windsurf / OpenAI Codex
+
 Copiar la carpeta `skills/control-comparacion-patrimonial/` dentro de la raíz de tu proyecto local o `.cursor/skills/`.
 
 ---
@@ -28,6 +31,7 @@ Copiar la carpeta `skills/control-comparacion-patrimonial/` dentro de la raíz d
 ## 2. Flujo Operativo en 4 Fases
 
 ### Fase 1: Diagnóstico Matemático del Borrador F210
+
 El agente extrae las casillas patrimoniales y cedulares del Formulario 210 y ejecuta el CLI:
 
 ```bash
@@ -40,6 +44,7 @@ $$\text{Patrimonio Líquido Actual} - \text{Patrimonio Líquido Anterior} \le \t
 Si existe `diferencia_no_justificada > 0`, el agente entra en modo de alerta y activa el cuestionario.
 
 ### Fase 2: Interrogatorio Probatorio & Solicitud de Documentos
+
 El agente interroga al usuario sobre 5 ejes críticos:
 1. **Inmuebles y Vehículos Adquiridos:** Escrituras públicas y matrículas.
 2. **Nuevas Deudas (Art. 283 E.T.):** Certificados bancarios a dic 31 o contratos de mutuo privado con **fecha cierta** ante notario.
@@ -48,6 +53,7 @@ El agente interroga al usuario sobre 5 ejes críticos:
 5. **Reajustes Fiscales DANE (Art. 73 E.T.):** Incremento nominal del costo fiscal que no requiere fondos del periodo.
 
 ### Fase 3: Elaboración del Plan de Regularización en Markdown
+
 El agente consolida las respuestas y soportes para generar el informe:
 
 ```bash
@@ -61,6 +67,7 @@ El documento resultante (`plan_optimizacion_patrimonial.md`) contiene:
 * Recomendación sobre **Beneficio de Auditoría (Art. 689-3 E.T.)** para lograr firmeza en 6 meses ($\ge 35\%$).
 
 ### Fase 4: Sincronización con la Interfaz de Fiscol
+
 ```bash
 poetry run python skills/control-comparacion-patrimonial/scripts/inyectar_session_patrimonial.py diagnostico.json --api-url https://fiscol-31954329640.us-central1.run.app --session-id ses_12345
 ```

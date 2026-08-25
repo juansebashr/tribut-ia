@@ -237,20 +237,20 @@ export const TributacionParejaModule: React.FC = () => {
       {/* SECCIÓN 1: SIMULADOR INTERACTIVO */}
       {activeSection === 'simulador' && (
         <>
-          {/* BOTONES DE PRESETS RÁPIDOS */}
-          <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginBottom: '18px' }}>
-            <span style={{ fontSize: '12px', fontWeight: 700, alignSelf: 'center', color: 'var(--text-muted)' }}>
-              Escenarios Didácticos:
-            </span>
-            <button className="btn btn-xs btn-outline" onClick={loadPresetCopropiedad}>
-              🟢 Caso 1: Copropiedad 50/50 &amp; Aprovechamiento Tramo 0%
-            </button>
-            <button className="btn btn-xs btn-outline" onClick={loadPresetAlertaDesajuste}>
-              🔴 Caso 2: Alerta Desajuste por Compra a Nombre de Pareja
-            </button>
-            <button className="btn btn-xs btn-outline" onClick={loadPresetMutuo}>
-              🟡 Caso 3: Financiamiento con Contrato de Mutuo
-            </button>
+          {/* BOTONES DE PRESETS RÁPIDOS ESTANDARIZADOS */}
+          <div className="presets-toolbar">
+            <div className="presets-toolbar-group">
+              <span className="presets-toolbar-label">⚡ Escenarios Didácticos:</span>
+              <button className="btn btn-sm btn-outline" onClick={loadPresetCopropiedad}>
+                🟢 Caso 1: Copropiedad 50/50 &amp; Tramo 0%
+              </button>
+              <button className="btn btn-sm btn-outline" onClick={loadPresetAlertaDesajuste}>
+                🔴 Caso 2: Alerta Desajuste Patrimonial
+              </button>
+              <button className="btn btn-sm btn-outline" onClick={loadPresetMutuo}>
+                🟡 Caso 3: Contrato de Mutuo Conyugal
+              </button>
+            </div>
           </div>
 
           {/* GRID DE ENTRADAS: CÓNYUGE A, CÓNYUGE B Y ACTIVOS FAMILIARES */}

@@ -16,7 +16,7 @@ export const Sidebar: React.FC = () => {
   } = useApp();
 
   const isNavActive = (mod: string, sub?: string) => {
-    if (mod === 'pn' || mod === 'pj' || mod === 'simple') {
+    if (mod === 'pn' || mod === 'pj' || mod === 'simple' || mod === 'iva' || mod === 'retefuente') {
       if (activeModule !== mod) return false;
       if (sub && activeSubTab !== sub) return false;
       return true;
@@ -317,28 +317,94 @@ export const Sidebar: React.FC = () => {
 
           {/* GRUPO: IMPUESTOS PERIÓDICOS */}
           <div>
-            <div className="sidebar-group-title">Impuestos Periódicos</div>
+            <div className="sidebar-group-title">Impuestos Periódicos (IVA & Retefuente)</div>
             <ul className="sidebar-menu">
               <li>
                 <button
-                  className={`sidebar-item-btn ${isNavActive('iva') ? 'active' : ''}`}
-                  id="nav-item-iva"
-                  onClick={() => navigateTo('iva', 'main')}
+                  className={`sidebar-item-btn ${isNavActive('iva', 'calc') ? 'active' : ''}`}
+                  id="nav-item-iva-calc"
+                  onClick={() => navigateTo('iva', 'calc')}
                 >
                   <span className="sidebar-item-icon">🛍️</span>
-                  <span className="sidebar-item-label">Impuesto a las Ventas (IVA)</span>
+                  <span className="sidebar-item-label">Liquidación Periódica IVA</span>
                   <span className="sidebar-item-tag">F-300</span>
                 </button>
               </li>
               <li>
                 <button
-                  className={`sidebar-item-btn ${isNavActive('retefuente') ? 'active' : ''}`}
-                  id="nav-item-retefuente"
-                  onClick={() => navigateTo('retefuente', 'main')}
+                  className={`sidebar-item-btn ${isNavActive('iva', 'f300') ? 'active' : ''}`}
+                  id="nav-item-iva-f300"
+                  onClick={() => navigateTo('iva', 'f300')}
+                >
+                  <span className="sidebar-item-icon">📋</span>
+                  <span className="sidebar-item-label">Formulario 300 (Copia Real)</span>
+                  <span className="sidebar-item-tag">Facsímil</span>
+                </button>
+              </li>
+              <li>
+                <button
+                  className={`sidebar-item-btn ${isNavActive('iva', 'prorrateo') ? 'active' : ''}`}
+                  id="nav-item-iva-prorrateo"
+                  onClick={() => navigateTo('iva', 'prorrateo')}
+                >
+                  <span className="sidebar-item-icon">⚖️</span>
+                  <span className="sidebar-item-label">Prorrateo IVA Común</span>
+                  <span className="sidebar-item-tag">Art. 490</span>
+                </button>
+              </li>
+              <li>
+                <button
+                  className={`sidebar-item-btn ${isNavActive('iva', 'clasificador') ? 'active' : ''}`}
+                  id="nav-item-iva-clasificador"
+                  onClick={() => navigateTo('iva', 'clasificador')}
+                >
+                  <span className="sidebar-item-icon">🔍</span>
+                  <span className="sidebar-item-label">Clasificador Bienes & IVA</span>
+                  <span className="sidebar-item-tag">Tarifas</span>
+                </button>
+              </li>
+              <li>
+                <button
+                  className={`sidebar-item-btn ${isNavActive('retefuente', 'calc') ? 'active' : ''}`}
+                  id="nav-item-retefuente-calc"
+                  onClick={() => navigateTo('retefuente', 'calc')}
                 >
                   <span className="sidebar-item-icon">💰</span>
-                  <span className="sidebar-item-label">Retención en la Fuente</span>
+                  <span className="sidebar-item-label">Depuración Retención Fuente</span>
                   <span className="sidebar-item-tag">F-350</span>
+                </button>
+              </li>
+              <li>
+                <button
+                  className={`sidebar-item-btn ${isNavActive('retefuente', 'f350') ? 'active' : ''}`}
+                  id="nav-item-retefuente-f350"
+                  onClick={() => navigateTo('retefuente', 'f350')}
+                >
+                  <span className="sidebar-item-icon">📋</span>
+                  <span className="sidebar-item-label">Formulario 350 (Copia Real)</span>
+                  <span className="sidebar-item-tag">Facsímil</span>
+                </button>
+              </li>
+              <li>
+                <button
+                  className={`sidebar-item-btn ${isNavActive('retefuente', 'laboral') ? 'active' : ''}`}
+                  id="nav-item-retefuente-laboral"
+                  onClick={() => navigateTo('retefuente', 'laboral')}
+                >
+                  <span className="sidebar-item-icon">👤</span>
+                  <span className="sidebar-item-label">Retención Nómina & Salarios</span>
+                  <span className="sidebar-item-tag">Art. 383</span>
+                </button>
+              </li>
+              <li>
+                <button
+                  className={`sidebar-item-btn ${isNavActive('retefuente', 'tabla') ? 'active' : ''}`}
+                  id="nav-item-retefuente-tabla"
+                  onClick={() => navigateTo('retefuente', 'tabla')}
+                >
+                  <span className="sidebar-item-icon">📚</span>
+                  <span className="sidebar-item-label">Tabla Maestra de Retenciones</span>
+                  <span className="sidebar-item-tag">UVT</span>
                 </button>
               </li>
             </ul>

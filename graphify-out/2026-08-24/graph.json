@@ -3897,7 +3897,7 @@
       "label": "beneficios_justificacion_patrimonial.md",
       "_origin": "ast",
       "community": 170,
-      "community_name": "2. Fuentes Justificativas V\u00e1lidas y Soportes Probatorios",
+      "community_name": "\ud83d\udcc2 3. Fuentes Justificativas V\u00e1lidas y Soportes Probatorios",
       "file_type": "document",
       "node_kind": "page",
       "norm_label": "beneficios_justificacion_patrimonial.md",
@@ -3905,119 +3905,143 @@
       "source_location": "L1"
     },
     {
-      "id": "skills_control_comparacion_patrimonial_beneficios_justificacion_patrimonial_1_la_ecuaci\u00f3n_fundamental_del_control_patrimonial_art_236_e_t",
-      "label": "1. La Ecuaci\u00f3n Fundamental del Control Patrimonial (Art. 236 E.T.)",
+      "id": "skills_control_comparacion_patrimonial_beneficios_justificacion_patrimonial_1_mapeo_oficial_de_casillas_dian_formulario_210",
+      "label": "\ud83d\udccb 1. Mapeo Oficial de Casillas DIAN (Formulario 210)",
       "_origin": "ast",
       "community": 170,
-      "community_name": "2. Fuentes Justificativas V\u00e1lidas y Soportes Probatorios",
+      "community_name": "\ud83d\udcc2 3. Fuentes Justificativas V\u00e1lidas y Soportes Probatorios",
       "file_type": "document",
       "node_kind": "heading",
-      "norm_label": "1. la ecuacion fundamental del control patrimonial (art. 236 e.t.)",
+      "norm_label": "\ud83d\udccb 1. mapeo oficial de casillas dian (formulario 210)",
       "source_file": "skills/control-comparacion-patrimonial/beneficios_justificacion_patrimonial.md",
       "source_location": "L7"
     },
     {
-      "id": "skills_control_comparacion_patrimonial_beneficios_justificacion_patrimonial_2_fuentes_justificativas_v\u00e1lidas_y_soportes_probatorios",
-      "label": "2. Fuentes Justificativas V\u00e1lidas y Soportes Probatorios",
+      "id": "skills_control_comparacion_patrimonial_beneficios_justificacion_patrimonial_2_la_ecuaci\u00f3n_fundamental_del_control_patrimonial_art_236_e_t",
+      "label": "\u2696\ufe0f 2. La Ecuaci\u00f3n Fundamental del Control Patrimonial (Art. 236 E.T.)",
       "_origin": "ast",
       "community": 170,
-      "community_name": "2. Fuentes Justificativas V\u00e1lidas y Soportes Probatorios",
+      "community_name": "\ud83d\udcc2 3. Fuentes Justificativas V\u00e1lidas y Soportes Probatorios",
       "file_type": "document",
       "node_kind": "heading",
-      "norm_label": "2. fuentes justificativas validas y soportes probatorios",
+      "norm_label": "\u2696\ufe0f 2. la ecuacion fundamental del control patrimonial (art. 236 e.t.)",
       "source_file": "skills/control-comparacion-patrimonial/beneficios_justificacion_patrimonial.md",
-      "source_location": "L24"
+      "source_location": "L28"
     },
     {
-      "id": "skills_control_comparacion_patrimonial_beneficios_justificacion_patrimonial_3_r\u00e9gimen_sancionatorio_por_desajuste_patrimonial",
-      "label": "3. R\u00e9gimen Sancionatorio por Desajuste Patrimonial",
+      "id": "skills_control_comparacion_patrimonial_beneficios_justificacion_patrimonial_3_fuentes_justificativas_v\u00e1lidas_y_soportes_probatorios",
+      "label": "\ud83d\udcc2 3. Fuentes Justificativas V\u00e1lidas y Soportes Probatorios",
       "_origin": "ast",
       "community": 170,
-      "community_name": "2. Fuentes Justificativas V\u00e1lidas y Soportes Probatorios",
+      "community_name": "\ud83d\udcc2 3. Fuentes Justificativas V\u00e1lidas y Soportes Probatorios",
       "file_type": "document",
       "node_kind": "heading",
-      "norm_label": "3. regimen sancionatorio por desajuste patrimonial",
+      "norm_label": "\ud83d\udcc2 3. fuentes justificativas validas y soportes probatorios",
+      "source_file": "skills/control-comparacion-patrimonial/beneficios_justificacion_patrimonial.md",
+      "source_location": "L45"
+    },
+    {
+      "id": "skills_control_comparacion_patrimonial_beneficios_justificacion_patrimonial_4_r\u00e9gimen_sancionatorio_por_desajuste_patrimonial",
+      "label": "\ud83d\udea8 4. R\u00e9gimen Sancionatorio por Desajuste Patrimonial",
+      "_origin": "ast",
+      "community": 170,
+      "community_name": "\ud83d\udcc2 3. Fuentes Justificativas V\u00e1lidas y Soportes Probatorios",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "\ud83d\udea8 4. regimen sancionatorio por desajuste patrimonial",
+      "source_file": "skills/control-comparacion-patrimonial/beneficios_justificacion_patrimonial.md",
+      "source_location": "L74"
+    },
+    {
+      "id": "skills_control_comparacion_patrimonial_beneficios_justificacion_patrimonial_a_rentas_exentas_y_deducciones_imputables_casilla_90_casilla_38_y_28",
+      "label": "A. Rentas Exentas y Deducciones Imputables (Casilla 90 / Casilla 38 y 28)",
+      "_origin": "ast",
+      "community": 170,
+      "community_name": "\ud83d\udcc2 3. Fuentes Justificativas V\u00e1lidas y Soportes Probatorios",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "a. rentas exentas y deducciones imputables (casilla 90 / casilla 38 y 28)",
+      "source_file": "skills/control-comparacion-patrimonial/beneficios_justificacion_patrimonial.md",
+      "source_location": "L47"
+    },
+    {
+      "id": "skills_control_comparacion_patrimonial_beneficios_justificacion_patrimonial_b_nuevas_deudas_y_pasivos_con_terceros_art_283_e_t",
+      "label": "B. Nuevas Deudas y Pasivos con Terceros (Art. 283 E.T.)",
+      "_origin": "ast",
+      "community": 170,
+      "community_name": "\ud83d\udcc2 3. Fuentes Justificativas V\u00e1lidas y Soportes Probatorios",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "b. nuevas deudas y pasivos con terceros (art. 283 e.t.)",
       "source_file": "skills/control-comparacion-patrimonial/beneficios_justificacion_patrimonial.md",
       "source_location": "L50"
     },
     {
-      "id": "skills_control_comparacion_patrimonial_beneficios_justificacion_patrimonial_a_nuevas_deudas_y_pasivos_con_terceros_art_283_e_t",
-      "label": "A. Nuevas Deudas y Pasivos con Terceros (Art. 283 E.T.)",
+      "id": "skills_control_comparacion_patrimonial_beneficios_justificacion_patrimonial_c_retiro_de_cesant\u00edas_acumuladas_de_a\u00f1os_anteriores",
+      "label": "C. Retiro de Cesant\u00edas Acumuladas de A\u00f1os Anteriores",
       "_origin": "ast",
       "community": 170,
-      "community_name": "2. Fuentes Justificativas V\u00e1lidas y Soportes Probatorios",
+      "community_name": "\ud83d\udcc2 3. Fuentes Justificativas V\u00e1lidas y Soportes Probatorios",
       "file_type": "document",
       "node_kind": "heading",
-      "norm_label": "a. nuevas deudas y pasivos con terceros (art. 283 e.t.)",
+      "norm_label": "c. retiro de cesantias acumuladas de anos anteriores",
       "source_file": "skills/control-comparacion-patrimonial/beneficios_justificacion_patrimonial.md",
-      "source_location": "L26"
+      "source_location": "L56"
     },
     {
-      "id": "skills_control_comparacion_patrimonial_beneficios_justificacion_patrimonial_b_desahorro_de_recursos_declarados_en_a\u00f1os_anteriores",
-      "label": "B. Desahorro de Recursos Declarados en A\u00f1os Anteriores",
+      "id": "skills_control_comparacion_patrimonial_beneficios_justificacion_patrimonial_cat\u00e1logo_normativo_de_fuentes_justificativas_y_mapeo_oficial_f210_arts_236_237_283_y_concordantes_del_e_t",
+      "label": "Cat\u00e1logo Normativo de Fuentes Justificativas y Mapeo Oficial F210 (Arts. 236, 237, 283 y concordantes del E.T.)",
       "_origin": "ast",
       "community": 170,
-      "community_name": "2. Fuentes Justificativas V\u00e1lidas y Soportes Probatorios",
+      "community_name": "\ud83d\udcc2 3. Fuentes Justificativas V\u00e1lidas y Soportes Probatorios",
       "file_type": "document",
       "node_kind": "heading",
-      "norm_label": "b. desahorro de recursos declarados en anos anteriores",
-      "source_file": "skills/control-comparacion-patrimonial/beneficios_justificacion_patrimonial.md",
-      "source_location": "L32"
-    },
-    {
-      "id": "skills_control_comparacion_patrimonial_beneficios_justificacion_patrimonial_c_retiro_de_cesant\u00edas_acumuladas",
-      "label": "C. Retiro de Cesant\u00edas Acumuladas",
-      "_origin": "ast",
-      "community": 170,
-      "community_name": "2. Fuentes Justificativas V\u00e1lidas y Soportes Probatorios",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "c. retiro de cesantias acumuladas",
-      "source_file": "skills/control-comparacion-patrimonial/beneficios_justificacion_patrimonial.md",
-      "source_location": "L36"
-    },
-    {
-      "id": "skills_control_comparacion_patrimonial_beneficios_justificacion_patrimonial_cat\u00e1logo_normativo_de_fuentes_justificativas_y_ajustes_patrimoniales_arts_236_237_283_y_concordantes_del_e_t",
-      "label": "Cat\u00e1logo Normativo de Fuentes Justificativas y Ajustes Patrimoniales (Arts. 236, 237, 283 y concordantes del E.T.)",
-      "_origin": "ast",
-      "community": 170,
-      "community_name": "2. Fuentes Justificativas V\u00e1lidas y Soportes Probatorios",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "catalogo normativo de fuentes justificativas y ajustes patrimoniales (arts. 236, 237, 283 y concordantes del e.t.)",
+      "norm_label": "catalogo normativo de fuentes justificativas y mapeo oficial f210 (arts. 236, 237, 283 y concordantes del e.t.)",
       "source_file": "skills/control-comparacion-patrimonial/beneficios_justificacion_patrimonial.md",
       "source_location": "L1"
     },
     {
-      "id": "skills_control_comparacion_patrimonial_beneficios_justificacion_patrimonial_d_reajustes_fiscales_del_costo_art_73_e_t",
-      "label": "D. Reajustes Fiscales del Costo (Art. 73 E.T.)",
+      "id": "skills_control_comparacion_patrimonial_beneficios_justificacion_patrimonial_d_desahorro_de_recursos_declarados_en_a\u00f1os_anteriores",
+      "label": "D. Desahorro de Recursos Declarados en A\u00f1os Anteriores",
       "_origin": "ast",
       "community": 170,
-      "community_name": "2. Fuentes Justificativas V\u00e1lidas y Soportes Probatorios",
+      "community_name": "\ud83d\udcc2 3. Fuentes Justificativas V\u00e1lidas y Soportes Probatorios",
       "file_type": "document",
       "node_kind": "heading",
-      "norm_label": "d. reajustes fiscales del costo (art. 73 e.t.)",
+      "norm_label": "d. desahorro de recursos declarados en anos anteriores",
       "source_file": "skills/control-comparacion-patrimonial/beneficios_justificacion_patrimonial.md",
-      "source_location": "L40"
+      "source_location": "L60"
     },
     {
-      "id": "skills_control_comparacion_patrimonial_beneficios_justificacion_patrimonial_e_copropiedad_conyugal_y_gananciales_arts_8_y_47_e_t",
-      "label": "E. Copropiedad Conyugal y Gananciales (Arts. 8 y 47 E.T.)",
+      "id": "skills_control_comparacion_patrimonial_beneficios_justificacion_patrimonial_e_reajustes_fiscales_del_costo_art_73_e_t",
+      "label": "E. Reajustes Fiscales del Costo (Art. 73 E.T.)",
       "_origin": "ast",
       "community": 170,
-      "community_name": "2. Fuentes Justificativas V\u00e1lidas y Soportes Probatorios",
+      "community_name": "\ud83d\udcc2 3. Fuentes Justificativas V\u00e1lidas y Soportes Probatorios",
       "file_type": "document",
       "node_kind": "heading",
-      "norm_label": "e. copropiedad conyugal y gananciales (arts. 8 y 47 e.t.)",
+      "norm_label": "e. reajustes fiscales del costo (art. 73 e.t.)",
       "source_file": "skills/control-comparacion-patrimonial/beneficios_justificacion_patrimonial.md",
-      "source_location": "L44"
+      "source_location": "L64"
+    },
+    {
+      "id": "skills_control_comparacion_patrimonial_beneficios_justificacion_patrimonial_f_copropiedad_conyugal_y_gananciales_arts_8_y_47_e_t",
+      "label": "F. Copropiedad Conyugal y Gananciales (Arts. 8 y 47 E.T.)",
+      "_origin": "ast",
+      "community": 170,
+      "community_name": "\ud83d\udcc2 3. Fuentes Justificativas V\u00e1lidas y Soportes Probatorios",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "f. copropiedad conyugal y gananciales (arts. 8 y 47 e.t.)",
+      "source_file": "skills/control-comparacion-patrimonial/beneficios_justificacion_patrimonial.md",
+      "source_location": "L68"
     },
     {
       "id": "skills_control_comparacion_patrimonial_skill",
       "label": "control-comparacion-patrimonial/SKILL.md",
       "_origin": "ast",
       "community": 171,
-      "community_name": "Workflow en 4 Fases",
+      "community_name": "Auditor\u00eda y Control por Comparaci\u00f3n Patrimonial (Arts. 236 y 237 E.T.)",
       "file_type": "document",
       "frontmatter": {
         "name": "control-comparacion-patrimonial",
@@ -4033,7 +4057,7 @@
       "label": "Auditor\u00eda y Control por Comparaci\u00f3n Patrimonial (Arts. 236 y 237 E.T.)",
       "_origin": "ast",
       "community": 171,
-      "community_name": "Workflow en 4 Fases",
+      "community_name": "Auditor\u00eda y Control por Comparaci\u00f3n Patrimonial (Arts. 236 y 237 E.T.)",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "auditoria y control por comparacion patrimonial (arts. 236 y 237 e.t.)",
@@ -4041,59 +4065,71 @@
       "source_location": "L6"
     },
     {
+      "id": "skills_control_comparacion_patrimonial_skill_estructura_oficial_de_casillas_dian_formulario_210",
+      "label": "Estructura Oficial de Casillas DIAN (Formulario 210)",
+      "_origin": "ast",
+      "community": 171,
+      "community_name": "Auditor\u00eda y Control por Comparaci\u00f3n Patrimonial (Arts. 236 y 237 E.T.)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "estructura oficial de casillas dian (formulario 210)",
+      "source_file": "skills/control-comparacion-patrimonial/SKILL.md",
+      "source_location": "L29"
+    },
+    {
       "id": "skills_control_comparacion_patrimonial_skill_fase_1_ingesta_del_borrador_f210_diagn\u00f3stico_matem\u00e1tico",
       "label": "Fase 1: Ingesta del Borrador F210 & Diagn\u00f3stico Matem\u00e1tico",
       "_origin": "ast",
       "community": 171,
-      "community_name": "Workflow en 4 Fases",
+      "community_name": "Auditor\u00eda y Control por Comparaci\u00f3n Patrimonial (Arts. 236 y 237 E.T.)",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "fase 1: ingesta del borrador f210 & diagnostico matematico",
       "source_file": "skills/control-comparacion-patrimonial/SKILL.md",
-      "source_location": "L43"
+      "source_location": "L64"
     },
     {
       "id": "skills_control_comparacion_patrimonial_skill_fase_2_diagn\u00f3stico_interactivo_cuestionario_guiado_al_contribuyente",
       "label": "Fase 2: Diagn\u00f3stico Interactivo & Cuestionario Guiado al Contribuyente",
       "_origin": "ast",
       "community": 171,
-      "community_name": "Workflow en 4 Fases",
+      "community_name": "Auditor\u00eda y Control por Comparaci\u00f3n Patrimonial (Arts. 236 y 237 E.T.)",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "fase 2: diagnostico interactivo & cuestionario guiado al contribuyente",
       "source_file": "skills/control-comparacion-patrimonial/SKILL.md",
-      "source_location": "L70"
+      "source_location": "L86"
     },
     {
       "id": "skills_control_comparacion_patrimonial_skill_fase_3_elaboraci\u00f3n_del_plan_de_regularizaci\u00f3n_optimizaci\u00f3n",
       "label": "Fase 3: Elaboraci\u00f3n del Plan de Regularizaci\u00f3n & Optimizaci\u00f3n",
       "_origin": "ast",
       "community": 171,
-      "community_name": "Workflow en 4 Fases",
+      "community_name": "Auditor\u00eda y Control por Comparaci\u00f3n Patrimonial (Arts. 236 y 237 E.T.)",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "fase 3: elaboracion del plan de regularizacion & optimizacion",
       "source_file": "skills/control-comparacion-patrimonial/SKILL.md",
-      "source_location": "L92"
+      "source_location": "L108"
     },
     {
       "id": "skills_control_comparacion_patrimonial_skill_fase_4_sincronizaci\u00f3n_e_inyecci\u00f3n_a_la_plataforma_fiscol",
       "label": "Fase 4: Sincronizaci\u00f3n e Inyecci\u00f3n a la Plataforma Fiscol",
       "_origin": "ast",
       "community": 171,
-      "community_name": "Workflow en 4 Fases",
+      "community_name": "Auditor\u00eda y Control por Comparaci\u00f3n Patrimonial (Arts. 236 y 237 E.T.)",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "fase 4: sincronizacion e inyeccion a la plataforma fiscol",
       "source_file": "skills/control-comparacion-patrimonial/SKILL.md",
-      "source_location": "L108"
+      "source_location": "L122"
     },
     {
       "id": "skills_control_comparacion_patrimonial_skill_overview",
       "label": "Overview",
       "_origin": "ast",
       "community": 171,
-      "community_name": "Workflow en 4 Fases",
+      "community_name": "Auditor\u00eda y Control por Comparaci\u00f3n Patrimonial (Arts. 236 y 237 E.T.)",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "overview",
@@ -4105,7 +4141,7 @@
       "label": "When to Use",
       "_origin": "ast",
       "community": 171,
-      "community_name": "Workflow en 4 Fases",
+      "community_name": "Auditor\u00eda y Control por Comparaci\u00f3n Patrimonial (Arts. 236 y 237 E.T.)",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "when to use",
@@ -4117,12 +4153,12 @@
       "label": "Workflow en 4 Fases",
       "_origin": "ast",
       "community": 171,
-      "community_name": "Workflow en 4 Fases",
+      "community_name": "Auditor\u00eda y Control por Comparaci\u00f3n Patrimonial (Arts. 236 y 237 E.T.)",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "workflow en 4 fases",
       "source_file": "skills/control-comparacion-patrimonial/SKILL.md",
-      "source_location": "L29"
+      "source_location": "L50"
     },
     {
       "id": "backend_tests_test_skill_comparacion_patrimonial",
@@ -4156,6 +4192,17 @@
       "norm_label": "test_analizar_borrador_justificado_correctamente",
       "source_file": "backend/tests/test_skill_comparacion_patrimonial.py",
       "source_location": "L94"
+    },
+    {
+      "id": "backend_tests_test_skill_comparacion_patrimonial_func_test_analizar_caso_real_juan_sebastian_2024_vs_2023",
+      "label": "test_analizar_caso_real_juan_sebastian_2024_vs_2023",
+      "_origin": "ast",
+      "community": 172,
+      "community_name": "test_skill_comparacion_patrimonial.py",
+      "file_type": "concept",
+      "norm_label": "test_analizar_caso_real_juan_sebastian_2024_vs_2023",
+      "source_file": "backend/tests/test_skill_comparacion_patrimonial.py",
+      "source_location": "L191"
     },
     {
       "id": "backend_tests_test_skill_comparacion_patrimonial_func_test_cargar_cuestionario_diagnostico",
@@ -4200,6 +4247,282 @@
       "norm_label": "test_generar_reporte_markdown",
       "source_file": "backend/tests/test_skill_comparacion_patrimonial.py",
       "source_location": "L121"
+    },
+    {
+      "id": "docs_estatuto_tributario_art\u00edculo_45",
+      "label": "ART\u00cdCULO 45",
+      "_origin": "ast",
+      "community": 173,
+      "community_name": "LIBRO SEXTO - \"",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "articulo 45",
+      "source_file": "docs/estatuto_tributario.md",
+      "source_location": "L21077"
+    },
+    {
+      "id": "docs_estatuto_tributario_art\u00edculo_870_gravamen_a_los_movimientos_financieros_gmf",
+      "label": "ART\u00cdCULO 870. GRAVAMEN A LOS MOVIMIENTOS FINANCIEROS, GMF",
+      "_origin": "ast",
+      "community": 173,
+      "community_name": "LIBRO SEXTO - \"",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "articulo 870. gravamen a los movimientos financieros, gmf",
+      "source_file": "docs/estatuto_tributario.md",
+      "source_location": "L20689"
+    },
+    {
+      "id": "docs_estatuto_tributario_art\u00edculo_871_hecho_generador_del_gmf",
+      "label": "ART\u00cdCULO 871. HECHO GENERADOR DEL GMF",
+      "_origin": "ast",
+      "community": 173,
+      "community_name": "LIBRO SEXTO - \"",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "articulo 871. hecho generador del gmf",
+      "source_file": "docs/estatuto_tributario.md",
+      "source_location": "L20696"
+    },
+    {
+      "id": "docs_estatuto_tributario_art\u00edculo_872_tarifa_del_gravamen_a_los_movimientos_financieros",
+      "label": "ART\u00cdCULO 872. TARIFA DEL GRAVAMEN A LOS MOVIMIENTOS FINANCIEROS",
+      "_origin": "ast",
+      "community": 173,
+      "community_name": "LIBRO SEXTO - \"",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "articulo 872. tarifa del gravamen a los movimientos financieros",
+      "source_file": "docs/estatuto_tributario.md",
+      "source_location": "L20795"
+    },
+    {
+      "id": "docs_estatuto_tributario_art\u00edculo_873_causaci\u00f3n_del_gmf",
+      "label": "ART\u00cdCULO 873. CAUSACI\u00d3N DEL GMF",
+      "_origin": "ast",
+      "community": 173,
+      "community_name": "LIBRO SEXTO - \"",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "articulo 873. causacion del gmf",
+      "source_file": "docs/estatuto_tributario.md",
+      "source_location": "L20802"
+    },
+    {
+      "id": "docs_estatuto_tributario_art\u00edculo_874_base_gravable_del_gmf",
+      "label": "ART\u00cdCULO 874. BASE GRAVABLE DEL GMF",
+      "_origin": "ast",
+      "community": 173,
+      "community_name": "LIBRO SEXTO - \"",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "articulo 874. base gravable del gmf",
+      "source_file": "docs/estatuto_tributario.md",
+      "source_location": "L20809"
+    },
+    {
+      "id": "docs_estatuto_tributario_art\u00edculo_875_sujetos_pasivos_del_gmf",
+      "label": "ART\u00cdCULO 875. SUJETOS PASIVOS DEL GMF",
+      "_origin": "ast",
+      "community": 173,
+      "community_name": "LIBRO SEXTO - \"",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "articulo 875. sujetos pasivos del gmf",
+      "source_file": "docs/estatuto_tributario.md",
+      "source_location": "L20816"
+    },
+    {
+      "id": "docs_estatuto_tributario_art\u00edculo_876_agentes_de_retenci\u00f3n_del_gmf",
+      "label": "ART\u00cdCULO 876. AGENTES DE RETENCI\u00d3N DEL GMF",
+      "_origin": "ast",
+      "community": 173,
+      "community_name": "LIBRO SEXTO - \"",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "articulo 876. agentes de retencion del gmf",
+      "source_file": "docs/estatuto_tributario.md",
+      "source_location": "L20828"
+    },
+    {
+      "id": "docs_estatuto_tributario_art\u00edculo_877_declaraci\u00f3n_y_pago_del_gmf",
+      "label": "ART\u00cdCULO 877. DECLARACI\u00d3N Y PAGO DEL GMF",
+      "_origin": "ast",
+      "community": 173,
+      "community_name": "LIBRO SEXTO - \"",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "articulo 877. declaracion y pago del gmf",
+      "source_file": "docs/estatuto_tributario.md",
+      "source_location": "L20839"
+    },
+    {
+      "id": "docs_estatuto_tributario_art\u00edculo_878_administraci\u00f3n_del_gmf",
+      "label": "ART\u00cdCULO 878. ADMINISTRACI\u00d3N DEL GMF",
+      "_origin": "ast",
+      "community": 173,
+      "community_name": "LIBRO SEXTO - \"",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "articulo 878. administracion del gmf",
+      "source_file": "docs/estatuto_tributario.md",
+      "source_location": "L20850"
+    },
+    {
+      "id": "docs_estatuto_tributario_art\u00edculo_879",
+      "label": "ART\u00cdCULO 879",
+      "_origin": "ast",
+      "community": 173,
+      "community_name": "LIBRO SEXTO - \"",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "articulo 879",
+      "source_file": "docs/estatuto_tributario.md",
+      "source_location": "L21086"
+    },
+    {
+      "id": "docs_estatuto_tributario_art\u00edculo_879_exenciones_del_gmf",
+      "label": "ART\u00cdCULO 879. EXENCIONES DEL GMF",
+      "_origin": "ast",
+      "community": 173,
+      "community_name": "LIBRO SEXTO - \"",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "articulo 879. exenciones del gmf",
+      "source_file": "docs/estatuto_tributario.md",
+      "source_location": "L20864"
+    },
+    {
+      "id": "docs_estatuto_tributario_art\u00edculo_880_agentes_de_retenci\u00f3n_del_gmf_en_operaciones_de_cuenta_de_dep\u00f3sito",
+      "label": "ART\u00cdCULO 880. AGENTES DE RETENCI\u00d3N DEL GMF EN OPERACIONES DE CUENTA DE DEP\u00d3SITO",
+      "_origin": "ast",
+      "community": 173,
+      "community_name": "LIBRO SEXTO - \"",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "articulo 880. agentes de retencion del gmf en operaciones de cuenta de deposito",
+      "source_file": "docs/estatuto_tributario.md",
+      "source_location": "L21081"
+    },
+    {
+      "id": "docs_estatuto_tributario_art\u00edculo_881_1_control_sobre_operaciones_y_montos_exentos_del_gravamen_a_los_movimientos_financieros",
+      "label": "ART\u00cdCULO 881-1. CONTROL SOBRE OPERACIONES Y MONTOS EXENTOS DEL GRAVAMEN A LOS MOVIMIENTOS FINANCIEROS",
+      "_origin": "ast",
+      "community": 173,
+      "community_name": "LIBRO SEXTO - \"",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "articulo 881-1. control sobre operaciones y montos exentos del gravamen a los movimientos financieros",
+      "source_file": "docs/estatuto_tributario.md",
+      "source_location": "L21114"
+    },
+    {
+      "id": "docs_estatuto_tributario_art\u00edculo_881_devoluci\u00f3n_del_gmf",
+      "label": "ART\u00cdCULO 881. DEVOLUCI\u00d3N DEL GMF",
+      "_origin": "ast",
+      "community": 173,
+      "community_name": "LIBRO SEXTO - \"",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "articulo 881. devolucion del gmf",
+      "source_file": "docs/estatuto_tributario.md",
+      "source_location": "L21094"
+    },
+    {
+      "id": "docs_estatuto_tributario_libro_sexto",
+      "label": "LIBRO SEXTO - \"",
+      "_origin": "ast",
+      "community": 173,
+      "community_name": "LIBRO SEXTO - \"",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "libro sexto - \"",
+      "source_file": "docs/estatuto_tributario.md",
+      "source_location": "L20684"
+    },
+    {
+      "id": "docs_estatuto_tributario",
+      "label": "estatuto_tributario.md",
+      "_origin": "ast",
+      "community": 174,
+      "community_name": "Estatuto Tributario Nacional de Colombia",
+      "file_type": "document",
+      "node_kind": "page",
+      "norm_label": "estatuto_tributario.md",
+      "source_file": "docs/estatuto_tributario.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "docs_estatuto_tributario_art\u00edculo_1_origen_de_la_obligaci\u00f3n_sustancial",
+      "label": "ART\u00cdCULO 1. ORIGEN DE LA OBLIGACI\u00d3N SUSTANCIAL",
+      "_origin": "ast",
+      "community": 174,
+      "community_name": "Estatuto Tributario Nacional de Colombia",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "articulo 1. origen de la obligacion sustancial",
+      "source_file": "docs/estatuto_tributario.md",
+      "source_location": "L10"
+    },
+    {
+      "id": "docs_estatuto_tributario_art\u00edculo_2_contribuyentes",
+      "label": "ART\u00cdCULO 2. CONTRIBUYENTES",
+      "_origin": "ast",
+      "community": 174,
+      "community_name": "Estatuto Tributario Nacional de Colombia",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "articulo 2. contribuyentes",
+      "source_file": "docs/estatuto_tributario.md",
+      "source_location": "L16"
+    },
+    {
+      "id": "docs_estatuto_tributario_art\u00edculo_3_responsables",
+      "label": "ART\u00cdCULO 3. RESPONSABLES",
+      "_origin": "ast",
+      "community": 174,
+      "community_name": "Estatuto Tributario Nacional de Colombia",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "articulo 3. responsables",
+      "source_file": "docs/estatuto_tributario.md",
+      "source_location": "L21"
+    },
+    {
+      "id": "docs_estatuto_tributario_art\u00edculo_4_sin\u00f3nimos",
+      "label": "ART\u00cdCULO 4. SIN\u00d3NIMOS",
+      "_origin": "ast",
+      "community": 174,
+      "community_name": "Estatuto Tributario Nacional de Colombia",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "articulo 4. sinonimos",
+      "source_file": "docs/estatuto_tributario.md",
+      "source_location": "L26"
+    },
+    {
+      "id": "docs_estatuto_tributario_estatuto_tributario_nacional_de_colombia",
+      "label": "Estatuto Tributario Nacional de Colombia",
+      "_origin": "ast",
+      "community": 174,
+      "community_name": "Estatuto Tributario Nacional de Colombia",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "estatuto tributario nacional de colombia",
+      "source_file": "docs/estatuto_tributario.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "docs_estatuto_tributario_t\u00edtulo_preliminar_obligaci\u00f3n_tributaria",
+      "label": "T\u00cdTULO PRELIMINAR: Obligaci\u00f3n Tributaria",
+      "_origin": "ast",
+      "community": 174,
+      "community_name": "Estatuto Tributario Nacional de Colombia",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "titulo preliminar: obligacion tributaria",
+      "source_file": "docs/estatuto_tributario.md",
+      "source_location": "L8"
     },
     {
       "id": "skills_control_comparacion_patrimonial_readme",
@@ -4291,7 +4614,7 @@
       "file_type": "concept",
       "norm_label": "main",
       "source_file": "skills/control-comparacion-patrimonial/scripts/analizar_comparacion.py",
-      "source_location": "L126"
+      "source_location": "L143"
     },
     {
       "id": "skills_control_comparacion_patrimonial_scripts_extraer_f210_borrador",
@@ -4313,7 +4636,18 @@
       "file_type": "concept",
       "norm_label": "extraer_datos_borrador",
       "source_file": "skills/control-comparacion-patrimonial/scripts/extraer_f210_borrador.py",
-      "source_location": "L14"
+      "source_location": "L85"
+    },
+    {
+      "id": "skills_control_comparacion_patrimonial_scripts_extraer_f210_borrador_func_extraer_datos_desde_pdf",
+      "label": "extraer_datos_desde_pdf",
+      "_origin": "ast",
+      "community": 178,
+      "community_name": "extraer_f210_borrador.py",
+      "file_type": "concept",
+      "norm_label": "extraer_datos_desde_pdf",
+      "source_file": "skills/control-comparacion-patrimonial/scripts/extraer_f210_borrador.py",
+      "source_location": "L15"
     },
     {
       "id": "skills_control_comparacion_patrimonial_scripts_extraer_f210_borrador_func_main",
@@ -4324,7 +4658,7 @@
       "file_type": "concept",
       "norm_label": "main",
       "source_file": "skills/control-comparacion-patrimonial/scripts/extraer_f210_borrador.py",
-      "source_location": "L108"
+      "source_location": "L250"
     },
     {
       "id": "skills_control_comparacion_patrimonial_scripts_generar_plan_optimizacion",
@@ -11624,30 +11958,6 @@
       "source_location": "L32"
     },
     {
-      "id": "docs_estatuto_tributario",
-      "label": "estatuto_tributario.md",
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "LIBRO S\u00c9PTIMO - (Libro, Adicionado por el Art. 139 de la Ley 1819 de 2016)",
-      "file_type": "document",
-      "node_kind": "page",
-      "norm_label": "estatuto_tributario.md",
-      "source_file": "docs/estatuto_tributario.md",
-      "source_location": "L1"
-    },
-    {
-      "id": "docs_estatuto_tributario_art\u00edculo_1_origen_de_la_obligaci\u00f3n_sustancial",
-      "label": "ART\u00cdCULO 1. ORIGEN DE LA OBLIGACI\u00d3N SUSTANCIAL",
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "LIBRO S\u00c9PTIMO - (Libro, Adicionado por el Art. 139 de la Ley 1819 de 2016)",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "articulo 1. origen de la obligacion sustancial",
-      "source_file": "docs/estatuto_tributario.md",
-      "source_location": "L10"
-    },
-    {
       "id": "docs_estatuto_tributario_art\u00edculo_260_7",
       "label": "ART\u00cdCULO 260-7",
       "_origin": "ast",
@@ -11670,222 +11980,6 @@
       "norm_label": "articulo 260-7",
       "source_file": "docs/estatuto_tributario.md",
       "source_location": "L21314"
-    },
-    {
-      "id": "docs_estatuto_tributario_art\u00edculo_2_contribuyentes",
-      "label": "ART\u00cdCULO 2. CONTRIBUYENTES",
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "LIBRO S\u00c9PTIMO - (Libro, Adicionado por el Art. 139 de la Ley 1819 de 2016)",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "articulo 2. contribuyentes",
-      "source_file": "docs/estatuto_tributario.md",
-      "source_location": "L16"
-    },
-    {
-      "id": "docs_estatuto_tributario_art\u00edculo_3_responsables",
-      "label": "ART\u00cdCULO 3. RESPONSABLES",
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "LIBRO S\u00c9PTIMO - (Libro, Adicionado por el Art. 139 de la Ley 1819 de 2016)",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "articulo 3. responsables",
-      "source_file": "docs/estatuto_tributario.md",
-      "source_location": "L21"
-    },
-    {
-      "id": "docs_estatuto_tributario_art\u00edculo_45",
-      "label": "ART\u00cdCULO 45",
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "LIBRO S\u00c9PTIMO - (Libro, Adicionado por el Art. 139 de la Ley 1819 de 2016)",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "articulo 45",
-      "source_file": "docs/estatuto_tributario.md",
-      "source_location": "L21077"
-    },
-    {
-      "id": "docs_estatuto_tributario_art\u00edculo_4_sin\u00f3nimos",
-      "label": "ART\u00cdCULO 4. SIN\u00d3NIMOS",
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "LIBRO S\u00c9PTIMO - (Libro, Adicionado por el Art. 139 de la Ley 1819 de 2016)",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "articulo 4. sinonimos",
-      "source_file": "docs/estatuto_tributario.md",
-      "source_location": "L26"
-    },
-    {
-      "id": "docs_estatuto_tributario_art\u00edculo_870_gravamen_a_los_movimientos_financieros_gmf",
-      "label": "ART\u00cdCULO 870. GRAVAMEN A LOS MOVIMIENTOS FINANCIEROS, GMF",
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "LIBRO S\u00c9PTIMO - (Libro, Adicionado por el Art. 139 de la Ley 1819 de 2016)",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "articulo 870. gravamen a los movimientos financieros, gmf",
-      "source_file": "docs/estatuto_tributario.md",
-      "source_location": "L20689"
-    },
-    {
-      "id": "docs_estatuto_tributario_art\u00edculo_871_hecho_generador_del_gmf",
-      "label": "ART\u00cdCULO 871. HECHO GENERADOR DEL GMF",
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "LIBRO S\u00c9PTIMO - (Libro, Adicionado por el Art. 139 de la Ley 1819 de 2016)",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "articulo 871. hecho generador del gmf",
-      "source_file": "docs/estatuto_tributario.md",
-      "source_location": "L20696"
-    },
-    {
-      "id": "docs_estatuto_tributario_art\u00edculo_872_tarifa_del_gravamen_a_los_movimientos_financieros",
-      "label": "ART\u00cdCULO 872. TARIFA DEL GRAVAMEN A LOS MOVIMIENTOS FINANCIEROS",
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "LIBRO S\u00c9PTIMO - (Libro, Adicionado por el Art. 139 de la Ley 1819 de 2016)",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "articulo 872. tarifa del gravamen a los movimientos financieros",
-      "source_file": "docs/estatuto_tributario.md",
-      "source_location": "L20795"
-    },
-    {
-      "id": "docs_estatuto_tributario_art\u00edculo_873_causaci\u00f3n_del_gmf",
-      "label": "ART\u00cdCULO 873. CAUSACI\u00d3N DEL GMF",
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "LIBRO S\u00c9PTIMO - (Libro, Adicionado por el Art. 139 de la Ley 1819 de 2016)",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "articulo 873. causacion del gmf",
-      "source_file": "docs/estatuto_tributario.md",
-      "source_location": "L20802"
-    },
-    {
-      "id": "docs_estatuto_tributario_art\u00edculo_874_base_gravable_del_gmf",
-      "label": "ART\u00cdCULO 874. BASE GRAVABLE DEL GMF",
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "LIBRO S\u00c9PTIMO - (Libro, Adicionado por el Art. 139 de la Ley 1819 de 2016)",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "articulo 874. base gravable del gmf",
-      "source_file": "docs/estatuto_tributario.md",
-      "source_location": "L20809"
-    },
-    {
-      "id": "docs_estatuto_tributario_art\u00edculo_875_sujetos_pasivos_del_gmf",
-      "label": "ART\u00cdCULO 875. SUJETOS PASIVOS DEL GMF",
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "LIBRO S\u00c9PTIMO - (Libro, Adicionado por el Art. 139 de la Ley 1819 de 2016)",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "articulo 875. sujetos pasivos del gmf",
-      "source_file": "docs/estatuto_tributario.md",
-      "source_location": "L20816"
-    },
-    {
-      "id": "docs_estatuto_tributario_art\u00edculo_876_agentes_de_retenci\u00f3n_del_gmf",
-      "label": "ART\u00cdCULO 876. AGENTES DE RETENCI\u00d3N DEL GMF",
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "LIBRO S\u00c9PTIMO - (Libro, Adicionado por el Art. 139 de la Ley 1819 de 2016)",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "articulo 876. agentes de retencion del gmf",
-      "source_file": "docs/estatuto_tributario.md",
-      "source_location": "L20828"
-    },
-    {
-      "id": "docs_estatuto_tributario_art\u00edculo_877_declaraci\u00f3n_y_pago_del_gmf",
-      "label": "ART\u00cdCULO 877. DECLARACI\u00d3N Y PAGO DEL GMF",
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "LIBRO S\u00c9PTIMO - (Libro, Adicionado por el Art. 139 de la Ley 1819 de 2016)",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "articulo 877. declaracion y pago del gmf",
-      "source_file": "docs/estatuto_tributario.md",
-      "source_location": "L20839"
-    },
-    {
-      "id": "docs_estatuto_tributario_art\u00edculo_878_administraci\u00f3n_del_gmf",
-      "label": "ART\u00cdCULO 878. ADMINISTRACI\u00d3N DEL GMF",
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "LIBRO S\u00c9PTIMO - (Libro, Adicionado por el Art. 139 de la Ley 1819 de 2016)",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "articulo 878. administracion del gmf",
-      "source_file": "docs/estatuto_tributario.md",
-      "source_location": "L20850"
-    },
-    {
-      "id": "docs_estatuto_tributario_art\u00edculo_879",
-      "label": "ART\u00cdCULO 879",
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "LIBRO S\u00c9PTIMO - (Libro, Adicionado por el Art. 139 de la Ley 1819 de 2016)",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "articulo 879",
-      "source_file": "docs/estatuto_tributario.md",
-      "source_location": "L21086"
-    },
-    {
-      "id": "docs_estatuto_tributario_art\u00edculo_879_exenciones_del_gmf",
-      "label": "ART\u00cdCULO 879. EXENCIONES DEL GMF",
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "LIBRO S\u00c9PTIMO - (Libro, Adicionado por el Art. 139 de la Ley 1819 de 2016)",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "articulo 879. exenciones del gmf",
-      "source_file": "docs/estatuto_tributario.md",
-      "source_location": "L20864"
-    },
-    {
-      "id": "docs_estatuto_tributario_art\u00edculo_880_agentes_de_retenci\u00f3n_del_gmf_en_operaciones_de_cuenta_de_dep\u00f3sito",
-      "label": "ART\u00cdCULO 880. AGENTES DE RETENCI\u00d3N DEL GMF EN OPERACIONES DE CUENTA DE DEP\u00d3SITO",
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "LIBRO S\u00c9PTIMO - (Libro, Adicionado por el Art. 139 de la Ley 1819 de 2016)",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "articulo 880. agentes de retencion del gmf en operaciones de cuenta de deposito",
-      "source_file": "docs/estatuto_tributario.md",
-      "source_location": "L21081"
-    },
-    {
-      "id": "docs_estatuto_tributario_art\u00edculo_881_1_control_sobre_operaciones_y_montos_exentos_del_gravamen_a_los_movimientos_financieros",
-      "label": "ART\u00cdCULO 881-1. CONTROL SOBRE OPERACIONES Y MONTOS EXENTOS DEL GRAVAMEN A LOS MOVIMIENTOS FINANCIEROS",
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "LIBRO S\u00c9PTIMO - (Libro, Adicionado por el Art. 139 de la Ley 1819 de 2016)",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "articulo 881-1. control sobre operaciones y montos exentos del gravamen a los movimientos financieros",
-      "source_file": "docs/estatuto_tributario.md",
-      "source_location": "L21114"
-    },
-    {
-      "id": "docs_estatuto_tributario_art\u00edculo_881_devoluci\u00f3n_del_gmf",
-      "label": "ART\u00cdCULO 881. DEVOLUCI\u00d3N DEL GMF",
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "LIBRO S\u00c9PTIMO - (Libro, Adicionado por el Art. 139 de la Ley 1819 de 2016)",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "articulo 881. devolucion del gmf",
-      "source_file": "docs/estatuto_tributario.md",
-      "source_location": "L21094"
     },
     {
       "id": "docs_estatuto_tributario_art\u00edculo_882_entidades_controladas_del_exterior_sin_residencia_fiscal_en_colombia_ece",
@@ -12164,30 +12258,6 @@
       "source_location": "L21399"
     },
     {
-      "id": "docs_estatuto_tributario_estatuto_tributario_nacional_de_colombia",
-      "label": "Estatuto Tributario Nacional de Colombia",
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "LIBRO S\u00c9PTIMO - (Libro, Adicionado por el Art. 139 de la Ley 1819 de 2016)",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "estatuto tributario nacional de colombia",
-      "source_file": "docs/estatuto_tributario.md",
-      "source_location": "L1"
-    },
-    {
-      "id": "docs_estatuto_tributario_libro_sexto",
-      "label": "LIBRO SEXTO - \"",
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "LIBRO S\u00c9PTIMO - (Libro, Adicionado por el Art. 139 de la Ley 1819 de 2016)",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "libro sexto - \"",
-      "source_file": "docs/estatuto_tributario.md",
-      "source_location": "L20684"
-    },
-    {
       "id": "docs_estatuto_tributario_libro_s\u00e9ptimo_libro_adicionado_por_el_art_139_de_la_ley_1819_de_2016",
       "label": "LIBRO S\u00c9PTIMO - (Libro, Adicionado por el Art. 139 de la Ley 1819 de 2016)",
       "_origin": "ast",
@@ -12198,18 +12268,6 @@
       "norm_label": "libro septimo - (libro, adicionado por el art. 139 de la ley 1819 de 2016)",
       "source_file": "docs/estatuto_tributario.md",
       "source_location": "L21131"
-    },
-    {
-      "id": "docs_estatuto_tributario_t\u00edtulo_preliminar_obligaci\u00f3n_tributaria",
-      "label": "T\u00cdTULO PRELIMINAR: Obligaci\u00f3n Tributaria",
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "LIBRO S\u00c9PTIMO - (Libro, Adicionado por el Art. 139 de la Ley 1819 de 2016)",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "titulo preliminar: obligacion tributaria",
-      "source_file": "docs/estatuto_tributario.md",
-      "source_location": "L8"
     },
     {
       "id": "docs_estatuto_tributario_art\u00edculo_514_contribuyentes_o_responsables_son_sujetos_pasivos",
@@ -20114,6 +20172,30 @@
       "source_location": "L9"
     },
     {
+      "id": "docs_readme_documentacion_tecnica_de_fiscol",
+      "label": "Documentacion Tecnica de Fiscol",
+      "_origin": "ast",
+      "community": 65,
+      "community_name": "Cuadrantes Diataxis",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "documentacion tecnica de fiscol",
+      "source_file": "docs/README.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "docs_readme_registro_de_decisiones_arquitectonicas_adrs_decisions_readme_md",
+      "label": "[Registro de Decisiones Arquitectonicas (ADRs)](./decisions/README.md)",
+      "_origin": "ast",
+      "community": 65,
+      "community_name": "Cuadrantes Diataxis",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "[registro de decisiones arquitectonicas (adrs)](./decisions/readme.md)",
+      "source_file": "docs/README.md",
+      "source_location": "L64"
+    },
+    {
       "id": "docs_explanation_02_sistema_cedular_colombiano",
       "label": "02-sistema-cedular-colombiano.md",
       "_origin": "ast",
@@ -20244,30 +20326,6 @@
       "norm_label": "docs/readme.md",
       "source_file": "docs/README.md",
       "source_location": "L1"
-    },
-    {
-      "id": "docs_readme_documentacion_tecnica_de_fiscol",
-      "label": "Documentacion Tecnica de Fiscol",
-      "_origin": "ast",
-      "community": 66,
-      "community_name": "README.md",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "documentacion tecnica de fiscol",
-      "source_file": "docs/README.md",
-      "source_location": "L1"
-    },
-    {
-      "id": "docs_readme_registro_de_decisiones_arquitectonicas_adrs_decisions_readme_md",
-      "label": "[Registro de Decisiones Arquitectonicas (ADRs)](./decisions/README.md)",
-      "_origin": "ast",
-      "community": 66,
-      "community_name": "README.md",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "[registro de decisiones arquitectonicas (adrs)](./decisions/readme.md)",
-      "source_file": "docs/README.md",
-      "source_location": "L64"
     },
     {
       "id": "docs_reference_architecture_erd_session_state_model",
@@ -25942,6 +26000,17 @@
       "confidence_score": 1.0,
       "source_file": "backend/tests/test_skill_comparacion_patrimonial.py",
       "source_location": "L157",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_tests_test_skill_comparacion_patrimonial",
+      "target": "backend_tests_test_skill_comparacion_patrimonial_func_test_analizar_caso_real_juan_sebastian_2024_vs_2023",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/tests/test_skill_comparacion_patrimonial.py",
+      "source_location": "L191",
       "weight": 1.0
     },
     {
@@ -41027,7 +41096,7 @@
     },
     {
       "source": "skills_control_comparacion_patrimonial_beneficios_justificacion_patrimonial",
-      "target": "skills_control_comparacion_patrimonial_beneficios_justificacion_patrimonial_cat\u00e1logo_normativo_de_fuentes_justificativas_y_ajustes_patrimoniales_arts_236_237_283_y_concordantes_del_e_t",
+      "target": "skills_control_comparacion_patrimonial_beneficios_justificacion_patrimonial_cat\u00e1logo_normativo_de_fuentes_justificativas_y_mapeo_oficial_f210_arts_236_237_283_y_concordantes_del_e_t",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -41037,74 +41106,19 @@
       "weight": 1.0
     },
     {
-      "source": "skills_control_comparacion_patrimonial_beneficios_justificacion_patrimonial_2_fuentes_justificativas_v\u00e1lidas_y_soportes_probatorios",
-      "target": "skills_control_comparacion_patrimonial_beneficios_justificacion_patrimonial_a_nuevas_deudas_y_pasivos_con_terceros_art_283_e_t",
+      "source": "skills_control_comparacion_patrimonial_beneficios_justificacion_patrimonial_3_fuentes_justificativas_v\u00e1lidas_y_soportes_probatorios",
+      "target": "skills_control_comparacion_patrimonial_beneficios_justificacion_patrimonial_a_rentas_exentas_y_deducciones_imputables_casilla_90_casilla_38_y_28",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "skills/control-comparacion-patrimonial/beneficios_justificacion_patrimonial.md",
-      "source_location": "L26",
+      "source_location": "L47",
       "weight": 1.0
     },
     {
-      "source": "skills_control_comparacion_patrimonial_beneficios_justificacion_patrimonial_2_fuentes_justificativas_v\u00e1lidas_y_soportes_probatorios",
-      "target": "skills_control_comparacion_patrimonial_beneficios_justificacion_patrimonial_b_desahorro_de_recursos_declarados_en_a\u00f1os_anteriores",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "skills/control-comparacion-patrimonial/beneficios_justificacion_patrimonial.md",
-      "source_location": "L32",
-      "weight": 1.0
-    },
-    {
-      "source": "skills_control_comparacion_patrimonial_beneficios_justificacion_patrimonial_2_fuentes_justificativas_v\u00e1lidas_y_soportes_probatorios",
-      "target": "skills_control_comparacion_patrimonial_beneficios_justificacion_patrimonial_c_retiro_de_cesant\u00edas_acumuladas",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "skills/control-comparacion-patrimonial/beneficios_justificacion_patrimonial.md",
-      "source_location": "L36",
-      "weight": 1.0
-    },
-    {
-      "source": "skills_control_comparacion_patrimonial_beneficios_justificacion_patrimonial_2_fuentes_justificativas_v\u00e1lidas_y_soportes_probatorios",
-      "target": "skills_control_comparacion_patrimonial_beneficios_justificacion_patrimonial_d_reajustes_fiscales_del_costo_art_73_e_t",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "skills/control-comparacion-patrimonial/beneficios_justificacion_patrimonial.md",
-      "source_location": "L40",
-      "weight": 1.0
-    },
-    {
-      "source": "skills_control_comparacion_patrimonial_beneficios_justificacion_patrimonial_2_fuentes_justificativas_v\u00e1lidas_y_soportes_probatorios",
-      "target": "skills_control_comparacion_patrimonial_beneficios_justificacion_patrimonial_e_copropiedad_conyugal_y_gananciales_arts_8_y_47_e_t",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "skills/control-comparacion-patrimonial/beneficios_justificacion_patrimonial.md",
-      "source_location": "L44",
-      "weight": 1.0
-    },
-    {
-      "source": "skills_control_comparacion_patrimonial_beneficios_justificacion_patrimonial_cat\u00e1logo_normativo_de_fuentes_justificativas_y_ajustes_patrimoniales_arts_236_237_283_y_concordantes_del_e_t",
-      "target": "skills_control_comparacion_patrimonial_beneficios_justificacion_patrimonial_2_fuentes_justificativas_v\u00e1lidas_y_soportes_probatorios",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "skills/control-comparacion-patrimonial/beneficios_justificacion_patrimonial.md",
-      "source_location": "L24",
-      "weight": 1.0
-    },
-    {
-      "source": "skills_control_comparacion_patrimonial_beneficios_justificacion_patrimonial_cat\u00e1logo_normativo_de_fuentes_justificativas_y_ajustes_patrimoniales_arts_236_237_283_y_concordantes_del_e_t",
-      "target": "skills_control_comparacion_patrimonial_beneficios_justificacion_patrimonial_3_r\u00e9gimen_sancionatorio_por_desajuste_patrimonial",
+      "source": "skills_control_comparacion_patrimonial_beneficios_justificacion_patrimonial_3_fuentes_justificativas_v\u00e1lidas_y_soportes_probatorios",
+      "target": "skills_control_comparacion_patrimonial_beneficios_justificacion_patrimonial_b_nuevas_deudas_y_pasivos_con_terceros_art_283_e_t",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -41114,14 +41128,91 @@
       "weight": 1.0
     },
     {
-      "source": "skills_control_comparacion_patrimonial_beneficios_justificacion_patrimonial_cat\u00e1logo_normativo_de_fuentes_justificativas_y_ajustes_patrimoniales_arts_236_237_283_y_concordantes_del_e_t",
-      "target": "skills_control_comparacion_patrimonial_beneficios_justificacion_patrimonial_1_la_ecuaci\u00f3n_fundamental_del_control_patrimonial_art_236_e_t",
+      "source": "skills_control_comparacion_patrimonial_beneficios_justificacion_patrimonial_3_fuentes_justificativas_v\u00e1lidas_y_soportes_probatorios",
+      "target": "skills_control_comparacion_patrimonial_beneficios_justificacion_patrimonial_c_retiro_de_cesant\u00edas_acumuladas_de_a\u00f1os_anteriores",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "skills/control-comparacion-patrimonial/beneficios_justificacion_patrimonial.md",
+      "source_location": "L56",
+      "weight": 1.0
+    },
+    {
+      "source": "skills_control_comparacion_patrimonial_beneficios_justificacion_patrimonial_3_fuentes_justificativas_v\u00e1lidas_y_soportes_probatorios",
+      "target": "skills_control_comparacion_patrimonial_beneficios_justificacion_patrimonial_d_desahorro_de_recursos_declarados_en_a\u00f1os_anteriores",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "skills/control-comparacion-patrimonial/beneficios_justificacion_patrimonial.md",
+      "source_location": "L60",
+      "weight": 1.0
+    },
+    {
+      "source": "skills_control_comparacion_patrimonial_beneficios_justificacion_patrimonial_3_fuentes_justificativas_v\u00e1lidas_y_soportes_probatorios",
+      "target": "skills_control_comparacion_patrimonial_beneficios_justificacion_patrimonial_e_reajustes_fiscales_del_costo_art_73_e_t",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "skills/control-comparacion-patrimonial/beneficios_justificacion_patrimonial.md",
+      "source_location": "L64",
+      "weight": 1.0
+    },
+    {
+      "source": "skills_control_comparacion_patrimonial_beneficios_justificacion_patrimonial_3_fuentes_justificativas_v\u00e1lidas_y_soportes_probatorios",
+      "target": "skills_control_comparacion_patrimonial_beneficios_justificacion_patrimonial_f_copropiedad_conyugal_y_gananciales_arts_8_y_47_e_t",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "skills/control-comparacion-patrimonial/beneficios_justificacion_patrimonial.md",
+      "source_location": "L68",
+      "weight": 1.0
+    },
+    {
+      "source": "skills_control_comparacion_patrimonial_beneficios_justificacion_patrimonial_cat\u00e1logo_normativo_de_fuentes_justificativas_y_mapeo_oficial_f210_arts_236_237_283_y_concordantes_del_e_t",
+      "target": "skills_control_comparacion_patrimonial_beneficios_justificacion_patrimonial_2_la_ecuaci\u00f3n_fundamental_del_control_patrimonial_art_236_e_t",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "skills/control-comparacion-patrimonial/beneficios_justificacion_patrimonial.md",
+      "source_location": "L28",
+      "weight": 1.0
+    },
+    {
+      "source": "skills_control_comparacion_patrimonial_beneficios_justificacion_patrimonial_cat\u00e1logo_normativo_de_fuentes_justificativas_y_mapeo_oficial_f210_arts_236_237_283_y_concordantes_del_e_t",
+      "target": "skills_control_comparacion_patrimonial_beneficios_justificacion_patrimonial_3_fuentes_justificativas_v\u00e1lidas_y_soportes_probatorios",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "skills/control-comparacion-patrimonial/beneficios_justificacion_patrimonial.md",
+      "source_location": "L45",
+      "weight": 1.0
+    },
+    {
+      "source": "skills_control_comparacion_patrimonial_beneficios_justificacion_patrimonial_cat\u00e1logo_normativo_de_fuentes_justificativas_y_mapeo_oficial_f210_arts_236_237_283_y_concordantes_del_e_t",
+      "target": "skills_control_comparacion_patrimonial_beneficios_justificacion_patrimonial_1_mapeo_oficial_de_casillas_dian_formulario_210",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "skills/control-comparacion-patrimonial/beneficios_justificacion_patrimonial.md",
       "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "skills_control_comparacion_patrimonial_beneficios_justificacion_patrimonial_cat\u00e1logo_normativo_de_fuentes_justificativas_y_mapeo_oficial_f210_arts_236_237_283_y_concordantes_del_e_t",
+      "target": "skills_control_comparacion_patrimonial_beneficios_justificacion_patrimonial_4_r\u00e9gimen_sancionatorio_por_desajuste_patrimonial",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "skills/control-comparacion-patrimonial/beneficios_justificacion_patrimonial.md",
+      "source_location": "L74",
       "weight": 1.0
     },
     {
@@ -41165,7 +41256,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "skills/control-comparacion-patrimonial/scripts/analizar_comparacion.py",
-      "source_location": "L126",
+      "source_location": "L143",
       "weight": 1.0
     },
     {
@@ -41192,13 +41283,24 @@
     },
     {
       "source": "skills_control_comparacion_patrimonial_scripts_extraer_f210_borrador",
+      "target": "skills_control_comparacion_patrimonial_scripts_extraer_f210_borrador_func_extraer_datos_desde_pdf",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "skills/control-comparacion-patrimonial/scripts/extraer_f210_borrador.py",
+      "source_location": "L15",
+      "weight": 1.0
+    },
+    {
+      "source": "skills_control_comparacion_patrimonial_scripts_extraer_f210_borrador",
       "target": "skills_control_comparacion_patrimonial_scripts_extraer_f210_borrador_func_main",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "skills/control-comparacion-patrimonial/scripts/extraer_f210_borrador.py",
-      "source_location": "L108",
+      "source_location": "L250",
       "weight": 1.0
     },
     {
@@ -41209,7 +41311,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "skills/control-comparacion-patrimonial/scripts/extraer_f210_borrador.py",
-      "source_location": "L14",
+      "source_location": "L85",
       "weight": 1.0
     },
     {
@@ -41280,13 +41382,24 @@
     },
     {
       "source": "skills_control_comparacion_patrimonial_skill_auditor\u00eda_y_control_por_comparaci\u00f3n_patrimonial_arts_236_y_237_e_t",
-      "target": "skills_control_comparacion_patrimonial_skill_workflow_en_4_fases",
+      "target": "skills_control_comparacion_patrimonial_skill_estructura_oficial_de_casillas_dian_formulario_210",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "skills/control-comparacion-patrimonial/SKILL.md",
       "source_location": "L29",
+      "weight": 1.0
+    },
+    {
+      "source": "skills_control_comparacion_patrimonial_skill_auditor\u00eda_y_control_por_comparaci\u00f3n_patrimonial_arts_236_y_237_e_t",
+      "target": "skills_control_comparacion_patrimonial_skill_workflow_en_4_fases",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "skills/control-comparacion-patrimonial/SKILL.md",
+      "source_location": "L50",
       "weight": 1.0
     },
     {
@@ -41302,7 +41415,7 @@
     },
     {
       "source": "skills_control_comparacion_patrimonial_skill_workflow_en_4_fases",
-      "target": "skills_control_comparacion_patrimonial_skill_fase_4_sincronizaci\u00f3n_e_inyecci\u00f3n_a_la_plataforma_fiscol",
+      "target": "skills_control_comparacion_patrimonial_skill_fase_3_elaboraci\u00f3n_del_plan_de_regularizaci\u00f3n_optimizaci\u00f3n",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -41313,13 +41426,24 @@
     },
     {
       "source": "skills_control_comparacion_patrimonial_skill_workflow_en_4_fases",
+      "target": "skills_control_comparacion_patrimonial_skill_fase_4_sincronizaci\u00f3n_e_inyecci\u00f3n_a_la_plataforma_fiscol",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "skills/control-comparacion-patrimonial/SKILL.md",
+      "source_location": "L122",
+      "weight": 1.0
+    },
+    {
+      "source": "skills_control_comparacion_patrimonial_skill_workflow_en_4_fases",
       "target": "skills_control_comparacion_patrimonial_skill_fase_1_ingesta_del_borrador_f210_diagn\u00f3stico_matem\u00e1tico",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "skills/control-comparacion-patrimonial/SKILL.md",
-      "source_location": "L43",
+      "source_location": "L64",
       "weight": 1.0
     },
     {
@@ -41330,18 +41454,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "skills/control-comparacion-patrimonial/SKILL.md",
-      "source_location": "L70",
-      "weight": 1.0
-    },
-    {
-      "source": "skills_control_comparacion_patrimonial_skill_workflow_en_4_fases",
-      "target": "skills_control_comparacion_patrimonial_skill_fase_3_elaboraci\u00f3n_del_plan_de_regularizaci\u00f3n_optimizaci\u00f3n",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "skills/control-comparacion-patrimonial/SKILL.md",
-      "source_location": "L92",
+      "source_location": "L86",
       "weight": 1.0
     },
     {
@@ -42490,5 +42603,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "1070635fe0789875defcebfdf5ade831eeb40b4e"
+  "built_at_commit": "f8a46e4830607b16e7014bd220df43076a55e1cb"
 }

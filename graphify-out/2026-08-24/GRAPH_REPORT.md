@@ -1,16 +1,16 @@
 # Graph Report - tribut-ia  (2026-08-24)
 
 ## Corpus Check
-- 215 files · ~541,325 words
+- 217 files · ~542,992 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 1894 nodes · 1829 edges · 178 communities (95 shown, 83 thin omitted)
+- 1899 nodes · 1834 edges · 180 communities (98 shown, 82 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `1070635f`
+- Built from commit: `f8a46e48`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -174,9 +174,11 @@
 - statutory-rules-art241.md
 - endpoints/regimen_simple.py
 - 2. Flujo Operativo en 4 Fases
-- 2. Fuentes Justificativas Válidas y Soportes Probatorios
-- Workflow en 4 Fases
+- 📂 3. Fuentes Justificativas Válidas y Soportes Probatorios
+- Auditoría y Control por Comparación Patrimonial (Arts. 236 y 237 E.T.)
 - test_skill_comparacion_patrimonial.py
+- LIBRO SEXTO - "
+- Estatuto Tributario Nacional de Colombia
 - Skill: Control por Comparación Patrimonial (Formulario 210)
 - analizar_comparacion.py
 - extraer_f210_borrador.py
@@ -201,7 +203,7 @@
 ## Import Cycles
 - None detected.
 
-## Communities (178 total, 83 thin omitted)
+## Communities (180 total, 82 thin omitted)
 
 ### Community 0 - "test_coverage_boost.py"
 Cohesion: 0.06
@@ -304,8 +306,8 @@ Cohesion: 0.03
 Nodes (78): ARTÍCULO 10, ARTÍCULO 11. BIENES DESTINADOS A FINES ESPECIALES, ARTÍCULO 12-1, ARTÍCULO 12. SOCIEDADES Y ENTIDADES SOMETIDAS AL IMPUESTO, ARTÍCULO 13. SOCIEDADES LIMITADAS Y ASIMILADAS, ARTÍCULO 14-1, ARTÍCULO 14-2, ARTÍCULO 14. LAS SOCIEDADES ANÓNIMAS Y ASIMILADAS ESTÁN SOMETIDAS AL IMPUESTO (+70 more)
 
 ### Community 44 - "LIBRO SÉPTIMO - (Libro, Adicionado por el Art. 139 de la Ley 1819 de 2016)"
-Cohesion: 0.04
-Nodes (48): ARTÍCULO 1. ORIGEN DE LA OBLIGACIÓN SUSTANCIAL, ARTÍCULO 260-7, ARTÍCULO 260-7, ARTÍCULO 2. CONTRIBUYENTES, ARTÍCULO 3. RESPONSABLES, ARTÍCULO 45, ARTÍCULO 4. SINÓNIMOS, ARTÍCULO 870. GRAVAMEN A LOS MOVIMIENTOS FINANCIEROS, GMF (+40 more)
+Cohesion: 0.08
+Nodes (26): ARTÍCULO 260-7, ARTÍCULO 260-7, ARTÍCULO 882. ENTIDADES CONTROLADAS DEL EXTERIOR SIN RESIDENCIA FISCAL EN COLOMBIA (ECE), ARTÍCULO 883, ARTÍCULO 883. SUJETOS DEL RÉGIMEN DE ENTIDADES CONTROLADAS DEL EXTERIOR SIN RESIDENCIA FISCAL EN COLOMBIA (ECE), ARTÍCULO 884. INGRESOS PASIVOS, ARTÍCULO 885. PRESUNCIÓN DE PLENO DERECHO, ARTÍCULO 886. REALIZACIÓN DE LOS INGRESOS (+18 more)
 
 ### Community 45 - "LIBRO CUARTO - IMPUESTOS DE TIMBRE NACIONAL"
 Cohesion: 0.05
@@ -388,12 +390,12 @@ Cohesion: 0.33
 Nodes (5): test_api_comparacion_patrimonial_endpoint, test_comparacion_patrimonial_desahorro_y_deudas, test_comparacion_patrimonial_desajuste_injustificado, test_comparacion_patrimonial_justificado_estandar, test_comparacion_patrimonial_reajustes_fiscales_art73
 
 ### Community 65 - "Cuadrantes Diataxis"
-Cohesion: 0.40
-Nodes (5): 1. [Tutoriales](./tutorials/) - *Orientado al Aprendizaje*, 2. [Guias How-To](./how-to/) - *Orientado a Tareas*, 3. [Referencias Tecnicas](./reference/) - *Orientado a la Informacion*, 4. [Explicaciones](./explanation/) - *Orientado a la Comprension*, Cuadrantes Diataxis
+Cohesion: 0.29
+Nodes (7): 1. [Tutoriales](./tutorials/) - *Orientado al Aprendizaje*, 2. [Guias How-To](./how-to/) - *Orientado a Tareas*, 3. [Referencias Tecnicas](./reference/) - *Orientado a la Informacion*, 4. [Explicaciones](./explanation/) - *Orientado a la Comprension*, Cuadrantes Diataxis, Documentacion Tecnica de Fiscol, [Registro de Decisiones Arquitectonicas (ADRs)](./decisions/README.md)
 
 ### Community 66 - "README.md"
-Cohesion: 0.11
-Nodes (14): 1. Cédulas de Tributación, Explicación: El Sistema Cedular en Colombia (Ley 2277 de 2022), 1. Por qué este mito es matemáticamente falso, Explicación: El Mito Tributario de las Tarifas Marginales, 1. Fundamento de la Tasa Mínima de Tributación (TTD), 2. Ejecución vía API, Guía How-To: Simular Tasa Mínima de Tributación (TTD 15% - PJ), Documentacion Tecnica de Fiscol (+6 more)
+Cohesion: 0.12
+Nodes (12): 1. Cédulas de Tributación, Explicación: El Sistema Cedular en Colombia (Ley 2277 de 2022), 1. Por qué este mito es matemáticamente falso, Explicación: El Mito Tributario de las Tarifas Marginales, 1. Fundamento de la Tasa Mínima de Tributación (TTD), 2. Ejecución vía API, Guía How-To: Simular Tasa Mínima de Tributación (TTD 15% - PJ), Modelo de Entidades y Estado de Sesión (+4 more)
 
 ### Community 67 - "Explicación: Arquitectura del Sistema Fiscol"
 Cohesion: 0.40
@@ -519,17 +521,25 @@ Nodes (3): 1. Tabla de Tramos Marginales, 2. Regla de Redondeo DIAN (Art. 868 E.
 Cohesion: 0.18
 Nodes (10): 1. Instalación del Skill en Asistentes de IA, 2. Flujo Operativo en 4 Fases, Claude Code, Cursor / Windsurf / OpenAI Codex, Cómo Auditar Borradores del Formulario 210 y Regularizar Desajustes con el Skill de IA `control-comparacion-patrimonial`, Fase 1: Diagnóstico Matemático del Borrador F210, Fase 2: Interrogatorio Probatorio & Solicitud de Documentos, Fase 3: Elaboración del Plan de Regularización en Markdown (+2 more)
 
-### Community 170 - "2. Fuentes Justificativas Válidas y Soportes Probatorios"
-Cohesion: 0.20
-Nodes (9): 1. La Ecuación Fundamental del Control Patrimonial (Art. 236 E.T.), 2. Fuentes Justificativas Válidas y Soportes Probatorios, 3. Régimen Sancionatorio por Desajuste Patrimonial, A. Nuevas Deudas y Pasivos con Terceros (Art. 283 E.T.), B. Desahorro de Recursos Declarados en Años Anteriores, C. Retiro de Cesantías Acumuladas, Catálogo Normativo de Fuentes Justificativas y Ajustes Patrimoniales (Arts. 236, 237, 283 y concordantes del E.T.), D. Reajustes Fiscales del Costo (Art. 73 E.T.) (+1 more)
+### Community 170 - "📂 3. Fuentes Justificativas Válidas y Soportes Probatorios"
+Cohesion: 0.17
+Nodes (11): 📋 1. Mapeo Oficial de Casillas DIAN (Formulario 210), ⚖️ 2. La Ecuación Fundamental del Control Patrimonial (Art. 236 E.T.), 📂 3. Fuentes Justificativas Válidas y Soportes Probatorios, 🚨 4. Régimen Sancionatorio por Desajuste Patrimonial, A. Rentas Exentas y Deducciones Imputables (Casilla 90 / Casilla 38 y 28), B. Nuevas Deudas y Pasivos con Terceros (Art. 283 E.T.), C. Retiro de Cesantías Acumuladas de Años Anteriores, Catálogo Normativo de Fuentes Justificativas y Mapeo Oficial F210 (Arts. 236, 237, 283 y concordantes del E.T.) (+3 more)
 
-### Community 171 - "Workflow en 4 Fases"
-Cohesion: 0.22
-Nodes (8): Auditoría y Control por Comparación Patrimonial (Arts. 236 y 237 E.T.), Fase 1: Ingesta del Borrador F210 & Diagnóstico Matemático, Fase 2: Diagnóstico Interactivo & Cuestionario Guiado al Contribuyente, Fase 3: Elaboración del Plan de Regularización & Optimización, Fase 4: Sincronización e Inyección a la Plataforma Fiscol, Overview, When to Use, Workflow en 4 Fases
+### Community 171 - "Auditoría y Control por Comparación Patrimonial (Arts. 236 y 237 E.T.)"
+Cohesion: 0.20
+Nodes (9): Auditoría y Control por Comparación Patrimonial (Arts. 236 y 237 E.T.), Estructura Oficial de Casillas DIAN (Formulario 210), Fase 1: Ingesta del Borrador F210 & Diagnóstico Matemático, Fase 2: Diagnóstico Interactivo & Cuestionario Guiado al Contribuyente, Fase 3: Elaboración del Plan de Regularización & Optimización, Fase 4: Sincronización e Inyección a la Plataforma Fiscol, Overview, When to Use (+1 more)
 
 ### Community 172 - "test_skill_comparacion_patrimonial.py"
+Cohesion: 0.25
+Nodes (7): test_analizar_borrador_con_desajuste, test_analizar_borrador_justificado_correctamente, test_analizar_caso_real_juan_sebastian_2024_vs_2023, test_cargar_cuestionario_diagnostico, test_cli_subprocess_analizar_comparacion, test_extraer_datos_borrador_f210, test_generar_reporte_markdown
+
+### Community 173 - "LIBRO SEXTO - ""
+Cohesion: 0.12
+Nodes (16): ARTÍCULO 45, ARTÍCULO 870. GRAVAMEN A LOS MOVIMIENTOS FINANCIEROS, GMF, ARTÍCULO 871. HECHO GENERADOR DEL GMF, ARTÍCULO 872. TARIFA DEL GRAVAMEN A LOS MOVIMIENTOS FINANCIEROS, ARTÍCULO 873. CAUSACIÓN DEL GMF, ARTÍCULO 874. BASE GRAVABLE DEL GMF, ARTÍCULO 875. SUJETOS PASIVOS DEL GMF, ARTÍCULO 876. AGENTES DE RETENCIÓN DEL GMF (+8 more)
+
+### Community 174 - "Estatuto Tributario Nacional de Colombia"
 Cohesion: 0.29
-Nodes (6): test_analizar_borrador_con_desajuste, test_analizar_borrador_justificado_correctamente, test_cargar_cuestionario_diagnostico, test_cli_subprocess_analizar_comparacion, test_extraer_datos_borrador_f210, test_generar_reporte_markdown
+Nodes (6): ARTÍCULO 1. ORIGEN DE LA OBLIGACIÓN SUSTANCIAL, ARTÍCULO 2. CONTRIBUYENTES, ARTÍCULO 3. RESPONSABLES, ARTÍCULO 4. SINÓNIMOS, Estatuto Tributario Nacional de Colombia, TÍTULO PRELIMINAR: Obligación Tributaria
 
 ### Community 175 - "Skill: Control por Comparación Patrimonial (Formulario 210)"
 Cohesion: 0.50
@@ -539,22 +549,26 @@ Nodes (3): 📦 Estructura del Skill, Skill: Control por Comparación Patrimonia
 Cohesion: 0.50
 Nodes (3): analizar_borrador_f210, cargar_cuestionario_diagnostico, main
 
+### Community 178 - "extraer_f210_borrador.py"
+Cohesion: 0.50
+Nodes (3): extraer_datos_borrador, extraer_datos_desde_pdf, main
+
 ## Knowledge Gaps
-- **1623 isolated node(s):** `obtener_tabla_componente_inflacionario`, `simular_componente_inflacionario_endpoint`, `simular_combinabilidad_endpoint`, `listar_beneficios`, `obtener_tabla_articulo_73` (+1618 more)
+- **1628 isolated node(s):** `obtener_tabla_componente_inflacionario`, `simular_componente_inflacionario_endpoint`, `simular_combinabilidad_endpoint`, `listar_beneficios`, `obtener_tabla_articulo_73` (+1623 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **83 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **82 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `Estatuto Tributario Nacional de Colombia` connect `LIBRO SÉPTIMO - (Libro, Adicionado por el Art. 139 de la Ley 1819 de 2016)` to `LIBRO PRIMERO - de este Estatuto`, `LIBRO QUINTO - PROCEDIMIENTO TRIBUTARIO, SANCIONES Y ESTRUCTURA DE LA DIRECCION GENERAL DE IMPUESTOS NACIONALES`, `LIBRO TERCERO - IMPUESTO SOBRE LAS VENTAS`, `LIBRO PRIMERO - IMPUESTO SOBRE LA RENTA Y COMPLEMENTARIOS`, `LIBRO CUARTO - IMPUESTOS DE TIMBRE NACIONAL`, `LIBRO OCTAVO - (Libro, Sustituido por el Art. 74 de la Ley 2010 de 2019)`?**
-  _High betweenness centrality (0.279) - this node is a cross-community bridge._
-- **Why does `LIBRO PRIMERO - de este Estatuto` connect `LIBRO PRIMERO - de este Estatuto` to `ARTÍCULO 57-2`, `ARTÍCULO 88-1. DESCONOCIMIENTO DE COSTOS Y GASTOS POR CAMPAÑAS DE PUBLICIDAD DE PRODUCTOS EXTRANJEROS`, `ARTÍCULO 90-3. ENAJENACIONES INDIRECTAS`, `LIBRO SÉPTIMO - (Libro, Adicionado por el Art. 139 de la Ley 1819 de 2016)`, `ARTÍCULO 103. DEFINICIÓN`, `ARTÍCULO 177. LAS LIMITACIONES A COSTOS SE APLICAN A LAS DEDUCCIONES`, `ARTÍCULO 205. RENTA GRAVABLE POR CERTIFICADOS DE DESARROLLO TURÍSTICO`, `ARTÍCULO 235. LAS EXENCIONES SOLO BENEFICIAN A SU TITULAR`, `ARTÍCULO 239. NO HABRÁ LUGAR A LA COMPARACIÓN PATRIMONIAL`, `ARTÍCULO 248. TARIFA ESPECIAL PARA ALGUNOS PAGOS AL EXTERIOR EFECTUADOS POR CONSTRUCTORES COLOMBIANOS`, `ARTÍCULO 259-1`, `ARTÍCULO 260-5`, `ARTÍCULO 260. INTRANSFERIBILIDAD DE LOS DESCUENTOS TRIBUTARIOS`, `ARTÍCULO 281. EFECTOS DEL REAJUSTE FISCAL`, `ARTÍCULO 282. CONCEPTO`, `ARTÍCULO 287. VALOR PATRIMONIAL DE LAS DEUDAS`, `ARTÍCULO 291. RÉGIMEN DE TRANSICIÓN POR LOS AJUSTES DE DIFERENCIA EN CAMBIO`, `ARTÍCULO 298-8. REMISIÓN`, `ARTÍCULO 306. EL IMPUESTO DEBE SER RETENIDO EN LA FUENTE`, `ARTÍCULO 310. OTRAS EXENCIONES`, `ARTÍCULO 312. CASOS EN LOS CUALES NO SE ACEPTAN PÉRDIDAS OCASIONALES`, `ARTÍCULO 318. TRATAMIENTO DE LA GANANCIA OCASIONAL COMO RENTA`, `ARTÍCULO 319. APORTES A SOCIEDADES NACIONALES`, `ARTÍCULO 320. CASO EN EL QUE SE PRESUME LA TRANSFERENCIA`, `ARTÍCULO 321. CONCEPTOS, BASE GRAVABLE Y TARIFAS`, `ARTÍCULO 324. EXENCIÓN A LAS REGALÍAS`, `ARTÍCULO 328. RECAUDO Y CONTROL`, `ARTÍCULO 334. FACULTADES DE FISCALIZACIÓN`, `ARTÍCULO 336-1`, `ARTÍCULO 337. INGRESOS DE LAS RENTAS DE PENSIONES`, `ARTÍCULO 339. RENTA LÍQUIDA CEDULAR DE LAS RENTAS DE CAPITAL`, `ARTÍCULO 341. RENTA LÍQUIDA CEDULAR DE LAS RENTAS NO LABORALES`, `ARTÍCULO 344. REGISTRO CONTABLE DE LOS AJUSTES A LOS PASIVOS`, `ARTÍCULO 347. AJUSTES AL PATRIMONIO LÍQUIDO QUE HA SUFRIDO DISMINUCIONES O AUMENTOS DURANTE EL AÑO`, `ARTÍCULO 352. TRATAMIENTOS DE LAS GANANCIAS OCASIONALES`, `ARTÍCULO 382. OBLIGACIÓN DE DECLARAR`, `ARTÍCULO 388`, `ARTÍCULO 391. TARIFAS`, `ARTÍCULO 394. CÓMO OPERA LA RETENCIÓN POR ARRENDAMIENTOS CUANDO HAY INTERMEDIACIÓN`, `ARTÍCULO 397. RETENCIÓN EN LA FUENTE EN TÍTULOS CON DESCUENTO`, `ARTÍCULO 400. EXCEPCIÓN`, `ARTÍCULO 401-4. RETENCIÓN EN LA FUENTE EN PAGOS DE TARJETAS DÉBITO Y CRÉDITO`, `ARTÍCULO 404. TRATAMIENTO DE LAS APUESTAS`, `ARTÍCULO 405. LA RETENCIÓN ES REQUISITOS PARA LA ACEPTACIÓN DE LA DEUDA`, `ARTÍCULO 49`?**
-  _High betweenness centrality (0.208) - this node is a cross-community bridge._
-- **Why does `LIBRO QUINTO - PROCEDIMIENTO TRIBUTARIO, SANCIONES Y ESTRUCTURA DE LA DIRECCION GENERAL DE IMPUESTOS NACIONALES` connect `LIBRO QUINTO - PROCEDIMIENTO TRIBUTARIO, SANCIONES Y ESTRUCTURA DE LA DIRECCION GENERAL DE IMPUESTOS NACIONALES` to `ARTÍCULO 570. CONSTANCIA DE LOS RECURSOS`, `ARTÍCULO 573. RESPONSABILIDAD SUBSIDIARIA DE LOS REPRESENTANTES POR INCUMPLIMIENTO DE DEBERES FORMALES`, `ARTÍCULO 611. CASOS EN QUE INTERVIENEN LAS MISMAS PARTES`, `ARTÍCULO 682. INCUMPLIMIENTO DE LOS TÉRMINOS PARA DEVOLVER`, `ARTÍCULO 696. UN REQUERIMIENTO Y UNA LIQUIDACIÓN PUEDEN REFERIRSE A RENTA Y VENTAS`, `ARTÍCULO 741. RECURSO EQUIVOCADOS`, `ARTÍCULO 746. PRESUNCIÓN DE VERACIDAD`, `ARTÍCULO 785. VALORACIÓN DEL DICTAMEN`, `ARTÍCULO 791. DE LAS TRANSACCIONES EFECTUADAS CON PERSONAS FALLECIDAS`, `ARTÍCULO 799. RESPONSABILIDAD DE LOS BANCOS POR PAGO IRREGULAR DE CHEQUE FISCALES`, `LIBRO SÉPTIMO - (Libro, Adicionado por el Art. 139 de la Ley 1819 de 2016)`?**
-  _High betweenness centrality (0.199) - this node is a cross-community bridge._
+- **Why does `Estatuto Tributario Nacional de Colombia` connect `Estatuto Tributario Nacional de Colombia` to `LIBRO PRIMERO - de este Estatuto`, `LIBRO QUINTO - PROCEDIMIENTO TRIBUTARIO, SANCIONES Y ESTRUCTURA DE LA DIRECCION GENERAL DE IMPUESTOS NACIONALES`, `LIBRO TERCERO - IMPUESTO SOBRE LAS VENTAS`, `LIBRO PRIMERO - IMPUESTO SOBRE LA RENTA Y COMPLEMENTARIOS`, `LIBRO SÉPTIMO - (Libro, Adicionado por el Art. 139 de la Ley 1819 de 2016)`, `LIBRO CUARTO - IMPUESTOS DE TIMBRE NACIONAL`, `LIBRO OCTAVO - (Libro, Sustituido por el Art. 74 de la Ley 2010 de 2019)`, `LIBRO SEXTO - "`?**
+  _High betweenness centrality (0.283) - this node is a cross-community bridge._
+- **Why does `LIBRO PRIMERO - de este Estatuto` connect `LIBRO PRIMERO - de este Estatuto` to `ARTÍCULO 57-2`, `ARTÍCULO 88-1. DESCONOCIMIENTO DE COSTOS Y GASTOS POR CAMPAÑAS DE PUBLICIDAD DE PRODUCTOS EXTRANJEROS`, `ARTÍCULO 90-3. ENAJENACIONES INDIRECTAS`, `Estatuto Tributario Nacional de Colombia`, `ARTÍCULO 103. DEFINICIÓN`, `ARTÍCULO 177. LAS LIMITACIONES A COSTOS SE APLICAN A LAS DEDUCCIONES`, `ARTÍCULO 205. RENTA GRAVABLE POR CERTIFICADOS DE DESARROLLO TURÍSTICO`, `ARTÍCULO 235. LAS EXENCIONES SOLO BENEFICIAN A SU TITULAR`, `ARTÍCULO 239. NO HABRÁ LUGAR A LA COMPARACIÓN PATRIMONIAL`, `ARTÍCULO 248. TARIFA ESPECIAL PARA ALGUNOS PAGOS AL EXTERIOR EFECTUADOS POR CONSTRUCTORES COLOMBIANOS`, `ARTÍCULO 259-1`, `ARTÍCULO 260-5`, `ARTÍCULO 260. INTRANSFERIBILIDAD DE LOS DESCUENTOS TRIBUTARIOS`, `ARTÍCULO 281. EFECTOS DEL REAJUSTE FISCAL`, `ARTÍCULO 282. CONCEPTO`, `ARTÍCULO 287. VALOR PATRIMONIAL DE LAS DEUDAS`, `ARTÍCULO 291. RÉGIMEN DE TRANSICIÓN POR LOS AJUSTES DE DIFERENCIA EN CAMBIO`, `ARTÍCULO 298-8. REMISIÓN`, `ARTÍCULO 306. EL IMPUESTO DEBE SER RETENIDO EN LA FUENTE`, `ARTÍCULO 310. OTRAS EXENCIONES`, `ARTÍCULO 312. CASOS EN LOS CUALES NO SE ACEPTAN PÉRDIDAS OCASIONALES`, `ARTÍCULO 318. TRATAMIENTO DE LA GANANCIA OCASIONAL COMO RENTA`, `ARTÍCULO 319. APORTES A SOCIEDADES NACIONALES`, `ARTÍCULO 320. CASO EN EL QUE SE PRESUME LA TRANSFERENCIA`, `ARTÍCULO 321. CONCEPTOS, BASE GRAVABLE Y TARIFAS`, `ARTÍCULO 324. EXENCIÓN A LAS REGALÍAS`, `ARTÍCULO 328. RECAUDO Y CONTROL`, `ARTÍCULO 334. FACULTADES DE FISCALIZACIÓN`, `ARTÍCULO 336-1`, `ARTÍCULO 337. INGRESOS DE LAS RENTAS DE PENSIONES`, `ARTÍCULO 339. RENTA LÍQUIDA CEDULAR DE LAS RENTAS DE CAPITAL`, `ARTÍCULO 341. RENTA LÍQUIDA CEDULAR DE LAS RENTAS NO LABORALES`, `ARTÍCULO 344. REGISTRO CONTABLE DE LOS AJUSTES A LOS PASIVOS`, `ARTÍCULO 347. AJUSTES AL PATRIMONIO LÍQUIDO QUE HA SUFRIDO DISMINUCIONES O AUMENTOS DURANTE EL AÑO`, `ARTÍCULO 352. TRATAMIENTOS DE LAS GANANCIAS OCASIONALES`, `ARTÍCULO 382. OBLIGACIÓN DE DECLARAR`, `ARTÍCULO 388`, `ARTÍCULO 391. TARIFAS`, `ARTÍCULO 394. CÓMO OPERA LA RETENCIÓN POR ARRENDAMIENTOS CUANDO HAY INTERMEDIACIÓN`, `ARTÍCULO 397. RETENCIÓN EN LA FUENTE EN TÍTULOS CON DESCUENTO`, `ARTÍCULO 400. EXCEPCIÓN`, `ARTÍCULO 401-4. RETENCIÓN EN LA FUENTE EN PAGOS DE TARJETAS DÉBITO Y CRÉDITO`, `ARTÍCULO 404. TRATAMIENTO DE LAS APUESTAS`, `ARTÍCULO 405. LA RETENCIÓN ES REQUISITOS PARA LA ACEPTACIÓN DE LA DEUDA`, `ARTÍCULO 49`?**
+  _High betweenness centrality (0.209) - this node is a cross-community bridge._
+- **Why does `LIBRO QUINTO - PROCEDIMIENTO TRIBUTARIO, SANCIONES Y ESTRUCTURA DE LA DIRECCION GENERAL DE IMPUESTOS NACIONALES` connect `LIBRO QUINTO - PROCEDIMIENTO TRIBUTARIO, SANCIONES Y ESTRUCTURA DE LA DIRECCION GENERAL DE IMPUESTOS NACIONALES` to `ARTÍCULO 570. CONSTANCIA DE LOS RECURSOS`, `ARTÍCULO 573. RESPONSABILIDAD SUBSIDIARIA DE LOS REPRESENTANTES POR INCUMPLIMIENTO DE DEBERES FORMALES`, `ARTÍCULO 611. CASOS EN QUE INTERVIENEN LAS MISMAS PARTES`, `ARTÍCULO 682. INCUMPLIMIENTO DE LOS TÉRMINOS PARA DEVOLVER`, `ARTÍCULO 696. UN REQUERIMIENTO Y UNA LIQUIDACIÓN PUEDEN REFERIRSE A RENTA Y VENTAS`, `ARTÍCULO 741. RECURSO EQUIVOCADOS`, `ARTÍCULO 746. PRESUNCIÓN DE VERACIDAD`, `ARTÍCULO 785. VALORACIÓN DEL DICTAMEN`, `ARTÍCULO 791. DE LAS TRANSACCIONES EFECTUADAS CON PERSONAS FALLECIDAS`, `ARTÍCULO 799. RESPONSABILIDAD DE LOS BANCOS POR PAGO IRREGULAR DE CHEQUE FISCALES`, `Estatuto Tributario Nacional de Colombia`?**
+  _High betweenness centrality (0.204) - this node is a cross-community bridge._
 - **What connects `obtener_tabla_componente_inflacionario`, `simular_componente_inflacionario_endpoint`, `simular_combinabilidad_endpoint` to the rest of the system?**
-  _1623 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _1628 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `test_coverage_boost.py` be split into smaller, more focused modules?**
   _Cohesion score 0.06451612903225806 - nodes in this community are weakly interconnected._
 - **Should `session_store.py` be split into smaller, more focused modules?**

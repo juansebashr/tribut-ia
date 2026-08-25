@@ -293,3 +293,86 @@ export async function simularTributacionPareja(
   return await res.json();
 }
 
+// RETENCIÓN EN LA FUENTE
+export async function calculateRetefuenteLaboral(
+  payload: import('../types/tax').RetefuenteLaboralInput
+): Promise<import('../types/tax').RetefuenteLaboralOutput> {
+  const res = await fetch(`${API_BASE_URL}/calculate/retefuente/laboral`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
+  });
+  if (!res.ok) {
+    const errorData = await res.json().catch(() => ({}));
+    throw new Error(errorData.detail || 'Error en depuración de retención laboral');
+  }
+  return await res.json();
+}
+
+export async function calculateRetefuenteF350(
+  payload: import('../types/tax').RetefuenteF350Input
+): Promise<import('../types/tax').RetefuenteF350Output> {
+  const res = await fetch(`${API_BASE_URL}/calculate/retefuente/f350`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
+  });
+  if (!res.ok) {
+    const errorData = await res.json().catch(() => ({}));
+    throw new Error(errorData.detail || 'Error en liquidación Formulario 350');
+  }
+  return await res.json();
+}
+
+export async function fetchTablaRetefuente(
+  year: number,
+  customUvt?: number
+): Promise<import('../types/tax').TablaRetefuenteItem[]> {
+  const query = customUvt ? `?year=${year}&custom_uvt=${customUvt}` : `?year=${year}`;
+  const res = await fetch(`${API_BASE_URL}/calculate/retefuente/tabla-retenciones${query}`);
+  if (!res.ok) {
+    throw new Error('Error al consultar tabla de retenciones');
+  }
+  return await res.json();
+}
+
+// IMPUESTO SOBRE LAS VENTAS (IVA)
+export async function calculateIvaF300(
+  payload: import('../types/tax').IvaF300Input
+): Promise<import('../types/tax').IvaF300Output> {
+  const res = await fetch(`${API_BASE_URL}/calculate/iva/f300`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
+  });
+  if (!res.ok) {
+    const errorData = await res.json().catch(() => ({}));
+    throw new Error(errorData.detail || 'Error en liquidación Formulario 300 IVA');
+  }
+  return await res.json();
+}
+
+export async function calculateIvaProrrateo(
+  payload: import('../types/tax').IvaProrrateoInput
+): Promise<import('../types/tax').IvaProrrateoOutput> {
+  const res = await fetch(`${API_BASE_URL}/calculate/iva/prorrateo`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
+  });
+  if (!res.ok) {
+    const errorData = await res.json().catch(() => ({}));
+    throw new Error(errorData.detail || 'Error en cálculo de prorrateo de IVA');
+  }
+  return await res.json();
+}
+
+export async function fetchClasificadorIva(): Promise<import('../types/tax').BienServicioIvaItem[]> {
+  const res = await fetch(`${API_BASE_URL}/calculate/iva/clasificador`);
+  if (!res.ok) {
+    throw new Error('Error al consultar clasificador de IVA');
+  }
+  return await res.json();
+}
+
+

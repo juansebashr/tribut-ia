@@ -152,8 +152,14 @@ class TestFiscolEndToEnd:
             ("nav-item-presentacion", "#pane-presentacion"),
             ("nav-item-art73", "#pane-art73"),
             ("nav-item-inmuebles-afc", "#pane-inmuebles-afc"),
-            ("nav-item-iva", "#pane-iva"),
-            ("nav-item-retefuente", "#pane-retefuente"),
+            ("nav-item-iva-calc", "#pane-iva-calc"),
+            ("nav-item-iva-f300", "#pane-iva-f300"),
+            ("nav-item-iva-prorrateo", "#pane-iva-prorrateo"),
+            ("nav-item-iva-clasificador", "#pane-iva-clasificador"),
+            ("nav-item-retefuente-calc", "#pane-retefuente-calc"),
+            ("nav-item-retefuente-f350", "#pane-retefuente-f350"),
+            ("nav-item-retefuente-laboral", "#pane-retefuente-laboral"),
+            ("nav-item-retefuente-tabla", "#pane-retefuente-tabla"),
         ]
 
         for nav_id, pane_id in modules:
@@ -210,6 +216,8 @@ class TestFiscolEndToEnd:
         page.wait_for_timeout(400)
 
         # 1. Modificar impuesto anterior en auditoría
+        page.click("text=⚡ Beneficio de Auditoría")
+        page.wait_for_timeout(300)
         page.fill("#sim-aud-impuesto-ant", "15'000.000")
         page.wait_for_timeout(400)
         aud_result = page.inner_text("#sim-aud-result")
@@ -217,6 +225,8 @@ class TestFiscolEndToEnd:
         assert "FIRMEZA EN 12 MESES" in aud_result
 
         # 2. Probar calculadora de sanciones - Corrección con Intereses de Mora
+        page.click("text=🧮 Calculadora de Sanciones")
+        page.wait_for_timeout(300)
         page.fill("#sancion-calc-monto-base", "50'000.000")
         page.wait_for_timeout(400)
         sancion_result = page.inner_text("#sancion-calc-result-box")
@@ -815,3 +825,165 @@ class TestResponsiveAndMobileMode:
         )
 
         assert len(errors) == 0, f"Errores en prueba de spreadsheet con sidebar extendido: {errors}"
+
+    def test_all_groups_and_subtabs_design_standardization(
+        self, page_with_error_tracking: tuple[Page, list[str]], live_server_url: str
+    ):
+        """Verifica que todos los submódulos y pestañas de todos los grupos sigan las clases estandarizadas de diseño."""
+        page, errors = page_with_error_tracking
+        page.goto(f"{live_server_url}/#app/pn", wait_until="domcontentloaded")
+        page.wait_for_timeout(500)
+
+        # 1. Probar cada grupo con subtabs y validar presencia de clases estándar
+        routes_to_test = [
+            # PERSONA NATURAL
+            ("pn", "calc", "#pane-pn-calc", [".presets-toolbar", ".calc-grid", ".results-card"]),
+            ("pn", "f210", "#pane-pn-f210", [".facsimile-action-bar", ".f210-sheet-wrapper"]),
+            ("pn", "marginal", "#pane-pn-marginal", [".marginal-kpi-grid"]),
+            # PERSONA JURÍDICA
+            ("pj", "calc", "#pane-pj-calc", [".presets-toolbar", ".calc-grid", ".results-card"]),
+            ("pj", "f110", "#pane-pj-f110", [".facsimile-action-bar", ".f110-sheet-wrapper"]),
+            ("pj", "ttd", "#pane-pj-ttd", [".card"]),
+            ("pj", "sobretasas", "#pane-pj-sobretasas", [".card"]),
+            # RÉGIMEN SIMPLE
+            (
+                "simple",
+                "calc",
+                "#pane-simple-calc",
+                [".presets-toolbar", ".calc-grid", ".results-card"],
+            ),
+            (
+                "simple",
+                "f260",
+                "#pane-simple-f260",
+                [".facsimile-action-bar", ".f260-sheet-wrapper"],
+            ),
+            ("simple", "comparador", "#pane-simple-comparador", [".card"]),
+            ("simple", "f2593", "#pane-simple-f2593", [".card"]),
+            ("simple", "requisitos", "#pane-simple-requisitos", [".card"]),
+            # RETENCIÓN EN LA FUENTE
+            (
+                "retefuente",
+                "calc",
+                "#pane-retefuente-calc",
+                [".presets-toolbar", ".calc-grid", ".results-card"],
+            ),
+            (
+                "retefuente",
+                "f350",
+                "#pane-retefuente-f350",
+                [".facsimile-action-bar", ".f350-sheet-wrapper"],
+            ),
+            (
+                "retefuente",
+                "laboral",
+                "#pane-retefuente-laboral",
+                [".presets-toolbar", ".calc-grid"],
+            ),
+            ("retefuente", "tabla", "#pane-retefuente-tabla", [".card"]),
+            # IVA
+            ("iva", "calc", "#pane-iva-calc", [".presets-toolbar", ".calc-grid", ".results-card"]),
+            ("iva", "f300", "#pane-iva-f300", [".facsimile-action-bar", ".f300-sheet-wrapper"]),
+            ("iva", "prorrateo", "#pane-iva-prorrateo", [".calc-grid", ".results-card"]),
+            ("iva", "clasificador", "#pane-iva-clasificador", [".card"]),
+            # HERRAMIENTAS Y SIMULADORES
+            ("art73", None, "#pane-art73", [".card"]),
+            ("inmuebles-afc", None, "#pane-inmuebles-afc", [".presets-toolbar", ".card"]),
+            ("tributacion-pareja", None, "#pane-tributacion-pareja", [".presets-toolbar", ".card"]),
+            ("beneficios", None, "#pane-beneficios", [".beneficio-card"]),
+            ("presentacion", None, "#pane-presentacion", [".card"]),
+            ("calendario", None, "#pane-calendario", [".calendar-search-box"]),
+            ("inflacionario", None, "#pane-inflacionario", [".module-subtabs-nav", ".card"]),
+            ("glosario", None, "#pane-glosario", [".card"]),
+            ("rules", None, "#pane-rules", [".card"]),
+        ]
+
+        for mod, subtab, pane_selector, expected_selectors in routes_to_test:
+            if subtab:
+                url_route = f"{live_server_url}/#app/{mod}/{subtab}"
+            else:
+                url_route = f"{live_server_url}/#app/{mod}"
+
+            page.goto(url_route, wait_until="domcontentloaded")
+            page.wait_for_timeout(300)
+
+            # Verificar que el contenedor principal esté visible
+            pane = page.locator(pane_selector)
+            assert pane.is_visible(), (
+                f"El panel {pane_selector} para {mod}/{subtab} no está visible"
+            )
+
+            # Verificar la presencia de cada clase/elemento de diseño estandarizado
+            for exp_sel in expected_selectors:
+                el = page.locator(f"{pane_selector} {exp_sel}").first
+                assert el.is_visible(), (
+                    f"Elemento de diseño estandarizado '{exp_sel}' no visible en {mod}/{subtab}"
+                )
+
+        assert len(errors) == 0, f"Errores de consola en prueba de estandarización: {errors}"
+
+    def test_casilla_popover_auto_dismiss_on_navigation_and_clean_subtabs(
+        self, page_with_error_tracking: tuple[Page, list[str]], live_server_url: str
+    ):
+        """Verifica que abrir la información de una casilla y cambiar de pestaña/módulo cierre el popover, y que las subpestañas no se dupliquen."""
+        page, errors = page_with_error_tracking
+        page.goto(f"{live_server_url}/#app/pn/f210", wait_until="domcontentloaded")
+        page.wait_for_timeout(500)
+
+        # 1. Abrir información de casilla en F-210
+        casilla_badge = page.locator(".badge-casilla").first
+        if casilla_badge.is_visible():
+            casilla_badge.click()
+        else:
+            page.evaluate("showCasillaPopover('28')")
+        page.wait_for_timeout(300)
+
+        popover = page.locator("#casilla-popover")
+        assert popover.is_visible(), "El popover de casilla debió abrirse"
+
+        # 2. Cambiar de subpestaña (a Tarifa Marginal)
+        page.click("#sub-tab-btn-pn-marginal")
+        page.wait_for_timeout(300)
+
+        # 3. El popover debe haberse cerrado automáticamente
+        assert not popover.is_visible(), "El popover debió cerrarse al cambiar de subpestaña"
+
+        # 4. Ir a F-110 (Persona Jurídica), abrir popover y cambiar de módulo
+        page.goto(f"{live_server_url}/#app/pj/f110", wait_until="domcontentloaded")
+        page.wait_for_timeout(400)
+        page.evaluate("showCasillaPopover('110')")
+        page.wait_for_timeout(300)
+        assert popover.is_visible(), "El popover debió abrirse en F-110"
+
+        # Cambiar de módulo a Régimen Simple
+        page.click("#nav-item-simple-calc")
+        page.wait_for_timeout(400)
+        assert not popover.is_visible(), "El popover debió cerrarse al cambiar de módulo"
+
+        # 5. Validar que no existan barras de subpestañas duplicadas dentro de los contenedores de módulos
+        mod_map = {
+            "pn": "module-persona-natural",
+            "pj": "module-persona-juridica",
+            "simple": "module-regimen-simple",
+            "retefuente": "module-retefuente",
+            "iva": "module-iva",
+        }
+        for mod, container_id in mod_map.items():
+            page.goto(f"{live_server_url}/#app/{mod}/calc", wait_until="domcontentloaded")
+            page.wait_for_timeout(300)
+
+            # Debe haber una barra en HeaderBar
+            header_subtabs = page.locator(".sub-tabs-container")
+            assert header_subtabs.is_visible(), (
+                f"La barra de subpestañas debe estar en HeaderBar para {mod}"
+            )
+
+            # NO debe haber barra duplicada dentro del module body
+            inner_duplicate_nav = page.locator(
+                f"#{container_id} .subtabs-bar, #{container_id} .module-subtabs-nav"
+            )
+            assert inner_duplicate_nav.count() == 0, (
+                f"No debe haber barra de subpestañas duplicada dentro de #{container_id}"
+            )
+
+        assert len(errors) == 0, f"Errores en prueba de popover y subpestañas: {errors}"

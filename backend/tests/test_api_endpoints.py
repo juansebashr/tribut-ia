@@ -162,3 +162,59 @@ def test_favicon_endpoints():
         assert r_png.status_code == 200
         assert "image/png" in r_png.headers["content-type"]
         assert len(r_png.content) > 500
+
+
+def test_api_retefuente_endpoints():
+    r_tabla = client.get("/api/v1/calculate/retefuente/tabla-retenciones?year=2026")
+    assert r_tabla.status_code == 200
+    assert len(r_tabla.json()) > 10
+
+    r_lab = client.post(
+        "/api/v1/calculate/retefuente/laboral",
+        json={"tax_year": 2026, "salario_basico": 10000000},
+    )
+    assert r_lab.status_code == 200
+    assert r_lab.json()["total_ingresos_brutos_laborales"] == 10000000
+
+    r_f350 = client.post(
+        "/api/v1/calculate/retefuente/f350",
+        json={"tax_year": 2026, "periodo_mes": 1, "base_compras_declarante": 50000000},
+    )
+    assert r_f350.status_code == 200
+    assert r_f350.json()["total_retenciones_renta_practicadas"] == 1250000
+
+
+def test_api_iva_endpoints():
+    r_cat = client.get("/api/v1/calculate/iva/clasificador")
+    assert r_cat.status_code == 200
+    assert len(r_cat.json()) > 10
+
+    r_prorrateo = client.post(
+        "/api/v1/calculate/iva/prorrateo",
+        json={
+            "tax_year": 2026,
+            "ingresos_gravados_19": 80000000,
+            "ingresos_gravados_5": 0,
+            "ingresos_exentos_0": 0,
+            "ingresos_excluidos": 20000000,
+            "iva_comun_en_compras_gastos": 10000000,
+        },
+    )
+    assert r_prorrateo.status_code == 200
+    assert r_prorrateo.json()["factor_prorrateo_porcentaje"] == 80.0
+    assert r_prorrateo.json()["iva_descontable_aceptado_f300"] == 8000000
+
+    r_f300 = client.post(
+        "/api/v1/calculate/iva/f300",
+        json={
+            "tax_year": 2026,
+            "tipo_periodicidad": "BIMESTRAL",
+            "periodo": 1,
+            "ingresos_bienes_gravados_19": 100000000,
+            "compras_bienes_gravados_19": 50000000,
+        },
+    )
+    assert r_f300.status_code == 200
+    assert r_f300.json()["total_iva_generado"] == 19000000
+    assert r_f300.json()["total_iva_descontable"] == 9500000
+    assert r_f300.json()["total_saldo_a_pagar"] == 9500000

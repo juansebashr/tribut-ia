@@ -9,9 +9,9 @@ Esta guía explica los conceptos fundamentales del sistema tributario colombiano
 * **Fundamento Legal:** Artículo 868 del Estatuto Tributario.
 * **Propósito:** Es la unidad de medida estándar que utiliza la DIAN para actualizar anualmente los valores de los topes, rangos de impuestos, deducciones y sanciones sin requerir reformas tributarias del Congreso.
 * **Histórico y Proyección:**
-  - 2024: $47.065 COP
-  - 2025: $49.799 COP
-  - 2026: $52.350 COP (proyectada paramétricamente)
+  * 2024: $47.065 COP
+  * 2025: $49.799 COP
+  * 2026: $52.350 COP (proyectada paramétricamente)
 
 ---
 
@@ -30,8 +30,8 @@ Esta guía explica los conceptos fundamentales del sistema tributario colombiano
 * **Rentas Exentas & Deducciones (Art. 336 E.T.):** 25% de exención laboral, intereses de vivienda (Art. 119), medicina prepagada y cuentas AFC (Art. 126-4).
 * **Techo Legal del 40%:** La suma de deducciones y rentas exentas imputables no puede superar el 40% de la renta líquida del contribuyente ni un tope máximo de **1.340 UVT** ($70.149.000 COP en 2026).
 * **Beneficios Extra-Cupo (Ley 2277 de 2022):**
-  - **72 UVT** por dependiente adicional (hasta 4 dependientes = 288 UVT).
-  - **1% de compras** con factura electrónica pagadas con medios electrónicos (hasta 240 UVT).
+  * **72 UVT** por dependiente adicional (hasta 4 dependientes = 288 UVT).
+  * **1% de compras** con factura electrónica pagadas con medios electrónicos (hasta 240 UVT).
 
 ---
 

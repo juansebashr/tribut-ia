@@ -72,9 +72,9 @@
     "semantic_hash": "1a84c7cae63f42446ee7eab679acacab"
   },
   "backend/app/api/v1/router.py": {
-    "mtime": 1787542589.1281672,
-    "seen": 1787542661.240321,
-    "ast_hash": "e5b7100b14d65fb8e2563d40f4c98925",
+    "mtime": 1787623828.259551,
+    "seen": 1787624466.451034,
+    "ast_hash": "b09c07c92f25ca4f7beba442a19625fb",
     "semantic_hash": ""
   },
   "backend/app/core/__init__.py": {
@@ -186,9 +186,9 @@
     "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
   },
   "backend/tests/test_api_endpoints.py": {
-    "mtime": 1787547413.501722,
-    "seen": 1787547510.992936,
-    "ast_hash": "a7c4eb6b1b767167d3428818c812dd0c",
+    "mtime": 1787624457.1431818,
+    "seen": 1787624466.451784,
+    "ast_hash": "5251081b80c66f9f3c2028501856345b",
     "semantic_hash": ""
   },
   "backend/tests/test_beneficios_and_go.py": {
@@ -606,9 +606,9 @@
     "semantic_hash": ""
   },
   "backend/tests/test_e2e_playwright.py": {
-    "mtime": 1787547413.5025592,
-    "seen": 1787547510.99305,
-    "ast_hash": "dda4e47b4339d5929344439f993828c8",
+    "mtime": 1787635785.0117621,
+    "seen": 1787635897.9221141,
+    "ast_hash": "cd1dfbeafb965c93ddbdc5e4d58d8016",
     "semantic_hash": ""
   },
   "skills/declaracion-renta-persona-natural/scripts/simular_inmuebles_afc.py": {
@@ -954,9 +954,9 @@
     "semantic_hash": ""
   },
   "docs/how-to/08-skill-control-comparacion-patrimonial.md": {
-    "mtime": 1787588039.193517,
-    "seen": 1787588161.454838,
-    "ast_hash": "161ab208cff7ce1252378aaf050bf55e",
+    "mtime": 1787635370.3114817,
+    "seen": 1787635897.923551,
+    "ast_hash": "39ad902b747f704ebfd8fa77271869e4",
     "semantic_hash": ""
   },
   "skills/control-comparacion-patrimonial/README.md": {
@@ -978,9 +978,57 @@
     "semantic_hash": ""
   },
   "docs/explanation/02-glosario-conceptos-basicos-tributarios.md": {
-    "mtime": 1787604516.419231,
-    "seen": 1787604575.417613,
-    "ast_hash": "0ac8e690ac0fca3119b7c2dee5941d11",
+    "mtime": 1787635360.6796155,
+    "seen": 1787635897.9233532,
+    "ast_hash": "1790753cb48a0c94a70030f551337dee",
+    "semantic_hash": ""
+  },
+  "backend/app/api/v1/endpoints/iva.py": {
+    "mtime": 1787623769.1912057,
+    "seen": 1787624466.450786,
+    "ast_hash": "81c69c9b53880da410a9121e4c5f86c5",
+    "semantic_hash": ""
+  },
+  "backend/app/api/v1/endpoints/retefuente.py": {
+    "mtime": 1787623766.0250292,
+    "seen": 1787624466.4509282,
+    "ast_hash": "0d5d80992c216b6e1c67d88b296f526d",
+    "semantic_hash": ""
+  },
+  "backend/app/models/iva.py": {
+    "mtime": 1787623828.2596326,
+    "seen": 1787624466.4513128,
+    "ast_hash": "6a1db5896e0ff07eceb6910f90e86161",
+    "semantic_hash": ""
+  },
+  "backend/app/models/retefuente.py": {
+    "mtime": 1787623828.2596698,
+    "seen": 1787624466.451401,
+    "ast_hash": "ddc3230416556e0c17ca65b48d53148a",
+    "semantic_hash": ""
+  },
+  "backend/app/services/liquidacion_iva.py": {
+    "mtime": 1787623828.2598948,
+    "seen": 1787624466.45152,
+    "ast_hash": "bde83194d1cf16d5caf89417822d0aa0",
+    "semantic_hash": ""
+  },
+  "backend/app/services/liquidacion_retefuente.py": {
+    "mtime": 1787623849.4225943,
+    "seen": 1787624466.4515798,
+    "ast_hash": "81f490ece65a2152bddb2c4624902a46",
+    "semantic_hash": ""
+  },
+  "backend/tests/test_iva_calculator.py": {
+    "mtime": 1787623788.510249,
+    "seen": 1787624466.451982,
+    "ast_hash": "d448661974042415ff3d62d5c7701de9",
+    "semantic_hash": ""
+  },
+  "backend/tests/test_retefuente_calculator.py": {
+    "mtime": 1787623782.6107662,
+    "seen": 1787624466.45207,
+    "ast_hash": "4fc66d13391f02683e43ba872d487c4b",
     "semantic_hash": ""
   }
 }

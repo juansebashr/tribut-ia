@@ -2,10 +2,12 @@ from fastapi import APIRouter
 
 from app.api.v1.endpoints import (
     beneficios,
+    iva,
     persona_juridica,
     persona_natural,
     reconciliation,
     regimen_simple,
+    retefuente,
     rules,
     session_sync,
     simulation,
@@ -32,6 +34,14 @@ api_router.include_router(regimen_simple.router, prefix="/regimen-simple", tags=
 api_router.include_router(
     regimen_simple.router, prefix="/calculate/simple", tags=["Régimen Simple"]
 )
+api_router.include_router(
+    retefuente.router, prefix="/calculate/retefuente", tags=["Retención en la Fuente"]
+)
+api_router.include_router(retefuente.router, prefix="/retefuente", tags=["Retención en la Fuente"])
+api_router.include_router(
+    iva.router, prefix="/calculate/iva", tags=["Impuesto sobre las Ventas (IVA)"]
+)
+api_router.include_router(iva.router, prefix="/iva", tags=["Impuesto sobre las Ventas (IVA)"])
 api_router.include_router(rules.router, prefix="/rules", tags=["Reglas y Parámetros"])
 api_router.include_router(simulation.router, prefix="/simulation", tags=["Simulación y Planeación"])
 api_router.include_router(beneficios.router, prefix="/beneficios", tags=["Beneficios y Auditoría"])

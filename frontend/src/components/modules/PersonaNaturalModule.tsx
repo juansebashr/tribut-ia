@@ -185,19 +185,21 @@ export const PersonaNaturalModule: React.FC = () => {
     showToast('✨ Ejemplo con Ganancia Ocasional cargado', 'info', 2000);
   };
 
+  const currentSubTab = activeSubTab || 'calc';
+
   return (
-    <>
-      {activeSubTab === 'f210' ? (
+    <div id="module-persona-natural">
+      {currentSubTab === 'f210' ? (
         <PnF210Subtab result={result} onNavigateToCalc={() => navigateTo('pn', 'calc')} />
-      ) : activeSubTab === 'marginal' ? (
+      ) : currentSubTab === 'marginal' ? (
         <PnMarginalSubtab
           result={result}
           uvtValue={uvtValue}
           onNavigateToCalc={() => navigateTo('pn', 'calc')}
         />
-      ) : activeSubTab === 'conciliacion' ? (
+      ) : currentSubTab === 'conciliacion' ? (
         <PnConciliacionSubtab />
-      ) : activeSubTab === 'comparacion_patrimonial' ? (
+      ) : currentSubTab === 'comparacion_patrimonial' ? (
         <PnComparacionPatrimonialSubtab
           currentPnInputs={inputs}
           currentPnResult={result}
@@ -262,6 +264,6 @@ export const PersonaNaturalModule: React.FC = () => {
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 };

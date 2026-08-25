@@ -176,48 +176,45 @@ export const ComponenteInflacionarioModule: React.FC = () => {
         </p>
       </div>
 
-      {/* SUB-TABS NAVIGATION */}
-      <div style={{ display: 'flex', gap: '8px', borderBottom: '1px solid var(--border-color)', marginBottom: '20px', overflowX: 'auto', paddingBottom: '4px' }}>
+      {/* SUB-TABS NAVIGATION ESTANDARIZADA */}
+      <div className="module-subtabs-nav">
         <button
-          className={`btn btn-sm ${activeSubTab === 'simulador' ? 'btn-primary' : 'btn-outline'}`}
+          className={`module-subtab-btn ${activeSubTab === 'simulador' ? 'active' : ''}`}
           onClick={() => setActiveSubTab('simulador')}
-          style={{ fontSize: '12.5px', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '6px' }}
         >
-          <span>🧮</span> Simulador Componente Inflacionario
+          <span>🧮</span> 1. Simulador Componente Inflacionario
         </button>
         <button
-          className={`btn btn-sm ${activeSubTab === 'tabla' ? 'btn-primary' : 'btn-outline'}`}
+          className={`module-subtab-btn ${activeSubTab === 'tabla' ? 'active' : ''}`}
           onClick={() => setActiveSubTab('tabla')}
-          style={{ fontSize: '12.5px', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '6px' }}
         >
-          <span>📜</span> Tabla Histórica de Decretos (2018-2026)
+          <span>📜</span> 2. Tabla Histórica de Decretos (2018-2026)
         </button>
         <button
-          className={`btn btn-sm ${activeSubTab === 'guia' ? 'btn-primary' : 'btn-outline'}`}
+          className={`module-subtab-btn ${activeSubTab === 'guia' ? 'active' : ''}`}
           onClick={() => setActiveSubTab('guia')}
-          style={{ fontSize: '12.5px', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '6px' }}
         >
-          <span>📖</span> Fundamentos Legales &amp; Normativa
+          <span>📖</span> 3. Fundamentos Legales &amp; Normativa
         </button>
       </div>
 
       {/* TAB 1: SIMULADOR INDIVIDUAL */}
       {activeSubTab === 'simulador' && (
         <div>
-          {/* BARRA DE PRESETS EJEMPLOS */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap', marginBottom: '18px', padding: '10px 14px', background: 'var(--bg-secondary)', borderRadius: '8px', border: '1px solid var(--border-color)' }}>
-            <span style={{ fontSize: '11.5px', fontWeight: 700, color: 'var(--text-secondary)' }}>
-              ⚡ Cargar Ejemplos Oficiales:
-            </span>
-            <button className="btn btn-outline btn-xs" onClick={loadPresetCdt2023} style={{ fontSize: '11.5px', borderRadius: '4px' }}>
-              🏦 CDT Banco 2023 ($15M - D.1006)
-            </button>
-            <button className="btn btn-outline btn-xs" onClick={loadPresetFics2024} style={{ fontSize: '11.5px', borderRadius: '4px' }}>
-              📈 FICs / Fondos 2024 ($35M - D.0572)
-            </button>
-            <button className="btn btn-outline btn-xs" onClick={loadPresetGastosIntereses} style={{ fontSize: '11.5px', borderRadius: '4px' }}>
-              💳 Intereses Pagados (Art. 118 E.T.)
-            </button>
+          {/* BARRA DE PRESETS EJEMPLOS ESTANDARIZADA */}
+          <div className="presets-toolbar">
+            <div className="presets-toolbar-group">
+              <span className="presets-toolbar-label">⚡ Cargar Ejemplos Oficiales:</span>
+              <button className="btn btn-outline btn-sm" onClick={loadPresetCdt2023}>
+                🏦 CDT Banco 2023 ($15M)
+              </button>
+              <button className="btn btn-outline btn-sm" onClick={loadPresetFics2024}>
+                📈 FICs / Fondos 2024 ($35M)
+              </button>
+              <button className="btn btn-outline btn-sm" onClick={loadPresetGastosIntereses}>
+                💳 Intereses Pagados (Art. 118)
+              </button>
+            </div>
           </div>
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '20px' }}>

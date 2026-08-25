@@ -249,44 +249,6 @@ export const RegimenSimpleModule: React.FC = () => {
 
   return (
     <div id="module-regimen-simple">
-      {/* NAVEGADOR DE SUBPESTAÑAS DE RÉGIMEN SIMPLE */}
-      <div className="subtabs-bar" style={{ marginBottom: '16px' }}>
-        <button
-          className={`subtab-btn ${currentSubTab === 'calc' ? 'active' : ''}`}
-          onClick={() => navigateTo('simple', 'calc')}
-        >
-          ⚡ 1. Calculadora Anual SIMPLE F-260
-        </button>
-
-        <button
-          className={`subtab-btn ${currentSubTab === 'f260' ? 'active' : ''}`}
-          onClick={() => navigateTo('simple', 'f260')}
-        >
-          📋 2. Formulario 260 Facsímil DIAN
-        </button>
-
-        <button
-          className={`subtab-btn ${currentSubTab === 'comparador' ? 'active' : ''}`}
-          onClick={() => navigateTo('simple', 'comparador')}
-        >
-          ⚖️ 3. Comparador Ordinario vs SIMPLE
-        </button>
-
-        <button
-          className={`subtab-btn ${currentSubTab === 'f2593' ? 'active' : ''}`}
-          onClick={() => navigateTo('simple', 'f2593')}
-        >
-          📅 4. Anticipos Bimestrales F-2593
-        </button>
-
-        <button
-          className={`subtab-btn ${currentSubTab === 'requisitos' ? 'active' : ''}`}
-          onClick={() => navigateTo('simple', 'requisitos')}
-        >
-          ✅ 5. Checklist Requisitos & Exclusiones
-        </button>
-      </div>
-
       {/* CONTENIDO DE CADA SUBPESTAÑA */}
       {currentSubTab === 'calc' && (
         <SimpleCalcSubtab

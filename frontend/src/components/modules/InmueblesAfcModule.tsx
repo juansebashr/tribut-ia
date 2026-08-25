@@ -157,17 +157,20 @@ export const InmueblesAfcModule: React.FC = () => {
         </p>
       </div>
 
-      {/* PRESETS BAR */}
-      <div style={{ display: 'flex', gap: '8px', marginBottom: '16px', flexWrap: 'wrap' }}>
-        <button className="btn btn-primary btn-sm" onClick={loadPresetEjemplo1}>
-          ✨ Cargar Ejemplo 1: Casa Adquirida en 2011 ($450M) + Cuenta AFC
-        </button>
-        <button className="btn btn-outline btn-sm" onClick={loadPresetPre1987}>
-          🏛️ Cargar Ejemplo 2: Inmueble Pre-1987 (Art. 44 y 399)
-        </button>
-        <button className="btn btn-outline btn-sm" onClick={loadPresetPredialArt72}>
-          📑 Cargar Ejemplo 3: Autoavalúo Predial (Art. 72)
-        </button>
+      {/* PRESETS BAR ESTANDARIZADA */}
+      <div className="presets-toolbar">
+        <div className="presets-toolbar-group">
+          <span className="presets-toolbar-label">⚡ Casos de Estudio:</span>
+          <button className="btn btn-outline btn-sm" onClick={loadPresetEjemplo1}>
+            ✨ Caso 1: Compra 2011 + Cuenta AFC ($450M)
+          </button>
+          <button className="btn btn-outline btn-sm" onClick={loadPresetPre1987}>
+            🏛️ Caso 2: Inmueble Pre-1987 (Art. 44)
+          </button>
+          <button className="btn btn-outline btn-sm" onClick={loadPresetPredialArt72}>
+            📑 Caso 3: Autoavalúo Predial (Art. 72)
+          </button>
+        </div>
       </div>
 
       {/* ========================================================================= */}

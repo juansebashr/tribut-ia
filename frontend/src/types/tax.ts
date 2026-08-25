@@ -917,3 +917,318 @@ export interface TributacionParejaResponse {
   audit_trace: AuditTraceItem[];
 }
 
+// RETENCIÓN EN LA FUENTE
+export interface TablaRetefuenteItem {
+  id: string;
+  concepto: string;
+  categoria: string;
+  base_minima_uvt: number;
+  base_minima_cop: number;
+  tarifa_declarante: number;
+  tarifa_no_declarante: number;
+  articulo_et: string;
+  observaciones: string;
+}
+
+export interface RetefuenteLaboralInput {
+  tax_year: number;
+  custom_uvt?: number;
+  mes_nombre?: string;
+  salario_basico: number;
+  comisiones_horas_extras?: number;
+  viaticos_gravados?: number;
+  otros_pagos_laborales?: number;
+  aporte_salud_obligatorio?: number;
+  aporte_pension_obligatorio?: number;
+  fondo_solidaridad_pensional?: number;
+  intereses_vivienda_mes?: number;
+  medicina_prepagada_mes?: number;
+  aplica_dependiente_10pct?: boolean;
+  numero_dependientes_adicionales_72uvt?: number;
+  aportes_voluntarios_pension_afc?: number;
+  otras_rentas_exentas?: number;
+  solicitar_25pct_exenta_laboral?: boolean;
+}
+
+export interface RetefuenteLaboralOutput {
+  tax_year: number;
+  uvt_value: number;
+  mes_nombre: string;
+  total_ingresos_brutos_laborales: number;
+  total_incrngo_seguridad_social: number;
+  ingreso_laboral_neto: number;
+  total_deducciones_solicitadas: number;
+  total_deducciones_aceptadas: number;
+  total_rentas_exentas_previas: number;
+  renta_exenta_laboral_25_aceptada: number;
+  total_rentas_exentas_aceptadas: number;
+  subtotal_alivios_antes_limite: number;
+  limite_conjunto_40pct_cop: number;
+  limite_conjunto_uvt_cop: number;
+  limite_conjunto_aplicable_cop: number;
+  total_alivios_procedentes: number;
+  alivios_rechazados_por_limite: number;
+  base_gravable_depurada_cop: number;
+  base_gravable_depurada_uvt: number;
+  rango_tabla_art383: string;
+  tarifa_marginal_aplicada_pct: number;
+  retencion_fuente_pesos: number;
+  porcentaje_efectivo_retencion: number;
+  audit_trace: AuditTraceItem[];
+}
+
+export interface Formulario350Casillas {
+  ano: number;
+  periodo_mes: number;
+  numero_formulario: string;
+  nit: string;
+  dv: string;
+  razon_social: string;
+  cod_direccion_seccional: number;
+  actividad_economica?: string;
+  c28_base_rentas_trabajo: number;
+  c29_base_honorarios: number;
+  c30_base_comisiones: number;
+  c31_base_servicios: number;
+  c32_base_arrendamientos: number;
+  c33_base_rendimientos_financieros: number;
+  c34_base_enajenacion_activos_fijos: number;
+  c35_base_compras: number;
+  c36_base_otros_pagos_sujetos: number;
+  c37_base_pagos_exterior_renta: number;
+  c41_total_bases_renta: number;
+  c42_ret_rentas_trabajo: number;
+  c43_ret_honorarios: number;
+  c44_ret_comisiones: number;
+  c45_ret_servicios: number;
+  c46_ret_arrendamientos: number;
+  c47_ret_rendimientos_financieros: number;
+  c48_ret_enajenacion_activos_fijos: number;
+  c49_ret_compras: number;
+  c50_ret_otros_pagos_sujetos: number;
+  c51_ret_pagos_exterior_renta: number;
+  c59_total_retenciones_renta_practicadas: number;
+  c61_base_autorretencion_especial: number;
+  c62_autorretencion_especial_decreto_2201: number;
+  c63_base_otras_autorretenciones: number;
+  c64_otras_autorretenciones: number;
+  c65_total_autorretenciones_renta: number;
+  c67_base_iva_responsables: number;
+  c68_retencion_iva_practicada: number;
+  c69_retencion_iva_prestadores_exterior: number;
+  c74_total_retenciones_iva: number;
+  c76_base_timbre_nacional: number;
+  c77_retencion_timbre: number;
+  c82_total_retenciones_periodo: number;
+  c83_sanciones: number;
+  c84_total_saldo_a_pagar: number;
+}
+
+export interface RetefuenteF350Input {
+  tax_year: number;
+  custom_uvt?: number;
+  periodo_mes: number;
+  razon_social: string;
+  nit: string;
+  dv: string;
+  actividad_economica?: string;
+  base_rentas_trabajo?: number;
+  ret_rentas_trabajo_manual?: number;
+  retencion_rentas_trabajo?: number;
+  base_honorarios_declarante?: number;
+  base_honorarios_no_declarante?: number;
+  base_comisiones_declarante?: number;
+  base_comisiones_no_declarante?: number;
+  base_servicios_declarante?: number;
+  base_servicios_no_declarante?: number;
+  base_servicios_transporte_carga?: number;
+  base_compras_declarante?: number;
+  base_compras_no_declarante?: number;
+  base_arrendamiento_inmuebles?: number;
+  base_arrendamiento_muebles?: number;
+  base_rendimientos_financieros?: number;
+  base_enajenacion_activos_fijos?: number;
+  base_pagos_exterior_servicios?: number;
+  base_pagos_exterior_paraisos?: number;
+  ingresos_brutos_propios_mes?: number;
+  tarifa_autorretencion_especial_pct?: number;
+  otras_autorretenciones_valor?: number;
+  base_iva_sujeto_reteiva?: number;
+  reteiva_servicios_exterior?: number;
+  base_impuesto_timbre?: number;
+  tarifa_timbre_pct?: number;
+  sanciones?: number;
+}
+
+export interface RetefuenteF350Output {
+  tax_year: number;
+  uvt_value: number;
+  periodo_mes: number;
+  periodo_nombre: string;
+  razon_social: string;
+  nit: string;
+  dv: string;
+  total_bases_renta: number;
+  total_retenciones_renta_practicadas: number;
+  total_autorretenciones_renta: number;
+  total_retenciones_iva_practicadas: number;
+  total_retenciones_timbre: number;
+  total_retenciones_periodo: number;
+  sanciones: number;
+  total_a_pagar: number;
+  casillas: Formulario350Casillas;
+  audit_trace: AuditTraceItem[];
+  resumen_ejecutivo: string;
+}
+
+// IMPUESTO SOBRE LAS VENTAS (IVA)
+export interface BienServicioIvaItem {
+  id: string;
+  nombre: string;
+  categoria: string;
+  tratamiento: string;
+  tarifa_pct: number;
+  articulo_et: string;
+  derecho_devolucion_iva: boolean;
+  descripcion_tecnica: string;
+}
+
+export interface IvaProrrateoInput {
+  tax_year: number;
+  custom_uvt?: number;
+  ingresos_gravados_19: number;
+  ingresos_gravados_5: number;
+  ingresos_exentos_0: number;
+  ingresos_excluidos: number;
+  ingresos_no_gravados?: number;
+  iva_comun_en_compras_gastos: number;
+}
+
+export interface IvaProrrateoOutput {
+  tax_year: number;
+  total_ingresos_con_derecho: number;
+  total_ingresos_operacionales: number;
+  factor_prorrateo_porcentaje: number;
+  factor_prorrateo_decimal: number;
+  iva_comun_total: number;
+  iva_descontable_aceptado_f300: number;
+  iva_rechazado_mayor_costo_renta: number;
+  explicacion_didactica: string;
+  audit_trace: AuditTraceItem[];
+}
+
+export interface Formulario300Casillas {
+  ano: number;
+  periodo: number;
+  tipo_periodicidad: string;
+  numero_formulario: string;
+  nit: string;
+  dv: string;
+  razon_social: string;
+  cod_direccion_seccional: number;
+  actividad_economica: string;
+  c27_ingresos_bienes_gravados_5: number;
+  c28_ingresos_bienes_gravados_19: number;
+  c29_ingresos_servicios_gravados_5: number;
+  c30_ingresos_servicios_gravados_19: number;
+  c34_operaciones_exentas_art477: number;
+  c35_exportaciones_bienes: number;
+  c36_exportaciones_servicios: number;
+  c37_operaciones_excluidas: number;
+  c38_operaciones_no_gravadas: number;
+  c41_total_ingresos_brutos: number;
+  c42_devoluciones_en_ventas: number;
+  c43_total_ingresos_netos: number;
+  c45_iva_gravados_5: number;
+  c46_iva_gravados_19: number;
+  c56_total_iva_generado_operaciones: number;
+  c57_iva_devoluciones_en_compras: number;
+  c58_total_iva_generado: number;
+  c66_compras_bienes_gravados_5: number;
+  c67_compras_bienes_gravados_19: number;
+  c68_servicios_gravados_5: number;
+  c69_servicios_gravados_19: number;
+  c72_importaciones_gravadas_5: number;
+  c73_importaciones_gravadas_19: number;
+  c74_compras_bienes_excluidos_exentos: number;
+  c75_servicios_excluidos_exentos: number;
+  c79_total_compras_importaciones_brutas: number;
+  c80_devoluciones_en_compras: number;
+  c81_descontable_compras_5: number;
+  c82_descontable_compras_19: number;
+  c83_descontable_servicios_5: number;
+  c84_descontable_servicios_19: number;
+  c87_descontable_importaciones_5: number;
+  c88_descontable_importaciones_19: number;
+  c90_descontable_iva_comun_prorrateado: number;
+  c95_iva_devoluciones_en_ventas: number;
+  c96_total_iva_descontable: number;
+  c98_saldo_a_pagar_periodo: number;
+  c99_saldo_a_favor_periodo: number;
+  c100_saldo_a_favor_periodo_anterior: number;
+  c101_retenciones_iva_que_le_practicaron: number;
+  c104_sanciones: number;
+  c105_total_saldo_a_pagar: number;
+  c106_total_saldo_a_favor: number;
+}
+
+export interface IvaF300Input {
+  tax_year: number;
+  custom_uvt?: number;
+  tipo_periodicidad: string;
+  periodo: number;
+  razon_social: string;
+  nit: string;
+  dv: string;
+  actividad_economica?: string;
+  ingresos_bienes_gravados_5?: number;
+  ingresos_bienes_gravados_19?: number;
+  ingresos_servicios_gravados_5?: number;
+  ingresos_servicios_gravados_19?: number;
+  operaciones_exentas_art477?: number;
+  exportaciones_bienes?: number;
+  exportaciones_servicios?: number;
+  operaciones_excluidas?: number;
+  operaciones_no_gravadas?: number;
+  devoluciones_en_ventas?: number;
+  compras_bienes_gravados_5?: number;
+  compras_bienes_gravados_19?: number;
+  servicios_gravados_5?: number;
+  servicios_gravados_19?: number;
+  importaciones_gravadas_5?: number;
+  importaciones_gravadas_19?: number;
+  compras_bienes_excluidos_exentos?: number;
+  servicios_excluidos_exentos?: number;
+  devoluciones_en_compras?: number;
+  iva_comun_sujeto_prorrateo?: number;
+  retenciones_iva_practicadas_a_favor?: number;
+  saldo_a_favor_periodo_anterior?: number;
+  sanciones?: number;
+}
+
+export interface IvaF300Output {
+  tax_year: number;
+  uvt_value: number;
+  tipo_periodicidad: string;
+  periodo: number;
+  periodo_nombre: string;
+  razon_social: string;
+  nit: string;
+  dv: string;
+  total_ingresos_brutos: number;
+  total_ingresos_netos: number;
+  total_iva_generado: number;
+  total_compras_brutas: number;
+  total_iva_descontable: number;
+  factor_prorrateo_art490_pct: number;
+  iva_comun_rechazado_renta: number;
+  saldo_periodo_a_pagar: number;
+  saldo_periodo_a_favor: number;
+  total_saldo_a_pagar: number;
+  total_saldo_a_favor: number;
+  casillas: Formulario300Casillas;
+  audit_trace: AuditTraceItem[];
+  resumen_ejecutivo: string;
+}
+
+

@@ -36,22 +36,28 @@ export const PnCalcSubtab: React.FC<PnCalcSubtabProps> = ({
 
   return (
     <div id="pane-pn-calc" className="module-pane active">
-      <div style={{ display: 'flex', gap: '10px', marginBottom: '16px', flexWrap: 'wrap' }}>
-        <button className="btn btn-outline btn-sm" onClick={loadPresetStandard}>
-          ✨ Cargar Ejemplo Estándar (Tramo 28%)
-        </button>
-        <button className="btn btn-outline btn-sm" onClick={loadPreset35}>
-          🔥 Cargar Altos Ingresos (Tramo 35%)
-        </button>
-        <button className="btn btn-outline btn-sm" onClick={loadPresetGo}>
-          ✨ Cargar Ejemplo con Ganancia Ocasional
-        </button>
-        <button className="btn btn-primary btn-sm" onClick={onNavigateToMarginal}>
-          🌡️ Ver Termómetro y Tarifa Progresiva
-        </button>
-        <button className="btn btn-secondary btn-sm" onClick={onNavigateToF210}>
-          📋 Ver Formulario 210 DIAN
-        </button>
+      {/* BARRA DE PRESETS ESTANDARIZADA */}
+      <div className="presets-toolbar">
+        <div className="presets-toolbar-group">
+          <span className="presets-toolbar-label">⚡ Presets de 1 Clic:</span>
+          <button className="btn btn-outline btn-sm" onClick={loadPresetStandard}>
+            ✨ Ejemplo Estándar (28%)
+          </button>
+          <button className="btn btn-outline btn-sm" onClick={loadPreset35}>
+            🔥 Altos Ingresos (35%)
+          </button>
+          <button className="btn btn-outline btn-sm" onClick={loadPresetGo}>
+            🏢 Ganancia Ocasional
+          </button>
+        </div>
+        <div className="presets-toolbar-actions">
+          <button className="btn btn-secondary btn-sm" onClick={onNavigateToMarginal}>
+            🌡️ Tarifa Progresiva &amp; Termómetro
+          </button>
+          <button className="btn btn-primary btn-sm" onClick={onNavigateToF210}>
+            📋 Ver Formulario 210 DIAN
+          </button>
+        </div>
       </div>
 
       <div className="calc-grid">
@@ -573,8 +579,8 @@ export const PnCalcSubtab: React.FC<PnCalcSubtabProps> = ({
 
         {/* RESULTS */}
         <div>
-          <div className="card results-card">
-            <div className="card-header">
+          <div className="card results-card sticky-card">
+            <div className="card-header results-card-header">
               <h2 className="card-title">Resumen de Liquidación</h2>
               <button className="btn btn-outline btn-sm" onClick={onOpenAudit}>
                 👁️ Ver Auditoría Legal

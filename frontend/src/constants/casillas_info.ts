@@ -1527,3 +1527,387 @@ export const CASILLAS_INFO_F260: Record<string, CasillaInfo> = {
   }
 };
 
+/* =========================================================================
+   BASE DE CONOCIMIENTO - FORMULARIO 350 DIAN (RETENCIÓN EN LA FUENTE)
+   ========================================================================= */
+export const CASILLAS_INFO_F350: Record<string, CasillaInfo> = {
+  "1": {
+    titulo: "Año",
+    art: "Art. 378 y 604 E.T.",
+    concepto: "Año gravable al que corresponde el periodo mensual declarado.",
+    como_llenar: "Año de 4 dígitos (ej: 2026).",
+    tope: "Obligación mensual."
+  },
+  "2": {
+    titulo: "Período (Mes)",
+    art: "Art. 604 E.T.",
+    concepto: "Mes del año fiscal correspondiente a la declaración (01 a 12).",
+    como_llenar: "Número del mes de enero (01) a diciembre (12).",
+    tope: "Mes 1 a 12."
+  },
+  "28": {
+    titulo: "Base pagos o abonos por rentas de trabajo",
+    art: "Art. 383 y 388 E.T.",
+    concepto: "Base gravable total depurada de nómina y salarios pagados en el mes a trabajadores.",
+    como_llenar: "Sumatoria de las bases depuradas de los trabajadores sujetas a retención.",
+    tope: "Base sujeta a depuración laboral."
+  },
+  "29": {
+    titulo: "Base honorarios",
+    art: "Art. 392 E.T.",
+    concepto: "Base de pagos o abonos en cuenta por honorarios donde predomina el factor intelectual.",
+    como_llenar: "Valor acumulado de honorarios facturados por personas jurídicas y naturales.",
+    tope: "Sin cuantía mínima."
+  },
+  "30": {
+    titulo: "Base comisiones",
+    art: "Art. 392 E.T.",
+    concepto: "Base de pagos por comisiones mercantiles e intermediación.",
+    como_llenar: "Valor total de comisiones pagadas a terceros.",
+    tope: "Sin cuantía mínima."
+  },
+  "31": {
+    titulo: "Base servicios",
+    art: "Art. 392 E.T.",
+    concepto: "Base de pagos por servicios generales donde predomina el factor físico o material.",
+    como_llenar: "Servicios con cuantía individual superior a 4 UVT.",
+    tope: "Base mínima 4 UVT."
+  },
+  "32": {
+    titulo: "Base arrendamientos",
+    art: "Art. 401 E.T.",
+    concepto: "Base de pagos por arrendamiento de bienes raíces y bienes muebles.",
+    como_llenar: "Arriendos de locales, oficinas (base 27 UVT) y muebles (sin base mínima).",
+    tope: "27 UVT en inmuebles."
+  },
+  "33": {
+    titulo: "Base rendimientos financieros e intereses",
+    art: "Art. 395 E.T.",
+    concepto: "Base de pagos por intereses, rendimientos de títulos y cuentas financieras.",
+    como_llenar: "Total intereses pagados o causados.",
+    tope: "Cualquier cuantía."
+  },
+  "35": {
+    titulo: "Base compras",
+    art: "Art. 401 E.T.",
+    concepto: "Base de pagos por adquisición de bienes corporales muebles.",
+    como_llenar: "Compras de mercancías e insumos con cuantía superior a 27 UVT.",
+    tope: "Base mínima 27 UVT."
+  },
+  "37": {
+    titulo: "Base pagos al exterior a título de renta",
+    art: "Art. 406 a 415 E.T.",
+    concepto: "Base de pagos o abonos en cuenta realizados a personas o sociedades sin residencia fiscal en Colombia.",
+    como_llenar: "Servicios técnicos, software, asistencia técnica, regalías y dividendos al exterior.",
+    tope: "Cualquier cuantía."
+  },
+  "41": {
+    titulo: "Total bases de retención a título de renta",
+    art: "Formulario 350 DIAN",
+    concepto: "Sumatoria de todas las bases gravables de retención de renta del mes.",
+    como_llenar: "Suma de Casillas 28 a 40.",
+    tope: "Casilla 41 = Suma de bases."
+  },
+  "42": {
+    titulo: "Retención por rentas de trabajo",
+    art: "Art. 383 E.T.",
+    concepto: "Valor total retenido a los trabajadores por salarios y pagos laborales.",
+    como_llenar: "Suma de las retenciones calculadas según la tabla del Art. 383.",
+    tope: "Retención laboral del mes."
+  },
+  "43": {
+    titulo: "Retención por honorarios",
+    art: "Art. 392 E.T.",
+    concepto: "Retenciones practicadas por honorarios (11% declarantes / 10% no declarantes).",
+    como_llenar: "Valor retenido a los contratistas de honorarios.",
+    tope: "11% o 10%."
+  },
+  "45": {
+    titulo: "Retención por servicios",
+    art: "Art. 392 E.T.",
+    concepto: "Retenciones practicadas por servicios generales (4% declarantes / 6% no declarantes / 1% transporte).",
+    como_llenar: "Total retenido en servicios que superen la base mínima de 4 UVT.",
+    tope: "4%, 6% o 1%."
+  },
+  "49": {
+    titulo: "Retención por compras",
+    art: "Art. 401 E.T.",
+    concepto: "Retenciones practicadas en compras de bienes (2.5% declarantes / 3.5% no declarantes).",
+    como_llenar: "Total retenido en compras superiores a 27 UVT.",
+    tope: "2.5% o 3.5%."
+  },
+  "51": {
+    titulo: "Retención pagos al exterior renta",
+    art: "Art. 408 E.T.",
+    concepto: "Retenciones practicadas en giros al exterior (20% servicios/software o 35% paraísos).",
+    como_llenar: "Retención del 20% o 35% sobre el valor bruto transferido.",
+    tope: "20% / 35%."
+  },
+  "59": {
+    titulo: "Total retenciones de renta practicadas",
+    art: "Formulario 350 DIAN",
+    concepto: "Suma de todas las retenciones practicadas a terceros a título del impuesto sobre la renta.",
+    como_llenar: "Suma de Casillas 42 a 58.",
+    tope: "Total retenciones renta."
+  },
+  "61": {
+    titulo: "Base autorretención especial Decreto 2201 de 2016",
+    art: "Decreto 2201 de 2016 y Art. 114-1 E.T.",
+    concepto: "Ingresos brutos operacionales propios de las personas jurídicas beneficiarias de la exoneración de aportes.",
+    como_llenar: "Total facturación bruta del mes de la propia empresa.",
+    tope: "Ingresos operacionales propios."
+  },
+  "62": {
+    titulo: "Autorretención especial Decreto 2201 de 2016",
+    art: "Decreto 2201 de 2016",
+    concepto: "Autorretención calculada aplicando la tarifa CIIU (0.55%, 1.10%, 1.70%, etc.) sobre los ingresos propios.",
+    como_llenar: "Casilla 61 multiplicada por la tarifa reglamentaria.",
+    tope: "Tarifa CIIU asignada."
+  },
+  "65": {
+    titulo: "Total autorretenciones a título de renta",
+    art: "Formulario 350 DIAN",
+    concepto: "Suma de la autorretención especial y demás autorretenciones del período.",
+    como_llenar: "Casilla 62 + Casilla 64.",
+    tope: "Total autorretenciones."
+  },
+  "68": {
+    titulo: "Retención de IVA practicada (ReteIVA 15%)",
+    art: "Art. 437-1 E.T.",
+    concepto: "Retención del 15% practicada sobre el IVA facturado por proveedores en compras gravadas.",
+    como_llenar: "15% del valor facturado por concepto de IVA.",
+    tope: "Tarifa del 15%."
+  },
+  "74": {
+    titulo: "Total retenciones a título de IVA",
+    art: "Art. 437-1 y 437-2 E.T.",
+    concepto: "Suma de retenciones de IVA practicadas a nacionales y prestadores del exterior.",
+    como_llenar: "Casilla 68 + Casilla 69.",
+    tope: "Total ReteIVA."
+  },
+  "82": {
+    titulo: "Total retenciones del período",
+    art: "Formulario 350 DIAN",
+    concepto: "Consolidado de retenciones de renta practicadas + autorretenciones + ReteIVA + timbre.",
+    como_llenar: "Casilla 59 + Casilla 65 + Casilla 74 + Casilla 81.",
+    tope: "Total retenciones brutas."
+  },
+  "83": {
+    titulo: "Sanciones",
+    art: "Art. 641 y 644 E.T.",
+    concepto: "Sanciones por extemporaneidad o corrección aplicables a la declaración de retención.",
+    como_llenar: "Registre el valor liquidado de la sanción (mínimo 10 UVT).",
+    tope: "Sanción mínima 10 UVT."
+  },
+  "84": {
+    titulo: "Total saldo a pagar",
+    art: "Art. 580-1 E.T.",
+    concepto: "Monto total a pagar en bancos mediante el Recibo 490 para que la declaración tenga plena eficacia legal.",
+    como_llenar: "Casilla 82 más Casilla 83.",
+    tope: "Casilla 84 = Total a pagar."
+  }
+};
+
+/* =========================================================================
+   BASE DE CONOCIMIENTO - FORMULARIO 300 DIAN (IMPUESTO SOBRE LAS VENTAS IVA)
+   ========================================================================= */
+export const CASILLAS_INFO_F300: Record<string, CasillaInfo> = {
+  "1": {
+    titulo: "Año",
+    art: "Art. 600 E.T.",
+    concepto: "Año gravable al que corresponde el periodo de IVA declarado.",
+    como_llenar: "Año fiscal de 4 dígitos.",
+    tope: "Año gravable."
+  },
+  "2": {
+    titulo: "Período",
+    art: "Art. 600 E.T.",
+    concepto: "Número del período fiscal (Bimestre 1 a 6 o Cuatrimestre 1 a 3).",
+    como_llenar: "Indique el período correspondiente al calendario tributario.",
+    tope: "1 a 6 (Bimestral) o 1 a 3 (Cuatrimestral)."
+  },
+  "27": {
+    titulo: "Ingresos por bienes gravados a la tarifa del 5%",
+    art: "Art. 468-1 E.T.",
+    concepto: "Ingresos brutos por venta de bienes gravados a la tarifa diferencial del 5% (café, pastas, azúcar, etc.).",
+    como_llenar: "Valor facturado antes de IVA por venta de bienes al 5%.",
+    tope: "Ventas gravadas al 5%."
+  },
+  "28": {
+    titulo: "Ingresos por bienes gravados a la tarifa general (19%)",
+    art: "Art. 468 E.T.",
+    concepto: "Ingresos brutos por venta de bienes muebles corporales gravados al 19%.",
+    como_llenar: "Valor facturado antes de IVA por ventas de bienes a tarifa general.",
+    tope: "Ventas gravadas al 19%."
+  },
+  "29": {
+    titulo: "Ingresos por servicios gravados a la tarifa del 5%",
+    art: "Art. 468-3 E.T.",
+    concepto: "Ingresos por prestación de servicios gravados a la tarifa especial del 5% (medicina prepagada, almacenamiento agrícola).",
+    como_llenar: "Valor facturado por servicios gravados al 5%.",
+    tope: "Servicios al 5%."
+  },
+  "30": {
+    titulo: "Ingresos por servicios gravados a la tarifa general (19%)",
+    art: "Art. 468 E.T.",
+    concepto: "Ingresos por prestación de servicios gravados al 19% (honorarios, asesorías, mantenimientos, transporte no excluido).",
+    como_llenar: "Valor facturado por servicios a tarifa general.",
+    tope: "Servicios al 19%."
+  },
+  "34": {
+    titulo: "Operaciones exentas (Art. 477)",
+    art: "Art. 477 E.T.",
+    concepto: "Venta de bienes exentos de la canasta básica (carnes, huevos, leche) con tarifa 0% y derecho a devolución.",
+    como_llenar: "Valor facturado de productos agropecuarios exentos.",
+    tope: "Tarifa 0% con devolución."
+  },
+  "35": {
+    titulo: "Exportaciones de bienes",
+    art: "Art. 479 E.T.",
+    concepto: "Ingresos por ventas de bienes despachados al exterior con declaración de exportación DEX.",
+    como_llenar: "Valor FOB de las exportaciones definitivas de bienes.",
+    tope: "Exportaciones a tarifa 0%."
+  },
+  "36": {
+    titulo: "Exportaciones de servicios",
+    art: "Art. 481 Literal c E.T.",
+    concepto: "Ingresos por servicios prestados desde Colombia para ser utilizados o consumidos exclusivamente en el exterior.",
+    como_llenar: "Valor facturado de servicios exportados soportados con contrato y factura electrónica.",
+    tope: "Exento con devolución."
+  },
+  "37": {
+    titulo: "Operaciones excluidas (Art. 424 y 476)",
+    art: "Art. 424 y 476 E.T.",
+    concepto: "Ingresos por venta de bienes o servicios no sujetos a IVA (frutas sin procesar, servicios médicos, educación, transporte público, cloud hosting).",
+    como_llenar: "Total ingresos por actividades no gravadas que no dan derecho a impuesto descontable.",
+    tope: "No causan IVA ni dan derecho a descontables."
+  },
+  "41": {
+    titulo: "Total ingresos brutos",
+    art: "Formulario 300 DIAN",
+    concepto: "Suma de todos los ingresos operacionales del período (gravados, exentos y excluidos).",
+    como_llenar: "Suma de Casillas 27 a 40.",
+    tope: "Total ingresos brutos."
+  },
+  "43": {
+    titulo: "Total ingresos netos",
+    art: "Formulario 300 DIAN",
+    concepto: "Ingresos brutos menos devoluciones en ventas.",
+    como_llenar: "Casilla 41 menos Casilla 42.",
+    tope: "Ingresos netos del período."
+  },
+  "45": {
+    titulo: "IVA generado a la tarifa del 5%",
+    art: "Art. 468-1 y 468-3 E.T.",
+    concepto: "Impuesto sobre las ventas generado al 5% en venta de bienes y servicios.",
+    como_llenar: "(Casilla 27 + Casilla 29) multiplicada por el 5%.",
+    tope: "5% de la base."
+  },
+  "46": {
+    titulo: "IVA generado a la tarifa general (19%)",
+    art: "Art. 468 E.T.",
+    concepto: "Impuesto sobre las ventas generado al 19% en venta de bienes y servicios.",
+    como_llenar: "(Casilla 28 + Casilla 30) multiplicada por el 19%.",
+    tope: "19% de la base."
+  },
+  "58": {
+    titulo: "Total IVA generado",
+    art: "Formulario 300 DIAN",
+    concepto: "Consolidado total del IVA facturado o generado a cargo del responsable.",
+    como_llenar: "Suma de Casillas 45 a 57.",
+    tope: "Total IVA Generado."
+  },
+  "67": {
+    titulo: "Compras de bienes gravados a la tarifa general (19%)",
+    art: "Art. 485 E.T.",
+    concepto: "Base de compras de inventarios y mercancías gravadas al 19%.",
+    como_llenar: "Valor antes de IVA de las compras nacionales soportadas con Factura Electrónica.",
+    tope: "Compras deducibles en renta."
+  },
+  "69": {
+    titulo: "Servicios gravados a la tarifa general (19%)",
+    art: "Art. 485 E.T.",
+    concepto: "Base de servicios y gastos operativos gravados al 19% adquiridos.",
+    como_llenar: "Valor antes de IVA de los servicios tomados con Factura Electrónica.",
+    tope: "Servicios imputables a la actividad."
+  },
+  "82": {
+    titulo: "Descontable por compras de bienes gravados al 19%",
+    art: "Art. 485 E.T.",
+    concepto: "IVA pagado en adquisición de bienes corporales muebles al 19%.",
+    como_llenar: "Casilla 67 multiplicada por el 19%.",
+    tope: "IVA pagado facturado."
+  },
+  "84": {
+    titulo: "Descontable por servicios gravados al 19%",
+    art: "Art. 485 E.T.",
+    concepto: "IVA pagado en contratación de servicios gravados al 19%.",
+    como_llenar: "Casilla 69 multiplicada por el 19%.",
+    tope: "IVA descontable de servicios."
+  },
+  "90": {
+    titulo: "IVA común descontable prorrateado",
+    art: "Art. 490 E.T.",
+    concepto: "IVA pagado en compras y gastos comunes aceptado como descontable según el factor de prorrateo (Ventas gravadas y exentas / Ventas totales).",
+    como_llenar: "IVA común multiplicado por el factor de prorrateo.",
+    tope: "Factor proporcional Art. 490."
+  },
+  "96": {
+    titulo: "Total IVA descontable",
+    art: "Formulario 300 DIAN",
+    concepto: "Suma de todo el IVA pagado en compras, servicios e importaciones que procede como descuento.",
+    como_llenar: "Suma de Casillas 81 a 94 menos Casilla 95.",
+    tope: "Total IVA Descontable."
+  },
+  "98": {
+    titulo: "Saldo a pagar por el período fiscal",
+    art: "Formulario 300 DIAN",
+    concepto: "Exceso del IVA Generado sobre el IVA Descontable en las operaciones del período.",
+    como_llenar: "Casilla 58 menos Casilla 96 (si es positivo).",
+    tope: "Impuesto a cargo del período."
+  },
+  "99": {
+    titulo: "Saldo a favor por el período fiscal",
+    art: "Art. 489 E.T.",
+    concepto: "Exceso del IVA Descontable sobre el IVA Generado en las operaciones del período.",
+    como_llenar: "Casilla 96 menos Casilla 58 (si es positivo).",
+    tope: "Saldo a favor generado."
+  },
+  "100": {
+    titulo: "Saldo a favor del período fiscal anterior",
+    art: "Art. 815 y 816 E.T.",
+    concepto: "Saldo a favor de la declaración anterior de IVA no solicitado en devolución ni compensación.",
+    como_llenar: "Casilla 106 de la declaración del bimestre/cuatrimestre anterior.",
+    tope: "Imputable al período actual."
+  },
+  "101": {
+    titulo: "Retenciones en la fuente de IVA que le practicaron",
+    art: "Art. 437-1 y 484-1 E.T.",
+    concepto: "ReteIVA del 15% retenido por clientes que son agentes de retención.",
+    como_llenar: "Certificados de retención de IVA recibidos de clientes.",
+    tope: "ReteIVA facturado y retenido."
+  },
+  "104": {
+    titulo: "Sanciones",
+    art: "Art. 641 y 644 E.T.",
+    concepto: "Sanción por extemporaneidad o corrección en la declaración de IVA.",
+    como_llenar: "Valor de la sanción liquidada (mínimo 10 UVT).",
+    tope: "Sanción mínima 10 UVT."
+  },
+  "105": {
+    titulo: "Total saldo a pagar por este período",
+    art: "Formulario 300 DIAN",
+    concepto: "Valor final a pagar en bancos por concepto del Impuesto sobre las Ventas.",
+    como_llenar: "Casilla 98 - Casilla 99 - Casilla 100 - Casilla 101 + Casilla 104 (si es mayor a 0).",
+    tope: "Total a pagar en bancos."
+  },
+  "106": {
+    titulo: "Total saldo a favor por este período",
+    art: "Art. 815 y 850 E.T.",
+    concepto: "Saldo a favor acumulado y susceptible de compensación, devolución o imputación al período siguiente.",
+    como_llenar: "Casilla 99 + Casilla 100 + Casilla 101 - Casilla 98 - Casilla 104 (si es mayor a 0).",
+    tope: "Saldo a favor definitivo."
+  }
+};
+
+

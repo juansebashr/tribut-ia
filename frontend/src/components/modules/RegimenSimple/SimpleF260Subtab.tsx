@@ -144,25 +144,16 @@ export const SimpleF260Subtab: React.FC<SimpleF260SubtabProps> = ({ result, onNa
   return (
     <div id="pane-simple-f260" className="module-pane active">
       {/* BARRA DE ACCIÓN Y HERRAMIENTAS */}
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          marginBottom: '14px',
-          flexWrap: 'wrap',
-          gap: '10px',
-        }}
-      >
+      <div className="facsimile-action-bar">
         <div>
-          <h2 style={{ fontSize: '16px', fontWeight: 800, color: '#0d5c3a', margin: 0, display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <span>📋</span> Formulario 260 Oficial DIAN (Facsímil Idéntico)
+          <h2 className="facsimile-title">
+            <span>🏛️</span> Formulario 260 Oficial DIAN (Facsímil Idéntico)
           </h2>
-          <p style={{ fontSize: '12px', color: 'var(--text-muted)', margin: '2px 0 0 0' }}>
-            💡 <em>Copia exacta de la Declaración Anual Consolidada del SIMPLE. Haz clic en el ícono <strong>[ i ]</strong> de cualquier casilla para consultar el instructivo normativo.</em>
+          <p className="facsimile-subtitle">
+            💡 <em>Facsímil oficial de la Declaración Anual Consolidada del SIMPLE. Haz clic en el ícono <strong>[ i ]</strong> de cualquier casilla para consultar el instructivo normativo.</em>
           </p>
         </div>
-        <div style={{ display: 'flex', gap: '8px' }}>
+        <div className="facsimile-btn-group">
           <button className="btn btn-outline btn-sm" onClick={() => window.print()}>
             🖨️ Imprimir Formulario 260
           </button>

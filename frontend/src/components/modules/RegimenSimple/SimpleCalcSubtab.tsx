@@ -62,32 +62,37 @@ export const SimpleCalcSubtab: React.FC<SimpleCalcSubtabProps> = ({
 
   return (
     <div id="pane-simple-calc" className="module-pane active">
-      {/* BARRA DE PRESETS POR GRUPO DE ACTIVIDAD */}
-      <div style={{ display: 'flex', gap: '8px', marginBottom: '16px', flexWrap: 'wrap' }}>
-        <button className="btn btn-outline btn-sm" onClick={loadPresetGrupo1}>
-          🏪 G1: Tienda / Peluquería
-        </button>
-        <button className="btn btn-outline btn-sm" onClick={loadPresetGrupo2}>
-          📦 G2: Comercio / Industria
-        </button>
-        <button className="btn btn-outline btn-sm" onClick={loadPresetGrupo3}>
-          🍽️ G3: Restaurante / INC 8%
-        </button>
-        <button className="btn btn-outline btn-sm" onClick={loadPresetGrupo4}>
-          🎓 G4: Educación / Salud
-        </button>
-        <button className="btn btn-outline btn-sm" onClick={loadPresetGrupo5}>
-          💼 G5: Profesionales / Consultoría
-        </button>
-        <button className="btn btn-outline btn-sm" onClick={loadPresetGrupo6}>
-          ♻️ G6: Reciclaje (1.62%)
-        </button>
-        <button className="btn btn-secondary btn-sm" onClick={onNavigateToComparador}>
-          ⚖️ Comparador SIMPLE vs Ordinario
-        </button>
-        <button className="btn btn-primary btn-sm" onClick={onNavigateToF260}>
-          📋 Ver Formulario 260 DIAN
-        </button>
+      {/* BARRA DE PRESETS ESTANDARIZADA */}
+      <div className="presets-toolbar">
+        <div className="presets-toolbar-group">
+          <span className="presets-toolbar-label">⚡ Presets de 1 Clic:</span>
+          <button className="btn btn-outline btn-sm" onClick={loadPresetGrupo1}>
+            🏪 G1: Tienda / Peluquería
+          </button>
+          <button className="btn btn-outline btn-sm" onClick={loadPresetGrupo2}>
+            📦 G2: Comercio / Industria
+          </button>
+          <button className="btn btn-outline btn-sm" onClick={loadPresetGrupo3}>
+            🍽️ G3: Restaurante / INC 8%
+          </button>
+          <button className="btn btn-outline btn-sm" onClick={loadPresetGrupo4}>
+            🎓 G4: Educación / Salud
+          </button>
+          <button className="btn btn-outline btn-sm" onClick={loadPresetGrupo5}>
+            💼 G5: Profesionales
+          </button>
+          <button className="btn btn-outline btn-sm" onClick={loadPresetGrupo6}>
+            ♻️ G6: Reciclaje
+          </button>
+        </div>
+        <div className="presets-toolbar-actions">
+          <button className="btn btn-secondary btn-sm" onClick={onNavigateToComparador}>
+            ⚖️ Comparador Ordinario vs SIMPLE
+          </button>
+          <button className="btn btn-primary btn-sm" onClick={onNavigateToF260}>
+            📋 Ver Formulario 260 DIAN
+          </button>
+        </div>
       </div>
 
       <div className="calc-grid">
@@ -357,8 +362,8 @@ export const SimpleCalcSubtab: React.FC<SimpleCalcSubtabProps> = ({
         </div>
 
         {/* COLUMNA DERECHA: RESULTADOS EN TIEMPO REAL */}
-        <div className="card" style={{ position: 'sticky', top: '16px' }}>
-          <div className="card-header">
+        <div className="card results-card sticky-card">
+          <div className="card-header results-card-header">
             <h2 className="card-title">Liquidación Privada F-260</h2>
             <button className="btn btn-outline btn-xs" onClick={onOpenAudit}>
               🔍 Memoria Fiscal
