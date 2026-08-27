@@ -7,6 +7,7 @@ import { SimpleF260Subtab } from './RegimenSimple/SimpleF260Subtab';
 import { SimpleComparadorSubtab } from './RegimenSimple/SimpleComparadorSubtab';
 import { SimpleF2593Subtab } from './RegimenSimple/SimpleF2593Subtab';
 import { SimpleRequisitosSubtab } from './RegimenSimple/SimpleRequisitosSubtab';
+import { WorkspaceHubLanding } from '../common/WorkspaceHubLanding';
 
 export const RegimenSimpleModule: React.FC = () => {
   const { activeSubTab, navigateTo, taxYear, uvtValue, showToast } = useApp();
@@ -250,6 +251,10 @@ export const RegimenSimpleModule: React.FC = () => {
   return (
     <div id="module-regimen-simple">
       {/* CONTENIDO DE CADA SUBPESTAÑA */}
+      {(currentSubTab === 'hub' || currentSubTab === 'overview') && (
+        <WorkspaceHubLanding workspace="juridicas" />
+      )}
+
       {currentSubTab === 'calc' && (
         <SimpleCalcSubtab
           inputs={inputs}

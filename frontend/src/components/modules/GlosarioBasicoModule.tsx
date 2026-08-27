@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useApp } from '../../context/AppContext';
 import { formatCOP, parseCOP } from '../../utils/formatters';
 
@@ -159,9 +159,37 @@ const GLOSARIO_DATA: TerminoGlosario[] = [
 ];
 
 export const GlosarioBasicoModule: React.FC = () => {
-  const { taxYear, uvtValue } = useApp();
+  const { taxYear, uvtValue, activeSubTab, navigateTo } = useApp();
 
-  const [activeTab, setActiveTab] = useState<'glosario' | 'aprende' | 'faq' | 'calculadora_topes'>('glosario');
+  const [activeTab, setActiveTab] = useState<
+    'glosario' | 'aprende' | 'calculadora_topes' | 'faq' | 'errores'
+  >(() => {
+    if (activeSubTab === 'errores') return 'errores';
+    if (activeSubTab === 'aprende') return 'aprende';
+    if (activeSubTab === 'calculadora_topes') return 'calculadora_topes';
+    if (activeSubTab === 'faq') return 'faq';
+    return 'glosario';
+  });
+
+  useEffect(() => {
+    if (activeSubTab === 'errores') {
+      setActiveTab('errores');
+    } else if (activeSubTab === 'aprende') {
+      setActiveTab('aprende');
+    } else if (activeSubTab === 'calculadora_topes') {
+      setActiveTab('calculadora_topes');
+    } else if (activeSubTab === 'faq') {
+      setActiveTab('faq');
+    } else if (activeSubTab === 'glosario' || activeSubTab === 'main') {
+      setActiveTab('glosario');
+    }
+  }, [activeSubTab]);
+
+  const handleTabChange = (tab: 'glosario' | 'aprende' | 'calculadora_topes' | 'faq' | 'errores') => {
+    setActiveTab(tab);
+    navigateTo('glosario', tab);
+  };
+
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [selectedCategory, setSelectedCategory] = useState<string>('todos');
 
@@ -214,25 +242,31 @@ export const GlosarioBasicoModule: React.FC = () => {
           <div className="tab-pill-group" style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
             <button
               className={`btn btn-sm ${activeTab === 'glosario' ? 'btn-primary' : 'btn-outline'}`}
-              onClick={() => setActiveTab('glosario')}
+              onClick={() => handleTabChange('glosario')}
             >
               📖 Diccionario A-Z ({GLOSARIO_DATA.length})
             </button>
             <button
+              className={`btn btn-sm ${activeTab === 'errores' ? 'btn-primary' : 'btn-outline'}`}
+              onClick={() => handleTabChange('errores')}
+            >
+              ⚠️ 10 Errores Frecuentes
+            </button>
+            <button
               className={`btn btn-sm ${activeTab === 'aprende' ? 'btn-primary' : 'btn-outline'}`}
-              onClick={() => setActiveTab('aprende')}
+              onClick={() => handleTabChange('aprende')}
             >
               🎓 Aprende desde Cero
             </button>
             <button
               className={`btn btn-sm ${activeTab === 'calculadora_topes' ? 'btn-primary' : 'btn-outline'}`}
-              onClick={() => setActiveTab('calculadora_topes')}
+              onClick={() => handleTabChange('calculadora_topes')}
             >
               🚦 ¿Debo Declarar Renta?
             </button>
             <button
               className={`btn btn-sm ${activeTab === 'faq' ? 'btn-primary' : 'btn-outline'}`}
-              onClick={() => setActiveTab('faq')}
+              onClick={() => handleTabChange('faq')}
             >
               ❓ Preguntas Frecuentes
             </button>
@@ -651,6 +685,125 @@ export const GlosarioBasicoModule: React.FC = () => {
               )}
             </div>
           </div>
+        </div>
+      )}
+
+      {/* PESTAÑA 5: 10 ERRORES TRIBUTARIOS MÁS FRECUENTES */}
+      {activeTab === 'errores' && (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+          <div className="card" style={{ background: 'linear-gradient(135deg, #450a0a 0%, #991b1b 100%)', color: 'white', padding: '20px' }}>
+            <h3 style={{ fontSize: '18px', fontWeight: 900, margin: '0 0 6px 0', color: 'white' }}>
+              ⚠️ Los 10 Errores Tributarios Más Costosos en Colombia
+            </h3>
+            <p style={{ fontSize: '13px', color: '#fecaca', margin: 0, lineHeight: '1.5' }}>
+              Evita sanciones de la DIAN, pagos dobles y pérdida de beneficios fiscales conociendo las equivocaciones más comunes cometidas por personas naturales y contadores.
+            </p>
+          </div>
+
+          {[
+            {
+              num: 1,
+              titulo: 'Prestar la cuenta bancaria o el Nequi/Daviplata a terceros',
+              explicacion: 'Creer que "como el dinero no era mío, no me afecta". Toda consignación que entra a tu cuenta bancaria o billetera digital suma para el tope de 1.400 UVT de la DIAN.',
+              consecuencia: 'Quedas obligado a declarar renta y la DIAN presumirá que esos ingresos son tuyos si no tienes contratos o soportes formales que demuestren que fue un mandato o dinero de terceros.',
+              solucion: 'Nunca prestes tus cuentas bancarias para mover dineros ajenos. Si lo hiciste, documenta las transacciones con soportes idóneos.',
+              norma: 'Art. 594-3 Literal c E.T.',
+            },
+            {
+              num: 2,
+              titulo: 'No declarar a tiempo porque la liquidación daba $0 a pagar o saldo a favor',
+              explicacion: 'Pensar que si las retenciones cubren todo el impuesto o si no hay valor a pagar, no pasa nada por no presentar el formulario en la fecha límite.',
+              consecuencia: 'Sanción por extemporaneidad (Art. 641 E.T.): mínimo 10 UVT ($523.500 COP en 2026) o 0.5% de tus ingresos brutos por cada mes o fracción de retraso.',
+              solucion: 'Presenta siempre la declaración dentro del calendario tributario oficial, incluso si el saldo final a pagar es $0.',
+              norma: 'Arts. 641 y 639 E.T.',
+            },
+            {
+              num: 3,
+              titulo: 'Declarar inmuebles por el valor comercial o por debajo del avalúo catastral',
+              explicacion: 'Poner el valor en el que compraste la casa hace 10 años ($80M) ignorando que el predial del año actual indica un avalúo catastral de $250M.',
+              consecuencia: 'Inexactitud patrimonial sancionable y contingencias en la comparación patrimonial al momento de vender el bien.',
+              solucion: 'El valor patrimonial de los bienes raíces no puede ser inferior al avalúo catastral oficial fijado para el año gravable ni al autoavalúo.',
+              norma: 'Art. 277 E.T.',
+            },
+            {
+              num: 4,
+              titulo: 'Registrar préstamos de familiares sin documento con fecha cierta en notaría',
+              explicacion: 'Declarar una deuda con un amigo o familiar por $100 millones con un papel firmado simple o mensaje de WhatsApp.',
+              consecuencia: 'La DIAN desconoce el pasivo en auditoría. Al quitar la deuda, tu patrimonio líquido aumenta artificialmente y genera una presunta renta por comparación patrimonial gravada al 35%-39%.',
+              solucion: 'Todo préstamo entre personas naturales debe contar con contrato de mutuo con firmas autenticadas ante notario con fecha cierta durante el año.',
+              norma: 'Art. 283 E.T.',
+            },
+            {
+              num: 5,
+              titulo: 'Confundir la tarifa marginal máxima con la tasa efectiva real',
+              explicacion: 'Pensar erróneamente: "Como caí en el tramo del 28% de la tabla, le tengo que pagar el 28% de todo mi sueldo a la DIAN".',
+              consecuencia: 'Genera pánico fiscal infundado y decisiones erradas de elusión o informalidad.',
+              solucion: 'El sistema colombiano es progresivo (Art. 241 E.T.). Los primeros 1.090 UVT tributan al 0%, el siguiente tramo al 19%, y solo el excedente tributa al 28%. Tu tasa real sobre ingresos suele ser del 5% al 12%.',
+              norma: 'Art. 241 E.T.',
+            },
+            {
+              num: 6,
+              titulo: 'No solicitar factura electrónica con tu cédula en compras cotidianas',
+              explicacion: 'Recibir tirilla POS común en supermercados, restaurantes y tiendas de retail.',
+              consecuencia: 'Pierdes la deducción del 1% del valor de las compras (Art. 336 Num. 5 E.T.), que es un beneficio directo que no está sujeto al límite conjunto del 40%.',
+              solucion: 'Pide siempre factura electrónica con tu número de cédula y paga por medios electrónicos (tarjeta débito/crédito, transferencias).',
+              norma: 'Art. 336 Numeral 5 E.T.',
+            },
+            {
+              num: 7,
+              titulo: 'Retirar dineros de cuentas AFC o Pensiones Voluntarias antes del plazo',
+              explicacion: 'Retirar recursos de FPV antes de 10 años o de cuentas AFC para fines distintos a compra o abono a vivienda.',
+              consecuencia: 'La entidad financiera te practicará la retención en la fuente contingente (generalmente del 35%) y el retiro se convierte en renta gravable.',
+              solucion: 'Planea la liquidez y usa las cuentas AFC y FPV estrictamente para adquisición de vivienda o retiro tras cumplir los 10 años de permanencia.',
+              norma: 'Arts. 126-1 y 126-4 E.T.',
+            },
+            {
+              num: 8,
+              titulo: 'No conciliar los ingresos contra el archivo de Información Exógena DIAN',
+              explicacion: 'Declarar con base únicamente en la memoria o extractos parciales sin descargar el reporte de terceros de la DIAN.',
+              consecuencia: 'Diferencias automáticas detectadas por los cruces de la DIAN, generando emplazamientos para corregir con sanción del 10% (Art. 644 E.T.).',
+              solucion: 'Descarga tu archivo de Información Exógena en el portal DIAN y concílialo celda por celda antes de radicar el Formulario 210.',
+              norma: 'Art. 651 y 644 E.T.',
+            },
+            {
+              num: 9,
+              titulo: 'Vender un inmueble sin aplicar el reajuste fiscal del Art. 73 E.T.',
+              explicacion: 'Calcular la ganancia ocasional restando únicamente el costo de adquisición histórico original.',
+              consecuencia: 'Pagar millones de pesos de más en impuesto de ganancia ocasional (15%).',
+              solucion: 'Utiliza el multiplicador oficial del Art. 73 E.T. según el año de compra del inmueble para elevar el costo fiscal legalmente y reducir la ganancia a cero o a un monto mínimo.',
+              norma: 'Art. 73 E.T.',
+            },
+            {
+              num: 10,
+              titulo: 'Omitir la comparación patrimonial al registrar ingresos y aumentos de capital',
+              explicacion: 'Declarar un patrimonio líquido significativamente superior al del año anterior sin justificar de dónde salieron los recursos (rentas exentas, donaciones, préstamos).',
+              consecuencia: 'Renta por Comparación Patrimonial (Art. 236 E.T.), donde la DIAN grava la diferencia no justificada a la tarifa marginal más alta como renta ordinaria.',
+              solucion: 'Aplica siempre la ecuación de comparación patrimonial: Patrimonio Líquido Año Actual - Patrimonio Líquido Año Anterior = Rentas Líquidas + Ganancias Ocasionales + Despatrimonialización justificada.',
+              norma: 'Arts. 236 a 239 E.T.',
+            },
+          ].map((item) => (
+            <div key={item.num} className="card" style={{ borderLeft: '4px solid #dc2626' }}>
+              <div className="card-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <h4 className="card-title" style={{ fontSize: '13.5px', color: '#991b1b' }}>
+                  {item.num}. {item.titulo}
+                </h4>
+                <span style={{ fontSize: '11px', fontWeight: 800, padding: '2px 8px', borderRadius: '6px', background: '#fee2e2', color: '#991b1b' }}>
+                  {item.norma}
+                </span>
+              </div>
+              <div className="card-body" style={{ fontSize: '12.5px', lineHeight: '1.6', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                <div>
+                  <strong>🔍 Error común:</strong> {item.explicacion}
+                </div>
+                <div style={{ color: '#dc2626' }}>
+                  <strong>🚨 Consecuencia:</strong> {item.consecuencia}
+                </div>
+                <div style={{ color: '#16a34a' }}>
+                  <strong>✓ Solución recomendada:</strong> {item.solucion}
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
       )}
 

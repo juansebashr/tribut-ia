@@ -7,6 +7,10 @@ import { PnF210Subtab } from './PersonaNatural/PnF210Subtab';
 import { PnMarginalSubtab } from './PersonaNatural/PnMarginalSubtab';
 import { PnConciliacionSubtab } from './PersonaNatural/PnConciliacionSubtab';
 import { PnComparacionPatrimonialSubtab } from './PersonaNatural/PnComparacionPatrimonialSubtab';
+import { PnObligadosSubtab } from './PersonaNatural/PnObligadosSubtab';
+import { PnOptimizerCard } from './PersonaNatural/PnOptimizerCard';
+import { ComponenteInflacionarioModule } from './ComponenteInflacionarioModule';
+import { WorkspaceHubLanding } from '../common/WorkspaceHubLanding';
 
 export const PersonaNaturalModule: React.FC = () => {
   const { activeSubTab, navigateTo, taxYear, uvtValue, showToast } = useApp();
@@ -185,11 +189,46 @@ export const PersonaNaturalModule: React.FC = () => {
     showToast('✨ Ejemplo con Ganancia Ocasional cargado', 'info', 2000);
   };
 
+  const handleTransferFromObligados = (datos: Partial<PersonaNaturalInput>) => {
+    setInputs((prev) => ({ ...prev, ...datos }));
+    navigateTo('pn', 'calc');
+    showToast('✓ Datos precargados en el Liquidador F-210', 'success', 2500);
+  };
+
+  const handleApplyOptimization = (modifications: Partial<PersonaNaturalInput>) => {
+    setInputs((prev) => ({ ...prev, ...modifications }));
+    navigateTo('pn', 'calc');
+    showToast('✨ Deducciones optimizadas aplicadas al Liquidador', 'success', 2500);
+  };
+
   const currentSubTab = activeSubTab || 'calc';
 
   return (
     <div id="module-persona-natural">
-      {currentSubTab === 'f210' ? (
+      {currentSubTab === 'hub' || currentSubTab === 'overview' ? (
+        <WorkspaceHubLanding workspace="naturales" />
+      ) : currentSubTab === 'test_obligados' ? (
+        <PnObligadosSubtab
+          uvtValue={uvtValue}
+          taxYear={taxYear}
+          onTransferToCalc={handleTransferFromObligados}
+          onNavigateToCalc={() => navigateTo('pn', 'calc')}
+        />
+      ) : currentSubTab === 'optimizer' ? (
+        <div style={{ padding: '0 4px' }}>
+          <PnOptimizerCard
+            inputs={inputs}
+            result={result}
+            uvtValue={uvtValue}
+            taxYear={taxYear}
+            onApplyOptimization={handleApplyOptimization}
+            onNavigateToCalc={() => navigateTo('pn', 'calc')}
+            onNavigateToF210={() => navigateTo('pn', 'f210')}
+          />
+        </div>
+      ) : currentSubTab === 'inflacionario' ? (
+        <ComponenteInflacionarioModule />
+      ) : currentSubTab === 'f210' ? (
         <PnF210Subtab result={result} onNavigateToCalc={() => navigateTo('pn', 'calc')} />
       ) : currentSubTab === 'marginal' ? (
         <PnMarginalSubtab
@@ -210,9 +249,13 @@ export const PersonaNaturalModule: React.FC = () => {
           inputs={inputs}
           setInputs={setInputs}
           result={result}
+          uvtValue={uvtValue}
+          taxYear={taxYear}
           onOpenAudit={() => setIsAuditModalOpen(true)}
           onNavigateToF210={() => navigateTo('pn', 'f210')}
           onNavigateToMarginal={() => navigateTo('pn', 'marginal')}
+          onNavigateToOptimizer={() => navigateTo('pn', 'optimizer')}
+          onNavigateToObligados={() => navigateTo('pn', 'test_obligados')}
           loadPresetStandard={loadPresetStandard}
           loadPreset35={loadPreset35}
           loadPresetGo={loadPresetGo}

@@ -7,6 +7,7 @@ import { PjF110Subtab } from './PersonaJuridica/PjF110Subtab';
 import { PjTtdSubtab } from './PersonaJuridica/PjTtdSubtab';
 import { PjSobretasasSubtab } from './PersonaJuridica/PjSobretasasSubtab';
 import { PjConciliacionSubtab } from './PersonaJuridica/PjConciliacionSubtab';
+import { WorkspaceHubLanding } from '../common/WorkspaceHubLanding';
 
 export const PersonaJuridicaModule: React.FC = () => {
   const { activeSubTab, navigateTo, taxYear, uvtValue, showToast } = useApp();
@@ -299,6 +300,10 @@ export const PersonaJuridicaModule: React.FC = () => {
   return (
     <div id="module-persona-juridica">
       {/* CONTENIDO DE CADA SUBPESTAÑA */}
+      {(currentSubTab === 'hub' || currentSubTab === 'overview') && (
+        <WorkspaceHubLanding workspace="juridicas" />
+      )}
+
       {currentSubTab === 'calc' && (
         <PjCalcSubtab
           inputs={inputs}

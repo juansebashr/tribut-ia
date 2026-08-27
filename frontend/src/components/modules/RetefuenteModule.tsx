@@ -6,6 +6,7 @@ import { RetefuenteCalcSubtab } from './Retefuente/RetefuenteCalcSubtab';
 import { RetefuenteF350Subtab } from './Retefuente/RetefuenteF350Subtab';
 import { RetefuenteLaboralSubtab } from './Retefuente/RetefuenteLaboralSubtab';
 import { RetefuenteTablaSubtab } from './Retefuente/RetefuenteTablaSubtab';
+import { WorkspaceHubLanding } from '../common/WorkspaceHubLanding';
 
 export const RetefuenteModule: React.FC = () => {
   const { activeSubTab, navigateTo, taxYear, uvtValue, showToast } = useApp();
@@ -220,6 +221,10 @@ export const RetefuenteModule: React.FC = () => {
   return (
     <div id="module-retefuente">
       {/* CONTENIDO DE CADA SUBPESTAÑA */}
+      {(currentSubTab === 'hub' || currentSubTab === 'overview') && (
+        <WorkspaceHubLanding workspace="periodicos" />
+      )}
+
       {currentSubTab === 'calc' && (
         <RetefuenteCalcSubtab
           inputs={inputs}

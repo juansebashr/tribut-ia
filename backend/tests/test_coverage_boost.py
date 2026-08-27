@@ -456,3 +456,109 @@ async def test_session_events_stream_generator_mock():
             break
     assert len(items) >= 1
     assert "connected" in items[0]
+
+
+def test_retefuente_laboral_all_high_brackets():
+    """Prueba todos los tramos de la tabla de retención laboral del Art. 383 (> 360, > 640, > 945, > 2300 UVT)."""
+    from app.models.retefuente import RetefuenteLaboralInput
+    from app.services.liquidacion_retefuente import calcular_retefuente_laboral_art383
+
+    uvt = 50000.0
+    # Tramo 4: > 360 a 640 UVT (e.g. 500 UVT -> 25.000.000)
+    res4 = calcular_retefuente_laboral_art383(
+        RetefuenteLaboralInput(
+            tax_year=2026,
+            custom_uvt=uvt,
+            salario_basico=28000000.0,
+            aporte_salud_obligatorio=1000000.0,
+            aporte_pension_obligatorio=1000000.0,
+        )
+    )
+    assert res4.tarifa_marginal_aplicada_pct == 33.0
+
+    # Tramo 5: > 640 a 945 UVT (e.g. 800 UVT -> 40.000.000)
+    res5 = calcular_retefuente_laboral_art383(
+        RetefuenteLaboralInput(
+            tax_year=2026,
+            custom_uvt=uvt,
+            salario_basico=45000000.0,
+            aporte_salud_obligatorio=1500000.0,
+            aporte_pension_obligatorio=1500000.0,
+        )
+    )
+    assert res5.tarifa_marginal_aplicada_pct == 35.0
+
+    # Tramo 6: > 945 a 2300 UVT (e.g. 1500 UVT -> 75.000.000)
+    res6 = calcular_retefuente_laboral_art383(
+        RetefuenteLaboralInput(
+            tax_year=2026,
+            custom_uvt=uvt,
+            salario_basico=85000000.0,
+            aporte_salud_obligatorio=2000000.0,
+            aporte_pension_obligatorio=2000000.0,
+        )
+    )
+    assert res6.tarifa_marginal_aplicada_pct == 37.0
+
+    # Tramo 7: > 2300 UVT (e.g. 3000 UVT -> 150.000.000)
+    res7 = calcular_retefuente_laboral_art383(
+        RetefuenteLaboralInput(
+            tax_year=2026,
+            custom_uvt=uvt,
+            salario_basico=170000000.0,
+            aporte_salud_obligatorio=2500000.0,
+            aporte_pension_obligatorio=2500000.0,
+        )
+    )
+    assert res7.tarifa_marginal_aplicada_pct == 39.0
+
+
+def test_iva_and_retefuente_endpoints_exception_handling():
+    """Valida los manejadores de excepciones en los routers de IVA, Retefuente y PN."""
+    with patch(
+        "app.api.v1.endpoints.iva.calcular_formulario_300", side_effect=Exception("F300 fail")
+    ):
+        res = client.post("/api/v1/iva/f300", json={"tax_year": 2026})
+        assert res.status_code == 400
+        assert "F300 fail" in res.json()["detail"]
+
+    with patch(
+        "app.api.v1.endpoints.iva.calcular_prorrateo_iva_art490", side_effect=Exception("Prorrateo")
+    ):
+        res = client.post("/api/v1/iva/prorrateo", json={"tax_year": 2026})
+        assert res.status_code == 400
+
+    with patch(
+        "app.api.v1.endpoints.iva.obtener_clasificador_bienes_servicios_iva",
+        side_effect=Exception("Clasificador"),
+    ):
+        res = client.get("/api/v1/iva/clasificador")
+        assert res.status_code == 400
+
+    with patch(
+        "app.api.v1.endpoints.retefuente.calcular_retefuente_laboral_art383",
+        side_effect=Exception("Laboral fail"),
+    ):
+        res = client.post("/api/v1/retefuente/laboral", json={"salario_basico": 5000000})
+        assert res.status_code == 400
+
+    with patch(
+        "app.api.v1.endpoints.retefuente.calcular_formulario_350",
+        side_effect=Exception("F350 fail"),
+    ):
+        res = client.post("/api/v1/retefuente/f350", json={"tax_year": 2026})
+        assert res.status_code == 400
+
+    with patch(
+        "app.api.v1.endpoints.retefuente.obtener_tabla_maestra_retefuente",
+        side_effect=Exception("Tabla fail"),
+    ):
+        res = client.get("/api/v1/retefuente/tabla-retenciones")
+        assert res.status_code == 400
+
+    with patch(
+        "app.api.v1.endpoints.persona_natural.liquidar_persona_natural",
+        side_effect=Exception("PN fail"),
+    ):
+        res = client.post("/api/v1/persona-natural/calculate", json={"tax_year": 2026})
+        assert res.status_code == 400

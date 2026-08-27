@@ -28,7 +28,17 @@ export type ModuleType =
   | 'rules'
   | 'session-sync';
 
-export type PnSubTab = 'calc' | 'f210' | 'marginal' | 'conciliacion' | 'comparacion_patrimonial';
+export type WorkspaceType = 'naturales' | 'juridicas' | 'periodicos' | 'sanciones' | 'globales';
+
+export type PnSubTab =
+  | 'calc'
+  | 'f210'
+  | 'marginal'
+  | 'conciliacion'
+  | 'comparacion_patrimonial'
+  | 'test_obligados'
+  | 'optimizer'
+  | 'inflacionario';
 
 export interface ToastMessage {
   id: string;
@@ -57,6 +67,8 @@ interface AppContextType {
   // Navigation
   currentView: ViewType;
   navigateToView: (view: ViewType, module?: ModuleType, subTab?: string) => void;
+  activeWorkspace: WorkspaceType;
+  navigateToWorkspace: (ws: WorkspaceType, module?: ModuleType, subTab?: string) => void;
   activeModule: ModuleType;
   activeSubTab: string;
   navigateTo: (module: ModuleType, subTab?: string) => void;
@@ -135,9 +147,36 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
   };
 
   // Session resolution from URL query or default
-  const urlParams = new URLSearchParams(window.location.search);
+  const urlParams = typeof window !== 'undefined' ? new URLSearchParams(window.location.search) : new URLSearchParams();
   const initialSessionId = urlParams.get('session_id') || 'default';
   const [sessionId, setSessionId] = useState<string>(initialSessionId);
+
+  // Helper para identificar a qué espacio pertenece cada módulo
+  const getWorkspaceForModule = (module: ModuleType): WorkspaceType => {
+    switch (module) {
+      case 'pn':
+      case 'art73':
+      case 'inmuebles-afc':
+      case 'tributacion-pareja':
+      case 'inflacionario':
+        return 'naturales';
+      case 'pj':
+      case 'simple':
+        return 'juridicas';
+      case 'iva':
+      case 'retefuente':
+        return 'periodicos';
+      case 'presentacion':
+      case 'beneficios':
+        return 'sanciones';
+      case 'calendario':
+      case 'glosario':
+      case 'rules':
+      case 'session-sync':
+      default:
+        return 'globales';
+    }
+  };
 
   // Helper to parse view & module from hash URL
   const parseInitialViewFromHash = (): { view: ViewType; module?: ModuleType; subTab?: string } => {
@@ -149,6 +188,43 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     if (hash === 'skill-tutorial' || hash === 'skills' || hash === 'tutorial') {
       return { view: 'skill-tutorial', module: 'pn', subTab: 'calc' };
     }
+
+    const parts = hash.split('/');
+    const prefix = parts[0];
+
+    // Rutas directas por espacio de trabajo
+    if (prefix === 'naturales') {
+      const sub = parts[1] || 'hub';
+      if (['art73', 'inmuebles-afc', 'tributacion-pareja', 'inflacionario'].includes(sub)) {
+        return { view: 'app', module: sub as ModuleType, subTab: parts[2] || 'main' };
+      }
+      return { view: 'app', module: 'pn', subTab: sub };
+    }
+
+    if (prefix === 'juridicas') {
+      const sub = parts[1] || 'hub';
+      if (sub === 'simple') {
+        return { view: 'app', module: 'simple', subTab: parts[2] || 'comparador' };
+      }
+      return { view: 'app', module: 'pj', subTab: sub };
+    }
+
+    if (prefix === 'periodicos') {
+      const sub = parts[1] || 'hub';
+      if (['iva', 'prorrateo', 'clasificador', 'f300'].includes(sub)) {
+        return { view: 'app', module: 'iva', subTab: sub === 'iva' ? 'calc' : sub };
+      }
+      return { view: 'app', module: 'retefuente', subTab: sub === 'retefuente' ? 'calc' : sub };
+    }
+
+    if (prefix === 'sanciones') {
+      const sub = parts[1] || 'hub';
+      if (sub === 'beneficios' || sub === 'all') {
+        return { view: 'app', module: 'beneficios', subTab: 'all' };
+      }
+      return { view: 'app', module: 'presentacion', subTab: sub };
+    }
+
     const knownModules: ModuleType[] = [
       'calendario',
       'pn',
@@ -166,7 +242,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
       'rules',
       'session-sync',
     ];
-    const parts = hash.split('/');
+
     const modCandidate = parts[0] === 'app' ? (parts[1] as ModuleType) : (parts[0] as ModuleType);
     const subCandidate = parts[0] === 'app' ? parts[2] : parts[1];
 
@@ -185,6 +261,9 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
   const [currentView, setCurrentView] = useState<ViewType>(initialRoute.view);
   const [activeModule, setActiveModule] = useState<ModuleType>(initialRoute.module || 'pn');
   const [activeSubTab, setActiveSubTab] = useState<string>(initialRoute.subTab || 'calc');
+  const [activeWorkspace, setActiveWorkspace] = useState<WorkspaceType>(
+    getWorkspaceForModule(initialRoute.module || 'pn')
+  );
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState<boolean>(false);
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState<boolean>(false);
 
@@ -193,7 +272,13 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     const handleHashChange = () => {
       const parsed = parseInitialViewFromHash();
       setCurrentView(parsed.view);
-      if (parsed.module) setActiveModule(parsed.module);
+      if (parsed.module) {
+        setActiveModule(parsed.module);
+        const ws = getWorkspaceForModule(parsed.module);
+        if (ws !== 'globales') {
+          setActiveWorkspace(ws);
+        }
+      }
       if (parsed.subTab) setActiveSubTab(parsed.subTab);
     };
 
@@ -275,11 +360,64 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     }
   };
 
+  const navigateToWorkspace = (
+    ws: WorkspaceType,
+    module?: ModuleType,
+    subTab?: string
+  ) => {
+    setPopoverState((prev) => ({ ...prev, visible: false, isPinned: false }));
+    setActiveWorkspace(ws);
+    setCurrentView('app');
+
+    let targetMod = module;
+    let targetSub = subTab;
+
+    if (!targetMod) {
+      switch (ws) {
+        case 'naturales':
+          targetMod = 'pn';
+          targetSub = targetSub || 'hub';
+          break;
+        case 'juridicas':
+          targetMod = 'pj';
+          targetSub = targetSub || 'hub';
+          break;
+        case 'periodicos':
+          targetMod = 'retefuente';
+          targetSub = targetSub || 'hub';
+          break;
+        case 'sanciones':
+          targetMod = 'presentacion';
+          targetSub = targetSub || 'hub';
+          break;
+        case 'globales':
+        default:
+          targetMod = 'calendario';
+          targetSub = targetSub || 'main';
+          break;
+      }
+    }
+
+    setActiveModule(targetMod);
+    if (targetSub) {
+      setActiveSubTab(targetSub);
+    }
+
+    if (typeof window !== 'undefined') {
+      window.location.hash = `${ws}/${targetMod}${targetSub ? `/${targetSub}` : ''}`;
+    }
+    setIsMobileSidebarOpen(false);
+  };
+
   const navigateToView = (view: ViewType, module?: ModuleType, subTab?: string) => {
     setPopoverState((prev) => ({ ...prev, visible: false, isPinned: false }));
     setCurrentView(view);
     if (module) {
       setActiveModule(module);
+      const ws = getWorkspaceForModule(module);
+      if (ws !== 'globales') {
+        setActiveWorkspace(ws);
+      }
     }
     if (subTab) {
       setActiveSubTab(subTab);
@@ -302,6 +440,10 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     setPopoverState((prev) => ({ ...prev, visible: false, isPinned: false }));
     setCurrentView('app');
     setActiveModule(module);
+    const ws = getWorkspaceForModule(module);
+    if (ws !== 'globales') {
+      setActiveWorkspace(ws);
+    }
     if (subTab) {
       setActiveSubTab(subTab);
     }
@@ -387,7 +529,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     };
 
     let top = 100;
-    let left = 100;
+    let left = 320;
     if (targetEl) {
       const rect = targetEl.getBoundingClientRect();
       top = rect.bottom + window.scrollY + 8;
@@ -464,6 +606,8 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
       value={{
         currentView,
         navigateToView,
+        activeWorkspace,
+        navigateToWorkspace,
         activeModule,
         activeSubTab,
         navigateTo,

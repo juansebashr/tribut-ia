@@ -6,6 +6,7 @@ import { IvaCalcSubtab } from './Iva/IvaCalcSubtab';
 import { IvaF300Subtab } from './Iva/IvaF300Subtab';
 import { IvaProrrateoSubtab } from './Iva/IvaProrrateoSubtab';
 import { IvaClasificadorSubtab } from './Iva/IvaClasificadorSubtab';
+import { WorkspaceHubLanding } from '../common/WorkspaceHubLanding';
 
 export const IvaModule: React.FC = () => {
   const { activeSubTab, navigateTo, taxYear, uvtValue, showToast } = useApp();
@@ -220,6 +221,10 @@ export const IvaModule: React.FC = () => {
   return (
     <div id="module-iva">
       {/* CONTENIDO DE CADA SUBPESTAÑA */}
+      {(currentSubTab === 'hub' || currentSubTab === 'overview') && (
+        <WorkspaceHubLanding workspace="periodicos" />
+      )}
+
       {currentSubTab === 'calc' && (
         <IvaCalcSubtab
           inputs={inputs}

@@ -1,14 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import type { PersonaNaturalInput, PersonaNaturalOutput } from '../../../types/tax';
 import { formatCOP, parseCOP } from '../../../utils/formatters';
+import { PnWaterfallChart } from './PnWaterfallChart';
+import { PnTaxGauge } from './PnTaxGauge';
+import { PnPdfReportModal } from './PnPdfReportModal';
 
 interface PnCalcSubtabProps {
   inputs: PersonaNaturalInput;
   setInputs: React.Dispatch<React.SetStateAction<PersonaNaturalInput>>;
   result: PersonaNaturalOutput | null;
+  taxYear?: number;
+  uvtValue?: number;
   onOpenAudit: () => void;
   onNavigateToF210: () => void;
   onNavigateToMarginal: () => void;
+  onNavigateToOptimizer?: () => void;
+  onNavigateToObligados?: () => void;
   loadPresetStandard: () => void;
   loadPreset35: () => void;
   loadPresetGo: () => void;
@@ -18,13 +25,19 @@ export const PnCalcSubtab: React.FC<PnCalcSubtabProps> = ({
   inputs,
   setInputs,
   result,
+  taxYear = 2026,
+  uvtValue = 49799,
   onOpenAudit,
   onNavigateToF210,
   onNavigateToMarginal,
+  onNavigateToOptimizer,
+  onNavigateToObligados,
   loadPresetStandard,
   loadPreset35,
   loadPresetGo,
 }) => {
+  const [isPdfModalOpen, setIsPdfModalOpen] = useState<boolean>(false);
+
   const handleNumChange = (field: keyof PersonaNaturalInput, valStr: string) => {
     const num = parseCOP(valStr);
     setInputs((prev) => ({ ...prev, [field]: num }));
@@ -50,12 +63,25 @@ export const PnCalcSubtab: React.FC<PnCalcSubtabProps> = ({
             🏢 Ganancia Ocasional
           </button>
         </div>
-        <div className="presets-toolbar-actions">
+        <div className="presets-toolbar-actions" style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
+          {onNavigateToObligados && (
+            <button className="btn btn-outline btn-sm" onClick={onNavigateToObligados} title="Verificar si debes declarar renta">
+              🚦 ¿Debo Declarar?
+            </button>
+          )}
+          {onNavigateToOptimizer && (
+            <button className="btn btn-outline btn-sm" onClick={onNavigateToOptimizer} title="Simular ahorro con AFC y FPV">
+              💡 Optimizador What-If
+            </button>
+          )}
+          <button className="btn btn-outline btn-sm" onClick={() => setIsPdfModalOpen(true)} title="Generar dictamen ejecutivo para imprimir">
+            📄 Dictamen PDF
+          </button>
           <button className="btn btn-secondary btn-sm" onClick={onNavigateToMarginal}>
-            🌡️ Tarifa Progresiva &amp; Termómetro
+            🌡️ Tarifa Progresiva
           </button>
           <button className="btn btn-primary btn-sm" onClick={onNavigateToF210}>
-            📋 Ver Formulario 210 DIAN
+            📋 Formulario 210
           </button>
         </div>
       </div>
@@ -676,7 +702,7 @@ export const PnCalcSubtab: React.FC<PnCalcSubtabProps> = ({
                 </tbody>
               </table>
 
-              <div style={{ display: 'flex', gap: '8px' }}>
+              <div style={{ display: 'flex', gap: '8px', marginBottom: '16px' }}>
                 <button className="btn btn-primary" style={{ flex: 1 }} onClick={onOpenAudit}>
                   🔍 Auditoría Legal
                 </button>
@@ -684,10 +710,26 @@ export const PnCalcSubtab: React.FC<PnCalcSubtabProps> = ({
                   📋 Ver F210 DIAN Real
                 </button>
               </div>
+
+              {/* TACÓMETRO DE TASAS */}
+              <PnTaxGauge result={result} />
+
+              {/* GRÁFICO CASCADA WATERFALL */}
+              <PnWaterfallChart result={result} />
             </div>
           </div>
         </div>
       </div>
+
+      {/* MODAL DE DICTAMEN EN PDF */}
+      <PnPdfReportModal
+        isOpen={isPdfModalOpen}
+        onClose={() => setIsPdfModalOpen(false)}
+        inputs={inputs}
+        result={result}
+        taxYear={taxYear}
+        uvtValue={uvtValue}
+      />
     </div>
   );
 };

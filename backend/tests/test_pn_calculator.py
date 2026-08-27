@@ -98,8 +98,8 @@ def test_persona_natural_2026_con_dependientes_adicionales_y_compras():
     assert result.limite_conjunto_porcentaje_cop == 44160000
     assert result.limite_conjunto_aplicable_cop == 44160000
 
-    # Renta líquida gravable = Ingreso neto (110.400.000) - Alivios procedentes (44.160.000) - Deducción 1% Factura Elec (500.000)
-    assert result.renta_liquida_gravable == 110400000 - 44160000 - 500000
-    assert result.renta_liquida_gravable == 65740000
+    # Renta líquida gravable = Ingreso neto (110.400.000) - Alivios 40% (44.160.000) - 2 Dep. Adic 72 UVT (7.538.400) - Deducción 1% Factura Elec (500.000)
+    assert result.renta_liquida_gravable == 110400000 - 44160000 - (2 * 72 * uvt_2026) - 500000
+    assert result.renta_liquida_gravable == 58201600
     assert result.impuesto_bruto_renta > 0
     assert len(result.audit_trace) >= 8

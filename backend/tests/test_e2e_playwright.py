@@ -133,38 +133,42 @@ class TestFiscolEndToEnd:
         page.wait_for_timeout(500)
 
         modules = [
-            ("nav-item-calendario", "#pane-calendario"),
-            ("nav-item-pn-calc", "#pane-pn-calc"),
-            ("nav-item-pn-f210", "#pane-pn-f210"),
-            ("nav-item-pn-marginal", "#pane-pn-marginal"),
-            ("nav-item-pn-conciliacion", "#pane-pn-conciliacion"),
-            ("nav-item-pj-calc", "#pane-pj-calc"),
-            ("nav-item-pj-f110", "#pane-pj-f110"),
-            ("nav-item-pj-ttd", "#pane-pj-ttd"),
-            ("nav-item-pj-sobretasas", "#pane-pj-sobretasas"),
-            ("nav-item-pj-conciliacion", "#pane-pj-conciliacion"),
-            ("nav-item-simple-calc", "#pane-simple-calc"),
-            ("nav-item-simple-f260", "#pane-simple-f260"),
-            ("nav-item-simple-comparador", "#pane-simple-comparador"),
-            ("nav-item-simple-f2593", "#pane-simple-f2593"),
-            ("nav-item-simple-requisitos", "#pane-simple-requisitos"),
-            ("nav-item-beneficios", "#pane-beneficios"),
-            ("nav-item-presentacion", "#pane-presentacion"),
-            ("nav-item-art73", "#pane-art73"),
-            ("nav-item-inmuebles-afc", "#pane-inmuebles-afc"),
-            ("nav-item-iva-calc", "#pane-iva-calc"),
-            ("nav-item-iva-f300", "#pane-iva-f300"),
-            ("nav-item-iva-prorrateo", "#pane-iva-prorrateo"),
-            ("nav-item-iva-clasificador", "#pane-iva-clasificador"),
-            ("nav-item-retefuente-calc", "#pane-retefuente-calc"),
-            ("nav-item-retefuente-f350", "#pane-retefuente-f350"),
-            ("nav-item-retefuente-laboral", "#pane-retefuente-laboral"),
-            ("nav-item-retefuente-tabla", "#pane-retefuente-tabla"),
+            ("calendario", "nav-item-pn-calendario", "#pane-calendario"),
+            ("pn/calc", "nav-item-pn-calc", "#pane-pn-calc"),
+            ("pn/f210", "nav-item-pn-f210", "#pane-pn-f210"),
+            ("pn/marginal", "nav-item-pn-marginal", "#pane-pn-marginal"),
+            ("pn/conciliacion", "nav-item-pn-conciliacion", "#pane-pn-conciliacion"),
+            ("art73", "nav-item-art73", "#pane-art73"),
+            ("inmuebles-afc", "nav-item-inmuebles-afc", "#pane-inmuebles-afc"),
+            ("pj/calc", "nav-item-pj-calc", "#pane-pj-calc"),
+            ("pj/f110", "nav-item-pj-f110", "#pane-pj-f110"),
+            ("pj/ttd", "nav-item-pj-ttd", "#pane-pj-ttd"),
+            ("pj/sobretasas", "nav-item-pj-sobretasas", "#pane-pj-sobretasas"),
+            ("pj/conciliacion", "nav-item-pj-conciliacion", "#pane-pj-conciliacion"),
+            ("simple/calc", "nav-item-simple-calc", "#pane-simple-calc"),
+            ("simple/f260", "nav-item-simple-f260", "#pane-simple-f260"),
+            ("simple/comparador", "nav-item-simple-comparador", "#pane-simple-comparador"),
+            ("simple/f2593", "nav-item-simple-f2593", "#pane-simple-f2593"),
+            ("simple/requisitos", "nav-item-simple-requisitos", "#pane-simple-requisitos"),
+            ("iva/calc", "nav-item-iva-calc", "#pane-iva-calc"),
+            ("iva/f300", "nav-item-iva-f300", "#pane-iva-f300"),
+            ("iva/prorrateo", "nav-item-iva-prorrateo", "#pane-iva-prorrateo"),
+            ("iva/clasificador", "nav-item-iva-clasificador", "#pane-iva-clasificador"),
+            ("retefuente/calc", "nav-item-retefuente-calc", "#pane-retefuente-calc"),
+            ("retefuente/f350", "nav-item-retefuente-f350", "#pane-retefuente-f350"),
+            ("retefuente/laboral", "nav-item-retefuente-laboral", "#pane-retefuente-laboral"),
+            ("retefuente/tabla", "nav-item-retefuente-tabla", "#pane-retefuente-tabla"),
+            ("beneficios", "nav-item-beneficios", "#pane-beneficios"),
+            ("presentacion", "nav-item-presentacion", "#pane-presentacion"),
         ]
 
-        for nav_id, pane_id in modules:
+        for mod_route, nav_id, pane_id in modules:
+            page.goto(f"{live_server_url}/#app/{mod_route}", wait_until="domcontentloaded")
+            page.wait_for_timeout(200)
             nav_btn = page.locator(f"#{nav_id}")
-            assert nav_btn.is_visible(), f"El botón de navegación #{nav_id} no está visible"
+            assert nav_btn.is_visible(), (
+                f"El botón de navegación #{nav_id} no está visible en {mod_route}"
+            )
             nav_btn.click()
             page.wait_for_timeout(200)
 
@@ -181,7 +185,7 @@ class TestFiscolEndToEnd:
     ):
         """Valida el catálogo de beneficios, el buscador reactivo y los filtros por categoría."""
         page, errors = page_with_error_tracking
-        page.goto(f"{live_server_url}/#app/pn", wait_until="domcontentloaded")
+        page.goto(f"{live_server_url}/#app/beneficios", wait_until="domcontentloaded")
         page.wait_for_timeout(500)
 
         page.click("#nav-item-beneficios")
@@ -209,7 +213,7 @@ class TestFiscolEndToEnd:
     ):
         """Valida el simulador de auditoría y la calculadora integral de sanciones."""
         page, errors = page_with_error_tracking
-        page.goto(f"{live_server_url}/#app/pn", wait_until="domcontentloaded")
+        page.goto(f"{live_server_url}/#app/presentacion", wait_until="domcontentloaded")
         page.wait_for_timeout(500)
 
         page.click("#nav-item-presentacion")
@@ -370,6 +374,185 @@ class TestFiscolEndToEnd:
 
         assert len(errors) == 0, f"Errores en submódulos de Persona Natural: {errors}"
 
+    def test_persona_natural_what_if_optimizer(
+        self, page_with_error_tracking: tuple[Page, list[str]], live_server_url: str
+    ):
+        """Valida el simulador interactivo What-If de planeación tributaria, palancas y aplicación al F-210."""
+        page, errors = page_with_error_tracking
+        page.goto(f"{live_server_url}/#app/pn/optimizer", wait_until="domcontentloaded")
+        page.wait_for_timeout(600)
+
+        # 1. Verificar presencia del panel del Optimizador
+        pane = page.locator("#pane-pn-optimizer")
+        assert pane.is_visible(), "El panel #pane-pn-optimizer no es visible"
+
+        # 2. Probar preset rápido de Medicina Prepagada
+        page.click("button:has-text('🩺 Prepagada Máx.')")
+        page.wait_for_timeout(400)
+
+        # 3. Probar preset rápido Familiar (Dependientes 72 UVT)
+        page.click("button:has-text('👨‍👩‍👧‍👦 Plan Familiar')")
+        page.wait_for_timeout(400)
+
+        # Verificar que el score de ahorro se haya calculado y sea positivo
+        pane_text = pane.inner_text()
+        assert "AHORRO NETO EN IMPUESTO" in pane_text.upper()
+        assert "+$" in pane_text or "COP" in pane_text
+
+        # 4. Probar aplicación de optimización al F-210
+        page.click("button:has-text('✨ Aplicar Plan al F-210')")
+        page.wait_for_timeout(400)
+
+        # Debe navegar de regreso a Captura F-210
+        assert page.locator("#pane-pn-calc").is_visible()
+
+        assert len(errors) == 0, f"Errores en Optimizador What-If: {errors}"
+
+    def test_all_workspace_hub_landings(
+        self, page_with_error_tracking: tuple[Page, list[str]], live_server_url: str
+    ):
+        """Valida que cada espacio activo cuente con una landing interactiva que explique las pestañas y su uso."""
+        page, errors = page_with_error_tracking
+
+        # 1. Espacio Personas Naturales Hub
+        page.goto(f"{live_server_url}/#naturales/hub", wait_until="domcontentloaded")
+        page.wait_for_timeout(500)
+        hub_nat = page.locator("#workspace-hub-naturales")
+        assert hub_nat.is_visible(), "Hub de Personas Naturales no es visible"
+        assert "Portal de Liquidación: Persona Natural" in hub_nat.inner_text()
+        assert "¿Qué hace?" in hub_nat.inner_text()
+        assert "¿Cómo y cuándo deberías usarla?" in hub_nat.inner_text()
+
+        # 2. Espacio Personas Jurídicas Hub
+        page.goto(f"{live_server_url}/#juridicas/hub", wait_until="domcontentloaded")
+        page.wait_for_timeout(500)
+        hub_jur = page.locator("#workspace-hub-juridicas")
+        assert hub_jur.is_visible(), "Hub de Personas Jurídicas no es visible"
+        assert "Portal de Renta Sociedades" in hub_jur.inner_text()
+        assert "Laboratorio Tasa Mínima TTD" in hub_jur.inner_text()
+
+        # 3. Espacio Impuestos Periódicos Hub
+        page.goto(f"{live_server_url}/#periodicos/hub", wait_until="domcontentloaded")
+        page.wait_for_timeout(500)
+        hub_per = page.locator("#workspace-hub-periodicos")
+        assert hub_per.is_visible(), "Hub de Impuestos Periódicos no es visible"
+        assert "Portal de Impuestos Periódicos" in hub_per.inner_text()
+        assert "Prorrateo IVA Común" in hub_per.inner_text()
+
+        # 4. Espacio Auditoría & Sanciones Hub
+        page.goto(f"{live_server_url}/#sanciones/hub", wait_until="domcontentloaded")
+        page.wait_for_timeout(500)
+        hub_sanc = page.locator("#workspace-hub-sanciones")
+        assert hub_sanc.is_visible(), "Hub de Sanciones no es visible"
+        assert "Portal de Régimen Sancionatorio" in hub_sanc.inner_text()
+        assert "Beneficio de Auditoría" in hub_sanc.inner_text()
+
+        # 5. Probar navegación directa desde una tarjeta del hub
+        page.goto(f"{live_server_url}/#naturales/hub", wait_until="domcontentloaded")
+        page.wait_for_timeout(400)
+        page.click("button:has-text('Abrir Cédula General (F-210) →')")
+        page.wait_for_timeout(400)
+        assert page.locator("#pane-pn-calc").is_visible()
+
+        assert len(errors) == 0, f"Errores en Landing Hubs de Espacios: {errors}"
+
+    def test_workspace_hubs_workflow_steps_and_switchers(
+        self, page_with_error_tracking: tuple[Page, list[str]], live_server_url: str
+    ):
+        """Valida que los 4 pasos del flujograma de cada espacio y los switchers de workspace funcionen reactivamente."""
+        page, errors = page_with_error_tracking
+
+        # 1. Flujograma en Naturales (Paso 3: Optimización What-If)
+        page.goto(f"{live_server_url}/#naturales/hub", wait_until="domcontentloaded")
+        page.wait_for_timeout(400)
+        page.click("#hub-step-3")
+        page.wait_for_timeout(400)
+        assert page.locator("#pane-pn-optimizer").is_visible()
+
+        # 2. Flujograma en Jurídicas (Paso 3: Laboratorio TTD 15%)
+        page.goto(f"{live_server_url}/#juridicas/hub", wait_until="domcontentloaded")
+        page.wait_for_timeout(400)
+        page.click("#hub-step-3")
+        page.wait_for_timeout(400)
+        assert page.locator("#pane-pj-ttd").is_visible()
+
+        # 3. Flujograma en Impuestos Periódicos (Paso 1: Retención Nómina & Pagos)
+        page.goto(f"{live_server_url}/#periodicos/hub", wait_until="domcontentloaded")
+        page.wait_for_timeout(400)
+        page.click("#hub-step-1")
+        page.wait_for_timeout(400)
+        assert page.locator("#pane-retefuente-laboral").is_visible()
+
+        # 4. Flujograma en Sanciones (Paso 1: Cálculo de Sanción / Sanciones)
+        page.goto(f"{live_server_url}/#sanciones/hub", wait_until="domcontentloaded")
+        page.wait_for_timeout(400)
+        page.click("#hub-step-1")
+        page.wait_for_timeout(400)
+        assert page.locator("#pane-presentacion").is_visible()
+
+        # 5. Probar el botón de Cambiar Espacio en el Header
+        page.click("#btn-switch-workspace-header")
+        page.wait_for_timeout(400)
+        assert page.locator("#btn-cta-start").is_visible()
+
+        assert len(errors) == 0, f"Errores en flujo interactivo de Hubs: {errors}"
+
+    def test_what_if_optimizer_complete_suite(
+        self, page_with_error_tracking: tuple[Page, list[str]], live_server_url: str
+    ):
+        """Valida a fondo la interacción con todos los presets del Optimizador What-If y su impacto tributario."""
+        page, errors = page_with_error_tracking
+        page.goto(f"{live_server_url}/#naturales/optimizer", wait_until="domcontentloaded")
+        page.wait_for_timeout(500)
+
+        assert page.locator("#pane-pn-optimizer").is_visible()
+
+        # 1. Preset Plan Familiar (4 Dependientes de 72 UVT)
+        page.click("button:has-text('Plan Familiar')")
+        page.wait_for_timeout(400)
+        card_text = page.locator("#pane-pn-optimizer").inner_text()
+        assert "4 dep." in card_text or "288 UVT" in card_text or "Ahorro" in card_text
+
+        # 2. Preset Compras con Factura Electrónica (1%)
+        page.click("button:has-text('Facturas (1%)')")
+        page.wait_for_timeout(400)
+
+        # 3. Preset Optimización Total
+        page.click("button:has-text('Optimización Total')")
+        page.wait_for_timeout(400)
+        total_text = page.locator("#pane-pn-optimizer").inner_text()
+        assert "+$" in total_text or "COP" in total_text
+
+        # 4. Preset Restablecer
+        page.click("button:has-text('Restablecer')")
+        page.wait_for_timeout(300)
+
+        assert len(errors) == 0, f"Errores en suite completa de What-If: {errors}"
+
+    def test_all_workspace_hubs_responsive_mobile_mode(
+        self, page_with_error_tracking: tuple[Page, list[str]], live_server_url: str
+    ):
+        """Valida que todas las landings hub se adapten a pantallas móviles (375x667) sin desbordamiento horizontal."""
+        page, errors = page_with_error_tracking
+        page.set_viewport_size({"width": 375, "height": 667})
+
+        workspaces = ["naturales", "juridicas", "periodicos", "sanciones"]
+        for ws in workspaces:
+            page.goto(f"{live_server_url}/#{ws}/hub", wait_until="domcontentloaded")
+            page.wait_for_timeout(400)
+            hub_elem = page.locator(f"#workspace-hub-container, #workspace-hub-{ws}")
+            assert hub_elem.is_visible(), f"Hub de {ws} debe ser visible en móvil"
+
+            # Verificar que no exista overflow horizontal
+            has_horizontal_scroll = page.evaluate("""() => {
+                return document.documentElement.scrollWidth > window.innerWidth + 2;
+            }""")
+            assert not has_horizontal_scroll, (
+                f"Existe desbordamiento horizontal en {ws} en vista móvil"
+            )
+
+        assert len(errors) == 0, f"Errores en visualización móvil de Hubs: {errors}"
+
     def test_calendario_tributario_nit_search_and_filters(
         self, page_with_error_tracking: tuple[Page, list[str]], live_server_url: str
     ):
@@ -378,7 +561,7 @@ class TestFiscolEndToEnd:
         page.goto(f"{live_server_url}/#app/pn", wait_until="domcontentloaded")
         page.wait_for_timeout(500)
 
-        page.click("#nav-item-calendario")
+        page.click("#nav-item-pn-calendario")
         page.wait_for_timeout(400)
 
         # Digitar NIT y consultar
@@ -401,7 +584,7 @@ class TestFiscolEndToEnd:
     ):
         """Verifica la interacción completa en Persona Jurídica: presets, F110, TTD, Sobretasas y Conciliación."""
         page, errors = page_with_error_tracking
-        page.goto(f"{live_server_url}/#app/pn", wait_until="domcontentloaded")
+        page.goto(f"{live_server_url}/#app/pj/calc", wait_until="domcontentloaded")
         page.wait_for_timeout(500)
 
         # 1. Navegar a Persona Jurídica Calculadora
@@ -458,8 +641,7 @@ class TestFiscolEndToEnd:
     ):
         """Verifica la interacción completa en Régimen Simple: presets, F260, Comparador, F-2593 y Requisitos."""
         page, errors = page_with_error_tracking
-        page.goto(f"{live_server_url}/#app/pn", wait_until="domcontentloaded")
-        page.wait_for_timeout(500)
+        page.goto(f"{live_server_url}/#app/simple/calc", wait_until="domcontentloaded")
         page.wait_for_timeout(500)
 
         # 1. Navegar a Régimen Simple Calculadora
@@ -553,13 +735,13 @@ class TestResponsiveAndMobileMode:
         page.wait_for_timeout(300)
         assert "mobile-open" not in (sidebar.get_attribute("class") or "")
 
-        # 5. Abrir nuevamente y navegar a otro módulo (debe autocerrar el drawer)
+        # 5. Abrir nuevamente y navegar a otro submódulo (debe autocerrar el drawer)
         mobile_btn.click()
         page.wait_for_timeout(300)
-        page.click("#nav-item-presentacion")
+        page.click("#nav-item-pn-f210")
         page.wait_for_timeout(400)
         assert "mobile-open" not in (sidebar.get_attribute("class") or "")
-        assert page.locator("#pane-presentacion").is_visible()
+        assert page.locator("#pane-pn-f210").is_visible()
 
         assert len(errors) == 0, f"Errores en drawer móvil en {device_name}: {errors}"
 

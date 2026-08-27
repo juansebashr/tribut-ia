@@ -17,8 +17,6 @@ export const HeaderBar: React.FC = () => {
     sessionId,
     copySessionId,
     createNewSession,
-    theme,
-    toggleTheme,
   } = useApp();
 
   const getModuleMeta = () => {
@@ -31,22 +29,34 @@ export const HeaderBar: React.FC = () => {
         };
       case 'pn':
         return {
-          breadcrumb: 'IMPUESTO DE RENTA / PERSONA NATURAL',
+          breadcrumb: '1. PERSONAS NATURALES / RENTA',
           title:
-            activeSubTab === 'f210'
-              ? 'Formulario 210 DIAN - Facsímil Oficial'
+            activeSubTab === 'hub' || activeSubTab === 'overview'
+              ? 'Inicio & Guía del Espacio: Personas Naturales (Formulario 210)'
+              : activeSubTab === 'test_obligados'
+              ? '¿Debo Declarar Renta 2026? - Diagnóstico Rápido de Topes'
+              : activeSubTab === 'optimizer'
+              ? 'Optimizador Fiscal What-If (Ahorro AFC, FPV & Dependientes)'
+              : activeSubTab === 'inflacionario'
+              ? 'Componente Inflacionario de Rendimientos Financieros (Arts. 38 y 40-1 E.T.)'
+              : activeSubTab === 'f210'
+              ? 'Formulario 210 DIAN - Facsímil Oficial & Dictamen PDF'
               : activeSubTab === 'marginal'
               ? 'Tarifa Marginal Progresiva & Termómetro (Art. 241 E.T.)'
+              : activeSubTab === 'comparacion_patrimonial'
+              ? 'Comparación Patrimonial & Riesgo de Desajuste (Art. 236 E.T.)'
               : activeSubTab === 'conciliacion'
               ? 'Hoja de Cálculo Fiscal & Conciliación Exógena DIAN'
-              : 'Depuración Cédula General',
+              : 'Depuración Cédula General (Waterfall & Tacómetro)',
           hasSubTabs: true,
         };
       case 'pj':
         return {
-          breadcrumb: 'IMPUESTO DE RENTA / PERSONA JURÍDICA',
+          breadcrumb: '2. PERSONAS JURÍDICAS / RENTA EMPRESARIAL',
           title:
-            activeSubTab === 'f110'
+            activeSubTab === 'hub' || activeSubTab === 'overview'
+              ? 'Inicio & Guía del Espacio: Sociedades & Régimen Simple (F-110 & F-260)'
+              : activeSubTab === 'f110'
               ? 'Formulario 110 DIAN - Facsímil Oficial'
               : activeSubTab === 'ttd'
               ? 'Laboratorio Tasa de Tributación Depurada TTD (15%)'
@@ -59,9 +69,11 @@ export const HeaderBar: React.FC = () => {
         };
       case 'simple':
         return {
-          breadcrumb: 'RÉGIMEN ESPECIAL / SIMPLE',
+          breadcrumb: '2. PERSONAS JURÍDICAS / RÉGIMEN SIMPLE (RST)',
           title:
-            activeSubTab === 'f260'
+            activeSubTab === 'hub' || activeSubTab === 'overview'
+              ? 'Inicio & Guía del Espacio: Régimen Simple de Tributación (F-260)'
+              : activeSubTab === 'f260'
               ? 'Formulario 260 DIAN - Facsímil Oficial'
               : activeSubTab === 'comparador'
               ? 'Comparador Ordinario vs SIMPLE (Art. 908 E.T.)'
@@ -74,9 +86,11 @@ export const HeaderBar: React.FC = () => {
         };
       case 'iva':
         return {
-          breadcrumb: 'IMPUESTOS INDIRECTOS / IVA',
+          breadcrumb: '3. IMPUESTOS PERIÓDICOS / IVA',
           title:
-            activeSubTab === 'f300'
+            activeSubTab === 'hub' || activeSubTab === 'overview'
+              ? 'Inicio & Guía del Espacio: Impuestos Periódicos (IVA & Retefuente)'
+              : activeSubTab === 'f300'
               ? 'Formulario 300 DIAN - Facsímil Oficial'
               : activeSubTab === 'prorrateo'
               ? 'Simulador de Prorrateo de IVA Común (Art. 490 E.T.)'
@@ -87,9 +101,11 @@ export const HeaderBar: React.FC = () => {
         };
       case 'retefuente':
         return {
-          breadcrumb: 'IMPUESTOS PERIÓDICOS / RETENCIONES',
+          breadcrumb: '3. IMPUESTOS PERIÓDICOS / RETENCIÓN EN LA FUENTE',
           title:
-            activeSubTab === 'f350'
+            activeSubTab === 'hub' || activeSubTab === 'overview'
+              ? 'Inicio & Guía del Espacio: Impuestos Periódicos (Retefuente & IVA)'
+              : activeSubTab === 'f350'
               ? 'Formulario 350 DIAN - Facsímil Oficial'
               : activeSubTab === 'laboral'
               ? 'Liquidador Nómina & Retención Salarios (Art. 383 E.T.)'
@@ -106,9 +122,12 @@ export const HeaderBar: React.FC = () => {
         };
       case 'presentacion':
         return {
-          breadcrumb: 'DECLARACIÓN / AUDITORÍA & SANCIONES',
-          title: 'Beneficio de Auditoría (Art. 689-3) & Calculadora Integral de Sanciones (Arts. 640, 641, 644)',
-          hasSubTabs: false,
+          breadcrumb: '4. AUDITORÍA & SANCIONES',
+          title:
+            activeSubTab === 'hub' || activeSubTab === 'overview'
+              ? 'Inicio & Guía del Espacio: Régimen Sancionatorio & Auditoría'
+              : 'Beneficio de Auditoría (Art. 689-3) & Calculadora Integral de Sanciones (Arts. 640, 641, 644)',
+          hasSubTabs: true,
         };
       case 'art73':
         return {
@@ -121,6 +140,21 @@ export const HeaderBar: React.FC = () => {
           breadcrumb: 'OPTIMIZACIÓN / INMUEBLES & VIVIENDA',
           title: 'Bienes Inmuebles, Reajuste Art. 73, Régimen Pre-1987 & Cuentas AFC (Art. 311-1 E.T.)',
           hasSubTabs: false,
+        };
+      case 'calendario':
+        return {
+          breadcrumb: 'CALENDARIO TRIBUTARIO DIAN / VENCIMIENTOS',
+          title: 'Calendario Tributario 2026 - Vencimientos por Últimos Dígitos del NIT',
+          hasSubTabs: false,
+        };
+      case 'glosario':
+        return {
+          breadcrumb: 'EDUCACIÓN TRIBUTARIA & CONCEPTOS',
+          title:
+            activeSubTab === 'errores'
+              ? '⚠️ 10 Errores Frecuentes al Declarar Impuestos ante la DIAN'
+              : '📚 Glosario Tributario & Diccionario de Conceptos Fiscales A-Z',
+          hasSubTabs: true,
         };
       case 'rules':
         return {
@@ -152,9 +186,28 @@ export const HeaderBar: React.FC = () => {
           ☰
         </button>
         <div className="workspace-title-text">
-          <span className="workspace-breadcrumbs" id="header-breadcrumbs">
-            {meta.breadcrumb}
-          </span>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
+            <span className="workspace-breadcrumbs" id="header-breadcrumbs">
+              {meta.breadcrumb}
+            </span>
+            <button
+              id="btn-switch-workspace-header"
+              onClick={() => navigateToView('landing')}
+              style={{
+                fontSize: '10px',
+                fontWeight: 700,
+                color: '#0284c7',
+                background: 'rgba(2, 132, 199, 0.08)',
+                border: '1px solid rgba(2, 132, 199, 0.2)',
+                borderRadius: '4px',
+                padding: '1px 6px',
+                cursor: 'pointer',
+              }}
+              title="Volver al Portal Principal para cambiar de espacio de trabajo"
+            >
+              ⇄ Cambiar Espacio
+            </button>
+          </div>
           <h1 className="workspace-title" id="header-title">
             {meta.title}
           </h1>
@@ -167,25 +220,54 @@ export const HeaderBar: React.FC = () => {
           {activeModule === 'pn' && (
             <>
               <button
+                className={`sub-tab-btn ${activeSubTab === 'hub' || activeSubTab === 'overview' ? 'active' : ''}`}
+                id="sub-tab-btn-pn-hub"
+                onClick={() => navigateTo('pn', 'hub')}
+                style={{ fontWeight: 700 }}
+              >
+                <span>🏠</span> Inicio &amp; Guía
+              </button>
+              <button
+                className={`sub-tab-btn ${activeSubTab === 'test_obligados' ? 'active' : ''}`}
+                id="sub-tab-btn-pn-obligados"
+                onClick={() => navigateTo('pn', 'test_obligados')}
+              >
+                <span>🚦</span> ¿Debo Declarar?
+              </button>
+              <button
                 className={`sub-tab-btn ${activeSubTab === 'calc' ? 'active' : ''}`}
                 id="sub-tab-btn-pn-calc"
                 onClick={() => navigateTo('pn', 'calc')}
               >
-                <span>✏️</span> Captura &amp; Depuración
+                <span>✏️</span> Cédula General
               </button>
               <button
-                className={`sub-tab-btn ${activeSubTab === 'f210' ? 'active' : ''}`}
-                id="sub-tab-btn-pn-f210"
-                onClick={() => navigateTo('pn', 'f210')}
+                className={`sub-tab-btn ${activeSubTab === 'optimizer' ? 'active' : ''}`}
+                id="sub-tab-btn-pn-optimizer"
+                onClick={() => navigateTo('pn', 'optimizer')}
               >
-                <span>📋</span> Formulario 210 DIAN
+                <span>💡</span> Optimizador What-If
               </button>
               <button
                 className={`sub-tab-btn ${activeSubTab === 'marginal' ? 'active' : ''}`}
                 id="sub-tab-btn-pn-marginal"
                 onClick={() => navigateTo('pn', 'marginal')}
               >
-                <span>🌡️</span> Tarifa Progresiva
+                <span>🌡️</span> Tarifa Marginal
+              </button>
+              <button
+                className={`sub-tab-btn ${activeSubTab === 'comparacion_patrimonial' ? 'active' : ''}`}
+                id="sub-tab-btn-pn-comparacion"
+                onClick={() => navigateTo('pn', 'comparacion_patrimonial')}
+              >
+                <span>⚖️</span> Comparación Patrimonial
+              </button>
+              <button
+                className={`sub-tab-btn ${activeSubTab === 'inflacionario' ? 'active' : ''}`}
+                id="sub-tab-btn-pn-inflacionario"
+                onClick={() => navigateTo('pn', 'inflacionario')}
+              >
+                <span>📊</span> Comp. Inflacionario
               </button>
               <button
                 className={`sub-tab-btn ${activeSubTab === 'conciliacion' ? 'active' : ''}`}
@@ -195,11 +277,11 @@ export const HeaderBar: React.FC = () => {
                 <span>📑</span> Conciliación CSV
               </button>
               <button
-                className={`sub-tab-btn ${activeSubTab === 'comparacion_patrimonial' ? 'active' : ''}`}
-                id="sub-tab-btn-pn-comparacion"
-                onClick={() => navigateTo('pn', 'comparacion_patrimonial')}
+                className={`sub-tab-btn ${activeSubTab === 'f210' ? 'active' : ''}`}
+                id="sub-tab-btn-pn-f210"
+                onClick={() => navigateTo('pn', 'f210')}
               >
-                <span>⚖️</span> Comparación Patrimonial
+                <span>📋</span> Formulario 210
               </button>
             </>
           )}
@@ -207,7 +289,15 @@ export const HeaderBar: React.FC = () => {
           {activeModule === 'pj' && (
             <>
               <button
-                className={`sub-tab-btn ${activeSubTab === 'calc' || !activeSubTab ? 'active' : ''}`}
+                className={`sub-tab-btn ${activeSubTab === 'hub' || activeSubTab === 'overview' ? 'active' : ''}`}
+                id="sub-tab-btn-pj-hub"
+                onClick={() => navigateTo('pj', 'hub')}
+                style={{ fontWeight: 700 }}
+              >
+                <span>🏠</span> Inicio &amp; Guía
+              </button>
+              <button
+                className={`sub-tab-btn ${activeSubTab === 'calc' ? 'active' : ''}`}
                 id="sub-tab-btn-pj-calc"
                 onClick={() => navigateTo('pj', 'calc')}
               >
@@ -247,7 +337,15 @@ export const HeaderBar: React.FC = () => {
           {activeModule === 'simple' && (
             <>
               <button
-                className={`sub-tab-btn ${activeSubTab === 'calc' || !activeSubTab ? 'active' : ''}`}
+                className={`sub-tab-btn ${activeSubTab === 'hub' || activeSubTab === 'overview' ? 'active' : ''}`}
+                id="sub-tab-btn-simple-hub"
+                onClick={() => navigateTo('simple', 'hub')}
+                style={{ fontWeight: 700 }}
+              >
+                <span>🏠</span> Inicio &amp; Guía
+              </button>
+              <button
+                className={`sub-tab-btn ${activeSubTab === 'calc' ? 'active' : ''}`}
                 id="sub-tab-btn-simple-calc"
                 onClick={() => navigateTo('simple', 'calc')}
               >
@@ -287,7 +385,15 @@ export const HeaderBar: React.FC = () => {
           {activeModule === 'retefuente' && (
             <>
               <button
-                className={`sub-tab-btn ${activeSubTab === 'calc' || !activeSubTab ? 'active' : ''}`}
+                className={`sub-tab-btn ${activeSubTab === 'hub' || activeSubTab === 'overview' ? 'active' : ''}`}
+                id="sub-tab-btn-retefuente-hub"
+                onClick={() => navigateTo('retefuente', 'hub')}
+                style={{ fontWeight: 700 }}
+              >
+                <span>🏠</span> Inicio &amp; Guía
+              </button>
+              <button
+                className={`sub-tab-btn ${activeSubTab === 'calc' ? 'active' : ''}`}
                 id="sub-tab-btn-retefuente-calc"
                 onClick={() => navigateTo('retefuente', 'calc')}
               >
@@ -320,7 +426,15 @@ export const HeaderBar: React.FC = () => {
           {activeModule === 'iva' && (
             <>
               <button
-                className={`sub-tab-btn ${activeSubTab === 'calc' || !activeSubTab ? 'active' : ''}`}
+                className={`sub-tab-btn ${activeSubTab === 'hub' || activeSubTab === 'overview' ? 'active' : ''}`}
+                id="sub-tab-btn-iva-hub"
+                onClick={() => navigateTo('iva', 'hub')}
+                style={{ fontWeight: 700 }}
+              >
+                <span>🏠</span> Inicio &amp; Guía
+              </button>
+              <button
+                className={`sub-tab-btn ${activeSubTab === 'calc' ? 'active' : ''}`}
                 id="sub-tab-btn-iva-calc"
                 onClick={() => navigateTo('iva', 'calc')}
               >
@@ -346,6 +460,67 @@ export const HeaderBar: React.FC = () => {
                 onClick={() => navigateTo('iva', 'clasificador')}
               >
                 <span>🔍</span> Catálogo de Bienes &amp; Servicios
+              </button>
+            </>
+          )}
+
+          {activeModule === 'presentacion' && (
+            <>
+              <button
+                className={`sub-tab-btn ${activeSubTab === 'hub' || activeSubTab === 'overview' ? 'active' : ''}`}
+                id="sub-tab-btn-presentacion-hub"
+                onClick={() => navigateTo('presentacion', 'hub')}
+                style={{ fontWeight: 700 }}
+              >
+                <span>🏠</span> Inicio &amp; Guía
+              </button>
+              <button
+                className={`sub-tab-btn ${activeSubTab === 'main' || !activeSubTab ? 'active' : ''}`}
+                id="sub-tab-btn-presentacion-main"
+                onClick={() => navigateTo('presentacion', 'main')}
+              >
+                <span>⚖️</span> Sanciones &amp; Auditoría
+              </button>
+            </>
+          )}
+
+          {activeModule === 'glosario' && (
+            <>
+              <button
+                className={`sub-tab-btn ${activeSubTab === 'glosario' || activeSubTab === 'main' || !activeSubTab ? 'active' : ''}`}
+                id="sub-tab-btn-glosario-main"
+                onClick={() => navigateTo('glosario', 'glosario')}
+                style={{ fontWeight: 700 }}
+              >
+                <span>📖</span> Glosario A-Z
+              </button>
+              <button
+                className={`sub-tab-btn ${activeSubTab === 'errores' ? 'active' : ''}`}
+                id="sub-tab-btn-glosario-errores"
+                onClick={() => navigateTo('glosario', 'errores')}
+              >
+                <span>⚠️</span> 10 Errores
+              </button>
+              <button
+                className={`sub-tab-btn ${activeSubTab === 'aprende' ? 'active' : ''}`}
+                id="sub-tab-btn-glosario-aprende"
+                onClick={() => navigateTo('glosario', 'aprende')}
+              >
+                <span>🎓</span> Aprende
+              </button>
+              <button
+                className={`sub-tab-btn ${activeSubTab === 'calculadora_topes' ? 'active' : ''}`}
+                id="sub-tab-btn-glosario-topes"
+                onClick={() => navigateTo('glosario', 'calculadora_topes')}
+              >
+                <span>🚦</span> Topes
+              </button>
+              <button
+                className={`sub-tab-btn ${activeSubTab === 'faq' ? 'active' : ''}`}
+                id="sub-tab-btn-glosario-faq"
+                onClick={() => navigateTo('glosario', 'faq')}
+              >
+                <span>❓</span> FAQ
               </button>
             </>
           )}
@@ -421,18 +596,6 @@ export const HeaderBar: React.FC = () => {
         >
           <span>🤖</span>
           <span className="header-skill-text">Skill IA</span>
-        </button>
-
-        {/* BOTÓN MODO OSCURO / CLARO */}
-        <button
-          id="btn-theme-toggle"
-          className="theme-toggle-btn"
-          onClick={toggleTheme}
-          aria-label={theme === 'dark' ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'}
-          title={theme === 'dark' ? '☀️ Cambiar a Modo Claro' : '🌙 Cambiar a Modo Oscuro'}
-        >
-          <span className="theme-toggle-icon">{theme === 'dark' ? '☀️' : '🌙'}</span>
-          <span className="theme-toggle-text">{theme === 'dark' ? 'Modo Claro' : 'Modo Oscuro'}</span>
         </button>
       </div>
     </header>

@@ -1,11 +1,11 @@
-# Graph Report - tribut-ia  (2026-08-25)
+# Graph Report - tribut-ia  (2026-08-26)
 
 ## Corpus Check
-- 240 files · ~581,859 words
+- 242 files · ~607,672 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 2772 nodes · 4370 edges · 193 communities (124 shown, 69 thin omitted)
+- 2789 nodes · 4399 edges · 200 communities (129 shown, 71 thin omitted)
 - Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 60 edges (avg confidence: 0.59)
 - Token cost: 0 input · 0 output
 
@@ -17,33 +17,33 @@
 ## Community Hubs (Navigation)
 - test_coverage_boost.py
 - test_reconciliation_ephemeral.py
-- SessionStoreBase
-- formatCOP
+- RedisSessionStore
+- formatters.ts
 - schema.py
 - LIBRO PRIMERO - de este Estatuto
 - endpoints/beneficios.py
 - useApp
 - test_session_sync.py
 - liquidar_persona_natural
-- common.py
+- calculate_formulario_350
 - test_beneficios_and_go.py
 - app.js
-- Path
-- RedisSessionStore
+- test_skill_comparacion_patrimonial.py
+- _liquidar_conyuge_individual
 - IvaModule.tsx
 - devDependencies
 - run.py
 - tax.ts
 - get_rules_for_year
 - compilerOptions
-- react
+- common.py
 - RetefuenteModule.tsx
 - AppContext.tsx
 - compilerOptions
-- update_session_state
+- session_events_stream
 - CalendarioModule.tsx
 - RegimenSimpleModule.tsx
-- SkillTutorialPage.tsx
+- PnComparacionPatrimonialSubtab.tsx
 - Cómo Analizar el Control por Comparación Patrimonial (Arts. 236 y 237 E.T.)
 - LIBRO QUINTO - PROCEDIMIENTO TRIBUTARIO, SANCIONES Y ESTRUCTURA DE LA DIRECCION GENERAL DE IMPUESTOS NACIONALES
 - LIBRO TERCERO - IMPUESTO SOBRE LAS VENTAS
@@ -69,8 +69,8 @@
 - Reglas del Frontend (React / TypeScript / Vite)
 - Reglas del Motor de Liquidación Tributaria (Tax Engine)
 - liquidar_comparacion_patrimonial
-- Cuadrantes Diataxis
-- README.md
+- consolidar_csv_a_payload
+- docs/README.md
 - Explicación: Arquitectura del Sistema Fiscol
 - Reglas de Documentación
 - Reglas de Modelos y Esquemas Pydantic
@@ -169,8 +169,8 @@
 - app_ui_logic.test.mjs
 - AuditTraceItem
 - calculate_formulario_300
-- get
-- InMemorySessionStore
+- main.py
+- workspace_hubs_and_optimizer.test.mjs
 - liquidacion_iva.py
 - liquidacion_retefuente.py
 - 2. Flujo Operativo en 4 Fases
@@ -188,10 +188,17 @@
 - 02-simular-tasa-minima-ttd-pj.md
 - Estatuto Tributario Nacional de Colombia
 - ADR 0006: Sistema Responsivo, Menú Off-Canvas y Modo Mobile
-- debug_ui_playwright.py
-- parseCOP
+- .test_mobile_casilla_popover_bottom_sheet
+- formatCOP
 - test_e2e_playwright.py
-- .test_all_groups_and_subtabs_design_standardization
+- README.md
+- PersonaJuridicaCalculator.tsx
+- Path
+- generar_reporte_markdown
+- calcular_comparacion_patrimonial_endpoint
+- inyectar_sesion_fiscol
+- debug_ui_playwright.py
+- UvtConverterWidget.tsx
 
 ## God Nodes (most connected - your core abstractions)
 1. `LIBRO PRIMERO - de este Estatuto` - 414 edges
@@ -200,7 +207,7 @@
 4. `LIBRO PRIMERO - IMPUESTO SOBRE LA RENTA Y COMPLEMENTARIOS` - 79 edges
 5. `useApp()` - 75 edges
 6. `formatCOP()` - 72 edges
-7. `react` - 68 edges
+7. `react` - 69 edges
 8. `AuditTraceItem` - 55 edges
 9. `parseCOP()` - 44 edges
 10. `LIBRO CUARTO - IMPUESTOS DE TIMBRE NACIONAL` - 42 edges
@@ -220,23 +227,23 @@
 ## Import Cycles
 - None detected.
 
-## Communities (193 total, 69 thin omitted)
+## Communities (200 total, 71 thin omitted)
 
 ### Community 0 - "test_coverage_boost.py"
-Cohesion: 0.07
-Nodes (27): serve_ui(), Valida la inyección y recálculo automático de Persona Jurídica en session_sync., Valida ramas de excepción seguras al calcular en session_sync., Valida respuestas HTTP 400 cuando el liquidador arroja una excepción controlada., Valida el endpoint raíz serve_ui cuando index.html no existe., Valida los métodos abstractos de SessionStoreBase., Valida comparación de escenarios con ahorro efectivo de impuesto., Valida la factoría de almacén de sesiones según configuración. (+19 more)
+Cohesion: 0.10
+Nodes (21): serve_ui(), Valida la inyección y recálculo automático de Persona Jurídica en session_sync., Valida ramas de excepción seguras al calcular en session_sync., Valida respuestas HTTP 400 cuando el liquidador arroja una excepción controlada., Valida el endpoint raíz serve_ui cuando index.html no existe., Valida comparación de escenarios con ahorro efectivo de impuesto., Valida los endpoints HTTP de beneficios directamente., Valida auto-provisionamiento de sesión cuando no hay cabeceras ni cookies. (+13 more)
 
 ### Community 1 - "test_reconciliation_ephemeral.py"
 Cohesion: 0.06
 Nodes (47): _clean_numeric_value(), CsvValidationError, _detect_delimiter(), download_csv_template(), _generate_didactic_explanation(), get_reconciliation_demo(), parse_raw_csv(), parse_reconciliation_csv() (+39 more)
 
-### Community 2 - "SessionStoreBase"
-Cohesion: 0.15
-Nodes (11): ABC, asyncio, BaseModel, Settings, Any, BaseModel, Queue, Clase base abstracta para almacén de sesiones con soporte para Pub/Sub y… (+3 more)
+### Community 2 - "RedisSessionStore"
+Cohesion: 0.05
+Nodes (38): ABC, asyncio, BaseModel, Settings, Any, BaseModel, Queue, Clase base abstracta para almacén de sesiones con soporte para Pub/Sub y… (+30 more)
 
-### Community 3 - "formatCOP"
+### Community 3 - "formatters.ts"
 Cohesion: 0.13
-Nodes (31): PnCalcSubtab(), PnCalcSubtabProps, PnComparacionPatrimonialSubtab(), PnComparacionPatrimonialSubtabProps, PnF210Subtab(), PnF210SubtabProps, MarginalSlice, PnMarginalSubtab() (+23 more)
+Nodes (25): PnCalcSubtabProps, PnComparacionPatrimonialSubtabProps, PnF210Subtab(), PnF210SubtabProps, MarginalSlice, PnMarginalSubtab(), PnMarginalSubtabProps, PnObligadosSubtab() (+17 more)
 
 ### Community 4 - "schema.py"
 Cohesion: 0.22
@@ -251,20 +258,20 @@ Cohesion: 0.25
 Nodes (17): listar_beneficios(), obtener_tabla_articulo_73(), obtener_tabla_componente_inflacionario(), get, AjusteArticulo73Item, BeneficioAuditoriaResponse, BeneficioItem, EscenarioComparativoInmueble (+9 more)
 
 ### Community 7 - "useApp"
-Cohesion: 0.12
-Nodes (22): CasillaPopover(), ConfirmModal(), ToastContainer(), WorkspaceHubLanding(), AppShell(), HeaderBar(), Sidebar(), BeneficioItem (+14 more)
+Cohesion: 0.09
+Nodes (27): App(), MainRouter(), CasillaPopover(), ConfirmModal(), FiscolLogoIcon(), FiscolLogoProps, ToastContainer(), LandingHeroPreview() (+19 more)
 
 ### Community 8 - "test_session_sync.py"
 Cohesion: 0.12
 Nodes (16): Valida el reinicio de la sesión., Verifica que las rutas alias /ui/state y /ui/reset funcionen igual que /session., Verifica la resolución de sesión mediante el Header HTTP 'X-Session-ID'., Verifica que clientes sin header o query reciban automáticamente un UUID seguro…, Inyecta un estado completo en la sesión y verifica su persistencia., Verifica que actualizaciones parciales preserven el resto de los campos., Valida el aislamiento estricto entre sesiones concurrentes con IDs distintos., Valida la obtención del estado inicial por defecto de la sesión. (+8 more)
 
 ### Community 10 - "liquidar_persona_natural"
-Cohesion: 0.12
-Nodes (27): comparar_escenarios_pn(), BaseModel, post, ScenarioComparisonRequest, ScenarioComparisonResponse, PersonaNaturalInput, PersonaNaturalOutput, BaseModel (+19 more)
+Cohesion: 0.10
+Nodes (33): Any, post, Restablece todos los datos de la sesión actual a sus valores iniciales por…, Inyecta datos en la sesión activa. Si la interfaz web está abierta con esta…, reset_session(), update_session_state(), comparar_escenarios_pn(), BaseModel (+25 more)
 
-### Community 11 - "common.py"
-Cohesion: 0.39
-Nodes (7): convertir_uvt(), post, BaseModel, ReconciliationItem, ReconciliationState, UvtConversionRequest, UvtConversionResponse
+### Community 11 - "calculate_formulario_350"
+Cohesion: 0.29
+Nodes (7): calculate_formulario_350(), calculate_retefuente_laboral(), post, RetefuenteF350Input, RetefuenteF350Output, RetefuenteLaboralInput, RetefuenteLaboralOutput
 
 ### Community 12 - "test_beneficios_and_go.py"
 Cohesion: 0.17
@@ -274,13 +281,13 @@ Nodes (20): liquidar_sancion(), calcular_sancion_tributaria(), LiquidacionSancio
 Cohesion: 0.07
 Nodes (27): allBeneficios, applyImportedJson(), applyTheme(), closeConfirmModal(), closeJsonModal(), closeJsonModalOnBackdrop(), closeMobileSidebar(), currentTimelineItems (+19 more)
 
-### Community 14 - "Path"
-Cohesion: 0.06
-Nodes (37): test_analizar_borrador_con_desajuste(), test_analizar_borrador_justificado_correctamente(), test_analizar_caso_real_juan_sebastian_2024_vs_2023(), test_cargar_cuestionario_diagnostico(), test_cli_subprocess_analizar_comparacion(), test_extraer_datos_borrador_f210(), test_generar_reporte_markdown(), test_conciliacion_exogena_matching() (+29 more)
+### Community 14 - "test_skill_comparacion_patrimonial.py"
+Cohesion: 0.16
+Nodes (18): test_analizar_borrador_con_desajuste(), test_analizar_borrador_justificado_correctamente(), test_analizar_caso_real_juan_sebastian_2024_vs_2023(), test_cargar_cuestionario_diagnostico(), test_cli_subprocess_analizar_comparacion(), test_extraer_datos_borrador_f210(), analizar_borrador_f210(), cargar_cuestionario_diagnostico() (+10 more)
 
-### Community 15 - "RedisSessionStore"
-Cohesion: 0.17
-Nodes (10): Almacén de sesiones distribuido en Redis con TTL de 1 día y Pub/Sub para…, Escucha eventos en Redis Pub/Sub y los despacha a los clientes SSE conectados a…, RedisSessionStore, Valida métodos completos de RedisSessionStore con fakeredis., test_redis_session_store_full_methods(), Valida la suscripción a eventos y la publicación Pub/Sub en Redis., Valida que RedisSessionStore persista datos con TTL de 86.400 segundos (1 día)…, test_redis_session_store_lifecycle_and_ttl() (+2 more)
+### Community 15 - "_liquidar_conyuge_individual"
+Cohesion: 0.33
+Nodes (6): _calcular_impuesto_tabla_241(), _liquidar_conyuge_individual(), Calcula el impuesto de renta según la tabla progresiva del Art. 241 del…, Realiza la depuración individual de la cédula general de un cónyuge., ConyugeFinanzasInput, LiquidacionIndividualConyuge
 
 ### Community 16 - "IvaModule.tsx"
 Cohesion: 0.17
@@ -295,48 +302,48 @@ Cohesion: 0.83
 Nodes (3): is_port_in_use(), kill_process_on_port(), main()
 
 ### Community 19 - "tax.ts"
-Cohesion: 0.06
-Nodes (45): ALL_HISTORIC_YEARS, BeneficiosAuditoriaTab(), BeneficiosAuditoriaTabProps, ComponenteInflacionarioModule(), InmueblesAfcModule(), RetefuenteLaboralSubtab(), RulesInspector(), RulesInspectorProps (+37 more)
+Cohesion: 0.05
+Nodes (49): ALL_HISTORIC_YEARS, BeneficiosAuditoriaTab(), BeneficiosAuditoriaTabProps, ComponenteInflacionarioModule(), RetefuenteLaboralSubtab(), TributacionParejaModule(), RulesInspector(), RulesInspectorProps (+41 more)
 
 ### Community 20 - "get_rules_for_year"
-Cohesion: 0.13
-Nodes (20): listar_anos(), obtener_reglas_ano(), get, get_available_tax_years(), get_rules_for_year(), load_all_rules(), Carga y valida todos los archivos de reglas YAML disponibles., Obtiene las reglas para un año fiscal específico, opcionalmente… (+12 more)
+Cohesion: 0.19
+Nodes (12): get_available_tax_years(), get_rules_for_year(), Obtiene las reglas para un año fiscal específico, opcionalmente…, Retorna la lista ordenada de años gravables disponibles., test_calendario_rules(), Valida branches del cargador de reglas., Valida ramas de error del cargador de reglas cuando no hay directorio o años., test_rules_loader_coverage() (+4 more)
 
 ### Community 21 - "compilerOptions"
 Cohesion: 0.08
 Nodes (23): compilerOptions, allowArbitraryExtensions, allowImportingTsExtensions, erasableSyntaxOnly, jsx, lib, module, moduleDetection (+15 more)
 
-### Community 22 - "react"
-Cohesion: 0.13
-Nodes (11): AuditTraceModal(), AuditTraceModalProps, PersonaJuridicaModule(), NavbarProps, PersonaJuridicaCalculator(), PersonaJuridicaCalculatorProps, PersonaNaturalCalculatorProps, UvtConverterWidgetProps (+3 more)
+### Community 22 - "common.py"
+Cohesion: 0.23
+Nodes (10): convertir_uvt(), listar_anos(), obtener_reglas_ano(), get, post, BaseModel, ReconciliationItem, ReconciliationState (+2 more)
 
 ### Community 23 - "RetefuenteModule.tsx"
 Cohesion: 0.22
 Nodes (12): MESES, RetefuenteCalcSubtab(), RetefuenteCalcSubtabProps, RetefuenteF350Subtab(), RetefuenteF350SubtabProps, RetefuenteTablaSubtab(), RetefuenteModule(), calculateRetefuenteF350() (+4 more)
 
 ### Community 24 - "AppContext.tsx"
-Cohesion: 0.09
-Nodes (25): App(), MainRouter(), ToolItem, WorkflowStep, WorkspaceHubData, LandingHeroPreview(), LandingNavbar(), LandingPage() (+17 more)
+Cohesion: 0.14
+Nodes (18): ToolItem, WorkflowStep, WorkspaceHubData, CasillaInfo, CASILLAS_INFO, CASILLAS_INFO_F110, CASILLAS_INFO_F260, CASILLAS_INFO_F300 (+10 more)
 
 ### Community 25 - "compilerOptions"
 Cohesion: 0.10
 Nodes (19): compilerOptions, allowImportingTsExtensions, erasableSyntaxOnly, lib, module, moduleDetection, noEmit, noFallthroughCasesInSwitch (+11 more)
 
-### Community 26 - "update_session_state"
-Cohesion: 0.12
-Nodes (19): get_current_session_info(), get_session_state(), Any, get, post, Request, Canal Server-Sent Events (SSE) al que se conecta el navegador web para recibir…, Restablece todos los datos de la sesión actual a sus valores iniciales por… (+11 more)
+### Community 26 - "session_events_stream"
+Cohesion: 0.18
+Nodes (13): get_current_session_info(), get_session_state(), get, Request, Canal Server-Sent Events (SSE) al que se conecta el navegador web para recibir…, Resolución unificada de ID de Sesión (Dual-Mode): 1. Header HTTP 'X-Session-ID'…, Retorna el ID de sesión asignado al cliente actual vía Cookie o Header., Retorna el estado completo actual de la sesión resuelta: metadatos, datos de… (+5 more)
 
 ### Community 27 - "CalendarioModule.tsx"
 Cohesion: 0.24
 Nodes (16): CalendarioModule(), CALENDARIO_TRIBUTARIO, DIAN_2026_IVA_BIMESTRES, DIAN_2026_RENTA_PJ, DIAN_2026_RENTA_PN, DIAN_2026_RETEFUENTE_MENSUAL, DIAN_2026_RETEFUENTE_PERIODOS, DIAN_2026_SIMPLE_ANUAL (+8 more)
 
 ### Community 28 - "RegimenSimpleModule.tsx"
-Cohesion: 0.16
-Nodes (15): SimpleCalcSubtab(), SimpleCalcSubtabProps, SimpleComparadorSubtab(), BimestreData, SimpleF2593Subtab(), SimpleF260Subtab(), SimpleF260SubtabProps, SimpleRequisitosSubtab() (+7 more)
+Cohesion: 0.19
+Nodes (13): SimpleCalcSubtab(), SimpleCalcSubtabProps, SimpleComparadorSubtab(), SimpleF260Subtab(), SimpleF260SubtabProps, SimpleRequisitosSubtab(), RegimenSimpleModule(), calculateRegimenSimple() (+5 more)
 
-### Community 31 - "SkillTutorialPage.tsx"
-Cohesion: 0.28
-Nodes (11): AntigravityTutorialTab(), ChatGptTutorialTab(), ClaudeTutorialTab(), SkillTutorialPage(), CLAUDE_DESKTOP_CONFIG_JSON, CSV_TEMPLATE_CONTENT, CUSTOM_GPT_INSTRUCTIONS, downloadFile() (+3 more)
+### Community 31 - "PnComparacionPatrimonialSubtab.tsx"
+Cohesion: 0.19
+Nodes (16): PnComparacionPatrimonialSubtab(), AntigravityTutorialTab(), ChatGptTutorialTab(), ClaudeTutorialTab(), SkillTutorialPage(), calcularComparacionPatrimonial(), ComparacionPatrimonialRequest, ComparacionPatrimonialResponse (+8 more)
 
 ### Community 40 - "Cómo Analizar el Control por Comparación Patrimonial (Arts. 236 y 237 E.T.)"
 Cohesion: 0.29
@@ -375,7 +382,7 @@ Cohesion: 0.14
 Nodes (13): 1. Firmeza de las Declaraciones Tributarias & Beneficio de Auditoría, 2. Liquidación de Sanciones (Arts. 641, 644, 647, 648, 640 y 639 E.T.), 3. Intereses Moratorios Diarios Compuestos (Arts. 634 y 635 E.T.), 4. Ejemplo de Cálculo vía API (`POST /api/v1/beneficios/calcular-sancion`), Beneficio de Auditoría (Art. 689-3 E.T.), Control de Sanción Mínima (Art. 639), Cómo Calcular Sanciones Tributarias y Simular el Beneficio de Auditoría, Ejemplo vía API REST (`POST /api/v1/beneficios/simular-auditoria`) (+5 more)
 
 ### Community 49 - "Referencia de Endpoints REST — Fiscol API (v1)"
-Cohesion: 0.11
+Cohesion: 0.10
 Nodes (19): 1. Módulo de Sesión y Sincronización en Tiempo Real (`/session`), 2. Módulo de Liquidación Tributaria (`/calculate`), 3. Módulo de Reglas y Parámetros (`/rules`), 4. Módulo de Beneficios, Ajustes Patrimoniales & Sanciones (`/beneficios`), 5. Módulo de Calendario Tributario (`/calendario`), 6. Módulo de Conciliación Exógena & CSV (`/reconciliation`) — *100% Efímero / Stateless*, 🔒 Control de Acceso y Aislamiento de Sesión, `GET /reconciliation/demo` (+11 more)
 
 ### Community 50 - "Workflow en 4 Fases con Conciliacion Exogena"
@@ -435,16 +442,16 @@ Cohesion: 0.40
 Nodes (4): 1. Principios Estatutarios y Normativos, 2. Precisión y Manejo Numérico, 3. Arquitectura del Servicio, Reglas del Motor de Liquidación Tributaria (Tax Engine)
 
 ### Community 64 - "liquidar_comparacion_patrimonial"
-Cohesion: 0.14
-Nodes (22): calcular_comparacion_patrimonial_endpoint(), calcular_renta_persona_natural(), ComparacionPatrimonialRequest, PersonaNaturalInput, post, ComparacionPatrimonialRequest, ComparacionPatrimonialResponse, BaseModel (+14 more)
+Cohesion: 0.19
+Nodes (17): ComparacionPatrimonialRequest, ComparacionPatrimonialResponse, BaseModel, liquidar_comparacion_patrimonial(), ComparacionPatrimonialRequest, Motor determinístico de cálculo para el control por Comparación Patrimonial…, Caso 1: Incremento de patrimonio plenamente justificado con ingresos…, Caso 4: Persona que compra apartamento de 500M con 300M de crédito hipotecario… (+9 more)
 
-### Community 65 - "Cuadrantes Diataxis"
-Cohesion: 0.29
-Nodes (7): 1. [Tutoriales](./tutorials/) - *Orientado al Aprendizaje*, 2. [Guias How-To](./how-to/) - *Orientado a Tareas*, 3. [Referencias Tecnicas](./reference/) - *Orientado a la Informacion*, 4. [Explicaciones](./explanation/) - *Orientado a la Comprension*, Cuadrantes Diataxis, Documentacion Tecnica de Fiscol, [Registro de Decisiones Arquitectonicas (ADRs)](./decisions/README.md)
+### Community 65 - "consolidar_csv_a_payload"
+Cohesion: 0.23
+Nodes (3): test_consolidar_template_csv(), consolidar_csv_a_payload(), Any
 
-### Community 66 - "README.md"
-Cohesion: 0.12
-Nodes (10): Registro de Decisiones de Arquitectura (ADRs), 1. Cédulas de Tributación, Explicación: El Sistema Cedular en Colombia (Ley 2277 de 2022), 1. Por qué este mito es matemáticamente falso, Explicación: El Mito Tributario de las Tarifas Marginales, Modelo de Entidades y Estado de Sesión, Flowchart: Algoritmo de Topes de Rentas Exentas y Deducciones, Diagrama de Secuencia: Pipeline de Liquidación Tributaria (+2 more)
+### Community 66 - "docs/README.md"
+Cohesion: 0.10
+Nodes (14): 1. Por qué este mito es matemáticamente falso, Explicación: El Mito Tributario de las Tarifas Marginales, 1. [Tutoriales](./tutorials/) - *Orientado al Aprendizaje*, 2. [Guias How-To](./how-to/) - *Orientado a Tareas*, 3. [Referencias Tecnicas](./reference/) - *Orientado a la Informacion*, 4. [Explicaciones](./explanation/) - *Orientado a la Comprension*, Cuadrantes Diataxis, Documentacion Tecnica de Fiscol (+6 more)
 
 ### Community 67 - "Explicación: Arquitectura del Sistema Fiscol"
 Cohesion: 0.40
@@ -471,8 +478,8 @@ Cohesion: 0.29
 Nodes (6): 1. Fundamento Legal (Art. 73 E.T.), 2. Tipos de Activos y Factores, 3. Ejemplo de Uso vía API REST, Cómo Simular el Reajuste Fiscal de Activos Fijos (Art. 73 E.T.), Petición HTTP (`POST /api/v1/beneficios/simular-articulo-73`), Respuesta
 
 ### Community 73 - "Page"
-Cohesion: 0.10
-Nodes (16): Suite de pruebas E2E que validan la estabilidad e interactividad de la UI., Verifica que la URL raíz cargue la Landing Page y al pulsar Empezar entre a la…, Verifica que hacer clic en cada módulo de la barra lateral active su respectivo…, Valida el catálogo de beneficios, el buscador reactivo y los filtros por…, Valida el simulador de auditoría y la calculadora integral de sanciones., Valida el módulo del Artículo 73 E.T.: tabla DANE 70 años, selector, búsqueda y…, Valida el simulador interactivo de beneficios inmobiliarios y Cuentas AFC (Art.…, Verifica la interacción en Persona Natural: subpestañas F210, termómetro… (+8 more)
+Cohesion: 0.09
+Nodes (18): Suite de pruebas E2E que validan la estabilidad e interactividad de la UI., Verifica que la URL raíz cargue la Landing Page y al pulsar Empezar entre a la…, Verifica que hacer clic en cada módulo de la barra lateral active su respectivo…, Valida el catálogo de beneficios, el buscador reactivo y los filtros por…, Valida el simulador de auditoría y la calculadora integral de sanciones., Valida el módulo del Artículo 73 E.T.: tabla DANE 70 años, selector, búsqueda y…, Valida el simulador interactivo de beneficios inmobiliarios y Cuentas AFC (Art.…, Verifica la interacción en Persona Natural: subpestañas F210, termómetro… (+10 more)
 
 ### Community 74 - "ADR 0002: Sincronización Bidireccional en Tiempo Real con Server-Sent Events (SSE)"
 Cohesion: 0.50
@@ -579,28 +586,24 @@ Cohesion: 0.22
 Nodes (7): appJsPath, calendarioPath, casillasPath, elementsMap, localStorageMock, mockNavigator, sandbox
 
 ### Community 163 - "AuditTraceItem"
-Cohesion: 0.12
-Nodes (32): AuditTraceItem, AnalisisRiesgoPatrimonialConyugal, ConyugeFinanzasInput, EscenarioTributarioPareja, LiquidacionIndividualConyuge, BaseModel, Resultado de la liquidación individual de renta de un cónyuge., Resumen consolidado de la pareja en un escenario de liquidación. (+24 more)
+Cohesion: 0.16
+Nodes (26): AuditTraceItem, AnalisisRiesgoPatrimonialConyugal, ConyugeFinanzasInput, EscenarioTributarioPareja, LiquidacionIndividualConyuge, BaseModel, Resultado de la liquidación individual de renta de un cónyuge., Resumen consolidado de la pareja en un escenario de liquidación. (+18 more)
 
 ### Community 164 - "calculate_formulario_300"
 Cohesion: 0.29
 Nodes (7): calculate_formulario_300(), calculate_prorrateo_art490(), IvaF300Input, IvaF300Output, IvaProrrateoInput, IvaProrrateoOutput, post
 
-### Community 165 - "get"
+### Community 165 - "main.py"
 Cohesion: 0.11
-Nodes (19): chrome_devtools_endpoint(), favicon_ico(), favicon_png(), favicon_svg(), health_check(), get, Request, Sirve el favicon.ico oficial en formato binario estándar. (+11 more)
-
-### Community 166 - "InMemorySessionStore"
-Cohesion: 0.15
-Nodes (9): InMemorySessionStore, Any, Queue, Almacén de sesiones en memoria RAM para desarrollo local y tests unitarios., Valida métodos completos de InMemorySessionStore., Valida manejo de colas llenas y desuscripción limpia en InMemorySessionStore., test_in_memory_session_store_full(), test_in_memory_session_store_queue_overflow_and_cleanup() (+1 more)
+Nodes (24): load_all_rules(), Carga y valida todos los archivos de reglas YAML disponibles., TaxYearRules, chrome_devtools_endpoint(), favicon_ico(), favicon_png(), favicon_svg(), health_check() (+16 more)
 
 ### Community 167 - "liquidacion_iva.py"
 Cohesion: 0.13
 Nodes (29): get_clasificador_iva(), BienServicioIvaItem, get, BienServicioIvaItem, Formulario300Casillas, IvaF300Input, IvaF300Output, IvaProrrateoInput (+21 more)
 
 ### Community 168 - "liquidacion_retefuente.py"
-Cohesion: 0.10
-Nodes (36): calculate_formulario_350(), calculate_retefuente_laboral(), get_tabla_retenciones(), get, post, RetefuenteF350Input, RetefuenteF350Output, RetefuenteLaboralInput (+28 more)
+Cohesion: 0.12
+Nodes (31): get_tabla_retenciones(), get, TablaRetefuenteItem, Formulario350Casillas, BaseModel, RetefuenteF350Input, RetefuenteF350Output, RetefuenteLaboralInput (+23 more)
 
 ### Community 169 - "2. Flujo Operativo en 4 Fases"
 Cohesion: 0.18
@@ -627,8 +630,8 @@ Cohesion: 0.50
 Nodes (3): 📦 Estructura del Skill, Skill: Control por Comparación Patrimonial (Formulario 210), 🚀 Uso Rápido en Línea de Comandos
 
 ### Community 184 - "TestResponsiveAndMobileMode"
-Cohesion: 0.15
-Nodes (10): Verifica que abrir la información de una casilla y cambiar de pestaña/módulo…, Suite de pruebas E2E especializadas para Modo Mobile y Responsive Design., Verifica que el drawer móvil (off-canvas), botón hamburguesa y backdrop…, Verifica que el body/viewport no sufra desbordamiento horizontal en móviles., Verifica que en celulares el badge de sesión y el botón Skill IA se rendericen…, Verifica la adaptación de layout en pantallas reducidas de escritorio y laptops., Verifica que los modales y popovers se adapten como bottom-sheets en mobile sin…, Verifica que el spreadsheet de conciliación tenga scroll horizontal interno y… (+2 more)
+Cohesion: 0.13
+Nodes (11): Verifica que todos los submódulos y pestañas de todos los grupos sigan las…, Verifica que abrir la información de una casilla y cambiar de pestaña/módulo…, Suite de pruebas E2E especializadas para Modo Mobile y Responsive Design., Verifica que el drawer móvil (off-canvas), botón hamburguesa y backdrop…, Verifica que el body/viewport no sufra desbordamiento horizontal en móviles., Verifica que en celulares el badge de sesión y el botón Skill IA se rendericen…, Verifica que las tablas complejas tengan contenedor con scroll horizontal…, Verifica la adaptación de layout en pantallas reducidas de escritorio y laptops. (+3 more)
 
 ### Community 185 - "LIBRO SEXTO - ""
 Cohesion: 0.12
@@ -646,33 +649,57 @@ Nodes (6): ARTÍCULO 1. ORIGEN DE LA OBLIGACIÓN SUSTANCIAL, ARTÍCULO 2. CONTRI
 Cohesion: 0.50
 Nodes (4): 1. Contexto y Problemática, 2. Decisión Tomada, 3. Consecuencias y Beneficios, ADR 0006: Sistema Responsivo, Menú Off-Canvas y Modo Mobile
 
-### Community 190 - "parseCOP"
-Cohesion: 0.28
-Nodes (10): PjCalcSubtab(), PjCalcSubtabProps, PjConciliacionSubtab(), PjF110Subtab(), PjF110SubtabProps, PjSobretasasSubtab(), PjTtdSubtab(), PersonaJuridicaInput (+2 more)
+### Community 190 - "formatCOP"
+Cohesion: 0.21
+Nodes (16): WorkspaceHubLanding(), PjCalcSubtab(), PjCalcSubtabProps, PjConciliacionSubtab(), PjF110Subtab(), PjF110SubtabProps, PjSobretasasSubtab(), PjTtdSubtab() (+8 more)
 
 ### Community 191 - "test_e2e_playwright.py"
 Cohesion: 0.21
 Nodes (13): browser(), context(), get_free_port(), live_server_url(), page_with_error_tracking(), Suite de pruebas End-to-End (E2E) con Playwright para la interfaz web de…, Obtiene un puerto TCP libre disponible en localhost., Inicia un servidor Uvicorn en segundo plano en un puerto dinámico para pruebas… (+5 more)
 
+### Community 192 - "README.md"
+Cohesion: 0.26
+Nodes (3): Registro de Decisiones de Arquitectura (ADRs), 1. Cédulas de Tributación, Explicación: El Sistema Cedular en Colombia (Ley 2277 de 2022)
+
+### Community 193 - "PersonaJuridicaCalculator.tsx"
+Cohesion: 0.31
+Nodes (7): AuditTraceModal(), AuditTraceModalProps, PersonaJuridicaModule(), PersonaJuridicaCalculator(), PersonaJuridicaCalculatorProps, calculatePersonaJuridica(), AuditTraceItem
+
+### Community 194 - "Path"
+Cohesion: 0.57
+Nodes (7): test_conciliacion_exogena_matching(), Path, conciliar_transacciones_con_exogena(), normalize_nit(), parse_exogena_file(), parse_facturas_electronicas(), Any
+
+### Community 195 - "generar_reporte_markdown"
+Cohesion: 0.40
+Nodes (5): test_generar_reporte_markdown(), generar_reporte_markdown(), main(), Any, Genera un documento Markdown con el Plan de Regularización Tributaria.
+
+### Community 196 - "calcular_comparacion_patrimonial_endpoint"
+Cohesion: 0.40
+Nodes (5): calcular_comparacion_patrimonial_endpoint(), calcular_renta_persona_natural(), ComparacionPatrimonialRequest, PersonaNaturalInput, post
+
+### Community 197 - "inyectar_sesion_fiscol"
+Cohesion: 0.50
+Nodes (4): inyectar_sesion_fiscol(), main(), Any, Envía los parámetros de comparación patrimonial a la API de Fiscol.
+
 ## Knowledge Gaps
-- **1409 isolated node(s):** `urlParams`, `allBeneficios`, `currentTimelineItems`, `MODULE_METADATA`, `NOMBRES_MESES` (+1404 more)
+- **1411 isolated node(s):** `urlParams`, `allBeneficios`, `currentTimelineItems`, `MODULE_METADATA`, `NOMBRES_MESES` (+1406 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **69 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **71 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `Estatuto Tributario Nacional de Colombia` connect `Estatuto Tributario Nacional de Colombia` to `LIBRO PRIMERO - de este Estatuto`, `LIBRO QUINTO - PROCEDIMIENTO TRIBUTARIO, SANCIONES Y ESTRUCTURA DE LA DIRECCION GENERAL DE IMPUESTOS NACIONALES`, `LIBRO TERCERO - IMPUESTO SOBRE LAS VENTAS`, `LIBRO PRIMERO - IMPUESTO SOBRE LA RENTA Y COMPLEMENTARIOS`, `LIBRO SÉPTIMO - (Libro, Adicionado por el Art. 139 de la Ley 1819 de 2016)`, `LIBRO CUARTO - IMPUESTOS DE TIMBRE NACIONAL`, `LIBRO OCTAVO - (Libro, Sustituido por el Art. 74 de la Ley 2010 de 2019)`, `LIBRO SEXTO - "`?**
-  _High betweenness centrality (0.098) - this node is a cross-community bridge._
+  _High betweenness centrality (0.095) - this node is a cross-community bridge._
 - **Why does `LIBRO PRIMERO - de este Estatuto` connect `LIBRO PRIMERO - de este Estatuto` to `ARTÍCULO 57-2`, `ARTÍCULO 88-1. DESCONOCIMIENTO DE COSTOS Y GASTOS POR CAMPAÑAS DE PUBLICIDAD DE PRODUCTOS EXTRANJEROS`, `ARTÍCULO 90-3. ENAJENACIONES INDIRECTAS`, `Estatuto Tributario Nacional de Colombia`, `ARTÍCULO 103. DEFINICIÓN`, `ARTÍCULO 177. LAS LIMITACIONES A COSTOS SE APLICAN A LAS DEDUCCIONES`, `ARTÍCULO 205. RENTA GRAVABLE POR CERTIFICADOS DE DESARROLLO TURÍSTICO`, `ARTÍCULO 235. LAS EXENCIONES SOLO BENEFICIAN A SU TITULAR`, `ARTÍCULO 239. NO HABRÁ LUGAR A LA COMPARACIÓN PATRIMONIAL`, `ARTÍCULO 248. TARIFA ESPECIAL PARA ALGUNOS PAGOS AL EXTERIOR EFECTUADOS POR CONSTRUCTORES COLOMBIANOS`, `ARTÍCULO 259-1`, `ARTÍCULO 260-5`, `ARTÍCULO 260. INTRANSFERIBILIDAD DE LOS DESCUENTOS TRIBUTARIOS`, `ARTÍCULO 281. EFECTOS DEL REAJUSTE FISCAL`, `ARTÍCULO 282. CONCEPTO`, `ARTÍCULO 287. VALOR PATRIMONIAL DE LAS DEUDAS`, `ARTÍCULO 291. RÉGIMEN DE TRANSICIÓN POR LOS AJUSTES DE DIFERENCIA EN CAMBIO`, `ARTÍCULO 298-8. REMISIÓN`, `ARTÍCULO 306. EL IMPUESTO DEBE SER RETENIDO EN LA FUENTE`, `ARTÍCULO 310. OTRAS EXENCIONES`, `ARTÍCULO 312. CASOS EN LOS CUALES NO SE ACEPTAN PÉRDIDAS OCASIONALES`, `ARTÍCULO 318. TRATAMIENTO DE LA GANANCIA OCASIONAL COMO RENTA`, `ARTÍCULO 319. APORTES A SOCIEDADES NACIONALES`, `ARTÍCULO 320. CASO EN EL QUE SE PRESUME LA TRANSFERENCIA`, `ARTÍCULO 321. CONCEPTOS, BASE GRAVABLE Y TARIFAS`, `ARTÍCULO 324. EXENCIÓN A LAS REGALÍAS`, `ARTÍCULO 328. RECAUDO Y CONTROL`, `ARTÍCULO 334. FACULTADES DE FISCALIZACIÓN`, `ARTÍCULO 336-1`, `ARTÍCULO 337. INGRESOS DE LAS RENTAS DE PENSIONES`, `ARTÍCULO 339. RENTA LÍQUIDA CEDULAR DE LAS RENTAS DE CAPITAL`, `ARTÍCULO 341. RENTA LÍQUIDA CEDULAR DE LAS RENTAS NO LABORALES`, `ARTÍCULO 344. REGISTRO CONTABLE DE LOS AJUSTES A LOS PASIVOS`, `ARTÍCULO 347. AJUSTES AL PATRIMONIO LÍQUIDO QUE HA SUFRIDO DISMINUCIONES O AUMENTOS DURANTE EL AÑO`, `ARTÍCULO 352. TRATAMIENTOS DE LAS GANANCIAS OCASIONALES`, `ARTÍCULO 382. OBLIGACIÓN DE DECLARAR`, `ARTÍCULO 388`, `ARTÍCULO 391. TARIFAS`, `ARTÍCULO 394. CÓMO OPERA LA RETENCIÓN POR ARRENDAMIENTOS CUANDO HAY INTERMEDIACIÓN`, `ARTÍCULO 397. RETENCIÓN EN LA FUENTE EN TÍTULOS CON DESCUENTO`, `ARTÍCULO 400. EXCEPCIÓN`, `ARTÍCULO 401-4. RETENCIÓN EN LA FUENTE EN PAGOS DE TARJETAS DÉBITO Y CRÉDITO`, `ARTÍCULO 404. TRATAMIENTO DE LAS APUESTAS`, `ARTÍCULO 405. LA RETENCIÓN ES REQUISITOS PARA LA ACEPTACIÓN DE LA DEUDA`, `ARTÍCULO 49`?**
-  _High betweenness centrality (0.084) - this node is a cross-community bridge._
+  _High betweenness centrality (0.082) - this node is a cross-community bridge._
 - **Why does `LIBRO QUINTO - PROCEDIMIENTO TRIBUTARIO, SANCIONES Y ESTRUCTURA DE LA DIRECCION GENERAL DE IMPUESTOS NACIONALES` connect `LIBRO QUINTO - PROCEDIMIENTO TRIBUTARIO, SANCIONES Y ESTRUCTURA DE LA DIRECCION GENERAL DE IMPUESTOS NACIONALES` to `ARTÍCULO 570. CONSTANCIA DE LOS RECURSOS`, `ARTÍCULO 573. RESPONSABILIDAD SUBSIDIARIA DE LOS REPRESENTANTES POR INCUMPLIMIENTO DE DEBERES FORMALES`, `ARTÍCULO 611. CASOS EN QUE INTERVIENEN LAS MISMAS PARTES`, `ARTÍCULO 682. INCUMPLIMIENTO DE LOS TÉRMINOS PARA DEVOLVER`, `ARTÍCULO 696. UN REQUERIMIENTO Y UNA LIQUIDACIÓN PUEDEN REFERIRSE A RENTA Y VENTAS`, `ARTÍCULO 741. RECURSO EQUIVOCADOS`, `ARTÍCULO 746. PRESUNCIÓN DE VERACIDAD`, `ARTÍCULO 785. VALORACIÓN DEL DICTAMEN`, `ARTÍCULO 791. DE LAS TRANSACCIONES EFECTUADAS CON PERSONAS FALLECIDAS`, `ARTÍCULO 799. RESPONSABILIDAD DE LOS BANCOS POR PAGO IRREGULAR DE CHEQUE FISCALES`, `Estatuto Tributario Nacional de Colombia`?**
-  _High betweenness centrality (0.073) - this node is a cross-community bridge._
+  _High betweenness centrality (0.077) - this node is a cross-community bridge._
 - **What connects `urlParams`, `allBeneficios`, `currentTimelineItems` to the rest of the system?**
-  _1409 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _1411 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `test_coverage_boost.py` be split into smaller, more focused modules?**
-  _Cohesion score 0.07407407407407407 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.09523809523809523 - nodes in this community are weakly interconnected._
 - **Should `test_reconciliation_ephemeral.py` be split into smaller, more focused modules?**
   _Cohesion score 0.055272108843537414 - nodes in this community are weakly interconnected._
-- **Should `SessionStoreBase` be split into smaller, more focused modules?**
-  _Cohesion score 0.14761904761904762 - nodes in this community are weakly interconnected._
+- **Should `RedisSessionStore` be split into smaller, more focused modules?**
+  _Cohesion score 0.05336951605608322 - nodes in this community are weakly interconnected._

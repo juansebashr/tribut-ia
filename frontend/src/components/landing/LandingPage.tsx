@@ -6,10 +6,8 @@ import {
   ArrowRight,
   Bot,
   Sparkles,
-  FileSpreadsheet,
   Building2,
   UserCheck,
-  Calendar,
   ShieldAlert,
   Percent,
   CheckCircle,
@@ -17,7 +15,7 @@ import {
 } from 'lucide-react';
 
 export const LandingPage: React.FC = () => {
-  const { navigateToView } = useApp();
+  const { navigateToView, navigateToWorkspace } = useApp();
 
   return (
     <div className="landing-wrapper">
@@ -119,122 +117,133 @@ export const LandingPage: React.FC = () => {
         </div>
       </section>
 
-      {/* SUITE MODULES GRID */}
-      <section className="landing-modules-section">
+      {/* SUITE WORKSPACE PORTALS SELECTOR */}
+      <section className="landing-modules-section" id="portales-tributarios">
         <div className="landing-container">
           <div className="landing-section-header text-center">
-            <h2 className="landing-section-title">Módulos Especializados de la Suite</h2>
-            <p className="landing-section-subtitle">
-              Accede directamente al liquidador o simulador que necesitas con un solo clic:
+            <div style={{ display: 'inline-block', background: 'rgba(2, 132, 199, 0.1)', color: '#0284c7', border: '1px solid rgba(2, 132, 199, 0.25)', borderRadius: '20px', fontSize: '11px', fontWeight: 800, padding: '4px 14px', marginBottom: '12px' }}>
+              🎯 SELECCIONA TU ESPACIO DE TRABAJO
+            </div>
+            <h2 className="landing-section-title">Elige tu Portal de Liquidación</h2>
+            <p className="landing-section-subtitle" style={{ maxWidth: '680px', margin: '0 auto' }}>
+              Ingresa a un entorno limpio y enfocado exclusivamente en las obligaciones y formularios que necesitas liquidar, sin sobrecarga ni distracciones:
             </p>
           </div>
 
-          <div className="landing-modules-grid">
-            {/* PN MODULE */}
+          <div className="landing-modules-grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '20px' }}>
+            {/* PORTAL 1: PERSONAS NATURALES */}
             <div
               className="module-card"
-              onClick={() => navigateToView('app', 'pn', 'calc')}
+              style={{ borderTop: '4px solid #16a34a' }}
+              onClick={() => navigateToWorkspace('naturales', 'pn', 'hub')}
             >
-              <div className="module-card-icon bg-blue">
-                <UserCheck size={22} color="#2563eb" />
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
+                <div className="module-card-icon bg-emerald" style={{ background: '#dcfce7' }}>
+                  <UserCheck size={24} color="#16a34a" />
+                </div>
+                <span style={{ fontSize: '10.5px', fontWeight: 800, padding: '3px 8px', borderRadius: '6px', background: '#dcfce7', color: '#15803d' }}>
+                  FORMULARIO 210
+                </span>
               </div>
-              <h3 className="module-card-title">Persona Natural (F-210)</h3>
+              <h3 className="module-card-title" style={{ fontSize: '17px', color: '#14532d' }}>
+                1. Personas Naturales
+              </h3>
               <p className="module-card-desc">
-                Depuración de rentas de trabajo, capital, no laborales, dependientes económicos (72 UVT) y deducción del 1% en compras electrónicas.
+                Diagnóstico de obligatoriedad, depuración de Cédula General, optimizador What-If (AFC/FPV), comparación patrimonial, reajuste fiscal (Art. 73) y conciliación exógena CSV.
               </p>
-              <div className="module-card-footer">
-                <span>Abrir liquidador</span>
-                <ArrowRight size={14} />
+              <div style={{ fontSize: '11px', color: '#64748b', margin: '10px 0 14px 0', borderTop: '1px solid #f1f5f9', paddingTop: '8px' }}>
+                🚦 Test 3 min • 💡 What-If Ahorro • ⚖️ Art. 236 • 📈 Art. 73
+              </div>
+              <div className="module-card-footer" style={{ color: '#16a34a', fontWeight: 800 }}>
+                <span>Ingresar al Espacio Naturales</span>
+                <ArrowRight size={16} />
               </div>
             </div>
 
-            {/* PJ MODULE */}
+            {/* PORTAL 2: PERSONAS JURÍDICAS */}
             <div
               className="module-card"
-              onClick={() => navigateToView('app', 'pj')}
+              style={{ borderTop: '4px solid #2563eb' }}
+              onClick={() => navigateToWorkspace('juridicas', 'pj', 'hub')}
             >
-              <div className="module-card-icon bg-emerald">
-                <Building2 size={22} color="#059669" />
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
+                <div className="module-card-icon bg-blue" style={{ background: '#dbeafe' }}>
+                  <Building2 size={24} color="#2563eb" />
+                </div>
+                <span style={{ fontSize: '10.5px', fontWeight: 800, padding: '3px 8px', borderRadius: '6px', background: '#dbeafe', color: '#1e40af' }}>
+                  F-110 &amp; RST F-260
+                </span>
               </div>
-              <h3 className="module-card-title">Persona Jurídica (F-110)</h3>
+              <h3 className="module-card-title" style={{ fontSize: '17px', color: '#1e3a8a' }}>
+                2. Personas Jurídicas &amp; RST
+              </h3>
               <p className="module-card-desc">
-                Renta ordinaria al 35%, sobretasa financiera/energética y control de la Tasa de Tributación Depurada (TTD mínima 15%).
+                Renta societaria al 35%, laboratorio de Tasa Mínima TTD (15%), sobretasas financiera/energética, comparador Ordinario vs SIMPLE, anticipos bimestrales F-2593 y conciliación NIIF F-2516.
               </p>
-              <div className="module-card-footer">
-                <span>Abrir Formulario 110</span>
-                <ArrowRight size={14} />
+              <div style={{ fontSize: '11px', color: '#64748b', margin: '10px 0 14px 0', borderTop: '1px solid #f1f5f9', paddingTop: '8px' }}>
+                🏢 Renta 35% • ⚖️ TTD 15% • ⚡ SIMPLE F-260 • 📑 F-2516
+              </div>
+              <div className="module-card-footer" style={{ color: '#2563eb', fontWeight: 800 }}>
+                <span>Ingresar al Espacio Jurídicas</span>
+                <ArrowRight size={16} />
               </div>
             </div>
 
-            {/* ART 73 MODULE */}
+            {/* PORTAL 3: IMPUESTOS PERIÓDICOS */}
             <div
               className="module-card"
-              onClick={() => navigateToView('app', 'art73')}
+              style={{ borderTop: '4px solid #f59e0b' }}
+              onClick={() => navigateToWorkspace('periodicos', 'retefuente', 'hub')}
             >
-              <div className="module-card-icon bg-purple">
-                <Percent size={22} color="#7c3aed" />
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
+                <div className="module-card-icon bg-amber" style={{ background: '#fef3c7' }}>
+                  <Percent size={24} color="#d97706" />
+                </div>
+                <span style={{ fontSize: '10.5px', fontWeight: 800, padding: '3px 8px', borderRadius: '6px', background: '#fef3c7', color: '#b45309' }}>
+                  IVA F-300 &amp; RETE F-350
+                </span>
               </div>
-              <h3 className="module-card-title">Reajuste Fiscal (Art. 73 E.T.)</h3>
+              <h3 className="module-card-title" style={{ fontSize: '17px', color: '#78350f' }}>
+                3. Impuestos Periódicos
+              </h3>
               <p className="module-card-desc">
-                Simulador del costo fiscal ajustado para venta de inmuebles y acciones con la serie histórica oficial DANE de 70 años.
+                Retención de nómina y salarios (Art. 383 E.T.), liquidación F-350, tabla maestra UVT, liquidación de IVA F-300, prorrateo de IVA común (Art. 490 E.T.) y clasificador de tarifas.
               </p>
-              <div className="module-card-footer">
-                <span>Calcular costo fiscal</span>
-                <ArrowRight size={14} />
+              <div style={{ fontSize: '11px', color: '#64748b', margin: '10px 0 14px 0', borderTop: '1px solid #f1f5f9', paddingTop: '8px' }}>
+                👤 Nómina Art. 383 • 💰 Retefuente F-350 • 🛍️ IVA F-300 • ⚖️ Prorrateo
+              </div>
+              <div className="module-card-footer" style={{ color: '#d97706', fontWeight: 800 }}>
+                <span>Ingresar a Impuestos Periódicos</span>
+                <ArrowRight size={16} />
               </div>
             </div>
 
-            {/* EXOGENA CONCILIATION */}
+            {/* PORTAL 4: AUDITORÍA Y SANCIONES */}
             <div
               className="module-card"
-              onClick={() => navigateToView('app', 'pn', 'conciliacion')}
+              style={{ borderTop: '4px solid #dc2626' }}
+              onClick={() => navigateToWorkspace('sanciones', 'presentacion', 'hub')}
             >
-              <div className="module-card-icon bg-amber">
-                <FileSpreadsheet size={22} color="#d97706" />
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
+                <div className="module-card-icon bg-rose" style={{ background: '#fee2e2' }}>
+                  <ShieldAlert size={24} color="#dc2626" />
+                </div>
+                <span style={{ fontSize: '10.5px', fontWeight: 800, padding: '3px 8px', borderRadius: '6px', background: '#fee2e2', color: '#991b1b' }}>
+                  ARTS. 640/641 &amp; 689-3
+                </span>
               </div>
-              <h3 className="module-card-title">Conciliación Exógena CSV</h3>
+              <h3 className="module-card-title" style={{ fontSize: '17px', color: '#7f1d1d' }}>
+                4. Auditoría &amp; Sanciones
+              </h3>
               <p className="module-card-desc">
-                Hoja de cálculo interactiva para cruzar soportes bancarios con la exógena DIAN, detectando discrepancias y partidas no soportadas.
+                Calculadora de sanciones por extemporaneidad y corrección, reducción de sanciones del Art. 640 E.T., firmeza del Beneficio de Auditoría (6 y 12 meses) y catálogo de beneficios.
               </p>
-              <div className="module-card-footer">
-                <span>Ver hoja de conciliación</span>
-                <ArrowRight size={14} />
+              <div style={{ fontSize: '11px', color: '#64748b', margin: '10px 0 14px 0', borderTop: '1px solid #f1f5f9', paddingTop: '8px' }}>
+                ⚖️ Sanción Extemporaneidad • 📉 Art. 640 • ⏱️ Firmeza 6 Meses
               </div>
-            </div>
-
-            {/* SANCIONES & AUDITORIA */}
-            <div
-              className="module-card"
-              onClick={() => navigateToView('app', 'presentacion')}
-            >
-              <div className="module-card-icon bg-rose">
-                <ShieldAlert size={22} color="#e11d48" />
-              </div>
-              <h3 className="module-card-title">Beneficio de Auditoría & Sanciones</h3>
-              <p className="module-card-desc">
-                Firmeza especial en 6 y 12 meses (Art. 689-3 E.T.) y calculadora de extemporaneidad con reducciones del Art. 640.
-              </p>
-              <div className="module-card-footer">
-                <span>Evaluar firmeza y sanciones</span>
-                <ArrowRight size={14} />
-              </div>
-            </div>
-
-            {/* CALENDARIO */}
-            <div
-              className="module-card"
-              onClick={() => navigateToView('app', 'calendario')}
-            >
-              <div className="module-card-icon bg-sky">
-                <Calendar size={22} color="#0284c7" />
-              </div>
-              <h3 className="module-card-title">Calendario & Consulta NIT</h3>
-              <p className="module-card-desc">
-                Consulta instantánea de vencimientos DIAN por los 2 últimos dígitos del NIT con cálculo del Dígito de Verificación (DV).
-              </p>
-              <div className="module-card-footer">
-                <span>Consultar vencimientos</span>
-                <ArrowRight size={14} />
+              <div className="module-card-footer" style={{ color: '#dc2626', fontWeight: 800 }}>
+                <span>Ingresar a Auditoría &amp; Sanciones</span>
+                <ArrowRight size={16} />
               </div>
             </div>
           </div>

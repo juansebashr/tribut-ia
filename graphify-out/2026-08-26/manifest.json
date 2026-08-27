@@ -90,8 +90,8 @@
     "semantic_hash": ""
   },
   "backend/app/main.py": {
-    "mtime": 1787782923.9993541,
-    "ast_hash": "41c57bf33b11f1daaf1701ff003f63d1",
+    "mtime": 1787547413.5018337,
+    "ast_hash": "e8be2b1e3e358a529b939307fd7d88cd",
     "semantic_hash": ""
   },
   "backend/app/models/__init__.py": {
@@ -325,8 +325,8 @@
     "semantic_hash": ""
   },
   "backend/app/static/index.html": {
-    "mtime": 1787782919.4656262,
-    "ast_hash": "dfb17744615dc203246a71765cb20b3f",
+    "mtime": 1787770600.4692805,
+    "ast_hash": "099b25b35cc2e13c2d380a7ba28ab683",
     "semantic_hash": ""
   },
   "docs/README.md": {
@@ -460,8 +460,8 @@
     "semantic_hash": ""
   },
   "frontend/index.html": {
-    "mtime": 1787782912.5436432,
-    "ast_hash": "c7c66b1474ab94c751c58be5ec951b62",
+    "mtime": 1787546694.316681,
+    "ast_hash": "17f80d2cc62b500f18e463e597cb71d9",
     "semantic_hash": ""
   },
   "skills/declaracion-renta-persona-natural/README.md": {

@@ -117,7 +117,8 @@ def liquidar_persona_natural(payload: PersonaNaturalInput) -> PersonaNaturalOutp
             )
         )
 
-    # 4.2 Dependientes Adicionales (72 UVT c/u hasta 4 dependientes)
+    # 4.2 Dependientes Adicionales (72 UVT c/u hasta 4 dependientes - Art. 336 Numeral 2 E.T.)
+    allowed_dep_add = 0.0
     if payload.numero_dependientes_adicionales_72uvt > 0:
         dep_add_rules = deducciones_dict.dependientes_adicionales_72uvt
         uvt_per_dep = dep_add_rules.get("tope_uvt_por_dependiente", 72)
@@ -125,9 +126,6 @@ def liquidar_persona_natural(payload: PersonaNaturalInput) -> PersonaNaturalOutp
         count_deps = min(payload.numero_dependientes_adicionales_72uvt, max_deps)
 
         allowed_dep_add = count_deps * uvt_per_dep * uvt
-        deducciones_list.append(
-            {"name": "Dependientes Adicionales (72 UVT)", "allowed": allowed_dep_add}
-        )
         trace.append(
             AuditTraceItem(
                 step_id="deduccion_dependientes_adicionales",
@@ -140,7 +138,7 @@ def liquidar_persona_natural(payload: PersonaNaturalInput) -> PersonaNaturalOutp
                 limit_uvt=float(count_deps * uvt_per_dep),
                 limit_cop=allowed_dep_add,
                 final_allowed_cop=allowed_dep_add,
-                notes=f"{count_deps} dependiente(s) x {uvt_per_dep} UVT = {count_deps * uvt_per_dep} UVT (${allowed_dep_add:,.0f}).",
+                notes=f"{count_deps} dependiente(s) x {uvt_per_dep} UVT = {count_deps * uvt_per_dep} UVT (${allowed_dep_add:,.0f}) (Fuera del límite del 40%).",
             )
         )
 
@@ -215,7 +213,7 @@ def liquidar_persona_natural(payload: PersonaNaturalInput) -> PersonaNaturalOutp
             )
         )
 
-    # 4.6 Compras Factura Electrónica 1%
+    # 4.6 Compras Factura Electrónica 1% (Art. 336 Numeral 5 E.T.)
     allowed_fe = 0.0
     if (
         payload.compras_factura_electronica > 0
@@ -230,9 +228,6 @@ def liquidar_persona_natural(payload: PersonaNaturalInput) -> PersonaNaturalOutp
         allowed_fe = min(raw_fe, fe_tope_cop)
         excess_fe = max(0.0, raw_fe - allowed_fe)
 
-        deducciones_list.append(
-            {"name": "Compras con Factura Electrónica (1%)", "allowed": allowed_fe}
-        )
         trace.append(
             AuditTraceItem(
                 step_id="deduccion_factura_electronica_1pct",
@@ -244,11 +239,13 @@ def liquidar_persona_natural(payload: PersonaNaturalInput) -> PersonaNaturalOutp
                 limit_cop=fe_tope_cop,
                 excess_rejected_cop=excess_fe,
                 final_allowed_cop=allowed_fe,
-                notes=f"1% de compras (${payload.compras_factura_electronica:,.0f}) limitado a {fe_tope_uvt} UVT (${fe_tope_cop:,.0f}).",
+                notes=f"1% de compras (${payload.compras_factura_electronica:,.0f}) limitado a {fe_tope_uvt} UVT (${fe_tope_cop:,.0f}) (Fuera del límite del 40%).",
             )
         )
 
-    total_deducciones_aceptadas = sum(d["allowed"] for d in deducciones_list)
+    # Total deducciones generales sujetas al 40%
+    total_deducciones_sujetas_40 = sum(d["allowed"] for d in deducciones_list)
+    total_deducciones_aceptadas = total_deducciones_sujetas_40 + allowed_dep_add + allowed_fe
 
     # 5. RENTAS EXENTAS
     re_rules = cg_rules.rentas_exentas
@@ -286,7 +283,7 @@ def liquidar_persona_natural(payload: PersonaNaturalInput) -> PersonaNaturalOutp
     # 5.2 Renta Exenta Laboral 25% (Art. 206 Numeral 10)
     ingreso_neto_trabajo = max(0.0, ingresos_trabajo - incrngo_trabajo)
     base_exenta_laboral = max(
-        0.0, ingreso_neto_trabajo - total_deducciones_aceptadas - total_rentas_exentas_previas
+        0.0, ingreso_neto_trabajo - total_deducciones_sujetas_40 - total_rentas_exentas_previas
     )
     lab_rule = re_rules.laboral_25
     lab_pct = lab_rule.get("porcentaje", 0.25)
@@ -315,7 +312,7 @@ def liquidar_persona_natural(payload: PersonaNaturalInput) -> PersonaNaturalOutp
     total_rentas_exentas_aceptadas = total_rentas_exentas_previas + allowed_exenta_laboral
 
     # 6. LÍMITE CONJUNTO (Art. 336 E.T. - Casilla 37)
-    subtotal_alivios = total_deducciones_aceptadas + total_rentas_exentas_aceptadas
+    subtotal_alivios = total_deducciones_sujetas_40 + total_rentas_exentas_aceptadas
     limite_conjunto_rule = cg_rules.limite_conjunto_rentas_exentas_deducciones
     limite_pct_cop = ingreso_neto * limite_conjunto_rule.porcentaje_max_ingreso_neto
     limite_uvt_cop = limite_conjunto_rule.tope_uvt * uvt
@@ -340,7 +337,10 @@ def liquidar_persona_natural(payload: PersonaNaturalInput) -> PersonaNaturalOutp
     )
 
     # 7. RENTA LÍQUIDA GRAVABLE (Casilla 39 / Casilla 97)
-    renta_liquida_gravable = max(0.0, ingreso_neto - alivios_procedentes_finales - allowed_fe)
+    # Renta líquida = Ingreso neto - Alivios sujetos al 40% procedentes - Deducciones especiales fuera del 40% (Art. 336 num 2 y num 5)
+    renta_liquida_gravable = max(
+        0.0, ingreso_neto - alivios_procedentes_finales - allowed_dep_add - allowed_fe
+    )
     renta_liquida_gravable_uvt = renta_liquida_gravable / uvt if uvt > 0 else 0.0
 
     trace.append(

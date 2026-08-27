@@ -1,5 +1,6 @@
 import React from 'react';
 import { Calculator, Building2, TrendingUp, Sliders, FileText } from 'lucide-react';
+import { FiscolLogoIcon } from './common/FiscolLogo';
 
 interface NavbarProps {
   activeTab: 'pn' | 'pj' | 'beneficios' | 'rules' | 'docs';
@@ -11,7 +12,9 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab }) => {
     <header className="navbar">
       <div className="navbar-inner">
         <div className="logo-group">
-          <div className="logo-badge">Fiscol</div>
+          <div className="logo-badge" style={{ padding: 0, background: 'transparent' }}>
+            <FiscolLogoIcon size={32} />
+          </div>
           <div>
             <h1 className="logo-title">Fiscol Colombia</h1>
             <p className="logo-subtitle">Motor Tributario & Liquidación de Renta 2026</p>

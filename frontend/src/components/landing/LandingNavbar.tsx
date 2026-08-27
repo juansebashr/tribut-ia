@@ -1,5 +1,6 @@
 import React from 'react';
 import { useApp } from '../../context/AppContext';
+import { FiscolLogoIcon } from '../common/FiscolLogo';
 import { Sun, Moon, ArrowRight, Bot, Sparkles, BookOpen } from 'lucide-react';
 
 export const LandingNavbar: React.FC = () => {
@@ -10,7 +11,7 @@ export const LandingNavbar: React.FC = () => {
       <div className="landing-navbar-container">
         <div className="landing-brand" onClick={() => navigateToView('landing')} style={{ cursor: 'pointer' }}>
           <div className="landing-brand-badge">
-            <span className="landing-brand-logo-text">Fiscol</span>
+            <FiscolLogoIcon size={32} />
           </div>
           <div className="landing-brand-info">
             <span className="landing-brand-name">Fiscol</span>

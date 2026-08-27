@@ -107,7 +107,11 @@ def favicon_ico():
         BASE_DIR.parent.parent / "frontend" / "public" / "favicon.ico",
     ]:
         if path.exists():
-            return FileResponse(str(path), media_type="image/x-icon")
+            return FileResponse(
+                str(path),
+                media_type="image/x-icon",
+                headers={"Cache-Control": "no-cache, must-revalidate"},
+            )
     return Response(status_code=204)
 
 
@@ -120,7 +124,11 @@ def favicon_svg():
         BASE_DIR.parent.parent / "frontend" / "public" / "favicon.svg",
     ]:
         if path.exists():
-            return FileResponse(str(path), media_type="image/svg+xml")
+            return FileResponse(
+                str(path),
+                media_type="image/svg+xml",
+                headers={"Cache-Control": "no-cache, must-revalidate"},
+            )
     return Response(status_code=204)
 
 
@@ -144,7 +152,11 @@ def favicon_png(request: Request):
         BASE_DIR.parent.parent / "frontend" / "public" / filename,
     ]:
         if path.exists():
-            return FileResponse(str(path), media_type="image/png")
+            return FileResponse(
+                str(path),
+                media_type="image/png",
+                headers={"Cache-Control": "no-cache, must-revalidate"},
+            )
     return Response(status_code=204)
 
 

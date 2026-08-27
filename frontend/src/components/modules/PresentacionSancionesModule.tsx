@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { useApp } from '../../context/AppContext';
 import { formatCOP, parseCOP } from '../../utils/formatters';
+import { WorkspaceHubLanding } from '../common/WorkspaceHubLanding';
 
 export const PresentacionSancionesModule: React.FC = () => {
-  const { uvtValue, taxYear } = useApp();
+  const { uvtValue, taxYear, activeSubTab } = useApp();
 
   const [activeSection, setActiveSection] = useState<'flujogramas' | 'calculadora' | 'auditoria' | 'guia'>('flujogramas');
 
@@ -109,6 +110,10 @@ export const PresentacionSancionesModule: React.FC = () => {
   };
 
   const sancionResult = calculateSancion();
+
+  if (activeSubTab === 'hub' || activeSubTab === 'overview') {
+    return <WorkspaceHubLanding workspace="sanciones" />;
+  }
 
   return (
     <div id="pane-presentacion" className="module-pane active" style={{ paddingBottom: '30px' }}>
