@@ -2,6 +2,7 @@ import React from 'react';
 import type { IvaF300Output } from '../../../types/tax';
 import { useApp } from '../../../context/AppContext';
 import { formatCOP } from '../../../utils/formatters';
+import { triggerPrint } from '../../../utils/printHelper';
 
 interface IvaF300SubtabProps {
   result: IvaF300Output | null;
@@ -138,10 +139,15 @@ export const IvaF300Subtab: React.FC<IvaF300SubtabProps> = ({ result, onNavigate
           </p>
         </div>
         <div className="facsimile-btn-group">
-          <button className="btn btn-outline btn-sm" onClick={() => window.print()}>
-            🖨️ Imprimir Formulario 300
+          <button
+            id="btn-iva-print-f300"
+            className="btn btn-export-primary btn-sm"
+            onClick={() => triggerPrint({ isFacsimile: true })}
+            title="Imprimir o guardar en PDF el Formulario 300 oficial DIAN ajustado a hoja completa"
+          >
+            <span>🖨️</span> Imprimir / Guardar Facsímil DIAN (PDF)
           </button>
-          <button className="btn btn-primary btn-sm" onClick={onNavigateToCalc}>
+          <button className="btn btn-outline btn-sm" onClick={onNavigateToCalc}>
             ✏️ Modificar Parámetros
           </button>
         </div>

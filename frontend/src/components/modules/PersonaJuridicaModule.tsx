@@ -309,6 +309,8 @@ export const PersonaJuridicaModule: React.FC = () => {
           inputs={inputs}
           setInputs={setInputs}
           result={result}
+          taxYear={taxYear}
+          uvtValue={uvtValue}
           onOpenAudit={() => setIsAuditModalOpen(true)}
           onNavigateToF110={() => navigateTo('pj', 'f110')}
           onNavigateToTtd={() => navigateTo('pj', 'ttd')}

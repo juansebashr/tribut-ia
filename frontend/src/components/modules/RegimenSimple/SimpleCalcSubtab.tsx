@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import type { RegimenSimpleInput, RegimenSimpleOutput } from '../../../types/tax';
 import { formatCOP, parseCOP } from '../../../utils/formatters';
+import { TaxPdfReportModal, type TaxReportData } from '../../common/TaxPdfReportModal';
 
 interface SimpleCalcSubtabProps {
   inputs: RegimenSimpleInput;
   setInputs: React.Dispatch<React.SetStateAction<RegimenSimpleInput>>;
   result: RegimenSimpleOutput | null;
+  taxYear?: number;
+  uvtValue?: number;
   onOpenAudit: () => void;
   onNavigateToF260: () => void;
   onNavigateToComparador: () => void;
@@ -22,6 +25,8 @@ export const SimpleCalcSubtab: React.FC<SimpleCalcSubtabProps> = ({
   inputs,
   setInputs,
   result,
+  taxYear = 2025,
+  uvtValue = 49799,
   onOpenAudit,
   onNavigateToF260,
   onNavigateToComparador,
@@ -33,6 +38,8 @@ export const SimpleCalcSubtab: React.FC<SimpleCalcSubtabProps> = ({
   loadPresetGrupo5,
   loadPresetGrupo6,
 }) => {
+  const [isPdfModalOpen, setIsPdfModalOpen] = useState<boolean>(false);
+
   const handleNumChange = (field: keyof RegimenSimpleInput, valStr: string) => {
     const num = parseCOP(valStr);
     setInputs((prev) => ({ ...prev, [field]: num }));
@@ -60,8 +67,58 @@ export const SimpleCalcSubtab: React.FC<SimpleCalcSubtabProps> = ({
     });
   };
 
+  const simpleReportData: TaxReportData | null = result
+    ? {
+        moduleType: 'simple',
+        title: 'DICTAMEN FISCAL RÉGIMEN SIMPLE DE TRIBUTACIÓN (FORMULARIO 260)',
+        formName: 'Formulario 260',
+        taxYear: taxYear,
+        uvtValue: uvtValue,
+        contributorName: inputs.razon_social_o_nombre || 'CONTRIBUYENTE SIMPLE',
+        contributorId: inputs.nit ? `NIT ${inputs.nit}-${inputs.dv || '0'}` : undefined,
+        regimeType: `Régimen SIMPLE - Grupo ${inputs.grupo_actividad} (Art. 908 E.T.)`,
+        mainKpiLabel:
+          result.saldo_a_pagar_simple > 0
+            ? 'Saldo Final a Pagar a la DIAN (Casilla 60)'
+            : 'Saldo Final a Favor en el SIMPLE (Casilla 61)',
+        mainKpiValue: result.saldo_a_pagar_simple > 0 ? result.saldo_a_pagar_simple : result.saldo_a_favor_simple,
+        isPayable: result.saldo_a_pagar_simple > 0,
+        metrics: [
+          { label: 'Tarifa Consolidada SIMPLE', value: `${(result.tarifa_simple_consolidada_pct || 0).toFixed(2)}%` },
+          { label: 'Ingresos Gravables UVT', value: `${(result.ingresos_en_uvt || 0).toFixed(0)} UVT` },
+          { label: 'Impuesto Neto SIMPLE', value: `$${formatCOP(result.impuesto_neto_simple, false)}` },
+        ],
+        depurationRows: [
+          { label: 'Total Ingresos Brutos del Régimen SIMPLE', value: `$${formatCOP(result.ingresos_brutos_totales, false)}`, isHeader: true },
+          { label: '(-) Ingresos No Constitutivos de Renta (INCRNGO)', value: `-$${formatCOP(inputs.ingresos_no_constitutivos_renta || 0, false)}`, isNegative: true },
+          { label: '(=) Base Gravable Consolidada SIMPLE (Casilla 42)', value: `$${formatCOP(result.ingresos_gravables_simple, false)}`, isBold: true },
+          { label: '(=) Impuesto SIMPLE Consolidado (Casilla 46)', value: `$${formatCOP(result.impuesto_simple_consolidado, false)}`, isBold: true },
+          { label: '(-) Componente ICA Territorial Consolidado (Casilla 47)', value: `-$${formatCOP(result.componente_ica_territorial, false)}` },
+          { label: '(=) Componente SIMPLE Nacional (Casilla 48)', value: `$${formatCOP(result.componente_simple_nacional, false)}`, bg: '#f1f5f9' },
+          { label: '(-) Descuento Pensión Empleador (Art. 903 E.T.) (Casilla 49)', value: `-$${formatCOP(result.descuento_pension_empleador, false)}`, isNegative: true },
+          { label: '(-) Descuento 0.5% Medios Electrónicos (Casilla 50)', value: `-$${formatCOP(result.descuento_medios_electronicos_0_5pct, false)}`, isNegative: true },
+          { label: '(=) Impuesto Neto SIMPLE Nacional (Casilla 53)', value: `$${formatCOP(result.impuesto_neto_simple, false)}`, isBold: true, bg: '#eff6ff' },
+          { label: '(+) Impuesto Nacional al Consumo INC 8% (Casilla 70)', value: `+$${formatCOP(result.impuesto_inc_comidas_bebidas, false)}` },
+          { label: '(-) Total Anticipos Bimestrales Pagados F-2593 (Casilla 56)', value: `-$${formatCOP(result.total_anticipos_simple_pagados, false)}`, isNegative: true },
+        ],
+        keyBoxes: [
+          { box: '42', label: 'Base Gravable SIMPLE', value: `$${formatCOP(result.ingresos_gravables_simple, false)}` },
+          { box: '47', label: 'Componente ICA', value: `$${formatCOP(result.componente_ica_territorial, false)}` },
+          { box: '48', label: 'SIMPLE Nacional', value: `$${formatCOP(result.componente_simple_nacional, false)}` },
+          { box: '53', label: 'Impuesto Neto', value: `$${formatCOP(result.impuesto_neto_simple, false)}` },
+          { box: '56', label: 'Anticipos Pagados', value: `$${formatCOP(result.total_anticipos_simple_pagados, false)}` },
+          { box: '60/61', label: 'Saldo Final F-260', value: `$${formatCOP(result.saldo_a_pagar_simple > 0 ? result.saldo_a_pagar_simple : result.saldo_a_favor_simple, false)}` },
+        ],
+      }
+    : null;
+
   return (
     <div id="pane-simple-calc" className="module-pane active">
+      <TaxPdfReportModal
+        isOpen={isPdfModalOpen}
+        onClose={() => setIsPdfModalOpen(false)}
+        report={simpleReportData}
+      />
       {/* BARRA DE PRESETS ESTANDARIZADA */}
       <div className="presets-toolbar">
         <div className="presets-toolbar-group">
@@ -86,6 +143,13 @@ export const SimpleCalcSubtab: React.FC<SimpleCalcSubtabProps> = ({
           </button>
         </div>
         <div className="presets-toolbar-actions">
+          <button
+            className="btn btn-export-outline btn-sm"
+            onClick={() => setIsPdfModalOpen(true)}
+            title="Generar dictamen ejecutivo formal para imprimir o guardar en PDF"
+          >
+            <span>📄</span> Dictamen PDF <span className="export-badge">PDF</span>
+          </button>
           <button className="btn btn-secondary btn-sm" onClick={onNavigateToComparador}>
             ⚖️ Comparador Ordinario vs SIMPLE
           </button>
@@ -453,7 +517,29 @@ export const SimpleCalcSubtab: React.FC<SimpleCalcSubtabProps> = ({
                   </div>
                 </div>
 
-                <p style={{ fontSize: '11px', color: 'var(--text-muted)', lineHeight: '1.4', margin: '4px 0 0 0' }}>
+                {/* BOTONES DE ACCIÓN Y EXPORTACIÓN */}
+                <div style={{ display: 'flex', gap: '8px', marginTop: '12px' }}>
+                  <button className="btn btn-primary" style={{ flex: 1 }} onClick={onOpenAudit}>
+                    🔍 Auditoría Legal
+                  </button>
+                  <button className="btn btn-outline" style={{ flex: 1 }} onClick={onNavigateToF260}>
+                    📋 Ver F260 DIAN Real
+                  </button>
+                </div>
+
+                {/* CTA PRIMARIO DESTACADO: DESCARGA DE DICTAMEN PDF */}
+                <div className="results-export-cta">
+                  <button
+                    id="btn-simple-export-pdf"
+                    className="btn-export-primary"
+                    onClick={() => setIsPdfModalOpen(true)}
+                    title="Generar y descargar dictamen formal con membrete para imprimir o guardar en PDF"
+                  >
+                    <span>📄</span> Descargar Dictamen Ejecutivo SIMPLE (PDF)
+                  </button>
+                </div>
+
+                <p style={{ fontSize: '11px', color: 'var(--text-muted)', lineHeight: '1.4', margin: '8px 0 0 0' }}>
                   {result.resumen_ejecutivo}
                 </p>
               </div>

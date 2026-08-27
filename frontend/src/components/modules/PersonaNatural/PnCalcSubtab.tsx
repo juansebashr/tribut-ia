@@ -74,8 +74,12 @@ export const PnCalcSubtab: React.FC<PnCalcSubtabProps> = ({
               💡 Optimizador What-If
             </button>
           )}
-          <button className="btn btn-outline btn-sm" onClick={() => setIsPdfModalOpen(true)} title="Generar dictamen ejecutivo para imprimir">
-            📄 Dictamen PDF
+          <button
+            className="btn btn-export-outline btn-sm"
+            onClick={() => setIsPdfModalOpen(true)}
+            title="Generar dictamen ejecutivo formal para imprimir o guardar en PDF"
+          >
+            <span>📄</span> Dictamen PDF <span className="export-badge">PDF</span>
           </button>
           <button className="btn btn-secondary btn-sm" onClick={onNavigateToMarginal}>
             🌡️ Tarifa Progresiva
@@ -702,12 +706,24 @@ export const PnCalcSubtab: React.FC<PnCalcSubtabProps> = ({
                 </tbody>
               </table>
 
-              <div style={{ display: 'flex', gap: '8px', marginBottom: '16px' }}>
+              <div style={{ display: 'flex', gap: '8px', marginBottom: '12px' }}>
                 <button className="btn btn-primary" style={{ flex: 1 }} onClick={onOpenAudit}>
                   🔍 Auditoría Legal
                 </button>
                 <button className="btn btn-outline" style={{ flex: 1 }} onClick={onNavigateToF210}>
                   📋 Ver F210 DIAN Real
+                </button>
+              </div>
+
+              {/* CTA PRIMARIO DESTACADO: DESCARGA DE DICTAMEN PDF */}
+              <div className="results-export-cta" style={{ marginBottom: '16px' }}>
+                <button
+                  id="btn-pn-export-pdf"
+                  className="btn-export-primary"
+                  onClick={() => setIsPdfModalOpen(true)}
+                  title="Generar y descargar dictamen formal con membrete para imprimir o guardar en PDF"
+                >
+                  <span>📄</span> Descargar Dictamen Ejecutivo (PDF)
                 </button>
               </div>
 

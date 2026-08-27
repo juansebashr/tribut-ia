@@ -2963,25 +2963,231 @@ body {
   }
 }
 
+/* =========================================================================
+   SISTEMA DE EXPORTACIÓN Y BOTONES DE ALTA VISIBILIDAD (PDF & DICTAMEN)
+   ========================================================================= */
+.results-export-cta {
+  margin-top: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.btn-export-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 10px 16px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #ffffff !important;
+  background: linear-gradient(135deg, #002e5b 0%, #1e40af 100%);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-md);
+  box-shadow: 0 4px 12px rgba(0, 46, 91, 0.25);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+.btn-export-primary:hover {
+  background: linear-gradient(135deg, #001f3f 0%, #1d4ed8 100%);
+  box-shadow: 0 6px 16px rgba(0, 46, 91, 0.35);
+  transform: translateY(-1px);
+}
+
+.btn-export-primary:active {
+  transform: translateY(0);
+}
+
+.btn-export-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+  padding: 7px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--primary);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btn-export-outline:hover {
+  background: var(--bg-tertiary);
+  border-color: var(--primary);
+}
+
+.export-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 6px;
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-radius: 4px;
+  background: #10b981;
+  color: #ffffff;
+}
+
+/* =========================================================================
+   REGLAS AVANZADAS @MEDIA PRINT (CERO RECORTES EN MÓVIL Y ESCRITORIO)
+   ========================================================================= */
+@page {
+  size: portrait;
+  margin: 6mm 5mm 6mm 5mm;
+}
+
 @media print {
-  body {
-    background: #ffffff;
+  *, *::before, *::after {
+    box-sizing: border-box !important;
+    text-shadow: none !important;
   }
-  .sidebar, .workspace-header, button, #casilla-popover {
+
+  html, body {
+    width: 100% !important;
+    height: auto !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #ffffff !important;
+    color: #000000 !important;
+    overflow: visible !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  #root, .app-shell, .workspace, .workspace-body, .workspace-content, .module-pane, .table-responsive, .facsimile-container {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    display: block !important;
+    position: static !important;
+  }
+
+  /* Ocultar elementos de navegación y UI interactiva */
+  .sidebar,
+  .workspace-header,
+  .presets-toolbar,
+  .facsimile-action-bar,
+  .table-scroll-hint,
+  .toast-container,
+  .no-print,
+  #casilla-popover,
+  button,
+  .btn,
+  .calc-grid > .card:first-child:not(.printable-card) {
     display: none !important;
   }
-  .workspace {
-    margin-left: 0 !important;
+
+  /* MODAL DE DICTAMEN IMPRIMIBLE CUANDO ESTÁ ABIERTO */
+  body.is-printing-modal .modal-backdrop,
+  .modal-backdrop {
+    position: static !important;
+    background: #ffffff !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+    height: auto !important;
+    display: block !important;
+    z-index: auto !important;
   }
-  .workspace-body {
-    padding: 0;
-    margin: 0;
-    max-width: 100%;
+
+  body.is-printing-modal .modal-content,
+  .modal-content.tax-report-modal-content {
+    position: static !important;
+    box-shadow: none !important;
+    border: none !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    max-height: none !important;
+    overflow: visible !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    background: #ffffff !important;
   }
-  .f210-sheet-wrapper {
-    box-shadow: none;
-    border: none;
-    padding: 0;
+
+  #printable-tax-report {
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+    color: #000000 !important;
+  }
+
+  /* FACSÍMILES OFICIALES DIAN (F210, F110, F260, F350, F300) */
+  .f210-sheet-wrapper,
+  .f110-sheet-wrapper,
+  .f260-sheet-wrapper,
+  .f350-sheet-wrapper,
+  .f300-sheet-wrapper {
+    box-shadow: none !important;
+    border: 1.5px solid #000000 !important;
+    padding: 2px !important;
+    margin: 0 auto !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    overflow: visible !important;
+    background: #ffffff !important;
+    page-break-inside: auto !important;
+  }
+
+  .f210-watermark,
+  .f110-watermark,
+  .f260-watermark,
+  .f350-watermark,
+  .f300-watermark {
+    opacity: 0.05 !important;
+    font-size: 70px !important;
+  }
+
+  .f210-table,
+  .f110-table,
+  .f260-table,
+  .f350-table,
+  .f300-table {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    table-layout: fixed !important;
+    font-size: 7.5pt !important;
+    line-height: 1.15 !important;
+    border-collapse: collapse !important;
+  }
+
+  .f210-table td, .f210-table th,
+  .f110-table td, .f110-table th,
+  .f260-table td, .f260-table th,
+  .f350-table td, .f350-table th,
+  .f300-table td, .f300-table th {
+    border: 1px solid #000000 !important;
+    padding: 1.5px 2px !important;
+    font-size: 7.5pt !important;
+    word-break: break-word !important;
+  }
+
+  .f210-header-cell-logo,
+  .f110-header-cell-logo,
+  .f260-header-cell-logo,
+  .f350-header-cell-logo,
+  .f300-header-cell-logo {
+    width: 140px !important;
+  }
+
+  /* Evitar saltos de página partidos en filas */
+  tr {
+    page-break-inside: avoid !important;
   }
 }
 

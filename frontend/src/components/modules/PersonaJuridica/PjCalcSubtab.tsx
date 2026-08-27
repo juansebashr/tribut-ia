@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import type { PersonaJuridicaInput, PersonaJuridicaOutput } from '../../../types/tax';
 import { formatCOP, parseCOP } from '../../../utils/formatters';
+import { TaxPdfReportModal, type TaxReportData } from '../../common/TaxPdfReportModal';
 
 interface PjCalcSubtabProps {
   inputs: PersonaJuridicaInput;
   setInputs: React.Dispatch<React.SetStateAction<PersonaJuridicaInput>>;
   result: PersonaJuridicaOutput | null;
+  taxYear?: number;
+  uvtValue?: number;
   onOpenAudit: () => void;
   onNavigateToF110: () => void;
   onNavigateToTtd: () => void;
@@ -20,6 +23,8 @@ export const PjCalcSubtab: React.FC<PjCalcSubtabProps> = ({
   inputs,
   setInputs,
   result,
+  taxYear = 2025,
+  uvtValue = 49799,
   onOpenAudit,
   onNavigateToF110,
   onNavigateToTtd,
@@ -29,6 +34,8 @@ export const PjCalcSubtab: React.FC<PjCalcSubtabProps> = ({
   loadPresetZonaFranca,
   loadPresetFinanciera,
 }) => {
+  const [isPdfModalOpen, setIsPdfModalOpen] = useState<boolean>(false);
+
   const handleNumChange = (field: keyof PersonaJuridicaInput, valStr: string) => {
     const num = parseCOP(valStr);
     setInputs((prev) => ({ ...prev, [field]: num }));
@@ -37,6 +44,59 @@ export const PjCalcSubtab: React.FC<PjCalcSubtabProps> = ({
   const handleSelectChange = (field: keyof PersonaJuridicaInput, val: any) => {
     setInputs((prev) => ({ ...prev, [field]: val }));
   };
+
+  const pjReportData: TaxReportData | null = result
+    ? {
+        moduleType: 'pj',
+        title: 'DICTAMEN FISCAL PERSONA JURÍDICA (FORMULARIO 110)',
+        formName: 'Formulario 110',
+        taxYear: taxYear,
+        uvtValue: uvtValue,
+        contributorName: 'SOCIEDAD INDUSTRIAL & COMERCIAL S.A.S.',
+        contributorId: 'NIT 900.987.654-1',
+        regimeType:
+          inputs.tipo_regimen === 'zona_franca'
+            ? 'Usuario Industrial Zona Franca (20%)'
+            : inputs.tipo_regimen === 'hotelero'
+            ? 'Sector Hotelero / Ecoturismo (15%)'
+            : 'Régimen Ordinario General (35%)',
+        mainKpiLabel:
+          result.saldo_a_pagar > 0
+            ? 'Saldo Final a Pagar a la DIAN (Casilla 110)'
+            : 'Saldo Final a Favor de la Sociedad (Casilla 111)',
+        mainKpiValue: result.saldo_a_pagar > 0 ? result.saldo_a_pagar : result.saldo_a_favor,
+        isPayable: result.saldo_a_pagar > 0,
+        metrics: [
+          { label: 'Tarifa Nominal', value: `${(result.tarifa_renta_aplicada * 100).toFixed(1)}%` },
+          { label: 'Tasa Mínima TTD (Art. 240 Par. 6)', value: `${result.ttd_calculada_pct.toFixed(2)}% (Mín 15%)` },
+          { label: 'Impuesto Neto Renta', value: `$${formatCOP(result.impuesto_neto_total, false)}` },
+        ],
+        depurationRows: [
+          { label: 'Ingresos Brutos Operacionales y no Operacionales', value: `$${formatCOP(result.ingresos_brutos_totales, false)}`, isHeader: true },
+          { label: '(-) Devoluciones, Rebajas e INCRNGO', value: `-$${formatCOP((inputs.devoluciones_rebajas_descuentos || 0) + (inputs.ingresos_no_constitutivos_renta || 0), false)}`, isNegative: true },
+          { label: '(=) Total Ingresos Netos (Casilla 61)', value: `$${formatCOP(result.ingresos_netos, false)}`, isBold: true },
+          { label: '(-) Total Costos Procedentes (Casilla 62)', value: `-$${formatCOP(inputs.costos_procedentes || 0, false)}`, isNegative: true },
+          { label: '(-) Gastos Operacionales y Deducciones Especiales', value: `-$${formatCOP(result.total_gastos_deducibles, false)}`, isNegative: true },
+          { label: '(=) Renta Líquida Ordinaria del Ejercicio (Casilla 72)', value: `$${formatCOP(result.renta_liquida_ordinaria, false)}`, isBold: true, bg: '#f1f5f9' },
+          { label: '(=) Renta Líquida Gravable (Casilla 79)', value: `$${formatCOP(result.renta_liquida_gravable, false)}`, isBold: true },
+          { label: 'Impuesto Básico de Renta (Casilla 84)', value: `$${formatCOP(result.impuesto_basico_renta, false)}` },
+          { label: '(+) Impuesto Adicional por Tasa Mínima TTD (Casilla 95)', value: `+$${formatCOP(result.impuesto_adicional_ttd, false)}` },
+          { label: '(+) Sobretasa Financiera / Hidroeléctrica (Casilla 85)', value: `+$${formatCOP(result.impuesto_sobretasa, false)}` },
+          { label: '(-) Descuentos Tributarios (ICA Art. 115 + Otros) (Casilla 91)', value: `-$${formatCOP(result.total_descuentos_tributarios_aplicados, false)}`, isNegative: true },
+          { label: '(=) Impuesto Neto de Renta a Cargo (Casilla 96)', value: `$${formatCOP(result.impuesto_neto_total, false)}`, isBold: true, bg: '#eff6ff' },
+          { label: '(-) Total Retenciones y Anticipos (Casilla 103 + 107)', value: `-$${formatCOP((result.total_retenciones_declarar || 0) + (inputs.anticipo_ano_anterior || 0), false)}`, isNegative: true },
+          { label: '(+) Anticipo de Renta Año Siguiente (Casilla 108)', value: `+$${formatCOP(result.anticipo_ano_siguiente, false)}` },
+        ],
+        keyBoxes: [
+          { box: '59', label: 'Ingresos Netos', value: `$${formatCOP(result.ingresos_netos, false)}` },
+          { box: '87', label: 'Renta Líquida Gravable', value: `$${formatCOP(result.renta_liquida_gravable, false)}` },
+          { box: '88', label: 'Impuesto Básico', value: `$${formatCOP(result.impuesto_basico_renta, false)}` },
+          { box: '96', label: 'Impuesto Neto Renta', value: `$${formatCOP(result.impuesto_neto_total, false)}` },
+          { box: '107', label: 'Retenciones Practicadas', value: `$${formatCOP(result.total_retenciones_declarar, false)}` },
+          { box: '110/111', label: 'Saldo Final Declaración', value: `$${formatCOP(result.saldo_a_pagar > 0 ? result.saldo_a_pagar : result.saldo_a_favor, false)}` },
+        ],
+      }
+    : null;
 
   return (
     <div id="pane-pj-calc" className="module-pane active">
@@ -58,6 +118,13 @@ export const PjCalcSubtab: React.FC<PjCalcSubtabProps> = ({
           </button>
         </div>
         <div className="presets-toolbar-actions">
+          <button
+            className="btn btn-export-outline btn-sm"
+            onClick={() => setIsPdfModalOpen(true)}
+            title="Generar dictamen ejecutivo formal para imprimir o guardar en PDF"
+          >
+            <span>📄</span> Dictamen PDF <span className="export-badge">PDF</span>
+          </button>
           <button className="btn btn-secondary btn-sm" onClick={onNavigateToTtd}>
             ⚖️ Laboratorio TTD (15%)
           </button>
@@ -573,7 +640,29 @@ export const PjCalcSubtab: React.FC<PjCalcSubtabProps> = ({
                   </div>
                 </div>
 
-                <p style={{ fontSize: '11px', color: 'var(--text-muted)', lineHeight: '1.4', margin: '4px 0 0 0' }}>
+                {/* BOTONES DE ACCIÓN Y EXPORTACIÓN */}
+                <div style={{ display: 'flex', gap: '8px', marginTop: '12px' }}>
+                  <button className="btn btn-primary" style={{ flex: 1 }} onClick={onOpenAudit}>
+                    🔍 Auditoría Legal
+                  </button>
+                  <button className="btn btn-outline" style={{ flex: 1 }} onClick={onNavigateToF110}>
+                    📋 Ver F110 DIAN Real
+                  </button>
+                </div>
+
+                {/* CTA PRIMARIO DESTACADO: DESCARGA DE DICTAMEN PDF */}
+                <div className="results-export-cta">
+                  <button
+                    id="btn-pj-export-pdf"
+                    className="btn-export-primary"
+                    onClick={() => setIsPdfModalOpen(true)}
+                    title="Generar y descargar dictamen formal con membrete para imprimir o guardar en PDF"
+                  >
+                    <span>📄</span> Descargar Dictamen Ejecutivo PJ (PDF)
+                  </button>
+                </div>
+
+                <p style={{ fontSize: '11px', color: 'var(--text-muted)', lineHeight: '1.4', margin: '8px 0 0 0' }}>
                   {result.resumen_ejecutivo}
                 </p>
               </div>
@@ -585,6 +674,13 @@ export const PjCalcSubtab: React.FC<PjCalcSubtabProps> = ({
           </div>
         </div>
       </div>
+
+      {/* MODAL UNIVERSAL DE DICTAMEN PDF */}
+      <TaxPdfReportModal
+        isOpen={isPdfModalOpen}
+        onClose={() => setIsPdfModalOpen(false)}
+        report={pjReportData}
+      />
     </div>
   );
 };

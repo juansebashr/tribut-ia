@@ -2,6 +2,7 @@ import React from 'react';
 import type { PersonaJuridicaOutput } from '../../../types/tax';
 import { useApp } from '../../../context/AppContext';
 import { formatCOP } from '../../../utils/formatters';
+import { triggerPrint } from '../../../utils/printHelper';
 
 interface PjF110SubtabProps {
   result: PersonaJuridicaOutput | null;
@@ -173,10 +174,15 @@ export const PjF110Subtab: React.FC<PjF110SubtabProps> = ({ result, onNavigateTo
           </p>
         </div>
         <div className="facsimile-btn-group">
-          <button className="btn btn-outline btn-sm" onClick={() => window.print()}>
-            🖨️ Imprimir Formulario 110
+          <button
+            id="btn-pj-print-f110"
+            className="btn btn-export-primary btn-sm"
+            onClick={() => triggerPrint({ isFacsimile: true })}
+            title="Imprimir o guardar en PDF el Formulario 110 oficial DIAN ajustado a hoja completa"
+          >
+            <span>🖨️</span> Imprimir / Guardar Facsímil DIAN (PDF)
           </button>
-          <button className="btn btn-primary btn-sm" onClick={onNavigateToCalc}>
+          <button className="btn btn-outline btn-sm" onClick={onNavigateToCalc}>
             ✏️ Modificar Parámetros
           </button>
         </div>

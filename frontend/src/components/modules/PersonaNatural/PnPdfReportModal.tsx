@@ -1,6 +1,7 @@
 import React from 'react';
 import type { PersonaNaturalInput, PersonaNaturalOutput } from '../../../types/tax';
 import { formatCOP } from '../../../utils/formatters';
+import { triggerPrint } from '../../../utils/printHelper';
 
 interface PnPdfReportModalProps {
   isOpen: boolean;
@@ -22,7 +23,7 @@ export const PnPdfReportModal: React.FC<PnPdfReportModalProps> = ({
   if (!isOpen || !result) return null;
 
   const handlePrint = () => {
-    window.print();
+    triggerPrint({ modalId: 'printable-tax-report' });
   };
 
   const currentDate = new Date().toLocaleDateString('es-CO', {
@@ -34,11 +35,11 @@ export const PnPdfReportModal: React.FC<PnPdfReportModalProps> = ({
   return (
     <div className="modal-backdrop" style={{ display: 'flex' }} onClick={onClose}>
       <div
-        className="modal-content"
-        style={{ maxWidth: '820px', width: '95%', maxHeight: '90vh', overflowY: 'auto' }}
+        className="modal-content tax-report-modal-content"
+        style={{ maxWidth: '840px', width: '95%', maxHeight: '90vh', overflowY: 'auto' }}
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="modal-header">
+        <div className="modal-header no-print">
           <h3 style={{ fontSize: '16px', fontWeight: 800 }}>
             📄 Dictamen &amp; Resumen Ejecutivo de Renta Persona Natural
           </h3>

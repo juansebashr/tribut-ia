@@ -260,6 +260,8 @@ export const RegimenSimpleModule: React.FC = () => {
           inputs={inputs}
           setInputs={setInputs}
           result={result}
+          taxYear={taxYear}
+          uvtValue={uvtValue}
           onOpenAudit={() => setIsAuditModalOpen(true)}
           onNavigateToF260={() => navigateTo('simple', 'f260')}
           onNavigateToComparador={() => navigateTo('simple', 'comparador')}

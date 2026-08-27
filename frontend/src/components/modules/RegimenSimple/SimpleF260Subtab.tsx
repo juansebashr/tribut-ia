@@ -2,6 +2,7 @@ import React from 'react';
 import type { RegimenSimpleOutput } from '../../../types/tax';
 import { useApp } from '../../../context/AppContext';
 import { formatCOP } from '../../../utils/formatters';
+import { triggerPrint } from '../../../utils/printHelper';
 
 interface SimpleF260SubtabProps {
   result: RegimenSimpleOutput | null;
@@ -154,10 +155,15 @@ export const SimpleF260Subtab: React.FC<SimpleF260SubtabProps> = ({ result, onNa
           </p>
         </div>
         <div className="facsimile-btn-group">
-          <button className="btn btn-outline btn-sm" onClick={() => window.print()}>
-            🖨️ Imprimir Formulario 260
+          <button
+            id="btn-simple-print-f260"
+            className="btn btn-export-primary btn-sm"
+            onClick={() => triggerPrint({ isFacsimile: true })}
+            title="Imprimir o guardar en PDF el Formulario 260 oficial DIAN ajustado a hoja completa"
+          >
+            <span>🖨️</span> Imprimir / Guardar Facsímil DIAN (PDF)
           </button>
-          <button className="btn btn-primary btn-sm" onClick={onNavigateToCalc}>
+          <button className="btn btn-outline btn-sm" onClick={onNavigateToCalc}>
             ✏️ Modificar Parámetros
           </button>
         </div>

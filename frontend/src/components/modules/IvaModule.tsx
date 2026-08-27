@@ -230,6 +230,8 @@ export const IvaModule: React.FC = () => {
           inputs={inputs}
           setInputs={setInputs}
           result={result}
+          taxYear={taxYear}
+          uvtValue={uvtValue}
           onOpenAudit={() => setIsAuditModalOpen(true)}
           onNavigateToF300={() => navigateTo('iva', 'f300')}
           onNavigateToProrrateo={() => navigateTo('iva', 'prorrateo')}

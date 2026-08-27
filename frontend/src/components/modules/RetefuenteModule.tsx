@@ -230,6 +230,8 @@ export const RetefuenteModule: React.FC = () => {
           inputs={inputs}
           setInputs={setInputs}
           result={result}
+          taxYear={taxYear}
+          uvtValue={uvtValue}
           onOpenAudit={() => setIsAuditModalOpen(true)}
           onNavigateToF350={() => navigateTo('retefuente', 'f350')}
           onNavigateToLaboral={() => navigateTo('retefuente', 'laboral')}

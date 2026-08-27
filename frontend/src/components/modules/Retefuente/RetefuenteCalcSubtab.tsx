@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import type { RetefuenteF350Input, RetefuenteF350Output } from '../../../types/tax';
 import { formatCOP, parseCOP } from '../../../utils/formatters';
+import { TaxPdfReportModal, type TaxReportData } from '../../common/TaxPdfReportModal';
 
 interface RetefuenteCalcSubtabProps {
   inputs: RetefuenteF350Input;
   setInputs: React.Dispatch<React.SetStateAction<RetefuenteF350Input>>;
   result: RetefuenteF350Output | null;
+  taxYear?: number;
+  uvtValue?: number;
   onOpenAudit: () => void;
   onNavigateToF350: () => void;
   onNavigateToLaboral: () => void;
@@ -26,6 +29,8 @@ export const RetefuenteCalcSubtab: React.FC<RetefuenteCalcSubtabProps> = ({
   inputs,
   setInputs,
   result,
+  taxYear = 2025,
+  uvtValue = 49799,
   onOpenAudit,
   onNavigateToF350,
   onNavigateToLaboral,
@@ -35,6 +40,8 @@ export const RetefuenteCalcSubtab: React.FC<RetefuenteCalcSubtabProps> = ({
   loadPresetServicios,
   loadPresetExterior,
 }) => {
+  const [isPdfModalOpen, setIsPdfModalOpen] = useState<boolean>(false);
+
   const handleNumChange = (field: keyof RetefuenteF350Input, valStr: string) => {
     const num = parseCOP(valStr);
     setInputs((prev) => ({ ...prev, [field]: num }));
@@ -43,6 +50,50 @@ export const RetefuenteCalcSubtab: React.FC<RetefuenteCalcSubtabProps> = ({
   const handleMesChange = (mes: number) => {
     setInputs((prev) => ({ ...prev, periodo_mes: mes }));
   };
+
+  const retefuenteReportData: TaxReportData | null = result
+    ? {
+        moduleType: 'retefuente',
+        title: 'DICTAMEN MENSUAL DE RETENCIÓN EN LA FUENTE (FORMULARIO 350)',
+        formName: 'Formulario 350',
+        taxYear: taxYear,
+        uvtValue: uvtValue,
+        contributorName: inputs.razon_social || 'AGENTE DE RETENCIÓN',
+        contributorId: inputs.nit ? `NIT ${inputs.nit}-${inputs.dv || '0'}` : undefined,
+        regimeType: `Agente Retenedor • Período Mes ${inputs.periodo_mes || 1} (${MESES[(inputs.periodo_mes || 1) - 1] || 'Enero'})`,
+        mainKpiLabel: 'Total Saldo a Pagar a la DIAN (Casilla 84)',
+        mainKpiValue: result.total_a_pagar ?? result.casillas.c84_total_saldo_a_pagar ?? 0,
+        isPayable: true,
+        metrics: [
+          { label: 'Retenciones Renta', value: `$${formatCOP(result.total_retenciones_renta_practicadas ?? 0, false)}` },
+          { label: 'Autorretenciones Renta', value: `$${formatCOP(result.total_autorretenciones_renta ?? 0, false)}` },
+          { label: 'Retenciones IVA (15%)', value: `$${formatCOP(result.total_retenciones_iva_practicadas ?? 0, false)}` },
+        ],
+        depurationRows: [
+          { label: 'Retención por Rentas de Trabajo (Nómina Art. 383) (Casilla 42)', value: `$${formatCOP(result.casillas.c42_ret_rentas_trabajo, false)}` },
+          { label: 'Retención por Honorarios y Comisiones (Casillas 43 + 44)', value: `$${formatCOP((result.casillas.c43_ret_honorarios || 0) + (result.casillas.c44_ret_comisiones || 0), false)}` },
+          { label: 'Retención por Servicios y Arrendamientos (Casillas 45 + 46)', value: `$${formatCOP((result.casillas.c45_ret_servicios || 0) + (result.casillas.c46_ret_arrendamientos || 0), false)}` },
+          { label: 'Retención por Compras Generales (Casilla 49)', value: `$${formatCOP(result.casillas.c49_ret_compras, false)}` },
+          { label: 'Retención por Rendimientos Financieros (Casilla 47)', value: `$${formatCOP(result.casillas.c47_ret_rendimientos_financieros, false)}` },
+          { label: 'Retención por Pagos al Exterior (Casilla 51)', value: `$${formatCOP(result.casillas.c51_ret_pagos_exterior_renta, false)}` },
+          { label: '(=) Total Retenciones Renta Practicadas (Casilla 59)', value: `$${formatCOP(result.total_retenciones_renta_practicadas, false)}`, isBold: true, bg: '#f1f5f9' },
+          { label: '(+) Autorretenciones Especiales de Renta D. 2201 (Casilla 65)', value: `+$${formatCOP(result.total_autorretenciones_renta, false)}` },
+          { label: '(+) Retenciones de IVA Practicadas (ReteIVA 15%) (Casilla 74)', value: `+$${formatCOP(result.total_retenciones_iva_practicadas, false)}` },
+          { label: '(+) Retenciones de Timbre Nacional (Casilla 77)', value: `+$${formatCOP(result.total_retenciones_timbre, false)}` },
+          { label: '(=) Total Retenciones del Período (Casilla 82)', value: `$${formatCOP(result.casillas.c82_total_retenciones_periodo, false)}`, isBold: true, bg: '#eff6ff' },
+          { label: '(+) Sanciones Liquidadas (Casilla 83)', value: `+$${formatCOP(result.casillas.c83_sanciones, false)}` },
+          { label: '(=) Total Saldo a Pagar Formulario 350 (Casilla 84)', value: `$${formatCOP(result.total_a_pagar ?? result.casillas.c84_total_saldo_a_pagar ?? 0, false)}`, isBold: true, bg: '#fee2e2' },
+        ],
+        keyBoxes: [
+          { box: '42', label: 'Rentas Trabajo', value: `$${formatCOP(result.casillas.c42_ret_rentas_trabajo, false)}` },
+          { box: '49', label: 'Compras', value: `$${formatCOP(result.casillas.c49_ret_compras, false)}` },
+          { box: '59', label: 'Total Ret. Renta', value: `$${formatCOP(result.total_retenciones_renta_practicadas, false)}` },
+          { box: '65', label: 'Autorretenciones', value: `$${formatCOP(result.total_autorretenciones_renta, false)}` },
+          { box: '74', label: 'ReteIVA 15%', value: `$${formatCOP(result.total_retenciones_iva_practicadas, false)}` },
+          { box: '84', label: 'Total a Pagar', value: `$${formatCOP(result.total_a_pagar ?? result.casillas.c84_total_saldo_a_pagar ?? 0, false)}` },
+        ],
+      }
+    : null;
 
   return (
     <div id="pane-retefuente-calc" className="module-pane active">
@@ -64,6 +115,13 @@ export const RetefuenteCalcSubtab: React.FC<RetefuenteCalcSubtabProps> = ({
           </button>
         </div>
         <div className="presets-toolbar-actions">
+          <button
+            className="btn btn-export-outline btn-sm"
+            onClick={() => setIsPdfModalOpen(true)}
+            title="Generar dictamen ejecutivo formal para imprimir o guardar en PDF"
+          >
+            <span>📄</span> Dictamen PDF <span className="export-badge">PDF</span>
+          </button>
           <button className="btn btn-secondary btn-sm" onClick={onNavigateToLaboral}>
             👤 Nómina Art. 383
           </button>
@@ -515,9 +573,28 @@ export const RetefuenteCalcSubtab: React.FC<RetefuenteCalcSubtabProps> = ({
                 👤 Abrir Depurador de Nómina Individual Art. 383
               </button>
             </div>
+
+            {/* CTA PRIMARIO DESTACADO: DESCARGA DE DICTAMEN PDF */}
+            <div className="results-export-cta" style={{ marginTop: '12px' }}>
+              <button
+                id="btn-retefuente-export-pdf"
+                className="btn-export-primary"
+                onClick={() => setIsPdfModalOpen(true)}
+                title="Generar y descargar dictamen formal con membrete para imprimir o guardar en PDF"
+              >
+                <span>📄</span> Descargar Dictamen Mensual F-350 (PDF)
+              </button>
+            </div>
           </div>
         </div>
       </div>
+
+      {/* MODAL UNIVERSAL DE DICTAMEN PDF */}
+      <TaxPdfReportModal
+        isOpen={isPdfModalOpen}
+        onClose={() => setIsPdfModalOpen(false)}
+        report={retefuenteReportData}
+      />
     </div>
   );
 };

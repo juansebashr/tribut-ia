@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import type { IvaF300Input, IvaF300Output } from '../../../types/tax';
 import { formatCOP, parseCOP } from '../../../utils/formatters';
+import { TaxPdfReportModal, type TaxReportData } from '../../common/TaxPdfReportModal';
 
 interface IvaCalcSubtabProps {
   inputs: IvaF300Input;
   setInputs: React.Dispatch<React.SetStateAction<IvaF300Input>>;
   result: IvaF300Output | null;
+  taxYear?: number;
+  uvtValue?: number;
   onOpenAudit: () => void;
   onNavigateToF300: () => void;
   onNavigateToProrrateo: () => void;
@@ -20,6 +23,8 @@ export const IvaCalcSubtab: React.FC<IvaCalcSubtabProps> = ({
   inputs,
   setInputs,
   result,
+  taxYear = 2025,
+  uvtValue = 49799,
   onOpenAudit,
   onNavigateToF300,
   onNavigateToProrrateo,
@@ -29,6 +34,8 @@ export const IvaCalcSubtab: React.FC<IvaCalcSubtabProps> = ({
   loadPresetExportador,
   loadPresetSoftware,
 }) => {
+  const [isPdfModalOpen, setIsPdfModalOpen] = useState<boolean>(false);
+
   const handleNumChange = (field: keyof IvaF300Input, valStr: string) => {
     const num = parseCOP(valStr);
     setInputs((prev) => ({ ...prev, [field]: num }));
@@ -41,6 +48,51 @@ export const IvaCalcSubtab: React.FC<IvaCalcSubtabProps> = ({
       periodo: 1,
     }));
   };
+
+  const ivaReportData: TaxReportData | null = result
+    ? {
+        moduleType: 'iva',
+        title: 'DICTAMEN DE IMPUESTO SOBRE LAS VENTAS IVA (FORMULARIO 300)',
+        formName: 'Formulario 300',
+        taxYear: taxYear,
+        uvtValue: uvtValue,
+        contributorName: inputs.razon_social || 'RESPONSABLE DEL IVA',
+        contributorId: inputs.nit ? `NIT ${inputs.nit}-${inputs.dv || '0'}` : undefined,
+        regimeType: `Periodicidad ${inputs.tipo_periodicidad || 'BIMESTRAL'} • Período ${inputs.periodo || 1}`,
+        mainKpiLabel:
+          result.total_saldo_a_pagar > 0
+            ? 'Total Saldo a Pagar Formulario 300 (Casilla 105)'
+            : 'Total Saldo a Favor del Período (Casilla 106)',
+        mainKpiValue: result.total_saldo_a_pagar > 0 ? result.total_saldo_a_pagar : result.total_saldo_a_favor,
+        isPayable: result.total_saldo_a_pagar > 0,
+        metrics: [
+          { label: 'IVA Generado Total', value: `$${formatCOP(result.total_iva_generado ?? 0, false)}` },
+          { label: 'IVA Descontable Total', value: `$${formatCOP(result.total_iva_descontable ?? 0, false)}` },
+          { label: 'ReteIVA Practicado a Favor', value: `$${formatCOP(result.casillas.c101_retenciones_iva_que_le_practicaron ?? 0, false)}` },
+        ],
+        depurationRows: [
+          { label: 'Total Ingresos Brutos por Operaciones Gravadas, Exentas y Excluidas', value: `$${formatCOP(result.total_ingresos_brutos, false)}`, isHeader: true },
+          { label: '(-) Devoluciones en Ventas Anuladas o Rescindidas (Casilla 42)', value: `-$${formatCOP(inputs.devoluciones_en_ventas || 0, false)}`, isNegative: true },
+          { label: '(=) Total Ingresos Netos del Período (Casilla 43)', value: `$${formatCOP(result.total_ingresos_netos, false)}`, isBold: true },
+          { label: 'IVA Generado a la Tarifa General 19% (Casilla 46)', value: `$${formatCOP(result.casillas.c46_iva_gravados_19, false)}` },
+          { label: 'IVA Generado a la Tarifa Especial 5% (Casilla 45)', value: `$${formatCOP(result.casillas.c45_iva_gravados_5, false)}` },
+          { label: '(=) Total Impuesto Generado del Período (Casilla 58)', value: `$${formatCOP(result.total_iva_generado, false)}`, isBold: true, bg: '#f1f5f9' },
+          { label: '(-) Total IVA Descontable por Compras y Servicios (Casilla 96)', value: `-$${formatCOP(result.total_iva_descontable, false)}`, isNegative: true },
+          { label: '(=) Saldo Técnico del Período (Casilla 98 / 99)', value: `$${formatCOP(result.saldo_periodo_a_pagar > 0 ? result.saldo_periodo_a_pagar : result.saldo_periodo_a_favor, false)}`, isBold: true },
+          { label: '(-) Saldo a Favor del Período Fiscal Anterior (Casilla 100)', value: `-$${formatCOP(result.casillas.c100_saldo_a_favor_periodo_anterior, false)}`, isNegative: true },
+          { label: '(-) Retenciones en la Fuente de IVA que le Practicaron (Casilla 101)', value: `-$${formatCOP(result.casillas.c101_retenciones_iva_que_le_practicaron, false)}`, isNegative: true },
+          { label: '(+) Sanciones Liquidadas (Casilla 104)', value: `+$${formatCOP(result.casillas.c104_sanciones, false)}` },
+          { label: '(=) Total Saldo a Pagar / Favor Definitivo (Casilla 105/106)', value: `$${formatCOP(result.total_saldo_a_pagar > 0 ? result.total_saldo_a_pagar : result.total_saldo_a_favor, false)}`, isBold: true, bg: '#eff6ff' },
+        ],
+        keyBoxes: [
+          { box: '43', label: 'Ingresos Netos', value: `$${formatCOP(result.total_ingresos_netos, false)}` },
+          { box: '58', label: 'IVA Generado', value: `$${formatCOP(result.total_iva_generado, false)}` },
+          { box: '96', label: 'IVA Descontable', value: `$${formatCOP(result.total_iva_descontable, false)}` },
+          { box: '101', label: 'ReteIVA a Favor', value: `$${formatCOP(result.casillas.c101_retenciones_iva_que_le_practicaron, false)}` },
+          { box: '105/106', label: 'Saldo Final F-300', value: `$${formatCOP(result.total_saldo_a_pagar > 0 ? result.total_saldo_a_pagar : result.total_saldo_a_favor, false)}` },
+        ],
+      }
+    : null;
 
   return (
     <div id="pane-iva-calc" className="module-pane active">
@@ -62,6 +114,13 @@ export const IvaCalcSubtab: React.FC<IvaCalcSubtabProps> = ({
           </button>
         </div>
         <div className="presets-toolbar-actions">
+          <button
+            className="btn btn-export-outline btn-sm"
+            onClick={() => setIsPdfModalOpen(true)}
+            title="Generar dictamen ejecutivo formal para imprimir o guardar en PDF"
+          >
+            <span>📄</span> Dictamen PDF <span className="export-badge">PDF</span>
+          </button>
           <button className="btn btn-secondary btn-sm" onClick={onNavigateToProrrateo}>
             ⚖️ Prorrateo Art. 490
           </button>
@@ -536,9 +595,28 @@ export const IvaCalcSubtab: React.FC<IvaCalcSubtabProps> = ({
                 ⚖️ Simular Prorrateo de Gastos Comunes Art. 490
               </button>
             </div>
+
+            {/* CTA PRIMARIO DESTACADO: DESCARGA DE DICTAMEN PDF */}
+            <div className="results-export-cta" style={{ marginTop: '12px' }}>
+              <button
+                id="btn-iva-export-pdf"
+                className="btn-export-primary"
+                onClick={() => setIsPdfModalOpen(true)}
+                title="Generar y descargar dictamen formal con membrete para imprimir o guardar en PDF"
+              >
+                <span>📄</span> Descargar Dictamen Periódico F-300 (PDF)
+              </button>
+            </div>
           </div>
         </div>
       </div>
+
+      {/* MODAL UNIVERSAL DE DICTAMEN PDF */}
+      <TaxPdfReportModal
+        isOpen={isPdfModalOpen}
+        onClose={() => setIsPdfModalOpen(false)}
+        report={ivaReportData}
+      />
     </div>
   );
 };
