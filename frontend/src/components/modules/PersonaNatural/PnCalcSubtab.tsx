@@ -13,9 +13,6 @@ interface PnCalcSubtabProps {
   uvtValue?: number;
   onOpenAudit: () => void;
   onNavigateToF210: () => void;
-  onNavigateToMarginal: () => void;
-  onNavigateToOptimizer?: () => void;
-  onNavigateToObligados?: () => void;
   loadPresetStandard: () => void;
   loadPreset35: () => void;
   loadPresetGo: () => void;
@@ -34,9 +31,6 @@ export const PnCalcSubtab: React.FC<PnCalcSubtabProps> = ({
   uvtValue = 49799,
   onOpenAudit,
   onNavigateToF210,
-  onNavigateToMarginal,
-  onNavigateToOptimizer,
-  onNavigateToObligados,
   loadPresetStandard,
   loadPreset35,
   loadPresetGo,
@@ -60,9 +54,9 @@ export const PnCalcSubtab: React.FC<PnCalcSubtabProps> = ({
   return (
     <div id="pane-pn-calc" className="module-pane active">
       {/* BARRA DE PRESETS ESTANDARIZADA */}
-      <div className="presets-toolbar">
-        <div className="presets-toolbar-group">
-          <span className="presets-toolbar-label">⚡ Presets de 1 Clic:</span>
+      <div className="presets-toolbar" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '10px' }}>
+        <div className="presets-toolbar-group" style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
+          <span className="presets-toolbar-label">⚡ Ejemplos Rápidos:</span>
           <button className="btn btn-outline btn-sm" onClick={loadPresetStandard}>
             ✨ Ejemplo Estándar (28%)
           </button>
@@ -73,29 +67,14 @@ export const PnCalcSubtab: React.FC<PnCalcSubtabProps> = ({
             🏢 Ganancia Ocasional
           </button>
         </div>
-        <div className="presets-toolbar-actions" style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
-          {onNavigateToObligados && (
-            <button className="btn btn-outline btn-sm" onClick={onNavigateToObligados} title="Verificar si debes declarar renta">
-              🚦 ¿Debo Declarar?
-            </button>
-          )}
-          {onNavigateToOptimizer && (
-            <button className="btn btn-outline btn-sm" onClick={onNavigateToOptimizer} title="Simular ahorro con AFC y FPV">
-              💡 Optimizador What-If
-            </button>
-          )}
+        <div className="presets-toolbar-actions">
           <button
             className="btn btn-export-outline btn-sm"
             onClick={() => setIsPdfModalOpen(true)}
             title="Generar dictamen ejecutivo formal para imprimir o guardar en PDF"
+            style={{ fontWeight: 700 }}
           >
             <span>📄</span> Dictamen PDF <span className="export-badge">PDF</span>
-          </button>
-          <button className="btn btn-secondary btn-sm" onClick={onNavigateToMarginal}>
-            🌡️ Tarifa Progresiva
-          </button>
-          <button className="btn btn-primary btn-sm" onClick={onNavigateToF210}>
-            📋 Formulario 210
           </button>
         </div>
       </div>

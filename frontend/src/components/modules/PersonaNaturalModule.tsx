@@ -342,9 +342,6 @@ export const PersonaNaturalModule: React.FC = () => {
           taxYear={taxYear}
           onOpenAudit={() => setIsAuditModalOpen(true)}
           onNavigateToF210={() => navigateTo('pn', 'f210')}
-          onNavigateToMarginal={() => navigateTo('pn', 'marginal')}
-          onNavigateToOptimizer={() => navigateTo('pn', 'optimizer')}
-          onNavigateToObligados={() => navigateTo('pn', 'test_obligados')}
           onNavigateToAnticipo={() => navigateTo('pn', 'anticipo')}
           loadPresetStandard={loadPresetStandard}
           loadPreset35={loadPreset35}
