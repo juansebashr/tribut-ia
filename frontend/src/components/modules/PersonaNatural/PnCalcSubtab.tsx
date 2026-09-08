@@ -704,12 +704,41 @@ export const PnCalcSubtab: React.FC<PnCalcSubtabProps> = ({
                       -{formatCOP(result?.renta_exenta_laboral_25)}
                     </td>
                   </tr>
-                  <tr>
-                    <td>Tope Límite Conjunto (40% / 1.340 UVT)</td>
-                    <td id="res-pn-limite-conjunto" className="amount" style={{ color: 'var(--amber)' }}>
-                      {formatCOP(result?.limite_conjunto_aplicable_cop)}
+                  <tr style={{ background: 'var(--bg-card-subtle, #f8fafc)' }}>
+                    <td style={{ fontWeight: 700, color: 'var(--text-primary)' }}>
+                      (=) Total Rentas Exentas Logradas (Casilla 37)
+                    </td>
+                    <td id="res-pn-total-exentas-logradas" className="amount negative" style={{ fontWeight: 800, color: '#16a34a' }}>
+                      -{formatCOP(result?.total_rentas_exentas_aceptadas)}
                     </td>
                   </tr>
+                  <tr>
+                    <td>
+                      <div>
+                        <span>Tope Límite Conjunto (40% / 1.340 UVT)</span>
+                        <div style={{ fontSize: '11px', color: 'var(--text-muted)' }}>
+                          Alivios logrados: <strong>{formatCOP(result?.alivios_procedentes_finales)}</strong> (
+                          {(result?.alivios_rechazados_por_limite ?? 0) > 0
+                            ? `Exceden $${formatCOP(result?.alivios_rechazados_por_limite, false)}`
+                            : '100% aceptado dentro del tope'}
+                          )
+                        </div>
+                      </div>
+                    </td>
+                    <td id="res-pn-limite-conjunto" className="amount" style={{ color: 'var(--amber)', verticalAlign: 'middle' }}>
+                      Máx. {formatCOP(result?.limite_conjunto_aplicable_cop)}
+                    </td>
+                  </tr>
+                  {(result?.alivios_rechazados_por_limite ?? 0) > 0 && (
+                    <tr style={{ background: '#fff1f2' }}>
+                      <td style={{ color: '#e11d48', fontSize: '12px' }}>
+                        (!) Alivios Excedentes Rechazados por Tope
+                      </td>
+                      <td className="amount negative" style={{ color: '#e11d48', fontSize: '12px' }}>
+                        +{formatCOP(result?.alivios_rechazados_por_limite)}
+                      </td>
+                    </tr>
+                  )}
                   <tr className="highlight" style={{ borderTop: '2px solid var(--primary-border)' }}>
                     <td>(=) Renta Líquida Gravable (Casilla 111)</td>
                     <td id="res-pn-renta-gravable" className="amount" style={{ color: 'var(--primary)' }}>
