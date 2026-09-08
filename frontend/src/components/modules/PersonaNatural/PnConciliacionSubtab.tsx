@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import type { ReconciliationItem, CsvValidationError } from '../../../types';
-import { fetchReconciliationDemo, uploadReconciliationCsv } from '../../../services/api';
+import { fetchReconciliationDemo, uploadReconciliationCsv, fetchSessionState, updateSessionState } from '../../../services/api';
 import { formatCOP } from '../../../utils/formatters';
 import { useApp } from '../../../context/AppContext';
 
 export const PnConciliacionSubtab: React.FC = () => {
-  const { showToast } = useApp();
+  const { showToast, sessionId } = useApp();
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const [items, setItems] = useState<ReconciliationItem[]>([]);
@@ -15,9 +15,33 @@ export const PnConciliacionSubtab: React.FC = () => {
   const [selectedDetailItem, setSelectedDetailItem] = useState<ReconciliationItem | null>(null);
 
   useEffect(() => {
-    // Load demo data on first visit
-    loadDemo();
-  }, []);
+    let isMounted = true;
+    const initData = async () => {
+      try {
+        if (sessionId) {
+          const state = await fetchSessionState(sessionId);
+          if (!isMounted) return;
+          const sessionItems = state?.reconciliation?.items || state?.reconciliation?.transacciones;
+          if (sessionItems && Array.isArray(sessionItems) && sessionItems.length > 0) {
+            setItems(sessionItems);
+            setErrors(state?.reconciliation?.errores_validacion || []);
+            showToast('✓ Conciliación cargada desde la sesión', 'success', 2500);
+            return;
+          }
+        }
+      } catch (err) {
+        console.warn('No se pudo cargar conciliación desde la sesión:', err);
+      }
+      if (isMounted) {
+        loadDemo();
+      }
+    };
+
+    initData();
+    return () => {
+      isMounted = false;
+    };
+  }, [sessionId]);
 
   const loadDemo = async () => {
     try {
@@ -41,6 +65,17 @@ export const PnConciliacionSubtab: React.FC = () => {
       setItems(list);
       setErrors(res.errores_validacion || res.validation_errors || []);
       showToast(`✓ Archivo "${file.name}" procesado con éxito`, 'success', 3000);
+
+      if (sessionId) {
+        updateSessionState(sessionId, {
+          reconciliation: {
+            items: list,
+            transacciones: list,
+            kpis: res.kpis,
+            errores_validacion: res.errores_validacion || res.validation_errors || [],
+          },
+        }).catch((err) => console.warn('Could not sync to session:', err));
+      }
     } catch (err: any) {
       showToast(err.message || 'Error al procesar archivo CSV', 'error', 4000);
     } finally {

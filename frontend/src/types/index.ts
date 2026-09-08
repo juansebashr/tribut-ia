@@ -49,7 +49,7 @@ export interface ReconciliationResponse {
   total_diferencias_cop?: number;
   resumen_por_estado?: Record<string, number>;
   resumen_por_cedula?: Record<string, number>;
-  alertas_criticas?: string[];
+  kpis?: any;
   errores_validacion?: CsvValidationError[];
   validation_errors?: CsvValidationError[];
 }
