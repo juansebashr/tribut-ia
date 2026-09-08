@@ -564,15 +564,15 @@
     "semantic_hash": ""
   },
   "skills/declaracion-renta-persona-natural/SKILL.md": {
-    "mtime": 1788837576.8477776,
-    "seen": 1788837710.557962,
-    "ast_hash": "0bd5ebbccd03c00c39ea0eafabbb854c",
+    "mtime": 1788837907.4370718,
+    "seen": 1788839259.4453819,
+    "ast_hash": "42a70e5c591350c7d115d26f15abf1f6",
     "semantic_hash": ""
   },
   "skills/declaracion-renta-persona-natural/beneficios_tributarios_pn.md": {
-    "mtime": 1787191046.8143063,
-    "seen": 1788837710.557963,
-    "ast_hash": "21316d2c4d36bd1ac88c3cb17867315f",
+    "mtime": 1788837918.802318,
+    "seen": 1788839259.4453828,
+    "ast_hash": "d58a3e7e72ed5e71e7642b4a2fb25c85",
     "semantic_hash": ""
   },
   "frontend/public/favicon.svg": {
@@ -1595,6 +1595,12 @@
     "mtime": 1788837632.1204922,
     "seen": 1788837710.557927,
     "ast_hash": "f0a4701da168061a21e94425f865031d",
+    "semantic_hash": ""
+  },
+  "skills/declaracion-renta-persona-natural/references/rendimientos_cesantias_tributacion.md": {
+    "mtime": 1788837878.8268013,
+    "seen": 1788839259.445384,
+    "ast_hash": "0983159a31fb78e30be4ca92851b4309",
     "semantic_hash": ""
   }
 }

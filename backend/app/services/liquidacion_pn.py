@@ -446,7 +446,7 @@ def liquidar_persona_natural(payload: PersonaNaturalInput) -> PersonaNaturalOutp
     # 11. TOTAL IMPUESTO A CARGO (Casilla 115)
     total_impuesto_a_cargo = impuesto_neto + impuesto_go_cop
 
-    # 12. SALDO A PAGAR O SALDO A FAVOR (Casillas 120 / 121)
+    # 12. SALDO A PAGAR O SALDO A FAVOR (Casillas 134 / 136 / 137)
     total_retenciones_anticipos = (
         payload.retenciones_fuente_practicadas
         + payload.anticipo_ano_anterior
@@ -457,17 +457,43 @@ def liquidar_persona_natural(payload: PersonaNaturalInput) -> PersonaNaturalOutp
     saldo_a_pagar = max(0.0, diferencia)
     saldo_a_favor = max(0.0, -diferencia)
 
+    # Anticipo para el año siguiente (Art. 807 E.T. - Casilla 133 / 135)
+    anticipo_siguiente = payload.anticipo_ano_siguiente
+    if saldo_a_pagar > 0:
+        total_a_pagar = saldo_a_pagar + anticipo_siguiente
+        saldo_a_favor_neto = 0.0
+    else:
+        if anticipo_siguiente > saldo_a_favor:
+            total_a_pagar = anticipo_siguiente - saldo_a_favor
+            saldo_a_favor_neto = 0.0
+        else:
+            total_a_pagar = 0.0
+            saldo_a_favor_neto = saldo_a_favor - anticipo_siguiente
+
     trace.append(
         AuditTraceItem(
             step_id="saldo_final",
-            title="Total Impuesto a Cargo y Liquidación Privada (Casillas 115, 120, 121)",
+            title="Total Impuesto a Cargo y Liquidación Privada (Casillas 129, 134, 136)",
             statutory_reference="Art. 801, 802 E.T.",
             raw_input_cop=total_impuesto_a_cargo,
             calculated_cop=diferencia,
             final_allowed_cop=saldo_a_pagar if saldo_a_pagar > 0 else -saldo_a_favor,
-            notes=f"Total Impuesto a Cargo (${total_impuesto_a_cargo:,.0f}) - Retenciones/Anticipos (${total_retenciones_anticipos:,.0f}) = Saldo {'a Pagar: $' + f'{saldo_a_pagar:,.0f}' if saldo_a_pagar > 0 else 'a Favor: $' + f'{saldo_a_favor:,.0f}'}.",
+            notes=f"Total Impuesto a Cargo (${total_impuesto_a_cargo:,.0f}) - Retenciones/Anticipos (${total_retenciones_anticipos:,.0f}) = Saldo Impuesto {'a Pagar: $' + f'{saldo_a_pagar:,.0f}' if saldo_a_pagar > 0 else 'a Favor: $' + f'{saldo_a_favor:,.0f}'}.",
         )
     )
+
+    if anticipo_siguiente > 0:
+        trace.append(
+            AuditTraceItem(
+                step_id="anticipo_ano_siguiente",
+                title="Anticipo de Renta Año Siguiente (Art. 807 E.T. - Casilla 133 / 135)",
+                statutory_reference="Art. 807 E.T.",
+                raw_input_cop=anticipo_siguiente,
+                calculated_cop=anticipo_siguiente,
+                final_allowed_cop=anticipo_siguiente,
+                notes=f"Anticipo liquidado para el año gravable siguiente: ${anticipo_siguiente:,.0f}. Total definitivo a pagar (Casilla 136 / 980): ${total_a_pagar:,.0f}.",
+            )
+        )
 
     # Subcédulas Cédula General
     renta_liq_trabajo = max(0.0, ingresos_trabajo - incrngo_trabajo)
@@ -548,10 +574,16 @@ def liquidar_persona_natural(payload: PersonaNaturalInput) -> PersonaNaturalOutp
         "c130_anticipo_ano_anterior": payload.anticipo_ano_anterior,
         "c131_saldo_a_favor_ano_anterior": payload.saldo_a_favor_ano_anterior,
         "c132_retenciones_fuente": payload.retenciones_fuente_practicadas,
+        "c133_anticipo_ano_siguiente": anticipo_siguiente,
         "c134_total_anticipos_retenciones": total_retenciones_anticipos,
+        "c134_saldo_a_pagar_por_impuesto": total_a_pagar if saldo_a_pagar > 0 else 0.0,
+        "c135_anticipo_ano_siguiente": anticipo_siguiente,
+        "c135_sanciones": 0.0,
         "c136_saldo_a_pagar_por_impuesto": saldo_a_pagar,
-        "c137_saldo_a_favor": saldo_a_favor,
-        "c980_total_a_pagar": saldo_a_pagar,
+        "c136_total_saldo_a_pagar": total_a_pagar,
+        "c137_saldo_a_favor": saldo_a_favor_neto,
+        "c140_total_saldo_a_pagar": total_a_pagar,
+        "c980_total_a_pagar": total_a_pagar,
     }
 
     resumen = (
@@ -563,7 +595,8 @@ def liquidar_persona_natural(payload: PersonaNaturalInput) -> PersonaNaturalOutp
         f"Impuesto Neto Renta ${impuesto_neto:,.0f} | "
         f"Impuesto Ganancias Ocasionales ${impuesto_go_cop:,.0f} | "
         f"Total Impuesto a Cargo ${total_impuesto_a_cargo:,.0f} | "
-        f"{'Saldo a Pagar: $' + f'{saldo_a_pagar:,.0f}' if saldo_a_pagar > 0 else 'Saldo a Favor: $' + f'{saldo_a_favor:,.0f}'}."
+        f"Anticipo Año Siguiente ${anticipo_siguiente:,.0f} | "
+        f"{'Total a Pagar: $' + f'{total_a_pagar:,.0f}' if total_a_pagar > 0 else 'Saldo a Favor: $' + f'{saldo_a_favor_neto:,.0f}'}."
     )
 
     return PersonaNaturalOutput(
@@ -602,7 +635,9 @@ def liquidar_persona_natural(payload: PersonaNaturalInput) -> PersonaNaturalOutp
         total_impuesto_a_cargo=total_impuesto_a_cargo,
         total_anticipos_y_retenciones=total_retenciones_anticipos,
         saldo_a_pagar=saldo_a_pagar,
-        saldo_a_favor=saldo_a_favor,
+        saldo_a_favor=saldo_a_favor_neto,
+        anticipo_ano_siguiente=anticipo_siguiente,
+        total_a_pagar=total_a_pagar,
         form_210_casillas=form_210_dict,
         audit_trace=trace,
         resumen_ejecutivo=resumen,

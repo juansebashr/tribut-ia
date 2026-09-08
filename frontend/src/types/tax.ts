@@ -44,6 +44,7 @@ export interface PersonaNaturalInput {
   retenciones_fuente_practicadas: number;
   anticipo_ano_anterior: number;
   saldo_a_favor_ano_anterior: number;
+  anticipo_ano_siguiente?: number;
 }
 
 export interface PersonaNaturalOutput {
@@ -81,6 +82,8 @@ export interface PersonaNaturalOutput {
   total_anticipos_y_retenciones: number;
   saldo_a_pagar: number;
   saldo_a_favor: number;
+  anticipo_ano_siguiente?: number;
+  total_a_pagar?: number;
   form_210_casillas?: Record<string, number>;
   audit_trace: AuditTraceItem[];
   resumen_ejecutivo: string;

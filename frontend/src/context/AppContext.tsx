@@ -38,7 +38,8 @@ export type PnSubTab =
   | 'comparacion_patrimonial'
   | 'test_obligados'
   | 'optimizer'
-  | 'inflacionario';
+  | 'inflacionario'
+  | 'anticipo';
 
 export interface ToastMessage {
   id: string;

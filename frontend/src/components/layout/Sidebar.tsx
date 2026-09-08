@@ -236,6 +236,19 @@ export const Sidebar: React.FC = () => {
                 </li>
                 <li>
                   <button
+                    className={`sidebar-item-btn ${isNavActive('pn', 'anticipo') ? 'active' : ''}`}
+                    id="nav-item-pn-anticipo"
+                    onClick={() => navigateTo('pn', 'anticipo')}
+                  >
+                    <span className="sidebar-item-icon">⚡</span>
+                    <span className="sidebar-item-label">Anticipo de Renta</span>
+                    <span className="sidebar-item-tag" style={{ background: '#2563eb', color: 'white' }}>
+                      Art. 807
+                    </span>
+                  </button>
+                </li>
+                <li>
+                  <button
                     className={`sidebar-item-btn ${isNavActive('pn', 'conciliacion') ? 'active' : ''}`}
                     id="nav-item-pn-conciliacion"
                     onClick={() => navigateTo('pn', 'conciliacion')}

@@ -3117,7 +3117,7 @@
       "file_type": "concept",
       "norm_label": "personanaturaloutput",
       "source_file": "backend/app/models/persona_natural.py",
-      "source_location": "L131"
+      "source_location": "L135"
     },
     {
       "id": "docs_readme_1_tutoriales_tutorials_orientado_al_aprendizaje",
@@ -3506,6 +3506,17 @@
       "norm_label": "test_pn_calculator.py",
       "source_file": "backend/tests/test_pn_calculator.py",
       "source_location": "L1"
+    },
+    {
+      "id": "backend_tests_test_pn_calculator_func_test_anticipo_ano_siguiente_art_807",
+      "label": "test_anticipo_ano_siguiente_art_807",
+      "_origin": "ast",
+      "community": 164,
+      "community_name": "test_pn_calculator.py",
+      "file_type": "concept",
+      "norm_label": "test_anticipo_ano_siguiente_art_807",
+      "source_file": "backend/tests/test_pn_calculator.py",
+      "source_location": "L108"
     },
     {
       "id": "backend_tests_test_pn_calculator_func_test_persona_natural_2026_con_dependientes_adicionales_y_compras",
@@ -24553,7 +24564,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "backend/app/models/persona_natural.py",
-      "source_location": "L131",
+      "source_location": "L135",
       "weight": 1.0
     },
     {
@@ -26930,6 +26941,17 @@
       "confidence_score": 1.0,
       "source_file": "backend/tests/test_pj_calculator.py",
       "source_location": "L97",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_tests_test_pn_calculator",
+      "target": "backend_tests_test_pn_calculator_func_test_anticipo_ano_siguiente_art_807",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/tests/test_pn_calculator.py",
+      "source_location": "L108",
       "weight": 1.0
     },
     {
@@ -44193,5 +44215,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "3335f07f3722c2e6f36b068abddb31b50bf029c8"
+  "built_at_commit": "298860b228659cf42e5968ecbbae53e0e2adbbff"
 }

@@ -6,7 +6,9 @@ import { WorkspaceHubLanding } from '../common/WorkspaceHubLanding';
 export const PresentacionSancionesModule: React.FC = () => {
   const { uvtValue, taxYear, activeSubTab } = useApp();
 
-  const [activeSection, setActiveSection] = useState<'flujogramas' | 'calculadora' | 'auditoria' | 'guia'>('flujogramas');
+  const [activeSection, setActiveSection] = useState<'flujogramas' | 'calculadora' | 'auditoria' | 'guia' | 'anticipo'>(
+    activeSubTab === 'anticipo' ? 'anticipo' : 'flujogramas'
+  );
 
   // Interactive Flowchart Selection
   const [selectedFlow, setSelectedFlow] = useState<'extemporaneidad' | 'correccion' | 'inexactitud' | 'auditoria'>('extemporaneidad');
@@ -147,6 +149,12 @@ export const PresentacionSancionesModule: React.FC = () => {
               onClick={() => setActiveSection('auditoria')}
             >
               ⚡ Beneficio de Auditoría
+            </button>
+            <button
+              className={`btn btn-sm ${activeSection === 'anticipo' ? 'btn-primary' : 'btn-outline'}`}
+              onClick={() => setActiveSection('anticipo')}
+            >
+              💰 Anticipo de Renta (Art. 807)
             </button>
             <button
               className={`btn btn-sm ${activeSection === 'guia' ? 'btn-primary' : 'btn-outline'}`}
@@ -777,6 +785,169 @@ export const PresentacionSancionesModule: React.FC = () => {
               <p>
                 A diferencia de las sanciones, los intereses <strong>no tienen valor mínimo ni tienen descuentos por el Art. 640</strong>. Por eso, pagar lo antes posible es la mejor estrategia.
               </p>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* SECCIÓN 5: ANTICIPO DE RENTA (ART. 807 E.T.) */}
+      {activeSection === 'anticipo' && (
+        <div className="space-y-6 animate-fade-in">
+          {/* BANNER INTRODUCTORIO */}
+          <div
+            className="card"
+            style={{
+              background: 'linear-gradient(135deg, #1e293b 0%, #0f172a 100%)',
+              color: '#ffffff',
+              padding: '24px',
+              borderRadius: '12px',
+            }}
+          >
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
+              <div>
+                <span className="badge" style={{ backgroundColor: '#2563eb', color: '#ffffff', marginBottom: '8px' }}>
+                  Art. 807 y 809 E.T.
+                </span>
+                <h2 style={{ fontSize: '22px', fontWeight: 800, margin: '4px 0', color: '#ffffff' }}>
+                  Anticipo del Impuesto sobre la Renta: Guía Doctrinal y Legal
+                </h2>
+                <p style={{ margin: 0, fontSize: '13px', color: '#94a3b8' }}>
+                  Aprende cómo funciona el pago adelantado de renta para personas naturales y jurídicas, quiénes están eximidos y cómo reducirlo.
+                </p>
+              </div>
+              <a
+                href="#app/pn/anticipo"
+                className="btn btn-primary"
+                style={{ padding: '10px 18px', fontWeight: 700, fontSize: '13px', textDecoration: 'none' }}
+              >
+                ⚡ Abrir Calculador Interactivo de Anticipo
+              </a>
+            </div>
+          </div>
+
+          {/* GRID DE CONCEPTOS */}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '20px' }}>
+            {/* CARD 1: QUE ES */}
+            <div className="card">
+              <div className="card-header" style={{ background: 'rgba(37, 99, 235, 0.08)' }}>
+                <div className="card-title" style={{ fontSize: '14px', color: '#1d4ed8', fontWeight: 700 }}>
+                  1. ¿Qué es el Anticipo de Renta?
+                </div>
+              </div>
+              <div className="card-body" style={{ fontSize: '12.5px', lineHeight: '1.6', color: 'var(--text-secondary)' }}>
+                <p>
+                  Es una obligación legal consagrada en el <strong>Artículo 807 del Estatuto Tributario</strong> que exige a los contribuyentes del Régimen Ordinario adelantar una porción del impuesto de renta del periodo gravable siguiente.
+                </p>
+                <p>
+                  No es un impuesto adicional: es un <strong>abono a tu cuenta fiscal futura</strong>. Todo lo que pagas en la Casilla 133/135 este año, se restará en la Casilla 130 de tu declaración del año siguiente.
+                </p>
+              </div>
+            </div>
+
+            {/* CARD 2: PORCENTAJES SEGUN ANTIGÜEDAD */}
+            <div className="card">
+              <div className="card-header" style={{ background: 'rgba(16, 185, 129, 0.08)' }}>
+                <div className="card-title" style={{ fontSize: '14px', color: '#047857', fontWeight: 700 }}>
+                  2. Porcentajes según Antigüedad como Declarante
+                </div>
+              </div>
+              <div className="card-body" style={{ fontSize: '12.5px', lineHeight: '1.6', color: 'var(--text-secondary)' }}>
+                <ul style={{ paddingLeft: '18px', margin: 0 }}>
+                  <li>
+                    <strong>1er año declarando:</strong> Tarifa del <strong>25%</strong>.
+                  </li>
+                  <li>
+                    <strong>2do año declarando:</strong> Tarifa del <strong>50%</strong>.
+                  </li>
+                  <li>
+                    <strong>3er año en adelante:</strong> Tarifa del <strong>75%</strong> (régimen general recurrente).
+                  </li>
+                </ul>
+                <p style={{ marginTop: '8px', fontSize: '11.5px', color: 'var(--text-muted)' }}>
+                  La jurisprudencia del Consejo de Estado y la DIAN reiteran que se cuentan los años en que se ha estado formalmente obligado a declarar renta, no la edad cronológica.
+                </p>
+              </div>
+            </div>
+
+            {/* CARD 3: METODOS LEGALES */}
+            <div className="card">
+              <div className="card-header" style={{ background: 'rgba(245, 158, 11, 0.08)' }}>
+                <div className="card-title" style={{ fontSize: '14px', color: '#b45309', fontWeight: 700 }}>
+                  3. Los 2 Métodos de Cálculo (Libre Elección)
+                </div>
+              </div>
+              <div className="card-body" style={{ fontSize: '12.5px', lineHeight: '1.6', color: 'var(--text-secondary)' }}>
+                <p>
+                  <strong>Método 1 (Año Corriente):</strong><br />
+                  <code>(Impuesto Neto del Año × Tarifa %) - Retenciones en la fuente</code>
+                </p>
+                <p>
+                  <strong>Método 2 (Promedio de 2 años):</strong><br />
+                  <code>([(Impuesto Año Actual + Impuesto Año Previo) / 2] × Tarifa %) - Retenciones</code>
+                </p>
+                <div style={{ backgroundColor: '#fef3c7', padding: '8px 12px', borderRadius: '6px', fontSize: '11.5px', color: '#92400e' }}>
+                  💡 <strong>Tip Estratégico:</strong> El declarante puede comparar ambos resultados y declarar el que resulte menor para optimizar su liquidez y flujo de caja.
+                </div>
+              </div>
+            </div>
+
+            {/* CARD 4: QUIENES NO LO PAGAN */}
+            <div className="card">
+              <div className="card-header" style={{ background: 'rgba(239, 68, 68, 0.08)' }}>
+                <div className="card-title" style={{ fontSize: '14px', color: '#b91c1c', fontWeight: 700 }}>
+                  4. ¿Quiénes están Exonerados de Anticipo?
+                </div>
+              </div>
+              <div className="card-body" style={{ fontSize: '12.5px', lineHeight: '1.6', color: 'var(--text-secondary)' }}>
+                <ul style={{ paddingLeft: '18px', margin: 0 }}>
+                  <li>
+                    <strong>Pensionados:</strong> Personas naturales que solo perciben mesadas pensionales legalmente exentas (Concepto DIAN 012200).
+                  </li>
+                  <li>
+                    <strong>Régimen Simple (RST):</strong> No liquidan anticipo en el F-210 ni F-110 porque pagan bimestralmente en el Formulario 260.
+                  </li>
+                  <li>
+                    <strong>Cese definitivo / Sucesiones ilíquidas terminadas:</strong> Liquidación final de personas jurídicas o partición de herencias.
+                  </li>
+                  <li>
+                    <strong>Retenciones mayores:</strong> Si las retenciones del año superan el anticipo bruto, el resultado es $0 COP.
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            {/* CARD 5: PROCEDIMIENTO DE REDUCCION */}
+            <div className="card" style={{ gridColumn: '1 / -1' }}>
+              <div className="card-header" style={{ background: '#f8fafc' }}>
+                <div className="card-title" style={{ fontSize: '14px', fontWeight: 700 }}>
+                  5. ¿Cómo solicitar la Reducción del Anticipo ante la DIAN? (Art. 809 E.T.)
+                </div>
+              </div>
+              <div className="card-body" style={{ fontSize: '12.5px', lineHeight: '1.6', color: 'var(--text-secondary)' }}>
+                <p>
+                  Si durante los primeros meses del nuevo año gravable los ingresos del contribuyente disminuyen en más de un <strong>15%</strong> (por ejemplo, por pérdida de empleo, cancelación de contratos o caída abrupta de ventas), el <strong>Artículo 809 del Estatuto Tributario</strong> y el Decreto Único Reglamentario 1625 facultan al contribuyente a radicar una solicitud de reducción de anticipo ante la Dirección Seccional de Impuestos.
+                </p>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '12px', marginTop: '12px' }}>
+                  <div style={{ backgroundColor: '#f1f5f9', padding: '10px 14px', borderRadius: '8px' }}>
+                    <strong>Paso 1: Oportunidad</strong>
+                    <div style={{ fontSize: '11.5px', color: 'var(--text-muted)' }}>
+                      Radicar la solicitud antes de la fecha límite para declarar y pagar la declaración de renta.
+                    </div>
+                  </div>
+                  <div style={{ backgroundColor: '#f1f5f9', padding: '10px 14px', borderRadius: '8px' }}>
+                    <strong>Paso 2: Pruebas Contables</strong>
+                    <div style={{ fontSize: '11.5px', color: 'var(--text-muted)' }}>
+                      Adjuntar balances o extractos bancarios del primer trimestre/semestre que evidencien la caída en ingresos.
+                    </div>
+                  </div>
+                  <div style={{ backgroundColor: '#f1f5f9', padding: '10px 14px', borderRadius: '8px' }}>
+                    <strong>Paso 3: Pronunciamiento</strong>
+                    <div style={{ fontSize: '11.5px', color: 'var(--text-muted)' }}>
+                      La DIAN tiene 2 meses para resolver. Si vence el plazo sin respuesta, opera el silencio administrativo positivo.
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

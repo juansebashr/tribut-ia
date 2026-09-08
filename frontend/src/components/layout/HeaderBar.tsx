@@ -45,6 +45,8 @@ export const HeaderBar: React.FC = () => {
               ? 'Tarifa Marginal Progresiva & Termómetro (Art. 241 E.T.)'
               : activeSubTab === 'comparacion_patrimonial'
               ? 'Comparación Patrimonial & Riesgo de Desajuste (Art. 236 E.T.)'
+              : activeSubTab === 'anticipo'
+              ? 'Optimizador de Anticipo de Renta Año Siguiente (Art. 807 E.T.)'
               : activeSubTab === 'conciliacion'
               ? 'Hoja de Cálculo Fiscal & Conciliación Exógena DIAN'
               : 'Depuración Cédula General (Waterfall & Tacómetro)',
@@ -268,6 +270,13 @@ export const HeaderBar: React.FC = () => {
                 onClick={() => navigateTo('pn', 'inflacionario')}
               >
                 <span>📊</span> Comp. Inflacionario
+              </button>
+              <button
+                className={`sub-tab-btn ${activeSubTab === 'anticipo' ? 'active' : ''}`}
+                id="sub-tab-btn-pn-anticipo"
+                onClick={() => navigateTo('pn', 'anticipo')}
+              >
+                <span>⚡</span> Anticipo Art. 807
               </button>
               <button
                 className={`sub-tab-btn ${activeSubTab === 'conciliacion' ? 'active' : ''}`}

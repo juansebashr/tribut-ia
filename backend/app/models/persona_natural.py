@@ -126,6 +126,10 @@ class PersonaNaturalInput(BaseModel):
     saldo_a_favor_ano_anterior: float = Field(
         0.0, description="Saldo a favor del año anterior sin solicitud de devolución o compensación"
     )
+    anticipo_ano_siguiente: float = Field(
+        0.0,
+        description="Anticipo de renta para el año gravable siguiente (Art. 807 E.T. - Casilla 133 / 135)",
+    )
 
 
 class PersonaNaturalOutput(BaseModel):
@@ -177,6 +181,14 @@ class PersonaNaturalOutput(BaseModel):
     total_anticipos_y_retenciones: float
     saldo_a_pagar: float
     saldo_a_favor: float
+    anticipo_ano_siguiente: float = Field(
+        0.0,
+        description="Anticipo de renta liquidado para el año gravable siguiente (Art. 807 E.T.)",
+    )
+    total_a_pagar: float = Field(
+        0.0,
+        description="Total saldo a pagar incluyendo anticipo año siguiente (Casilla 980 / Casilla 136)",
+    )
 
     # Mapeo Oficial Casillas Formulario 210 DIAN
     form_210_casillas: dict[str, float]

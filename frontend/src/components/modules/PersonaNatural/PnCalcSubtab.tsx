@@ -19,6 +19,11 @@ interface PnCalcSubtabProps {
   loadPresetStandard: () => void;
   loadPreset35: () => void;
   loadPresetGo: () => void;
+  declaranteNombre?: string;
+  setDeclaranteNombre?: (val: string) => void;
+  declaranteNit?: string;
+  setDeclaranteNit?: (val: string) => void;
+  onNavigateToAnticipo?: () => void;
 }
 
 export const PnCalcSubtab: React.FC<PnCalcSubtabProps> = ({
@@ -35,6 +40,11 @@ export const PnCalcSubtab: React.FC<PnCalcSubtabProps> = ({
   loadPresetStandard,
   loadPreset35,
   loadPresetGo,
+  declaranteNombre,
+  setDeclaranteNombre,
+  declaranteNit,
+  setDeclaranteNit,
+  onNavigateToAnticipo,
 }) => {
   const [isPdfModalOpen, setIsPdfModalOpen] = useState<boolean>(false);
 
@@ -109,7 +119,8 @@ export const PnCalcSubtab: React.FC<PnCalcSubtabProps> = ({
                     type="text"
                     id="pn_nombre_declarante"
                     className="text-input"
-                    defaultValue="CONTRIBUYENTE PERSONA NATURAL DEMO"
+                    value={declaranteNombre ?? 'JUAN PABLO HERNANDEZ GOMEZ'}
+                    onChange={(e) => setDeclaranteNombre?.(e.target.value)}
                   />
                 </div>
                 <div className="input-field">
@@ -118,7 +129,8 @@ export const PnCalcSubtab: React.FC<PnCalcSubtabProps> = ({
                     type="text"
                     id="pn_nit_declarante"
                     className="text-input"
-                    defaultValue="9001234567"
+                    value={declaranteNit ?? '79463249'}
+                    onChange={(e) => setDeclaranteNit?.(e.target.value)}
                   />
                 </div>
               </div>
@@ -602,6 +614,38 @@ export const PnCalcSubtab: React.FC<PnCalcSubtabProps> = ({
                     />
                   </div>
                 </div>
+
+                <div className="input-field" style={{ border: '1px solid #bfdbfe', padding: '10px', borderRadius: '8px', backgroundColor: '#f0f9ff' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '4px' }}>
+                    <label className="input-label" style={{ fontWeight: 700, color: '#0369a1', margin: 0 }}>
+                      Anticipo Año Siguiente (Casilla 133 / 135)
+                    </label>
+                    {onNavigateToAnticipo && (
+                      <button
+                        type="button"
+                        className="btn btn-outline btn-xs"
+                        style={{ fontSize: '11px', padding: '2px 8px', borderColor: '#0284c7', color: '#0284c7' }}
+                        onClick={onNavigateToAnticipo}
+                      >
+                        ⚡ Asistente Art. 807
+                      </button>
+                    )}
+                  </div>
+                  <div className="input-wrapper">
+                    <span className="input-prefix">$</span>
+                    <input
+                      type="text"
+                      inputMode="numeric"
+                      id="pn_anticipo_siguiente"
+                      className="currency-input"
+                      value={formatCOP(inputs.anticipo_ano_siguiente ?? 0, false)}
+                      onChange={(e) => handleNumChange('anticipo_ano_siguiente', e.target.value)}
+                    />
+                  </div>
+                  <small style={{ color: '#0284c7', fontSize: '11px', display: 'block', marginTop: '4px' }}>
+                    Art. 807 E.T. Método 1: $6.015.000 COP | Se suma al saldo final a pagar (Casilla 980).
+                  </small>
+                </div>
               </div>
             </div>
           </div>
@@ -620,14 +664,22 @@ export const PnCalcSubtab: React.FC<PnCalcSubtabProps> = ({
             <div className="card-body">
               <div
                 id="pn-kpi-box"
-                className={`kpi-banner ${result && result.saldo_a_pagar > 0 ? 'to-pay' : 'to-favor'}`}
+                className={`kpi-banner ${(result?.total_a_pagar ?? result?.saldo_a_pagar ?? 0) > 0 ? 'to-pay' : 'to-favor'}`}
               >
                 <div>
                   <div id="pn-kpi-label" className="kpi-label">
-                    {result && result.saldo_a_favor > 0 ? 'Saldo a Favor (Casilla 137)' : 'Saldo a Pagar (Casilla 136)'}
+                    {result && result.saldo_a_favor > 0 && !(result.total_a_pagar && result.total_a_pagar > 0)
+                      ? 'Saldo a Favor (Casilla 137)'
+                      : 'Total Saldo a Pagar (Casilla 980)'}
                   </div>
                   <div id="pn-kpi-value" className="kpi-value">
-                    {result ? formatCOP(result.saldo_a_pagar > 0 ? result.saldo_a_pagar : result.saldo_a_favor) : '$0 COP'}
+                    {result
+                      ? formatCOP(
+                          (result.total_a_pagar ?? result.saldo_a_pagar) > 0
+                            ? (result.total_a_pagar ?? result.saldo_a_pagar)
+                            : result.saldo_a_favor
+                        )
+                      : '$0 COP'}
                   </div>
                 </div>
                 <span id="pn-kpi-badge" className="badge-uvt">
@@ -698,9 +750,29 @@ export const PnCalcSubtab: React.FC<PnCalcSubtabProps> = ({
                     </td>
                   </tr>
                   <tr>
-                    <td>(-) Retenciones y Anticipos</td>
+                    <td>(-) Retenciones y Anticipos Previos</td>
                     <td id="res-pn-retenciones" className="amount negative">
                       -{formatCOP(result?.total_anticipos_y_retenciones)}
+                    </td>
+                  </tr>
+                  <tr className="highlight" style={{ borderTop: '1px dashed var(--border)' }}>
+                    <td>(=) Saldo por Impuesto (Casilla 136)</td>
+                    <td id="res-pn-saldo-impuesto" className="amount">
+                      {formatCOP(result?.saldo_a_pagar)}
+                    </td>
+                  </tr>
+                  {(inputs.anticipo_ano_siguiente ?? 0) > 0 && (
+                    <tr style={{ color: '#0369a1' }}>
+                      <td>(+) Anticipo Año Siguiente (Art. 807 - Casilla 133/135)</td>
+                      <td id="res-pn-anticipo-siguiente" className="amount" style={{ color: '#0284c7', fontWeight: 700 }}>
+                        +{formatCOP(inputs.anticipo_ano_siguiente)}
+                      </td>
+                    </tr>
+                  )}
+                  <tr className="highlight" style={{ background: '#dbeafe', fontWeight: 900, fontSize: '13.5px' }}>
+                    <td>(=) TOTAL SALDO A PAGAR (Casilla 980)</td>
+                    <td id="res-pn-total-definitivo" className="amount" style={{ color: '#1e40af' }}>
+                      {formatCOP(result?.total_a_pagar ?? result?.saldo_a_pagar)}
                     </td>
                   </tr>
                 </tbody>

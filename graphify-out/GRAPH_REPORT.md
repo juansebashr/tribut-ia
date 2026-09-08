@@ -1,16 +1,16 @@
 # Graph Report - tribut-ia  (2026-09-07)
 
 ## Corpus Check
-- 248 files · ~616,692 words
+- 249 files · ~620,753 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 1974 nodes · 1903 edges · 190 communities (108 shown, 82 thin omitted)
+- 1975 nodes · 1904 edges · 190 communities (109 shown, 81 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `3335f07f`
+- Built from commit: `298860b2`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -213,7 +213,7 @@
 ## Import Cycles
 - None detected.
 
-## Communities (190 total, 82 thin omitted)
+## Communities (190 total, 81 thin omitted)
 
 ### Community 0 - "test_coverage_boost.py"
 Cohesion: 0.06
@@ -559,6 +559,10 @@ Nodes (8): 1. La Regla de Oro: Individualidad Fiscal (Art. 8 E.T.), 2. Diagnóst
 Cohesion: 0.29
 Nodes (6): AnalisisRiesgoPatrimonialConyugal, ConyugeFinanzasInput, EscenarioTributarioPareja, LiquidacionIndividualConyuge, TributacionParejaRequest, TributacionParejaResponse
 
+### Community 164 - "test_pn_calculator.py"
+Cohesion: 0.50
+Nodes (3): test_anticipo_ano_siguiente_art_807, test_persona_natural_2026_con_dependientes_adicionales_y_compras, test_persona_natural_excel_benchmark_2022
+
 ### Community 165 - "main.py"
 Cohesion: 0.17
 Nodes (11): chrome_devtools_endpoint, favicon_ico, favicon_png, favicon_svg, health_check, serve_llms_full_txt, serve_llms_txt, serve_robots_txt (+3 more)
@@ -604,9 +608,9 @@ Cohesion: 0.06
 Nodes (33): TestFiscolEndToEnd, TestResponsiveAndMobileMode, browser, context, get_free_port, live_server_url, on_console, on_page_error (+25 more)
 
 ## Knowledge Gaps
-- **1692 isolated node(s):** `obtener_tabla_componente_inflacionario`, `simular_componente_inflacionario_endpoint`, `simular_combinabilidad_endpoint`, `listar_beneficios`, `obtener_tabla_articulo_73` (+1687 more)
+- **1693 isolated node(s):** `obtener_tabla_componente_inflacionario`, `simular_componente_inflacionario_endpoint`, `simular_combinabilidad_endpoint`, `listar_beneficios`, `obtener_tabla_articulo_73` (+1688 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **82 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **81 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
@@ -618,7 +622,7 @@ _Questions this graph is uniquely positioned to answer:_
 - **Why does `LIBRO QUINTO - PROCEDIMIENTO TRIBUTARIO, SANCIONES Y ESTRUCTURA DE LA DIRECCION GENERAL DE IMPUESTOS NACIONALES` connect `LIBRO QUINTO - PROCEDIMIENTO TRIBUTARIO, SANCIONES Y ESTRUCTURA DE LA DIRECCION GENERAL DE IMPUESTOS NACIONALES` to `ARTÍCULO 570. CONSTANCIA DE LOS RECURSOS`, `ARTÍCULO 573. RESPONSABILIDAD SUBSIDIARIA DE LOS REPRESENTANTES POR INCUMPLIMIENTO DE DEBERES FORMALES`, `ARTÍCULO 611. CASOS EN QUE INTERVIENEN LAS MISMAS PARTES`, `ARTÍCULO 682. INCUMPLIMIENTO DE LOS TÉRMINOS PARA DEVOLVER`, `ARTÍCULO 696. UN REQUERIMIENTO Y UNA LIQUIDACIÓN PUEDEN REFERIRSE A RENTA Y VENTAS`, `ARTÍCULO 741. RECURSO EQUIVOCADOS`, `ARTÍCULO 746. PRESUNCIÓN DE VERACIDAD`, `ARTÍCULO 785. VALORACIÓN DEL DICTAMEN`, `ARTÍCULO 791. DE LAS TRANSACCIONES EFECTUADAS CON PERSONAS FALLECIDAS`, `ARTÍCULO 799. RESPONSABILIDAD DE LOS BANCOS POR PAGO IRREGULAR DE CHEQUE FISCALES`, `Estatuto Tributario Nacional de Colombia`?**
   _High betweenness centrality (0.172) - this node is a cross-community bridge._
 - **What connects `obtener_tabla_componente_inflacionario`, `simular_componente_inflacionario_endpoint`, `simular_combinabilidad_endpoint` to the rest of the system?**
-  _1692 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _1693 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `test_coverage_boost.py` be split into smaller, more focused modules?**
   _Cohesion score 0.06060606060606061 - nodes in this community are weakly interconnected._
 - **Should `test_reconciliation_ephemeral.py` be split into smaller, more focused modules?**

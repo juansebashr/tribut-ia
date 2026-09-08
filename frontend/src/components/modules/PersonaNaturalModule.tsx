@@ -9,6 +9,7 @@ import { PnConciliacionSubtab } from './PersonaNatural/PnConciliacionSubtab';
 import { PnComparacionPatrimonialSubtab } from './PersonaNatural/PnComparacionPatrimonialSubtab';
 import { PnObligadosSubtab } from './PersonaNatural/PnObligadosSubtab';
 import { PnOptimizerCard } from './PersonaNatural/PnOptimizerCard';
+import { PnAnticipoSubtab } from './PersonaNatural/PnAnticipoSubtab';
 import { ComponenteInflacionarioModule } from './ComponenteInflacionarioModule';
 import { WorkspaceHubLanding } from '../common/WorkspaceHubLanding';
 
@@ -52,6 +53,8 @@ export const PersonaNaturalModule: React.FC = () => {
 
   const [result, setResult] = useState<PersonaNaturalOutput | null>(null);
   const [isAuditModalOpen, setIsAuditModalOpen] = useState<boolean>(false);
+  const [declaranteNombre, setDeclaranteNombre] = useState<string>('JUAN PABLO HERNANDEZ GOMEZ');
+  const [declaranteNit, setDeclaranteNit] = useState<string>('79463249');
 
   // Cargar estado de la sesión activa desde la API y suscribir a SSE
   useEffect(() => {
@@ -68,9 +71,13 @@ export const PersonaNaturalModule: React.FC = () => {
             tax_year: state.metadata?.tax_year ?? prev.tax_year,
             custom_uvt: state.metadata?.custom_uvt ?? prev.custom_uvt,
           }));
-          if (state.metadata?.nombre) {
-            showToast(`⚡ Sesión cargada: ${state.metadata.nombre}`, 'success', 3000);
-          }
+        }
+        if (state.metadata?.nombre) {
+          setDeclaranteNombre(state.metadata.nombre);
+          showToast(`⚡ Sesión cargada: ${state.metadata.nombre}`, 'success', 3000);
+        }
+        if (state.metadata?.nit) {
+          setDeclaranteNit(state.metadata.nit);
         }
       } catch (err) {
         console.warn('No se pudo cargar la sesión inicial desde la API:', err);
@@ -97,6 +104,12 @@ export const PersonaNaturalModule: React.FC = () => {
                 custom_uvt: payload.state.metadata?.custom_uvt ?? prev.custom_uvt,
               }));
               showToast('⚡ Declaración sincronizada en vivo desde la API', 'success', 3000);
+            }
+            if (payload.state.metadata?.nombre) {
+              setDeclaranteNombre(payload.state.metadata.nombre);
+            }
+            if (payload.state.metadata?.nit) {
+              setDeclaranteNit(payload.state.metadata.nit);
             }
           }
         } catch (err) {
@@ -290,8 +303,22 @@ export const PersonaNaturalModule: React.FC = () => {
         </div>
       ) : currentSubTab === 'inflacionario' ? (
         <ComponenteInflacionarioModule />
+      ) : currentSubTab === 'anticipo' ? (
+        <PnAnticipoSubtab
+          inputs={inputs}
+          setInputs={setInputs}
+          result={result}
+          onNavigateToCalc={() => navigateTo('pn', 'calc')}
+          onNavigateToF210={() => navigateTo('pn', 'f210')}
+          showToast={showToast}
+        />
       ) : currentSubTab === 'f210' ? (
-        <PnF210Subtab result={result} onNavigateToCalc={() => navigateTo('pn', 'calc')} />
+        <PnF210Subtab
+          result={result}
+          onNavigateToCalc={() => navigateTo('pn', 'calc')}
+          declaranteNombre={declaranteNombre}
+          declaranteNit={declaranteNit}
+        />
       ) : currentSubTab === 'marginal' ? (
         <PnMarginalSubtab
           result={result}
@@ -318,9 +345,14 @@ export const PersonaNaturalModule: React.FC = () => {
           onNavigateToMarginal={() => navigateTo('pn', 'marginal')}
           onNavigateToOptimizer={() => navigateTo('pn', 'optimizer')}
           onNavigateToObligados={() => navigateTo('pn', 'test_obligados')}
+          onNavigateToAnticipo={() => navigateTo('pn', 'anticipo')}
           loadPresetStandard={loadPresetStandard}
           loadPreset35={loadPreset35}
           loadPresetGo={loadPresetGo}
+          declaranteNombre={declaranteNombre}
+          setDeclaranteNombre={setDeclaranteNombre}
+          declaranteNit={declaranteNit}
+          setDeclaranteNit={setDeclaranteNit}
         />
       )}
 
