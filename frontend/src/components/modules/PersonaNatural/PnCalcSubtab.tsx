@@ -782,7 +782,7 @@ export const PnCalcSubtab: React.FC<PnCalcSubtabProps> = ({
               <PnTaxGauge result={result} />
 
               {/* GRÁFICO CASCADA WATERFALL */}
-              <PnWaterfallChart result={result} />
+              <PnWaterfallChart result={result} anticipoAnoSiguiente={inputs.anticipo_ano_siguiente} />
             </div>
           </div>
         </div>

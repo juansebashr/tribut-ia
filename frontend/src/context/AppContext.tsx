@@ -147,10 +147,39 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     setThemeState(newTheme);
   };
 
-  // Session resolution from URL query or default
-  const urlParams = typeof window !== 'undefined' ? new URLSearchParams(window.location.search) : new URLSearchParams();
-  const initialSessionId = urlParams.get('session_id') || 'default';
-  const [sessionId, setSessionId] = useState<string>(initialSessionId);
+  // Session resolution from URL query, localStorage, or unique generation
+  const generateSessionId = (): string => {
+    return `ses_${Math.random().toString(36).substring(2, 10)}${Math.random().toString(36).substring(2, 10)}`;
+  };
+
+  const resolveInitialSessionId = (): string => {
+    if (typeof window === 'undefined') return 'default';
+    const params = new URLSearchParams(window.location.search);
+    const urlSid = params.get('session_id');
+    if (urlSid && urlSid.trim()) {
+      const trimmed = urlSid.trim();
+      try {
+        localStorage.setItem('fiscol_session_id', trimmed);
+      } catch {
+        // ignore
+      }
+      return trimmed;
+    }
+
+    try {
+      const storedSid = localStorage.getItem('fiscol_session_id');
+      if (storedSid && storedSid.trim()) {
+        return storedSid.trim();
+      }
+      const newId = generateSessionId();
+      localStorage.setItem('fiscol_session_id', newId);
+      return newId;
+    } catch {
+      return generateSessionId();
+    }
+  };
+
+  const [sessionId, setSessionId] = useState<string>(resolveInitialSessionId);
 
   // Helper para identificar a qué espacio pertenece cada módulo
   const getWorkspaceForModule = (module: ModuleType): WorkspaceType => {
@@ -493,7 +522,10 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
 
   const createNewSession = () => {
     const doNew = () => {
-      const newId = `ses_${Math.random().toString(36).substring(2, 10)}${Math.random().toString(36).substring(2, 10)}`;
+      const newId = generateSessionId();
+      try {
+        localStorage.setItem('fiscol_session_id', newId);
+      } catch {}
       setSessionId(newId);
       const url = new URL(window.location.href);
       url.searchParams.set('session_id', newId);

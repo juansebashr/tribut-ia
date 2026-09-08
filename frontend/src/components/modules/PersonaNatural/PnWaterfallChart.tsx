@@ -4,9 +4,10 @@ import { formatCOP } from '../../../utils/formatters';
 
 interface PnWaterfallChartProps {
   result: PersonaNaturalOutput | null;
+  anticipoAnoSiguiente?: number;
 }
 
-export const PnWaterfallChart: React.FC<PnWaterfallChartProps> = ({ result }) => {
+export const PnWaterfallChart: React.FC<PnWaterfallChartProps> = ({ result, anticipoAnoSiguiente }) => {
   if (!result) return null;
 
   const ingresosBrutos = result.total_ingresos_brutos || 0;
@@ -17,10 +18,28 @@ export const PnWaterfallChart: React.FC<PnWaterfallChartProps> = ({ result }) =>
   const rentaGravable = result.renta_liquida_gravable || 0;
   const impuestoNeto = result.impuesto_neto_renta || 0;
   const retenciones = result.total_anticipos_y_retenciones || 0;
+
+  const anticipoSiguiente =
+    (anticipoAnoSiguiente !== undefined && anticipoAnoSiguiente > 0)
+      ? anticipoAnoSiguiente
+      : (result.anticipo_ano_siguiente ||
+         result.form_210_casillas?.c133_anticipo_ano_siguiente ||
+         result.form_210_casillas?.c135_anticipo_ano_siguiente ||
+         0);
+
+  const saldoImpuesto = result.saldo_a_pagar || 0;
+  const saldoFavor = result.saldo_a_favor || 0;
+  const totalAPagar =
+    result.total_a_pagar !== undefined && result.total_a_pagar > 0
+      ? result.total_a_pagar
+      : saldoImpuesto > 0
+      ? saldoImpuesto + anticipoSiguiente
+      : Math.max(0, anticipoSiguiente - saldoFavor);
+
   const saldoFinal = result.saldo_a_pagar > 0 ? result.saldo_a_pagar : -result.saldo_a_favor;
 
   // Maximum value for scaling (default to ingresosBrutos or 1)
-  const maxVal = Math.max(ingresosBrutos, 1);
+  const maxVal = Math.max(ingresosBrutos, totalAPagar, 1);
 
   const steps = [
     {
@@ -69,7 +88,7 @@ export const PnWaterfallChart: React.FC<PnWaterfallChartProps> = ({ result }) =>
       type: 'tax',
       color: '#8b5cf6',
       isNegative: false,
-      desc: 'Liquidado según rangos progresivos UVT',
+      desc: 'Liquidado según rangos progresivos UVT (Casilla 129)',
     },
     {
       label: '(-) Retenciones Previas',
@@ -77,17 +96,45 @@ export const PnWaterfallChart: React.FC<PnWaterfallChartProps> = ({ result }) =>
       type: 'subtraction',
       color: '#10b981',
       isNegative: true,
-      desc: 'Retenciones en la fuente y anticipos pagados',
+      desc: 'Retenciones en la fuente y anticipos pagados año anterior',
     },
-    {
+  ];
+
+  if (anticipoSiguiente > 0) {
+    steps.push({
+      label: '(=) Saldo por Impuesto',
+      value: saldoImpuesto,
+      type: 'subtotal',
+      color: '#0284c7',
+      isNegative: false,
+      desc: 'Impuesto neto del año menos retenciones previas (Casilla 136)',
+    });
+    steps.push({
+      label: '(+) Anticipo Año Siguiente',
+      value: anticipoSiguiente,
+      type: 'addition',
+      color: '#2563eb',
+      isNegative: false,
+      desc: 'Anticipo obligatorio Art. 807 E.T. (Casilla 133 / 135)',
+    });
+    steps.push({
+      label: '(=) Total Saldo a Pagar',
+      value: totalAPagar,
+      type: 'to_pay',
+      color: '#dc2626',
+      isNegative: false,
+      desc: 'Monto definitivo a cancelar a la DIAN (Casilla 980 / 140)',
+    });
+  } else {
+    steps.push({
       label: saldoFinal >= 0 ? '(=) Saldo a Pagar' : '(=) Saldo a Favor',
       value: Math.abs(saldoFinal),
       type: saldoFinal >= 0 ? 'to_pay' : 'to_favor',
       color: saldoFinal >= 0 ? '#dc2626' : '#16a34a',
       isNegative: false,
-      desc: saldoFinal >= 0 ? 'Valor final a cancelar a la DIAN' : 'Saldo a favor recuperable o imputable',
-    },
-  ];
+      desc: saldoFinal >= 0 ? 'Valor final a cancelar a la DIAN (Casilla 980)' : 'Saldo a favor recuperable o imputable (Casilla 137)',
+    });
+  }
 
   return (
     <div className="card" style={{ marginBottom: '20px' }}>
