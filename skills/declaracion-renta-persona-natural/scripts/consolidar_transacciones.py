@@ -139,22 +139,20 @@ def consolidar_csv_a_payload(
                 go_loterias += val
             elif concepto == "GO_EXENTAS":
                 go_exentas += val
-            elif concepto == "RETENCION_FUENTE" or tipo_mov == "RETENCION":
-                retenciones_fuente += val
             elif concepto == "ANTICIPO_ANTERIOR":
                 anticipo_ano_anterior += val
             elif concepto == "SALDO_FAVOR_ANTERIOR":
                 saldo_favor_anterior += val
+            elif concepto == "RETENCION_FUENTE" or tipo_mov == "RETENCION":
+                retenciones_fuente += val
             elif tipo_mov == "INGRESO" and cedula == "TRABAJO":
                 rentas_trabajo += val
             elif tipo_mov == "INGRESO":
                 otros_ingresos_brutos += val
 
-    # Buscar archivo de conciliación si existe
+    # Buscar archivo de conciliación si existe en el mismo directorio
     reconciliation_state = {}
     recon_file = path.parent / "estado_conciliacion.json"
-    if not recon_file.exists():
-        recon_file = Path("estado_conciliacion.json")
     if recon_file.exists():
         try:
             with open(recon_file, encoding="utf-8") as rf:

@@ -34,10 +34,10 @@ def parse_exogena_file(exogena_path: str) -> list[dict[str, Any]]:
         ws = wb.active
         # Buscar fila de encabezado
         start_row = 1
-        for r in range(1, min(25, ws.max_row + 1)):
-            v1 = str(ws.cell(row=r, column=1).value or "").lower()
-            v2 = str(ws.cell(row=r, column=2).value or "").lower()
-            if "nit" in v1 or "persona que reporta" in v1 or "nombre" in v2:
+        for r in range(1, min(30, ws.max_row + 1)):
+            v1 = str(ws.cell(row=r, column=1).value or "").lower().strip()
+            v2 = str(ws.cell(row=r, column=2).value or "").lower().strip()
+            if v1 == "nit" and "nombre" in v2:
                 start_row = r + 1
                 break
 
@@ -49,6 +49,14 @@ def parse_exogena_file(exogena_path: str) -> list[dict[str, Any]]:
             info_adic = ws.cell(row=r, column=8).value or ""
 
             if not nit_reporta and not nombre_reporta:
+                continue
+
+            norm_nit = normalize_nit(nit_reporta)
+            if (
+                not norm_nit
+                or "nombre" in str(nombre_reporta).lower()
+                or "persona que reporta" in str(nit_reporta).lower()
+            ):
                 continue
 
             try:
@@ -282,6 +290,12 @@ def conciliar_transacciones_con_exogena(
     if facturas_path and Path(facturas_path).exists():
         tot_facturado, tot_susceptible, num_facturas = parse_facturas_electronicas(facturas_path)
         has_facturas = True
+    else:
+        for exo in exogena_records:
+            if "susceptible de beneficio" in exo["detalle_concepto"].lower():
+                tot_susceptible = exo["valor_cop"]
+                has_facturas = True
+                break
 
     # 6. Escribir transacciones actualizadas con columnas de exógena
     fieldnames = list(transacciones[0].keys())

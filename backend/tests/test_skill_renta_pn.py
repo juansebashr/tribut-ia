@@ -90,3 +90,63 @@ def test_conciliacion_exogena_matching(tmp_path):
     assert res["metricas"]["match_exacto"] == 1
     assert res["metricas"]["solo_en_exogena"] == 1
     assert res["metricas"]["solo_en_certificados"] == 1
+
+
+def test_organizar_documentos_helpers(tmp_path):
+    from organizar_documentos import (
+        calculate_file_hash,
+        classify_document,
+        generate_index_markdown,
+        generate_notas_markdown,
+        update_transacciones_csv_filenames,
+    )
+
+    # 1. Test clasificación de documentos
+    doc1 = classify_document(
+        Path("Retencion_Inetum_2025.pdf"), "Certificado de Ingresos y Retenciones Formulario 220"
+    )
+    assert doc1["order"] == "01"
+    assert "F220" in doc1["standard_name"]
+
+    doc2 = classify_document(
+        Path("Declaracion_Renta_2024.pdf"), "Declaración de Renta Formulario 210 año 2024"
+    )
+    assert doc2["order"] == "02"
+
+    doc3 = classify_document(Path("Factura_Predial_2025.pdf"), "Impuesto Predial Unificado 2025")
+    assert doc3["order"] == "03"
+
+    doc4 = classify_document(
+        Path("Certificacion_Banco_Occidente_2025.pdf"), "Cuenta de ahorros AFC"
+    )
+    assert doc4["order"] == "04"
+
+    # 2. Test hash calculation
+    test_file = tmp_path / "sample.txt"
+    test_file.write_text("Hello Taxpayer", encoding="utf-8")
+    h1 = calculate_file_hash(test_file)
+    assert len(h1) == 64
+
+    # 3. Test generate markdown
+    records = [doc1, doc2, doc3, doc4]
+    index_md = generate_index_markdown(records)
+    assert "# Índice de Documentos" in index_md
+    assert "01_Ingresos_Retenciones" in index_md
+
+    notas_md = generate_notas_markdown()
+    assert "TIVIT Colombia" in notas_md
+    assert "Banco Itaú" in notas_md
+    assert "Construcciones Planificadas" in notas_md
+    assert "Parroquia de Cristo Rey" in notas_md
+
+    # 4. Test update csv filenames
+    csv_file = tmp_path / "transacciones_depuradas.csv"
+    csv_file.write_text(
+        "id,archivo_origen,valor\n1,Retencion_Inetum_2025.pdf,100\n",
+        encoding="utf-8",
+    )
+    renames = {"Retencion_Inetum_2025.pdf": "01_Ingresos_Retenciones_F220_Inetum_2025.pdf"}
+    updated = update_transacciones_csv_filenames(csv_file, renames)
+    assert updated == 1
+    content = csv_file.read_text(encoding="utf-8")
+    assert "01_Ingresos_Retenciones_F220_Inetum_2025.pdf" in content

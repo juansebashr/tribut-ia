@@ -37,6 +37,26 @@ Al iniciar el analisis del directorio, verificar la presencia de dos documentos 
 
 ---
 
+### Paso 0.1: Preparación, Desencriptación, Renombrado e Indexación (`organizar_documentos.py`)
+
+Antes de realizar la ingesta o desglose documental, acondicionar la carpeta del contribuyente ejecutando el script CLI `organizar_documentos.py`:
+1. **Detección y Eliminación de Contraseñas en PDFs**:
+   - Comprobar cada archivo PDF con `pdfinfo` o `pdftotext`.
+   - Si se encuentra protegido con contraseña, desencriptarlo usando `/opt/homebrew/bin/pdftocairo -pdf -upw <cedula>` sustituyendo el archivo original para que quede 100% sin contraseña (`Encrypted: no`).
+2. **Renombrado Estandarizado y Limpieza**:
+   - Renombrar cada archivo con una nomenclatura estándar, secuencial y clara según su emisor, año y tipo de documento (ej: `01_Ingresos_Retenciones_F220_Inetum_2025.pdf`, `02_Declaracion_Renta_F210_AG2024.pdf`, `05_Certificado_Tributario_Davivienda_2025.pdf`).
+   - Detectar y eliminar duplicados binarios o textuales redundantes.
+3. **Generación del Inventario (`index.md`)**:
+   - Generar automáticamente `index.md` en la carpeta con la tabla de documentos y una descripción de 1 a 2 líneas de su contenido y alcance contable.
+4. **Levantamiento de Alertas y Soportes Faltantes (`notas.md`)**:
+   - Generar automáticamente `notas.md` señalando con claridad qué documentos o certificados de retención y pasivos faltan físicamente con base en la Información Exógena DIAN (ej. honorarios TIVIT, deudas de tarjeta Banco Itaú, cuentas por cobrar).
+
+```bash
+python skills/declaracion-renta-persona-natural/scripts/organizar_documentos.py "/ruta/carpeta_contribuyente" --cedula <cedula>
+```
+
+---
+
 ### Fase 1: Ingesta y Desglose Documental en CSV (`transacciones_depuradas.csv`)
 
 1. Escanear todos los archivos del directorio de documentos del contribuyente (`/documentos_renta` o carpeta especificada).
@@ -65,6 +85,8 @@ El script clasifica cada partida en:
 2. **Ajuste Obligatorio por Inversiones y Cedula de Rentas de Capital (Revision Paso a Paso)**:
    - **Paso 2.1 (Exclusion del Capital Invertido)**: El dinero invertido (principal) NO es ingreso; constituye un activo en el **Patrimonio Bruto (Casilla 29)** a 31 de diciembre. El ingreso bruto tributario es unicamente el rendimiento o utilidad generada.
    - **Paso 2.2 (Componente Inflacionario - Art. 38, 40-1 y 41 E.T.)**: Para personas naturales no obligadas a llevar contabilidad, restar como INCRNGO (Casilla 59) el porcentaje certificado de inflacion sobre los rendimientos percibidos de entidades financieras y FICs (ej. 55,43% para 2025).
+     > [!WARNING]
+     > **Improcedencia en Rendimientos de Cesantías**: Los rendimientos financieros generados sobre las cesantías en los fondos administradores (AFPs) pertenecen a la Cédula de Rentas de Capital (Casilla 58), pero **NO son acreedores del componente inflacionario** (Arts. 38 y 40-1 E.T.). Tributan al 100% como ingreso gravado de capital (ver doctrina y normativa en [`references/rendimientos_cesantias_tributacion.md`](references/rendimientos_cesantias_tributacion.md)).
    - **Paso 2.3 (Regla de los 2 Anos en Venta de Acciones y Activos - Art. 300 E.T.)**:
      - Si el activo/accion fue poseido por **menos de 2 anos**: La utilidad neta (precio de venta - costo fiscal de adquisicion) se clasifica en la **Cedula General (Rentas No Laborales)** y tributa a la tarifa marginal del Art. 241 (hasta el 39%).
      - Si el activo/accion fue poseido por **2 anos o mas**: La utilidad neta se clasifica como **Ganancia Ocasional (Art. 300 E.T.)** y tributa a la tarifa fija del **15%** (Art. 313 y 314 E.T.).
@@ -140,3 +162,4 @@ Si el reporte de conciliacion contiene partidas `SOLO_EN_EXOGENA` o `DIFERENCIA_
 | Olvidar la exencion de 5.000 UVT en venta de casa de habitacion (Art. 311-1) | Si el contribuyente vende su vivienda y deposita en AFC o compra otra vivienda, las primeras 5.000 UVT de ganancia estan 100% exentas. |
 | Calcular sanciones sin aplicar el Art. 640 E.T. | Todo contribuyente sin antecedentes sancionatorios en 2 años tiene derecho a reducir la sanción al 50% (o 75% si es 1 año), respetando la mínima de 10 UVT (Art. 639). |
 | Olvidar restar los INCRNGO antes de calcular el 25% de renta exenta laboral | El 25% del Art. 206 Num. 10 se calcula sobre la base neta residual tras detraer INCRNGO y demas deducciones. |
+| Aplicar componente inflacionario a los rendimientos del fondo de cesantías | Los rendimientos causados en fondos de cesantías son 100% gravados en Rentas de Capital (Casilla 58); NO les aplica el componente inflacionario no constitutivo (Art. 38/40-1 E.T.) ni el 25% exento laboral (ver `references/rendimientos_cesantias_tributacion.md`). |

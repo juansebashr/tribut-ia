@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useApp } from '../../context/AppContext';
 import type { PersonaNaturalInput, PersonaNaturalOutput } from '../../types/tax';
-import { calculatePersonaNatural } from '../../services/api';
+import { calculatePersonaNatural, fetchSessionState } from '../../services/api';
 import { PnCalcSubtab } from './PersonaNatural/PnCalcSubtab';
 import { PnF210Subtab } from './PersonaNatural/PnF210Subtab';
 import { PnMarginalSubtab } from './PersonaNatural/PnMarginalSubtab';
@@ -13,7 +13,7 @@ import { ComponenteInflacionarioModule } from './ComponenteInflacionarioModule';
 import { WorkspaceHubLanding } from '../common/WorkspaceHubLanding';
 
 export const PersonaNaturalModule: React.FC = () => {
-  const { activeSubTab, navigateTo, taxYear, uvtValue, showToast } = useApp();
+  const { activeSubTab, navigateTo, taxYear, uvtValue, showToast, sessionId } = useApp();
 
   const [inputs, setInputs] = useState<PersonaNaturalInput>({
     tax_year: taxYear,
@@ -40,9 +40,9 @@ export const PersonaNaturalModule: React.FC = () => {
     aportes_voluntarios_pension_afc: 10000000,
     otras_rentas_exentas: 0,
     ganancias_ocasionales_brutas_activos_fijos: 0,
+    costos_ganancia_ocasional: 0,
     ganancias_ocasionales_brutas_herencias: 0,
     ganancias_ocasionales_brutas_loterias: 0,
-    costos_ganancia_ocasional: 0,
     ganancias_ocasionales_exentas_solicitadas: 0,
     descuentos_tributarios: 0,
     retenciones_fuente_practicadas: 5000000,
@@ -52,6 +52,68 @@ export const PersonaNaturalModule: React.FC = () => {
 
   const [result, setResult] = useState<PersonaNaturalOutput | null>(null);
   const [isAuditModalOpen, setIsAuditModalOpen] = useState<boolean>(false);
+
+  // Cargar estado de la sesión activa desde la API y suscribir a SSE
+  useEffect(() => {
+    let isMounted = true;
+    const loadSession = async () => {
+      try {
+        const state = await fetchSessionState(sessionId);
+        if (!isMounted || !state) return;
+
+        if (state.persona_natural && (state.persona_natural.rentas_trabajo > 0 || state.persona_natural.patrimonio_bruto > 0)) {
+          setInputs((prev) => ({
+            ...prev,
+            ...state.persona_natural,
+            tax_year: state.metadata?.tax_year ?? prev.tax_year,
+            custom_uvt: state.metadata?.custom_uvt ?? prev.custom_uvt,
+          }));
+          if (state.metadata?.nombre) {
+            showToast(`⚡ Sesión cargada: ${state.metadata.nombre}`, 'success', 3000);
+          }
+        }
+      } catch (err) {
+        console.warn('No se pudo cargar la sesión inicial desde la API:', err);
+      }
+    };
+
+    loadSession();
+
+    // Suscripción en vivo Server-Sent Events (SSE)
+    const API_BASE_URL = import.meta.env.VITE_API_URL || '/api/v1';
+    let eventSource: EventSource | null = null;
+    try {
+      eventSource = new EventSource(`${API_BASE_URL}/session/events?session_id=${sessionId}`);
+      eventSource.addEventListener('state_update', (e: MessageEvent) => {
+        try {
+          const payload = JSON.parse(e.data);
+          if (payload && payload.state && payload.source !== 'ui') {
+            const remotePn = payload.state.persona_natural;
+            if (remotePn) {
+              setInputs((prev) => ({
+                ...prev,
+                ...remotePn,
+                tax_year: payload.state.metadata?.tax_year ?? prev.tax_year,
+                custom_uvt: payload.state.metadata?.custom_uvt ?? prev.custom_uvt,
+              }));
+              showToast('⚡ Declaración sincronizada en vivo desde la API', 'success', 3000);
+            }
+          }
+        } catch (err) {
+          console.error('Error parseando evento SSE:', err);
+        }
+      });
+    } catch (err) {
+      console.warn('No se pudo inicializar EventSource SSE:', err);
+    }
+
+    return () => {
+      isMounted = false;
+      if (eventSource) {
+        eventSource.close();
+      }
+    };
+  }, [sessionId]);
 
   // Sync year and uvt changes
   useEffect(() => {

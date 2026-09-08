@@ -56,8 +56,9 @@ export interface ReconciliationResponse {
 
 export interface SessionState {
   session_id: string;
-  tax_year: number;
+  tax_year?: number;
   custom_uvt?: number;
+  metadata?: any;
   persona_natural?: any;
   persona_juridica?: any;
   beneficios_auditoria?: any;

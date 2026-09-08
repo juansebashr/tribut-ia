@@ -198,7 +198,7 @@ export async function parseReconciliationRaw(rawText: string): Promise<import('.
 }
 
 export async function fetchSessionState(sessionId: string): Promise<import('../types').SessionState> {
-  const res = await fetch(`${API_BASE_URL}/session/current`, {
+  const res = await fetch(`${API_BASE_URL}/session/state`, {
     headers: { 'X-Session-ID': sessionId },
   });
   if (!res.ok) throw new Error('Error al cargar estado de sesión');
@@ -206,7 +206,7 @@ export async function fetchSessionState(sessionId: string): Promise<import('../t
 }
 
 export async function updateSessionState(sessionId: string, state: any): Promise<import('../types').SessionState> {
-  const res = await fetch(`${API_BASE_URL}/session/current`, {
+  const res = await fetch(`${API_BASE_URL}/session/state`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -219,7 +219,7 @@ export async function updateSessionState(sessionId: string, state: any): Promise
 }
 
 export async function resetSessionState(sessionId: string): Promise<{ status: string }> {
-  const res = await fetch(`${API_BASE_URL}/session/current/reset`, {
+  const res = await fetch(`${API_BASE_URL}/session/reset`, {
     method: 'POST',
     headers: { 'X-Session-ID': sessionId },
   });
