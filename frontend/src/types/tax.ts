@@ -58,6 +58,8 @@ export interface PersonaNaturalOutput {
   ingreso_neto: number;
   total_deducciones_solicitadas: number;
   total_deducciones_aceptadas: number;
+  total_deducciones_sujetas_40?: number;
+  deducciones_fuera_limite_40?: number;
   total_rentas_exentas_previas: number;
   renta_exenta_laboral_25: number;
   total_rentas_exentas_aceptadas: number;

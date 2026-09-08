@@ -154,6 +154,8 @@ class PersonaNaturalOutput(BaseModel):
     total_rentas_exentas_aceptadas: float
 
     # Límite Conjunto (Art. 336 E.T.)
+    total_deducciones_sujetas_40: float = 0.0
+    deducciones_fuera_limite_40: float = 0.0
     subtotal_alivios_antes_de_limite: float
     limite_conjunto_porcentaje_cop: float
     limite_conjunto_uvt_cop: float

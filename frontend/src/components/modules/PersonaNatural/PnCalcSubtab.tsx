@@ -681,94 +681,134 @@ export const PnCalcSubtab: React.FC<PnCalcSubtabProps> = ({
                     </td>
                   </tr>
                   <tr className="highlight">
-                    <td>(=) Total Ingreso Neto</td>
+                    <td>(=) Total Ingreso Neto (Casilla 91)</td>
                     <td id="res-pn-ingreso-neto" className="amount">
                       {formatCOP(result?.ingreso_neto)}
                     </td>
                   </tr>
-                  <tr>
-                    <td>(-) Deducciones Aceptadas</td>
-                    <td id="res-pn-deducciones" className="amount negative">
-                      -{formatCOP(result?.total_deducciones_aceptadas)}
+
+                  {/* Detalle y Control de Alivios Sujetos al Tope del 40% (Art. 336 E.T.) */}
+                  <tr style={{ background: '#f8fafc', borderTop: '1px solid var(--border)', borderBottom: '1px solid var(--border)' }}>
+                    <td colSpan={2} style={{ padding: '10px 14px' }}>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
+                        <span style={{ fontSize: '11.5px', fontWeight: 700, color: 'var(--text-primary)', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+                          ⚖️ Depuración de Alivios y Tope del 40% (Art. 336 E.T.)
+                        </span>
+                        <span style={{ fontSize: '11px', color: (result?.alivios_rechazados_por_limite ?? 0) > 0 ? '#b45309' : '#15803d', fontWeight: 700 }}>
+                          {(result?.alivios_rechazados_por_limite ?? 0) > 0 ? '⚠️ Límite Excedido' : '✓ Dentro del Límite'}
+                        </span>
+                      </div>
+
+                      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(210px, 1fr))', gap: '8px', fontSize: '11.5px', color: 'var(--text-muted)' }}>
+                        <div>
+                          • Deducciones sujetas al 40%: <strong id="res-pn-deducciones" style={{ color: 'var(--text-primary)' }}>{formatCOP(result?.total_deducciones_sujetas_40 ?? result?.total_deducciones_aceptadas)}</strong>
+                        </div>
+                        <div>
+                          • Total rentas exentas (AFC + 25% laboral): <strong id="res-pn-total-exentas-logradas" style={{ color: 'var(--text-primary)' }}>{formatCOP(result?.total_rentas_exentas_aceptadas)}</strong>
+                          <div style={{ fontSize: '10.5px', color: '#94a3b8', marginLeft: '10px' }}>
+                            (AFC/Otras: {formatCOP(result?.total_rentas_exentas_previas)} | 25% Laboral: {formatCOP(result?.renta_exenta_laboral_25)})
+                          </div>
+                        </div>
+                        <div>
+                          • Subtotal alivios calculados: <strong style={{ color: 'var(--text-primary)' }}>{formatCOP(result?.subtotal_alivios_antes_de_limite)}</strong>
+                        </div>
+                        <div>
+                          • Tope legal máximo (40% / 1.340 UVT): <strong id="res-pn-limite-conjunto" style={{ color: '#d97706' }}>Máx. {formatCOP(result?.limite_conjunto_aplicable_cop)}</strong>
+                        </div>
+                      </div>
+
+                      {(result?.alivios_rechazados_por_limite ?? 0) > 0 ? (
+                        <div style={{ marginTop: '8px', fontSize: '11px', color: '#b91c1c', background: '#fef2f2', padding: '6px 10px', borderRadius: '6px', border: '1px solid #fecaca' }}>
+                          ⚠️ <strong>Tope aplicado:</strong> Los alivios calculados ({formatCOP(result?.subtotal_alivios_antes_de_limite)}) superan el tope legal de {formatCOP(result?.limite_conjunto_aplicable_cop)}. El excedente de <strong>{formatCOP(result?.alivios_rechazados_por_limite)}</strong> queda rechazado y solo proceden <strong>{formatCOP(result?.alivios_procedentes_finales)}</strong>.
+                        </div>
+                      ) : (
+                        <div style={{ marginTop: '8px', fontSize: '11px', color: '#15803d', background: '#f0fdf4', padding: '6px 10px', borderRadius: '6px', border: '1px solid #bbf7d0' }}>
+                          ✓ <strong>100% de alivios aceptados:</strong> El subtotal de alivios ({formatCOP(result?.subtotal_alivios_antes_de_limite)}) no supera el tope legal máximo de {formatCOP(result?.limite_conjunto_aplicable_cop)}.
+                        </div>
+                      )}
                     </td>
                   </tr>
-                  <tr>
-                    <td>(-) Rentas Exentas (AFC + Otras)</td>
-                    <td id="res-pn-exentas-afc" className="amount negative">
-                      -{formatCOP(result?.total_rentas_exentas_previas)}
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>(-) Renta Exenta Laboral (25%)</td>
-                    <td id="res-pn-exenta-25" className="amount negative">
-                      -{formatCOP(result?.renta_exenta_laboral_25)}
-                    </td>
-                  </tr>
-                  <tr style={{ background: 'var(--bg-card-subtle, #f8fafc)' }}>
-                    <td style={{ fontWeight: 700, color: 'var(--text-primary)' }}>
-                      (=) Total Rentas Exentas Logradas (Casilla 37)
-                    </td>
-                    <td id="res-pn-total-exentas-logradas" className="amount negative" style={{ fontWeight: 800, color: '#16a34a' }}>
-                      -{formatCOP(result?.total_rentas_exentas_aceptadas)}
-                    </td>
-                  </tr>
+
+                  {/* Filas Oficiales de Sustracción Casillas F210 */}
                   <tr>
                     <td>
                       <div>
-                        <span>Tope Límite Conjunto (40% / 1.340 UVT)</span>
+                        <span style={{ fontWeight: 600 }}>(-) Rentas Exentas y Deducciones dentro del Tope (Casilla 92)</span>
                         <div style={{ fontSize: '11px', color: 'var(--text-muted)' }}>
-                          Alivios logrados: <strong>{formatCOP(result?.alivios_procedentes_finales)}</strong> (
-                          {(result?.alivios_rechazados_por_limite ?? 0) > 0
-                            ? `Exceden $${formatCOP(result?.alivios_rechazados_por_limite, false)}`
-                            : '100% aceptado dentro del tope'}
-                          )
+                          Alivios procedentes limitados según Art. 336 E.T.
                         </div>
                       </div>
                     </td>
-                    <td id="res-pn-limite-conjunto" className="amount" style={{ color: 'var(--amber)', verticalAlign: 'middle' }}>
-                      Máx. {formatCOP(result?.limite_conjunto_aplicable_cop)}
+                    <td id="res-pn-alivios-procedentes" className="amount negative" style={{ fontWeight: 700, color: '#dc2626' }}>
+                      -{formatCOP(result?.alivios_procedentes_finales)}
                     </td>
                   </tr>
-                  {(result?.alivios_rechazados_por_limite ?? 0) > 0 && (
-                    <tr style={{ background: '#fff1f2' }}>
-                      <td style={{ color: '#e11d48', fontSize: '12px' }}>
-                        (!) Alivios Excedentes Rechazados por Tope
+
+                  {(result?.deducciones_fuera_limite_40 ?? 0) > 0 && (
+                    <tr>
+                      <td>
+                        <div>
+                          <span style={{ fontWeight: 600 }}>(-) Deducción 1% Factura Electrónica (Art. 336 Num. 5)</span>
+                          <div style={{ fontSize: '11px', color: 'var(--text-muted)' }}>
+                            Deducción especial por adquisiciones soportadas que no computa para el tope del 40%
+                          </div>
+                        </div>
                       </td>
-                      <td className="amount negative" style={{ color: '#e11d48', fontSize: '12px' }}>
-                        +{formatCOP(result?.alivios_rechazados_por_limite)}
+                      <td id="res-pn-deduccion-fe" className="amount negative" style={{ fontWeight: 700, color: '#dc2626' }}>
+                        -{formatCOP(result?.deducciones_fuera_limite_40)}
                       </td>
                     </tr>
                   )}
+
                   <tr className="highlight" style={{ borderTop: '2px solid var(--primary-border)' }}>
-                    <td>(=) Renta Líquida Gravable (Casilla 111)</td>
-                    <td id="res-pn-renta-gravable" className="amount" style={{ color: 'var(--primary)' }}>
+                    <td>(=) Renta Líquida Gravable Cédula General (Casilla 111)</td>
+                    <td id="res-pn-renta-gravable" className="amount" style={{ color: 'var(--primary)', fontWeight: 800 }}>
                       {formatCOP(result?.renta_liquida_gravable)}
                     </td>
                   </tr>
                   <tr className="highlight">
-                    <td>(=) Impuesto Neto de Renta (Casilla 126)</td>
+                    <td>(=) Impuesto Neto de Renta Cédula General (Casilla 126)</td>
                     <td id="res-pn-impuesto-bruto" className="amount">
                       {formatCOP(result?.impuesto_neto_renta)}
                     </td>
                   </tr>
+                  {(result?.impuesto_ganancias_ocasionales ?? 0) > 0 && (
+                    <tr>
+                      <td>(+) Impuesto de Ganancias Ocasionales (Casilla 128)</td>
+                      <td id="res-pn-impuesto-go" className="amount" style={{ color: '#7c3aed', fontWeight: 700 }}>
+                        +{formatCOP(result?.impuesto_ganancias_ocasionales)}
+                      </td>
+                    </tr>
+                  )}
                   <tr className="highlight" style={{ background: '#eff6ff', fontWeight: 800 }}>
                     <td>(=) Total Impuesto a Cargo (Casilla 129)</td>
                     <td id="res-pn-total-impuesto-cargo" className="amount">
-                      {formatCOP(result?.impuesto_neto_renta)}
+                      {formatCOP(result?.total_impuesto_a_cargo ?? result?.impuesto_neto_renta)}
                     </td>
                   </tr>
                   <tr>
-                    <td>(-) Retenciones y Anticipos Previos</td>
+                    <td>(-) Retenciones y Anticipos Previos (Casillas 130 a 132)</td>
                     <td id="res-pn-retenciones" className="amount negative">
                       -{formatCOP(result?.total_anticipos_y_retenciones)}
                     </td>
                   </tr>
-                  <tr className="highlight" style={{ borderTop: '1px dashed var(--border)' }}>
-                    <td>(=) Saldo por Impuesto (Casilla 136)</td>
-                    <td id="res-pn-saldo-impuesto" className="amount">
-                      {formatCOP(result?.saldo_a_pagar)}
-                    </td>
-                  </tr>
+
+                  {(result?.saldo_a_pagar ?? 0) > 0 ? (
+                    <tr className="highlight" style={{ borderTop: '1px dashed var(--border)' }}>
+                      <td>(=) Saldo por Impuesto (Casilla 136)</td>
+                      <td id="res-pn-saldo-impuesto" className="amount">
+                        {formatCOP(result?.saldo_a_pagar)}
+                      </td>
+                    </tr>
+                  ) : (
+                    <tr className="highlight" style={{ borderTop: '1px dashed var(--border)', background: '#f0fdf4' }}>
+                      <td style={{ color: '#16a34a', fontWeight: 700 }}>(=) Saldo a Favor por Impuesto (Casilla 137)</td>
+                      <td id="res-pn-saldo-favor" className="amount" style={{ color: '#16a34a', fontWeight: 800 }}>
+                        {formatCOP(result?.saldo_a_favor)}
+                      </td>
+                    </tr>
+                  )}
+
                   {(inputs.anticipo_ano_siguiente ?? 0) > 0 && (
                     <tr style={{ color: '#0369a1' }}>
                       <td>(+) Anticipo Año Siguiente (Art. 807 - Casilla 133/135)</td>
@@ -777,10 +817,18 @@ export const PnCalcSubtab: React.FC<PnCalcSubtabProps> = ({
                       </td>
                     </tr>
                   )}
-                  <tr className="highlight" style={{ background: '#dbeafe', fontWeight: 900, fontSize: '13.5px' }}>
-                    <td>(=) TOTAL SALDO A PAGAR (Casilla 980)</td>
-                    <td id="res-pn-total-definitivo" className="amount" style={{ color: '#1e40af' }}>
-                      {formatCOP(result?.total_a_pagar ?? result?.saldo_a_pagar)}
+                  <tr className="highlight" style={{ background: (result?.total_a_pagar ?? result?.saldo_a_pagar ?? 0) > 0 ? '#dbeafe' : '#f0fdf4', fontWeight: 900, fontSize: '13.5px' }}>
+                    <td>
+                      {(result?.total_a_pagar ?? result?.saldo_a_pagar ?? 0) > 0
+                        ? '(=) TOTAL SALDO A PAGAR (Casilla 980)'
+                        : '(=) TOTAL SALDO A FAVOR DEFINITIVO (Casilla 137)'}
+                    </td>
+                    <td id="res-pn-total-definitivo" className="amount" style={{ color: (result?.total_a_pagar ?? result?.saldo_a_pagar ?? 0) > 0 ? '#1e40af' : '#16a34a' }}>
+                      {formatCOP(
+                        (result?.total_a_pagar ?? result?.saldo_a_pagar ?? 0) > 0
+                          ? (result?.total_a_pagar ?? result?.saldo_a_pagar)
+                          : (result?.saldo_a_favor ?? 0)
+                      )}
                     </td>
                   </tr>
                 </tbody>

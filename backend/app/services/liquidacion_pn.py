@@ -97,7 +97,7 @@ def liquidar_persona_natural(payload: PersonaNaturalInput) -> PersonaNaturalOutp
         dep_tope_uvt = dep_rules.get("tope_uvt", 384)
         dep_tope_cop = dep_tope_uvt * uvt
 
-        raw_dep = total_ingresos * dep_pct
+        raw_dep = ingresos_trabajo * dep_pct
         allowed_dep = min(raw_dep, dep_tope_cop)
         excess_dep = max(0.0, raw_dep - allowed_dep)
 
@@ -612,6 +612,8 @@ def liquidar_persona_natural(payload: PersonaNaturalInput) -> PersonaNaturalOutp
         if deducciones_list
         else 0.0,
         total_deducciones_aceptadas=total_deducciones_aceptadas,
+        total_deducciones_sujetas_40=total_deducciones_sujetas_40,
+        deducciones_fuera_limite_40=allowed_dep_add + allowed_fe,
         total_rentas_exentas_previas=total_rentas_exentas_previas,
         renta_exenta_laboral_25=allowed_exenta_laboral,
         total_rentas_exentas_aceptadas=total_rentas_exentas_aceptadas,

@@ -3180,30 +3180,6 @@
       "source_location": "L9"
     },
     {
-      "id": "docs_readme_documentacion_tecnica_de_fiscol",
-      "label": "Documentacion Tecnica de Fiscol",
-      "_origin": "ast",
-      "community": 16,
-      "community_name": "Cuadrantes Diataxis",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "documentacion tecnica de fiscol",
-      "source_file": "docs/README.md",
-      "source_location": "L1"
-    },
-    {
-      "id": "docs_readme_registro_de_decisiones_arquitectonicas_adrs_decisions_readme_md",
-      "label": "[Registro de Decisiones Arquitectonicas (ADRs)](./decisions/README.md)",
-      "_origin": "ast",
-      "community": 16,
-      "community_name": "Cuadrantes Diataxis",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "[registro de decisiones arquitectonicas (adrs)](./decisions/readme.md)",
-      "source_file": "docs/README.md",
-      "source_location": "L64"
-    },
-    {
       "id": "backend_app_api_v1_endpoints_persona_juridica",
       "label": "endpoints/persona_juridica.py",
       "_origin": "ast",
@@ -3563,72 +3539,6 @@
       "norm_label": "test_persona_natural_excel_benchmark_2022",
       "source_file": "backend/tests/test_pn_calculator.py",
       "source_location": "L7"
-    },
-    {
-      "id": "backend_tests_test_pn_calculator_func_test_pn_calculadora_exactitud_aritmetica_vertical",
-      "label": "test_pn_calculadora_exactitud_aritmetica_vertical",
-      "_origin": "ast",
-      "community": 164,
-      "community_name": "test_pn_calculator.py",
-      "file_type": "concept",
-      "norm_label": "test_pn_calculadora_exactitud_aritmetica_vertical",
-      "source_file": "backend/tests/test_pn_calculator.py",
-      "source_location": "L147"
-    },
-    {
-      "id": "backend_tests_test_pn_calculator_func_test_pn_calculadora_ganancias_ocasionales_y_f210",
-      "label": "test_pn_calculadora_ganancias_ocasionales_y_f210",
-      "_origin": "ast",
-      "community": 164,
-      "community_name": "test_pn_calculator.py",
-      "file_type": "concept",
-      "norm_label": "test_pn_calculadora_ganancias_ocasionales_y_f210",
-      "source_file": "backend/tests/test_pn_calculator.py",
-      "source_location": "L292"
-    },
-    {
-      "id": "backend_tests_test_pn_calculator_func_test_pn_calculadora_sin_superar_tope_40",
-      "label": "test_pn_calculadora_sin_superar_tope_40",
-      "_origin": "ast",
-      "community": 164,
-      "community_name": "test_pn_calculator.py",
-      "file_type": "concept",
-      "norm_label": "test_pn_calculadora_sin_superar_tope_40",
-      "source_file": "backend/tests/test_pn_calculator.py",
-      "source_location": "L223"
-    },
-    {
-      "id": "backend_tests_test_pn_calculator_func_test_pn_calculadora_superando_tope_porcentual_40",
-      "label": "test_pn_calculadora_superando_tope_porcentual_40",
-      "_origin": "ast",
-      "community": 164,
-      "community_name": "test_pn_calculator.py",
-      "file_type": "concept",
-      "norm_label": "test_pn_calculadora_superando_tope_porcentual_40",
-      "source_file": "backend/tests/test_pn_calculator.py",
-      "source_location": "L244"
-    },
-    {
-      "id": "backend_tests_test_pn_calculator_func_test_pn_calculadora_superando_tope_uvt_1340",
-      "label": "test_pn_calculadora_superando_tope_uvt_1340",
-      "_origin": "ast",
-      "community": 164,
-      "community_name": "test_pn_calculator.py",
-      "file_type": "concept",
-      "norm_label": "test_pn_calculadora_superando_tope_uvt_1340",
-      "source_file": "backend/tests/test_pn_calculator.py",
-      "source_location": "L268"
-    },
-    {
-      "id": "backend_tests_test_pn_calculator_func_test_pn_caso_real_papa_2025_completo",
-      "label": "test_pn_caso_real_papa_2025_completo",
-      "_origin": "ast",
-      "community": 164,
-      "community_name": "test_pn_calculator.py",
-      "file_type": "concept",
-      "norm_label": "test_pn_caso_real_papa_2025_completo",
-      "source_file": "backend/tests/test_pn_calculator.py",
-      "source_location": "L332"
     },
     {
       "id": "backend_app_main",
@@ -21483,6 +21393,30 @@
       "source_location": "L1"
     },
     {
+      "id": "docs_readme_documentacion_tecnica_de_fiscol",
+      "label": "Documentacion Tecnica de Fiscol",
+      "_origin": "ast",
+      "community": 66,
+      "community_name": "README.md",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "documentacion tecnica de fiscol",
+      "source_file": "docs/README.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "docs_readme_registro_de_decisiones_arquitectonicas_adrs_decisions_readme_md",
+      "label": "[Registro de Decisiones Arquitectonicas (ADRs)](./decisions/README.md)",
+      "_origin": "ast",
+      "community": 66,
+      "community_name": "README.md",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "[registro de decisiones arquitectonicas (adrs)](./decisions/readme.md)",
+      "source_file": "docs/README.md",
+      "source_location": "L64"
+    },
+    {
       "id": "docs_reference_architecture_erd_session_state_model",
       "label": "session-state-model.md",
       "_origin": "ast",
@@ -27018,72 +26952,6 @@
       "confidence_score": 1.0,
       "source_file": "backend/tests/test_pn_calculator.py",
       "source_location": "L108",
-      "weight": 1.0
-    },
-    {
-      "source": "backend_tests_test_pn_calculator",
-      "target": "backend_tests_test_pn_calculator_func_test_pn_calculadora_exactitud_aritmetica_vertical",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "backend/tests/test_pn_calculator.py",
-      "source_location": "L147",
-      "weight": 1.0
-    },
-    {
-      "source": "backend_tests_test_pn_calculator",
-      "target": "backend_tests_test_pn_calculator_func_test_pn_calculadora_sin_superar_tope_40",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "backend/tests/test_pn_calculator.py",
-      "source_location": "L223",
-      "weight": 1.0
-    },
-    {
-      "source": "backend_tests_test_pn_calculator",
-      "target": "backend_tests_test_pn_calculator_func_test_pn_calculadora_superando_tope_porcentual_40",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "backend/tests/test_pn_calculator.py",
-      "source_location": "L244",
-      "weight": 1.0
-    },
-    {
-      "source": "backend_tests_test_pn_calculator",
-      "target": "backend_tests_test_pn_calculator_func_test_pn_calculadora_superando_tope_uvt_1340",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "backend/tests/test_pn_calculator.py",
-      "source_location": "L268",
-      "weight": 1.0
-    },
-    {
-      "source": "backend_tests_test_pn_calculator",
-      "target": "backend_tests_test_pn_calculator_func_test_pn_calculadora_ganancias_ocasionales_y_f210",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "backend/tests/test_pn_calculator.py",
-      "source_location": "L292",
-      "weight": 1.0
-    },
-    {
-      "source": "backend_tests_test_pn_calculator",
-      "target": "backend_tests_test_pn_calculator_func_test_pn_caso_real_papa_2025_completo",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "backend/tests/test_pn_calculator.py",
-      "source_location": "L332",
       "weight": 1.0
     },
     {
@@ -44347,5 +44215,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "e8f729dc19e865b4c798bc8a0dbc2ce8bd58b289"
+  "built_at_commit": "298860b228659cf42e5968ecbbae53e0e2adbbff"
 }

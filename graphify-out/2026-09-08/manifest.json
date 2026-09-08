@@ -132,9 +132,9 @@
     "semantic_hash": ""
   },
   "backend/app/models/persona_natural.py": {
-    "mtime": 1788874374.7846067,
-    "seen": 1788874803.372427,
-    "ast_hash": "fbaea7e01b7a69c13c13611792659fce",
+    "mtime": 1788840159.8916628,
+    "seen": 1788840530.534778,
+    "ast_hash": "4a21d59c656322f37dcee7295bb740ec",
     "semantic_hash": ""
   },
   "backend/app/services/__init__.py": {
@@ -156,9 +156,9 @@
     "semantic_hash": ""
   },
   "backend/app/services/liquidacion_pn.py": {
-    "mtime": 1788874435.1981483,
-    "seen": 1788874803.372617,
-    "ast_hash": "2c9810d150712eb9a6fde31d890da425",
+    "mtime": 1788840186.97649,
+    "seen": 1788840530.534951,
+    "ast_hash": "451f4d5db46df68fdac855ddb39e25df",
     "semantic_hash": ""
   },
   "backend/app/services/session_store.py": {
@@ -216,9 +216,9 @@
     "semantic_hash": ""
   },
   "backend/tests/test_pn_calculator.py": {
-    "mtime": 1788874779.0033681,
-    "seen": 1788874803.373046,
-    "ast_hash": "c9d70f55127e0cd5cdfa2f556d275ca1",
+    "mtime": 1788840217.7682118,
+    "seen": 1788840530.535337,
+    "ast_hash": "341c0b00000daab39a2fee7a9933bbfc",
     "semantic_hash": ""
   },
   "backend/tests/test_reconciliation_ephemeral.py": {

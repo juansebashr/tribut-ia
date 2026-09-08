@@ -41,7 +41,19 @@ export const PnWaterfallChart: React.FC<PnWaterfallChartProps> = ({ result, anti
   // Maximum value for scaling (default to ingresosBrutos or 1)
   const maxVal = Math.max(ingresosBrutos, totalAPagar, 1);
 
-  const steps = [
+  const deduccionesFuera = result.deducciones_fuera_limite_40 || 0;
+  const aliviosRechazados = result.alivios_rechazados_por_limite || 0;
+  const impuestoGo = result.impuesto_ganancias_ocasionales || 0;
+  const totalImpuestoCargo = result.total_impuesto_a_cargo || impuestoNeto;
+
+  const steps: Array<{
+    label: string;
+    value: number;
+    type: string;
+    color: string;
+    isNegative: boolean;
+    desc: string;
+  }> = [
     {
       label: 'Ingresos Brutos',
       value: ingresosBrutos,
@@ -58,47 +70,97 @@ export const PnWaterfallChart: React.FC<PnWaterfallChartProps> = ({ result, anti
       isNegative: true,
       desc: 'Salud y pensión obligatoria (Arts. 55-56 E.T.)',
     },
-    {
-      label: '(-) Deducciones',
-      value: deducciones,
+  ];
+
+  if (aliviosRechazados > 0) {
+    steps.push({
+      label: '(-) Alivios Aceptados (Tope 40%)',
+      value: result.alivios_procedentes_finales || 0,
       type: 'subtraction',
       color: '#f97316',
       isNegative: true,
-      desc: 'Vivienda, dependientes, prepagada, 1% compras',
-    },
-    {
-      label: '(-) Rentas Exentas',
-      value: exentasAfc + exenta25,
+      desc: `Rentas exentas y deducciones dentro del tope legal de ${formatCOP(result.limite_conjunto_aplicable_cop)} (Casilla 92)`,
+    });
+  } else {
+    const dedSujetas = Math.max(0, deducciones - deduccionesFuera);
+    if (dedSujetas > 0) {
+      steps.push({
+        label: '(-) Deducciones Imputables',
+        value: dedSujetas,
+        type: 'subtraction',
+        color: '#f97316',
+        isNegative: true,
+        desc: 'Vivienda, dependientes, prepagada, 50% GMF',
+      });
+    }
+    if (exentasAfc + exenta25 > 0) {
+      steps.push({
+        label: '(-) Rentas Exentas',
+        value: exentasAfc + exenta25,
+        type: 'subtraction',
+        color: '#eab308',
+        isNegative: true,
+        desc: 'Exenta 25% laboral + Cuentas AFC / FPV (Casilla 37)',
+      });
+    }
+  }
+
+  if (deduccionesFuera > 0) {
+    steps.push({
+      label: '(-) Deducción 1% Factura Elec.',
+      value: deduccionesFuera,
       type: 'subtraction',
-      color: '#eab308',
+      color: '#06b6d4',
       isNegative: true,
-      desc: 'Exenta 25% laboral + Cuentas AFC / FPV',
-    },
-    {
-      label: '(=) Renta Líquida',
-      value: rentaGravable,
-      type: 'subtotal',
-      color: '#0284c7',
-      isNegative: false,
-      desc: 'Base gravable sujeta a la tabla Art. 241',
-    },
-    {
-      label: '(=) Impuesto a Cargo',
+      desc: 'Compras personales soportadas con FE (Art. 336 Num. 5 - Fuera del 40%)',
+    });
+  }
+
+  steps.push({
+    label: '(=) Renta Líquida Gravable',
+    value: rentaGravable,
+    type: 'subtotal',
+    color: '#0284c7',
+    isNegative: false,
+    desc: 'Base gravable sujeta a la tabla Art. 241 E.T. (Casilla 111)',
+  });
+
+  if (impuestoGo > 0) {
+    steps.push({
+      label: 'Impuesto Neto Renta',
       value: impuestoNeto,
       type: 'tax',
       color: '#8b5cf6',
       isNegative: false,
-      desc: 'Liquidado según rangos progresivos UVT (Casilla 129)',
-    },
-    {
-      label: '(-) Retenciones Previas',
-      value: retenciones,
-      type: 'subtraction',
-      color: '#10b981',
-      isNegative: true,
-      desc: 'Retenciones en la fuente y anticipos pagados año anterior',
-    },
-  ];
+      desc: 'Liquidado sobre renta líquida ordinaria (Casilla 126)',
+    });
+    steps.push({
+      label: '(+) Ganancias Ocasionales',
+      value: impuestoGo,
+      type: 'addition',
+      color: '#a855f7',
+      isNegative: false,
+      desc: 'Tarifa 15% o 20% sobre activos fijos o loterías (Casilla 128)',
+    });
+  }
+
+  steps.push({
+    label: '(=) Total Impuesto a Cargo',
+    value: totalImpuestoCargo,
+    type: 'tax',
+    color: '#7c3aed',
+    isNegative: false,
+    desc: 'Impuesto definitivo antes de retenciones (Casilla 129)',
+  });
+
+  steps.push({
+    label: '(-) Retenciones Previas',
+    value: retenciones,
+    type: 'subtraction',
+    color: '#10b981',
+    isNegative: true,
+    desc: 'Retenciones practicadas y anticipos año anterior (Casillas 130-132)',
+  });
 
   if (anticipoSiguiente > 0) {
     steps.push({
